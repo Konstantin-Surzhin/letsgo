@@ -16,10 +16,11 @@
  */
 package org.igo.ejb;
 
-import org.igo.jpa.GoGame;
+//import org.igo.jpa.GoGame;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.igo.jpa.Game;
 import org.igo.remote.intf.IGameRemote;
 
 /**
@@ -39,8 +40,8 @@ public class GameBean implements IGameRemote, IGameLocal {
     }
 
     @Override
-    public Integer create() {
-        GoGame game = new GoGame();
+    public Long create() {
+        Game game = new Game();
         getEm().persist(game);
         getEm().flush();
         return game.getId();

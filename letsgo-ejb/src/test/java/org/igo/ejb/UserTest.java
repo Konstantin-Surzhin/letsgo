@@ -16,7 +16,7 @@
  */
 package org.igo.ejb;
 
-import org.igo.jpa.GoUser;
+import org.igo.jpa.User;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -28,9 +28,9 @@ import static org.junit.Assert.*;
  *
  * @author surzhin.konstantin
  */
-public class GoUserTest {
+public class UserTest {
 
-    public GoUserTest() {
+    public UserTest() {
     }
 
     @BeforeClass
@@ -55,7 +55,7 @@ public class GoUserTest {
     @Test
     public void testGetId() {
         System.out.println("getId");
-        GoUser instance = new GoUser();
+        User instance = new User();
         Integer expResult = null;
         Integer result = instance.getId();
         assertEquals(expResult, result);
@@ -70,7 +70,7 @@ public class GoUserTest {
     public void testSetId() {
         System.out.println("setId");
         Integer id = null;
-        GoUser instance = new GoUser();
+        User instance = new User();
         instance.setId(id);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
@@ -82,7 +82,7 @@ public class GoUserTest {
     @Test
     public void testGetName() {
         System.out.println("getName");
-        GoUser instance = new GoUser();
+        User instance = new User();
         String expResult = "";
         String result = instance.getName();
         //assertEquals(expResult, result);
@@ -97,7 +97,7 @@ public class GoUserTest {
     public void testSetName() {
         System.out.println("setName");
         String name = "";
-        GoUser instance = new GoUser();
+        User instance = new User();
         instance.setName(name);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
@@ -109,7 +109,7 @@ public class GoUserTest {
     @Test
     public void testHashCode() {
         System.out.println("hashCode");
-        GoUser instance = new GoUser();
+        User instance = new User();
         int expResult = 0;
         int result = instance.hashCode();
         assertEquals(expResult, result);
@@ -124,7 +124,7 @@ public class GoUserTest {
     public void testEquals() {
         System.out.println("equals");
         Object object = null;
-        GoUser instance = new GoUser();
+        User instance = new User();
         boolean expResult = false;
         boolean result = instance.equals(object);
         assertEquals(expResult, result);
@@ -138,7 +138,7 @@ public class GoUserTest {
     @Test
     public void testToString() {
         System.out.println("toString");
-        GoUser instance = new GoUser();
+        User instance = new User();
         String expResult = "org.igo.GoUser[ id=null ]";
         String result = instance.toString();
         assertEquals(expResult, result);

@@ -16,6 +16,6 @@ public interface IGameRemote {
 
     String getString();
 
-    Integer create();
+    Long create();
 
 }
