@@ -71,7 +71,7 @@ public class Ban implements Serializable {
      * @return the startDate
      */
     @Temporal(javax.persistence.TemporalType.DATE)
-    @Column(name = "start_date")
+    @Column(name = "start_date", nullable = false)
     public Date getStartDate() {
         return startDate;
     }
@@ -86,7 +86,7 @@ public class Ban implements Serializable {
     /**
      * @return the duration
      */
-    @Column(name = "duration")
+    @Column(name = "duration", nullable = false)
     public Short getDuration() {
         return duration;
     }
@@ -101,7 +101,7 @@ public class Ban implements Serializable {
     /**
      * @return the comment
      */
-    @Column(name = "comment")
+    @Column(name = "comment", nullable = false)
     public String getComment() {
         return comment;
     }
@@ -113,8 +113,8 @@ public class Ban implements Serializable {
         this.comment = comment;
     }
 
-    @ManyToOne
-    @JoinColumn(name="user_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     public User getUser() {
         return user;
     }

@@ -65,7 +65,7 @@ public class Room implements Serializable {
     /**
      * @return the roomName
      */
-    @Column(name ="room_name")
+    @Column(name = "room_name", nullable = false, unique = true)
     public String getRoomName() {
         return roomName;
     }
@@ -85,5 +85,5 @@ public class Room implements Serializable {
     public void setUsers(List<User> users) {
         this.users = users;
     }
-    
+
 }

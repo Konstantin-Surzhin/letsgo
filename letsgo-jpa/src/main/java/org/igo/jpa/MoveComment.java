@@ -6,6 +6,7 @@
 package org.igo.jpa;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 import javax.persistence.UniqueConstraint;
 
 /**
@@ -34,6 +36,7 @@ public class MoveComment implements Serializable {
     private Long id;
 
     private String comment;
+    private Date postTime;
 
     private User user;
 
@@ -100,6 +103,22 @@ public class MoveComment implements Serializable {
      */
     public void setUser(User user) {
         this.user = user;
+    }
+
+    /**
+     * @return the postTime
+     */
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    @Column(name = "post_date_time", nullable = false)
+    public Date getPostTime() {
+        return postTime;
+    }
+
+    /**
+     * @param postTime the postTime to set
+     */
+    public void setPostTime(Date postTime) {
+        this.postTime = postTime;
     }
 
 }

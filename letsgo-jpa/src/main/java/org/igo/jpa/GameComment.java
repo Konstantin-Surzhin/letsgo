@@ -6,17 +6,19 @@
 package org.igo.jpa;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.TableGenerator;
+import javax.persistence.Temporal;
 import javax.persistence.UniqueConstraint;
 
 /**
@@ -25,7 +27,7 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "game_comments",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"game_id", "user_id","comment"}))
+        uniqueConstraints = @UniqueConstraint(columnNames = {"game_id", "user_id", "comment"}))
 public class GameComment implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -34,13 +36,15 @@ public class GameComment implements Serializable {
     private Long id;
     private User user;
     private String comment;
+    private Date postTime;
     private List<GameComment> comments;
 
     @Id
     @Column(name = "id", nullable = false)
-    @TableGenerator(name = "game_comment_gen", table = "id_gen",
-            pkColumnName = "gen_name", valueColumnName = "gen_val")
-    @GeneratedValue(generator = "game_comment_gen")
+//    @TableGenerator(name = "game_comment_gen", table = "id_gen",
+//            pkColumnName = "gen_name", valueColumnName = "gen_val")
+//    @GeneratedValue(generator = "game_comment_gen")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
@@ -74,7 +78,7 @@ public class GameComment implements Serializable {
     /**
      * @return the comment
      */
-    @Column(name = "comment")
+    @Column(name = "comment", nullable = false)
     public String getComment() {
         return comment;
     }
@@ -103,7 +107,7 @@ public class GameComment implements Serializable {
     }
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     public User getUser() {
         return user;
     }
@@ -116,12 +120,28 @@ public class GameComment implements Serializable {
     }
 
     @ManyToOne
-    @JoinColumn(name = "game_id")
+    @JoinColumn(name = "game_id", nullable = false)
     public Game getGame() {
         return game;
     }
 
     public void setGame(Game game) {
         this.game = game;
+    }
+
+    /**
+     * @return the postTime
+     */
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    @Column(name = "post_date_time", nullable = false)
+    public Date getPostTime() {
+        return postTime;
+    }
+
+    /**
+     * @param postTime the postTime to set
+     */
+    public void setPostTime(Date postTime) {
+        this.postTime = postTime;
     }
 }

@@ -23,7 +23,7 @@ public class Place implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Long id;
-    
+
     private String placeName;
 
     @Id
@@ -62,7 +62,7 @@ public class Place implements Serializable {
     /**
      * @return the placeName
      */
-    @Column(name="place_name")
+    @Column(name = "place_name", nullable = false, unique = true)
     public String getPlaceName() {
         return placeName;
     }
@@ -73,5 +73,5 @@ public class Place implements Serializable {
     public void setPlaceName(String placeName) {
         this.placeName = placeName;
     }
-    
+
 }

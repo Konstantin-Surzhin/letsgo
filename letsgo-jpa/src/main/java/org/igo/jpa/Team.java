@@ -27,7 +27,7 @@ public class Team implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Long id;
-    
+
     private String teamName;
 
     @Id
@@ -66,7 +66,7 @@ public class Team implements Serializable {
     /**
      * @return the teamName
      */
-    @Column(name="team_name")
+    @Column(name = "team_name", nullable = false, unique = true)
     public String getTeamName() {
         return teamName;
     }
@@ -86,5 +86,5 @@ public class Team implements Serializable {
     public void setUsers(List<User> users) {
         this.users = users;
     }
-    
+
 }

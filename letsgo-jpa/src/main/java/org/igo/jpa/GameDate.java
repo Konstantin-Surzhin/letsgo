@@ -60,7 +60,7 @@ public class GameDate implements Serializable {
         this.gameDatePK = gameDatePK;
     }
 
-    @Column(name = "game_date")
+    @Column(name = "game_date", nullable = false)
     @Temporal(TemporalType.DATE)
     public Date getGameDate() {
         return gameDate;

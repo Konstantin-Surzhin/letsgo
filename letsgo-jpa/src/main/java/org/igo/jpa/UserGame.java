@@ -57,9 +57,9 @@ public class UserGame implements Serializable {
         this.userGamePK = userGamePK;
     }
 
-    @Column(name = "color", nullable = false)
     @Enumerated
-    public UserColor getColor() {
+    @Column(name = "color", nullable = false)
+     public UserColor getColor() {
         return color;
     }
 

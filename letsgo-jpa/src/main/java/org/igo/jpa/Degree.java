@@ -75,7 +75,9 @@ public class Degree implements Serializable {
     /**
      * @return the dergeeValue
      */
-    @Column(name = "degree_value", unique = true, length = 255)
+    @Column(name = "degree_value",
+            unique = true,
+            nullable = false)
     public String getDergeeValue() {
         return dergeeValue;
     }

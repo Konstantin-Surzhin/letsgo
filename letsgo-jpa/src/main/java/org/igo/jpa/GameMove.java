@@ -61,7 +61,7 @@ public class GameMove implements Serializable {
         this.gameMovesPK = gameMovesPK;
     }
 
-    @Column(name = "x")
+    @Column(name = "x",nullable = false)
     public Character getX() {
         return x;
     }
@@ -70,7 +70,7 @@ public class GameMove implements Serializable {
         this.x = x;
     }
 
-    @Column(name = "y")
+    @Column(name = "y",nullable = false)
     public Character getY() {
         return y;
     }

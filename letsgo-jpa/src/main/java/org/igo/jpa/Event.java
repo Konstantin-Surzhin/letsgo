@@ -29,10 +29,10 @@ public class Event implements Serializable {
     private Long id;
 
     private String eventName;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     public Long getId() {
         return id;
     }
@@ -66,7 +66,7 @@ public class Event implements Serializable {
     /**
      * @return the eventName
      */
-    @Column(name = "event_name")
+    @Column(name = "event_name", nullable = false, unique = true)
     public String getEventName() {
         return eventName;
     }
@@ -86,5 +86,5 @@ public class Event implements Serializable {
     public void setGames(List<Game> games) {
         this.games = games;
     }
-    
+
 }
