@@ -8,13 +8,17 @@ package org.igo.jpa;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -69,6 +73,14 @@ public class User implements Serializable {
     private Collection<UserDegree> userDegrees;
 
     private Collection<UserGame> userGames;
+    
+    private UserStatus status;
+    
+    private List<Ban> bans;
+    
+    private Room defaultRoom;
+    
+    private Team defaultTeam;
 
     public User() {
     }
@@ -271,5 +283,68 @@ public class User implements Serializable {
      */
     public void setRating(Integer rating) {
         this.rating = rating;
+    }
+
+    /**
+     * @return the status
+     */
+    @Enumerated
+    @Column(name = "staus")
+    public UserStatus getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(UserStatus  status) {
+        this.status = status;
+    }
+
+    /**
+     * @return the bans
+     */
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
+    public List<Ban> getBans() {
+        return bans;
+    }
+
+    /**
+     * @param bans the bans to set
+     */
+    public void setBans(List<Ban> bans) {
+        this.bans = bans;
+    }
+
+    /**
+     * @return the defaultRoom
+     */
+    @ManyToOne
+    @JoinColumn(name ="room_id")
+    public Room getDefaultRoom() {
+        return defaultRoom;
+    }
+
+    /**
+     * @param defaultRoom the defaultRoom to set
+     */
+    public void setDefaultRoom(Room defaultRoom) {
+        this.defaultRoom = defaultRoom;
+    }
+
+    /**
+     * @return the defaultTeam
+     */
+    @ManyToOne
+    @JoinColumn(name = "team_id")
+    public Team getDefaultTeam() {
+        return defaultTeam;
+    }
+
+    /**
+     * @param defaultTeam the defaultTeam to set
+     */
+    public void setDefaultTeam(Team defaultTeam) {
+        this.defaultTeam = defaultTeam;
     }
 }

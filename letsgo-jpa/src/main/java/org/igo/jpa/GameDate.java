@@ -17,15 +17,17 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author pl
  */
-@Entity
-@Table(name = "game_dates", catalog = "letsgo", schema = "")
 @XmlRootElement
+@Entity
+@Table(name = "game_dates", catalog = "letsgo", schema = "",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"game_date", "game_id"}))
 @NamedQueries({
     @NamedQuery(name = "GameDate.findAll", query = "SELECT g FROM GameDate g"),
     @NamedQuery(name = "GameDate.findByGameId", query = "SELECT g FROM GameDate g WHERE g.gameDatePK.gameId = :gameId"),

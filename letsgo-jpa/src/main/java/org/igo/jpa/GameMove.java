@@ -7,7 +7,6 @@ package org.igo.jpa;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -24,9 +23,9 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author pl
  */
+@XmlRootElement
 @Entity
 @Table(name = "game_moves", catalog = "letsgo", schema = "")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "GameMove.findAll", query = "SELECT g FROM GameMove g"),
     @NamedQuery(name = "GameMove.findByX", query = "SELECT g FROM GameMove g WHERE g.x = :x"),
@@ -36,14 +35,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class GameMove implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
     protected GameMovesPK gameMovesPK;
-
     private Character x;
     private Character y;
-
     private Game game;
-
     private List<MoveComment> comments;
 
     public GameMove() {

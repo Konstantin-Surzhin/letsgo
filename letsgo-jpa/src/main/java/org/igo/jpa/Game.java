@@ -15,6 +15,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
@@ -49,6 +51,8 @@ public class Game implements Serializable {
     private Collection<GameMove> gameMoves;
 
     private List<GameComment> comments;
+    
+    private Event event;
 
     @Id
     @Basic(optional = false)
@@ -243,5 +247,21 @@ public class Game implements Serializable {
 
     public void setGameDates(Collection<GameDate> gameDates) {
         this.gameDates = gameDates;
+    }
+
+    /**
+     * @return the event
+     */
+    @ManyToOne
+    @JoinColumn(name = "event_id")
+    public Event getEvent() {
+        return event;
+    }
+
+    /**
+     * @param event the event to set
+     */
+    public void setEvent(Event event) {
+        this.event = event;
     }
 }

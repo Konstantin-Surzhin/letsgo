@@ -9,6 +9,6 @@ package org.igo.jpa;
  *
  * @author pl
  */
-public enum DegreeType {
-    PROVIDED, APPOINTMENT, CALCULATION;
+public enum UserStatus {
+    ENABLE, DISABLE, PENDING;
 }

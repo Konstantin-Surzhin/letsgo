@@ -6,12 +6,13 @@
 package org.igo.jpa;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -19,24 +20,24 @@ import javax.persistence.Table;
  * @author pl
  */
 @Entity
-@Table(name = "degree", schema = "letsgo")
-public class Degree implements Serializable {
+@Table(name = "team")
+public class Team implements Serializable {
+
+    private List<User> users;
 
     private static final long serialVersionUID = 1L;
-
-    private Integer id;
-
-    private String dergeeValue;
+    private Long id;
+    
+    private String teamName;
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id", nullable = false)
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -50,47 +51,40 @@ public class Degree implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (object == null) {
+        if (!(object instanceof Team)) {
             return false;
         }
-
-        if (object.getClass() != Degree.class) {
-            return false;
-        }
-
-        Degree other = (Degree) object;
-
-        if (!other.dergeeValue.equals(dergeeValue)) {
-            return false;
-        }
-
+        Team other = (Team) object;
         return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     @Override
     public String toString() {
-        return dergeeValue;
+        return "jpa.Team[ id=" + id + " ]";
     }
 
     /**
-     * @return the dergeeValue
+     * @return the teamName
      */
-    @Column(name = "degree_value", unique = true, length = 255)
-    public String getDergeeValue() {
-        return dergeeValue;
+    @Column(name="team_name")
+    public String getTeamName() {
+        return teamName;
     }
 
     /**
-     * @param dergeeValue the dergeeValue to set
+     * @param teamName the teamName to set
      */
-    public void setDergeeValue(String dergeeValue) {
-        this.dergeeValue = dergeeValue;
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
     }
 
-    public Degree() {
+    @OneToMany(mappedBy = "defaultTeam")
+    public List<User> getUsers() {
+        return users;
     }
 
-    public Degree(Integer id) {
-        this.id = id;
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
+    
 }

@@ -7,7 +7,6 @@ package org.igo.jpa;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,13 +15,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  *
  * @author pl
  */
 @Entity
-@Table(name = "move_comments")
+@Table(name = "move_comments",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"move_comment",
+    "ndx", "game_id", "user_id"}))
 public class MoveComment implements Serializable {
 
     private static final long serialVersionUID = 1L;

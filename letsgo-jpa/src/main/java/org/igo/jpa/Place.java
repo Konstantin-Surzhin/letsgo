@@ -6,7 +6,6 @@
 package org.igo.jpa;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,24 +18,22 @@ import javax.persistence.Table;
  * @author pl
  */
 @Entity
-@Table(name = "degree", schema = "letsgo")
-public class Degree implements Serializable {
+@Table(name = "place")
+public class Place implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    private Integer id;
-
-    private String dergeeValue;
+    private Long id;
+    
+    private String placeName;
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id", nullable = false)
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -50,47 +47,31 @@ public class Degree implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (object == null) {
+        if (!(object instanceof Place)) {
             return false;
         }
-
-        if (object.getClass() != Degree.class) {
-            return false;
-        }
-
-        Degree other = (Degree) object;
-
-        if (!other.dergeeValue.equals(dergeeValue)) {
-            return false;
-        }
-
+        Place other = (Place) object;
         return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     @Override
     public String toString() {
-        return dergeeValue;
+        return "jpa.Place[ id=" + id + " ]";
     }
 
     /**
-     * @return the dergeeValue
+     * @return the placeName
      */
-    @Column(name = "degree_value", unique = true, length = 255)
-    public String getDergeeValue() {
-        return dergeeValue;
+    @Column(name="place_name")
+    public String getPlaceName() {
+        return placeName;
     }
 
     /**
-     * @param dergeeValue the dergeeValue to set
+     * @param placeName the placeName to set
      */
-    public void setDergeeValue(String dergeeValue) {
-        this.dergeeValue = dergeeValue;
+    public void setPlaceName(String placeName) {
+        this.placeName = placeName;
     }
-
-    public Degree() {
-    }
-
-    public Degree(Integer id) {
-        this.id = id;
-    }
+    
 }

@@ -31,7 +31,7 @@ public class UserDegree implements Serializable {
     private static final long serialVersionUID = 1L;
 
     protected UserDegreePK userDegreePK;
-    private Degree ratingId;
+    private Degree degeeId;
     private User users;
     private DegreeType degreeType;
 
@@ -57,12 +57,12 @@ public class UserDegree implements Serializable {
 
     @JoinColumn(name = "degree_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
-    public Degree getRatingId() {
-        return ratingId;
+    public Degree getDegeeId() {
+        return degeeId;
     }
 
-    public void setRatingId(Degree ratingId) {
-        this.ratingId = ratingId;
+    public void setDegeeId(Degree degeeId) {
+        this.degeeId = degeeId;
     }
 
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)

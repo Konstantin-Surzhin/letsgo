@@ -10,18 +10,22 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
+import javax.persistence.UniqueConstraint;
 
 /**
  *
  * @author pl
  */
 @Entity
-@Table(name = "game_comments")
+@Table(name = "game_comments",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"game_id", "user_id","comment"}))
 public class GameComment implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -33,7 +37,10 @@ public class GameComment implements Serializable {
     private List<GameComment> comments;
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
+    @TableGenerator(name = "game_comment_gen", table = "id_gen",
+            pkColumnName = "gen_name", valueColumnName = "gen_val")
+    @GeneratedValue(generator = "game_comment_gen")
     public Long getId() {
         return id;
     }
