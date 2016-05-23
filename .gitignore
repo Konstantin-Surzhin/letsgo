@@ -18,3 +18,9 @@ hs_err_pid*
 /letsgo-ear/nb-configuration.xml
 /letsgo-client/nb-configuration.xml
 /nb-configuration.xml
+/letsgo-client/target/
+/letsgo-ear/target/
+/letsgo-ejb/target/
+/letsgo-remote/target/
+/letsgo-rest/target/
+/letsgo-web/target/
