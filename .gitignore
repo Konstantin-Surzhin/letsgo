@@ -10,3 +10,11 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+/letsgo-web/nbactions.xml
+/letsgo-soap/nb-configuration.xml
+/letsgo-rest/nb-configuration.xml
+/letsgo-remote/nb-configuration.xml
+/letsgo-ejb/nb-configuration.xml
+/letsgo-ear/nb-configuration.xml
+/letsgo-client/nb-configuration.xml
+/nb-configuration.xml

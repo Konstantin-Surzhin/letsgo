@@ -1,0 +1,7 @@
+org\igo\letsgo\client\Find.class
+org\igo\letsgo\client\GameFcadeSOAP_Service.class
+org\igo\letsgo\client\FindResponse.class
+org\igo\letsgo\client\package-info.class
+org\igo\letsgo\client\GameFcadeSOAP.class
+org\igo\letsgo\client\ObjectFactory.class
+org\igo\letsgo\client\Main.class
