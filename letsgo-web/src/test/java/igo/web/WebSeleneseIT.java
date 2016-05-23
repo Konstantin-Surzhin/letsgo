@@ -17,10 +17,7 @@
 package igo.web;
 
 import io.github.bonigarcia.wdm.ChromeDriverManager;
-import java.net.URL;
-import java.util.List;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -60,15 +57,15 @@ public class WebSeleneseIT {
 
     @Test
     public void testTitle() throws Exception {
-        System.out.println("Test Title");
+        System.out.println("Test title");
         (new WebDriverWait(driver, 10)).until(
-                (WebDriver d) -> d.getTitle().contains("JSP Page"));
+                (WebDriver d) -> d.getTitle().contains("IGO Server"));
     }
 
     @Test
     public void testH1() throws Exception {
-        System.out.println("Test Title");
+        System.out.println("Test content");
         (new WebDriverWait(driver, 10)).until(
-                (WebDriver d) -> d.findElement(By.tagName("H1")).getText().contains("Hello Web World!"));
+                (WebDriver d) -> d.findElement(By.tagName("H1")).getText().contains("Let's go play go!"));
     }
 }
