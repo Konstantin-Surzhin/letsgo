@@ -48,7 +48,7 @@
   </wsdl:binding>
   <wsdl:service name="GameFcadeSOAP">
     <wsdl:port binding="tns:GameFcadeSOAPSoapBinding" name="GameFcadeSOAPPort">
-      <soap:address location="http://localhost:8084/letsgo-soap/GameFcadeSOAP"/>
+      <soap:address location="http://localhost:8084/soap/GameFcadeSOAP"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

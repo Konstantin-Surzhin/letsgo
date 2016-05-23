@@ -5,11 +5,10 @@
  */
 package org.igo.letsgo.soap;
 
+import javax.ejb.EJB;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
-import javax.jws.soap.SOAPBinding;
-import javax.jws.soap.SOAPBinding.Style;
-
+import org.igo.IGameRemote;
 
 /**
  *
@@ -17,19 +16,25 @@ import javax.jws.soap.SOAPBinding.Style;
  */
 @WebService(serviceName = "GameFcadeSOAP")
 public class GameFcadeSOAP {
-
-
 // Add business logic below. (Right-click in editor and choose
-    // "Web Service > Add Operation"
+// "Web Service > Add Operation"    
+
+    @EJB(beanInterface = IGameRemote.class)
+    private IGameRemote ejbRef;
 
     /**
      * Операция веб-службы
-     * @return 
+     *
+     * @return
      */
     @WebMethod(operationName = "find")
     public String find() {
         //TODO write your implementation code here:
-       // return ejbRef.businessMethod();
-       return  "Hello SOAP World!!!";
+
+        if (ejbRef != null) {
+            return ejbRef.getString();
+        }
+
+        return "Hello SOAP World !!! EJB NULL!";
     }
 }

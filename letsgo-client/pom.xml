@@ -105,14 +105,14 @@
                         </goals>
                         <configuration>
                             <wsdlFiles>
-                                <wsdlFile>localhost_8084/letsgo-soap/GameFcadeSOAP.wsdl</wsdlFile>
+                                <wsdlFile>localhost_8084/soap/GameFcadeSOAP.wsdl</wsdlFile>
                             </wsdlFiles>
                             <packageName>org.igo.letsgo.client</packageName>
                             <vmArgs>
                                 <vmArg>-Djavax.xml.accessExternalSchema=all</vmArg>
                             </vmArgs>
-                            <wsdlLocation>http://localhost:8084/letsgo-soap/GameFcadeSOAP?wsdl</wsdlLocation>
-                            <staleFile>${project.build.directory}/jaxws/stale/GameFcadeSOAP.stale</staleFile>
+                            <wsdlLocation>http://localhost:8084/soap/GameFcadeSOAP?wsdl</wsdlLocation>
+                            <staleFile>${project.build.directory}/jaxws/stale/GameFcadeSOAP_1.stale</staleFile>
                         </configuration>
                         <id>wsimport-generate-GameFcadeSOAP</id>
                         <phase>generate-sources</phase>

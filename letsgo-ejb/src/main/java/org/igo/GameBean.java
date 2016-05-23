@@ -33,7 +33,7 @@ public class GameBean implements IGameRemote, IGameLocal {
     
     @Override
     public String getString() {
-        return "Hello Remote Interface";
+        return "Hello EJB World!";
     }
 
     @Override
