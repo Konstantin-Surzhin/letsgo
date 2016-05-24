@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2016 surzhin.konstantin
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+
+<policy>
+
+    <application-policy name="testDB">
+
+        <authentication>
+
+            <login-module code="org.jboss.security.auth.spi.DatabaseServerLoginModule"
+
+                             flag="required">
+
+                <module-option name="dsJndiName">java:/MyDatabaseDS</module-option>
+
+                <module-option name="principalsQuery">
+
+                    select passwd from Users username where username=?</module-option>
+
+                <module-option name="rolesQuery">
+
+                    select userRoles, 'Roles' from UserRoles where username=?</module-option>
+
+            </login-module>
+
+        </authentication>
+
+    </application-policy>
+
+</policy>

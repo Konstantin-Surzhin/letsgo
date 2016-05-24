@@ -42,8 +42,8 @@ import javax.sql.DataSource;
  */
 public class MySQL extends HttpServlet {
 
-    @PersistenceContext(unitName = "MySQLDS")
-    private EntityManager em;
+   // @PersistenceContext(unitName = "MySQLDS")
+   // private EntityManager em;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -70,27 +70,27 @@ public class MySQL extends HttpServlet {
             out.println("<title>Servlet MySQL</title>");
             out.println("</head>");
             out.println("<body>");
-            if (conn != null) {
-                out.println("Есть соединение");
-                PreparedStatement st = conn.prepareStatement("SELECT * FROM letsgo.Game");
-                ResultSet rs = st.executeQuery();
-
-                if (em != null) {
-
-                    Query nq = em.createNativeQuery("SELECT * FROM letsgo.Game  where id='1111'");
-                    Object r = nq.getSingleResult();
-                    out.println("Есть менагер: " + r);
-                }else{
-                     out.println("Нет менагера.");
-                }
-
-                rs.next();
-                int id = rs.getInt("id");
-                out.println("id: " + id);
-
-            } else {
-                out.println("Нет соединения!");
-            }
+//            if (conn != null) {
+//                out.println("Есть соединение");
+//                PreparedStatement st = conn.prepareStatement("SELECT * FROM letsgo.Game");
+//                ResultSet rs = st.executeQuery();
+//
+//                if (em != null) {
+//
+//                    Query nq = em.createNativeQuery("SELECT * FROM letsgo.Game  where id='1111'");
+//                    Object r = nq.getSingleResult();
+//                    out.println("Есть менагер: " + r);
+//                }else{
+//                     out.println("Нет менагера.");
+//                }
+//
+//                rs.next();
+//                int id = rs.getInt("id");
+//                out.println("id: " + id);
+//
+//            } else {
+//                out.println("Нет соединения!");
+//            }
             out.println("</body>");
             out.println("</html>");
 

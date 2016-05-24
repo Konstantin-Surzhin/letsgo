@@ -29,7 +29,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  *
  * @author surzhin.konstantin
  */
-public class WebSeleneseIT {
+public class AdminIT {
 
     private ChromeDriver driver;
 
@@ -38,13 +38,12 @@ public class WebSeleneseIT {
      */
     @Before
     public void setUp() {
-        //System.setProperty("webdriver.chrome.driver", "D:\\distr\\selenium\\chromedriver.exe");    
 
         ChromeDriverManager.getInstance().setup();
         //InternetExplorerDriverManager.getInstance().setup(); 
         //OperaDriverManager.getInstance().setup(); 
         driver = new ChromeDriver();
-        driver.get("http://localhost:8084/");
+        driver.get("http://localhost:8084/admin");
     }
 
     /**
@@ -59,13 +58,13 @@ public class WebSeleneseIT {
     public void testTitle() throws Exception {
         System.out.println("Test title");
         (new WebDriverWait(driver, 10)).until(
-                (WebDriver d) -> d.getTitle().contains("IGO Server"));
+                (WebDriver d) -> d.getTitle().contains("Login Page"));
     }
 
     @Test
     public void testH1() throws Exception {
         System.out.println("Test content");
         (new WebDriverWait(driver, 10)).until(
-                (WebDriver d) -> d.findElement(By.tagName("H1")).getText().contains("Let's go play go!"));
+                (WebDriver d) -> d.findElement(By.tagName("H1")).getText().contains("Login Page!"));
     }
 }
