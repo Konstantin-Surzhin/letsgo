@@ -29,7 +29,7 @@ public class GameBean implements IGameRemote, IGameLocal {
 // Add business logic below. (Right-click in editor and choose
 // "Insert Code > Add Business Method")
 
-    @PersistenceContext private EntityManager em;
+    private EntityManager em;
     
     @Override
     public String getString() {
@@ -39,9 +39,24 @@ public class GameBean implements IGameRemote, IGameLocal {
     @Override
     public Integer create() {
         GoGame game = new GoGame();
-        em.persist(game);
-        em.flush();
+        getEm().persist(game);
+        getEm().flush();
         return game.getId();
+    }
+
+    /**
+     * @return the em
+     */
+    public EntityManager getEm() {
+        return em;
+    }
+
+    /**
+     * @param em the em to set
+     */
+    @PersistenceContext
+    public void setEm(EntityManager em) {
+        this.em = em;
     }
 
 }
