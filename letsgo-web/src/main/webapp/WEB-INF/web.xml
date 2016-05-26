@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app metadata-complete="false" version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
-    <servlet>
-        <servlet-name>MySQL</servlet-name>
-        <servlet-class>igo.dao.MySQL</servlet-class>
-    </servlet>
+    <context-param>
+        <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+        <param-value>org.igo.i18n.Bundle</param-value>
+    </context-param>
     <servlet>
         <servlet-name>admin</servlet-name>
         <jsp-file>/WEB-INF/admin/admin.jsp</jsp-file>
@@ -13,10 +13,6 @@
             <role-link>ADMIN</role-link>
         </security-role-ref>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>MySQL</servlet-name>
-        <url-pattern>/MySQL</url-pattern>
-    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>admin</servlet-name>
         <url-pattern>/admin/*</url-pattern>
