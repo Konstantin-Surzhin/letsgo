@@ -22,6 +22,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -55,16 +56,59 @@ public class AdminIT {
     }
 
     @Test
-    public void testTitle() throws Exception {
-        System.out.println("Test title");
+    public void testLoginPage() throws Exception {
+        System.out.println("Test Login Page");
         (new WebDriverWait(driver, 10)).until(
-                (WebDriver d) -> d.getTitle().contains("Login Page"));
+                (WebDriver d) -> {
+                    return d.getTitle().contains("Login Page")
+                    && d.findElement(By.tagName("H1"))
+                    .getText()
+                    .contains("Login Page!");
+                });
     }
 
     @Test
-    public void testH1() throws Exception {
-        System.out.println("Test content");
+    public void testFailLogin() throws Exception {
+        System.out.println("Test fail login");
+
+        WebElement username = driver.findElement(By.name("j_username"));
+        WebElement passwd = driver.findElement(By.name("j_password"));
+
+        username.clear();
+        passwd.clear();
+
+        username.sendKeys("qqq");
+        passwd.sendKeys("www");
+        passwd.submit();
+
         (new WebDriverWait(driver, 10)).until(
-                (WebDriver d) -> d.findElement(By.tagName("H1")).getText().contains("Login Page!"));
+                (WebDriver d) -> {
+                    return d.getTitle().contains("Login Error")
+                    && d.findElement(By.tagName("H2"))
+                    .getText()
+                    .contains("Invalid user name or password.");
+                });
+    }
+    @Test
+    public void testSuccesLogin() throws Exception {
+        System.out.println("Test succesed login");
+
+        WebElement username = driver.findElement(By.name("j_username"));
+        WebElement passwd = driver.findElement(By.name("j_password"));
+
+        username.clear();
+        passwd.clear();
+
+        username.sendKeys("myfear");
+        passwd.sendKeys("admin");
+        passwd.submit();
+
+        (new WebDriverWait(driver, 10)).until(
+                (WebDriver d) -> {
+                    return d.getTitle().contains("Admin Page")
+                    && d.findElement(By.tagName("H1"))
+                    .getText()
+                    .contains("Hello Admin!");
+                });
     }
 }
