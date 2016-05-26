@@ -30,7 +30,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  *
  * @author surzhin.konstantin
  */
-public class AdminIT {
+public class AdminIT extends BaseIT{
 
     private ChromeDriver driver;
 
@@ -58,13 +58,7 @@ public class AdminIT {
     @Test
     public void testLoginPage() throws Exception {
         System.out.println("Test Login Page");
-        (new WebDriverWait(driver, 10)).until(
-                (WebDriver d) -> {
-                    return d.getTitle().contains("Login Page")
-                    && d.findElement(By.tagName("H1"))
-                    .getText()
-                    .contains("Login Page!");
-                });
+        locales.parallelStream().forEach(new PageAction("admin"));
     }
 
     @Test

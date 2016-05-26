@@ -19,17 +19,17 @@ package igo.web;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
-import org.junit.Test;
 
 /**
  *
  * @author surzhin.konstantin
  */
-public class HomeIT extends BaseIT {
+class BaseIT {
 
-    @Test
-    public void testHome() throws Exception {
-        System.out.println("test home page");
-        locales.parallelStream().forEach(new PageAction(""));
+    final Set<Locale> locales = new HashSet<>();
+
+    public BaseIT() {
+        locales.add(new Locale("en", "En"));
+        locales.add(new Locale("ru", "RU"));
     }
 }

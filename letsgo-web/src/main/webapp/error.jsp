@@ -6,17 +6,23 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"  %>        
+<c:set var="clientLocale" value="${pageContext.request.locale}" />
+<c:set var="clientLocales" value="${pageContext.request.locales}" />
+<fmt:setLocale value="${clientLocale}" />
+<fmt:setBundle basename="org.igo.i18n.error.Bundle" var="msg" scope="session"/>
+<c:url var="url" value="/admin"/>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login Error</title>
+        <title><fmt:message key="title" bundle="${msg}"/></title>
     </head>
     <body>
-    <c:url var="url" value="/admin"/>
-    <h2>Invalid user name or password.</h2>
+        <h1><fmt:message key="welcome" bundle="${msg}"/></h1>
+        
+        <h2><fmt:message key="message" bundle="${msg}"/></h2>
 
-    <p>Please enter a user name or password that is authorized to access this 
-    application. Click here to <a href="${url}">Try Again</a></p>
-</body>
+        <p><fmt:message key="hint" bundle="${msg}"/></p>
+    </body>
 </html>

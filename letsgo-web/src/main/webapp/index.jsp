@@ -9,7 +9,7 @@
 <c:set var="clientLocale" value="${pageContext.request.locale}" />
 <c:set var="clientLocales" value="${pageContext.request.locales}" />
 <fmt:setLocale value="${clientLocale}" />
-<fmt:setBundle basename="org.igo.i18n.Bundle" var="msg" scope="session"/>
+<fmt:setBundle basename="org.igo.i18n.home.Bundle" var="msg" scope="session"/>
 <!DOCTYPE html>
 <html lang="${clientLocale}">
     <head>
