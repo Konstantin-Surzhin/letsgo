@@ -17,58 +17,53 @@
 package igo.web;
 
 import io.github.bonigarcia.wdm.ChromeDriverManager;
-import java.net.URL;
-import java.util.List;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import java.util.Locale;
+import java.util.ResourceBundle;
+import java.util.function.Consumer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  *
  * @author surzhin.konstantin
  */
-public class WebSeleneseIT {
+public class PageAction implements Consumer<Locale> {
 
-    private ChromeDriver driver;
-
-    /**
-     *
-     */
-    @Before
-    public void setUp() {
-        //System.setProperty("webdriver.chrome.driver", "D:\\distr\\selenium\\chromedriver.exe");    
-
+    static {
         ChromeDriverManager.getInstance().setup();
         //InternetExplorerDriverManager.getInstance().setup(); 
         //OperaDriverManager.getInstance().setup(); 
-        driver = new ChromeDriver();
-        driver.get("http://localhost:8084/");
+    }
+    private final String url;
+
+    PageAction(String url) {
+        if (url != null) {
+            this.url = url;
+        } else {
+            this.url = "";
+        }
     }
 
-    /**
-     *
-     */
-    @After
-    public void tearDown() {
-        driver.quit();
-    }
+    @Override
+    public void accept(Locale t) {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--lang=" + t);
+        ChromeDriver driver = new ChromeDriver(options);
 
-    @Test
-    public void testTitle() throws Exception {
-        System.out.println("Test Title");
+        driver.get("http://localhost:8084/" + url);
+        Locale.setDefault(t);
+        ResourceBundle bundle = java.util.ResourceBundle.getBundle("org/igo/i18n/"+url+"/Bundle");
         (new WebDriverWait(driver, 10)).until(
-                (WebDriver d) -> d.getTitle().contains("JSP Page"));
-    }
-
-    @Test
-    public void testH1() throws Exception {
-        System.out.println("Test Title");
-        (new WebDriverWait(driver, 10)).until(
-                (WebDriver d) -> d.findElement(By.tagName("H1")).getText().contains("Hello Web World!"));
+                (WebDriver d) -> {
+                    return d.getTitle()
+                    .contains(bundle.getString("title"))
+                    && d.findElement(By.tagName("H1"))
+                    .getText()
+                    .contains(bundle.getString("welcome"));
+                });
+        driver.close();
     }
 }
