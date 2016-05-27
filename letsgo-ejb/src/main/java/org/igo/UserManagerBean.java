@@ -30,11 +30,20 @@ public class UserManagerBean implements UserManagerBeanRemote, UserManagerBeanLo
     private EntityManager em;
 
     @Override
-    public Integer create(final String name, final String passwd, final String rpasswd) {
+    public String create(final String name, final String passwd, final String rpasswd) {
+
+        if (!passwd.equals(rpasswd)) {
+            return "";
+        }
+
         GoUser user = new GoUser();
+        user.setName(name);
+        user.setPasswd(passwd);
+
         getEm().persist(user);
         getEm().flush();
-        return user.getId();
+
+        return user.getId().toString();
     }
 
     // Add business logic below. (Right-click in editor and choose
