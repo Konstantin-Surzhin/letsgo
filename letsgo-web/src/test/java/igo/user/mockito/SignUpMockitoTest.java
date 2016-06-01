@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package igo.user.Mockito;
+package igo.user.mockito;
 
 import igo.user.SignUp;
 import java.io.ByteArrayOutputStream;
@@ -28,15 +28,18 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import org.mockito.Mockito;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+//import static org.mockito.Mockito.*;
 
 /**
  *
  * @author surzhin.konstantin
  */
-public class SignUpTest {
+public class SignUpMockitoTest {
 
-    public SignUpTest() {
+    public SignUpMockitoTest() {
     }
 
     @BeforeClass
@@ -67,23 +70,23 @@ public class SignUpTest {
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
+        HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
+        HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
         try (PrintWriter writer = new PrintWriter(out)) {
 
             String name = "user";
             String passwd = "passwd";
             String rpasswd = passwd;
 
-            when(request.getParameter("name")).thenReturn(name);
-            when(request.getParameter("passwd")).thenReturn(passwd);
-            when(request.getParameter("rpasswd")).thenReturn(rpasswd);
+            Mockito.when(request.getParameter("name")).thenReturn(name);
+            Mockito.when(request.getParameter("passwd")).thenReturn(passwd);
+            Mockito.when(request.getParameter("rpasswd")).thenReturn(rpasswd);
 
-            when(response.getWriter()).thenReturn(writer);
+            Mockito.when(response.getWriter()).thenReturn(writer);
 
             SignUp instance = new SignUp();
 
-            instance.processRequest(request, response);
+            instance.doPost(request, response);
         }
         assertEquals("user manager is null", out.toString());
     }
@@ -98,8 +101,8 @@ public class SignUpTest {
     public void testProcessRequestUMBean2() throws Exception {
         System.out.println("user manager Bean is not null");
 
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
+        HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
+        HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         try (PrintWriter writer = new PrintWriter(out)) {
 
@@ -107,18 +110,18 @@ public class SignUpTest {
             String passwd = "passwd";
             String rpasswd = passwd;
 
-            when(request.getParameter("name")).thenReturn(name);
-            when(request.getParameter("passwd")).thenReturn(passwd);
-            when(request.getParameter("rpasswd")).thenReturn(rpasswd);
+            Mockito.when(request.getParameter("name")).thenReturn(name);
+            Mockito.when(request.getParameter("passwd")).thenReturn(passwd);
+            Mockito.when(request.getParameter("rpasswd")).thenReturn(rpasswd);
 
-            when(response.getWriter()).thenReturn(writer);
+            Mockito.when(response.getWriter()).thenReturn(writer);
 
             SignUp instance = new SignUp();
 
-            UserManagerBeanRemote userManagerBean = mock(UserManagerBeanRemote.class);
+            UserManagerBeanRemote userManagerBean = Mockito.mock(UserManagerBeanRemote.class);
             instance.setUserManagerBean(userManagerBean);
             
-            instance.processRequest(request, response);
+            instance.doPost(request, response);
 
             verify(userManagerBean, times(1)).create(name, passwd, rpasswd);
         }
@@ -130,13 +133,13 @@ public class SignUpTest {
     public void testProcessRequestName1() throws Exception {
         System.out.println("name is null");
 
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
+        HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
+        HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         try (PrintWriter writer = new PrintWriter(out)) {
-            when(response.getWriter()).thenReturn(writer);
+            Mockito.when(response.getWriter()).thenReturn(writer);
             SignUp instance = new SignUp();
-            instance.processRequest(request, response);
+            instance.doPost(request, response);
         }
         assertEquals("name is null", out.toString());
     }
@@ -145,14 +148,14 @@ public class SignUpTest {
     public void testProcessRequestName2() throws Exception {
         System.out.println("name is empty");
 
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
+        HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
+        HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         try (PrintWriter writer = new PrintWriter(out)) {
-            when(response.getWriter()).thenReturn(writer);
-            when(request.getParameter("name")).thenReturn("");
+            Mockito.when(response.getWriter()).thenReturn(writer);
+            Mockito.when(request.getParameter("name")).thenReturn("");
             SignUp instance = new SignUp();
-            instance.processRequest(request, response);
+            instance.doPost(request, response);
         }
 
         assertEquals("name is empty", out.toString());
@@ -162,14 +165,14 @@ public class SignUpTest {
     public void testProcessRequestPasswd1() throws Exception {
         System.out.println("passwd is null");
 
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
+        HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
+        HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         try (PrintWriter writer = new PrintWriter(out)) {
-            when(response.getWriter()).thenReturn(writer);
-            when(request.getParameter("name")).thenReturn("user");
+            Mockito.when(response.getWriter()).thenReturn(writer);
+            Mockito.when(request.getParameter("name")).thenReturn("user");
             SignUp instance = new SignUp();
-            instance.processRequest(request, response);
+            instance.doPost(request, response);
         }
         assertEquals("passwd is null", out.toString());
     }
@@ -178,15 +181,15 @@ public class SignUpTest {
     public void testProcessRequestPasswd2() throws Exception {
         System.out.println("passwd is empty");
 
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
+        HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
+        HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         try (PrintWriter writer = new PrintWriter(out)) {
-            when(response.getWriter()).thenReturn(writer);
-            when(request.getParameter("name")).thenReturn("user");
-            when(request.getParameter("passwd")).thenReturn("");
+            Mockito.when(response.getWriter()).thenReturn(writer);
+            Mockito.when(request.getParameter("name")).thenReturn("user");
+            Mockito.when(request.getParameter("passwd")).thenReturn("");
             SignUp instance = new SignUp();
-            instance.processRequest(request, response);
+            instance.doPost(request, response);
         }
 
         assertEquals("passwd is empty", out.toString());
@@ -196,15 +199,15 @@ public class SignUpTest {
     public void testProcessRequestRPasswd1() throws Exception {
         System.out.println("rpasswd is null");
 
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
+        HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
+        HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         try (PrintWriter writer = new PrintWriter(out)) {
-            when(response.getWriter()).thenReturn(writer);
-            when(request.getParameter("name")).thenReturn("user");
-            when(request.getParameter("passwd")).thenReturn("passwd");
+            Mockito.when(response.getWriter()).thenReturn(writer);
+            Mockito.when(request.getParameter("name")).thenReturn("user");
+            Mockito.when(request.getParameter("passwd")).thenReturn("passwd");
             SignUp instance = new SignUp();
-            instance.processRequest(request, response);
+            instance.doPost(request, response);
         }
         assertEquals("rpasswd is null", out.toString());
     }
@@ -213,16 +216,16 @@ public class SignUpTest {
     public void testProcessRequestRPasswd2() throws Exception {
         System.out.println("rpasswd is empty");
 
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
+        HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
+        HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         try (PrintWriter writer = new PrintWriter(out)) {
-            when(response.getWriter()).thenReturn(writer);
-            when(request.getParameter("name")).thenReturn("user");
-            when(request.getParameter("passwd")).thenReturn("passwd");
-            when(request.getParameter("rpasswd")).thenReturn("");
+            Mockito.when(response.getWriter()).thenReturn(writer);
+            Mockito.when(request.getParameter("name")).thenReturn("user");
+            Mockito.when(request.getParameter("passwd")).thenReturn("passwd");
+            Mockito.when(request.getParameter("rpasswd")).thenReturn("");
             SignUp instance = new SignUp();
-            instance.processRequest(request, response);
+            instance.doPost(request, response);
         }
 
         assertEquals("rpasswd is empty", out.toString());
@@ -232,16 +235,16 @@ public class SignUpTest {
     public void testProcessRequestPasswdRPasswdNotEquals() throws Exception {
         System.out.println("passwd and rpasswd not equals");
 
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
+        HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
+        HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         try (PrintWriter writer = new PrintWriter(out)) {
-            when(response.getWriter()).thenReturn(writer);
-            when(request.getParameter("name")).thenReturn("user");
-            when(request.getParameter("passwd")).thenReturn("passwd");
-            when(request.getParameter("rpasswd")).thenReturn("rpasswd");
+            Mockito.when(response.getWriter()).thenReturn(writer);
+            Mockito.when(request.getParameter("name")).thenReturn("user");
+            Mockito.when(request.getParameter("passwd")).thenReturn("passwd");
+            Mockito.when(request.getParameter("rpasswd")).thenReturn("rpasswd");
             SignUp instance = new SignUp();
-            instance.processRequest(request, response);
+            instance.doPost(request, response);
         }
 
         assertEquals("A password mismatch has been detected", out.toString());

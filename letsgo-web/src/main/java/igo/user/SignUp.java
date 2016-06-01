@@ -44,30 +44,32 @@ public class SignUp extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    public void processRequest(HttpServletRequest request, HttpServletResponse response)
+    private void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
 
-        String name = parametrCheck("name", request, out);
+        String name = parametrCheck("name", request, response, out);
         if (name == null) {
             return;
         }
-        String passwd = parametrCheck("passwd", request, out);
+        String passwd = parametrCheck("passwd", request, response, out);
         if (passwd == null) {
             return;
         }
-        String rPasswd = parametrCheck("rpasswd", request, out);
+        String rPasswd = parametrCheck("rpasswd", request, response, out);
         if (rPasswd == null) {
             return;
         }
 
         if (!passwd.equals(rPasswd)) {
             out.print("A password mismatch has been detected");
+            response.setStatus(400);
             return;
         }
 
         if (userManagerBean == null) {
             out.print("user manager is null");
+            response.setStatus(500);
         } else {
             String useId = userManagerBean.create(name, passwd, rPasswd);
             out.print("User id: " + useId);
@@ -128,15 +130,20 @@ public class SignUp extends HttpServlet {
         this.userManagerBean = userManagerBean;
     }
 
-    private String parametrCheck(String name, HttpServletRequest request, PrintWriter out) {
+    private String parametrCheck(String name,
+            HttpServletRequest request,
+            HttpServletResponse response,
+            PrintWriter out) {
         String param = request.getParameter(name);
 
         if (param == null) {
             out.print(name + " is null");
-            return null;
         } else if (param.isEmpty()) {
             out.print(name + " is empty");
-            return null;
+            param = null;
+        }
+        if (param == null) {
+            response.setStatus(400);
         }
         return param;
     }
