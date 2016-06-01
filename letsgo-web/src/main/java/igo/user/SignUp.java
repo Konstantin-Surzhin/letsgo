@@ -18,12 +18,13 @@ package igo.user;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.security.SecureRandom;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.igo.UserManagerBeanRemote;
 
 /**
  *
@@ -31,6 +32,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "SignUp", urlPatterns = {"/SignUp"})
 public class SignUp extends HttpServlet {
+
+    private UserManagerBeanRemote userManagerBean;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,9 +44,34 @@ public class SignUp extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    public void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
- 
+        PrintWriter out = response.getWriter();
+
+        String name = parametrCheck("name", request, out);
+        if (name == null) {
+            return;
+        }
+        String passwd = parametrCheck("passwd", request, out);
+        if (passwd == null) {
+            return;
+        }
+        String rPasswd = parametrCheck("rpasswd", request, out);
+        if (rPasswd == null) {
+            return;
+        }
+
+        if (!passwd.equals(rPasswd)) {
+            out.print("A password mismatch has been detected");
+            return;
+        }
+
+        if (userManagerBean == null) {
+            out.print("user manager is null");
+        } else {
+            String useId = userManagerBean.create(name, passwd, rPasswd);
+            out.print("User id: " + useId);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -56,7 +84,7 @@ public class SignUp extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -70,7 +98,7 @@ public class SignUp extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -85,5 +113,31 @@ public class SignUp extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    
+    /**
+     * @return the userManagerBean
+     */
+    public UserManagerBeanRemote getUserManagerBean() {
+        return userManagerBean;
+    }
+
+    /**
+     * @param userManagerBean the userManagerBean to set
+     */
+    @EJB
+    public void setUserManagerBean(UserManagerBeanRemote userManagerBean) {
+        this.userManagerBean = userManagerBean;
+    }
+
+    private String parametrCheck(String name, HttpServletRequest request, PrintWriter out) {
+        String param = request.getParameter(name);
+
+        if (param == null) {
+            out.print(name + " is null");
+            return null;
+        } else if (param.isEmpty()) {
+            out.print(name + " is empty");
+            return null;
+        }
+        return param;
+    }
 }

@@ -20,7 +20,7 @@
     <body>
         <h1><fmt:message key="welcome" bundle="${msg}"/></h1>
         <form method="POST" action="SignUp">
-            <input type="text" name="username"><br/>
+            <input type="text" name="name"><br/>
             <input title="passwd" type="password" name="passwd"><br/>
             <input title="repeatpasswd" type="password" name="rpasswd"><br/>
             <input type="submit" value="submit" name="submit"/>
