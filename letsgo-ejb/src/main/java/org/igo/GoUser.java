@@ -113,5 +113,7 @@ public class GoUser implements Serializable {
     public void setPasswd(String passwd) {
         this.passwd = passwd;
     }
-    
+
+    public GoUser() {
+    }   
 }
