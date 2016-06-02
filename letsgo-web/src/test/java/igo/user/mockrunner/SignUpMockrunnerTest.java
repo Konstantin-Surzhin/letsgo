@@ -18,7 +18,7 @@ package igo.user.mockrunner;
 
 import com.mockrunner.mock.web.WebMockObjectFactory;
 import com.mockrunner.servlet.ServletTestModule;
-import igo.user.SignUp;
+import igo.user.SignUpVerification;
 import org.igo.UserManagerBeanRemote;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -54,7 +54,7 @@ public class SignUpMockrunnerTest {
         tester.addRequestParameter("rpasswd", rpasswd);
 
         // instantiate the servlet
-        tester.createServlet(SignUp.class);
+        tester.createServlet(SignUpVerification.class);
 
         // call doPost
         tester.doPost();
@@ -78,7 +78,7 @@ public class SignUpMockrunnerTest {
         tester.addRequestParameter("rpasswd", rpasswd);
 
         // instantiate the servlet
-        SignUp srv = (SignUp) tester.createServlet(SignUp.class);
+        SignUpVerification srv = (SignUpVerification) tester.createServlet(SignUpVerification.class);
 
         //TODO: MockEJB
         UserManagerBeanRemote userManagerBean = mock(UserManagerBeanRemote.class);
@@ -105,7 +105,7 @@ public class SignUpMockrunnerTest {
         tester.addRequestParameter("rpasswd", "rpasswd");
 
         // instantiate the servlet
-        SignUp srv = (SignUp) tester.createServlet(SignUp.class);
+        SignUpVerification srv = (SignUpVerification) tester.createServlet(SignUpVerification.class);
 
         //TODO: MockEJB
         UserManagerBeanRemote userManagerBean = mock(UserManagerBeanRemote.class);

@@ -16,9 +16,13 @@
  */
 package org.igo;
 
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
+import javax.persistence.Query;
 
 /**
  *
@@ -26,23 +30,35 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class UserManagerBean implements UserManagerBeanRemote, UserManagerBeanLocal {
-
+    
+    static final Logger LOGGER = Logger.getLogger(UserManagerBean.class.getName());
     private EntityManager em;
-
+    
     @Override
     public String create(final String name, final String passwd, final String rpasswd) {
-
+        
         if (!passwd.equals(rpasswd)) {
             return "";
         }
-
-        GoUser user = new GoUser();
-        user.setName(name);
-        user.setPasswd(passwd);
-
-        getEm().persist(user);
-        getEm().flush();
-
+        
+        Query query = em.createNamedQuery("GoUser.findByName", GoUser.class);
+        query.setParameter("name", name);
+        GoUser user;
+        
+        try {
+            user = (GoUser) query.getSingleResult();
+            return "-1";
+        } catch (NoResultException e) {
+            user = new GoUser();
+            user.setName(name);
+            user.setPasswd(passwd);
+            try {
+                em.persist(user);
+                em.flush();
+            } catch (PersistenceException pe) {
+                LOGGER.severe(pe.getMessage());
+            }
+        }
         return user.getId().toString();
     }
 

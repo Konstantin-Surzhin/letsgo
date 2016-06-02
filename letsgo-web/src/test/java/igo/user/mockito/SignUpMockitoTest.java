@@ -16,7 +16,7 @@
  */
 package igo.user.mockito;
 
-import igo.user.SignUp;
+import igo.user.SignUpVerification;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
@@ -59,7 +59,7 @@ public class SignUpMockitoTest {
     }
 
     /**
-     * Test of processRequest method, of class SignUp. User manager Bean is
+     * Test of processRequest method, of class SignUpVerification. User manager Bean is
      * null.
      *
      * @throws java.lang.Exception
@@ -84,7 +84,7 @@ public class SignUpMockitoTest {
 
             Mockito.when(response.getWriter()).thenReturn(writer);
 
-            SignUp instance = new SignUp();
+            SignUpVerification instance = new SignUpVerification();
 
             instance.doPost(request, response);
         }
@@ -92,7 +92,7 @@ public class SignUpMockitoTest {
     }
 
     /**
-     * Test of processRequest method, of class SignUp. User manager Bean is not
+     * Test of processRequest method, of class SignUpVerification. User manager Bean is not
      * null.
      *
      * @throws java.lang.Exception
@@ -116,7 +116,7 @@ public class SignUpMockitoTest {
 
             Mockito.when(response.getWriter()).thenReturn(writer);
 
-            SignUp instance = new SignUp();
+            SignUpVerification instance = new SignUpVerification();
 
             UserManagerBeanRemote userManagerBean = Mockito.mock(UserManagerBeanRemote.class);
             instance.setUserManagerBean(userManagerBean);
@@ -138,7 +138,7 @@ public class SignUpMockitoTest {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         try (PrintWriter writer = new PrintWriter(out)) {
             Mockito.when(response.getWriter()).thenReturn(writer);
-            SignUp instance = new SignUp();
+            SignUpVerification instance = new SignUpVerification();
             instance.doPost(request, response);
         }
         assertEquals("name is null", out.toString());
@@ -154,7 +154,7 @@ public class SignUpMockitoTest {
         try (PrintWriter writer = new PrintWriter(out)) {
             Mockito.when(response.getWriter()).thenReturn(writer);
             Mockito.when(request.getParameter("name")).thenReturn("");
-            SignUp instance = new SignUp();
+            SignUpVerification instance = new SignUpVerification();
             instance.doPost(request, response);
         }
 
@@ -171,7 +171,7 @@ public class SignUpMockitoTest {
         try (PrintWriter writer = new PrintWriter(out)) {
             Mockito.when(response.getWriter()).thenReturn(writer);
             Mockito.when(request.getParameter("name")).thenReturn("user");
-            SignUp instance = new SignUp();
+            SignUpVerification instance = new SignUpVerification();
             instance.doPost(request, response);
         }
         assertEquals("passwd is null", out.toString());
@@ -188,7 +188,7 @@ public class SignUpMockitoTest {
             Mockito.when(response.getWriter()).thenReturn(writer);
             Mockito.when(request.getParameter("name")).thenReturn("user");
             Mockito.when(request.getParameter("passwd")).thenReturn("");
-            SignUp instance = new SignUp();
+            SignUpVerification instance = new SignUpVerification();
             instance.doPost(request, response);
         }
 
@@ -206,7 +206,7 @@ public class SignUpMockitoTest {
             Mockito.when(response.getWriter()).thenReturn(writer);
             Mockito.when(request.getParameter("name")).thenReturn("user");
             Mockito.when(request.getParameter("passwd")).thenReturn("passwd");
-            SignUp instance = new SignUp();
+            SignUpVerification instance = new SignUpVerification();
             instance.doPost(request, response);
         }
         assertEquals("rpasswd is null", out.toString());
@@ -224,7 +224,7 @@ public class SignUpMockitoTest {
             Mockito.when(request.getParameter("name")).thenReturn("user");
             Mockito.when(request.getParameter("passwd")).thenReturn("passwd");
             Mockito.when(request.getParameter("rpasswd")).thenReturn("");
-            SignUp instance = new SignUp();
+            SignUpVerification instance = new SignUpVerification();
             instance.doPost(request, response);
         }
 
@@ -243,7 +243,7 @@ public class SignUpMockitoTest {
             Mockito.when(request.getParameter("name")).thenReturn("user");
             Mockito.when(request.getParameter("passwd")).thenReturn("passwd");
             Mockito.when(request.getParameter("rpasswd")).thenReturn("rpasswd");
-            SignUp instance = new SignUp();
+            SignUpVerification instance = new SignUpVerification();
             instance.doPost(request, response);
         }
 

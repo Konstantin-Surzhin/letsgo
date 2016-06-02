@@ -24,14 +24,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.igo.UserManagerBeanRemote;
 
 /**
  *
  * @author surzhin.konstantin
  */
-@WebServlet(name = "SignUp", urlPatterns = {"/SignUp"})
-public class SignUp extends HttpServlet {
+@WebServlet(name = "SignUpVerification", urlPatterns = {"/verification"})
+public class SignUpVerification extends HttpServlet {
 
     private UserManagerBeanRemote userManagerBean;
 
@@ -71,8 +72,14 @@ public class SignUp extends HttpServlet {
             out.print("user manager is null");
             response.setStatus(500);
         } else {
-            String useId = userManagerBean.create(name, passwd, rPasswd);
-            out.print("User id: " + useId);
+            String userId = userManagerBean.create(name, passwd, rPasswd);
+            if (userId.equals("-1")) {
+                out.print("user " + name + " exist");
+            } else {
+                HttpSession ss = request.getSession();
+                ss.setAttribute("name", name);
+                response.sendRedirect("/user/" + userId);
+            }
         }
     }
 

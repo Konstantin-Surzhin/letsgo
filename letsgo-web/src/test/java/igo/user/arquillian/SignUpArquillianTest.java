@@ -16,7 +16,7 @@
  */
 package igo.user.arquillian;
 
-import igo.user.SignUp;
+import igo.user.SignUpVerification;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -40,7 +40,7 @@ public class SignUpArquillianTest {
     @Deployment
     public static WebArchive createDeployment() {
         WebArchive war = ShrinkWrap.create(WebArchive.class)
-                .addClass(SignUp.class);
+                .addClass(SignUpVerification.class);
         System.out.println(war.toString(true));
         return war;
     }

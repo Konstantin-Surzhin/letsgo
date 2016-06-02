@@ -16,7 +16,7 @@
  */
 package igo.user.spring;
 
-import igo.user.SignUp;
+import igo.user.SignUpVerification;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintWriter;
 import org.junit.After;
@@ -65,7 +65,7 @@ public class SignUpSpringTest {
         request.addParameter("passwd", "passwd");
         request.addParameter("rpasswd", "passwd");
 
-        SignUp instance = new SignUp();
+        SignUpVerification instance = new SignUpVerification();
 
 
         instance.doPost(request, response);
