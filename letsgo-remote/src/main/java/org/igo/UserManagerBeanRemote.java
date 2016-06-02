@@ -14,22 +14,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package igo.web;
+package org.igo;
 
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Set;
-import org.junit.Test;
+import javax.ejb.Remote;
 
 /**
  *
  * @author surzhin.konstantin
  */
-public class HomeIT extends BaseIT {
+@Remote
+public interface UserManagerBeanRemote {
 
-    @Test
-    public void testHome() throws Exception {
-        System.out.println("test home page");
-        locales.parallelStream().forEach(new PageAction(""));
-    }
+    String create(final String name, final String passwd, final String rpasswd);
+    
 }

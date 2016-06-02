@@ -14,8 +14,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package igo.user;
+package igo.user.mockito;
 
+import igo.user.User;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

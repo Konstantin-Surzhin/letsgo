@@ -49,23 +49,18 @@ public class GoUser implements Serializable {
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
     private Integer id;
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 128)
-    @Column(name = "name", nullable = false, length = 128)
+    @Column(name = "user_name", nullable = false, length = 128, unique = true)
     private String name;
 
-    public GoUser() {
-    }
-
-    public GoUser(Integer id) {
-        this.id = id;
-    }
-
-    public GoUser(Integer id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
+    @Column(name = "password", nullable = false, length = 255)
+    private String passwd;
 
     public Integer getId() {
         return id;
@@ -97,15 +92,28 @@ public class GoUser implements Serializable {
             return false;
         }
         GoUser other = (GoUser) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     @Override
     public String toString() {
         return "org.igo.GoUser[ id=" + id + " ]";
     }
-    
+
+    /**
+     * @return the passwd
+     */
+    public String getPasswd() {
+        return passwd;
+    }
+
+    /**
+     * @param passwd the passwd to set
+     */
+    public void setPasswd(String passwd) {
+        this.passwd = passwd;
+    }
+
+    public GoUser() {
+    }
 }

@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package igo.user;
+package org.igo;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -28,37 +28,21 @@ import org.junit.runners.Suite;
  * @author surzhin.konstantin
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({UserTest.class})
-public class UserTestSuite {
+@Suite.SuiteClasses({org.igo.GameBeanTest.class, org.igo.IGameLocalTest.class, org.igo.GoUserTest.class, org.igo.GoGameTest.class})
+public class IgoSuite {
 
-    /**
-     *
-     * @throws Exception
-     */
     @BeforeClass
     public static void setUpClass() throws Exception {
     }
 
-    /**
-     *
-     * @throws Exception
-     */
     @AfterClass
     public static void tearDownClass() throws Exception {
     }
 
-    /**
-     *
-     * @throws Exception
-     */
     @Before
     public void setUp() throws Exception {
     }
 
-    /**
-     *
-     * @throws Exception
-     */
     @After
     public void tearDown() throws Exception {
     }
