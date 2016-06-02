@@ -53,13 +53,13 @@ public class GoUser implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 128)
-    @Column(name = "name", nullable = false, length = 128)
+    @Column(name = "user_name", nullable = false, length = 128)
     private String name;
 
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
-    @Column(name = "name", nullable = false, length = 255)
+    @Column(name = "password", nullable = false, length = 255)
     private String passwd;
     
     public Integer getId() {
