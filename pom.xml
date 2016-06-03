@@ -58,7 +58,8 @@
         <module>letsgo-rest</module>
         <module>letsgo-client</module>
         <module>letsgo-remote</module>
-    </modules>
+    <module>letsgo-spring</module>
+  </modules>
     <dependencies>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
