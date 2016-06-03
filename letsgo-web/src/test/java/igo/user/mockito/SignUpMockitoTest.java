@@ -21,6 +21,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.igo.UserManagerBeanRemote;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -103,6 +104,8 @@ public class SignUpMockitoTest {
 
         HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
         HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
+        HttpSession session = Mockito.mock(HttpSession.class);
+        
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         try (PrintWriter writer = new PrintWriter(out)) {
 
@@ -113,6 +116,7 @@ public class SignUpMockitoTest {
             Mockito.when(request.getParameter("name")).thenReturn(name);
             Mockito.when(request.getParameter("passwd")).thenReturn(passwd);
             Mockito.when(request.getParameter("rpasswd")).thenReturn(rpasswd);
+            Mockito.when(request.getSession()).thenReturn(session);
 
             Mockito.when(response.getWriter()).thenReturn(writer);
 
@@ -121,12 +125,54 @@ public class SignUpMockitoTest {
             UserManagerBeanRemote userManagerBean = Mockito.mock(UserManagerBeanRemote.class);
             instance.setUserManagerBean(userManagerBean);
             
+            Mockito.when(userManagerBean.create(name, passwd, rpasswd)).thenReturn("1");
+            
+            instance.doPost(request, response);
+
+            verify(userManagerBean, times(1)).create(name, passwd, rpasswd);
+        }
+    }
+    /**
+     * Test of processRequest method, of class SignUpVerification. User manager Bean is not
+     * null.
+     *
+     * @throws java.lang.Exception
+     */
+    @Test
+    public void testProcessRequestUMBean3() throws Exception {
+        System.out.println("user exist");
+
+        HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
+        HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
+        HttpSession session = Mockito.mock(HttpSession.class);
+        
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        try (PrintWriter writer = new PrintWriter(out)) {
+
+            String name = "user";
+            String passwd = "passwd";
+            String rpasswd = passwd;
+
+            Mockito.when(request.getParameter("name")).thenReturn(name);
+            Mockito.when(request.getParameter("passwd")).thenReturn(passwd);
+            Mockito.when(request.getParameter("rpasswd")).thenReturn(rpasswd);
+            Mockito.when(request.getSession()).thenReturn(session);
+
+            Mockito.when(response.getWriter()).thenReturn(writer);
+
+            SignUpVerification instance = new SignUpVerification();
+
+            UserManagerBeanRemote userManagerBean = Mockito.mock(UserManagerBeanRemote.class);
+            instance.setUserManagerBean(userManagerBean);
+            
+            Mockito.when(userManagerBean.create(name, passwd, rpasswd)).thenReturn("-1");
+            
             instance.doPost(request, response);
 
             verify(userManagerBean, times(1)).create(name, passwd, rpasswd);
         }
 
-        assertTrue(out.toString().contains("User id: "));
+        assertTrue(out.toString().contains(" exist"));
     }
 
     @Test
