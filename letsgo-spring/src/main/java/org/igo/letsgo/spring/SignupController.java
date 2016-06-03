@@ -18,7 +18,7 @@ public class SignupController {
 
     @RequestMapping(value = "/signup")
     public ModelAndView sayHello() {
-        ModelAndView mv = new ModelAndView();
+        ModelAndView mv = new ModelAndView("signup", "user", new User());
         mv.addObject("message", "Let's signup!");
         mv.setViewName("signup");
         return mv;
