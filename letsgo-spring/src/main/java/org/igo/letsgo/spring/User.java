@@ -27,9 +27,9 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 public class User {
 
-    @Size(min = 3, max = 20, message = "{SIZE_ERR}")
+    @Size(min = 3, max = 20)
     private String name;
-    @Pattern(regexp = "^[a-zA-Z]\\w{3,14}$")
+    @Pattern(regexp = "^[a-zA-Z]\\w{8,14}$")
     private String passwd;
     @Pattern(regexp = "^[a-zA-Z]\\w{3,14}$")
     private String rpasswd;
