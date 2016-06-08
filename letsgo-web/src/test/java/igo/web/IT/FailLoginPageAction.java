@@ -19,17 +19,16 @@ package igo.web.IT;
 import io.github.bonigarcia.wdm.InternetExplorerDriverManager;
 import java.util.Locale;
 import java.util.Map;
-import java.util.ResourceBundle;
-import java.util.function.Consumer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  *
  * @author surzhin.konstantin
  */
-public class PageAction implements Consumer<Locale> {
+class FailLoginPageAction {
 
     static {
         // ChromeDriverManager.getInstance().setup(Architecture.x32, "2.21");
@@ -41,7 +40,7 @@ public class PageAction implements Consumer<Locale> {
     private final String PORT;
     private final Map<String, String> MESSAGES;
 
-    PageAction(WebDriver driver, String port, Map<String, String> messages, String url) {
+    FailLoginPageAction(WebDriver driver, String port, Map<String, String> messages, String url) {
         if (url != null) {
             this.url = url;
         } else {
@@ -52,29 +51,15 @@ public class PageAction implements Consumer<Locale> {
         this.MESSAGES = messages;
     }
 
-    @Override
-    public void accept(Locale locale) {
 
-        driver.get("http://localhost:" + PORT + "/" + url);
-
-        //  Locale.setDefault(locale);
-        ResourceBundle bundle;
-        if (url.isEmpty()) {
-            bundle = java.util.ResourceBundle.getBundle("org/igo/i18n/home/Bundle", locale);
-        } else {
-            bundle = java.util.ResourceBundle.getBundle("org/igo/i18n/" + url + "/Bundle", locale);
-        }
-
-        System.out.println(bundle.getString("title") + " : " + driver);
-        System.out.println(bundle.getString("welcome") + " : " + driver);
-
+    void accept(Locale l) {
         (new WebDriverWait(driver, 10)).until(
                 (WebDriver d) -> {
-                    return d.getTitle()
-                    .contains(MESSAGES.get("title"))
-                    && d.findElement(By.tagName("H1"))
+                    return d.getTitle().contains("Login Error")
+                    && d.findElement(By.tagName("H2"))
                     .getText()
-                    .contains(MESSAGES.get("welcome"));
+                    .contains("Invalid user name or password.");
                 });
     }
+
 }

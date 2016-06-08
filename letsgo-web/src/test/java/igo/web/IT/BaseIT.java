@@ -16,6 +16,10 @@
  */
 package igo.web.IT;
 
+import io.github.bonigarcia.wdm.Architecture;
+import io.github.bonigarcia.wdm.ChromeDriverManager;
+import io.github.bonigarcia.wdm.InternetExplorerDriverManager;
+import io.github.bonigarcia.wdm.OperaDriverManager;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
@@ -26,10 +30,13 @@ import java.util.Set;
  */
 class BaseIT {
 
-    final Set<Locale> locales = new HashSet<>();
+    final String PORT = "8080";
+    private static final Architecture ARCH = Architecture.x32;
+    private static final String CHROME_VERSION = "2.21";
 
     public BaseIT() {
-        locales.add(new Locale("en", "En"));
-        locales.add(new Locale("ru", "RU"));
+        ChromeDriverManager.getInstance().setup(ARCH, CHROME_VERSION);
+        InternetExplorerDriverManager.getInstance().setup(ARCH);
+       // OperaDriverManager.getInstance().setup(ARCH);
     }
 }
