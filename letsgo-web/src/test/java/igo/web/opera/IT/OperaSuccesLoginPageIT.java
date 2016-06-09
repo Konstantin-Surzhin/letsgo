@@ -16,7 +16,9 @@
  */
 package igo.web.opera.IT;
 
-import igo.web.PageAction;
+import igo.web.chrome.IT.*;
+import static igo.web.BaseInterface.PORT;
+import igo.web.SuccesLoginPageAction;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -26,8 +28,6 @@ import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameter;
-import org.junit.runners.Parameterized.Parameters;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.opera.OperaOptions;
@@ -37,26 +37,26 @@ import org.openqa.selenium.opera.OperaOptions;
  * @author surzhin.konstantin
  */
 @RunWith(Parameterized.class)
-public class OperaLoginPageIT extends OperaBase {
+public class OperaSuccesLoginPageIT extends OperaBase {
 
-    @Parameter(value = 0)
+    @Parameterized.Parameter(value = 0)
     public Locale locale;
 
-    @Parameter(value = 1)
+    @Parameterized.Parameter(value = 1)
     public Map<String, String> messages;
 
-    @Parameter(value = 2)
+    @Parameterized.Parameter(value = 2)
     public WebDriver driver;
 
-    @Parameters
+    @Parameterized.Parameters
     public static Collection localesedParam() {
         Map<String, String> m0 = new HashMap<>();
-        m0.put("title", "Login Page");
-        m0.put("welcome", "Let's login!");
+        m0.put("title", "Admin Page");
+        m0.put("welcome", "Hello Admin!");
 
         Map<String, String> m1 = new HashMap<>();
-        m1.put("title", "Страница авторизации");
-        m1.put("welcome", "Давай авторизуйся!");
+        m1.put("title", "Уголок администратора.");
+        m1.put("welcome", "Привет, админ!");
 
         Locale locale0 = Locale.ENGLISH;
         Locale locale1 = new Locale("ru");
@@ -66,18 +66,17 @@ public class OperaLoginPageIT extends OperaBase {
         return Arrays.asList(param);
     }
 
-    
     @After
     public void tearDown() {
         if (driver != null) {
             driver.quit();
         }
     }
-    
+
     @Test
-    public void testOperaLoginPage() throws Exception {
-        System.out.println("Test Opera Login Page: " + locale.getLanguage() + " : " + driver);
-        new PageAction(driver, PORT, messages, "admin").accept(locale);
+    public void testChromeSuccesLoginPage() throws Exception {
+        System.out.println("Test Chrome succes Login Page: " + locale.getLanguage() + " : " + driver);
+        new SuccesLoginPageAction(driver, PORT, messages, "admin").accept(locale);
     }
 
     public static WebDriver getDiver(Locale locale) {

@@ -16,7 +16,9 @@
  */
 package igo.web.opera.IT;
 
-import igo.web.PageAction;
+import igo.web.chrome.IT.*;
+import static igo.web.BaseInterface.PORT;
+import igo.web.FailLoginPageAction;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -26,8 +28,6 @@ import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameter;
-import org.junit.runners.Parameterized.Parameters;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.opera.OperaOptions;
@@ -37,26 +37,30 @@ import org.openqa.selenium.opera.OperaOptions;
  * @author surzhin.konstantin
  */
 @RunWith(Parameterized.class)
-public class OperaLoginPageIT extends OperaBase {
+public class OperaFailLoginPageIT extends OperaBase {
 
-    @Parameter(value = 0)
+    @Parameterized.Parameter(value = 0)
     public Locale locale;
 
-    @Parameter(value = 1)
+    @Parameterized.Parameter(value = 1)
     public Map<String, String> messages;
 
-    @Parameter(value = 2)
+    @Parameterized.Parameter(value = 2)
     public WebDriver driver;
 
-    @Parameters
+    @Parameterized.Parameters
     public static Collection localesedParam() {
         Map<String, String> m0 = new HashMap<>();
-        m0.put("title", "Login Page");
-        m0.put("welcome", "Let's login!");
+        m0.put("title", "Error page");
+        m0.put("welcome", "Something went wrong!");
+        m0.put("message", "Invalid user name or password.");
+        m0.put("hint", "Please enter a user name or password that is authorized to access this application. Click here to Try Again");
 
         Map<String, String> m1 = new HashMap<>();
-        m1.put("title", "Страница авторизации");
-        m1.put("welcome", "Давай авторизуйся!");
+        m1.put("title", "Ошибка");
+        m1.put("welcome", "Ошибочка вышла :-(");
+        m1.put("message", "Неверное имя пользователя или пароль.");
+        m1.put("hint", "Пожалуйста, введите имя и пароль пользователя, который имеет право доступа к этой странице. Для того чтобы повторить, щелкай по ссылке: Повторить");
 
         Locale locale0 = Locale.ENGLISH;
         Locale locale1 = new Locale("ru");
@@ -66,18 +70,18 @@ public class OperaLoginPageIT extends OperaBase {
         return Arrays.asList(param);
     }
 
-    
     @After
     public void tearDown() {
         if (driver != null) {
             driver.quit();
         }
     }
-    
+
     @Test
-    public void testOperaLoginPage() throws Exception {
-        System.out.println("Test Opera Login Page: " + locale.getLanguage() + " : " + driver);
-        new PageAction(driver, PORT, messages, "admin").accept(locale);
+    public void testChromeFailLoginPage() throws Exception {
+        System.out.println("Test Chrome fail Login Page: " + locale.getLanguage() + " : " + driver);
+        new FailLoginPageAction(driver, PORT, messages, "admin").accept(locale);
+        driver.quit();
     }
 
     public static WebDriver getDiver(Locale locale) {
@@ -85,4 +89,5 @@ public class OperaLoginPageIT extends OperaBase {
         options.addArguments("--lang=" + locale.getLanguage());
         return new OperaDriver(options);
     }
+
 }
