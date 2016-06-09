@@ -60,8 +60,8 @@ public class SignUpMockitoTest {
     }
 
     /**
-     * Test of processRequest method, of class SignUpVerification. User manager Bean is
-     * null.
+     * Test of processRequest method, of class SignUpVerification. User manager
+     * Bean is null.
      *
      * @throws java.lang.Exception
      */
@@ -93,8 +93,8 @@ public class SignUpMockitoTest {
     }
 
     /**
-     * Test of processRequest method, of class SignUpVerification. User manager Bean is not
-     * null.
+     * Test of processRequest method, of class SignUpVerification. User manager
+     * Bean is not null.
      *
      * @throws java.lang.Exception
      */
@@ -105,7 +105,7 @@ public class SignUpMockitoTest {
         HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
         HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
         HttpSession session = Mockito.mock(HttpSession.class);
-        
+
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         try (PrintWriter writer = new PrintWriter(out)) {
 
@@ -124,17 +124,18 @@ public class SignUpMockitoTest {
 
             UserManagerBeanRemote userManagerBean = Mockito.mock(UserManagerBeanRemote.class);
             instance.setUserManagerBean(userManagerBean);
-            
+
             Mockito.when(userManagerBean.create(name, passwd, rpasswd)).thenReturn("1");
-            
+
             instance.doPost(request, response);
 
             verify(userManagerBean, times(1)).create(name, passwd, rpasswd);
         }
     }
+
     /**
-     * Test of processRequest method, of class SignUpVerification. User manager Bean is not
-     * null.
+     * Test of processRequest method, of class SignUpVerification. User manager
+     * Bean is not null.
      *
      * @throws java.lang.Exception
      */
@@ -145,7 +146,7 @@ public class SignUpMockitoTest {
         HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
         HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
         HttpSession session = Mockito.mock(HttpSession.class);
-        
+
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         try (PrintWriter writer = new PrintWriter(out)) {
 
@@ -164,9 +165,9 @@ public class SignUpMockitoTest {
 
             UserManagerBeanRemote userManagerBean = Mockito.mock(UserManagerBeanRemote.class);
             instance.setUserManagerBean(userManagerBean);
-            
+
             Mockito.when(userManagerBean.create(name, passwd, rpasswd)).thenReturn("-1");
-            
+
             instance.doPost(request, response);
 
             verify(userManagerBean, times(1)).create(name, passwd, rpasswd);

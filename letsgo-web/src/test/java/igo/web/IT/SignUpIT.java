@@ -16,6 +16,7 @@
  */
 package igo.web.IT;
 
+import igo.web.chrome.IT.ChromeBase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,7 +30,7 @@ import org.openqa.selenium.opera.OperaOptions;
  *
  * @author surzhin.konstantin
  */
-public class SignUpIT extends BaseIT {
+public class SignUpIT extends ChromeBase {
 
 //    @Test
 //    public void testChromeLoginPage() throws Exception {
@@ -44,7 +45,6 @@ public class SignUpIT extends BaseIT {
 //            new PageAction(driver, PORT, "signup").accept(l);
 //        });
 //    }
-
 //    @Test
 //    public void testOperaLoginPage() throws Exception {
 //        System.out.println("Test Opera Login Page");
@@ -58,7 +58,6 @@ public class SignUpIT extends BaseIT {
 //            new PageAction(driver, PORT, "signup").accept(l);
 //        });
 //    }
-
 //    @Test
 //    public void testInternetExplorerLoginPage() throws Exception {
 //        System.out.println("Test InternetExplorer Login Page");

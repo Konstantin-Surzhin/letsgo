@@ -29,34 +29,34 @@ import static org.junit.Assert.*;
  * @author surzhin.konstantin
  */
 public class UserTest {
-    
+
     /**
      *
      */
     public UserTest() {
     }
-    
+
     /**
      *
      */
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     /**
      *
      */
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     /**
      *
      */
     @Before
     public void setUp() {
     }
-    
+
     /**
      *
      */
@@ -73,7 +73,7 @@ public class UserTest {
         User instance = new User();
         Long expResult = 1L;
         instance.setId(expResult);
-        
+
         Long result = instance.getId();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
@@ -128,7 +128,7 @@ public class UserTest {
     public void testGetNikname() {
         System.out.println("getNikname");
         User instance = new User();
-        String  expResult= "Don";
+        String expResult = "Don";
         instance.setNickName(expResult);
         String result = instance.getNickName();
         assertEquals(expResult, result);

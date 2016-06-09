@@ -67,7 +67,6 @@ public class SignUpSpringTest {
 
         SignUpVerification instance = new SignUpVerification();
 
-
         instance.doPost(request, response);
         assertEquals("user manager is null", out.toString());
     }

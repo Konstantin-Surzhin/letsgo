@@ -14,52 +14,48 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package igo.web.IT;
+package igo.web;
 
-import io.github.bonigarcia.wdm.InternetExplorerDriverManager;
 import java.util.Locale;
 import java.util.Map;
+import java.util.function.Consumer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  *
  * @author surzhin.konstantin
  */
-class FailLoginPageAction {
+public class SuccesLoginPageAction extends PageAction implements Consumer<Locale> {
 
-    static {
-        // ChromeDriverManager.getInstance().setup(Architecture.x32, "2.21");
-        InternetExplorerDriverManager.getInstance().setup();
-        //  OperaDriverManager.getInstance().setup();
-    }
-    private final String url;
-    private final WebDriver driver;
-    private final String PORT;
-    private final Map<String, String> MESSAGES;
-
-    FailLoginPageAction(WebDriver driver, String port, Map<String, String> messages, String url) {
-        if (url != null) {
-            this.url = url;
-        } else {
-            this.url = "";
-        }
-        this.driver = driver;
-        this.PORT = port;
-        this.MESSAGES = messages;
+    public SuccesLoginPageAction(WebDriver driver, String port, Map<String, String> messages, String url) {
+        super(driver, port, messages, url);
     }
 
+    @Override
+    public void accept(Locale locale) {
 
-    void accept(Locale l) {
+        driver.get("http://localhost:" + PORT + "/" + url);
+
+        WebElement username = driver.findElement(By.name("j_username"));
+        WebElement passwd = driver.findElement(By.name("j_password"));
+
+        username.clear();
+        passwd.clear();
+
+        username.sendKeys("myfear");
+        passwd.sendKeys("admin");
+        passwd.submit();
+
         (new WebDriverWait(driver, 10)).until(
                 (WebDriver d) -> {
-                    return d.getTitle().contains("Login Error")
-                    && d.findElement(By.tagName("H2"))
+                    return d.getTitle()
+                    .equals(MESSAGES.get("title"))
+                    && d.findElement(By.tagName("H1"))
                     .getText()
-                    .contains("Invalid user name or password.");
+                    .equals(MESSAGES.get("welcome"));
                 });
     }
-
 }

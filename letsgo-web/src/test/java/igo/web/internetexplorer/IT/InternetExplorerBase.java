@@ -14,29 +14,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package igo.web.IT;
+package igo.web.internetexplorer.IT;
 
-import io.github.bonigarcia.wdm.Architecture;
-import io.github.bonigarcia.wdm.ChromeDriverManager;
+import igo.web.BaseInterface;
 import io.github.bonigarcia.wdm.InternetExplorerDriverManager;
-import io.github.bonigarcia.wdm.OperaDriverManager;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Set;
 
 /**
  *
  * @author surzhin.konstantin
  */
-class BaseIT {
+public class InternetExplorerBase implements BaseInterface {
 
-    final String PORT = "8080";
-    private static final Architecture ARCH = Architecture.x32;
-    private static final String CHROME_VERSION = "2.21";
-
-    public BaseIT() {
-        ChromeDriverManager.getInstance().setup(ARCH, CHROME_VERSION);
+    static {
         InternetExplorerDriverManager.getInstance().setup(ARCH);
-       // OperaDriverManager.getInstance().setup(ARCH);
     }
 }
