@@ -14,22 +14,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package igo.web.IT;
+package igo.web.internetexplorer.IT;
 
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Set;
+import igo.web.BaseInterface;
+import io.github.bonigarcia.wdm.InternetExplorerDriverManager;
 
 /**
  *
  * @author surzhin.konstantin
  */
-class BaseIT {
+public class InternetExplorerBase implements BaseInterface {
 
-    final Set<Locale> locales = new HashSet<>();
-
-    public BaseIT() {
-        locales.add(new Locale("en", "En"));
-        locales.add(new Locale("ru", "RU"));
+    static {
+        InternetExplorerDriverManager.getInstance().setup(ARCH);
     }
 }

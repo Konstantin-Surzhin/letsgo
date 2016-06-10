@@ -25,3 +25,4 @@ hs_err_pid*
 /letsgo-rest/target/
 /letsgo-web/target/
 /letsgo-jpa/target/
+/letsgo-spring/target/

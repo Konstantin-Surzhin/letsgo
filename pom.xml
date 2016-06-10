@@ -59,6 +59,7 @@
         <module>letsgo-client</module>
         <module>letsgo-remote</module>
         <module>letsgo-jpa</module>
+        <module>letsgo-spring</module>
     </modules>
     <dependencies>
         <dependency>

@@ -14,56 +14,54 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package igo.web.IT;
+package igo.web;
 
-import io.github.bonigarcia.wdm.ChromeDriverManager;
 import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.Map;
 import java.util.function.Consumer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  *
  * @author surzhin.konstantin
  */
-public class PageAction implements Consumer<Locale> {
+public class FailLoginPageAction extends PageAction implements Consumer<Locale> {
 
-    static {
-        ChromeDriverManager.getInstance().setup();
-        //InternetExplorerDriverManager.getInstance().setup(); 
-        //OperaDriverManager.getInstance().setup(); 
-    }
-    private final String url;
-
-    PageAction(String url) {
-        if (url != null) {
-            this.url = url;
-        } else {
-            this.url = "";
-        }
+    public FailLoginPageAction(WebDriver driver, String port, Map<String, String> messages, String url) {
+        super(driver, port, messages, url);
     }
 
     @Override
-    public void accept(Locale t) {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--lang=" + t);
-        ChromeDriver driver = new ChromeDriver(options);
+    public void accept(Locale locale) {
 
-        driver.get("http://localhost:8084/" + url);
-        Locale.setDefault(t);
-        ResourceBundle bundle = java.util.ResourceBundle.getBundle("org/igo/i18n/"+url+"/Bundle");
+        driver.get("http://localhost:" + PORT + "/" + url);
+
+        WebElement username = driver.findElement(By.name("j_username"));
+        WebElement passwd = driver.findElement(By.name("j_password"));
+
+        username.clear();
+        passwd.clear();
+
+        username.sendKeys("qqq");
+        passwd.sendKeys("www");
+        passwd.submit();
+
         (new WebDriverWait(driver, 10)).until(
                 (WebDriver d) -> {
                     return d.getTitle()
-                    .contains(bundle.getString("title"))
+                    .equals(MESSAGES.get("title"))
                     && d.findElement(By.tagName("H1"))
                     .getText()
-                    .contains(bundle.getString("welcome"));
+                    .equals(MESSAGES.get("welcome"))
+                    && d.findElement(By.tagName("H2"))
+                    .getText()
+                    .equals(MESSAGES.get("message"))
+                    && d.findElement(By.tagName("p"))
+                    .getText()
+                    .equals(MESSAGES.get("hint"));
                 });
-        driver.close();
     }
 }

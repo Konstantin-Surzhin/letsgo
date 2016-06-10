@@ -14,53 +14,38 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package igo.user.mockito;
+package org.igo.letsgo.spring;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
+import javax.validation.Valid;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
  * @author surzhin.konstantin
  */
-@RunWith(Suite.class)
-@Suite.SuiteClasses({UserTest.class})
-public class UserTestSuite {
+@Controller
+public class UserController {
 
     /**
      *
-     * @throws Exception
+     * @param user
+     * @param result
+     * @return
      */
-    @BeforeClass
-    public static void setUpClass() throws Exception {
-    }
+    @RequestMapping(value = "/result")
+    public ModelAndView processUser(@Valid User user, BindingResult result) {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("result");
+        mv.addObject("u", user);
 
-    /**
-     *
-     * @throws Exception
-     */
-    @AfterClass
-    public static void tearDownClass() throws Exception {
+        if (result.hasErrors()) {
+            mv.setViewName("signup");
+        } else {
+            mv.setViewName("result");
+        }
+        return mv;
     }
-
-    /**
-     *
-     * @throws Exception
-     */
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    /**
-     *
-     * @throws Exception
-     */
-    @After
-    public void tearDown() throws Exception {
-    }
-
 }

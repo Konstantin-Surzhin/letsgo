@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package igo.user.mockito;
+package igo.web.chrome.IT;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -28,39 +28,24 @@ import org.junit.runners.Suite;
  * @author surzhin.konstantin
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({UserTest.class})
-public class UserTestSuite {
+@Suite.SuiteClasses({igo.web.chrome.IT.ChromeLoginPageIT.class,
+    igo.web.chrome.IT.ChromeFailLoginPageIT.class,
+    igo.web.chrome.IT.ChromeSuccesLoginPageIT.class})
+public class ChromeTestSuiteIT {
 
-    /**
-     *
-     * @throws Exception
-     */
     @BeforeClass
     public static void setUpClass() throws Exception {
     }
 
-    /**
-     *
-     * @throws Exception
-     */
     @AfterClass
     public static void tearDownClass() throws Exception {
     }
 
-    /**
-     *
-     * @throws Exception
-     */
     @Before
     public void setUp() throws Exception {
     }
 
-    /**
-     *
-     * @throws Exception
-     */
     @After
     public void tearDown() throws Exception {
     }
-
 }

@@ -17,6 +17,8 @@
 package igo.web.IT;
 
 import igo.web.chrome.IT.ChromeBase;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -28,7 +30,7 @@ import org.openqa.selenium.opera.OperaOptions;
  *
  * @author surzhin.konstantin
  */
-public class HomeIT extends ChromeBase {
+public class SignUpIT extends ChromeBase {
 
 //    @Test
 //    public void testChromeLoginPage() throws Exception {
@@ -40,7 +42,7 @@ public class HomeIT extends ChromeBase {
 //            ChromeOptions options = new ChromeOptions();
 //            options.addArguments("--lang=" + l);
 //            ChromeDriver driver = new ChromeDriver(options);
-//            new PageAction(driver, PORT, "").accept(l);
+//            new PageAction(driver, PORT, "signup").accept(l);
 //        });
 //    }
 //    @Test
@@ -53,7 +55,7 @@ public class HomeIT extends ChromeBase {
 //            OperaOptions options = new OperaOptions();
 //            options.addArguments("--lang=" + l);
 //            OperaDriver driver = new OperaDriver(options);
-//            new PageAction(driver, PORT, "").accept(l);
+//            new PageAction(driver, PORT, "signup").accept(l);
 //        });
 //    }
 //    @Test
@@ -62,7 +64,7 @@ public class HomeIT extends ChromeBase {
 //        locales.forEach(l
 //                -> {
 //            InternetExplorerDriver driver = new InternetExplorerDriver();
-//            new PageAction(driver, PORT, "").accept(l);
+//            new PageAction(driver, PORT, "signup").accept(l);
 //        });
 //    }
 }
