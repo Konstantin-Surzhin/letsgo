@@ -16,6 +16,7 @@
  */
 package org.igo;
 
+import org.igo.letsgo.jpa.GoUser;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
