@@ -16,6 +16,7 @@
  */
 package org.igo;
 
+import org.igo.letsgo.jpa.GoGame;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

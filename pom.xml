@@ -58,6 +58,7 @@
         <module>letsgo-rest</module>
         <module>letsgo-client</module>
         <module>letsgo-remote</module>
+        <module>letsgo-jpa</module>
     </modules>
     <dependencies>
         <dependency>

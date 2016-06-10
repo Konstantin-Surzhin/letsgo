@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.igo;
+package org.igo.letsgo.jpa;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -35,13 +35,13 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author surzhin.konstantin
  */
 @Entity
-@Table(name = "go_game", catalog = "letsgo", schema = "")
+@Table(name = "go_user", catalog = "letsgo", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "GoGame.findAll", query = "SELECT g FROM GoGame g"),
-    @NamedQuery(name = "GoGame.findById", query = "SELECT g FROM GoGame g WHERE g.id = :id"),
-    @NamedQuery(name = "GoGame.findByName", query = "SELECT g FROM GoGame g WHERE g.name = :name")})
-public class GoGame implements Serializable {
+    @NamedQuery(name = "GoUser.findAll", query = "SELECT g FROM GoUser g"),
+    @NamedQuery(name = "GoUser.findById", query = "SELECT g FROM GoUser g WHERE g.id = :id"),
+    @NamedQuery(name = "GoUser.findByName", query = "SELECT g FROM GoUser g WHERE g.name = :name")})
+public class GoUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -49,23 +49,18 @@ public class GoGame implements Serializable {
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
     private Integer id;
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 128)
-    @Column(name = "name", nullable = false, length = 128)
-    private String name = "noname";
+    @Column(name = "user_name", nullable = false, length = 128, unique = true)
+    private String name;
 
-    public GoGame() {
-    }
-
-    public GoGame(Integer id) {
-        this.id = id;
-    }
-
-    public GoGame(Integer id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
+    @Column(name = "password", nullable = false, length = 255)
+    private String passwd;
 
     public Integer getId() {
         return id;
@@ -93,19 +88,32 @@ public class GoGame implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof GoGame)) {
+        if (!(object instanceof GoUser)) {
             return false;
         }
-        GoGame other = (GoGame) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        GoUser other = (GoUser) object;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     @Override
     public String toString() {
-        return "org.igo.GoGame[ id=" + id + " ]";
+        return "org.igo.GoUser[ id=" + id + " ]";
     }
-    
+
+    /**
+     * @return the passwd
+     */
+    public String getPasswd() {
+        return passwd;
+    }
+
+    /**
+     * @param passwd the passwd to set
+     */
+    public void setPasswd(String passwd) {
+        this.passwd = passwd;
+    }
+
+    public GoUser() {
+    }
 }
