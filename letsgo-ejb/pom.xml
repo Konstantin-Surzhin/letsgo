@@ -52,6 +52,7 @@
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
             <version>1.10.19</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.igo</groupId>
@@ -88,11 +89,11 @@
                 <version>2.5.1</version>
                 <configuration>
                     <ejbVersion>3.1</ejbVersion>
-                  <!--  <archive>
-                        <addMavenDescriptor>false</addMavenDescriptor>
-                        <manifest> -->
-                            <!-- Этот параметр добавит Class-Path в META-INF/MANIFEST.MF -->
-                        <!--    <addClasspath>true</addClasspath>
+                    <!--  <archive>
+                    <addMavenDescriptor>false</addMavenDescriptor>
+                    <manifest> -->
+                    <!-- Этот параметр добавит Class-Path в META-INF/MANIFEST.MF -->
+                    <!--    <addClasspath>true</addClasspath>
                         </manifest>
                     </archive>
                     <generateClient>true</generateClient>-->
