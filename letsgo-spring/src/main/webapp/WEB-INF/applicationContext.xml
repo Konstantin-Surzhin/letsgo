@@ -25,7 +25,7 @@
     p:password="${jdbc.password}" /-->
 
     <!-- ADD PERSISTENCE SUPPORT HERE (jpa, hibernate, etc) -->
-   <!-- <bean id="localeResolver"
+    <!-- <bean id="localeResolver"
           class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
     <bean id="messageSource"
           class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
