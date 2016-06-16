@@ -17,18 +17,21 @@
 package org.igo.jpa;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
+import javax.persistence.OrderColumn;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -36,11 +39,9 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "go_game", catalog = "letsgo", schema = "")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "GoGame.findAll", query = "SELECT g FROM GoGame g"),
-    @NamedQuery(name = "GoGame.findById", query = "SELECT g FROM GoGame g WHERE g.id = :id"),
-    @NamedQuery(name = "GoGame.findByName", query = "SELECT g FROM GoGame g WHERE g.name = :name")})
+    @NamedQuery(name = "GoGame.findById", query = "SELECT g FROM GoGame g WHERE g.id = :id")})
 public class GoGame implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,22 +50,19 @@ public class GoGame implements Serializable {
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 128)
-    @Column(name = "name", nullable = false, length = 128)
-    private String name = "noname";
+
+    @OneToOne
+    private GoGameDetail goGameDetail;
+
+    @ElementCollection
+    @CollectionTable(
+            name = "go_game_moves",
+            joinColumns = @JoinColumn(name = "game_id")
+    )
+    @OrderColumn(name = "ndx")
+    private List<GoGameMove> goGameMoves;
 
     public GoGame() {
-    }
-
-    public GoGame(Integer id) {
-        this.id = id;
-    }
-
-    public GoGame(Integer id, String name) {
-        this.id = id;
-        this.name = name;
     }
 
     public Integer getId() {
@@ -73,14 +71,6 @@ public class GoGame implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override
@@ -93,14 +83,14 @@ public class GoGame implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof GoGame)) {
+        if (object == null) {
+            return false;
+        }
+        if (object.getClass() != this.getClass()) {
             return false;
         }
         GoGame other = (GoGame) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     @Override
@@ -108,4 +98,32 @@ public class GoGame implements Serializable {
         return "org.igo.GoGame[ id=" + id + " ]";
     }
 
+    /**
+     * @return the goGameDetail
+     */
+    public GoGameDetail getGoGameDetail() {
+        return goGameDetail;
+    }
+
+    /**
+     * @param goGameDetail the goGameDetail to set
+     */
+    public void setGoGameDetail(GoGameDetail goGameDetail) {
+        this.goGameDetail = goGameDetail;
+    }
+
+    /**
+     * @return the goGameMoves
+     */
+    public List<GoGameMove> getGoGameMoves() {
+        return goGameMoves;
+    }
+
+    /**
+     * @param goGameMoves the goGameMoves to set
+     */
+    public void setGoGameMoves(List<GoGameMove> goGameMoves) {
+        this.goGameMoves = goGameMoves;
+    }
 }
+
