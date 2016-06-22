@@ -47,6 +47,9 @@
                             <value>org.jboss.logmanager.LogManager</value>
                         </property>
                     </systemProperties>
+                  <!-- <systemPropertyVariables>
+                        <arquillian.launch>jbossas_managed</arquillian.launch>
+                     </systemPropertyVariables>-->
                 </configuration>
                 <executions>
                     <execution>
@@ -56,7 +59,9 @@
                         </goals>
                         <configuration>
                             <environmentVariables>
-                                <JBOSS_HOME>/home/pl/wildfly-10.0.0.Final</JBOSS_HOME>
+                                <!--<JBOSS_HOME>/home/pl/wildfly-10.0.0.Final</JBOSS_HOME>-->
+                                <!--<JBOSS_HOME>D:/wildfly-10.0.0.Final</JBOSS_HOME>-->
+                                <LETSGO_HOME>D:/letsgo</LETSGO_HOME>
                             </environmentVariables>
                         </configuration>
                     </execution>
@@ -146,7 +151,7 @@
         </dependency>
         <dependency>
             <groupId>org.wildfly.arquillian</groupId>
-            <artifactId>wildfly-arquillian-container-embedded</artifactId>
+            <artifactId>wildfly-arquillian-container-managed</artifactId>
             <version>2.0.0.Final</version>
             <scope>test</scope>
         </dependency>
@@ -157,11 +162,18 @@
             <type>jar</type>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.21</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <serverProfile>standalone-full.xml</serverProfile>
     </properties>
     
     <reporting>
