@@ -1,7 +1,18 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2016 kostya surzhin
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.igo.jpa;
 
@@ -31,11 +42,11 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author pl
+ * @author kostya surzhin
  */
+@XmlRootElement
 @Entity
 @Table(name = "users", schema = "letsgo")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
     @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id"),
@@ -63,37 +74,53 @@ public class User implements Serializable {
     private String salt;
 
     private Integer lose;
-    
+
     private Integer draw;
 
     private Integer win;
-    
+
     private Integer rating;
 
     private Collection<UserDegree> userDegrees;
 
     private Collection<UserGame> userGames;
-    
+
     private UserStatus status;
-    
+
     private List<Ban> bans;
-    
+
     private Room defaultRoom;
-    
+
     private Team defaultTeam;
 
+    /**
+     *
+     */
     public User() {
     }
 
+    /**
+     *
+     * @param id
+     */
     public User(Integer id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @param id
+     * @param lastTime
+     */
     public User(Integer id, Date lastTime) {
         this.id = id;
         this.lastTime = lastTime;
     }
 
+    /**
+     *
+     * @return
+     */
     @Id
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
@@ -104,46 +131,86 @@ public class User implements Serializable {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     @Column(name = "name", length = 64, nullable = false, unique = true)
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     *
+     * @return
+     */
     @Column(name = "is_login")
     public Boolean getIslogin() {
         return isLogin;
     }
 
+    /**
+     *
+     * @param islogin
+     */
     public void setIslogin(Boolean islogin) {
         this.isLogin = islogin;
     }
 
+    /**
+     *
+     * @return
+     */
     @Column(name = "password", length = 128)
     public String getPassword() {
         return password;
     }
 
+    /**
+     *
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     *
+     * @return
+     */
     @Column(name = "salt", length = 128)
     public String getSalt() {
         return salt;
     }
 
+    /**
+     *
+     * @param salt
+     */
     public void setSalt(String salt) {
         this.salt = salt;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -151,6 +218,11 @@ public class User implements Serializable {
         return hash;
     }
 
+    /**
+     *
+     * @param object
+     * @return
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -161,6 +233,10 @@ public class User implements Serializable {
         return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "jpa.User[ id=" + id + " ]";
@@ -229,12 +305,20 @@ public class User implements Serializable {
         this.win = win;
     }
 
+    /**
+     *
+     * @return
+     */
     @XmlTransient
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "users", fetch = FetchType.LAZY)
     public Collection<UserDegree> getUserDegrees() {
         return userDegrees;
     }
 
+    /**
+     *
+     * @param userDegrees
+     */
     public void setUserDegrees(Collection<UserDegree> userDegrees) {
         this.userDegrees = userDegrees;
     }
@@ -258,7 +342,7 @@ public class User implements Serializable {
     /**
      * @return the draw
      */
-    @Column(name="draw")
+    @Column(name = "draw")
     public Integer getDraw() {
         return draw;
     }
@@ -273,7 +357,7 @@ public class User implements Serializable {
     /**
      * @return the rating
      */
-    @Column(name="rating")
+    @Column(name = "rating")
     public Integer getRating() {
         return rating;
     }
@@ -297,14 +381,14 @@ public class User implements Serializable {
     /**
      * @param status the status to set
      */
-    public void setStatus(UserStatus  status) {
+    public void setStatus(UserStatus status) {
         this.status = status;
     }
 
     /**
      * @return the bans
      */
-    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     public List<Ban> getBans() {
         return bans;
     }
@@ -320,7 +404,7 @@ public class User implements Serializable {
      * @return the defaultRoom
      */
     @ManyToOne
-    @JoinColumn(name ="room_id")
+    @JoinColumn(name = "room_id")
     public Room getDefaultRoom() {
         return defaultRoom;
     }

@@ -1,7 +1,18 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2016 kostya surzhin
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.igo.jpa;
 
@@ -19,21 +30,23 @@ import javax.persistence.Temporal;
 
 /**
  *
- * @author pl
+ * @author kostya surzhin
  */
 @Entity
 @Table(name = "user_ban")
 public class Ban implements Serializable {
 
-    private User user;
-
     private static final long serialVersionUID = 1L;
+    private User user;
     private Long id;
-
     private Date startDate;
     private Short duration;
     private String comment;
 
+    /**
+     *
+     * @return id
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -41,10 +54,18 @@ public class Ban implements Serializable {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return hash
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -52,6 +73,11 @@ public class Ban implements Serializable {
         return hash;
     }
 
+    /**
+     *
+     * @param object
+     * @return
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -62,6 +88,10 @@ public class Ban implements Serializable {
         return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "jpa.Ban[ id=" + id + " ]";
@@ -113,12 +143,20 @@ public class Ban implements Serializable {
         this.comment = comment;
     }
 
+    /**
+     *
+     * @return
+     */
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     public User getUser() {
         return user;
     }
 
+    /**
+     *
+     * @param user
+     */
     public void setUser(User user) {
         this.user = user;
     }
