@@ -38,7 +38,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 @Entity
-@Table(name = "user_degree", catalog = "letsgo", schema = "")
+@Table(name = "user_degree")
 @NamedQueries({
     @NamedQuery(name = "UserDegree.findAll", query = "SELECT u FROM UserDegree u")})
 public class UserDegree implements Serializable {

@@ -27,6 +27,7 @@ import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -46,7 +47,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @XmlRootElement
 @Entity
-@Table(name = "users", schema = "letsgo")
+@Table(name = "users")
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
     @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id"),
@@ -123,10 +124,11 @@ public class User implements Serializable {
      */
     @Id
     @Basic(optional = false)
-    @Column(name = "id", nullable = false)
-    @TableGenerator(name = "user_gen", table = "id_gen",
-            pkColumnName = "gen_name", valueColumnName = "gen_val")
-    @GeneratedValue(generator = "user_gen")
+//    @Column(name = "id", nullable = false)
+//    @TableGenerator(name = "user_gen", table = "id_gen",
+//            pkColumnName = "gen_name", valueColumnName = "gen_val")
+//    @GeneratedValue(generator = "user_gen")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getId() {
         return id;
     }

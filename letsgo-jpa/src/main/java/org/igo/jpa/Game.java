@@ -25,6 +25,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -39,7 +40,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author kostya surzhin
  */
 @Entity
-@Table(name = "games", schema = "letsgo")
+@Table(name = "games")
 @XmlRootElement
 public class Game implements Serializable {
 
@@ -71,10 +72,11 @@ public class Game implements Serializable {
      */
     @Id
     @Basic(optional = false)
-    @Column(name = "id", nullable = false)
-    @TableGenerator(name = "game_gen", table = "id_gen",
-            pkColumnName = "gen_name", valueColumnName = "gen_val")
-    @GeneratedValue(generator = "game_gen")
+//    @Column(name = "id", nullable = false)
+//    @TableGenerator(name = "game_gen", table = "id_gen",
+//            pkColumnName = "gen_name", valueColumnName = "gen_val")
+//    @GeneratedValue(generator = "game_gen")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
