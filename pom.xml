@@ -79,7 +79,8 @@
         <module>letsgo-remote</module>
         <module>letsgo-jpa</module>
         <module>letsgo-spring</module>
-    </modules>
+    <module>letsgo-PrimeFaces</module>
+  </modules>
     <dependencyManagement>
         <dependencies>
             <dependency>
