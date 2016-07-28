@@ -16,7 +16,7 @@
  */
 package org.igo.ejb;
 
-import org.igo.jpa.GoGame;
+import org.igo.jpa.Game;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -28,9 +28,9 @@ import static org.junit.Assert.*;
  *
  * @author surzhin.konstantin
  */
-public class GoGameTest {
+public class GameTest {
 
-    public GoGameTest() {
+    public GameTest() {
     }
 
     @BeforeClass
@@ -69,8 +69,8 @@ public class GoGameTest {
     @Test
     public void testSetId() {
         System.out.println("setId");
-        Integer id = null;
-        GoGame instance = new GoGame();
+        Long id = null;
+        Game instance = new Game();
         instance.setId(id);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
@@ -83,7 +83,7 @@ public class GoGameTest {
     @Test
     public void testHashCode() {
         System.out.println("hashCode");
-        GoGame instance = new GoGame();
+        Game instance = new Game();
         int expResult = 0;
         int result = instance.hashCode();
         assertEquals(expResult, result);
@@ -98,7 +98,7 @@ public class GoGameTest {
     public void testEquals() {
         System.out.println("equals");
         Object object = null;
-        GoGame instance = new GoGame();
+        Game instance = new Game();
         boolean expResult = false;
         boolean result = instance.equals(object);
         assertEquals(expResult, result);
@@ -112,7 +112,7 @@ public class GoGameTest {
     @Test
     public void testToString() {
         System.out.println("toString");
-        GoGame instance = new GoGame();
+        Game instance = new Game();
         String expResult = "org.igo.GoGame[ id=null ]";
         String result = instance.toString();
         assertEquals(expResult, result);

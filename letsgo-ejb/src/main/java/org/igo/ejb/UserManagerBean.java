@@ -16,7 +16,6 @@
  */
 package org.igo.ejb;
 
-import org.igo.jpa.GoUser;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -24,6 +23,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
+import org.igo.jpa.User;
 import org.igo.remote.intf.UserManagerBeanRemote;
 
 /**
@@ -43,17 +43,17 @@ public class UserManagerBean implements UserManagerBeanRemote, UserManagerBeanLo
             return "";
         }
         
-        Query query = em.createNamedQuery("GoUser.findByName", GoUser.class);
+        Query query = em.createNamedQuery("User.findByName", User.class);
         query.setParameter("name", name);
-        GoUser user;
+        User user;
         
         try {
-            user = (GoUser) query.getSingleResult();
+            user = (User) query.getSingleResult();
             return "-1";
         } catch (NoResultException e) {
-            user = new GoUser();
+            user = new User();
             user.setName(name);
-            user.setPasswd(passwd);
+            user.setPassword(passwd);
             try {
                 em.persist(user);
                 em.flush();

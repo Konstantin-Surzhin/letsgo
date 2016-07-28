@@ -28,7 +28,7 @@ import org.junit.runners.Suite;
  * @author surzhin.konstantin
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({org.igo.ejb.GameBeanTest.class, org.igo.ejb.IGameLocalTest.class, org.igo.ejb.GoUserTest.class, org.igo.ejb.GoGameTest.class})
+@Suite.SuiteClasses({org.igo.ejb.GameBeanTest.class, org.igo.ejb.IGameLocalTest.class, org.igo.ejb.UserTest.class, org.igo.ejb.GameTest.class})
 public class IgoSuite {
 
     @BeforeClass

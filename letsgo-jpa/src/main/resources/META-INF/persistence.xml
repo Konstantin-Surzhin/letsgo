@@ -3,8 +3,15 @@
   <persistence-unit name="gamePU" transaction-type="JTA">
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     <jta-data-source>java:/jboss/datasources/MySQLDS</jta-data-source>
-    <class>org.igo.jpa.GoGame</class>
-    <class>org.igo.jpa.GoUser</class>
+    <class>org.igo.jpa.Degree</class>
+    <class>org.igo.jpa.Game</class>
+    <class>org.igo.jpa.GameComment</class>
+    <class>org.igo.jpa.GameDate</class>
+    <class>org.igo.jpa.GameMove</class>
+    <class>org.igo.jpa.MoveComment</class>
+    <class>org.igo.jpa.User</class>
+    <class>org.igo.jpa.UserDegree</class>
+    <class>org.igo.jpa.UserGame</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
