@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-  <persistence-unit name="gamePU" transaction-type="JTA">
-    <mapping-file>META-INF/orm.xml</mapping-file>
-    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-    <jta-data-source>java:/jboss/datasources/MySQLDS</jta-data-source>
+  <persistence-unit name="testPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>>
+    <non-jta-data-source>java:/jboss/datasources/MySQLDS</non-jta-data-source>
     <class>org.igo.jpa.Degree</class>
     <class>org.igo.jpa.Game</class>
     <class>org.igo.jpa.GameComment</class>
@@ -15,7 +14,11 @@
     <class>org.igo.jpa.UserGame</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
-      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:letsgo;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;INIT=CREATE SCHEMA LETSGO IF NOT EXIST;"/>
+      <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+      <property name="javax.persistence.jdbc.password" value=""/>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
+      <property name="org.h2.schema" value="letsgo"/>
     </properties>
   </persistence-unit>
 </persistence>
