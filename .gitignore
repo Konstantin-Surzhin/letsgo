@@ -24,4 +24,8 @@ hs_err_pid*
 /letsgo-remote/target/
 /letsgo-rest/target/
 /letsgo-web/target/
+/letsgo-jpa/target/
 /letsgo-spring/target/
+/letsgo-spring/target/
+/target/
+/letsgo-soap/target/

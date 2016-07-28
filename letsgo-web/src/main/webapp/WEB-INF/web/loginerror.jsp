@@ -19,7 +19,7 @@
     </head>
     <body>
         <h1><fmt:message key="welcome" bundle="${msg}"/></h1>
-        
+
         <h2><fmt:message key="message" bundle="${msg}"/></h2>
 
         <p><fmt:message key="hint" bundle="${msg}"/></p>

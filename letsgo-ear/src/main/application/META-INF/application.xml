@@ -31,5 +31,8 @@
     <module>
         <java>letsgo-remote-1.0.jar</java>
     </module>
+    <module>
+        <java>letsgo-jpa-1.0.jar</java>
+    </module>
     <library-directory>lib</library-directory>
 </application>
