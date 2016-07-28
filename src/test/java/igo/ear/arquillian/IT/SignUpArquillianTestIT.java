@@ -18,6 +18,7 @@ package igo.ear.arquillian.IT;
 
 import java.io.File;
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.container.test.api.Testable;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -38,23 +39,34 @@ import org.junit.runner.RunWith;
 public class SignUpArquillianTestIT {
 
     @Deployment
-    public static EnterpriseArchive createDeployment() {
+    public static EnterpriseArchive createDeployment() throws Exception {
+        String letsgoHome = System.getenv("LETSGO_HOME");
+        String jbossHome = System.getenv("JBOSS_HOME");
+
+        if (letsgoHome == null || letsgoHome.isEmpty()) {
+            System.err.println("LETSGO_HOME is empty");
+            throw new Exception("LETSGO_HOME is empty");
+        }
+//        if (jbossHome == null || jbossHome.isEmpty()) {
+//            System.err.println("JBOSS_HOME is empty");
+//            throw new Exception("JBOSS_HOME is empty");
+//        }
+
         EnterpriseArchive ear = ShrinkWrap.create(EnterpriseArchive.class);
-        
-        ear.addAsModule(new File("/home/pl/NetBeansProjects/letsgo/letsgo-client/target/letsgo-client-1.0.jar"));
-        ear.addAsModule(new File("/home/pl/NetBeansProjects/letsgo/letsgo-ejb/target/letsgo-ejb-1.0.jar"));
-        ear.addAsModule(new File("/home/pl/NetBeansProjects/letsgo/letsgo-jpa/target/letsgo-jpa-1.0.jar"));
-        ear.addAsModule(new File("/home/pl/NetBeansProjects/letsgo/letsgo-remote/target/letsgo-remote-1.0.jar"));
-        ear.addAsModule(new File("/home/pl/NetBeansProjects/letsgo/letsgo-rest/target/letsgo-rest-1.0.war"));
-        ear.addAsModule(new File("/home/pl/NetBeansProjects/letsgo/letsgo-soap/target/letsgo-soap-1.0.war"));
-        ear.addAsModule(new File("/home/pl/NetBeansProjects/letsgo/letsgo-soap/target/letsgo-soap-1.0.war"));
-        ear.addAsModule(new File("/home/pl/NetBeansProjects/letsgo/letsgo-spring/target/letsgo-spring-1.0.war"));
+
+        ear.addAsModule(new File(letsgoHome + "/letsgo-client/target/letsgo-client-1.0.jar"));
+        ear.addAsModule(new File(letsgoHome + "/letsgo-ejb/target/letsgo-ejb-1.0.jar"));
+        ear.addAsModule(new File(letsgoHome + "/letsgo-jpa/target/letsgo-jpa-1.0.jar"));
+        ear.addAsModule(new File(letsgoHome + "/letsgo-remote/target/letsgo-remote-1.0.jar"));
+        ear.addAsModule(new File(letsgoHome + "/letsgo-rest/target/letsgo-rest-1.0.war"));
+        ear.addAsModule(new File(letsgoHome + "/letsgo-soap/target/letsgo-soap-1.0.war"));
+        ear.addAsModule(new File(letsgoHome + "/letsgo-spring/target/letsgo-spring-1.0.war"));
 
         WebArchive war = Testable.archiveToTest(ShrinkWrap.createFromZipFile(WebArchive.class,
-                new File("/home/pl/NetBeansProjects/letsgo/letsgo-web/target/letsgo-web-1.0.war")));
+                new File(letsgoHome + "/letsgo-web/target/letsgo-web-1.0.war")));
         ear.addAsModule(war);
-        ear.setApplicationXML(new File("/home/pl/NetBeansProjects/letsgo/letsgo-ear/src/main/application/META-INF/application.xml"));
-        ear.addAsApplicationResource(new File("/home/pl/NetBeansProjects/letsgo/letsgo-ear/src/main/application/META-INF/jboss-app.xml"));
+        ear.setApplicationXML(new File(letsgoHome + "/letsgo-ear/src/main/application/META-INF/application.xml"));
+        ear.addAsApplicationResource(new File(letsgoHome + "/letsgo-ear/src/main/application/META-INF/jboss-app.xml"));
 
 //        EnterpriseArchive ear = ShrinkWrap.createFromZipFile(EnterpriseArchive.class,
 //                new File("/home/pl/NetBeansProjects/letsgo/letsgo-ear/target/letsgo-ear-1.0.ear"));
@@ -86,6 +98,8 @@ public class SignUpArquillianTestIT {
     // The methods must be annotated with annotation @Test. For example:
     //
     @Test
-    public void hello() {
+    @RunAsClient
+    public void helloLetsgo() throws Exception {
+        System.out.println("OK <=========================");
     }
 }
