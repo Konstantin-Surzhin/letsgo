@@ -36,7 +36,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 @Entity
-@Table(name = "game_moves", catalog = "letsgo", schema = "")
+@Table(name = "game_moves")
 @NamedQueries({
     @NamedQuery(name = "GameMove.findAll", query = "SELECT g FROM GameMove g"),
     @NamedQuery(name = "GameMove.findByX", query = "SELECT g FROM GameMove g WHERE g.x = :x"),
