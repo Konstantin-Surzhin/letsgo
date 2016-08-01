@@ -36,8 +36,8 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "move_comments",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"move_comment",
-    "ndx", "game_id", "user_id"}))
+        uniqueConstraints = @UniqueConstraint(columnNames = {"move_game_id", "user_id", "move_ndx", "move_comment"})
+)
 public class MoveComment implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,6 +47,7 @@ public class MoveComment implements Serializable {
     private Long id;
 
     private String comment;
+
     private Date postTime;
 
     private User user;
