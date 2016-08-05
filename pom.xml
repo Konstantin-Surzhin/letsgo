@@ -71,11 +71,9 @@
     </build>
     <modules>
         <module>letsgo-ear</module>
-        <module>letsgo-ejb</module>
-        <module>letsgo-web</module>
-        <module>letsgo-remote</module>
         <module>letsgo-jpa</module>
-  </modules>
+        <module>letsgo-spring</module>
+    </modules>
     <dependencyManagement>
         <dependencies>
             <dependency>

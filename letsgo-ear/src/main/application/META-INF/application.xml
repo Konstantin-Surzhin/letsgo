@@ -2,16 +2,10 @@
 <application xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/application_6.xsd" version="6">
     <display-name>letsgo-ear</display-name>
     <module>
-        <ejb>letsgo-ejb-1.0.jar</ejb>
-    </module>
-    <module>
         <web>
-            <web-uri>letsgo-web-1.0.war</web-uri>
-            <context-root>/</context-root>
+            <web-uri>letsgo-spring-1.0.war</web-uri>
+            <context-root>/spring</context-root>
         </web>
-    </module>
-    <module>
-        <java>letsgo-remote-1.0.jar</java>
     </module>
     <module>
         <java>letsgo-jpa-1.0.jar</java>

@@ -21,7 +21,7 @@
     <!--<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>-->
 
 
-    <context:component-scan base-package="org.igo.letsgo.spring" />
+    <context:component-scan base-package="org.igo.spring" />
     <context:annotation-config />
     <mvc:annotation-driven />
     <!--
