@@ -18,7 +18,7 @@
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    
+
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -55,11 +55,6 @@
             <artifactId>spring-expression</artifactId>
             <version>4.3.2.RELEASE</version>
         </dependency>
-        <!-- <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-framework-bom</artifactId>
-            <version>4.2.6.RELEASE</version>
-        </dependency>-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-instrument</artifactId>
@@ -145,13 +140,18 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>5.2.4.Final</version>
-
         </dependency>
         <dependency>
             <groupId>org.springframework.webflow</groupId>
             <artifactId>spring-webflow</artifactId>
             <version>2.4.4.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>1.10.2.RELEASE</version>
+        </dependency>
+
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
@@ -209,5 +209,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
