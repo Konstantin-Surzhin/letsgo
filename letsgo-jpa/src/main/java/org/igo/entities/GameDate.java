@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 @Entity
-@Table(name = "game_dates",
+@Table(name = "games_dates",
         uniqueConstraints = @UniqueConstraint(columnNames = {"game_date", "game_id"}))
 @NamedQueries({
     @NamedQuery(name = "GameDate.findAll", query = "SELECT g FROM GameDate g"),

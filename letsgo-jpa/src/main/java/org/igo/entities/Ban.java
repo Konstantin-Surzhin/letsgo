@@ -33,7 +33,7 @@ import javax.persistence.Temporal;
  * @author kostya surzhin
  */
 @Entity
-@Table(name = "user_bans")
+@Table(name = "users_bans")
 public class Ban implements Serializable {
 
     private static final long serialVersionUID = 1L;

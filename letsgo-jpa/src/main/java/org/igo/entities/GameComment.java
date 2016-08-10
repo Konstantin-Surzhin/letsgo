@@ -37,7 +37,7 @@ import javax.persistence.UniqueConstraint;
  * @author kostya surzhin
  */
 @Entity
-@Table(name = "game_comments",
+@Table(name = "games_comments",
         uniqueConstraints = @UniqueConstraint(columnNames = {"game_id", "user_id", "comment"}))
 public class GameComment implements Serializable {
 
