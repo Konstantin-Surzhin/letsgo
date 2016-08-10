@@ -14,24 +14,24 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.igo.jpa;
+package org.igo.entities;
 
 /**
  *
  * @author kostya surzhin
  */
-public enum UserStatus {
+public enum DegreeType {
 
     /**
      *
      */
-    ENABLE,
+    PROVIDED,
     /**
      *
      */
-    DISABLE,
+    APPOINTMENT,
     /**
      *
      */
-    PENDING;
+    CALCULATION;
 }

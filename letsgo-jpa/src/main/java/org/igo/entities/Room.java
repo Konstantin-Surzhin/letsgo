@@ -14,14 +14,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.igo.jpa;
+package org.igo.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -29,13 +31,14 @@ import javax.persistence.Table;
  * @author kostya surzhin
  */
 @Entity
-@Table(name = "place")
-public class Place implements Serializable {
+@Table(name = "room")
+public class Room implements Serializable {
+
+    private List<User> users;
 
     private static final long serialVersionUID = 1L;
     private Long id;
-
-    private String placeName;
+    private String roomName;
 
     /**
      *
@@ -75,10 +78,10 @@ public class Place implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Place)) {
+        if (!(object instanceof Room)) {
             return false;
         }
-        Place other = (Place) object;
+        Room other = (Room) object;
         return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
@@ -88,22 +91,39 @@ public class Place implements Serializable {
      */
     @Override
     public String toString() {
-        return "jpa.Place[ id=" + id + " ]";
+        return "jpa.Room[ id=" + id + " ]";
     }
 
     /**
-     * @return the placeName
+     * @return the roomName
      */
-    @Column(name = "place_name", nullable = false, unique = true)
-    public String getPlaceName() {
-        return placeName;
+    @Column(name = "room_name", nullable = false, unique = true)
+    public String getRoomName() {
+        return roomName;
     }
 
     /**
-     * @param placeName the placeName to set
+     * @param roomName the roomName to set
      */
-    public void setPlaceName(String placeName) {
-        this.placeName = placeName;
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
+    }
+
+    /**
+     *
+     * @return
+     */
+    @OneToMany(mappedBy = "defaultRoom")
+    public List<User> getUsers() {
+        return users;
+    }
+
+    /**
+     *
+     * @param users
+     */
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
 }

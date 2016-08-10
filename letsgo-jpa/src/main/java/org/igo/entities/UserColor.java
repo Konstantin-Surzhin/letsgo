@@ -14,46 +14,24 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.igo.jpa;
+package org.igo.entities;
 
 /**
  *
  * @author kostya surzhin
  */
-public enum GameSize {
+public enum UserColor {
 
     /**
      *
      */
-    S9(9),
+    BLACK,
     /**
      *
      */
-    S11(11),
+    WHITE,
     /**
      *
      */
-    S13(13),
-    /**
-     *
-     */
-    S15(15),
-    /**
-     *
-     */
-    S17(17),
-    /**
-     *
-     */
-    S19(19),
-    /**
-     *
-     */
-    S21(21);
-
-    private final Integer size;
-
-    private GameSize(Integer size) {
-        this.size = size;
-    }
+    NONE;
 }

@@ -14,62 +14,38 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.igo.jpa;
+package org.igo.entities;
 
-/**
- *
- * @author kostya surzhin
- */
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
  * @author kostya surzhin
  */
 @Embeddable
-public class UserDegreePK implements Serializable {
+public class GameMovesPK implements Serializable {
 
-    private int userId;
-    private Date appointmentDate;
+    private long gameId;
+
+    private int ndx;
 
     /**
      *
      */
-    public UserDegreePK() {
+    public GameMovesPK() {
     }
 
     /**
      *
-     * @param userId
-     * @param appointmentDate
+     * @param gameId
+     * @param ndx
      */
-    public UserDegreePK(int userId, Date appointmentDate) {
-        this.userId = userId;
-        this.appointmentDate = appointmentDate;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Basic(optional = false)
-    @Column(name = "user_id", nullable = false)
-    public int getUserId() {
-        return userId;
-    }
-
-    /**
-     *
-     * @param userId
-     */
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public GameMovesPK(long gameId, int ndx) {
+        this.gameId = gameId;
+        this.ndx = ndx;
     }
 
     /**
@@ -77,18 +53,35 @@ public class UserDegreePK implements Serializable {
      * @return
      */
     @Basic(optional = false)
-    @Column(name = "appointment_date", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    public Date getAppointmentDate() {
-        return appointmentDate;
+    @Column(name = "game_id", nullable = false)
+    public long getGameId() {
+        return gameId;
     }
 
     /**
      *
-     * @param appointmentDate
+     * @param gameId
      */
-    public void setAppointmentDate(Date appointmentDate) {
-        this.appointmentDate = appointmentDate;
+    public void setGameId(long gameId) {
+        this.gameId = gameId;
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Basic(optional = false)
+    @Column(name = "ndx", nullable = false)
+    public int getNdx() {
+        return ndx;
+    }
+
+    /**
+     *
+     * @param ndx
+     */
+    public void setNdx(int ndx) {
+        this.ndx = ndx;
     }
 
     /**
@@ -98,8 +91,8 @@ public class UserDegreePK implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) userId;
-        hash += (appointmentDate != null ? appointmentDate.hashCode() : 0);
+        hash += (int) gameId;
+        hash += (int) ndx;
         return hash;
     }
 
@@ -111,14 +104,17 @@ public class UserDegreePK implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof UserDegreePK)) {
+        if (!(object instanceof GameMovesPK)) {
             return false;
         }
-        UserDegreePK other = (UserDegreePK) object;
-        if (this.userId != other.userId) {
+        GameMovesPK other = (GameMovesPK) object;
+        if (this.gameId != other.gameId) {
             return false;
         }
-        return !((this.appointmentDate == null && other.appointmentDate != null) || (this.appointmentDate != null && !this.appointmentDate.equals(other.appointmentDate)));
+        if (this.ndx != other.ndx) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -127,7 +123,7 @@ public class UserDegreePK implements Serializable {
      */
     @Override
     public String toString() {
-        return "jpa2.UserRatingPK[ userId=" + userId + ", appointmentDate=" + appointmentDate + " ]";
+        return "jpa2.GameMovesPK[ gameId=" + gameId + ", ndx=" + ndx + " ]";
     }
 
 }

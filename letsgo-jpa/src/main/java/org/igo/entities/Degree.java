@@ -14,16 +14,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.igo.jpa;
+package org.igo.entities;
 
 import java.io.Serializable;
-import java.util.List;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -31,15 +30,14 @@ import javax.persistence.Table;
  * @author kostya surzhin
  */
 @Entity
-@Table(name = "event")
-public class Event implements Serializable {
-
-    private List<Game> games;
+@Table(name = "degree")
+public class Degree implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private Long id;
 
-    private String eventName;
+    private Integer id;
+
+    private String dergeeValue;
 
     /**
      *
@@ -47,8 +45,9 @@ public class Event implements Serializable {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    public Long getId() {
+    @Basic(optional = false)
+    @Column(name = "id", nullable = false)
+    public Integer getId() {
         return id;
     }
 
@@ -56,7 +55,7 @@ public class Event implements Serializable {
      *
      * @param id
      */
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -79,10 +78,20 @@ public class Event implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Event)) {
+        if (object == null) {
             return false;
         }
-        Event other = (Event) object;
+
+        if (object.getClass() != Degree.class) {
+            return false;
+        }
+
+        Degree other = (Degree) object;
+
+        if (!other.dergeeValue.equals(dergeeValue)) {
+            return false;
+        }
+
         return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
@@ -92,39 +101,37 @@ public class Event implements Serializable {
      */
     @Override
     public String toString() {
-        return "jpa.Event[ id=" + id + " ]";
+        return dergeeValue;
     }
 
     /**
-     * @return the eventName
+     * @return the dergeeValue
      */
-    @Column(name = "event_name", nullable = false, unique = true)
-    public String getEventName() {
-        return eventName;
+    @Column(name = "degree_value",
+            unique = true,
+            nullable = false)
+    public String getDergeeValue() {
+        return dergeeValue;
     }
 
     /**
-     * @param eventName the eventName to set
+     * @param dergeeValue the dergeeValue to set
      */
-    public void setEventName(String eventName) {
-        this.eventName = eventName;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @OneToMany(mappedBy = "event")
-    public List<Game> getGames() {
-        return games;
+    public void setDergeeValue(String dergeeValue) {
+        this.dergeeValue = dergeeValue;
     }
 
     /**
      *
-     * @param games
      */
-    public void setGames(List<Game> games) {
-        this.games = games;
+    public Degree() {
     }
 
+    /**
+     *
+     * @param id
+     */
+    public Degree(Integer id) {
+        this.id = id;
+    }
 }

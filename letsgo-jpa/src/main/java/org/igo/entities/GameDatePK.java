@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.igo.jpa;
+package org.igo.entities;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -26,16 +26,15 @@ import javax.persistence.Embeddable;
  * @author kostya surzhin
  */
 @Embeddable
-public class GameMovesPK implements Serializable {
+public class GameDatePK implements Serializable {
 
     private long gameId;
-
     private int ndx;
 
     /**
      *
      */
-    public GameMovesPK() {
+    public GameDatePK() {
     }
 
     /**
@@ -43,7 +42,7 @@ public class GameMovesPK implements Serializable {
      * @param gameId
      * @param ndx
      */
-    public GameMovesPK(long gameId, int ndx) {
+    public GameDatePK(long gameId, int ndx) {
         this.gameId = gameId;
         this.ndx = ndx;
     }
@@ -104,17 +103,14 @@ public class GameMovesPK implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof GameMovesPK)) {
+        if (!(object instanceof GameDatePK)) {
             return false;
         }
-        GameMovesPK other = (GameMovesPK) object;
+        GameDatePK other = (GameDatePK) object;
         if (this.gameId != other.gameId) {
             return false;
         }
-        if (this.ndx != other.ndx) {
-            return false;
-        }
-        return true;
+        return this.ndx == other.ndx;
     }
 
     /**
@@ -123,7 +119,7 @@ public class GameMovesPK implements Serializable {
      */
     @Override
     public String toString() {
-        return "jpa2.GameMovesPK[ gameId=" + gameId + ", ndx=" + ndx + " ]";
+        return "jpa2.GameDatesPK[ gameId=" + gameId + ", ndx=" + ndx + " ]";
     }
 
 }
