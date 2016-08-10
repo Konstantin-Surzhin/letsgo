@@ -4,15 +4,16 @@
     <mapping-file>META-INF/orm.xml</mapping-file>
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     <jta-data-source>java:/jboss/datasources/MySQLDS</jta-data-source>
-    <class>org.igo.jpa.Degree</class>
-    <class>org.igo.jpa.Game</class>
-    <class>org.igo.jpa.GameComment</class>
-    <class>org.igo.jpa.GameDate</class>
-    <class>org.igo.jpa.GameMove</class>
-    <class>org.igo.jpa.MoveComment</class>
-    <class>org.igo.jpa.User</class>
-    <class>org.igo.jpa.UserDegree</class>
-    <class>org.igo.jpa.UserGame</class>
+    <class>org.igo.entities.UserDegree</class>
+    <class>org.igo.entities.User</class>
+    <class>org.igo.entities.Game</class>
+    <class>org.igo.entities.MoveComment</class>
+    <class>org.igo.entities.UserGame</class>
+    <class>org.igo.entities.Degree</class>
+    <class>org.igo.entities.Role</class>
+    <class>org.igo.entities.GameComment</class>
+    <class>org.igo.entities.GameMove</class>
+    <class>org.igo.entities.GameDate</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>

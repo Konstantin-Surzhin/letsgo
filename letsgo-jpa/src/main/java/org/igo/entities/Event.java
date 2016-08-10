@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.igo.jpa;
+package org.igo.entities;
 
 import java.io.Serializable;
 import java.util.List;
@@ -31,22 +31,23 @@ import javax.persistence.Table;
  * @author kostya surzhin
  */
 @Entity
-@Table(name = "room")
-public class Room implements Serializable {
+@Table(name = "event")
+public class Event implements Serializable {
 
-    private List<User> users;
+    private List<Game> games;
 
     private static final long serialVersionUID = 1L;
     private Long id;
-    private String roomName;
+
+    private String eventName;
 
     /**
      *
      * @return
      */
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     public Long getId() {
         return id;
     }
@@ -78,10 +79,10 @@ public class Room implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Room)) {
+        if (!(object instanceof Event)) {
             return false;
         }
-        Room other = (Room) object;
+        Event other = (Event) object;
         return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
@@ -91,39 +92,39 @@ public class Room implements Serializable {
      */
     @Override
     public String toString() {
-        return "jpa.Room[ id=" + id + " ]";
+        return "jpa.Event[ id=" + id + " ]";
     }
 
     /**
-     * @return the roomName
+     * @return the eventName
      */
-    @Column(name = "room_name", nullable = false, unique = true)
-    public String getRoomName() {
-        return roomName;
+    @Column(name = "event_name", nullable = false, unique = true)
+    public String getEventName() {
+        return eventName;
     }
 
     /**
-     * @param roomName the roomName to set
+     * @param eventName the eventName to set
      */
-    public void setRoomName(String roomName) {
-        this.roomName = roomName;
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
     }
 
     /**
      *
      * @return
      */
-    @OneToMany(mappedBy = "defaultRoom")
-    public List<User> getUsers() {
-        return users;
+    @OneToMany(mappedBy = "event")
+    public List<Game> getGames() {
+        return games;
     }
 
     /**
      *
-     * @param users
+     * @param games
      */
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setGames(List<Game> games) {
+        this.games = games;
     }
 
 }

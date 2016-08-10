@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.igo.jpa;
+package org.igo.entities;
 
+import org.igo.entities.Ban;
+import org.igo.entities.User;
 import java.util.Date;
 import org.junit.After;
 import org.junit.AfterClass;

@@ -14,73 +14,46 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.igo.jpa;
+package org.igo.entities;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author kostya surzhin
  */
-@Embeddable
-public class GameDatePK implements Serializable {
+@Entity
+@Table(name = "place")
+public class Place implements Serializable {
 
-    private long gameId;
-    private int ndx;
+    private static final long serialVersionUID = 1L;
+    private Long id;
 
-    /**
-     *
-     */
-    public GameDatePK() {
-    }
-
-    /**
-     *
-     * @param gameId
-     * @param ndx
-     */
-    public GameDatePK(long gameId, int ndx) {
-        this.gameId = gameId;
-        this.ndx = ndx;
-    }
+    private String placeName;
 
     /**
      *
      * @return
      */
-    @Basic(optional = false)
-    @Column(name = "game_id", nullable = false)
-    public long getGameId() {
-        return gameId;
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long getId() {
+        return id;
     }
 
     /**
      *
-     * @param gameId
+     * @param id
      */
-    public void setGameId(long gameId) {
-        this.gameId = gameId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Basic(optional = false)
-    @Column(name = "ndx", nullable = false)
-    public int getNdx() {
-        return ndx;
-    }
-
-    /**
-     *
-     * @param ndx
-     */
-    public void setNdx(int ndx) {
-        this.ndx = ndx;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
@@ -90,8 +63,7 @@ public class GameDatePK implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) gameId;
-        hash += (int) ndx;
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -103,14 +75,11 @@ public class GameDatePK implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof GameDatePK)) {
+        if (!(object instanceof Place)) {
             return false;
         }
-        GameDatePK other = (GameDatePK) object;
-        if (this.gameId != other.gameId) {
-            return false;
-        }
-        return this.ndx == other.ndx;
+        Place other = (Place) object;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     /**
@@ -119,7 +88,22 @@ public class GameDatePK implements Serializable {
      */
     @Override
     public String toString() {
-        return "jpa2.GameDatesPK[ gameId=" + gameId + ", ndx=" + ndx + " ]";
+        return "jpa.Place[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the placeName
+     */
+    @Column(name = "place_name", nullable = false, unique = true)
+    public String getPlaceName() {
+        return placeName;
+    }
+
+    /**
+     * @param placeName the placeName to set
+     */
+    public void setPlaceName(String placeName) {
+        this.placeName = placeName;
     }
 
 }

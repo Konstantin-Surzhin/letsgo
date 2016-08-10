@@ -14,40 +14,43 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.igo.jpa;
+package org.igo.entities;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 /**
  *
  * @author kostya surzhin
  */
 @Entity
-@Table(name = "degree")
-public class Degree implements Serializable {
+@Table(name = "user_ban")
+public class Ban implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    private Integer id;
-
-    private String dergeeValue;
+    private User user;
+    private Long id;
+    private Date startDate;
+    private Short duration;
+    private String comment;
 
     /**
      *
-     * @return
+     * @return id
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
     @Column(name = "id", nullable = false)
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -55,13 +58,13 @@ public class Degree implements Serializable {
      *
      * @param id
      */
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     /**
      *
-     * @return
+     * @return hash
      */
     @Override
     public int hashCode() {
@@ -78,20 +81,10 @@ public class Degree implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (object == null) {
+        if (!(object instanceof Ban)) {
             return false;
         }
-
-        if (object.getClass() != Degree.class) {
-            return false;
-        }
-
-        Degree other = (Degree) object;
-
-        if (!other.dergeeValue.equals(dergeeValue)) {
-            return false;
-        }
-
+        Ban other = (Ban) object;
         return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
@@ -101,37 +94,71 @@ public class Degree implements Serializable {
      */
     @Override
     public String toString() {
-        return dergeeValue;
+        return "jpa.Ban[ id=" + id + " ]";
     }
 
     /**
-     * @return the dergeeValue
+     * @return the startDate
      */
-    @Column(name = "degree_value",
-            unique = true,
-            nullable = false)
-    public String getDergeeValue() {
-        return dergeeValue;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    @Column(name = "start_date", nullable = false)
+    public Date getStartDate() {
+        return startDate;
     }
 
     /**
-     * @param dergeeValue the dergeeValue to set
+     * @param startDate the startDate to set
      */
-    public void setDergeeValue(String dergeeValue) {
-        this.dergeeValue = dergeeValue;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    /**
+     * @return the duration
+     */
+    @Column(name = "duration", nullable = false)
+    public Short getDuration() {
+        return duration;
+    }
+
+    /**
+     * @param duration the duration to set
+     */
+    public void setDuration(Short duration) {
+        this.duration = duration;
+    }
+
+    /**
+     * @return the comment
+     */
+    @Column(name = "comment", nullable = false)
+    public String getComment() {
+        return comment;
+    }
+
+    /**
+     * @param comment the comment to set
+     */
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     /**
      *
+     * @return
      */
-    public Degree() {
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    public User getUser() {
+        return user;
     }
 
     /**
      *
-     * @param id
+     * @param user
      */
-    public Degree(Integer id) {
-        this.id = id;
+    public void setUser(User user) {
+        this.user = user;
     }
+
 }

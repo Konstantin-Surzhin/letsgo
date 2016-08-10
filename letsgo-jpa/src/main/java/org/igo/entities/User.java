@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.igo.jpa;
+package org.igo.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -34,6 +34,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
@@ -81,6 +82,8 @@ public class User implements Serializable {
     private Integer win;
 
     private Integer rating;
+    
+    private Role role;
 
     private Collection<UserDegree> userDegrees;
 
@@ -92,7 +95,7 @@ public class User implements Serializable {
 
     private Room defaultRoom;
 
-    private Team defaultTeam;
+    private Team team;
 
     /**
      *
@@ -423,14 +426,29 @@ public class User implements Serializable {
      */
     @ManyToOne
     @JoinColumn(name = "team_id")
-    public Team getDefaultTeam() {
-        return defaultTeam;
+    public Team getTeam() {
+        return team;
     }
 
     /**
-     * @param defaultTeam the defaultTeam to set
+     * @param team the defaultTeam to set
      */
-    public void setDefaultTeam(Team defaultTeam) {
-        this.defaultTeam = defaultTeam;
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    /**
+     * @return the role
+     */
+    @OneToOne
+    public Role getRole() {
+        return role;
+    }
+
+    /**
+     * @param role the role to set
+     */
+    public void setRole(Role role) {
+        this.role = role;
     }
 }
