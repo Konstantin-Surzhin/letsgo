@@ -11,24 +11,6 @@
         </web>
     </module>
     <module>
-        <web>
-            <web-uri>letsgo-spring-1.0.war</web-uri>
-            <context-root>/spring</context-root>
-        </web>
-    </module>
-    <module>
-        <web>
-            <web-uri>letsgo-rest-1.0.war</web-uri>
-            <context-root>/rest</context-root>
-        </web>
-    </module>
-    <module>
-        <web>
-            <web-uri>letsgo-soap-1.0.war</web-uri>
-            <context-root>/soap</context-root>
-        </web>
-    </module>
-    <module>
         <java>letsgo-remote-1.0.jar</java>
     </module>
     <module>

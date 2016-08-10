@@ -73,13 +73,8 @@
         <module>letsgo-ear</module>
         <module>letsgo-ejb</module>
         <module>letsgo-web</module>
-        <module>letsgo-soap</module>
-        <module>letsgo-rest</module>
-        <module>letsgo-client</module>
         <module>letsgo-remote</module>
         <module>letsgo-jpa</module>
-        <module>letsgo-spring</module>
-    <module>letsgo-PrimeFaces</module>
   </modules>
     <dependencyManagement>
         <dependencies>
