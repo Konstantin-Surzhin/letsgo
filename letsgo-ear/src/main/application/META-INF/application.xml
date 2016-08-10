@@ -3,12 +3,19 @@
     <display-name>letsgo-ear</display-name>
     <module>
         <web>
-            <web-uri>letsgo-spring-1.0.war</web-uri>
-            <context-root>/spring</context-root>
+            <web-uri>letsgo-web-1.0.war</web-uri>
+            <context-root>/web</context-root>
         </web>
     </module>
     <module>
+        <ejb>letsgo-ejb-1.0.jar</ejb>
+    </module>
+        
+    <module>
         <java>letsgo-jpa-1.0.jar</java>
+    </module>
+    <module>
+        <java>letsgo-remote-1.0.jar</java>
     </module>
     <library-directory>lib</library-directory>
 </application>

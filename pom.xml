@@ -72,7 +72,9 @@
     <modules>
         <module>letsgo-ear</module>
         <module>letsgo-jpa</module>
-        <module>letsgo-spring</module>
+        <module>letsgo-web</module>
+        <module>letsgo-ejb</module>
+        <module>letsgo-remote</module>
     </modules>
     <dependencyManagement>
         <dependencies>
