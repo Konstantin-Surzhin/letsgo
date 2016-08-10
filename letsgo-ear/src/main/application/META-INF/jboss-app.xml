@@ -2,8 +2,8 @@
 <jboss-app>
     <module>
         <web>
-            <web-uri>letsgo-web-1.0.war</web-uri>
-            <context-root>/web</context-root>
+            <web-uri>letsgo-spring-1.0.war</web-uri>
+            <context-root>/spring</context-root>
         </web>
     </module>
 </jboss-app>

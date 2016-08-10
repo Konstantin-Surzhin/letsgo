@@ -40,24 +40,14 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>letsgo-jpa</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>letsgo-web</artifactId>
+            <artifactId>letsgo-spring</artifactId>
             <version>${project.version}</version>
             <type>war</type>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>letsgo-ejb</artifactId>
+            <artifactId>letsgo-jpa</artifactId>
             <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.igo</groupId>
-            <artifactId>letsgo-remote</artifactId>
-            <version>1.0</version>
         </dependency>
     </dependencies>
 </project>

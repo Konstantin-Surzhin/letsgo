@@ -36,7 +36,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -96,7 +95,10 @@ public class User implements Serializable {
     private Room defaultRoom;
 
     private Team team;
-
+    
+    private League league;
+    
+    private City city;
     /**
      *
      */
@@ -450,5 +452,29 @@ public class User implements Serializable {
      */
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    @OneToOne
+    public League getLeague() {
+        return league;
+    }
+
+    public void setLeague(League league) {
+        this.league = league;
+    }
+
+    /**
+     * @return the city
+     */
+    @ManyToOne
+    public City getCity() {
+        return city;
+    }
+
+    /**
+     * @param city the city to set
+     */
+    public void setCity(City city) {
+        this.city = city;
     }
 }

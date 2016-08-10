@@ -6,26 +6,33 @@
 package org.igo.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author surzhin.konstantin
  */
 @Entity
+@Table(name = "city")
 public class City implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
     private Long id;
-    
+
     private String name;
 
+    private List<User> users;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
@@ -59,7 +66,7 @@ public class City implements Serializable {
     /**
      * @return the name
      */
-    @Column(name = "city_name",nullable = false, unique = true)
+    @Column(name = "city_name", nullable = false, unique = true)
     public String getName() {
         return name;
     }
@@ -70,5 +77,13 @@ public class City implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    
+
+    @OneToMany(mappedBy = "city")
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
 }

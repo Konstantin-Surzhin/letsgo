@@ -6,28 +6,35 @@
 package org.igo.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author surzhin.konstantin
  */
 @Entity
-public class CityLeague implements Serializable {
+@Table(name = "league")
+public class League implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
     private Long id;
 
-    private String name;
+    private String leagueName;
 
-    private City city;
+    private List<User> users;
+    
+    private List<Team> teams;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
@@ -46,14 +53,11 @@ public class CityLeague implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CityLeague)) {
+        if (!(object instanceof League)) {
             return false;
         }
-        CityLeague other = (CityLeague) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        League other = (League) object;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     @Override
@@ -62,32 +66,47 @@ public class CityLeague implements Serializable {
     }
 
     /**
-     * @return the name
+     * @return the leagueName
      */
     @Column(name = "league_name", nullable = false, unique = true)
-    public String getName() {
-        return name;
+    public String getLeagueName() {
+        return leagueName;
     }
 
     /**
-     * @param name the name to set
+     * @param leagueName the leagueName to set
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setLeagueName(String leagueName) {
+        this.leagueName = leagueName;
     }
 
     /**
-     * @return the city
+     * @return the users
      */
-    public City getCity() {
-        return city;
+    @OneToMany(mappedBy = "league")
+    public List<User> getUsers() {
+        return users;
     }
 
     /**
-     * @param city the city to set
+     * @param users the users to set
      */
-    public void setCity(City city) {
-        this.city = city;
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
+    /**
+     * @return the teams
+     */
+    @OneToMany(mappedBy = "league")
+    public List<Team> getTeams() {
+        return teams;
+    }
+
+    /**
+     * @param teams the teams to set
+     */
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
+    }
 }

@@ -23,6 +23,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -34,10 +35,13 @@ import javax.persistence.Table;
 @Table(name = "team")
 public class Team implements Serializable {
 
-    private List<User> users;
-
     private static final long serialVersionUID = 1L;
+
     private Long id;
+
+    private League league;
+
+    private List<User> users;
 
     private String teamName;
 
@@ -125,6 +129,15 @@ public class Team implements Serializable {
      */
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    @ManyToOne
+    public League getLeague() {
+        return league;
+    }
+
+    public void setLeague(League league) {
+        this.league = league;
     }
 
 }

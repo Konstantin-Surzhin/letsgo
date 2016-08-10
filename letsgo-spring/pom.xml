@@ -151,7 +151,11 @@
             <artifactId>spring-data-jpa</artifactId>
             <version>1.10.2.RELEASE</version>
         </dependency>
-
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>letsgo-jpa</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
