@@ -31,7 +31,7 @@ import javax.persistence.Table;
  * @author kostya surzhin
  */
 @Entity
-@Table(name = "event")
+@Table(name = "events")
 public class Event implements Serializable {
 
     private List<Game> games;

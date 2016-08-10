@@ -30,7 +30,7 @@ import javax.persistence.Table;
  * @author kostya surzhin
  */
 @Entity
-@Table(name = "degree")
+@Table(name = "degrees")
 public class Degree implements Serializable {
 
     private static final long serialVersionUID = 1L;

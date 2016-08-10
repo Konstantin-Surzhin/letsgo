@@ -29,7 +29,7 @@ import javax.persistence.Table;
  * @author kostya surzhin
  */
 @Entity
-@Table(name = "place")
+@Table(name = "places")
 public class Place implements Serializable {
 
     private static final long serialVersionUID = 1L;

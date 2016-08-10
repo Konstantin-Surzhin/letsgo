@@ -31,7 +31,7 @@ import javax.persistence.Table;
  * @author kostya surzhin
  */
 @Entity
-@Table(name = "room")
+@Table(name = "rooms")
 public class Room implements Serializable {
 
     private List<User> users;
