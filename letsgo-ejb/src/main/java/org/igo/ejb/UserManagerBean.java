@@ -23,7 +23,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
-import org.igo.jpa.User;
+import org.igo.entities.User;
 import org.igo.remote.intf.UserManagerBeanRemote;
 
 /**
