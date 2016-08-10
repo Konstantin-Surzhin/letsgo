@@ -14,6 +14,13 @@
     <class>org.igo.entities.GameComment</class>
     <class>org.igo.entities.GameMove</class>
     <class>org.igo.entities.GameDate</class>
+    <class>org.igo.entities.CityLeague</class>
+    <class>org.igo.entities.City</class>
+    <class>org.igo.entities.Ban</class>
+    <class>org.igo.entities.Event</class>
+    <class>org.igo.entities.Place</class>
+    <class>org.igo.entities.Room</class>
+    <class>org.igo.entities.Team</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>

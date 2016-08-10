@@ -114,7 +114,7 @@ public class Team implements Serializable {
      *
      * @return
      */
-    @OneToMany(mappedBy = "defaultTeam")
+    @OneToMany(mappedBy = "team")
     public List<User> getUsers() {
         return users;
     }
