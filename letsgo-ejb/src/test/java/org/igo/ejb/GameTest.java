@@ -16,7 +16,7 @@
  */
 package org.igo.ejb;
 
-import org.igo.jpa.Game;
+import org.igo.entities.Game;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

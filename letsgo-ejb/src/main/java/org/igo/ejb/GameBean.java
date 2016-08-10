@@ -20,7 +20,7 @@ package org.igo.ejb;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.igo.jpa.Game;
+import org.igo.entities.Game;
 import org.igo.remote.intf.IGameRemote;
 
 /**

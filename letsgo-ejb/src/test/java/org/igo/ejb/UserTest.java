@@ -16,7 +16,7 @@
  */
 package org.igo.ejb;
 
-import org.igo.jpa.User;
+import org.igo.entities.User;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
