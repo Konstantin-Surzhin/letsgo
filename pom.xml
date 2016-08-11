@@ -71,7 +71,6 @@
     </build>
     <modules>
         <module>letsgo-data</module>
-        <module>letsgo-spring</module>
     </modules>
     <dependencyManagement>
         <dependencies>
