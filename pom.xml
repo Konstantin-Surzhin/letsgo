@@ -47,9 +47,9 @@
                             <value>org.jboss.logmanager.LogManager</value>
                         </property>
                     </systemProperties>
-                  <!-- <systemPropertyVariables>
-                        <arquillian.launch>jbossas_managed</arquillian.launch>
-                     </systemPropertyVariables>-->
+                    <!-- <systemPropertyVariables>
+                       <arquillian.launch>jbossas_managed</arquillian.launch>
+                    </systemPropertyVariables>-->
                 </configuration>
                 <executions>
                     <execution>
@@ -70,9 +70,8 @@
         </plugins>
     </build>
     <modules>
-        <module>letsgo-ear</module>
         <module>letsgo-spring</module>
-        <module>letsgo-jpa</module>
+        <module>letsgo-data</module>
     </modules>
     <dependencyManagement>
         <dependencies>

@@ -7,12 +7,14 @@
     <version>1.0</version>
   </parent>
   <groupId>org.igo</groupId>
-  <artifactId>letsgo-spring</artifactId>
+  <artifactId>letsgo-data</artifactId>
   <version>1.0</version>
   <packaging>pom</packaging>
-  <name>letsgo-spring</name>
+  <name>letsgo-data</name>
   <modules>
-    <module>letsgo-spring-ear</module>
-    <module>letsgo-spring-web</module>
+    <module>letsgo-data-ear</module>
+    <module>letsgo-data-web</module>
+    <module>letsgo-data-jpa</module>
+    <module>letsgo-data-ejb</module>
   </modules>
 </project>

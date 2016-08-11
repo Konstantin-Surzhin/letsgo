@@ -3,10 +3,10 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.igo</groupId>
-        <artifactId>letsgo</artifactId>
+        <artifactId>letsgo-data</artifactId>
         <version>1.0</version>
     </parent>
-    <artifactId>letsgo-jpa</artifactId>
+    <artifactId>letsgo-data-jpa</artifactId>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
@@ -30,4 +30,5 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
+    <name>letsgo-data-jpa</name>
 </project>
