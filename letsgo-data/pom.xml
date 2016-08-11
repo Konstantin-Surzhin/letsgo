@@ -14,7 +14,6 @@
   <modules>
     <module>letsgo-data-ear</module>
     <module>letsgo-data-web</module>
-    <module>letsgo-data-jpa</module>
     <module>letsgo-data-ejb</module>
   </modules>
 </project>

@@ -43,11 +43,6 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>letsgo-data-jpa</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>letsgo-data-web</artifactId>
             <version>${project.version}</version>
             <type>war</type>

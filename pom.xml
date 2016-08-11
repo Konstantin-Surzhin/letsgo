@@ -72,7 +72,7 @@
     <modules>
         <module>letsgo-data</module>
         <module>letsgo-spring</module>
-    </modules>
+  </modules>
     <dependencyManagement>
         <dependencies>
             <dependency>
