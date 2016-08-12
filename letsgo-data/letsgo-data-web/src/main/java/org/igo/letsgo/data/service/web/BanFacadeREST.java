@@ -25,7 +25,7 @@ import org.igo.entities.Ban;
  * @author surzhin.konstantin
  */
 @Stateless
-@Path("org.igo.entities.ban")
+@Path("ban")
 public class BanFacadeREST extends AbstractFacade<Ban> {
 
     @PersistenceContext(unitName = "gamePU")
@@ -55,12 +55,12 @@ public class BanFacadeREST extends AbstractFacade<Ban> {
         super.remove(super.find(id));
     }
 
-    @GET
-    @Path("{id}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Ban find(@PathParam("id") Long id) {
-        return super.find(id);
-    }
+//    @GET
+//    @Path("{id}")
+//    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+//    public Ban find(@PathParam("id") Long id) {
+//        return super.find(id);
+//    }
 
     @GET
     @Override
@@ -69,18 +69,19 @@ public class BanFacadeREST extends AbstractFacade<Ban> {
         return super.findAll();
     }
 
-    @GET
-    @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Ban> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
-    }
+//    @GET
+//    @Path("{from}/{to}")
+//    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+//    public List<Ban> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+//        return super.findRange(new int[]{from, to});
+//    }
 
     @GET
-    @Path("count")
+    @Path("/{id}/count/")
     @Produces(MediaType.TEXT_PLAIN)
-    public String countREST() {
-        return String.valueOf(super.count());
+    public String countREST(@PathParam("id") Long user_id) {
+        return "1";
+       // return String.valueOf(super.count());
     }
 
     @Override
