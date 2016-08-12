@@ -5,6 +5,7 @@
  */
 package org.igo.ejb;
 
+import org.igo.letsgo.data.remote.IBanRemote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +16,7 @@ import org.igo.entities.Ban;
  * @author surzhin.konstantin
  */
 @Stateless
-public class BanFacade extends AbstractFacade<Ban> {
+public class BanFacade extends AbstractFacade<Ban> implements IBanRemote{
 
     @PersistenceContext(unitName = "gamePU")
     private EntityManager em;

@@ -15,5 +15,7 @@
     <module>letsgo-data-ear</module>
     <module>letsgo-data-web</module>
     <module>letsgo-data-ejb</module>
+    <module>letsgo-ban-ws</module>
+    <module>letsgo-data-remote</module>
   </modules>
 </project>
