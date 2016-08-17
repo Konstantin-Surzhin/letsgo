@@ -51,3 +51,12 @@ hs_err_pid*
 /mavenproject1/mavenproject1-web/target/
 /mavenproject1/target/
 /letsgo-data/letsgo-data-remote/target/
+/letsgo-data-jpa/target/
+/letsgo-data/letsgo-ban-ejb/target/
+/letsgo-data/letsgo-ejb/target/
+/letsgo-data/letsgo-rest/target/
+/letsgo-data/letsgo-remote/target/
+/letsgo-data/letsgo-ear/target/
+/letsgo-data/letsgo-entity/target/
+/letsgo-data/letsgo-place-ejb/target/
+/letsgo-data/letsgo-game-ejb/target/

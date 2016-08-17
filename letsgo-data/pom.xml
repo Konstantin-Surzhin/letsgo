@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <artifactId>letsgo</artifactId>
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>letsgo</artifactId>
+        <groupId>org.igo</groupId>
+        <version>1.0</version>
+    </parent>
     <groupId>org.igo</groupId>
+    <artifactId>letsgo-data</artifactId>
     <version>1.0</version>
-  </parent>
-  <groupId>org.igo</groupId>
-  <artifactId>letsgo-data</artifactId>
-  <version>1.0</version>
-  <packaging>pom</packaging>
-  <name>letsgo-data</name>
-  <modules>
-    <module>letsgo-data-ear</module>
-    <module>letsgo-data-web</module>
-    <module>letsgo-data-ejb</module>
-    <module>letsgo-ban-ws</module>
-    <module>letsgo-data-remote</module>
-  </modules>
+    <packaging>pom</packaging>
+    <name>letsgo-data</name>
+    <modules>
+        <module>letsgo-ear</module>
+        <module>letsgo-rest</module>
+        <module>letsgo-remote</module>
+        <module>letsgo-entity</module>
+        <module>letsgo-place-ejb</module>
+        <module>letsgo-game-ejb</module>
+    </modules>
 </project>
