@@ -15,5 +15,5 @@ import javax.ejb.Remote;
 public interface IPlaceRemote {
 
     public String getPlaceTitle(int id);
-    
+
 }

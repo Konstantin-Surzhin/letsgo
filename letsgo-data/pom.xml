@@ -13,7 +13,6 @@
     <name>letsgo-data</name>
     <modules>
         <module>letsgo-ear</module>
-        <module>letsgo-rest</module>
         <module>letsgo-remote</module>
         <module>letsgo-entity</module>
         <module>letsgo-place-ejb</module>
