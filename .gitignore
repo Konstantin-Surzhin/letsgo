@@ -60,3 +60,8 @@ hs_err_pid*
 /letsgo-data/letsgo-entity/target/
 /letsgo-data/letsgo-place-ejb/target/
 /letsgo-data/letsgo-game-ejb/target/
+/letsgo-place-rest/target/
+/rest/letsgo-place-rest/target/
+/rest/letsgo-game-rest/target/
+/letsgo-rest/letsgo-game-rest/target/
+/letsgo-rest/letsgo-place-rest/target/
