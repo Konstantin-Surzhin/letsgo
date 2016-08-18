@@ -67,3 +67,4 @@ hs_err_pid*
 /letsgo-rest/letsgo-place-rest/target/
 /letsgo-soap/letsgo-game-soap/target/
 /letsgo-soap/letsgo-client-soap/target/
+/letsgo-mdb/letsgo-game-mdb/target/

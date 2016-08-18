@@ -73,6 +73,7 @@
         <module>letsgo-data</module>
         <module>letsgo-rest</module>
         <module>letsgo-soap</module>
+        <module>letsgo-mdb</module>
     </modules>
     <dependencyManagement>
         <dependencies>
