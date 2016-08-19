@@ -10,5 +10,6 @@
     <packaging>pom</packaging>
   <modules>
     <module>letsgo-game-soap</module>
+    <module>lesgo-game-client</module>
   </modules>
 </project>
