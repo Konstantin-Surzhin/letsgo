@@ -15,11 +15,11 @@ import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
 import javax.jms.Queue;
 import javax.jms.Session;
-import org.igo.remote.IGameRemote;
+import org.igo.letsgo.remote.IGameRemote;
 
 /**
  *
- * @author martin
+ * @author surzhin.konstantin
  */
 @Stateless
 public class GameSessionBean implements IGameRemote {

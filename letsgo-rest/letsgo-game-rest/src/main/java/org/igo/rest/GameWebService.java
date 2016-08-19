@@ -13,7 +13,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
-import org.igo.remote.IGameRemote;
+import org.igo.letsgo.remote.IGameRemote;
 
 /**
  * REST Web Service

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.igo.remote;
+package org.igo.letsgo.remote;
 
 import javax.ejb.Remote;
 
@@ -14,6 +14,6 @@ import javax.ejb.Remote;
 @Remote
 public interface IGameRemote {
 
-   public String getGame(int id);
+   public String getGame(final int id);
     
 }

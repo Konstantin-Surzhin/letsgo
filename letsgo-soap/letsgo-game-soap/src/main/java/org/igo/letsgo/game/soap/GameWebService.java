@@ -18,7 +18,7 @@ import javax.jws.WebService;
 public class GameWebService {
 
     @EJB(lookup = "java:global/letsgo-ear-1.0/letsgo-game-ejb-1.0/GameSessionBean!org.igo.remote.IGameRemote")
-    private org.igo.remote.IGameRemote ejbRef;
+    private org.igo.letsgo.remote.IGameRemote ejbRef;
     // Add business logic below. (Right-click in editor and choose
     // "Web Service > Add Operation"
 

@@ -69,3 +69,17 @@ hs_err_pid*
 /letsgo-soap/letsgo-client-soap/target/
 /letsgo-mdb/letsgo-game-mdb/target/
 /letsgo-soap/lesgo-game-client/target/
+/letsgo-data/letsgo-city-ejb/target/
+/letsgo-data/letsgo-game-comment-ejb/target/
+/letsgo-data/letsgo-event-ejb/target/
+/letsgo-data/letsgo-game-date-ejb/target/
+/letsgo-data/letsgo-game-move-ejb/target/
+/letsgo-data/letsgo-league-ejb/target/
+/letsgo-data/letsgo-move-comment-ejb/target/
+/letsgo-data/letsgo-room-ejb/target/
+/letsgo-data/letsgo-team-ejb/target/
+/letsgo-data/letsgo-user-ejb/target/
+/letsgo-data/letsgo-user-degree-ejb/target/
+/letsgo-data/letsgo-user-ban-ejb/target/
+/letsgo-data/letsgo-user-role-ejb/target/
+/letsgo-data/letsgo-user-game-ejb/target/

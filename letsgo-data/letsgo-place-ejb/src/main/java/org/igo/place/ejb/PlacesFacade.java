@@ -7,7 +7,7 @@ package org.igo.place.ejb;
 
 
 import javax.ejb.Stateless;
-import org.igo.remote.IPlaceRemote;
+import org.igo.letsgo.remote.IPlaceRemote;
 
 /**
  *
