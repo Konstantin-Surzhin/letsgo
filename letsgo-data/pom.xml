@@ -15,21 +15,21 @@
         <module>letsgo-ear</module>
         <module>letsgo-remote</module>
         <module>letsgo-entity</module>
-        <module>letsgo-place-ejb</module>
-        <module>letsgo-game-ejb</module>
-        <module>letsgo-city-ejb</module>
-    <module>letsgo-event-ejb</module>
-    <module>letsgo-game-comment-ejb</module>
-    <module>letsgo-game-date-ejb</module>
-    <module>letsgo-game-move-ejb</module>
-    <module>letsgo-league-ejb</module>
-    <module>letsgo-move-comment-ejb</module>
-    <module>letsgo-room-ejb</module>
-    <module>letsgo-team-ejb</module>
-    <module>letsgo-user-role-ejb</module>
-    <module>letsgo-user-ejb</module>
-    <module>letsgo-user-ban-ejb</module>
-    <module>letsgo-user-degree-ejb</module>
-    <module>letsgo-user-game-ejb</module>
-  </modules>
+        <module>letsgo-game-date-ejb</module>
+        <module>letsgo-game-move-ejb</module>
+        <module>letsgo-league-ejb</module>
+        <module>letsgo-move-comment-ejb</module>
+        <module>letsgo-room-ejb</module>
+        <module>letsgo-team-ejb</module>
+        <module>letsgo-user-role-ejb</module>
+        <module>letsgo-user-ejb</module>
+        <module>letsgo-user-ban-ejb</module>
+        <module>letsgo-user-degree-ejb</module>
+        <module>letsgo-user-game-ejb</module>
+        <module>letsgo-place</module>
+        <module>letsgo-game</module>
+        <module>letsgo-city</module>
+        <module>letsgo-event</module>
+        <module>letsgo-game-comment</module>
+    </modules>
 </project>
