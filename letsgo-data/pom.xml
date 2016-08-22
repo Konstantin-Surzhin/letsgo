@@ -15,14 +15,6 @@
         <module>letsgo-ear</module>
         <module>letsgo-remote</module>
         <module>letsgo-entity</module>
-        <module>letsgo-game-date-ejb</module>
-        <module>letsgo-game-move-ejb</module>
-        <module>letsgo-league-ejb</module>
-        <module>letsgo-move-comment-ejb</module>
-        <module>letsgo-room-ejb</module>
-        <module>letsgo-team-ejb</module>
-        <module>letsgo-user-role-ejb</module>
-        <module>letsgo-user-ejb</module>
         <module>letsgo-user-ban-ejb</module>
         <module>letsgo-user-degree-ejb</module>
         <module>letsgo-user-game-ejb</module>
@@ -31,5 +23,13 @@
         <module>letsgo-city</module>
         <module>letsgo-event</module>
         <module>letsgo-game-comment</module>
+        <module>letsgo-game-date</module>
+        <module>letsgo-game-move</module>
+        <module>letsgo-league</module>
+        <module>letsgo-move-comment</module>
+        <module>letsgo-room</module>
+        <module>letsgo-team</module>
+        <module>letsgo-user-role</module>
+        <module>letsgo-user</module>
     </modules>
 </project>

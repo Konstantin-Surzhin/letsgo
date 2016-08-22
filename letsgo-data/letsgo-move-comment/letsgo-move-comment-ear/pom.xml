@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <artifactId>letsgo-city</artifactId>
-        <groupId>org.igo</groupId>
-        <version>1.0</version>
-    </parent>
+
     <groupId>org.igo</groupId>
-    <artifactId>letsgo-city-ear</artifactId>
+    <artifactId>letsgo-move-comment-ear</artifactId>
     <version>1.0</version>
     <packaging>ear</packaging>
 
-    <name>letsgo-city-ear</name>
+    <name>letsgo-move-comment-ear</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+  
     <build>
         <plugins>
             <plugin>
@@ -37,7 +34,7 @@
                     <modules>
                         <ejbModule>
                             <groupId>${project.groupId}</groupId>
-                            <artifactId>letsgo-city-ejb</artifactId>
+                            <artifactId>letsgo-move-comment-ejb</artifactId>
                         </ejbModule>
                     </modules>
                 </configuration>
@@ -47,7 +44,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>letsgo-city-ejb</artifactId>
+            <artifactId>letsgo-move-comment-ejb</artifactId>
             <version>${project.version}</version>
             <type>ejb</type>
         </dependency>
