@@ -107,3 +107,9 @@ hs_err_pid*
 /letsgo-data/letsgo-team/letsgo-team-ear/target/
 /letsgo-data/letsgo-room/letsgo-room-ear/target/
 /letsgo-data/letsgo-user-role/letsgo-user-role-ear/target/
+/letsgo-data/letsgo-user-ban/letsgo-user-ban-ejb/target/
+/letsgo-data/letsgo-user-ban/letsgo-user-ban-ear/target/
+/letsgo-data/letsgo-user-degree/letsgo-user-degree-ejb/target/
+/letsgo-data/letsgo-user-degree/letsgo-user-degree-ear/target/
+/letsgo-data/letsgo-user-game/letsgo-user-game-ejb/target/
+/letsgo-data/letsgo-user-game/letsgo-user-game-ear/target/
