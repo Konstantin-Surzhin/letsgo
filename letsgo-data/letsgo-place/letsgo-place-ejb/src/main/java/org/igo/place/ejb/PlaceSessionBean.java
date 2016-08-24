@@ -14,7 +14,7 @@ import org.igo.letsgo.remote.IPlaceRemote;
  * @author surzhin.konstantin
  */
 @Stateless
-public class PlacesFacade  implements IPlaceRemote{
+public class PlaceSessionBean  implements IPlaceRemote{
 
     @Override
     public String getPlaceTitle(int id) {
