@@ -42,7 +42,7 @@ public class Events implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(nullable = false)
-    private Long id;
+    private Short id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
@@ -54,20 +54,20 @@ public class Events implements Serializable {
     public Events() {
     }
 
-    public Events(Long id) {
+    public Events(Short id) {
         this.id = id;
     }
 
-    public Events(Long id, String eventName) {
+    public Events(Short id, String eventName) {
         this.id = id;
         this.eventName = eventName;
     }
 
-    public Long getId() {
+    public Short getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Short id) {
         this.id = id;
     }
 
@@ -102,10 +102,7 @@ public class Events implements Serializable {
             return false;
         }
         Events other = (Events) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     @Override

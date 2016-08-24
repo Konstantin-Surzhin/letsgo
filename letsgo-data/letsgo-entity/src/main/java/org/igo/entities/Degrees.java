@@ -43,7 +43,7 @@ public class Degrees implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(nullable = false)
-    private Integer id;
+    private Short id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
@@ -55,20 +55,20 @@ public class Degrees implements Serializable {
     public Degrees() {
     }
 
-    public Degrees(Integer id) {
+    public Degrees(Short id) {
         this.id = id;
     }
 
-    public Degrees(Integer id, String degreeValue) {
+    public Degrees(Short id, String degreeValue) {
         this.id = id;
         this.degreeValue = degreeValue;
     }
 
-    public Integer getId() {
+    public Short getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Short id) {
         this.id = id;
     }
 
@@ -103,10 +103,7 @@ public class Degrees implements Serializable {
             return false;
         }
         Degrees other = (Degrees) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     @Override

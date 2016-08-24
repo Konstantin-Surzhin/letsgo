@@ -6,6 +6,7 @@
 package org.igo.entities;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -17,6 +18,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -30,45 +32,45 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "cities")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Cities.findAll", query = "SELECT c FROM Cities c"),
-    @NamedQuery(name = "Cities.findById", query = "SELECT c FROM Cities c WHERE c.id = :id"),
-    @NamedQuery(name = "Cities.findByCityName", query = "SELECT c FROM Cities c WHERE c.cityName = :cityName")})
-public class Cities implements Serializable {
+    @NamedQuery(name = "City.findAll", query = "SELECT c FROM City c"),
+    @NamedQuery(name = "City.findById", query = "SELECT c FROM City c WHERE c.id = :id"),
+    @NamedQuery(name = "City.findByCityName", query = "SELECT c FROM City c WHERE c.cityName = :cityName")})
+public class City implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
-    private Long id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "city_name")
+    private Integer id;
     private String cityName;
-    @OneToMany(mappedBy = "cityId")
     private Collection<Users> usersCollection;
+    private Timestamp version;
 
-    public Cities() {
+    public City() {
     }
 
-    public Cities(Long id) {
+    public City(Integer id) {
         this.id = id;
     }
 
-    public Cities(Long id, String cityName) {
+    public City(Integer id, String cityName) {
         this.id = id;
         this.cityName = cityName;
     }
 
-    public Long getId() {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    @Id
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "city_name", unique = true, columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci")
+    @Size(min = 1, max = 255)
     public String getCityName() {
         return cityName;
     }
@@ -77,6 +79,7 @@ public class Cities implements Serializable {
         this.cityName = cityName;
     }
 
+    @OneToMany(mappedBy = "cityId")
     @XmlTransient
     public Collection<Users> getUsersCollection() {
         return usersCollection;
@@ -96,10 +99,10 @@ public class Cities implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Cities)) {
+        if (!(object instanceof City)) {
             return false;
         }
-        Cities other = (Cities) object;
+        City other = (City) object;
         return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
@@ -107,5 +110,21 @@ public class Cities implements Serializable {
     public String toString() {
         return "org.igo.ban.ejb.Cities[ id=" + id + " ]";
     }
-    
+
+    /**
+     * @return the version
+     */
+    @Version
+    @Column(name = "version")
+    public Timestamp getVersion() {
+        return version;
+    }
+
+    /**
+     * @param version the version to set
+     */
+    public void setVersion(Timestamp version) {
+        this.version = version;
+    }
+
 }

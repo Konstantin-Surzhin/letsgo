@@ -40,7 +40,7 @@ public class Leagues implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Long id;
+    private Short id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
@@ -54,20 +54,20 @@ public class Leagues implements Serializable {
     public Leagues() {
     }
 
-    public Leagues(Long id) {
+    public Leagues(Short id) {
         this.id = id;
     }
 
-    public Leagues(Long id, String leagueName) {
+    public Leagues(Short id, String leagueName) {
         this.id = id;
         this.leagueName = leagueName;
     }
 
-    public Long getId() {
+    public Short getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Short id) {
         this.id = id;
     }
 

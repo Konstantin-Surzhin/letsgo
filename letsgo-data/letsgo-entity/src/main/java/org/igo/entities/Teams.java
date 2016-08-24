@@ -42,7 +42,7 @@ public class Teams implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Long id;
+    private Short id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
@@ -57,20 +57,20 @@ public class Teams implements Serializable {
     public Teams() {
     }
 
-    public Teams(Long id) {
+    public Teams(Short id) {
         this.id = id;
     }
 
-    public Teams(Long id, String teamName) {
+    public Teams(Short id, String teamName) {
         this.id = id;
         this.teamName = teamName;
     }
 
-    public Long getId() {
+    public Short getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Short id) {
         this.id = id;
     }
 

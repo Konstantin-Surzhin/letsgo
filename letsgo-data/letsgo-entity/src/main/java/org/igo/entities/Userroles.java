@@ -41,7 +41,7 @@ public class Userroles implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Long id;
+    private Short id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
@@ -58,21 +58,21 @@ public class Userroles implements Serializable {
     public Userroles() {
     }
 
-    public Userroles(Long id) {
+    public Userroles(Short id) {
         this.id = id;
     }
 
-    public Userroles(Long id, String username, String userrole) {
+    public Userroles(Short id, String username, String userrole) {
         this.id = id;
         this.username = username;
         this.userrole = userrole;
     }
 
-    public Long getId() {
+    public Short getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Short id) {
         this.id = id;
     }
 

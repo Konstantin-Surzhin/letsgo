@@ -39,7 +39,7 @@ public class Places implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(nullable = false)
-    private Long id;
+    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
@@ -49,20 +49,20 @@ public class Places implements Serializable {
     public Places() {
     }
 
-    public Places(Long id) {
+    public Places(Integer id) {
         this.id = id;
     }
 
-    public Places(Long id, String placeName) {
+    public Places(Integer id, String placeName) {
         this.id = id;
         this.placeName = placeName;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

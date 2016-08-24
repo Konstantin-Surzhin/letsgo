@@ -116,7 +116,7 @@ public class Users implements Serializable {
     private Rooms roomId;
     @JoinColumn(name = "city_id", referencedColumnName = "id")
     @ManyToOne
-    private Cities cityId;
+    private City cityId;
 
     public Users() {
     }
@@ -269,11 +269,11 @@ public class Users implements Serializable {
         this.roomId = roomId;
     }
 
-    public Cities getCityId() {
+    public City getCityId() {
         return cityId;
     }
 
-    public void setCityId(Cities cityId) {
+    public void setCityId(City cityId) {
         this.cityId = cityId;
     }
 
@@ -291,10 +291,7 @@ public class Users implements Serializable {
             return false;
         }
         Users other = (Users) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     @Override

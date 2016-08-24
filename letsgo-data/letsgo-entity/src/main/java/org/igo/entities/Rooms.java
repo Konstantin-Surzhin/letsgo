@@ -40,7 +40,7 @@ public class Rooms implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Long id;
+    private Short id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
@@ -52,20 +52,20 @@ public class Rooms implements Serializable {
     public Rooms() {
     }
 
-    public Rooms(Long id) {
+    public Rooms(Short id) {
         this.id = id;
     }
 
-    public Rooms(Long id, String roomName) {
+    public Rooms(Short id, String roomName) {
         this.id = id;
         this.roomName = roomName;
     }
 
-    public Long getId() {
+    public Short getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Short id) {
         this.id = id;
     }
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-  <persistence-unit name="gamePU" transaction-type="JTA">
-    <jta-data-source>java:/jboss/datasources/MySQLDS</jta-data-source>
+  <persistence-unit name="testGamePU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     <class>org.igo.entities.City</class>
     <class>org.igo.entities.Degrees</class>
     <class>org.igo.entities.Events</class>
@@ -20,6 +20,17 @@
     <class>org.igo.entities.UsersBans</class>
     <class>org.igo.entities.UsersDegrees</class>
     <class>org.igo.entities.UsersGames</class>
-    <properties/>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/letsgo?UseUnicode=true&amp;characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="su1Jutaith"/>
+      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+      <property name="hibernate.connection.useUnicode" value="true"/>
+      <property name="hibernate.connection.characterEncoding" value="UTF-8"/>
+      <property name="hibernate.connection.charSet" value="UTF-8"/>
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+    </properties>
   </persistence-unit>
 </persistence>
