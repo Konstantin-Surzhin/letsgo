@@ -45,8 +45,8 @@ public class DegreesTest {
     public void testGetId() {
         System.out.println("getId");
         Degrees instance = new Degrees();
-        Integer expResult = null;
-        Short result = instance.getId();
+        Byte expResult = null;
+        Byte result = instance.getId();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -58,7 +58,7 @@ public class DegreesTest {
     @Test
     public void testSetId() {
         System.out.println("setId");
-        Short id = null;
+        Byte id = null;
         Degrees instance = new Degrees();
         instance.setId(id);
         // TODO review the generated test code and remove the default call to fail.
