@@ -132,3 +132,6 @@ hs_err_pid*
 /letsgo-data/letsgo-user-game/letsgo-user-game-ejb/nbproject/
 /letsgo-data/letsgo-city/nbproject/
 /letsgo-data/letsgo-city/target/
+/letsgo-data/letsgo-game-comment/letsgo-game-comment-ear/target/
+/letsgo-data/letsgo-game/letsgo-game-ear/target/
+/spring/letsgo-spring/target/
