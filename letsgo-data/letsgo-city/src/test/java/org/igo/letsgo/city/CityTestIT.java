@@ -31,24 +31,12 @@ import org.junit.runner.RunWith;
 @RunWith(Arquillian.class)
 public class CityTestIT {
 
-    private static String letsgoHome;
-    private static String jbossHome;
-
     public CityTestIT() {
     }
 
     @BeforeClass
     public static void setUpClass() throws Exception {
-//        letsgoHome = System.getenv("LETSGO_HOME");
-//        jbossHome = System.getenv("JBOSS_HOME");
-////        if (letsgoHome == null || letsgoHome.isEmpty()) {
-////            System.err.println("LETSGO_HOME is empty");
-////            throw new Exception("LETSGO_HOME is empty");
-////        }
-////        if (jbossHome == null || jbossHome.isEmpty()) {
-////            System.err.println("JBOSS_HOME is empty");
-////            throw new Exception("JBOSS_HOME is empty");
-////        }
+
     }
 
     @AfterClass
@@ -66,10 +54,13 @@ public class CityTestIT {
     @Deployment
     @OverProtocol("Servlet 3.0")
     public static EnterpriseArchive createTestArchive() {
+     
+        String letsgoHome = System.getenv("LETSGO_HOME");
         JavaArchive testLibraryHelper = ShrinkWrap.create(JavaArchive.class, "test-library.jar")
                 .addClass(CityTestIT.class)
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
-        EnterpriseArchive ear = ShrinkWrap.createFromZipFile(EnterpriseArchive.class, new File("d:/letsgo/letsgo-data/letsgo-city/letsgo-city-ear/target/letsgo-city-ear-1.0.ear"))
+        String file = letsgoHome + "/letsgo-data/letsgo-city/letsgo-city-ear/target/letsgo-city-ear-1.0.ear";
+        EnterpriseArchive ear = ShrinkWrap.createFromZipFile(EnterpriseArchive.class, new File(file))
                 .addAsLibrary(testLibraryHelper);
 
         System.out.println(ear.toString(true));
@@ -81,7 +72,7 @@ public class CityTestIT {
 
     @Test
     public void testCityNotNull() {
-        System.out.println("City is not null");
+        System.out.println("City is not null: ");
         assertNotNull("Ups! City is null", city);
     }
 
