@@ -5,8 +5,7 @@
  */
 package org.igo.entities;
 
-import java.sql.Timestamp;
-import java.util.Collection;
+import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -58,7 +57,7 @@ public class CitiesTest {
         City city = new City();
 
         Integer result = city.getId();
-        city.setCityName("Москва");
+
         assertNull(result);
 
         em.getTransaction().begin();
@@ -70,16 +69,13 @@ public class CitiesTest {
     }
 
     /**
-     * Test of getCityName method, of class City.
+     * Test of getCityNameResourseBandle method, of class City.
      */
     @Test
     public void testGetCityName() {
         System.out.println("getCityName");
-        String expResult = "Ленинград";
 
         City city = new City();
-
-        city.setCityName(expResult);
 
         em.getTransaction().begin();
         em.persist(city);
@@ -91,9 +87,6 @@ public class CitiesTest {
         City c = em.find(City.class, id);
         em.getTransaction().commit();
 
-        String result = c.getCityName();
-
-        assertEquals(expResult, result);
     }
 
     /**
@@ -104,7 +97,7 @@ public class CitiesTest {
         System.out.println("setCityName");
         String cityName = "";
         City city = new City();
-        city.setCityName(cityName);
+        // city.setCityName(cityName);
     }
 
     /**
@@ -112,10 +105,10 @@ public class CitiesTest {
      */
     @Test
     public void testGetUsersCollection() {
-        System.out.println("getUsersCollection");
+        System.out.println("getUsers");
         City instance = new City();
-        Collection<Users> expResult = null;
-        Collection<Users> result = instance.getUsersCollection();
+        Set<Users> expResult = null;
+        Set<Users> result = instance.getUsersCollection();
         assertEquals(expResult, result);
 
     }
@@ -125,10 +118,10 @@ public class CitiesTest {
      */
     @Test
     public void testSetUsersCollection() {
-        System.out.println("setUsersCollection");
-        Collection<Users> usersCollection = null;
+        System.out.println("setUsers");
+        Set<Users> users = null;
         City instance = new City();
-        instance.setUsersCollection(usersCollection);
+        instance.setUsersCollection(users);
 
     }
 
@@ -174,32 +167,4 @@ public class CitiesTest {
         // TODO review the generated test code and remove the default call to fail.
 
     }
-
-    /**
-     * Test of getVersion method, of class City.
-     */
-    @Test
-    public void testGetVersion() {
-        System.out.println("getVersion");
-        City instance = new City();
-        Timestamp expResult = null;
-        Timestamp result = instance.getVersion();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-
-    }
-
-    /**
-     * Test of setVersion method, of class City.
-     */
-    @Test
-    public void testSetVersion() {
-        System.out.println("setVersion");
-        Timestamp version = null;
-        City instance = new City();
-        instance.setVersion(version);
-        // TODO review the generated test code and remove the default call to fail.
-
-    }
-
 }

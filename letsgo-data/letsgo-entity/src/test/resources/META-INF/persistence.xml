@@ -20,6 +20,7 @@
     <class>org.igo.entities.UsersBans</class>
     <class>org.igo.entities.UsersDegrees</class>
     <class>org.igo.entities.UsersGames</class>
+    <class>org.igo.entities.ResourseBandle</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/letsgo?UseUnicode=true&amp;characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

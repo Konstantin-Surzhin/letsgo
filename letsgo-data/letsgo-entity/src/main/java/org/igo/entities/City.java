@@ -8,21 +8,23 @@ package org.igo.entities;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.Map;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.MapKeyColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -30,18 +32,16 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "cities")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "City.findAll", query = "SELECT c FROM City c"),
-    @NamedQuery(name = "City.findById", query = "SELECT c FROM City c WHERE c.id = :id"),
-    @NamedQuery(name = "City.findByCityName", query = "SELECT c FROM City c WHERE c.cityName = :cityName")})
+    @NamedQuery(name = "City.findById", query = "SELECT c FROM City c WHERE c.id = :id"), //@NamedQuery(name = "City.findByCityName", query = "SELECT c FROM City c WHERE c.cityName = :cityName")
+})
 public class City implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Integer id;
-    private String cityName;
-    private Collection<Users> usersCollection;
-    private Timestamp version;
+    private Map<String, String> cityName;
+    private Set<Users> usersCollection;
 
     public City() {
     }
@@ -50,7 +50,7 @@ public class City implements Serializable {
         this.id = id;
     }
 
-    public City(Integer id, String cityName) {
+    public City(Integer id, Map<String, String> cityName) {
         this.id = id;
         this.cityName = cityName;
     }
@@ -67,25 +67,12 @@ public class City implements Serializable {
         this.id = id;
     }
 
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "city_name", unique = true, columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci")
-    @Size(min = 1, max = 255)
-    public String getCityName() {
-        return cityName;
-    }
-
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
-    }
-
     @OneToMany(mappedBy = "cityId")
-    @XmlTransient
-    public Collection<Users> getUsersCollection() {
+    public Set<Users> getUsersCollection() {
         return usersCollection;
     }
 
-    public void setUsersCollection(Collection<Users> usersCollection) {
+    public void setUsersCollection(Set<Users> usersCollection) {
         this.usersCollection = usersCollection;
     }
 
@@ -112,19 +99,20 @@ public class City implements Serializable {
     }
 
     /**
-     * @return the version
+     * @return the cityName
      */
-    @Version
-    @Column(name = "version")
-    public Timestamp getVersion() {
-        return version;
+    @ElementCollection
+    @JoinTable(name = "city_name", joinColumns = @JoinColumn(name = "id"))
+    @MapKeyColumn(name = "locale")
+    @Column(name = "city_name")
+    public Map<String, String> getCityName() {
+        return cityName;
     }
 
     /**
-     * @param version the version to set
+     * @param cityName the cityName to set
      */
-    public void setVersion(Timestamp version) {
-        this.version = version;
+    public void setCityName(Map<String, String> cityName) {
+        this.cityName = cityName;
     }
-
 }

@@ -36,17 +36,8 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Rooms implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
     private Short id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "room_name")
     private String roomName;
-    @OneToMany(mappedBy = "roomId")
     private Collection<Users> usersCollection;
 
     public Rooms() {
@@ -61,6 +52,10 @@ public class Rooms implements Serializable {
         this.roomName = roomName;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
     public Short getId() {
         return id;
     }
@@ -69,6 +64,10 @@ public class Rooms implements Serializable {
         this.id = id;
     }
 
+    @Basic(optional = false)
+    @Column(name = "room_name")
+    @NotNull
+    @Size(min = 1, max = 255)
     public String getRoomName() {
         return roomName;
     }
@@ -77,6 +76,7 @@ public class Rooms implements Serializable {
         this.roomName = roomName;
     }
 
+    @OneToMany(mappedBy = "roomId")
     @XmlTransient
     public Collection<Users> getUsersCollection() {
         return usersCollection;
@@ -110,5 +110,5 @@ public class Rooms implements Serializable {
     public String toString() {
         return "org.igo.ban.ejb.Rooms[ id=" + id + " ]";
     }
-    
+
 }
