@@ -33,7 +33,7 @@
                 <version>2.10.1</version>
                 <configuration>
                     <version>7</version>
-                    <defaultLibBundleDir>META-INF/lib</defaultLibBundleDir>
+                    <defaultLibBundleDir>lib</defaultLibBundleDir>
                     <modules>
                         <ejbModule>
                             <groupId>${project.groupId}</groupId>
@@ -54,6 +54,35 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>letsgo-entity</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <scope>test</scope>
+            <version>2.53.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.opera</groupId>
+            <artifactId>operadriver</artifactId>
+            <scope>test</scope>
+            <version>1.5</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-remote-driver</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+            <version>4.12</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>letsgo-remote</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

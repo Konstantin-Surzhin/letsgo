@@ -60,7 +60,7 @@
                         <configuration>
                             <environmentVariables>
                                 <!--<JBOSS_HOME>/home/pl/wildfly-10.0.0.Final</JBOSS_HOME>-->
-                                <!--<JBOSS_HOME>D:/wildfly-10.0.0.Final</JBOSS_HOME>-->
+                                <JBOSS_HOME>D:/wildfly-10.0.0.Final</JBOSS_HOME>
                                 <LETSGO_HOME>D:/letsgo</LETSGO_HOME>
                             </environmentVariables>
                         </configuration>
@@ -144,9 +144,15 @@
             <!--<version>1.1.11.Final</version>-->
             <scope>test</scope>
         </dependency>
-        <dependency>
+        <!-- <dependency>
             <groupId>org.wildfly.arquillian</groupId>
             <artifactId>wildfly-arquillian-container-managed</artifactId>
+            <version>2.0.0.Final</version>
+            <scope>test</scope>
+        </dependency>-->
+        <dependency>
+            <groupId>org.wildfly.arquillian</groupId>
+            <artifactId>wildfly-arquillian-container-remote</artifactId>
             <version>2.0.0.Final</version>
             <scope>test</scope>
         </dependency>
@@ -187,6 +193,31 @@
             <version>7.0.1</version>
             <scope>test</scope>
             <classifier>jaxrs</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.core</groupId>
+            <artifactId>arquillian-core-api</artifactId>
+            <version>1.1.11.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.protocol</groupId>
+            <artifactId>arquillian-protocol-servlet</artifactId>
+            <version>1.1.11.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.testenricher</groupId>
+            <artifactId>arquillian-testenricher-cdi</artifactId>
+            <version>1.1.11.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.testenricher</groupId>
+            <artifactId>arquillian-testenricher-resource</artifactId>
+            <version>1.1.11.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.testenricher</groupId>
+            <artifactId>arquillian-testenricher-initialcontext</artifactId>
+            <version>1.1.11.Final</version>
         </dependency>
     </dependencies>
     <properties>

@@ -130,3 +130,5 @@ hs_err_pid*
 /letsgo-data/letsgo-user-ban/letsgo-user-ban-ejb/nbproject/
 /letsgo-data/letsgo-user-degree/letsgo-user-degree-ejb/nbproject/
 /letsgo-data/letsgo-user-game/letsgo-user-game-ejb/nbproject/
+/letsgo-data/letsgo-city/nbproject/
+/letsgo-data/letsgo-city/target/
