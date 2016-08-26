@@ -132,3 +132,7 @@ hs_err_pid*
 /letsgo-data/letsgo-user-game/letsgo-user-game-ejb/nbproject/
 /letsgo-data/letsgo-city/nbproject/
 /letsgo-data/letsgo-city/target/
+/letsgo-wso2/letsgo-city-ejb-client/target/
+/letsgo-spring/letsgo-spring/target/
+/letsgo-wso2/letsgo-wso2-msf4j-city/target/
+/letsgo-wso2/Hello-Service/target/

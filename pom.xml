@@ -74,8 +74,9 @@
         <module>letsgo-rest</module>
         <module>letsgo-soap</module>
         <module>letsgo-mdb</module>
-        <module>letsgo-spring</module>
         <module>letsgo-wso2</module>
+        <module>letsgo-spring</module>
+        <module>../temp/Hello-Service</module>
     </modules>
     <dependencyManagement>
         <dependencies>
@@ -137,13 +138,12 @@
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>1.4.6</version>
+            <version>1.4.8</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jboss.arquillian.junit</groupId>
             <artifactId>arquillian-junit-container</artifactId>
-            <!--<version>1.1.11.Final</version>-->
             <scope>test</scope>
         </dependency>
         <!----> <dependency>
@@ -180,7 +180,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>5.2.1.Final</version>
+            <version>5.2.2.Final</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -199,27 +199,27 @@
         <dependency>
             <groupId>org.jboss.arquillian.core</groupId>
             <artifactId>arquillian-core-api</artifactId>
-            <version>1.1.11.Final</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jboss.arquillian.protocol</groupId>
             <artifactId>arquillian-protocol-servlet</artifactId>
-            <version>1.1.11.Final</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jboss.arquillian.testenricher</groupId>
             <artifactId>arquillian-testenricher-cdi</artifactId>
-            <version>1.1.11.Final</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jboss.arquillian.testenricher</groupId>
             <artifactId>arquillian-testenricher-resource</artifactId>
-            <version>1.1.11.Final</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jboss.arquillian.testenricher</groupId>
             <artifactId>arquillian-testenricher-initialcontext</artifactId>
-            <version>1.1.11.Final</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <properties>
