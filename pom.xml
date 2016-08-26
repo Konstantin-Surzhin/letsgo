@@ -75,6 +75,7 @@
         <module>letsgo-soap</module>
         <module>letsgo-mdb</module>
         <module>letsgo-spring</module>
+        <module>letsgo-wso2</module>
     </modules>
     <dependencyManagement>
         <dependencies>
