@@ -6,9 +6,10 @@
         <artifactId>letsgo</artifactId>
         <version>1.0</version>
     </parent>
-    <artifactId>spring</artifactId>
+    <artifactId>letsgo-spring</artifactId>
     <packaging>pom</packaging>
     <modules>
         <module>letsgo-spring</module>
     </modules>
+    <name>letsgo-spring</name>
 </project>
