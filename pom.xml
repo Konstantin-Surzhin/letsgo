@@ -76,7 +76,6 @@
         <module>letsgo-mdb</module>
         <module>letsgo-spring</module>
         <module>letsgo-ejb-remote-client</module>
-        <module>microsevices/vert.x/letsgo-vertx-city-microservice</module>
     </modules>
     <dependencyManagement>
         <dependencies>
