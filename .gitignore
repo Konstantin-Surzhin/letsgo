@@ -136,3 +136,6 @@ hs_err_pid*
 /letsgo-spring/letsgo-spring/target/
 /letsgo-wso2/letsgo-wso2-msf4j-city/target/
 /letsgo-wso2/Hello-Service/target/
+/microsevices/wso2-msf4j/Hello-Service/target/
+/letsgo-ejb-remote-client/letsgo-city-ejb-client/target/
+/microsevices/wso2-msf4j/wso2-msf4j-city-microservice/target/

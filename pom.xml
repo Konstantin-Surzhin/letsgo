@@ -74,8 +74,8 @@
         <module>letsgo-rest</module>
         <module>letsgo-soap</module>
         <module>letsgo-mdb</module>
-        <module>letsgo-wso2</module>
         <module>letsgo-spring</module>
+        <module>letsgo-ejb-remote-client</module>
     </modules>
     <dependencyManagement>
         <dependencies>

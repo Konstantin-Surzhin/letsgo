@@ -8,8 +8,8 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.example</groupId>
-  <artifactId>Hello-Service</artifactId>
-  <name>WSO2 MSF4J Microservice</name>
+  <artifactId>wso2-msf4j-city-microservice</artifactId>
+  <name>wso2-msf4j-city-microservice</name>
   <version>0.1</version>
   <properties>
     <microservice.mainClass>org.example.service.Application</microservice.mainClass>

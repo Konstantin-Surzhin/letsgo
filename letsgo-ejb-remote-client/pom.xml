@@ -7,12 +7,11 @@
         <version>1.0</version>
     </parent>
     <groupId>org.igo</groupId>
-    <artifactId>letsgo-wso2</artifactId>
+    <artifactId>letsgo-ejb-remote-client</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
-    <name>letsgo-wso2</name>
+    <name>letsgo-ejb-remote-client</name>
   <modules>
     <module>letsgo-city-ejb-client</module>
-    <module>Hello-Service</module>
   </modules>
 </project>

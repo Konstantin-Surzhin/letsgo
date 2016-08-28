@@ -19,7 +19,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-  <!---->
+  
     <parent>
         <groupId>org.wso2.msf4j</groupId>
         <artifactId>msf4j-service</artifactId>
@@ -28,9 +28,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>Hello-Service</artifactId>
+    <artifactId>wso2-msf4j-city-microservice</artifactId>
     <version>0.1</version>
-    <name>WSO2 MSF4J Microservice</name>
+    <name>wso2-msf4j-city-microservice</name>
 
 
     <dependencies>
