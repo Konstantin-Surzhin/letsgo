@@ -140,3 +140,4 @@ hs_err_pid*
 /letsgo-ejb-remote-client/letsgo-city-ejb-client/target/
 /microsevices/wso2-msf4j/wso2-msf4j-city-microservice/target/
 /microsevices/wildfly-swarm/wildfly-swarm-city-microservice/target/
+/microsevices/spring-boot/letsgo-spring-boot-city-rest-microservice/target/
