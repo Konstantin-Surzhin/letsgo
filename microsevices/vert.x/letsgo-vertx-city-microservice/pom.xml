@@ -9,4 +9,11 @@
     </parent>
     <artifactId>letsgo-vertx-city-microservice</artifactId>
     <packaging>jar</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-service-discovery</artifactId>
+            <version>3.3.2</version>
+        </dependency>
+    </dependencies>
 </project>
