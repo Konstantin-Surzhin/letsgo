@@ -2,17 +2,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-    <artifactId>letsgo-game-comment</artifactId>
-    <groupId>org.igo</groupId>
-    <version>1.0</version>
-  </parent>
+        <artifactId>letsgo-wso2</artifactId>
+        <groupId>org.igo</groupId>
+        <version>1.0</version>
+    </parent>
 
     <groupId>org.igo</groupId>
-    <artifactId>letsgo-game-comment-ejb</artifactId>
+    <artifactId>letsgo-city-ejb-client</artifactId>
     <version>1.0</version>
-    <packaging>ejb</packaging>
+    <packaging>app-client</packaging>
 
-    <name>letsgo-game-comment-ejb</name>
+    <name>letsgo-city-ejb-client</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
@@ -21,14 +21,16 @@
 
     <dependencies>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>letsgo-remote</artifactId>
-            <version>${project.version}</version>
+            <groupId>org.wildfly</groupId>
+            <artifactId>wildfly-ejb-client-bom</artifactId>
+            <version>10.1.0.Final</version>
+            <type>pom</type>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>letsgo-entity</artifactId>
-            <version>${project.version}</version>
+            <groupId>org.wildfly</groupId>
+            <artifactId>wildfly-jms-client-bom</artifactId>
+            <version>10.1.0.Final</version>
+            <type>pom</type>
         </dependency>
         <dependency>
             <groupId>javax</groupId>
@@ -54,10 +56,15 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-ejb-plugin</artifactId>
-                <version>2.3</version>
+                <artifactId>maven-acr-plugin</artifactId>
+                <version>1.0</version>
+                <extensions>true</extensions>
                 <configuration>
-                    <ejbVersion>3.1</ejbVersion>
+                    <archive>
+                        <manifest>                            
+                            <mainClass>org.igo.letsgo.city.ejb.client.Main</mainClass>
+                        </manifest>
+                    </archive>
                 </configuration>
             </plugin>
             <plugin>

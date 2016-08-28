@@ -132,6 +132,15 @@ hs_err_pid*
 /letsgo-data/letsgo-user-game/letsgo-user-game-ejb/nbproject/
 /letsgo-data/letsgo-city/nbproject/
 /letsgo-data/letsgo-city/target/
+/letsgo-wso2/letsgo-city-ejb-client/target/
+/letsgo-spring/letsgo-spring/target/
+/letsgo-wso2/letsgo-wso2-msf4j-city/target/
+/letsgo-wso2/Hello-Service/target/
+/microsevices/wso2-msf4j/Hello-Service/target/
+/letsgo-ejb-remote-client/letsgo-city-ejb-client/target/
+/microsevices/wso2-msf4j/wso2-msf4j-city-microservice/target/
+/microsevices/wildfly-swarm/wildfly-swarm-city-microservice/target/
+/microsevices/spring-boot/letsgo-spring-boot-city-rest-microservice/target/
 /letsgo-data/letsgo-game-comment/letsgo-game-comment-ear/target/
 /letsgo-data/letsgo-game/letsgo-game-ear/target/
 /spring/letsgo-spring/target/

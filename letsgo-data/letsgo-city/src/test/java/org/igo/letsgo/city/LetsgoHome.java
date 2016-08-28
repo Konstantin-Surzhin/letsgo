@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.assertNotNull;
+
 /**
  *
  * @author surzhin.konstantin
@@ -40,9 +41,10 @@ public class LetsgoHome {
     public void LetsgoHome() {
         System.out.println("LetsgoHome");
         String letsgoHome = System.getenv("LETSGO_HOME");
-        assertNotNull("You need to set LETSGO_HOME env to prodject home path." , letsgoHome);
+        assertNotNull("You need to set LETSGO_HOME env to prodject home path.", letsgoHome);
     }
-        @Test
+
+    @Test
     public void JBossHome() {
 //        System.out.println("JBossHome");
 //        String letsgoHome = System.getenv("JBOSS_HOME");
