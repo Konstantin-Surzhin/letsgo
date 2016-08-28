@@ -10,6 +10,12 @@
     <packaging>pom</packaging>
     <modules>
         <module>letsgo-spring-web</module>
+        <module>spring-sitemesh</module>
+        <module>spring-thymeleaf</module>
+        <module>spring-tiles</module>
+        <module>spring-velocity</module>
+        <module>spring-freemarker</module>
+        <module>spring-mixer2</module>
     </modules>
     <name>letsgo-spring</name>
 </project>
