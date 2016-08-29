@@ -8,11 +8,11 @@
     </parent>
 
     <groupId>org.igo</groupId>
-    <artifactId>letsgo-spring-city-angular-bootstrap</artifactId>
+    <artifactId>letsgo-spring-angular-bootstrap-city</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
 
-    <name>letsgo-spring-city-angular-bootstrap</name>
+    <name>letsgo-spring-angular-bootstrap-city</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>

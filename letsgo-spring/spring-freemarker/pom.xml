@@ -8,4 +8,7 @@
     </parent>
     <artifactId>spring-freemarker</artifactId>
     <packaging>pom</packaging>
+  <modules>
+    <module>letsgo-spring-freemarker-city</module>
+  </modules>
 </project>
