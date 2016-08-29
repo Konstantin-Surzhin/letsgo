@@ -1,28 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-
 <html lang="en">
-
     <head>
-
         <spring:url value="resources/css/bootstrap.css" var="bootstrap"/>
         <spring:url value="/resources/css/modern-business.css" var="startertemplate"/>
         <spring:url value="/resources/font-awesome/css/font-awesome.min.css" var="font_awesome"/>
         <spring:url value="/resources/js/jquery.js" var="jq"/>
         <spring:url value="/resources/js/bootstrap.min.js" var="bs"/>
-        
+        <spring:url value="/resources/js/angular.min.js" var="angular"/>
         <link href="${bootstrap}" rel="stylesheet" />
         <link href="${startertemplate}" rel="stylesheet" />
         <link href="${font_awesome}" rel="stylesheet" />
-
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
+        <meta name="description" content="cities admin page">
         <meta name="author" content="kostya.surzhin">
 
         <title>Modern Business - Start Bootstrap Template</title>
