@@ -16,6 +16,7 @@
         <module>spring-velocity</module>
         <module>spring-freemarker</module>
         <module>spring-mixer2</module>
+        <module>spring-angular-bootstrap</module>
     </modules>
     <name>letsgo-spring</name>
 </project>

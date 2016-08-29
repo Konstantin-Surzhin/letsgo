@@ -145,3 +145,4 @@ hs_err_pid*
 /letsgo-data/letsgo-game/letsgo-game-ear/target/
 /spring/letsgo-spring/target/
 /microsevices/vert.x/letsgo-vertx-city-microservice/target/
+/letsgo-spring/spring-angular-bootstrap/letsgo-spring-city-angular-bootstrap/target/
