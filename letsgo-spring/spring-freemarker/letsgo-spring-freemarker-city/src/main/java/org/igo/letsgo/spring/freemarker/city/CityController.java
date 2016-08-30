@@ -5,6 +5,8 @@
  */
 package org.igo.letsgo.spring.freemarker.city;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,10 +18,17 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class CityController {
 
+    private static final List<City> cityList = new ArrayList<>();
+
+    static {
+        cityList.add(new City(1,"Москва"));
+    }
+
     @RequestMapping(value = "/index")
-    public ModelAndView sayHello() {
+    public ModelAndView index() {
         ModelAndView mv = new ModelAndView();
         mv.addObject("message", "Hello World!");
+        mv.addObject("cityList", cityList);
         mv.setViewName("index");
         return mv;
     }
