@@ -40,7 +40,7 @@ public class Degree implements Serializable {
     private static final long serialVersionUID = 1L;
     private Byte id;
     private String degreeValue;
-    private Collection<UsersDegrees> usersDegreesCollection;
+    private Collection<UserDegree> usersDegreesCollection;
 
     public Degree() {
     }
@@ -79,11 +79,11 @@ public class Degree implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "degreeId")
     @XmlTransient
-    public Collection<UsersDegrees> getUsersDegreesCollection() {
+    public Collection<UserDegree> getUsersDegreesCollection() {
         return usersDegreesCollection;
     }
 
-    public void setUsersDegreesCollection(Collection<UsersDegrees> usersDegreesCollection) {
+    public void setUsersDegreesCollection(Collection<UserDegree> usersDegreesCollection) {
         this.usersDegreesCollection = usersDegreesCollection;
     }
 

@@ -4,36 +4,22 @@
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     <mapping-file>META-INF/orm.xml</mapping-file>
     <class>org.igo.entities.City</class>
-    <class>org.igo.entities.Degrees</class>
-    <class>org.igo.entities.Events</class>
-    <class>org.igo.entities.GameRule</class>
-    <class>org.igo.entities.Games</class>
-    <class>org.igo.entities.GamesComments</class>
-    <class>org.igo.entities.GamesDates</class>
-    <class>org.igo.entities.GamesMoves</class>
-    <class>org.igo.entities.Leagues</class>
-    <class>org.igo.entities.MovesComments</class>
-    <class>org.igo.entities.Places</class>
-    <class>org.igo.entities.Rooms</class>
-    <class>org.igo.entities.Teams</class>
-    <class>org.igo.entities.Userroles</class>
-    <class>org.igo.entities.Users</class>
-    <class>org.igo.entities.UsersBans</class>
-    <class>org.igo.entities.UsersDegrees</class>
-    <class>org.igo.entities.UsersGames</class>
-    <class>org.igo.entities.ResourseBandle</class>
     <class>org.igo.entities.Degree</class>
     <class>org.igo.entities.Event</class>
     <class>org.igo.entities.Game</class>
     <class>org.igo.entities.GameComment</class>
     <class>org.igo.entities.GameDate</class>
     <class>org.igo.entities.GameMove</class>
+    <class>org.igo.entities.GameRule</class>
     <class>org.igo.entities.League</class>
     <class>org.igo.entities.MoveComment</class>
     <class>org.igo.entities.Place</class>
     <class>org.igo.entities.Room</class>
     <class>org.igo.entities.Team</class>
     <class>org.igo.entities.User</class>
+    <class>org.igo.entities.UserBan</class>
+    <class>org.igo.entities.UserDegree</class>
+    <class>org.igo.entities.UserGame</class>
     <class>org.igo.entities.UserRole</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/letsgo?UseUnicode=true&amp;characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull"/>

@@ -9,32 +9,26 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.validation.constraints.NotNull;
 
 /**
  *
  * @author surzhin.konstantin
  */
 @Embeddable
-public class UsersGamesPK implements Serializable {
+public class UserGamePK implements Serializable {
 
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "game_id", nullable = false)
     private long gameId;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "user_id", nullable = false)
     private int userId;
 
-    public UsersGamesPK() {
+    public UserGamePK() {
     }
 
-    public UsersGamesPK(long gameId, int userId) {
+    public UserGamePK(long gameId, int userId) {
         this.gameId = gameId;
         this.userId = userId;
     }
-
+    @Basic(optional = false)
+    @Column(name = "game_id", nullable = false)
     public long getGameId() {
         return gameId;
     }
@@ -43,6 +37,8 @@ public class UsersGamesPK implements Serializable {
         this.gameId = gameId;
     }
 
+    @Basic(optional = false)
+    @Column(name = "user_id", nullable = false)
     public int getUserId() {
         return userId;
     }
@@ -62,10 +58,10 @@ public class UsersGamesPK implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof UsersGamesPK)) {
+        if (!(object instanceof UserGamePK)) {
             return false;
         }
-        UsersGamesPK other = (UsersGamesPK) object;
+        UserGamePK other = (UserGamePK) object;
         if (this.gameId != other.gameId) {
             return false;
         }

@@ -39,12 +39,9 @@ public class UserRole implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Short id;
-
     private String username;
-    @NotNull
-    @Size(min = 1, max = 255)
     private String userrole;
-    private Collection<User> usersCollection;
+    private Collection<User> userCollection;
 
     public UserRole() {
     }
@@ -82,8 +79,9 @@ public class UserRole implements Serializable {
         this.username = username;
     }
 
+    @Size(min = 1, max = 255)
     @Basic(optional = false)
-    @Column(name = "userrole")
+    @Column(name = "userrole",nullable = false)
     public String getUserrole() {
         return userrole;
     }
@@ -94,12 +92,12 @@ public class UserRole implements Serializable {
 
     @OneToMany(mappedBy = "roleId")
     @XmlTransient
-    public Collection<User> getUsersCollection() {
-        return usersCollection;
+    public Collection<User> getUserCollection() {
+        return userCollection;
     }
 
-    public void setUsersCollection(Collection<User> usersCollection) {
-        this.usersCollection = usersCollection;
+    public void setUserCollection(Collection<User> userCollection) {
+        this.userCollection = userCollection;
     }
 
     @Override

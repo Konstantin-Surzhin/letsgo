@@ -127,7 +127,7 @@ public class UserRoleTest {
         System.out.println("getUsersCollection");
         UserRole instance = new UserRole();
         Collection<User> expResult = null;
-        Collection<User> result = instance.getUsersCollection();
+        Collection<User> result = instance.getUserCollection();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -141,7 +141,7 @@ public class UserRoleTest {
         System.out.println("setUsersCollection");
         Collection<User> usersCollection = null;
         UserRole instance = new UserRole();
-        instance.setUsersCollection(usersCollection);
+        instance.setUserCollection(usersCollection);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

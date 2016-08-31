@@ -15,7 +15,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -26,50 +25,45 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "users_games", catalog = "letsgo", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "UsersGames.findAll", query = "SELECT u FROM UsersGames u"),
-    @NamedQuery(name = "UsersGames.findByGameId", query = "SELECT u FROM UsersGames u WHERE u.usersGamesPK.gameId = :gameId"),
-    @NamedQuery(name = "UsersGames.findByUserId", query = "SELECT u FROM UsersGames u WHERE u.usersGamesPK.userId = :userId"),
-    @NamedQuery(name = "UsersGames.findByColor", query = "SELECT u FROM UsersGames u WHERE u.color = :color")})
-public class UsersGames implements Serializable {
+    @NamedQuery(name = "UserGame.findAll", query = "SELECT u FROM UserGame u"),
+    @NamedQuery(name = "UserGame.findByGameId", query = "SELECT u FROM UserGame u WHERE u.userGamePK.gameId = :gameId"),
+    @NamedQuery(name = "UserGame.findByUserId", query = "SELECT u FROM UserGame u WHERE u.userGamePK.userId = :userId"),
+    @NamedQuery(name = "UserGame.findByColor", query = "SELECT u FROM UserGame u WHERE u.color = :color")})
+public class UserGame implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected UsersGamesPK usersGamesPK;
-    @Basic(optional = false)
-    @NotNull
-    @Column(nullable = false)
+    protected UserGamePK usersGamesPK;
     private int color;
-    @JoinColumn(name = "game_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
-    @ManyToOne(optional = false)
     private Game games;
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
-    @ManyToOne(optional = false)
     private User users;
 
-    public UsersGames() {
+    public UserGame() {
     }
 
-    public UsersGames(UsersGamesPK usersGamesPK) {
+    public UserGame(UserGamePK usersGamesPK) {
         this.usersGamesPK = usersGamesPK;
     }
 
-    public UsersGames(UsersGamesPK usersGamesPK, int color) {
+    public UserGame(UserGamePK usersGamesPK, int color) {
         this.usersGamesPK = usersGamesPK;
         this.color = color;
     }
 
-    public UsersGames(long gameId, int userId) {
-        this.usersGamesPK = new UsersGamesPK(gameId, userId);
+    public UserGame(long gameId, int userId) {
+        this.usersGamesPK = new UserGamePK(gameId, userId);
     }
 
-    public UsersGamesPK getUsersGamesPK() {
+    @EmbeddedId
+    public UserGamePK getUsersGamesPK() {
         return usersGamesPK;
     }
 
-    public void setUsersGamesPK(UsersGamesPK usersGamesPK) {
+    public void setUsersGamesPK(UserGamePK usersGamesPK) {
         this.usersGamesPK = usersGamesPK;
     }
 
+    @Basic(optional = false)
+    @Column(nullable = false)
     public int getColor() {
         return color;
     }
@@ -78,6 +72,8 @@ public class UsersGames implements Serializable {
         this.color = color;
     }
 
+    @JoinColumn(name = "game_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
+    @ManyToOne(optional = false)
     public Game getGames() {
         return games;
     }
@@ -86,6 +82,8 @@ public class UsersGames implements Serializable {
         this.games = games;
     }
 
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
+    @ManyToOne(optional = false)
     public User getUsers() {
         return users;
     }
@@ -104,10 +102,10 @@ public class UsersGames implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof UsersGames)) {
+        if (!(object instanceof UserGame)) {
             return false;
         }
-        UsersGames other = (UsersGames) object;
+        UserGame other = (UserGame) object;
         if ((this.usersGamesPK == null && other.usersGamesPK != null) || (this.usersGamesPK != null && !this.usersGamesPK.equals(other.usersGamesPK))) {
             return false;
         }
@@ -118,5 +116,5 @@ public class UsersGames implements Serializable {
     public String toString() {
         return "org.igo.entities.UsersGames[ usersGamesPK=" + usersGamesPK + " ]";
     }
-    
+
 }

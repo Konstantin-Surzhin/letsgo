@@ -20,7 +20,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -32,51 +31,37 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "users_bans")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "UsersBans.findAll", query = "SELECT u FROM UsersBans u"),
-    @NamedQuery(name = "UsersBans.findById", query = "SELECT u FROM UsersBans u WHERE u.id = :id"),
-    @NamedQuery(name = "UsersBans.findByComment", query = "SELECT u FROM UsersBans u WHERE u.comment = :comment"),
-    @NamedQuery(name = "UsersBans.findByDuration", query = "SELECT u FROM UsersBans u WHERE u.duration = :duration"),
-    @NamedQuery(name = "UsersBans.findByStartDate", query = "SELECT u FROM UsersBans u WHERE u.startDate = :startDate")})
-public class UsersBans implements Serializable {
+    @NamedQuery(name = "UserBan.findAll", query = "SELECT u FROM UserBan u"),
+    @NamedQuery(name = "UserBan.findById", query = "SELECT u FROM UserBan u WHERE u.id = :id"),
+    @NamedQuery(name = "UserBan.findByComment", query = "SELECT u FROM UserBan u WHERE u.comment = :comment"),
+    @NamedQuery(name = "UserBan.findByDuration", query = "SELECT u FROM UserBan u WHERE u.duration = :duration"),
+    @NamedQuery(name = "UserBan.findByStartDate", query = "SELECT u FROM UserBan u WHERE u.startDate = :startDate")})
+public class UserBan implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
     private Long id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "comment")
     private String comment;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "duration")
     private short duration;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "start_date")
-    @Temporal(TemporalType.DATE)
     private Date startDate;
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
     private User userId;
 
-    public UsersBans() {
+    public UserBan() {
     }
 
-    public UsersBans(Long id) {
+    public UserBan(Long id) {
         this.id = id;
     }
 
-    public UsersBans(Long id, String comment, short duration, Date startDate) {
+    public UserBan(Long id, String comment, short duration, Date startDate) {
         this.id = id;
         this.comment = comment;
         this.duration = duration;
         this.startDate = startDate;
     }
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
     public Long getId() {
         return id;
     }
@@ -85,6 +70,9 @@ public class UsersBans implements Serializable {
         this.id = id;
     }
 
+    @Basic(optional = false)
+    @Column(name = "comment", nullable = false,unique = true)
+    @Size(min = 1, max = 255)
     public String getComment() {
         return comment;
     }
@@ -93,6 +81,8 @@ public class UsersBans implements Serializable {
         this.comment = comment;
     }
 
+    @Basic(optional = false)
+    @Column(name = "duration",nullable = false)
     public short getDuration() {
         return duration;
     }
@@ -101,6 +91,9 @@ public class UsersBans implements Serializable {
         this.duration = duration;
     }
 
+    @Basic(optional = false)
+    @Column(name = "start_date",nullable = false)
+    @Temporal(TemporalType.DATE)
     public Date getStartDate() {
         return startDate;
     }
@@ -109,6 +102,8 @@ public class UsersBans implements Serializable {
         this.startDate = startDate;
     }
 
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
     public User getUserId() {
         return userId;
     }
@@ -127,10 +122,10 @@ public class UsersBans implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof UsersBans)) {
+        if (!(object instanceof UserBan)) {
             return false;
         }
-        UsersBans other = (UsersBans) object;
+        UserBan other = (UserBan) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }

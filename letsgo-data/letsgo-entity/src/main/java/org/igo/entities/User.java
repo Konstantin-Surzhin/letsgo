@@ -51,10 +51,11 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByWin", query = "SELECT u FROM User u WHERE u.win = :win")})
 public class User implements Serializable {
 
-    private Collection<UsersGames> usersGamesCollection;
-    private Collection<UsersDegrees> usersDegreesCollection;
-    private Collection<MoveComment> movesCommentsCollection;
-    private Collection<GameComment> gamesCommentsCollection;
+    private Collection<UserGame> userGameCollection;
+    private Collection<UserDegree> userDegreeCollection;
+    private Collection<MoveComment> moveCommentCollection;
+    private Collection<GameComment> gameCommentCollection;
+    private Collection<UserBan> userBanCollection;
 
     private static final long serialVersionUID = 1L;
 
@@ -71,7 +72,7 @@ public class User implements Serializable {
     private String salt;
     private Integer staus;
     private Integer win;
-    private Collection<UsersBans> usersBansCollection;
+
     private League leagueId;
     private UserRole roleId;
     private Team teamId;
@@ -112,6 +113,7 @@ public class User implements Serializable {
     public void setDraw(Integer draw) {
         this.draw = draw;
     }
+
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Недопустимый адрес электронной почты")//if the field contains email address consider using this annotation to enforce field validation
     @NotNull
     @Size(min = 1, max = 255)
@@ -153,6 +155,7 @@ public class User implements Serializable {
     public void setLose(Integer lose) {
         this.lose = lose;
     }
+
     @NotNull
     @Size(min = 1, max = 64)
     @Basic(optional = false)
@@ -164,8 +167,9 @@ public class User implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    @Size(min=8 , max = 128)
-    @Column(name = "password",nullable = false)
+
+    @Size(min = 8, max = 128)
+    @Column(name = "password", nullable = false)
     public String getPassword() {
         return password;
     }
@@ -212,12 +216,12 @@ public class User implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     @XmlTransient
-    public Collection<UsersBans> getUsersBansCollection() {
-        return usersBansCollection;
+    public Collection<UserBan> getUserBanCollection() {
+        return userBanCollection;
     }
 
-    public void setUsersBansCollection(Collection<UsersBans> usersBansCollection) {
-        this.usersBansCollection = usersBansCollection;
+    public void setUserBanCollection(Collection<UserBan> userBanCollection) {
+        this.userBanCollection = userBanCollection;
     }
 
     @JoinColumn(name = "league_id", referencedColumnName = "id")
@@ -294,42 +298,42 @@ public class User implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "users")
     @XmlTransient
-    public Collection<UsersGames> getUsersGamesCollection() {
-        return usersGamesCollection;
+    public Collection<UserGame> getUserGameCollection() {
+        return userGameCollection;
     }
 
-    public void setUsersGamesCollection(Collection<UsersGames> usersGamesCollection) {
-        this.usersGamesCollection = usersGamesCollection;
+    public void setUserGameCollection(Collection<UserGame> userGameCollection) {
+        this.userGameCollection = userGameCollection;
     }
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "users")
     @XmlTransient
-    public Collection<UsersDegrees> getUsersDegreesCollection() {
-        return usersDegreesCollection;
+    public Collection<UserDegree> getUserDegreeCollection() {
+        return userDegreeCollection;
     }
 
-    public void setUsersDegreesCollection(Collection<UsersDegrees> usersDegreesCollection) {
-        this.usersDegreesCollection = usersDegreesCollection;
+    public void setUserDegreeCollection(Collection<UserDegree> userDegreeCollection) {
+        this.userDegreeCollection = userDegreeCollection;
     }
 
     @OneToMany(mappedBy = "userId")
     @XmlTransient
-    public Collection<MoveComment> getMovesCommentsCollection() {
-        return movesCommentsCollection;
+    public Collection<MoveComment> getMoveCommentCollection() {
+        return moveCommentCollection;
     }
 
-    public void setMovesCommentsCollection(Collection<MoveComment> movesCommentsCollection) {
-        this.movesCommentsCollection = movesCommentsCollection;
+    public void setMoveCommentCollection(Collection<MoveComment> moveCommentCollection) {
+        this.moveCommentCollection = moveCommentCollection;
     }
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     @XmlTransient
-    public Collection<GameComment> getGamesCommentsCollection() {
-        return gamesCommentsCollection;
+    public Collection<GameComment> getGameCommentCollection() {
+        return gameCommentCollection;
     }
 
-    public void setGamesCommentsCollection(Collection<GameComment> gamesCommentsCollection) {
-        this.gamesCommentsCollection = gamesCommentsCollection;
+    public void setGameCommentCollection(Collection<GameComment> gameCommentCollection) {
+        this.gameCommentCollection = gameCommentCollection;
     }
 
 }

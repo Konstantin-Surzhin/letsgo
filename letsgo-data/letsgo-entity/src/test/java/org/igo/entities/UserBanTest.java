@@ -17,9 +17,9 @@ import static org.junit.Assert.*;
  *
  * @author surzhin.konstantin
  */
-public class UsersBansTest {
+public class UserBanTest {
     
-    public UsersBansTest() {
+    public UserBanTest() {
     }
     
     @BeforeClass
@@ -39,12 +39,12 @@ public class UsersBansTest {
     }
 
     /**
-     * Test of getId method, of class UsersBans.
+     * Test of getId method, of class UserBan.
      */
     @Test
     public void testGetId() {
         System.out.println("getId");
-        UsersBans instance = new UsersBans();
+        UserBan instance = new UserBan();
         Long expResult = null;
         Long result = instance.getId();
         assertEquals(expResult, result);
@@ -53,25 +53,25 @@ public class UsersBansTest {
     }
 
     /**
-     * Test of setId method, of class UsersBans.
+     * Test of setId method, of class UserBan.
      */
     @Test
     public void testSetId() {
         System.out.println("setId");
         Long id = null;
-        UsersBans instance = new UsersBans();
+        UserBan instance = new UserBan();
         instance.setId(id);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getComment method, of class UsersBans.
+     * Test of getComment method, of class UserBan.
      */
     @Test
     public void testGetComment() {
         System.out.println("getComment");
-        UsersBans instance = new UsersBans();
+        UserBan instance = new UserBan();
         String expResult = "";
         String result = instance.getComment();
         assertEquals(expResult, result);
@@ -80,25 +80,25 @@ public class UsersBansTest {
     }
 
     /**
-     * Test of setComment method, of class UsersBans.
+     * Test of setComment method, of class UserBan.
      */
     @Test
     public void testSetComment() {
         System.out.println("setComment");
         String comment = "";
-        UsersBans instance = new UsersBans();
+        UserBan instance = new UserBan();
         instance.setComment(comment);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getDuration method, of class UsersBans.
+     * Test of getDuration method, of class UserBan.
      */
     @Test
     public void testGetDuration() {
         System.out.println("getDuration");
-        UsersBans instance = new UsersBans();
+        UserBan instance = new UserBan();
         short expResult = 0;
         short result = instance.getDuration();
         assertEquals(expResult, result);
@@ -107,25 +107,25 @@ public class UsersBansTest {
     }
 
     /**
-     * Test of setDuration method, of class UsersBans.
+     * Test of setDuration method, of class UserBan.
      */
     @Test
     public void testSetDuration() {
         System.out.println("setDuration");
         short duration = 0;
-        UsersBans instance = new UsersBans();
+        UserBan instance = new UserBan();
         instance.setDuration(duration);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getStartDate method, of class UsersBans.
+     * Test of getStartDate method, of class UserBan.
      */
     @Test
     public void testGetStartDate() {
         System.out.println("getStartDate");
-        UsersBans instance = new UsersBans();
+        UserBan instance = new UserBan();
         Date expResult = null;
         Date result = instance.getStartDate();
         assertEquals(expResult, result);
@@ -134,25 +134,25 @@ public class UsersBansTest {
     }
 
     /**
-     * Test of setStartDate method, of class UsersBans.
+     * Test of setStartDate method, of class UserBan.
      */
     @Test
     public void testSetStartDate() {
         System.out.println("setStartDate");
         Date startDate = null;
-        UsersBans instance = new UsersBans();
+        UserBan instance = new UserBan();
         instance.setStartDate(startDate);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getUserId method, of class UsersBans.
+     * Test of getUserId method, of class UserBan.
      */
     @Test
     public void testGetUserId() {
         System.out.println("getUserId");
-        UsersBans instance = new UsersBans();
+        UserBan instance = new UserBan();
         User expResult = null;
         User result = instance.getUserId();
         assertEquals(expResult, result);
@@ -161,25 +161,25 @@ public class UsersBansTest {
     }
 
     /**
-     * Test of setUserId method, of class UsersBans.
+     * Test of setUserId method, of class UserBan.
      */
     @Test
     public void testSetUserId() {
         System.out.println("setUserId");
         User userId = null;
-        UsersBans instance = new UsersBans();
+        UserBan instance = new UserBan();
         instance.setUserId(userId);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of hashCode method, of class UsersBans.
+     * Test of hashCode method, of class UserBan.
      */
     @Test
     public void testHashCode() {
         System.out.println("hashCode");
-        UsersBans instance = new UsersBans();
+        UserBan instance = new UserBan();
         int expResult = 0;
         int result = instance.hashCode();
         assertEquals(expResult, result);
@@ -188,13 +188,13 @@ public class UsersBansTest {
     }
 
     /**
-     * Test of equals method, of class UsersBans.
+     * Test of equals method, of class UserBan.
      */
     @Test
     public void testEquals() {
         System.out.println("equals");
         Object object = null;
-        UsersBans instance = new UsersBans();
+        UserBan instance = new UserBan();
         boolean expResult = false;
         boolean result = instance.equals(object);
         assertEquals(expResult, result);
@@ -203,12 +203,12 @@ public class UsersBansTest {
     }
 
     /**
-     * Test of toString method, of class UsersBans.
+     * Test of toString method, of class UserBan.
      */
     @Test
     public void testToString() {
         System.out.println("toString");
-        UsersBans instance = new UsersBans();
+        UserBan instance = new UserBan();
         String expResult = "";
         String result = instance.toString();
         assertEquals(expResult, result);

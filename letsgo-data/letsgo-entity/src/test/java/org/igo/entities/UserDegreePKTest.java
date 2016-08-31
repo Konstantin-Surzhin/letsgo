@@ -17,9 +17,9 @@ import static org.junit.Assert.*;
  *
  * @author surzhin.konstantin
  */
-public class UsersDegreesPKTest {
+public class UserDegreePKTest {
     
-    public UsersDegreesPKTest() {
+    public UserDegreePKTest() {
     }
     
     @BeforeClass
@@ -39,12 +39,12 @@ public class UsersDegreesPKTest {
     }
 
     /**
-     * Test of getAppointmentDate method, of class UsersDegreesPK.
+     * Test of getAppointmentDate method, of class UserDegreePK.
      */
     @Test
     public void testGetAppointmentDate() {
         System.out.println("getAppointmentDate");
-        UsersDegreesPK instance = new UsersDegreesPK();
+        UserDegreePK instance = new UserDegreePK();
         Date expResult = null;
         Date result = instance.getAppointmentDate();
         assertEquals(expResult, result);
@@ -53,25 +53,25 @@ public class UsersDegreesPKTest {
     }
 
     /**
-     * Test of setAppointmentDate method, of class UsersDegreesPK.
+     * Test of setAppointmentDate method, of class UserDegreePK.
      */
     @Test
     public void testSetAppointmentDate() {
         System.out.println("setAppointmentDate");
         Date appointmentDate = null;
-        UsersDegreesPK instance = new UsersDegreesPK();
+        UserDegreePK instance = new UserDegreePK();
         instance.setAppointmentDate(appointmentDate);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getUserId method, of class UsersDegreesPK.
+     * Test of getUserId method, of class UserDegreePK.
      */
     @Test
     public void testGetUserId() {
         System.out.println("getUserId");
-        UsersDegreesPK instance = new UsersDegreesPK();
+        UserDegreePK instance = new UserDegreePK();
         int expResult = 0;
         int result = instance.getUserId();
         assertEquals(expResult, result);
@@ -80,25 +80,25 @@ public class UsersDegreesPKTest {
     }
 
     /**
-     * Test of setUserId method, of class UsersDegreesPK.
+     * Test of setUserId method, of class UserDegreePK.
      */
     @Test
     public void testSetUserId() {
         System.out.println("setUserId");
         int userId = 0;
-        UsersDegreesPK instance = new UsersDegreesPK();
+        UserDegreePK instance = new UserDegreePK();
         instance.setUserId(userId);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of hashCode method, of class UsersDegreesPK.
+     * Test of hashCode method, of class UserDegreePK.
      */
     @Test
     public void testHashCode() {
         System.out.println("hashCode");
-        UsersDegreesPK instance = new UsersDegreesPK();
+        UserDegreePK instance = new UserDegreePK();
         int expResult = 0;
         int result = instance.hashCode();
         assertEquals(expResult, result);
@@ -107,13 +107,13 @@ public class UsersDegreesPKTest {
     }
 
     /**
-     * Test of equals method, of class UsersDegreesPK.
+     * Test of equals method, of class UserDegreePK.
      */
     @Test
     public void testEquals() {
         System.out.println("equals");
         Object object = null;
-        UsersDegreesPK instance = new UsersDegreesPK();
+        UserDegreePK instance = new UserDegreePK();
         boolean expResult = false;
         boolean result = instance.equals(object);
         assertEquals(expResult, result);
@@ -122,12 +122,12 @@ public class UsersDegreesPKTest {
     }
 
     /**
-     * Test of toString method, of class UsersDegreesPK.
+     * Test of toString method, of class UserDegreePK.
      */
     @Test
     public void testToString() {
         System.out.println("toString");
-        UsersDegreesPK instance = new UsersDegreesPK();
+        UserDegreePK instance = new UserDegreePK();
         String expResult = "";
         String result = instance.toString();
         assertEquals(expResult, result);

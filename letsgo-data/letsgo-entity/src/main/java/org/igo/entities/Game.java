@@ -51,7 +51,7 @@ public class Game implements Serializable {
     private int gameStatus;
     private Short gameTime;
     private int gameType;
-    private Collection<UsersGames> usersGamesCollection;
+    private Collection<UserGame> usersGamesCollection;
     private Collection<GameComment> gamesCommentsCollection;
     private Collection<GameMove> gamesMovesCollection;
     private Collection<GameDate> gamesDatesCollection;
@@ -149,11 +149,11 @@ public class Game implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "games")
     @XmlTransient
-    public Collection<UsersGames> getUsersGamesCollection() {
+    public Collection<UserGame> getUsersGamesCollection() {
         return usersGamesCollection;
     }
 
-    public void setUsersGamesCollection(Collection<UsersGames> usersGamesCollection) {
+    public void setUsersGamesCollection(Collection<UserGame> usersGamesCollection) {
         this.usersGamesCollection = usersGamesCollection;
     }
 

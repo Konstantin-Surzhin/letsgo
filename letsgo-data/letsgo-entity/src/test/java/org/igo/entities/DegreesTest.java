@@ -99,8 +99,8 @@ public class DegreesTest {
     public void testGetUsersDegreesCollection() {
         System.out.println("getUsersDegreesCollection");
         Degree instance = new Degree();
-        Collection<UsersDegrees> expResult = null;
-        Collection<UsersDegrees> result = instance.getUsersDegreesCollection();
+        Collection<UserDegree> expResult = null;
+        Collection<UserDegree> result = instance.getUsersDegreesCollection();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -112,7 +112,7 @@ public class DegreesTest {
     @Test
     public void testSetUsersDegreesCollection() {
         System.out.println("setUsersDegreesCollection");
-        Collection<UsersDegrees> usersDegreesCollection = null;
+        Collection<UserDegree> usersDegreesCollection = null;
         Degree instance = new Degree();
         instance.setUsersDegreesCollection(usersDegreesCollection);
         // TODO review the generated test code and remove the default call to fail.
