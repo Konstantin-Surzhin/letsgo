@@ -9,7 +9,24 @@
     <artifactId>letsgo-soap</artifactId>
     <packaging>pom</packaging>
   <modules>
-    <module>letsgo-game-soap</module>
     <module>lesgo-game-client</module>
+    <module>letsgo-soap-game</module>
+    <module>letsgo-soap-city</module>
+    <module>letsgo-soap-degree</module>
+    <module>letsgo-soap-event</module>
+    <module>letsgo-soap-game-comment</module>
+    <module>letsgo-soap-game-date</module>
+    <module>letsgo-soap-game-move</module>
+    <module>letsgo-soap-game-rule</module>
+    <module>letsgo-soap-league</module>
+    <module>letsg-soap-move-comment</module>
+    <module>letsgo-soap-place</module>
+    <module>letsgo-soap-room</module>
+    <module>letsgo-soap-team</module>
+    <module>letsgo-soap-user</module>
+    <module>letsgo-soap-user-ban</module>
+    <module>letsgo-soap-user-degree</module>
+    <module>letsgo-soap-user-game</module>
+    <module>letsgo-soap-user-role</module>
   </modules>
 </project>

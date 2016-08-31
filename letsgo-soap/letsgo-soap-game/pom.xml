@@ -8,11 +8,11 @@
   </parent>
 
     <groupId>org.igo</groupId>
-    <artifactId>letsgo-game-soap</artifactId>
+    <artifactId>letsgo-soap-game</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
 
-    <name>letsgo-game-soap</name>
+    <name>letsgo-soap-game</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
