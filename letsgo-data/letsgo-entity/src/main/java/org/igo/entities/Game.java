@@ -31,15 +31,15 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "games", catalog = "letsgo", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Games.findAll", query = "SELECT g FROM Games g"),
-    @NamedQuery(name = "Games.findById", query = "SELECT g FROM Games g WHERE g.id = :id"),
-    @NamedQuery(name = "Games.findByBayomeeNumber", query = "SELECT g FROM Games g WHERE g.bayomeeNumber = :bayomeeNumber"),
-    @NamedQuery(name = "Games.findByBayomeeTime", query = "SELECT g FROM Games g WHERE g.bayomeeTime = :bayomeeTime"),
-    @NamedQuery(name = "Games.findByGandicap", query = "SELECT g FROM Games g WHERE g.gandicap = :gandicap"),
-    @NamedQuery(name = "Games.findByGameSize", query = "SELECT g FROM Games g WHERE g.gameSize = :gameSize"),
-    @NamedQuery(name = "Games.findByGameStatus", query = "SELECT g FROM Games g WHERE g.gameStatus = :gameStatus"),
-    @NamedQuery(name = "Games.findByGameTime", query = "SELECT g FROM Games g WHERE g.gameTime = :gameTime"),
-    @NamedQuery(name = "Games.findByGameType", query = "SELECT g FROM Games g WHERE g.gameType = :gameType")})
+    @NamedQuery(name = "Game.findAll", query = "SELECT g FROM Game g"),
+    @NamedQuery(name = "Game.findById", query = "SELECT g FROM Game g WHERE g.id = :id"),
+    @NamedQuery(name = "Game.findByBayomeeNumber", query = "SELECT g FROM Game g WHERE g.bayomeeNumber = :bayomeeNumber"),
+    @NamedQuery(name = "Game.findByBayomeeTime", query = "SELECT g FROM Game g WHERE g.bayomeeTime = :bayomeeTime"),
+    @NamedQuery(name = "Game.findByGandicap", query = "SELECT g FROM Game g WHERE g.gandicap = :gandicap"),
+    @NamedQuery(name = "Game.findByGameSize", query = "SELECT g FROM Game g WHERE g.gameSize = :gameSize"),
+    @NamedQuery(name = "Game.findByGameStatus", query = "SELECT g FROM Game g WHERE g.gameStatus = :gameStatus"),
+    @NamedQuery(name = "Game.findByGameTime", query = "SELECT g FROM Game g WHERE g.gameTime = :gameTime"),
+    @NamedQuery(name = "Game.findByGameType", query = "SELECT g FROM Game g WHERE g.gameType = :gameType")})
 public class Game implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,7 +53,7 @@ public class Game implements Serializable {
     private int gameType;
     private Collection<UsersGames> usersGamesCollection;
     private Collection<GameComment> gamesCommentsCollection;
-    private Collection<GamesMoves> gamesMovesCollection;
+    private Collection<GameMove> gamesMovesCollection;
     private Collection<GameDate> gamesDatesCollection;
     private Event eventId;
 
@@ -169,11 +169,11 @@ public class Game implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "games")
     @XmlTransient
-    public Collection<GamesMoves> getGamesMovesCollection() {
+    public Collection<GameMove> getGamesMovesCollection() {
         return gamesMovesCollection;
     }
 
-    public void setGamesMovesCollection(Collection<GamesMoves> gamesMovesCollection) {
+    public void setGamesMovesCollection(Collection<GameMove> gamesMovesCollection) {
         this.gamesMovesCollection = gamesMovesCollection;
     }
 

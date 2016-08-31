@@ -29,35 +29,32 @@ import javax.xml.bind.annotation.XmlRootElement;
     @UniqueConstraint(columnNames = {"place_name"})})
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Places.findAll", query = "SELECT p FROM Places p"),
-    @NamedQuery(name = "Places.findById", query = "SELECT p FROM Places p WHERE p.id = :id"),
-    @NamedQuery(name = "Places.findByPlaceName", query = "SELECT p FROM Places p WHERE p.placeName = :placeName")})
-public class Places implements Serializable {
+    @NamedQuery(name = "Place.findAll", query = "SELECT p FROM Place p"),
+    @NamedQuery(name = "Place.findById", query = "SELECT p FROM Place p WHERE p.id = :id"),
+    @NamedQuery(name = "Place.findByPlaceName", query = "SELECT p FROM Place p WHERE p.placeName = :placeName")})
+public class Place implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(nullable = false)
+
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "place_name", nullable = false, length = 255)
     private String placeName;
 
-    public Places() {
+    public Place() {
     }
 
-    public Places(Integer id) {
+    public Place(Integer id) {
         this.id = id;
     }
 
-    public Places(Integer id, String placeName) {
+    public Place(Integer id, String placeName) {
         this.id = id;
         this.placeName = placeName;
     }
 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(nullable = false)
+    @Id
     public Integer getId() {
         return id;
     }
@@ -66,6 +63,9 @@ public class Places implements Serializable {
         this.id = id;
     }
 
+    @Basic(optional = false)
+    @Size(min = 1, max = 255)
+    @Column(name = "place_name", nullable = false, length = 255, unique = true)
     public String getPlaceName() {
         return placeName;
     }
@@ -84,10 +84,10 @@ public class Places implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Places)) {
+        if (!(object instanceof Place)) {
             return false;
         }
-        Places other = (Places) object;
+        Place other = (Place) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -98,5 +98,5 @@ public class Places implements Serializable {
     public String toString() {
         return "org.igo.entities.Places[ id=" + id + " ]";
     }
-    
+
 }

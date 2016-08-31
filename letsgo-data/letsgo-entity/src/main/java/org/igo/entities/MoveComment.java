@@ -36,52 +36,37 @@ import javax.xml.bind.annotation.XmlTransient;
     @UniqueConstraint(columnNames = {"move_game_id", "user_id", "move_ndx", "move_comment"})})
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "MovesComments.findAll", query = "SELECT m FROM MovesComments m"),
-    @NamedQuery(name = "MovesComments.findById", query = "SELECT m FROM MovesComments m WHERE m.id = :id"),
-    @NamedQuery(name = "MovesComments.findByMoveComment", query = "SELECT m FROM MovesComments m WHERE m.moveComment = :moveComment"),
-    @NamedQuery(name = "MovesComments.findByPostDateTime", query = "SELECT m FROM MovesComments m WHERE m.postDateTime = :postDateTime")})
-public class MovesComments implements Serializable {
+    @NamedQuery(name = "MoveComment.findAll", query = "SELECT m FROM MoveComment m"),
+    @NamedQuery(name = "MoveComment.findById", query = "SELECT m FROM MoveComment m WHERE m.id = :id"),
+    @NamedQuery(name = "MoveComment.findByMoveComment", query = "SELECT m FROM MoveComment m WHERE m.moveComment = :moveComment"),
+    @NamedQuery(name = "MoveComment.findByPostDateTime", query = "SELECT m FROM MoveComment m WHERE m.postDateTime = :postDateTime")})
+public class MoveComment implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(nullable = false)
-    private Long id;
-    @Size(max = 255)
-    @Column(name = "move_comment", length = 255)
-    private String moveComment;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "post_date_time", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date postDateTime;
-    @JoinColumns({
-        @JoinColumn(name = "move_game_id", referencedColumnName = "game_id"),
-        @JoinColumn(name = "move_ndx", referencedColumnName = "ndx")})
-    @ManyToOne
-    private GamesMoves gamesMoves;
-    @OneToMany(mappedBy = "inReplayToId")
-    private Collection<MovesComments> movesCommentsCollection;
-    @JoinColumn(name = "in_replay_to_id", referencedColumnName = "id")
-    @ManyToOne
-    private MovesComments inReplayToId;
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @ManyToOne
-    private Users userId;
 
-    public MovesComments() {
+    private Long id;
+    private String moveComment;
+    private Date postDateTime;
+    private GameMove gamesMoves;
+    private Collection<MoveComment> movesCommentsCollection;
+    private MoveComment inReplayToId;
+    private User userId;
+
+    public MoveComment() {
     }
 
-    public MovesComments(Long id) {
+    public MoveComment(Long id) {
         this.id = id;
     }
 
-    public MovesComments(Long id, Date postDateTime) {
+    public MoveComment(Long id, Date postDateTime) {
         this.id = id;
         this.postDateTime = postDateTime;
     }
 
+    @Id
+    @Basic(optional = false)
+    @Column(nullable = false)
     public Long getId() {
         return id;
     }
@@ -90,6 +75,8 @@ public class MovesComments implements Serializable {
         this.id = id;
     }
 
+    @Column(name = "move_comment", length = 255)
+    @Size(min = 1, max = 255)
     public String getMoveComment() {
         return moveComment;
     }
@@ -98,6 +85,9 @@ public class MovesComments implements Serializable {
         this.moveComment = moveComment;
     }
 
+    @Basic(optional = false)
+    @Column(name = "post_date_time", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     public Date getPostDateTime() {
         return postDateTime;
     }
@@ -106,36 +96,45 @@ public class MovesComments implements Serializable {
         this.postDateTime = postDateTime;
     }
 
-    public GamesMoves getGamesMoves() {
+    @JoinColumns({
+        @JoinColumn(name = "move_game_id", referencedColumnName = "game_id"),
+        @JoinColumn(name = "move_ndx", referencedColumnName = "ndx")})
+    @ManyToOne
+    public GameMove getGamesMoves() {
         return gamesMoves;
     }
 
-    public void setGamesMoves(GamesMoves gamesMoves) {
+    public void setGamesMoves(GameMove gamesMoves) {
         this.gamesMoves = gamesMoves;
     }
 
+    @OneToMany(mappedBy = "inReplayToId")
     @XmlTransient
-    public Collection<MovesComments> getMovesCommentsCollection() {
+    public Collection<MoveComment> getMovesCommentsCollection() {
         return movesCommentsCollection;
     }
 
-    public void setMovesCommentsCollection(Collection<MovesComments> movesCommentsCollection) {
+    public void setMovesCommentsCollection(Collection<MoveComment> movesCommentsCollection) {
         this.movesCommentsCollection = movesCommentsCollection;
     }
 
-    public MovesComments getInReplayToId() {
+    @JoinColumn(name = "in_replay_to_id", referencedColumnName = "id")
+    @ManyToOne
+    public MoveComment getInReplayToId() {
         return inReplayToId;
     }
 
-    public void setInReplayToId(MovesComments inReplayToId) {
+    public void setInReplayToId(MoveComment inReplayToId) {
         this.inReplayToId = inReplayToId;
     }
 
-    public Users getUserId() {
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @ManyToOne
+    public User getUserId() {
         return userId;
     }
 
-    public void setUserId(Users userId) {
+    public void setUserId(User userId) {
         this.userId = userId;
     }
 
@@ -149,19 +148,16 @@ public class MovesComments implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof MovesComments)) {
+        if (!(object instanceof MoveComment)) {
             return false;
         }
-        MovesComments other = (MovesComments) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        MoveComment other = (MoveComment) object;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     @Override
     public String toString() {
         return "org.igo.entities.MovesComments[ id=" + id + " ]";
     }
-    
+
 }

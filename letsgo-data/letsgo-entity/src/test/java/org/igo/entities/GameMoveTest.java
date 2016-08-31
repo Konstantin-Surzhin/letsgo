@@ -17,9 +17,9 @@ import static org.junit.Assert.*;
  *
  * @author surzhin.konstantin
  */
-public class GamesMovesTest {
+public class GameMoveTest {
     
-    public GamesMovesTest() {
+    public GameMoveTest() {
     }
     
     @BeforeClass
@@ -39,39 +39,39 @@ public class GamesMovesTest {
     }
 
     /**
-     * Test of getGamesMovesPK method, of class GamesMoves.
+     * Test of getGamesMovesPK method, of class GameMove.
      */
     @Test
     public void testGetGamesMovesPK() {
         System.out.println("getGamesMovesPK");
-        GamesMoves instance = new GamesMoves();
-        GamesMovesPK expResult = null;
-        GamesMovesPK result = instance.getGamesMovesPK();
+        GameMove instance = new GameMove();
+        GameMovePK expResult = null;
+        GameMovePK result = instance.getGameMovePK();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of setGamesMovesPK method, of class GamesMoves.
+     * Test of setGamesMovesPK method, of class GameMove.
      */
     @Test
     public void testSetGamesMovesPK() {
         System.out.println("setGamesMovesPK");
-        GamesMovesPK gamesMovesPK = null;
-        GamesMoves instance = new GamesMoves();
-        instance.setGamesMovesPK(gamesMovesPK);
+        GameMovePK gamesMovesPK = null;
+        GameMove instance = new GameMove();
+        instance.setGameMovePK(gamesMovesPK);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getX method, of class GamesMoves.
+     * Test of getX method, of class GameMove.
      */
     @Test
     public void testGetX() {
         System.out.println("getX");
-        GamesMoves instance = new GamesMoves();
+        GameMove instance = new GameMove();
         Character expResult = null;
         Character result = instance.getX();
         assertEquals(expResult, result);
@@ -80,25 +80,25 @@ public class GamesMovesTest {
     }
 
     /**
-     * Test of setX method, of class GamesMoves.
+     * Test of setX method, of class GameMove.
      */
     @Test
     public void testSetX() {
         System.out.println("setX");
         Character x = null;
-        GamesMoves instance = new GamesMoves();
+        GameMove instance = new GameMove();
         instance.setX(x);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getY method, of class GamesMoves.
+     * Test of getY method, of class GameMove.
      */
     @Test
     public void testGetY() {
         System.out.println("getY");
-        GamesMoves instance = new GamesMoves();
+        GameMove instance = new GameMove();
         Character expResult = null;
         Character result = instance.getY();
         assertEquals(expResult, result);
@@ -107,52 +107,52 @@ public class GamesMovesTest {
     }
 
     /**
-     * Test of setY method, of class GamesMoves.
+     * Test of setY method, of class GameMove.
      */
     @Test
     public void testSetY() {
         System.out.println("setY");
         Character y = null;
-        GamesMoves instance = new GamesMoves();
+        GameMove instance = new GameMove();
         instance.setY(y);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getMovesCommentsCollection method, of class GamesMoves.
+     * Test of getMovesCommentsCollection method, of class GameMove.
      */
     @Test
     public void testGetMovesCommentsCollection() {
         System.out.println("getMovesCommentsCollection");
-        GamesMoves instance = new GamesMoves();
-        Collection<MovesComments> expResult = null;
-        Collection<MovesComments> result = instance.getMovesCommentsCollection();
+        GameMove instance = new GameMove();
+        Collection<MoveComment> expResult = null;
+        Collection<MoveComment> result = instance.getMovesCommentsCollection();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of setMovesCommentsCollection method, of class GamesMoves.
+     * Test of setMovesCommentsCollection method, of class GameMove.
      */
     @Test
     public void testSetMovesCommentsCollection() {
         System.out.println("setMovesCommentsCollection");
-        Collection<MovesComments> movesCommentsCollection = null;
-        GamesMoves instance = new GamesMoves();
+        Collection<MoveComment> movesCommentsCollection = null;
+        GameMove instance = new GameMove();
         instance.setMovesCommentsCollection(movesCommentsCollection);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getGames method, of class GamesMoves.
+     * Test of getGames method, of class GameMove.
      */
     @Test
     public void testGetGames() {
         System.out.println("getGames");
-        GamesMoves instance = new GamesMoves();
+        GameMove instance = new GameMove();
         Game expResult = null;
         Game result = instance.getGames();
         assertEquals(expResult, result);
@@ -161,25 +161,25 @@ public class GamesMovesTest {
     }
 
     /**
-     * Test of setGames method, of class GamesMoves.
+     * Test of setGames method, of class GameMove.
      */
     @Test
     public void testSetGames() {
         System.out.println("setGames");
         Game games = null;
-        GamesMoves instance = new GamesMoves();
+        GameMove instance = new GameMove();
         instance.setGames(games);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of hashCode method, of class GamesMoves.
+     * Test of hashCode method, of class GameMove.
      */
     @Test
     public void testHashCode() {
         System.out.println("hashCode");
-        GamesMoves instance = new GamesMoves();
+        GameMove instance = new GameMove();
         int expResult = 0;
         int result = instance.hashCode();
         assertEquals(expResult, result);
@@ -188,13 +188,13 @@ public class GamesMovesTest {
     }
 
     /**
-     * Test of equals method, of class GamesMoves.
+     * Test of equals method, of class GameMove.
      */
     @Test
     public void testEquals() {
         System.out.println("equals");
         Object object = null;
-        GamesMoves instance = new GamesMoves();
+        GameMove instance = new GameMove();
         boolean expResult = false;
         boolean result = instance.equals(object);
         assertEquals(expResult, result);
@@ -203,12 +203,12 @@ public class GamesMovesTest {
     }
 
     /**
-     * Test of toString method, of class GamesMoves.
+     * Test of toString method, of class GameMove.
      */
     @Test
     public void testToString() {
         System.out.println("toString");
-        GamesMoves instance = new GamesMoves();
+        GameMove instance = new GameMove();
         String expResult = "";
         String result = instance.toString();
         assertEquals(expResult, result);

@@ -30,39 +30,33 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "leagues")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Leagues.findAll", query = "SELECT l FROM Leagues l"),
-    @NamedQuery(name = "Leagues.findById", query = "SELECT l FROM Leagues l WHERE l.id = :id"),
-    @NamedQuery(name = "Leagues.findByLeagueName", query = "SELECT l FROM Leagues l WHERE l.leagueName = :leagueName")})
-public class Leagues implements Serializable {
+    @NamedQuery(name = "League.findAll", query = "SELECT l FROM League l"),
+    @NamedQuery(name = "League.findById", query = "SELECT l FROM League l WHERE l.id = :id"),
+    @NamedQuery(name = "League.findByLeagueName", query = "SELECT l FROM League l WHERE l.leagueName = :leagueName")})
+public class League implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
     private Short id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "league_name")
     private String leagueName;
-    @OneToMany(mappedBy = "leagueId")
-    private Collection<Teams> teamsCollection;
-    @OneToMany(mappedBy = "leagueId")
-    private Collection<Users> usersCollection;
+    private Collection<Team> teamsCollection;
+    private Collection<User> usersCollection;
 
-    public Leagues() {
+    public League() {
     }
 
-    public Leagues(Short id) {
+    public League(Short id) {
         this.id = id;
     }
 
-    public Leagues(Short id, String leagueName) {
+    public League(Short id, String leagueName) {
         this.id = id;
         this.leagueName = leagueName;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
     public Short getId() {
         return id;
     }
@@ -71,6 +65,9 @@ public class Leagues implements Serializable {
         this.id = id;
     }
 
+    @Basic(optional = false)
+    @Size(min = 1, max = 255)
+    @Column(name = "league_name")
     public String getLeagueName() {
         return leagueName;
     }
@@ -79,21 +76,23 @@ public class Leagues implements Serializable {
         this.leagueName = leagueName;
     }
 
+    @OneToMany(mappedBy = "leagueId")
     @XmlTransient
-    public Collection<Teams> getTeamsCollection() {
+    public Collection<Team> getTeamsCollection() {
         return teamsCollection;
     }
 
-    public void setTeamsCollection(Collection<Teams> teamsCollection) {
+    public void setTeamsCollection(Collection<Team> teamsCollection) {
         this.teamsCollection = teamsCollection;
     }
 
+    @OneToMany(mappedBy = "leagueId")
     @XmlTransient
-    public Collection<Users> getUsersCollection() {
+    public Collection<User> getUsersCollection() {
         return usersCollection;
     }
 
-    public void setUsersCollection(Collection<Users> usersCollection) {
+    public void setUsersCollection(Collection<User> usersCollection) {
         this.usersCollection = usersCollection;
     }
 
@@ -107,19 +106,16 @@ public class Leagues implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Leagues)) {
+        if (!(object instanceof League)) {
             return false;
         }
-        Leagues other = (Leagues) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        League other = (League) object;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     @Override
     public String toString() {
         return "org.igo.ban.ejb.Leagues[ id=" + id + " ]";
     }
-    
+
 }

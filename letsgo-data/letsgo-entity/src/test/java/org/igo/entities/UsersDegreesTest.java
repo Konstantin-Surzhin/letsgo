@@ -98,8 +98,8 @@ public class UsersDegreesTest {
     public void testGetUsers() {
         System.out.println("getUsers");
         UsersDegrees instance = new UsersDegrees();
-        Users expResult = null;
-        Users result = instance.getUsers();
+        User expResult = null;
+        User result = instance.getUsers();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -111,7 +111,7 @@ public class UsersDegreesTest {
     @Test
     public void testSetUsers() {
         System.out.println("setUsers");
-        Users users = null;
+        User users = null;
         UsersDegrees instance = new UsersDegrees();
         instance.setUsers(users);
         // TODO review the generated test code and remove the default call to fail.

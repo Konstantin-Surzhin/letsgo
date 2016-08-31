@@ -4,14 +4,6 @@
     <jta-data-source>java:/jboss/datasources/MySQLDS</jta-data-source>
     <class>org.igo.entities.City</class>
     <class>org.igo.entities.GameRule</class>
-    <class>org.igo.entities.GamesMoves</class>
-    <class>org.igo.entities.Leagues</class>
-    <class>org.igo.entities.MovesComments</class>
-    <class>org.igo.entities.Places</class>
-    <class>org.igo.entities.Rooms</class>
-    <class>org.igo.entities.Teams</class>
-    <class>org.igo.entities.Userroles</class>
-    <class>org.igo.entities.Users</class>
     <class>org.igo.entities.UsersBans</class>
     <class>org.igo.entities.UsersDegrees</class>
     <class>org.igo.entities.UsersGames</class>
@@ -21,6 +13,14 @@
     <class>org.igo.entities.Game</class>
     <class>org.igo.entities.GameComment</class>
     <class>org.igo.entities.GameDate</class>
+    <class>org.igo.entities.GameMove</class>
+    <class>org.igo.entities.League</class>
+    <class>org.igo.entities.MoveComment</class>
+    <class>org.igo.entities.Place</class>
+    <class>org.igo.entities.Room</class>
+    <class>org.igo.entities.Team</class>
+    <class>org.igo.entities.UserRole</class>
+    <class>org.igo.entities.User</class>
     <properties/>
   </persistence-unit>
 </persistence>

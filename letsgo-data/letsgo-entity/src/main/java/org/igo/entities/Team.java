@@ -13,6 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -27,47 +29,37 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author surzhin.konstantin
  */
 @Entity
-@Table(name = "userroles")
+@Table(name = "teams")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Userroles.findAll", query = "SELECT u FROM Userroles u"),
-    @NamedQuery(name = "Userroles.findById", query = "SELECT u FROM Userroles u WHERE u.id = :id"),
-    @NamedQuery(name = "Userroles.findByUsername", query = "SELECT u FROM Userroles u WHERE u.username = :username"),
-    @NamedQuery(name = "Userroles.findByUserrole", query = "SELECT u FROM Userroles u WHERE u.userrole = :userrole")})
-public class Userroles implements Serializable {
+    @NamedQuery(name = "Team.findAll", query = "SELECT t FROM Team t"),
+    @NamedQuery(name = "Team.findById", query = "SELECT t FROM Team t WHERE t.id = :id"),
+    @NamedQuery(name = "Team.findByTeamName", query = "SELECT t FROM Team t WHERE t.teamName = :teamName")})
+public class Team implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
+
+    private Short id;
+    private String teamName;
+    private League leagueId;
+    private Collection<User> usersCollection;
+
+    public Team() {
+    }
+
+    public Team(Short id) {
+        this.id = id;
+    }
+
+    public Team(Short id, String teamName) {
+        this.id = id;
+        this.teamName = teamName;
+    }
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Short id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "username")
-    private String username;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "userrole")
-    private String userrole;
-    @OneToMany(mappedBy = "roleId")
-    private Collection<Users> usersCollection;
-
-    public Userroles() {
-    }
-
-    public Userroles(Short id) {
-        this.id = id;
-    }
-
-    public Userroles(Short id, String username, String userrole) {
-        this.id = id;
-        this.username = username;
-        this.userrole = userrole;
-    }
-
+    @Id
     public Short getId() {
         return id;
     }
@@ -76,28 +68,34 @@ public class Userroles implements Serializable {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    @Basic(optional = false)
+    @Column(name = "team_name", nullable = false, unique = true)
+    @Size(min = 1, max = 255)
+    public String getTeamName() {
+        return teamName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
     }
 
-    public String getUserrole() {
-        return userrole;
+    @JoinColumn(name = "league_id", referencedColumnName = "id")
+    @ManyToOne
+    public League getLeagueId() {
+        return leagueId;
     }
 
-    public void setUserrole(String userrole) {
-        this.userrole = userrole;
+    public void setLeagueId(League leagueId) {
+        this.leagueId = leagueId;
     }
 
+    @OneToMany(mappedBy = "teamId")
     @XmlTransient
-    public Collection<Users> getUsersCollection() {
+    public Collection<User> getUsersCollection() {
         return usersCollection;
     }
 
-    public void setUsersCollection(Collection<Users> usersCollection) {
+    public void setUsersCollection(Collection<User> usersCollection) {
         this.usersCollection = usersCollection;
     }
 
@@ -111,10 +109,10 @@ public class Userroles implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Userroles)) {
+        if (!(object instanceof Team)) {
             return false;
         }
-        Userroles other = (Userroles) object;
+        Team other = (Team) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -123,7 +121,7 @@ public class Userroles implements Serializable {
 
     @Override
     public String toString() {
-        return "org.igo.ban.ejb.Userroles[ id=" + id + " ]";
+        return "org.igo.ban.ejb.Teams[ id=" + id + " ]";
     }
-    
+
 }

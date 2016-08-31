@@ -50,7 +50,7 @@ public class GameComment implements Serializable {
     private Game gameId;
     private Collection<GameComment> gamesCommentsCollection;
     private GameComment inReplayToId;
-    private Users userId;
+    private User userId;
 
     public GameComment() {
     }
@@ -130,11 +130,11 @@ public class GameComment implements Serializable {
 
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
-    public Users getUserId() {
+    public User getUserId() {
         return userId;
     }
 
-    public void setUserId(Users userId) {
+    public void setUserId(User userId) {
         this.userId = userId;
     }
 

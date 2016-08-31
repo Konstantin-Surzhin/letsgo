@@ -13,8 +13,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -29,43 +27,35 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author surzhin.konstantin
  */
 @Entity
-@Table(name = "teams")
+@Table(name = "rooms", catalog = "letsgo", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Teams.findAll", query = "SELECT t FROM Teams t"),
-    @NamedQuery(name = "Teams.findById", query = "SELECT t FROM Teams t WHERE t.id = :id"),
-    @NamedQuery(name = "Teams.findByTeamName", query = "SELECT t FROM Teams t WHERE t.teamName = :teamName")})
-public class Teams implements Serializable {
+    @NamedQuery(name = "Room.findAll", query = "SELECT r FROM Room r"),
+    @NamedQuery(name = "Room.findById", query = "SELECT r FROM Room r WHERE r.id = :id"),
+    @NamedQuery(name = "Room.findByRoomName", query = "SELECT r FROM Room r WHERE r.roomName = :roomName")})
+public class Room implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    private Short id;
+    private String roomName;
+    private Collection<User> usersCollection;
+
+    public Room() {
+    }
+
+    public Room(Short id) {
+        this.id = id;
+    }
+
+    public Room(Short id, String roomName) {
+        this.id = id;
+        this.roomName = roomName;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Short id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "team_name")
-    private String teamName;
-    @JoinColumn(name = "league_id", referencedColumnName = "id")
-    @ManyToOne
-    private Leagues leagueId;
-    @OneToMany(mappedBy = "teamId")
-    private Collection<Users> usersCollection;
-
-    public Teams() {
-    }
-
-    public Teams(Short id) {
-        this.id = id;
-    }
-
-    public Teams(Short id, String teamName) {
-        this.id = id;
-        this.teamName = teamName;
-    }
-
     public Short getId() {
         return id;
     }
@@ -74,28 +64,25 @@ public class Teams implements Serializable {
         this.id = id;
     }
 
-    public String getTeamName() {
-        return teamName;
+    @Basic(optional = false)
+    @Column(name = "room_name")
+    @NotNull
+    @Size(min = 1, max = 255)
+    public String getRoomName() {
+        return roomName;
     }
 
-    public void setTeamName(String teamName) {
-        this.teamName = teamName;
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
     }
 
-    public Leagues getLeagueId() {
-        return leagueId;
-    }
-
-    public void setLeagueId(Leagues leagueId) {
-        this.leagueId = leagueId;
-    }
-
+    @OneToMany(mappedBy = "roomId")
     @XmlTransient
-    public Collection<Users> getUsersCollection() {
+    public Collection<User> getUsersCollection() {
         return usersCollection;
     }
 
-    public void setUsersCollection(Collection<Users> usersCollection) {
+    public void setUsersCollection(Collection<User> usersCollection) {
         this.usersCollection = usersCollection;
     }
 
@@ -109,10 +96,10 @@ public class Teams implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Teams)) {
+        if (!(object instanceof Room)) {
             return false;
         }
-        Teams other = (Teams) object;
+        Room other = (Room) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -121,7 +108,7 @@ public class Teams implements Serializable {
 
     @Override
     public String toString() {
-        return "org.igo.ban.ejb.Teams[ id=" + id + " ]";
+        return "org.igo.ban.ejb.Rooms[ id=" + id + " ]";
     }
-    
+
 }

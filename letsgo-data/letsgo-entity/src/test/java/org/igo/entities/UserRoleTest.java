@@ -17,34 +17,34 @@ import static org.junit.Assert.*;
  *
  * @author surzhin.konstantin
  */
-public class TeamsTest {
-
-    public TeamsTest() {
+public class UserRoleTest {
+    
+    public UserRoleTest() {
     }
-
+    
     @BeforeClass
     public static void setUpClass() {
     }
-
+    
     @AfterClass
     public static void tearDownClass() {
     }
-
+    
     @Before
     public void setUp() {
     }
-
+    
     @After
     public void tearDown() {
     }
 
     /**
-     * Test of getId method, of class Teams.
+     * Test of getId method, of class UserRole.
      */
     @Test
     public void testGetId() {
         System.out.println("getId");
-        Teams instance = new Teams();
+        UserRole instance = new UserRole();
         Short expResult = null;
         Short result = instance.getId();
         assertEquals(expResult, result);
@@ -53,106 +53,106 @@ public class TeamsTest {
     }
 
     /**
-     * Test of setId method, of class Teams.
+     * Test of setId method, of class UserRole.
      */
     @Test
     public void testSetId() {
         System.out.println("setId");
         Short id = null;
-        Teams instance = new Teams();
+        UserRole instance = new UserRole();
         instance.setId(id);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getTeamName method, of class Teams.
+     * Test of getUsername method, of class UserRole.
      */
     @Test
-    public void testGetTeamName() {
-        System.out.println("getTeamName");
-        Teams instance = new Teams();
+    public void testGetUsername() {
+        System.out.println("getUsername");
+        UserRole instance = new UserRole();
         String expResult = "";
-        String result = instance.getTeamName();
+        String result = instance.getUsername();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of setTeamName method, of class Teams.
+     * Test of setUsername method, of class UserRole.
      */
     @Test
-    public void testSetTeamName() {
-        System.out.println("setTeamName");
-        String teamName = "";
-        Teams instance = new Teams();
-        instance.setTeamName(teamName);
+    public void testSetUsername() {
+        System.out.println("setUsername");
+        String username = "";
+        UserRole instance = new UserRole();
+        instance.setUsername(username);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getLeagueId method, of class Teams.
+     * Test of getUserrole method, of class UserRole.
      */
     @Test
-    public void testGetLeagueId() {
-        System.out.println("getLeagueId");
-        Teams instance = new Teams();
-        Leagues expResult = null;
-        Leagues result = instance.getLeagueId();
+    public void testGetUserrole() {
+        System.out.println("getUserrole");
+        UserRole instance = new UserRole();
+        String expResult = "";
+        String result = instance.getUserrole();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of setLeagueId method, of class Teams.
+     * Test of setUserrole method, of class UserRole.
      */
     @Test
-    public void testSetLeagueId() {
-        System.out.println("setLeagueId");
-        Leagues leagueId = null;
-        Teams instance = new Teams();
-        instance.setLeagueId(leagueId);
+    public void testSetUserrole() {
+        System.out.println("setUserrole");
+        String userrole = "";
+        UserRole instance = new UserRole();
+        instance.setUserrole(userrole);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getUsersCollection method, of class Teams.
+     * Test of getUsersCollection method, of class UserRole.
      */
     @Test
     public void testGetUsersCollection() {
         System.out.println("getUsersCollection");
-        Teams instance = new Teams();
-        Collection<Users> expResult = null;
-        Collection<Users> result = instance.getUsersCollection();
+        UserRole instance = new UserRole();
+        Collection<User> expResult = null;
+        Collection<User> result = instance.getUsersCollection();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of setUsersCollection method, of class Teams.
+     * Test of setUsersCollection method, of class UserRole.
      */
     @Test
     public void testSetUsersCollection() {
         System.out.println("setUsersCollection");
-        Collection<Users> usersCollection = null;
-        Teams instance = new Teams();
+        Collection<User> usersCollection = null;
+        UserRole instance = new UserRole();
         instance.setUsersCollection(usersCollection);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of hashCode method, of class Teams.
+     * Test of hashCode method, of class UserRole.
      */
     @Test
     public void testHashCode() {
         System.out.println("hashCode");
-        Teams instance = new Teams();
+        UserRole instance = new UserRole();
         int expResult = 0;
         int result = instance.hashCode();
         assertEquals(expResult, result);
@@ -161,13 +161,13 @@ public class TeamsTest {
     }
 
     /**
-     * Test of equals method, of class Teams.
+     * Test of equals method, of class UserRole.
      */
     @Test
     public void testEquals() {
         System.out.println("equals");
         Object object = null;
-        Teams instance = new Teams();
+        UserRole instance = new UserRole();
         boolean expResult = false;
         boolean result = instance.equals(object);
         assertEquals(expResult, result);
@@ -176,17 +176,17 @@ public class TeamsTest {
     }
 
     /**
-     * Test of toString method, of class Teams.
+     * Test of toString method, of class UserRole.
      */
     @Test
     public void testToString() {
         System.out.println("toString");
-        Teams instance = new Teams();
+        UserRole instance = new UserRole();
         String expResult = "";
         String result = instance.toString();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-
+    
 }

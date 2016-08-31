@@ -61,7 +61,7 @@ public class UsersBans implements Serializable {
     private Date startDate;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Users userId;
+    private User userId;
 
     public UsersBans() {
     }
@@ -109,11 +109,11 @@ public class UsersBans implements Serializable {
         this.startDate = startDate;
     }
 
-    public Users getUserId() {
+    public User getUserId() {
         return userId;
     }
 
-    public void setUserId(Users userId) {
+    public void setUserId(User userId) {
         this.userId = userId;
     }
 

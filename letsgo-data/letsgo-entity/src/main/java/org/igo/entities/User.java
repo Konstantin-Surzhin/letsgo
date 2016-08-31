@@ -36,102 +36,66 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "users")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u"),
-    @NamedQuery(name = "Users.findById", query = "SELECT u FROM Users u WHERE u.id = :id"),
-    @NamedQuery(name = "Users.findByDraw", query = "SELECT u FROM Users u WHERE u.draw = :draw"),
-    @NamedQuery(name = "Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email"),
-    @NamedQuery(name = "Users.findByIsLogin", query = "SELECT u FROM Users u WHERE u.isLogin = :isLogin"),
-    @NamedQuery(name = "Users.findByLastTime", query = "SELECT u FROM Users u WHERE u.lastTime = :lastTime"),
-    @NamedQuery(name = "Users.findByLose", query = "SELECT u FROM Users u WHERE u.lose = :lose"),
-    @NamedQuery(name = "Users.findByName", query = "SELECT u FROM Users u WHERE u.name = :name"),
-    @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password"),
-    @NamedQuery(name = "Users.findByRating", query = "SELECT u FROM Users u WHERE u.rating = :rating"),
-    @NamedQuery(name = "Users.findBySalt", query = "SELECT u FROM Users u WHERE u.salt = :salt"),
-    @NamedQuery(name = "Users.findByStaus", query = "SELECT u FROM Users u WHERE u.staus = :staus"),
-    @NamedQuery(name = "Users.findByWin", query = "SELECT u FROM Users u WHERE u.win = :win")})
-public class Users implements Serializable {
+    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
+    @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id"),
+    @NamedQuery(name = "User.findByDraw", query = "SELECT u FROM User u WHERE u.draw = :draw"),
+    @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
+    @NamedQuery(name = "User.findByIsLogin", query = "SELECT u FROM User u WHERE u.isLogin = :isLogin"),
+    @NamedQuery(name = "User.findByLastTime", query = "SELECT u FROM User u WHERE u.lastTime = :lastTime"),
+    @NamedQuery(name = "User.findByLose", query = "SELECT u FROM User u WHERE u.lose = :lose"),
+    @NamedQuery(name = "User.findByName", query = "SELECT u FROM User u WHERE u.name = :name"),
+    @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password"),
+    @NamedQuery(name = "User.findByRating", query = "SELECT u FROM User u WHERE u.rating = :rating"),
+    @NamedQuery(name = "User.findBySalt", query = "SELECT u FROM User u WHERE u.salt = :salt"),
+    @NamedQuery(name = "User.findByStaus", query = "SELECT u FROM User u WHERE u.staus = :staus"),
+    @NamedQuery(name = "User.findByWin", query = "SELECT u FROM User u WHERE u.win = :win")})
+public class User implements Serializable {
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "users")
     private Collection<UsersGames> usersGamesCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "users")
     private Collection<UsersDegrees> usersDegreesCollection;
-    @OneToMany(mappedBy = "userId")
-    private Collection<MovesComments> movesCommentsCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    private Collection<MoveComment> movesCommentsCollection;
     private Collection<GameComment> gamesCommentsCollection;
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
+
     private Integer id;
-    @Column(name = "draw")
     private Integer draw;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Недопустимый адрес электронной почты")//if the field contains email address consider using this annotation to enforce field validation
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "email")
     private String email;
-    @Column(name = "is_login")
     private Boolean isLogin;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "last_time")
-    @Temporal(TemporalType.TIMESTAMP)
     private Date lastTime;
-    @Column(name = "lose")
     private Integer lose;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 64)
-    @Column(name = "name")
     private String name;
-    @Size(max = 128)
-    @Column(name = "password")
     private String password;
-    @Column(name = "rating")
     private Integer rating;
     @Size(max = 128)
-    @Column(name = "salt")
     private String salt;
-    @Column(name = "staus")
     private Integer staus;
-    @Column(name = "win")
     private Integer win;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Collection<UsersBans> usersBansCollection;
-    @JoinColumn(name = "league_id", referencedColumnName = "id")
-    @ManyToOne
-    private Leagues leagueId;
-    @JoinColumn(name = "role_id", referencedColumnName = "id")
-    @ManyToOne
-    private Userroles roleId;
-    @JoinColumn(name = "team_id", referencedColumnName = "id")
-    @ManyToOne
-    private Teams teamId;
-    @JoinColumn(name = "room_id", referencedColumnName = "id")
-    @ManyToOne
-    private Rooms roomId;
-    @JoinColumn(name = "city_id", referencedColumnName = "id")
-    @ManyToOne
+    private League leagueId;
+    private UserRole roleId;
+    private Team teamId;
+    private Room roomId;
     private City cityId;
 
-    public Users() {
+    public User() {
     }
 
-    public Users(Integer id) {
+    public User(Integer id) {
         this.id = id;
     }
 
-    public Users(Integer id, String email, Date lastTime, String name) {
+    public User(Integer id, String email, Date lastTime, String name) {
         this.id = id;
         this.email = email;
         this.lastTime = lastTime;
         this.name = name;
     }
 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    @Id
     public Integer getId() {
         return id;
     }
@@ -140,6 +104,7 @@ public class Users implements Serializable {
         this.id = id;
     }
 
+    @Column(name = "draw")
     public Integer getDraw() {
         return draw;
     }
@@ -147,7 +112,11 @@ public class Users implements Serializable {
     public void setDraw(Integer draw) {
         this.draw = draw;
     }
-
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Недопустимый адрес электронной почты")//if the field contains email address consider using this annotation to enforce field validation
+    @NotNull
+    @Size(min = 1, max = 255)
+    @Basic(optional = false)
+    @Column(name = "email", unique = true, nullable = false)
     public String getEmail() {
         return email;
     }
@@ -156,6 +125,7 @@ public class Users implements Serializable {
         this.email = email;
     }
 
+    @Column(name = "is_login")
     public Boolean getIsLogin() {
         return isLogin;
     }
@@ -164,6 +134,9 @@ public class Users implements Serializable {
         this.isLogin = isLogin;
     }
 
+    @Basic(optional = false)
+    @Column(name = "last_time")
+    @Temporal(TemporalType.TIMESTAMP)
     public Date getLastTime() {
         return lastTime;
     }
@@ -172,6 +145,7 @@ public class Users implements Serializable {
         this.lastTime = lastTime;
     }
 
+    @Column(name = "lose")
     public Integer getLose() {
         return lose;
     }
@@ -179,7 +153,10 @@ public class Users implements Serializable {
     public void setLose(Integer lose) {
         this.lose = lose;
     }
-
+    @NotNull
+    @Size(min = 1, max = 64)
+    @Basic(optional = false)
+    @Column(name = "name", nullable = false, unique = true)
     public String getName() {
         return name;
     }
@@ -187,7 +164,8 @@ public class Users implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-
+    @Size(min=8 , max = 128)
+    @Column(name = "password",nullable = false)
     public String getPassword() {
         return password;
     }
@@ -196,6 +174,7 @@ public class Users implements Serializable {
         this.password = password;
     }
 
+    @Column(name = "rating")
     public Integer getRating() {
         return rating;
     }
@@ -204,6 +183,7 @@ public class Users implements Serializable {
         this.rating = rating;
     }
 
+    @Column(name = "salt")
     public String getSalt() {
         return salt;
     }
@@ -212,6 +192,7 @@ public class Users implements Serializable {
         this.salt = salt;
     }
 
+    @Column(name = "staus")
     public Integer getStaus() {
         return staus;
     }
@@ -220,6 +201,7 @@ public class Users implements Serializable {
         this.staus = staus;
     }
 
+    @Column(name = "win")
     public Integer getWin() {
         return win;
     }
@@ -228,6 +210,7 @@ public class Users implements Serializable {
         this.win = win;
     }
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     @XmlTransient
     public Collection<UsersBans> getUsersBansCollection() {
         return usersBansCollection;
@@ -237,38 +220,48 @@ public class Users implements Serializable {
         this.usersBansCollection = usersBansCollection;
     }
 
-    public Leagues getLeagueId() {
+    @JoinColumn(name = "league_id", referencedColumnName = "id")
+    @ManyToOne
+    public League getLeagueId() {
         return leagueId;
     }
 
-    public void setLeagueId(Leagues leagueId) {
+    public void setLeagueId(League leagueId) {
         this.leagueId = leagueId;
     }
 
-    public Userroles getRoleId() {
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    @ManyToOne
+    public UserRole getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Userroles roleId) {
+    public void setRoleId(UserRole roleId) {
         this.roleId = roleId;
     }
 
-    public Teams getTeamId() {
+    @JoinColumn(name = "team_id", referencedColumnName = "id")
+    @ManyToOne
+    public Team getTeamId() {
         return teamId;
     }
 
-    public void setTeamId(Teams teamId) {
+    public void setTeamId(Team teamId) {
         this.teamId = teamId;
     }
 
-    public Rooms getRoomId() {
+    @JoinColumn(name = "room_id", referencedColumnName = "id")
+    @ManyToOne
+    public Room getRoomId() {
         return roomId;
     }
 
-    public void setRoomId(Rooms roomId) {
+    public void setRoomId(Room roomId) {
         this.roomId = roomId;
     }
 
+    @JoinColumn(name = "city_id", referencedColumnName = "id")
+    @ManyToOne
     public City getCityId() {
         return cityId;
     }
@@ -287,10 +280,10 @@ public class Users implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Users)) {
+        if (!(object instanceof User)) {
             return false;
         }
-        Users other = (Users) object;
+        User other = (User) object;
         return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
@@ -299,6 +292,7 @@ public class Users implements Serializable {
         return "org.igo.ban.ejb.Users[ id=" + id + " ]";
     }
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "users")
     @XmlTransient
     public Collection<UsersGames> getUsersGamesCollection() {
         return usersGamesCollection;
@@ -308,6 +302,7 @@ public class Users implements Serializable {
         this.usersGamesCollection = usersGamesCollection;
     }
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "users")
     @XmlTransient
     public Collection<UsersDegrees> getUsersDegreesCollection() {
         return usersDegreesCollection;
@@ -317,15 +312,17 @@ public class Users implements Serializable {
         this.usersDegreesCollection = usersDegreesCollection;
     }
 
+    @OneToMany(mappedBy = "userId")
     @XmlTransient
-    public Collection<MovesComments> getMovesCommentsCollection() {
+    public Collection<MoveComment> getMovesCommentsCollection() {
         return movesCommentsCollection;
     }
 
-    public void setMovesCommentsCollection(Collection<MovesComments> movesCommentsCollection) {
+    public void setMovesCommentsCollection(Collection<MoveComment> movesCommentsCollection) {
         this.movesCommentsCollection = movesCommentsCollection;
     }
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     @XmlTransient
     public Collection<GameComment> getGamesCommentsCollection() {
         return gamesCommentsCollection;
@@ -334,5 +331,5 @@ public class Users implements Serializable {
     public void setGamesCommentsCollection(Collection<GameComment> gamesCommentsCollection) {
         this.gamesCommentsCollection = gamesCommentsCollection;
     }
-    
+
 }

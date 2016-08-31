@@ -5,6 +5,7 @@
  */
 package org.igo.entities;
 
+import java.util.Collection;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -16,88 +17,115 @@ import static org.junit.Assert.*;
  *
  * @author surzhin.konstantin
  */
-public class PlacesTest {
-    
-    public PlacesTest() {
+public class RoomTest {
+
+    public RoomTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
 
     /**
-     * Test of getId method, of class Places.
+     * Test of getId method, of class Room.
      */
     @Test
     public void testGetId() {
         System.out.println("getId");
-        Places instance = new Places();
-        Long expResult = null;
-        Integer result = instance.getId();
+        Room instance = new Room();
+        Short expResult = null;
+        Short result = instance.getId();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of setId method, of class Places.
+     * Test of setId method, of class Room.
      */
     @Test
     public void testSetId() {
         System.out.println("setId");
-        Integer id = null;
-        Places instance = new Places();
+         Short id = null;
+        Room instance = new Room();
         instance.setId(id);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getPlaceName method, of class Places.
+     * Test of getRoomName method, of class Room.
      */
     @Test
-    public void testGetPlaceName() {
-        System.out.println("getPlaceName");
-        Places instance = new Places();
+    public void testGetRoomName() {
+        System.out.println("getRoomName");
+        Room instance = new Room();
         String expResult = "";
-        String result = instance.getPlaceName();
+        String result = instance.getRoomName();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of setPlaceName method, of class Places.
+     * Test of setRoomName method, of class Room.
      */
     @Test
-    public void testSetPlaceName() {
-        System.out.println("setPlaceName");
-        String placeName = "";
-        Places instance = new Places();
-        instance.setPlaceName(placeName);
+    public void testSetRoomName() {
+        System.out.println("setRoomName");
+        String roomName = "";
+        Room instance = new Room();
+        instance.setRoomName(roomName);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of hashCode method, of class Places.
+     * Test of getUsersCollection method, of class Room.
+     */
+    @Test
+    public void testGetUsersCollection() {
+        System.out.println("getUsersCollection");
+        Room instance = new Room();
+        Collection<User> expResult = null;
+        Collection<User> result = instance.getUsersCollection();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setUsersCollection method, of class Room.
+     */
+    @Test
+    public void testSetUsersCollection() {
+        System.out.println("setUsersCollection");
+        Collection<User> usersCollection = null;
+        Room instance = new Room();
+        instance.setUsersCollection(usersCollection);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of hashCode method, of class Room.
      */
     @Test
     public void testHashCode() {
         System.out.println("hashCode");
-        Places instance = new Places();
+        Room instance = new Room();
         int expResult = 0;
         int result = instance.hashCode();
         assertEquals(expResult, result);
@@ -106,13 +134,13 @@ public class PlacesTest {
     }
 
     /**
-     * Test of equals method, of class Places.
+     * Test of equals method, of class Room.
      */
     @Test
     public void testEquals() {
         System.out.println("equals");
         Object object = null;
-        Places instance = new Places();
+        Room instance = new Room();
         boolean expResult = false;
         boolean result = instance.equals(object);
         assertEquals(expResult, result);
@@ -121,17 +149,17 @@ public class PlacesTest {
     }
 
     /**
-     * Test of toString method, of class Places.
+     * Test of toString method, of class Room.
      */
     @Test
     public void testToString() {
         System.out.println("toString");
-        Places instance = new Places();
+        Room instance = new Room();
         String expResult = "";
         String result = instance.toString();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-    
+
 }

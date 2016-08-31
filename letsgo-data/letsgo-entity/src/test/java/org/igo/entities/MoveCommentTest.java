@@ -18,9 +18,9 @@ import static org.junit.Assert.*;
  *
  * @author surzhin.konstantin
  */
-public class MovesCommentsTest {
+public class MoveCommentTest {
     
-    public MovesCommentsTest() {
+    public MoveCommentTest() {
     }
     
     @BeforeClass
@@ -40,12 +40,12 @@ public class MovesCommentsTest {
     }
 
     /**
-     * Test of getId method, of class MovesComments.
+     * Test of getId method, of class MoveComment.
      */
     @Test
     public void testGetId() {
         System.out.println("getId");
-        MovesComments instance = new MovesComments();
+        MoveComment instance = new MoveComment();
         Long expResult = null;
         Long result = instance.getId();
         assertEquals(expResult, result);
@@ -54,25 +54,25 @@ public class MovesCommentsTest {
     }
 
     /**
-     * Test of setId method, of class MovesComments.
+     * Test of setId method, of class MoveComment.
      */
     @Test
     public void testSetId() {
         System.out.println("setId");
         Long id = null;
-        MovesComments instance = new MovesComments();
+        MoveComment instance = new MoveComment();
         instance.setId(id);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getMoveComment method, of class MovesComments.
+     * Test of getMoveComment method, of class MoveComment.
      */
     @Test
     public void testGetMoveComment() {
         System.out.println("getMoveComment");
-        MovesComments instance = new MovesComments();
+        MoveComment instance = new MoveComment();
         String expResult = "";
         String result = instance.getMoveComment();
         assertEquals(expResult, result);
@@ -81,25 +81,25 @@ public class MovesCommentsTest {
     }
 
     /**
-     * Test of setMoveComment method, of class MovesComments.
+     * Test of setMoveComment method, of class MoveComment.
      */
     @Test
     public void testSetMoveComment() {
         System.out.println("setMoveComment");
         String moveComment = "";
-        MovesComments instance = new MovesComments();
+        MoveComment instance = new MoveComment();
         instance.setMoveComment(moveComment);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getPostDateTime method, of class MovesComments.
+     * Test of getPostDateTime method, of class MoveComment.
      */
     @Test
     public void testGetPostDateTime() {
         System.out.println("getPostDateTime");
-        MovesComments instance = new MovesComments();
+        MoveComment instance = new MoveComment();
         Date expResult = null;
         Date result = instance.getPostDateTime();
         assertEquals(expResult, result);
@@ -108,133 +108,133 @@ public class MovesCommentsTest {
     }
 
     /**
-     * Test of setPostDateTime method, of class MovesComments.
+     * Test of setPostDateTime method, of class MoveComment.
      */
     @Test
     public void testSetPostDateTime() {
         System.out.println("setPostDateTime");
         Date postDateTime = null;
-        MovesComments instance = new MovesComments();
+        MoveComment instance = new MoveComment();
         instance.setPostDateTime(postDateTime);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getGamesMoves method, of class MovesComments.
+     * Test of getGamesMoves method, of class MoveComment.
      */
     @Test
     public void testGetGamesMoves() {
         System.out.println("getGamesMoves");
-        MovesComments instance = new MovesComments();
-        GamesMoves expResult = null;
-        GamesMoves result = instance.getGamesMoves();
+        MoveComment instance = new MoveComment();
+        GameMove expResult = null;
+        GameMove result = instance.getGamesMoves();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of setGamesMoves method, of class MovesComments.
+     * Test of setGamesMoves method, of class MoveComment.
      */
     @Test
     public void testSetGamesMoves() {
         System.out.println("setGamesMoves");
-        GamesMoves gamesMoves = null;
-        MovesComments instance = new MovesComments();
+        GameMove gamesMoves = null;
+        MoveComment instance = new MoveComment();
         instance.setGamesMoves(gamesMoves);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getMovesCommentsCollection method, of class MovesComments.
+     * Test of getMovesCommentsCollection method, of class MoveComment.
      */
     @Test
     public void testGetMovesCommentsCollection() {
         System.out.println("getMovesCommentsCollection");
-        MovesComments instance = new MovesComments();
-        Collection<MovesComments> expResult = null;
-        Collection<MovesComments> result = instance.getMovesCommentsCollection();
+        MoveComment instance = new MoveComment();
+        Collection<MoveComment> expResult = null;
+        Collection<MoveComment> result = instance.getMovesCommentsCollection();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of setMovesCommentsCollection method, of class MovesComments.
+     * Test of setMovesCommentsCollection method, of class MoveComment.
      */
     @Test
     public void testSetMovesCommentsCollection() {
         System.out.println("setMovesCommentsCollection");
-        Collection<MovesComments> movesCommentsCollection = null;
-        MovesComments instance = new MovesComments();
+        Collection<MoveComment> movesCommentsCollection = null;
+        MoveComment instance = new MoveComment();
         instance.setMovesCommentsCollection(movesCommentsCollection);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getInReplayToId method, of class MovesComments.
+     * Test of getInReplayToId method, of class MoveComment.
      */
     @Test
     public void testGetInReplayToId() {
         System.out.println("getInReplayToId");
-        MovesComments instance = new MovesComments();
-        MovesComments expResult = null;
-        MovesComments result = instance.getInReplayToId();
+        MoveComment instance = new MoveComment();
+        MoveComment expResult = null;
+        MoveComment result = instance.getInReplayToId();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of setInReplayToId method, of class MovesComments.
+     * Test of setInReplayToId method, of class MoveComment.
      */
     @Test
     public void testSetInReplayToId() {
         System.out.println("setInReplayToId");
-        MovesComments inReplayToId = null;
-        MovesComments instance = new MovesComments();
+        MoveComment inReplayToId = null;
+        MoveComment instance = new MoveComment();
         instance.setInReplayToId(inReplayToId);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getUserId method, of class MovesComments.
+     * Test of getUserId method, of class MoveComment.
      */
     @Test
     public void testGetUserId() {
         System.out.println("getUserId");
-        MovesComments instance = new MovesComments();
-        Users expResult = null;
-        Users result = instance.getUserId();
+        MoveComment instance = new MoveComment();
+        User expResult = null;
+        User result = instance.getUserId();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of setUserId method, of class MovesComments.
+     * Test of setUserId method, of class MoveComment.
      */
     @Test
     public void testSetUserId() {
         System.out.println("setUserId");
-        Users userId = null;
-        MovesComments instance = new MovesComments();
+        User userId = null;
+        MoveComment instance = new MoveComment();
         instance.setUserId(userId);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of hashCode method, of class MovesComments.
+     * Test of hashCode method, of class MoveComment.
      */
     @Test
     public void testHashCode() {
         System.out.println("hashCode");
-        MovesComments instance = new MovesComments();
+        MoveComment instance = new MoveComment();
         int expResult = 0;
         int result = instance.hashCode();
         assertEquals(expResult, result);
@@ -243,13 +243,13 @@ public class MovesCommentsTest {
     }
 
     /**
-     * Test of equals method, of class MovesComments.
+     * Test of equals method, of class MoveComment.
      */
     @Test
     public void testEquals() {
         System.out.println("equals");
         Object object = null;
-        MovesComments instance = new MovesComments();
+        MoveComment instance = new MoveComment();
         boolean expResult = false;
         boolean result = instance.equals(object);
         assertEquals(expResult, result);
@@ -258,12 +258,12 @@ public class MovesCommentsTest {
     }
 
     /**
-     * Test of toString method, of class MovesComments.
+     * Test of toString method, of class MoveComment.
      */
     @Test
     public void testToString() {
         System.out.println("toString");
-        MovesComments instance = new MovesComments();
+        MoveComment instance = new MoveComment();
         String expResult = "";
         String result = instance.toString();
         assertEquals(expResult, result);

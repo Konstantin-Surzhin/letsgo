@@ -44,7 +44,7 @@ public class UsersGames implements Serializable {
     private Game games;
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private Users users;
+    private User users;
 
     public UsersGames() {
     }
@@ -86,11 +86,11 @@ public class UsersGames implements Serializable {
         this.games = games;
     }
 
-    public Users getUsers() {
+    public User getUsers() {
         return users;
     }
 
-    public void setUsers(Users users) {
+    public void setUsers(User users) {
         this.users = users;
     }
 

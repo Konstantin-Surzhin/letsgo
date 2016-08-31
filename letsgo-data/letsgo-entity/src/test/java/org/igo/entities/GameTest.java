@@ -315,8 +315,8 @@ public class GameTest {
     public void testGetGamesMovesCollection() {
         System.out.println("getGamesMovesCollection");
         Game instance = new Game();
-        Collection<GamesMoves> expResult = null;
-        Collection<GamesMoves> result = instance.getGamesMovesCollection();
+        Collection<GameMove> expResult = null;
+        Collection<GameMove> result = instance.getGamesMovesCollection();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -328,7 +328,7 @@ public class GameTest {
     @Test
     public void testSetGamesMovesCollection() {
         System.out.println("setGamesMovesCollection");
-        Collection<GamesMoves> gamesMovesCollection = null;
+        Collection<GameMove> gamesMovesCollection = null;
         Game instance = new Game();
         instance.setGamesMovesCollection(gamesMovesCollection);
         // TODO review the generated test code and remove the default call to fail.

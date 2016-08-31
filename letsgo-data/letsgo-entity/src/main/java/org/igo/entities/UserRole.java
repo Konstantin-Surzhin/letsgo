@@ -27,35 +27,42 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author surzhin.konstantin
  */
 @Entity
-@Table(name = "rooms")
+@Table(name = "userroles")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Rooms.findAll", query = "SELECT r FROM Rooms r"),
-    @NamedQuery(name = "Rooms.findById", query = "SELECT r FROM Rooms r WHERE r.id = :id"),
-    @NamedQuery(name = "Rooms.findByRoomName", query = "SELECT r FROM Rooms r WHERE r.roomName = :roomName")})
-public class Rooms implements Serializable {
+    @NamedQuery(name = "UserRole.findAll", query = "SELECT u FROM UserRole u"),
+    @NamedQuery(name = "UserRole.findById", query = "SELECT u FROM UserRole u WHERE u.id = :id"),
+    @NamedQuery(name = "UserRole.findByUsername", query = "SELECT u FROM UserRole u WHERE u.username = :username"),
+    @NamedQuery(name = "UserRole.findByUserrole", query = "SELECT u FROM UserRole u WHERE u.userrole = :userrole")})
+public class UserRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     private Short id;
-    private String roomName;
-    private Collection<Users> usersCollection;
 
-    public Rooms() {
+    private String username;
+    @NotNull
+    @Size(min = 1, max = 255)
+    private String userrole;
+    private Collection<User> usersCollection;
+
+    public UserRole() {
     }
 
-    public Rooms(Short id) {
+    public UserRole(Short id) {
         this.id = id;
     }
 
-    public Rooms(Short id, String roomName) {
+    public UserRole(Short id, String username, String userrole) {
         this.id = id;
-        this.roomName = roomName;
+        this.username = username;
+        this.userrole = userrole;
     }
 
-    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
+    @Id
     public Short getId() {
         return id;
     }
@@ -65,24 +72,33 @@ public class Rooms implements Serializable {
     }
 
     @Basic(optional = false)
-    @Column(name = "room_name")
-    @NotNull
+    @Column(name = "username", nullable = false, unique = true, length = 255)
     @Size(min = 1, max = 255)
-    public String getRoomName() {
-        return roomName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setRoomName(String roomName) {
-        this.roomName = roomName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    @OneToMany(mappedBy = "roomId")
+    @Basic(optional = false)
+    @Column(name = "userrole")
+    public String getUserrole() {
+        return userrole;
+    }
+
+    public void setUserrole(String userrole) {
+        this.userrole = userrole;
+    }
+
+    @OneToMany(mappedBy = "roleId")
     @XmlTransient
-    public Collection<Users> getUsersCollection() {
+    public Collection<User> getUsersCollection() {
         return usersCollection;
     }
 
-    public void setUsersCollection(Collection<Users> usersCollection) {
+    public void setUsersCollection(Collection<User> usersCollection) {
         this.usersCollection = usersCollection;
     }
 
@@ -96,10 +112,10 @@ public class Rooms implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Rooms)) {
+        if (!(object instanceof UserRole)) {
             return false;
         }
-        Rooms other = (Rooms) object;
+        UserRole other = (UserRole) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -108,7 +124,7 @@ public class Rooms implements Serializable {
 
     @Override
     public String toString() {
-        return "org.igo.ban.ejb.Rooms[ id=" + id + " ]";
+        return "org.igo.ban.ejb.Userroles[ id=" + id + " ]";
     }
 
 }

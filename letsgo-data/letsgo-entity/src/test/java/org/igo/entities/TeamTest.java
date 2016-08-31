@@ -17,35 +17,35 @@ import static org.junit.Assert.*;
  *
  * @author surzhin.konstantin
  */
-public class LeaguesTest {
-    
-    public LeaguesTest() {
+public class TeamTest {
+
+    public TeamTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
 
     /**
-     * Test of getId method, of class Leagues.
+     * Test of getId method, of class Team.
      */
     @Test
     public void testGetId() {
         System.out.println("getId");
-        Leagues instance = new Leagues();
-        Long expResult = null;
+        Team instance = new Team();
+        Short expResult = null;
         Short result = instance.getId();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
@@ -53,106 +53,106 @@ public class LeaguesTest {
     }
 
     /**
-     * Test of setId method, of class Leagues.
+     * Test of setId method, of class Team.
      */
     @Test
     public void testSetId() {
         System.out.println("setId");
         Short id = null;
-        Leagues instance = new Leagues();
+        Team instance = new Team();
         instance.setId(id);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getLeagueName method, of class Leagues.
+     * Test of getTeamName method, of class Team.
      */
     @Test
-    public void testGetLeagueName() {
-        System.out.println("getLeagueName");
-        Leagues instance = new Leagues();
+    public void testGetTeamName() {
+        System.out.println("getTeamName");
+        Team instance = new Team();
         String expResult = "";
-        String result = instance.getLeagueName();
+        String result = instance.getTeamName();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of setLeagueName method, of class Leagues.
+     * Test of setTeamName method, of class Team.
      */
     @Test
-    public void testSetLeagueName() {
-        System.out.println("setLeagueName");
-        String leagueName = "";
-        Leagues instance = new Leagues();
-        instance.setLeagueName(leagueName);
+    public void testSetTeamName() {
+        System.out.println("setTeamName");
+        String teamName = "";
+        Team instance = new Team();
+        instance.setTeamName(teamName);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getTeamsCollection method, of class Leagues.
+     * Test of getLeagueId method, of class Team.
      */
     @Test
-    public void testGetTeamsCollection() {
-        System.out.println("getTeamsCollection");
-        Leagues instance = new Leagues();
-        Collection<Teams> expResult = null;
-        Collection<Teams> result = instance.getTeamsCollection();
+    public void testGetLeagueId() {
+        System.out.println("getLeagueId");
+        Team instance = new Team();
+        League expResult = null;
+        League result = instance.getLeagueId();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of setTeamsCollection method, of class Leagues.
+     * Test of setLeagueId method, of class Team.
      */
     @Test
-    public void testSetTeamsCollection() {
-        System.out.println("setTeamsCollection");
-        Collection<Teams> teamsCollection = null;
-        Leagues instance = new Leagues();
-        instance.setTeamsCollection(teamsCollection);
+    public void testSetLeagueId() {
+        System.out.println("setLeagueId");
+        League leagueId = null;
+        Team instance = new Team();
+        instance.setLeagueId(leagueId);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getUsersCollection method, of class Leagues.
+     * Test of getUsersCollection method, of class Team.
      */
     @Test
     public void testGetUsersCollection() {
         System.out.println("getUsersCollection");
-        Leagues instance = new Leagues();
-        Collection<Users> expResult = null;
-        Collection<Users> result = instance.getUsersCollection();
+        Team instance = new Team();
+        Collection<User> expResult = null;
+        Collection<User> result = instance.getUsersCollection();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of setUsersCollection method, of class Leagues.
+     * Test of setUsersCollection method, of class Team.
      */
     @Test
     public void testSetUsersCollection() {
         System.out.println("setUsersCollection");
-        Collection<Users> usersCollection = null;
-        Leagues instance = new Leagues();
+        Collection<User> usersCollection = null;
+        Team instance = new Team();
         instance.setUsersCollection(usersCollection);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of hashCode method, of class Leagues.
+     * Test of hashCode method, of class Team.
      */
     @Test
     public void testHashCode() {
         System.out.println("hashCode");
-        Leagues instance = new Leagues();
+        Team instance = new Team();
         int expResult = 0;
         int result = instance.hashCode();
         assertEquals(expResult, result);
@@ -161,13 +161,13 @@ public class LeaguesTest {
     }
 
     /**
-     * Test of equals method, of class Leagues.
+     * Test of equals method, of class Team.
      */
     @Test
     public void testEquals() {
         System.out.println("equals");
         Object object = null;
-        Leagues instance = new Leagues();
+        Team instance = new Team();
         boolean expResult = false;
         boolean result = instance.equals(object);
         assertEquals(expResult, result);
@@ -176,17 +176,17 @@ public class LeaguesTest {
     }
 
     /**
-     * Test of toString method, of class Leagues.
+     * Test of toString method, of class Team.
      */
     @Test
     public void testToString() {
         System.out.println("toString");
-        Leagues instance = new Leagues();
+        Team instance = new Team();
         String expResult = "";
         String result = instance.toString();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-    
+
 }

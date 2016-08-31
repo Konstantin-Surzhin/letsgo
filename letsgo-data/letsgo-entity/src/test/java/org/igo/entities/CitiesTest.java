@@ -107,8 +107,8 @@ public class CitiesTest {
     public void testGetUsersCollection() {
         System.out.println("getUsers");
         City instance = new City();
-        Set<Users> expResult = null;
-        Set<Users> result = instance.getUsersCollection();
+        Set<User> expResult = null;
+        Set<User> result = instance.getUsersCollection();
         assertEquals(expResult, result);
 
     }
@@ -119,7 +119,7 @@ public class CitiesTest {
     @Test
     public void testSetUsersCollection() {
         System.out.println("setUsers");
-        Set<Users> users = null;
+        Set<User> users = null;
         City instance = new City();
         instance.setUsersCollection(users);
 

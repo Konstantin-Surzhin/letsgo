@@ -38,7 +38,7 @@ public class City implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer id;
     private Map<String, String> cityName;
-    private Set<Users> usersCollection;
+    private Set<User> usersCollection;
 
     public City() {
     }
@@ -65,11 +65,11 @@ public class City implements Serializable {
     }
 
     @OneToMany(mappedBy = "cityId")
-    public Set<Users> getUsersCollection() {
+    public Set<User> getUsersCollection() {
         return usersCollection;
     }
 
-    public void setUsersCollection(Set<Users> usersCollection) {
+    public void setUsersCollection(Set<User> usersCollection) {
         this.usersCollection = usersCollection;
     }
 

@@ -16,9 +16,9 @@ import static org.junit.Assert.*;
  *
  * @author surzhin.konstantin
  */
-public class GamesMovesPKTest {
+public class GameMovePKTest {
     
-    public GamesMovesPKTest() {
+    public GameMovePKTest() {
     }
     
     @BeforeClass
@@ -38,12 +38,12 @@ public class GamesMovesPKTest {
     }
 
     /**
-     * Test of getGameId method, of class GamesMovesPK.
+     * Test of getGameId method, of class GameMovePK.
      */
     @Test
     public void testGetGameId() {
         System.out.println("getGameId");
-        GamesMovesPK instance = new GamesMovesPK();
+        GameMovePK instance = new GameMovePK();
         long expResult = 0L;
         long result = instance.getGameId();
         assertEquals(expResult, result);
@@ -52,25 +52,25 @@ public class GamesMovesPKTest {
     }
 
     /**
-     * Test of setGameId method, of class GamesMovesPK.
+     * Test of setGameId method, of class GameMovePK.
      */
     @Test
     public void testSetGameId() {
         System.out.println("setGameId");
         long gameId = 0L;
-        GamesMovesPK instance = new GamesMovesPK();
+        GameMovePK instance = new GameMovePK();
         instance.setGameId(gameId);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getNdx method, of class GamesMovesPK.
+     * Test of getNdx method, of class GameMovePK.
      */
     @Test
     public void testGetNdx() {
         System.out.println("getNdx");
-        GamesMovesPK instance = new GamesMovesPK();
+        GameMovePK instance = new GameMovePK();
         int expResult = 0;
         int result = instance.getNdx();
         assertEquals(expResult, result);
@@ -79,25 +79,25 @@ public class GamesMovesPKTest {
     }
 
     /**
-     * Test of setNdx method, of class GamesMovesPK.
+     * Test of setNdx method, of class GameMovePK.
      */
     @Test
     public void testSetNdx() {
         System.out.println("setNdx");
         int ndx = 0;
-        GamesMovesPK instance = new GamesMovesPK();
+        GameMovePK instance = new GameMovePK();
         instance.setNdx(ndx);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of hashCode method, of class GamesMovesPK.
+     * Test of hashCode method, of class GameMovePK.
      */
     @Test
     public void testHashCode() {
         System.out.println("hashCode");
-        GamesMovesPK instance = new GamesMovesPK();
+        GameMovePK instance = new GameMovePK();
         int expResult = 0;
         int result = instance.hashCode();
         assertEquals(expResult, result);
@@ -106,13 +106,13 @@ public class GamesMovesPKTest {
     }
 
     /**
-     * Test of equals method, of class GamesMovesPK.
+     * Test of equals method, of class GameMovePK.
      */
     @Test
     public void testEquals() {
         System.out.println("equals");
         Object object = null;
-        GamesMovesPK instance = new GamesMovesPK();
+        GameMovePK instance = new GameMovePK();
         boolean expResult = false;
         boolean result = instance.equals(object);
         assertEquals(expResult, result);
@@ -121,12 +121,12 @@ public class GamesMovesPKTest {
     }
 
     /**
-     * Test of toString method, of class GamesMovesPK.
+     * Test of toString method, of class GameMovePK.
      */
     @Test
     public void testToString() {
         System.out.println("toString");
-        GamesMovesPK instance = new GamesMovesPK();
+        GameMovePK instance = new GameMovePK();
         String expResult = "";
         String result = instance.toString();
         assertEquals(expResult, result);

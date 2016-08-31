@@ -38,7 +38,7 @@ public class UsersDegrees implements Serializable {
     private Integer degreeType;
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private Users users;
+    private User users;
     @JoinColumn(name = "degree_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
     private Degree degreeId;
@@ -70,11 +70,11 @@ public class UsersDegrees implements Serializable {
         this.degreeType = degreeType;
     }
 
-    public Users getUsers() {
+    public User getUsers() {
         return users;
     }
 
-    public void setUsers(Users users) {
+    public void setUsers(User users) {
         this.users = users;
     }
 

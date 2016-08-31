@@ -208,8 +208,8 @@ public class GameCommentTest {
     public void testGetUserId() {
         System.out.println("getUserId");
         GameComment instance = new GameComment();
-        Users expResult = null;
-        Users result = instance.getUserId();
+        User expResult = null;
+        User result = instance.getUserId();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -221,7 +221,7 @@ public class GameCommentTest {
     @Test
     public void testSetUserId() {
         System.out.println("setUserId");
-        Users userId = null;
+        User userId = null;
         GameComment instance = new GameComment();
         instance.setUserId(userId);
         // TODO review the generated test code and remove the default call to fail.
