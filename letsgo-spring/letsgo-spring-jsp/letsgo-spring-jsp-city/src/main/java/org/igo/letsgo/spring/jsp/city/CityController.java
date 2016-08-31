@@ -6,8 +6,14 @@
 package org.igo.letsgo.spring.jsp.city;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  *
@@ -16,11 +22,18 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class CityController {
 
-    @RequestMapping(value = "/index")
-    public ModelAndView sayHello() {
-        ModelAndView mv = new ModelAndView();
-        mv.addObject("message", "Hello World!");
-        mv.setViewName("index");
-        return mv;
+    @GetMapping(value = "/index")
+    public String index(Model model) {
+        model.addAttribute("city", new City());
+        return "index";
+    }
+
+    @PostMapping(value = "addCity")
+    public String addCity(Model model, @ModelAttribute City city) {
+
+        model.addAttribute("name", city.getName());
+        model.addAttribute("lang", city.getLanguage());
+        model.addAttribute("id", city.getId());
+        return "result";
     }
 }
