@@ -51,7 +51,7 @@ public class GamesMoves implements Serializable {
     private Collection<MovesComments> movesCommentsCollection;
     @JoinColumn(name = "game_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private Games games;
+    private Game games;
 
     public GamesMoves() {
     }
@@ -103,11 +103,11 @@ public class GamesMoves implements Serializable {
         this.movesCommentsCollection = movesCommentsCollection;
     }
 
-    public Games getGames() {
+    public Game getGames() {
         return games;
     }
 
-    public void setGames(Games games) {
+    public void setGames(Game games) {
         this.games = games;
     }
 

@@ -29,41 +29,34 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author surzhin.konstantin
  */
 @Entity
-@Table(catalog = "letsgo", schema = "", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"degree_value"})})
+@Table(name = "degrees" , catalog = "letsgo", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Degrees.findAll", query = "SELECT d FROM Degrees d"),
-    @NamedQuery(name = "Degrees.findById", query = "SELECT d FROM Degrees d WHERE d.id = :id"),
-    @NamedQuery(name = "Degrees.findByDegreeValue", query = "SELECT d FROM Degrees d WHERE d.degreeValue = :degreeValue")})
-public class Degrees implements Serializable {
+    @NamedQuery(name = "Degree.findAll", query = "SELECT d FROM Degree d"),
+    @NamedQuery(name = "Degree.findById", query = "SELECT d FROM Degree d WHERE d.id = :id"),
+    @NamedQuery(name = "Degree.findByDegreeValue", query = "SELECT d FROM Degree d WHERE d.degreeValue = :degreeValue")})
+public class Degree implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    private Byte id;
+    private String degreeValue;
+    private Collection<UsersDegrees> usersDegreesCollection;
+
+    public Degree() {
+    }
+
+    public Degree(Byte id) {
+        this.id = id;
+    }
+
+    public Degree(Byte id, String degreeValue) {
+        this.id = id;
+        this.degreeValue = degreeValue;
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(nullable = false)
-    private Byte id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "degree_value", nullable = false, length = 255)
-    private String degreeValue;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "degreeId")
-    private Collection<UsersDegrees> usersDegreesCollection;
-
-    public Degrees() {
-    }
-
-    public Degrees(Byte id) {
-        this.id = id;
-    }
-
-    public Degrees(Byte id, String degreeValue) {
-        this.id = id;
-        this.degreeValue = degreeValue;
-    }
-
     public Byte getId() {
         return id;
     }
@@ -72,6 +65,10 @@ public class Degrees implements Serializable {
         this.id = id;
     }
 
+    @Basic(optional = false)
+        @NotNull
+    @Size(min = 1, max = 255)
+    @Column(name = "degree_value", nullable = false, length = 255, unique = true)
     public String getDegreeValue() {
         return degreeValue;
     }
@@ -80,6 +77,7 @@ public class Degrees implements Serializable {
         this.degreeValue = degreeValue;
     }
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "degreeId")
     @XmlTransient
     public Collection<UsersDegrees> getUsersDegreesCollection() {
         return usersDegreesCollection;
@@ -99,10 +97,10 @@ public class Degrees implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Degrees)) {
+        if (!(object instanceof Degree)) {
             return false;
         }
-        Degrees other = (Degrees) object;
+        Degree other = (Degree) object;
         return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 

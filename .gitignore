@@ -148,3 +148,6 @@ hs_err_pid*
 /letsgo-spring/spring-angular-bootstrap/letsgo-spring-city-angular-bootstrap/target/
 /letsgo-spring/spring-angular-bootstrap/letsgo-spring-angular-bootstrap-city/target/
 /letsgo-spring/letsgo-spring-jsp/letsgo-spring-jsp-city/target/
+/letsgo-rest/letsgo-rest-game/target/
+/letsgo-rest/letsgo-rest-place/target/
+/letsgo-rest/letsgo-rest-degree/target/

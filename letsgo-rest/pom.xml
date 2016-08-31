@@ -9,8 +9,9 @@
     <artifactId>letsgo-rest</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>letsgo-game-rest</module>
-        <module>letsgo-place-rest</module>
-    </modules>
+        <module>letsgo-rest-game</module>
+        <module>letsgo-rest-place</module>
+    <module>letsgo-rest-degree</module>
+  </modules>
     <name>letsgo-rest</name>
 </project>

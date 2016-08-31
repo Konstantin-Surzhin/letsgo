@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-    <persistence-unit name="gamePU" transaction-type="JTA">
-        <jta-data-source>java:/jboss/datasources/MySQLDS</jta-data-source>
-        <class>org.igo.entities.City</class>
-        <class>org.igo.entities.Degrees</class>
-        <class>org.igo.entities.Events</class>
-        <class>org.igo.entities.GameRule</class>
-        <class>org.igo.entities.Games</class>
-        <class>org.igo.entities.GamesComments</class>
-        <class>org.igo.entities.GamesDates</class>
-        <class>org.igo.entities.GamesMoves</class>
-        <class>org.igo.entities.Leagues</class>
-        <class>org.igo.entities.MovesComments</class>
-        <class>org.igo.entities.Places</class>
-        <class>org.igo.entities.Rooms</class>
-        <class>org.igo.entities.Teams</class>
-        <class>org.igo.entities.Userroles</class>
-        <class>org.igo.entities.Users</class>
-        <class>org.igo.entities.UsersBans</class>
-        <class>org.igo.entities.UsersDegrees</class>
-        <class>org.igo.entities.UsersGames</class>
-        <class>org.igo.entities.ResourseBandle</class>
-        <properties/>
-    </persistence-unit>
+  <persistence-unit name="gamePU" transaction-type="JTA">
+    <jta-data-source>java:/jboss/datasources/MySQLDS</jta-data-source>
+    <class>org.igo.entities.City</class>
+    <class>org.igo.entities.GameRule</class>
+    <class>org.igo.entities.GamesMoves</class>
+    <class>org.igo.entities.Leagues</class>
+    <class>org.igo.entities.MovesComments</class>
+    <class>org.igo.entities.Places</class>
+    <class>org.igo.entities.Rooms</class>
+    <class>org.igo.entities.Teams</class>
+    <class>org.igo.entities.Userroles</class>
+    <class>org.igo.entities.Users</class>
+    <class>org.igo.entities.UsersBans</class>
+    <class>org.igo.entities.UsersDegrees</class>
+    <class>org.igo.entities.UsersGames</class>
+    <class>org.igo.entities.ResourseBandle</class>
+    <class>org.igo.entities.Degree</class>
+    <class>org.igo.entities.Event</class>
+    <class>org.igo.entities.Game</class>
+    <class>org.igo.entities.GameComment</class>
+    <class>org.igo.entities.GameDate</class>
+    <properties/>
+  </persistence-unit>
 </persistence>

@@ -41,7 +41,7 @@ public class UsersGames implements Serializable {
     private int color;
     @JoinColumn(name = "game_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private Games games;
+    private Game games;
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Users users;
@@ -78,11 +78,11 @@ public class UsersGames implements Serializable {
         this.color = color;
     }
 
-    public Games getGames() {
+    public Game getGames() {
         return games;
     }
 
-    public void setGames(Games games) {
+    public void setGames(Game games) {
         this.games = games;
     }
 

@@ -20,7 +20,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -29,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author surzhin.konstantin
  */
 @Entity
-@Table(catalog = "letsgo", schema = "")
+@Table(name = "games", catalog = "letsgo", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Games.findAll", query = "SELECT g FROM Games g"),
@@ -41,59 +40,40 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Games.findByGameStatus", query = "SELECT g FROM Games g WHERE g.gameStatus = :gameStatus"),
     @NamedQuery(name = "Games.findByGameTime", query = "SELECT g FROM Games g WHERE g.gameTime = :gameTime"),
     @NamedQuery(name = "Games.findByGameType", query = "SELECT g FROM Games g WHERE g.gameType = :gameType")})
-public class Games implements Serializable {
+public class Game implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(nullable = false)
     private Long id;
-    @Column(name = "bayomee_number")
     private Short bayomeeNumber;
-    @Column(name = "bayomee_time")
     private Short bayomeeTime;
     private Short gandicap;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "game_size", nullable = false)
     private int gameSize;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "game_status", nullable = false)
     private int gameStatus;
-    @Column(name = "game_time")
     private Short gameTime;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "game_type", nullable = false)
     private int gameType;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "games")
     private Collection<UsersGames> usersGamesCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "gameId")
-    private Collection<GamesComments> gamesCommentsCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "games")
+    private Collection<GameComment> gamesCommentsCollection;
     private Collection<GamesMoves> gamesMovesCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "games")
-    private Collection<GamesDates> gamesDatesCollection;
-    @JoinColumn(name = "event_id", referencedColumnName = "id")
-    @ManyToOne
-    private Events eventId;
+    private Collection<GameDate> gamesDatesCollection;
+    private Event eventId;
 
-    public Games() {
+    public Game() {
     }
 
-    public Games(Long id) {
+    public Game(Long id) {
         this.id = id;
     }
 
-    public Games(Long id, int gameSize, int gameStatus, int gameType) {
+    public Game(Long id, int gameSize, int gameStatus, int gameType) {
         this.id = id;
         this.gameSize = gameSize;
         this.gameStatus = gameStatus;
         this.gameType = gameType;
     }
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(nullable = false)
     public Long getId() {
         return id;
     }
@@ -102,6 +82,7 @@ public class Games implements Serializable {
         this.id = id;
     }
 
+    @Column(name = "bayomee_number")
     public Short getBayomeeNumber() {
         return bayomeeNumber;
     }
@@ -110,6 +91,7 @@ public class Games implements Serializable {
         this.bayomeeNumber = bayomeeNumber;
     }
 
+    @Column(name = "bayomee_time")
     public Short getBayomeeTime() {
         return bayomeeTime;
     }
@@ -126,6 +108,8 @@ public class Games implements Serializable {
         this.gandicap = gandicap;
     }
 
+    @Basic(optional = false)
+    @Column(name = "game_size", nullable = false)
     public int getGameSize() {
         return gameSize;
     }
@@ -134,6 +118,8 @@ public class Games implements Serializable {
         this.gameSize = gameSize;
     }
 
+    @Basic(optional = false)
+    @Column(name = "game_status", nullable = false)
     public int getGameStatus() {
         return gameStatus;
     }
@@ -142,6 +128,7 @@ public class Games implements Serializable {
         this.gameStatus = gameStatus;
     }
 
+    @Column(name = "game_time",nullable = false)
     public Short getGameTime() {
         return gameTime;
     }
@@ -150,6 +137,8 @@ public class Games implements Serializable {
         this.gameTime = gameTime;
     }
 
+    @Basic(optional = false)
+    @Column(name = "game_type", nullable = false)
     public int getGameType() {
         return gameType;
     }
@@ -158,6 +147,7 @@ public class Games implements Serializable {
         this.gameType = gameType;
     }
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "games")
     @XmlTransient
     public Collection<UsersGames> getUsersGamesCollection() {
         return usersGamesCollection;
@@ -167,15 +157,17 @@ public class Games implements Serializable {
         this.usersGamesCollection = usersGamesCollection;
     }
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "gameId")
     @XmlTransient
-    public Collection<GamesComments> getGamesCommentsCollection() {
+    public Collection<GameComment> getGamesCommentsCollection() {
         return gamesCommentsCollection;
     }
 
-    public void setGamesCommentsCollection(Collection<GamesComments> gamesCommentsCollection) {
+    public void setGamesCommentsCollection(Collection<GameComment> gamesCommentsCollection) {
         this.gamesCommentsCollection = gamesCommentsCollection;
     }
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "games")
     @XmlTransient
     public Collection<GamesMoves> getGamesMovesCollection() {
         return gamesMovesCollection;
@@ -185,20 +177,23 @@ public class Games implements Serializable {
         this.gamesMovesCollection = gamesMovesCollection;
     }
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "games")
     @XmlTransient
-    public Collection<GamesDates> getGamesDatesCollection() {
+    public Collection<GameDate> getGamesDatesCollection() {
         return gamesDatesCollection;
     }
 
-    public void setGamesDatesCollection(Collection<GamesDates> gamesDatesCollection) {
+    public void setGamesDatesCollection(Collection<GameDate> gamesDatesCollection) {
         this.gamesDatesCollection = gamesDatesCollection;
     }
 
-    public Events getEventId() {
+    @JoinColumn(name = "event_id", referencedColumnName = "id")
+    @ManyToOne
+    public Event getEventId() {
         return eventId;
     }
 
-    public void setEventId(Events eventId) {
+    public void setEventId(Event eventId) {
         this.eventId = eventId;
     }
 
@@ -212,19 +207,16 @@ public class Games implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Games)) {
+        if (!(object instanceof Game)) {
             return false;
         }
-        Games other = (Games) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        Game other = (Game) object;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     @Override
     public String toString() {
         return "org.igo.entities.Games[ id=" + id + " ]";
     }
-    
+
 }

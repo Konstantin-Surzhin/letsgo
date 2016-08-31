@@ -28,41 +28,35 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author surzhin.konstantin
  */
 @Entity
-@Table(catalog = "letsgo", schema = "", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"event_name"})})
+@Table(name = "events", catalog = "letsgo", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Events.findAll", query = "SELECT e FROM Events e"),
-    @NamedQuery(name = "Events.findById", query = "SELECT e FROM Events e WHERE e.id = :id"),
-    @NamedQuery(name = "Events.findByEventName", query = "SELECT e FROM Events e WHERE e.eventName = :eventName")})
-public class Events implements Serializable {
+    @NamedQuery(name = "Event.findAll", query = "SELECT e FROM Event e"),
+    @NamedQuery(name = "Event.findById", query = "SELECT e FROM Event e WHERE e.id = :id"),
+    @NamedQuery(name = "Event.findByEventName", query = "SELECT e FROM Event e WHERE e.eventName = :eventName")})
+public class Event implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(nullable = false)
     private Short id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "event_name", nullable = false, length = 255)
     private String eventName;
-    @OneToMany(mappedBy = "eventId")
-    private Collection<Games> gamesCollection;
+    private Collection<Game> gamesCollection;
 
-    public Events() {
+    public Event() {
     }
 
-    public Events(Short id) {
+    public Event(Short id) {
         this.id = id;
     }
 
-    public Events(Short id, String eventName) {
+    public Event(Short id, String eventName) {
         this.id = id;
         this.eventName = eventName;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(nullable = false)
     public Short getId() {
         return id;
     }
@@ -71,6 +65,9 @@ public class Events implements Serializable {
         this.id = id;
     }
 
+    @Basic(optional = false)
+    @Size(min = 1, max = 255)
+    @Column(name = "event_name", nullable = false, length = 255, unique = true)
     public String getEventName() {
         return eventName;
     }
@@ -79,12 +76,13 @@ public class Events implements Serializable {
         this.eventName = eventName;
     }
 
+    @OneToMany(mappedBy = "eventId")
     @XmlTransient
-    public Collection<Games> getGamesCollection() {
+    public Collection<Game> getGamesCollection() {
         return gamesCollection;
     }
 
-    public void setGamesCollection(Collection<Games> gamesCollection) {
+    public void setGamesCollection(Collection<Game> gamesCollection) {
         this.gamesCollection = gamesCollection;
     }
 
@@ -98,10 +96,10 @@ public class Events implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Events)) {
+        if (!(object instanceof Event)) {
             return false;
         }
-        Events other = (Events) object;
+        Event other = (Event) object;
         return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
@@ -109,5 +107,5 @@ public class Events implements Serializable {
     public String toString() {
         return "org.igo.entities.Events[ id=" + id + " ]";
     }
-    
+
 }

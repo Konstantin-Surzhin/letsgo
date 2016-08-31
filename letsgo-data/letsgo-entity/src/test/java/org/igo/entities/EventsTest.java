@@ -39,12 +39,12 @@ public class EventsTest {
     }
 
     /**
-     * Test of getId method, of class Events.
+     * Test of getId method, of class Event.
      */
     @Test
     public void testGetId() {
         System.out.println("getId");
-        Events instance = new Events();
+        Event instance = new Event();
         Long expResult = null;
         Short result = instance.getId();
         assertEquals(expResult, result);
@@ -53,25 +53,25 @@ public class EventsTest {
     }
 
     /**
-     * Test of setId method, of class Events.
+     * Test of setId method, of class Event.
      */
     @Test
     public void testSetId() {
         System.out.println("setId");
         Short id = null;
-        Events instance = new Events();
+        Event instance = new Event();
         instance.setId(id);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getEventName method, of class Events.
+     * Test of getEventName method, of class Event.
      */
     @Test
     public void testGetEventName() {
         System.out.println("getEventName");
-        Events instance = new Events();
+        Event instance = new Event();
         String expResult = "";
         String result = instance.getEventName();
         assertEquals(expResult, result);
@@ -80,52 +80,52 @@ public class EventsTest {
     }
 
     /**
-     * Test of setEventName method, of class Events.
+     * Test of setEventName method, of class Event.
      */
     @Test
     public void testSetEventName() {
         System.out.println("setEventName");
         String eventName = "";
-        Events instance = new Events();
+        Event instance = new Event();
         instance.setEventName(eventName);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getGamesCollection method, of class Events.
+     * Test of getGamesCollection method, of class Event.
      */
     @Test
     public void testGetGamesCollection() {
         System.out.println("getGamesCollection");
-        Events instance = new Events();
-        Collection<Games> expResult = null;
-        Collection<Games> result = instance.getGamesCollection();
+        Event instance = new Event();
+        Collection<Game> expResult = null;
+        Collection<Game> result = instance.getGamesCollection();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of setGamesCollection method, of class Events.
+     * Test of setGamesCollection method, of class Event.
      */
     @Test
     public void testSetGamesCollection() {
         System.out.println("setGamesCollection");
-        Collection<Games> gamesCollection = null;
-        Events instance = new Events();
+        Collection<Game> gamesCollection = null;
+        Event instance = new Event();
         instance.setGamesCollection(gamesCollection);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of hashCode method, of class Events.
+     * Test of hashCode method, of class Event.
      */
     @Test
     public void testHashCode() {
         System.out.println("hashCode");
-        Events instance = new Events();
+        Event instance = new Event();
         int expResult = 0;
         int result = instance.hashCode();
         assertEquals(expResult, result);
@@ -134,13 +134,13 @@ public class EventsTest {
     }
 
     /**
-     * Test of equals method, of class Events.
+     * Test of equals method, of class Event.
      */
     @Test
     public void testEquals() {
         System.out.println("equals");
         Object object = null;
-        Events instance = new Events();
+        Event instance = new Event();
         boolean expResult = false;
         boolean result = instance.equals(object);
         assertEquals(expResult, result);
@@ -149,12 +149,12 @@ public class EventsTest {
     }
 
     /**
-     * Test of toString method, of class Events.
+     * Test of toString method, of class Event.
      */
     @Test
     public void testToString() {
         System.out.println("toString");
-        Events instance = new Events();
+        Event instance = new Event();
         String expResult = "";
         String result = instance.toString();
         assertEquals(expResult, result);

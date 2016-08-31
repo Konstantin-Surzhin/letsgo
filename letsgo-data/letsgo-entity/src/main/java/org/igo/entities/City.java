@@ -6,8 +6,6 @@
 package org.igo.entities;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
-import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -24,14 +22,13 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Version;
 
 /**
  *
  * @author surzhin.konstantin
  */
 @Entity
-@Table(name = "cities")
+@Table(name = "cities", catalog = "letsgo", schema = "")
 @NamedQueries({
     @NamedQuery(name = "City.findAll", query = "SELECT c FROM City c"),
     @NamedQuery(name = "City.findById", query = "SELECT c FROM City c WHERE c.id = :id"), //@NamedQuery(name = "City.findByCityName", query = "SELECT c FROM City c WHERE c.cityName = :cityName")
@@ -55,10 +52,10 @@ public class City implements Serializable {
         this.cityName = cityName;
     }
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     @Basic(optional = false)
     @Column(name = "id")
-    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getId() {
         return id;
     }
@@ -104,7 +101,7 @@ public class City implements Serializable {
     @ElementCollection
     @JoinTable(name = "city_name", joinColumns = @JoinColumn(name = "id"))
     @MapKeyColumn(name = "locale")
-    @Column(name = "city_name")
+    @Column(name = "city_name", unique = true)
     public Map<String, String> getCityName() {
         return cityName;
     }

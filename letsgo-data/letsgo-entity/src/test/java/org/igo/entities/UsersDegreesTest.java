@@ -125,8 +125,8 @@ public class UsersDegreesTest {
     public void testGetDegreeId() {
         System.out.println("getDegreeId");
         UsersDegrees instance = new UsersDegrees();
-        Degrees expResult = null;
-        Degrees result = instance.getDegreeId();
+        Degree expResult = null;
+        Degree result = instance.getDegreeId();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -138,7 +138,7 @@ public class UsersDegreesTest {
     @Test
     public void testSetDegreeId() {
         System.out.println("setDegreeId");
-        Degrees degreeId = null;
+        Degree degreeId = null;
         UsersDegrees instance = new UsersDegrees();
         instance.setDegreeId(degreeId);
         // TODO review the generated test code and remove the default call to fail.

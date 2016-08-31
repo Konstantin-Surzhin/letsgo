@@ -58,7 +58,7 @@ public class Users implements Serializable {
     @OneToMany(mappedBy = "userId")
     private Collection<MovesComments> movesCommentsCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private Collection<GamesComments> gamesCommentsCollection;
+    private Collection<GameComment> gamesCommentsCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -327,11 +327,11 @@ public class Users implements Serializable {
     }
 
     @XmlTransient
-    public Collection<GamesComments> getGamesCommentsCollection() {
+    public Collection<GameComment> getGamesCommentsCollection() {
         return gamesCommentsCollection;
     }
 
-    public void setGamesCommentsCollection(Collection<GamesComments> gamesCommentsCollection) {
+    public void setGamesCommentsCollection(Collection<GameComment> gamesCommentsCollection) {
         this.gamesCommentsCollection = gamesCommentsCollection;
     }
     

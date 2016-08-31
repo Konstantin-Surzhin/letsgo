@@ -39,12 +39,12 @@ public class DegreesTest {
     }
 
     /**
-     * Test of getId method, of class Degrees.
+     * Test of getId method, of class Degree.
      */
     @Test
     public void testGetId() {
         System.out.println("getId");
-        Degrees instance = new Degrees();
+        Degree instance = new Degree();
         Byte expResult = null;
         Byte result = instance.getId();
         assertEquals(expResult, result);
@@ -53,25 +53,25 @@ public class DegreesTest {
     }
 
     /**
-     * Test of setId method, of class Degrees.
+     * Test of setId method, of class Degree.
      */
     @Test
     public void testSetId() {
         System.out.println("setId");
         Byte id = null;
-        Degrees instance = new Degrees();
+        Degree instance = new Degree();
         instance.setId(id);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getDegreeValue method, of class Degrees.
+     * Test of getDegreeValue method, of class Degree.
      */
     @Test
     public void testGetDegreeValue() {
         System.out.println("getDegreeValue");
-        Degrees instance = new Degrees();
+        Degree instance = new Degree();
         String expResult = "";
         String result = instance.getDegreeValue();
         assertEquals(expResult, result);
@@ -80,25 +80,25 @@ public class DegreesTest {
     }
 
     /**
-     * Test of setDegreeValue method, of class Degrees.
+     * Test of setDegreeValue method, of class Degree.
      */
     @Test
     public void testSetDegreeValue() {
         System.out.println("setDegreeValue");
         String degreeValue = "";
-        Degrees instance = new Degrees();
+        Degree instance = new Degree();
         instance.setDegreeValue(degreeValue);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getUsersDegreesCollection method, of class Degrees.
+     * Test of getUsersDegreesCollection method, of class Degree.
      */
     @Test
     public void testGetUsersDegreesCollection() {
         System.out.println("getUsersDegreesCollection");
-        Degrees instance = new Degrees();
+        Degree instance = new Degree();
         Collection<UsersDegrees> expResult = null;
         Collection<UsersDegrees> result = instance.getUsersDegreesCollection();
         assertEquals(expResult, result);
@@ -107,25 +107,25 @@ public class DegreesTest {
     }
 
     /**
-     * Test of setUsersDegreesCollection method, of class Degrees.
+     * Test of setUsersDegreesCollection method, of class Degree.
      */
     @Test
     public void testSetUsersDegreesCollection() {
         System.out.println("setUsersDegreesCollection");
         Collection<UsersDegrees> usersDegreesCollection = null;
-        Degrees instance = new Degrees();
+        Degree instance = new Degree();
         instance.setUsersDegreesCollection(usersDegreesCollection);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of hashCode method, of class Degrees.
+     * Test of hashCode method, of class Degree.
      */
     @Test
     public void testHashCode() {
         System.out.println("hashCode");
-        Degrees instance = new Degrees();
+        Degree instance = new Degree();
         int expResult = 0;
         int result = instance.hashCode();
         assertEquals(expResult, result);
@@ -134,13 +134,13 @@ public class DegreesTest {
     }
 
     /**
-     * Test of equals method, of class Degrees.
+     * Test of equals method, of class Degree.
      */
     @Test
     public void testEquals() {
         System.out.println("equals");
         Object object = null;
-        Degrees instance = new Degrees();
+        Degree instance = new Degree();
         boolean expResult = false;
         boolean result = instance.equals(object);
         assertEquals(expResult, result);
@@ -149,12 +149,12 @@ public class DegreesTest {
     }
 
     /**
-     * Test of toString method, of class Degrees.
+     * Test of toString method, of class Degree.
      */
     @Test
     public void testToString() {
         System.out.println("toString");
-        Degrees instance = new Degrees();
+        Degree instance = new Degree();
         String expResult = "";
         String result = instance.toString();
         assertEquals(expResult, result);

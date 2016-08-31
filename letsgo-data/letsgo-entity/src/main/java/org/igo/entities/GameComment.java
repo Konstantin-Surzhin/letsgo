@@ -37,53 +37,37 @@ import javax.xml.bind.annotation.XmlTransient;
     @UniqueConstraint(columnNames = {"game_id", "user_id", "comment"})})
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "GamesComments.findAll", query = "SELECT g FROM GamesComments g"),
-    @NamedQuery(name = "GamesComments.findById", query = "SELECT g FROM GamesComments g WHERE g.id = :id"),
-    @NamedQuery(name = "GamesComments.findByComment", query = "SELECT g FROM GamesComments g WHERE g.comment = :comment"),
-    @NamedQuery(name = "GamesComments.findByPostDateTime", query = "SELECT g FROM GamesComments g WHERE g.postDateTime = :postDateTime")})
-public class GamesComments implements Serializable {
+    @NamedQuery(name = "GameComment.findAll", query = "SELECT g FROM GameComment g"),
+    @NamedQuery(name = "GameComment.findById", query = "SELECT g FROM GameComment g WHERE g.id = :id"),
+    @NamedQuery(name = "GameComment.findByComment", query = "SELECT g FROM GameComment g WHERE g.comment = :comment"),
+    @NamedQuery(name = "GameComment.findByPostDateTime", query = "SELECT g FROM GameComment g WHERE g.postDateTime = :postDateTime")})
+public class GameComment implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(nullable = false)
     private Long id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(nullable = false, length = 255)
     private String comment;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "post_date_time", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
     private Date postDateTime;
-    @JoinColumn(name = "game_id", referencedColumnName = "id", nullable = false)
-    @ManyToOne(optional = false)
-    private Games gameId;
-    @OneToMany(mappedBy = "inReplayToId")
-    private Collection<GamesComments> gamesCommentsCollection;
-    @JoinColumn(name = "in_replay_to_id", referencedColumnName = "id")
-    @ManyToOne
-    private GamesComments inReplayToId;
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
-    @ManyToOne(optional = false)
+    private Game gameId;
+    private Collection<GameComment> gamesCommentsCollection;
+    private GameComment inReplayToId;
     private Users userId;
 
-    public GamesComments() {
+    public GameComment() {
     }
 
-    public GamesComments(Long id) {
+    public GameComment(Long id) {
         this.id = id;
     }
 
-    public GamesComments(Long id, String comment, Date postDateTime) {
+    public GameComment(Long id, String comment, Date postDateTime) {
         this.id = id;
         this.comment = comment;
         this.postDateTime = postDateTime;
     }
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(nullable = false)
     public Long getId() {
         return id;
     }
@@ -92,6 +76,9 @@ public class GamesComments implements Serializable {
         this.id = id;
     }
 
+    @Basic(optional = false)
+    @Column(nullable = false, length = 255)
+    @Size(min = 1, max = 255)
     public String getComment() {
         return comment;
     }
@@ -100,6 +87,9 @@ public class GamesComments implements Serializable {
         this.comment = comment;
     }
 
+    @Basic(optional = false)
+    @Column(name = "post_date_time", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     public Date getPostDateTime() {
         return postDateTime;
     }
@@ -108,31 +98,38 @@ public class GamesComments implements Serializable {
         this.postDateTime = postDateTime;
     }
 
-    public Games getGameId() {
+    @JoinColumn(name = "game_id", referencedColumnName = "id", nullable = false)
+    @ManyToOne(optional = false)
+    public Game getGameId() {
         return gameId;
     }
 
-    public void setGameId(Games gameId) {
+    public void setGameId(Game gameId) {
         this.gameId = gameId;
     }
 
+    @OneToMany(mappedBy = "inReplayToId")
     @XmlTransient
-    public Collection<GamesComments> getGamesCommentsCollection() {
+    public Collection<GameComment> getGamesCommentsCollection() {
         return gamesCommentsCollection;
     }
 
-    public void setGamesCommentsCollection(Collection<GamesComments> gamesCommentsCollection) {
+    public void setGamesCommentsCollection(Collection<GameComment> gamesCommentsCollection) {
         this.gamesCommentsCollection = gamesCommentsCollection;
     }
 
-    public GamesComments getInReplayToId() {
+    @JoinColumn(name = "in_replay_to_id", referencedColumnName = "id")
+    @ManyToOne
+    public GameComment getInReplayToId() {
         return inReplayToId;
     }
 
-    public void setInReplayToId(GamesComments inReplayToId) {
+    public void setInReplayToId(GameComment inReplayToId) {
         this.inReplayToId = inReplayToId;
     }
 
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    @ManyToOne(optional = false)
     public Users getUserId() {
         return userId;
     }
@@ -151,10 +148,10 @@ public class GamesComments implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof GamesComments)) {
+        if (!(object instanceof GameComment)) {
             return false;
         }
-        GamesComments other = (GamesComments) object;
+        GameComment other = (GameComment) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }

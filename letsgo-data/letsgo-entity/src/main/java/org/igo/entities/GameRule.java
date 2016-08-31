@@ -6,6 +6,7 @@
 package org.igo.entities;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,14 +18,15 @@ import javax.persistence.Table;
  * @author surzhin.konstantin
  */
 @Entity
-@Table(name = "game_rules")
+@Table(name = "game_rules", catalog = "letsgo", schema = "")
 public class GameRule implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    private Short id;
+    private String gameRuleName;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Short id;
-
     public Short getId() {
         return id;
     }
@@ -54,5 +56,19 @@ public class GameRule implements Serializable {
     public String toString() {
         return "org.igo.entities.GameRule[ id=" + id + " ]";
     }
-    
+
+    /**
+     * @return the gameRuleName
+     */
+    @Column(name = "game_rule_name", unique = true, length = 255)
+    public String getGameRuleName() {
+        return gameRuleName;
+    }
+
+    /**
+     * @param gameRuleName the gameRuleName to set
+     */
+    public void setGameRuleName(String gameRuleName) {
+        this.gameRuleName = gameRuleName;
+    }
 }

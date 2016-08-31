@@ -5,6 +5,7 @@
  */
 package org.igo.entities;
 
+import java.util.Date;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -16,9 +17,9 @@ import static org.junit.Assert.*;
  *
  * @author surzhin.konstantin
  */
-public class GamesDatesPKTest {
+public class GameDateTest {
     
-    public GamesDatesPKTest() {
+    public GameDateTest() {
     }
     
     @BeforeClass
@@ -38,66 +39,93 @@ public class GamesDatesPKTest {
     }
 
     /**
-     * Test of getGameId method, of class GamesDatesPK.
+     * Test of getGameDatePK method, of class GameDate.
      */
     @Test
-    public void testGetGameId() {
-        System.out.println("getGameId");
-        GamesDatesPK instance = new GamesDatesPK();
-        long expResult = 0L;
-        long result = instance.getGameId();
+    public void testGetGameDatePK() {
+        System.out.println("getGameDatePK");
+        GameDate instance = new GameDate();
+        GameDatePK expResult = null;
+        GameDatePK result = instance.getGameDatePK();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of setGameId method, of class GamesDatesPK.
+     * Test of setGameDatePK method, of class GameDate.
      */
     @Test
-    public void testSetGameId() {
-        System.out.println("setGameId");
-        long gameId = 0L;
-        GamesDatesPK instance = new GamesDatesPK();
-        instance.setGameId(gameId);
+    public void testSetGameDatePK() {
+        System.out.println("setGameDatePK");
+        GameDatePK gamesDatesPK = null;
+        GameDate instance = new GameDate();
+        instance.setGameDatePK(gamesDatesPK);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getNdx method, of class GamesDatesPK.
+     * Test of getGameDate method, of class GameDate.
      */
     @Test
-    public void testGetNdx() {
-        System.out.println("getNdx");
-        GamesDatesPK instance = new GamesDatesPK();
-        int expResult = 0;
-        int result = instance.getNdx();
+    public void testGetGameDate() {
+        System.out.println("getGameDate");
+        GameDate instance = new GameDate();
+        Date expResult = null;
+        Date result = instance.getGameDate();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of setNdx method, of class GamesDatesPK.
+     * Test of setGameDate method, of class GameDate.
      */
     @Test
-    public void testSetNdx() {
-        System.out.println("setNdx");
-        int ndx = 0;
-        GamesDatesPK instance = new GamesDatesPK();
-        instance.setNdx(ndx);
+    public void testSetGameDate() {
+        System.out.println("setGameDate");
+        Date gameDate = null;
+        GameDate instance = new GameDate();
+        instance.setGameDate(gameDate);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of hashCode method, of class GamesDatesPK.
+     * Test of getGames method, of class GameDate.
+     */
+    @Test
+    public void testGetGames() {
+        System.out.println("getGames");
+        GameDate instance = new GameDate();
+        Game expResult = null;
+        Game result = instance.getGames();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setGames method, of class GameDate.
+     */
+    @Test
+    public void testSetGames() {
+        System.out.println("setGames");
+        Game games = null;
+        GameDate instance = new GameDate();
+        instance.setGames(games);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of hashCode method, of class GameDate.
      */
     @Test
     public void testHashCode() {
         System.out.println("hashCode");
-        GamesDatesPK instance = new GamesDatesPK();
+        GameDate instance = new GameDate();
         int expResult = 0;
         int result = instance.hashCode();
         assertEquals(expResult, result);
@@ -106,13 +134,13 @@ public class GamesDatesPKTest {
     }
 
     /**
-     * Test of equals method, of class GamesDatesPK.
+     * Test of equals method, of class GameDate.
      */
     @Test
     public void testEquals() {
         System.out.println("equals");
         Object object = null;
-        GamesDatesPK instance = new GamesDatesPK();
+        GameDate instance = new GameDate();
         boolean expResult = false;
         boolean result = instance.equals(object);
         assertEquals(expResult, result);
@@ -121,12 +149,12 @@ public class GamesDatesPKTest {
     }
 
     /**
-     * Test of toString method, of class GamesDatesPK.
+     * Test of toString method, of class GameDate.
      */
     @Test
     public void testToString() {
         System.out.println("toString");
-        GamesDatesPK instance = new GamesDatesPK();
+        GameDate instance = new GameDate();
         String expResult = "";
         String result = instance.toString();
         assertEquals(expResult, result);

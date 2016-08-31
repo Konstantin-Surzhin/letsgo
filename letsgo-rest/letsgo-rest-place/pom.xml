@@ -8,11 +8,11 @@
   </parent>
 
     <groupId>org.igo</groupId>
-    <artifactId>letsgo-game-rest</artifactId>
+    <artifactId>letsgo-rest-place</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
 
-    <name>letsgo-game-rest</name>
+    <name>letsgo-rest-place</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
@@ -21,10 +21,21 @@
     
     <dependencies>
         <dependency>
-            <groupId>org.igo</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>letsgo-remote</artifactId>
-            <version>1.0</version>
-            <type>jar</type>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>4.3.1.Final</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>unknown.binary</groupId>
+            <artifactId>hibernate-jpamodelgen-4.3.1.Final</artifactId>
+            <version>SNAPSHOT</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax</groupId>
@@ -83,5 +94,11 @@
             </plugin>
         </plugins>
     </build>
-
+    <repositories>
+        <repository>
+            <id>unknown-jars-temp-repo</id>
+            <name>A temporary repository created by NetBeans for libraries and jars it could not identify. Please replace the dependencies in this repository with correct ones and delete this repository.</name>
+            <url>file:${project.basedir}/lib</url>
+        </repository>
+    </repositories>
 </project>

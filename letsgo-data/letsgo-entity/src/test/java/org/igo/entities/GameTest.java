@@ -17,9 +17,9 @@ import static org.junit.Assert.*;
  *
  * @author surzhin.konstantin
  */
-public class GamesTest {
+public class GameTest {
     
-    public GamesTest() {
+    public GameTest() {
     }
     
     @BeforeClass
@@ -39,12 +39,12 @@ public class GamesTest {
     }
 
     /**
-     * Test of getId method, of class Games.
+     * Test of getId method, of class Game.
      */
     @Test
     public void testGetId() {
         System.out.println("getId");
-        Games instance = new Games();
+        Game instance = new Game();
         Long expResult = null;
         Long result = instance.getId();
         assertEquals(expResult, result);
@@ -53,25 +53,25 @@ public class GamesTest {
     }
 
     /**
-     * Test of setId method, of class Games.
+     * Test of setId method, of class Game.
      */
     @Test
     public void testSetId() {
         System.out.println("setId");
         Long id = null;
-        Games instance = new Games();
+        Game instance = new Game();
         instance.setId(id);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getBayomeeNumber method, of class Games.
+     * Test of getBayomeeNumber method, of class Game.
      */
     @Test
     public void testGetBayomeeNumber() {
         System.out.println("getBayomeeNumber");
-        Games instance = new Games();
+        Game instance = new Game();
         Short expResult = null;
         Short result = instance.getBayomeeNumber();
         assertEquals(expResult, result);
@@ -80,25 +80,25 @@ public class GamesTest {
     }
 
     /**
-     * Test of setBayomeeNumber method, of class Games.
+     * Test of setBayomeeNumber method, of class Game.
      */
     @Test
     public void testSetBayomeeNumber() {
         System.out.println("setBayomeeNumber");
         Short bayomeeNumber = null;
-        Games instance = new Games();
+        Game instance = new Game();
         instance.setBayomeeNumber(bayomeeNumber);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getBayomeeTime method, of class Games.
+     * Test of getBayomeeTime method, of class Game.
      */
     @Test
     public void testGetBayomeeTime() {
         System.out.println("getBayomeeTime");
-        Games instance = new Games();
+        Game instance = new Game();
         Short expResult = null;
         Short result = instance.getBayomeeTime();
         assertEquals(expResult, result);
@@ -107,25 +107,25 @@ public class GamesTest {
     }
 
     /**
-     * Test of setBayomeeTime method, of class Games.
+     * Test of setBayomeeTime method, of class Game.
      */
     @Test
     public void testSetBayomeeTime() {
         System.out.println("setBayomeeTime");
         Short bayomeeTime = null;
-        Games instance = new Games();
+        Game instance = new Game();
         instance.setBayomeeTime(bayomeeTime);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getGandicap method, of class Games.
+     * Test of getGandicap method, of class Game.
      */
     @Test
     public void testGetGandicap() {
         System.out.println("getGandicap");
-        Games instance = new Games();
+        Game instance = new Game();
         Short expResult = null;
         Short result = instance.getGandicap();
         assertEquals(expResult, result);
@@ -134,25 +134,25 @@ public class GamesTest {
     }
 
     /**
-     * Test of setGandicap method, of class Games.
+     * Test of setGandicap method, of class Game.
      */
     @Test
     public void testSetGandicap() {
         System.out.println("setGandicap");
         Short gandicap = null;
-        Games instance = new Games();
+        Game instance = new Game();
         instance.setGandicap(gandicap);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getGameSize method, of class Games.
+     * Test of getGameSize method, of class Game.
      */
     @Test
     public void testGetGameSize() {
         System.out.println("getGameSize");
-        Games instance = new Games();
+        Game instance = new Game();
         int expResult = 0;
         int result = instance.getGameSize();
         assertEquals(expResult, result);
@@ -161,25 +161,25 @@ public class GamesTest {
     }
 
     /**
-     * Test of setGameSize method, of class Games.
+     * Test of setGameSize method, of class Game.
      */
     @Test
     public void testSetGameSize() {
         System.out.println("setGameSize");
         int gameSize = 0;
-        Games instance = new Games();
+        Game instance = new Game();
         instance.setGameSize(gameSize);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getGameStatus method, of class Games.
+     * Test of getGameStatus method, of class Game.
      */
     @Test
     public void testGetGameStatus() {
         System.out.println("getGameStatus");
-        Games instance = new Games();
+        Game instance = new Game();
         int expResult = 0;
         int result = instance.getGameStatus();
         assertEquals(expResult, result);
@@ -188,25 +188,25 @@ public class GamesTest {
     }
 
     /**
-     * Test of setGameStatus method, of class Games.
+     * Test of setGameStatus method, of class Game.
      */
     @Test
     public void testSetGameStatus() {
         System.out.println("setGameStatus");
         int gameStatus = 0;
-        Games instance = new Games();
+        Game instance = new Game();
         instance.setGameStatus(gameStatus);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getGameTime method, of class Games.
+     * Test of getGameTime method, of class Game.
      */
     @Test
     public void testGetGameTime() {
         System.out.println("getGameTime");
-        Games instance = new Games();
+        Game instance = new Game();
         Short expResult = null;
         Short result = instance.getGameTime();
         assertEquals(expResult, result);
@@ -215,25 +215,25 @@ public class GamesTest {
     }
 
     /**
-     * Test of setGameTime method, of class Games.
+     * Test of setGameTime method, of class Game.
      */
     @Test
     public void testSetGameTime() {
         System.out.println("setGameTime");
         Short gameTime = null;
-        Games instance = new Games();
+        Game instance = new Game();
         instance.setGameTime(gameTime);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getGameType method, of class Games.
+     * Test of getGameType method, of class Game.
      */
     @Test
     public void testGetGameType() {
         System.out.println("getGameType");
-        Games instance = new Games();
+        Game instance = new Game();
         int expResult = 0;
         int result = instance.getGameType();
         assertEquals(expResult, result);
@@ -242,25 +242,25 @@ public class GamesTest {
     }
 
     /**
-     * Test of setGameType method, of class Games.
+     * Test of setGameType method, of class Game.
      */
     @Test
     public void testSetGameType() {
         System.out.println("setGameType");
         int gameType = 0;
-        Games instance = new Games();
+        Game instance = new Game();
         instance.setGameType(gameType);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getUsersGamesCollection method, of class Games.
+     * Test of getUsersGamesCollection method, of class Game.
      */
     @Test
     public void testGetUsersGamesCollection() {
         System.out.println("getUsersGamesCollection");
-        Games instance = new Games();
+        Game instance = new Game();
         Collection<UsersGames> expResult = null;
         Collection<UsersGames> result = instance.getUsersGamesCollection();
         assertEquals(expResult, result);
@@ -269,52 +269,52 @@ public class GamesTest {
     }
 
     /**
-     * Test of setUsersGamesCollection method, of class Games.
+     * Test of setUsersGamesCollection method, of class Game.
      */
     @Test
     public void testSetUsersGamesCollection() {
         System.out.println("setUsersGamesCollection");
         Collection<UsersGames> usersGamesCollection = null;
-        Games instance = new Games();
+        Game instance = new Game();
         instance.setUsersGamesCollection(usersGamesCollection);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getGamesCommentsCollection method, of class Games.
+     * Test of getGamesCommentsCollection method, of class Game.
      */
     @Test
     public void testGetGamesCommentsCollection() {
         System.out.println("getGamesCommentsCollection");
-        Games instance = new Games();
-        Collection<GamesComments> expResult = null;
-        Collection<GamesComments> result = instance.getGamesCommentsCollection();
+        Game instance = new Game();
+        Collection<GameComment> expResult = null;
+        Collection<GameComment> result = instance.getGamesCommentsCollection();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of setGamesCommentsCollection method, of class Games.
+     * Test of setGamesCommentsCollection method, of class Game.
      */
     @Test
     public void testSetGamesCommentsCollection() {
         System.out.println("setGamesCommentsCollection");
-        Collection<GamesComments> gamesCommentsCollection = null;
-        Games instance = new Games();
+        Collection<GameComment> gamesCommentsCollection = null;
+        Game instance = new Game();
         instance.setGamesCommentsCollection(gamesCommentsCollection);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getGamesMovesCollection method, of class Games.
+     * Test of getGamesMovesCollection method, of class Game.
      */
     @Test
     public void testGetGamesMovesCollection() {
         System.out.println("getGamesMovesCollection");
-        Games instance = new Games();
+        Game instance = new Game();
         Collection<GamesMoves> expResult = null;
         Collection<GamesMoves> result = instance.getGamesMovesCollection();
         assertEquals(expResult, result);
@@ -323,79 +323,79 @@ public class GamesTest {
     }
 
     /**
-     * Test of setGamesMovesCollection method, of class Games.
+     * Test of setGamesMovesCollection method, of class Game.
      */
     @Test
     public void testSetGamesMovesCollection() {
         System.out.println("setGamesMovesCollection");
         Collection<GamesMoves> gamesMovesCollection = null;
-        Games instance = new Games();
+        Game instance = new Game();
         instance.setGamesMovesCollection(gamesMovesCollection);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getGamesDatesCollection method, of class Games.
+     * Test of getGamesDatesCollection method, of class Game.
      */
     @Test
     public void testGetGamesDatesCollection() {
         System.out.println("getGamesDatesCollection");
-        Games instance = new Games();
-        Collection<GamesDates> expResult = null;
-        Collection<GamesDates> result = instance.getGamesDatesCollection();
+        Game instance = new Game();
+        Collection<GameDate> expResult = null;
+        Collection<GameDate> result = instance.getGamesDatesCollection();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of setGamesDatesCollection method, of class Games.
+     * Test of setGamesDatesCollection method, of class Game.
      */
     @Test
     public void testSetGamesDatesCollection() {
         System.out.println("setGamesDatesCollection");
-        Collection<GamesDates> gamesDatesCollection = null;
-        Games instance = new Games();
+        Collection<GameDate> gamesDatesCollection = null;
+        Game instance = new Game();
         instance.setGamesDatesCollection(gamesDatesCollection);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getEventId method, of class Games.
+     * Test of getEventId method, of class Game.
      */
     @Test
     public void testGetEventId() {
         System.out.println("getEventId");
-        Games instance = new Games();
-        Events expResult = null;
-        Events result = instance.getEventId();
+        Game instance = new Game();
+        Event expResult = null;
+        Event result = instance.getEventId();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of setEventId method, of class Games.
+     * Test of setEventId method, of class Game.
      */
     @Test
     public void testSetEventId() {
         System.out.println("setEventId");
-        Events eventId = null;
-        Games instance = new Games();
+        Event eventId = null;
+        Game instance = new Game();
         instance.setEventId(eventId);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of hashCode method, of class Games.
+     * Test of hashCode method, of class Game.
      */
     @Test
     public void testHashCode() {
         System.out.println("hashCode");
-        Games instance = new Games();
+        Game instance = new Game();
         int expResult = 0;
         int result = instance.hashCode();
         assertEquals(expResult, result);
@@ -404,13 +404,13 @@ public class GamesTest {
     }
 
     /**
-     * Test of equals method, of class Games.
+     * Test of equals method, of class Game.
      */
     @Test
     public void testEquals() {
         System.out.println("equals");
         Object object = null;
-        Games instance = new Games();
+        Game instance = new Game();
         boolean expResult = false;
         boolean result = instance.equals(object);
         assertEquals(expResult, result);
@@ -419,12 +419,12 @@ public class GamesTest {
     }
 
     /**
-     * Test of toString method, of class Games.
+     * Test of toString method, of class Game.
      */
     @Test
     public void testToString() {
         System.out.println("toString");
-        Games instance = new Games();
+        Game instance = new Game();
         String expResult = "";
         String result = instance.toString();
         assertEquals(expResult, result);

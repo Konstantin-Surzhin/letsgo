@@ -9,32 +9,28 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.validation.constraints.NotNull;
 
 /**
  *
  * @author surzhin.konstantin
  */
 @Embeddable
-public class GamesDatesPK implements Serializable {
+public class GameDatePK implements Serializable {
 
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "game_id", nullable = false)
+
     private long gameId;
-    @Basic(optional = false)
-    @NotNull
-    @Column(nullable = false)
     private int ndx;
 
-    public GamesDatesPK() {
+    public GameDatePK() {
     }
 
-    public GamesDatesPK(long gameId, int ndx) {
+    public GameDatePK(long gameId, int ndx) {
         this.gameId = gameId;
         this.ndx = ndx;
     }
 
+    @Basic(optional = false)
+    @Column(name = "game_id", nullable = false)
     public long getGameId() {
         return gameId;
     }
@@ -42,7 +38,8 @@ public class GamesDatesPK implements Serializable {
     public void setGameId(long gameId) {
         this.gameId = gameId;
     }
-
+    @Basic(optional = false)
+    @Column(nullable = false)
     public int getNdx() {
         return ndx;
     }
@@ -62,17 +59,14 @@ public class GamesDatesPK implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof GamesDatesPK)) {
+        if (!(object instanceof GameDatePK)) {
             return false;
         }
-        GamesDatesPK other = (GamesDatesPK) object;
+        GameDatePK other = (GameDatePK) object;
         if (this.gameId != other.gameId) {
             return false;
         }
-        if (this.ndx != other.ndx) {
-            return false;
-        }
-        return true;
+        return this.ndx == other.ndx;
     }
 
     @Override
