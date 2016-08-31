@@ -2,6 +2,7 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="testGamePU" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <mapping-file>META-INF/orm.xml</mapping-file>
     <class>org.igo.entities.City</class>
     <class>org.igo.entities.Degrees</class>
     <class>org.igo.entities.Events</class>
@@ -21,6 +22,19 @@
     <class>org.igo.entities.UsersDegrees</class>
     <class>org.igo.entities.UsersGames</class>
     <class>org.igo.entities.ResourseBandle</class>
+    <class>org.igo.entities.Degree</class>
+    <class>org.igo.entities.Event</class>
+    <class>org.igo.entities.Game</class>
+    <class>org.igo.entities.GameComment</class>
+    <class>org.igo.entities.GameDate</class>
+    <class>org.igo.entities.GameMove</class>
+    <class>org.igo.entities.League</class>
+    <class>org.igo.entities.MoveComment</class>
+    <class>org.igo.entities.Place</class>
+    <class>org.igo.entities.Room</class>
+    <class>org.igo.entities.Team</class>
+    <class>org.igo.entities.User</class>
+    <class>org.igo.entities.UserRole</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/letsgo?UseUnicode=true&amp;characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
