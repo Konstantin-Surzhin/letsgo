@@ -10,5 +10,6 @@
     <packaging>pom</packaging>
   <modules>
     <module>letsgo-spring-city-angular-bootstrap</module>
+    <module>letsgo-spring-angular-bootstrap-city</module>
   </modules>
 </project>
