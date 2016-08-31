@@ -18,7 +18,7 @@ import javax.persistence.Table;
  * @author surzhin.konstantin
  */
 @Entity
-@Table(name = "game_rules", catalog = "letsgo", schema = "")
+@Table(name = "game_rules")
 public class GameRule implements Serializable {
 
     private static final long serialVersionUID = 1L;

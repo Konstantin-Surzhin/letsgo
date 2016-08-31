@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author surzhin.konstantin
  */
 @Entity
-@Table(name = "games_dates", catalog = "letsgo", schema = "", uniqueConstraints = {
+@Table(name = "games_dates",  uniqueConstraints = {
     @UniqueConstraint(columnNames = {"game_date", "game_id"})})
 @XmlRootElement
 @NamedQueries({
@@ -39,7 +39,7 @@ public class GameDate implements Serializable {
     private static final long serialVersionUID = 1L;
     protected GameDatePK gameDatePK;
     private Date gameDate;
-    private Game games;
+    private Game game;
 
     public GameDate() {
     }
@@ -79,12 +79,12 @@ public class GameDate implements Serializable {
 
     @JoinColumn(name = "game_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    public Game getGames() {
-        return games;
+    public Game getGame() {
+        return game;
     }
 
-    public void setGames(Game games) {
-        this.games = games;
+    public void setGame(Game game) {
+        this.game = game;
     }
 
     @Override

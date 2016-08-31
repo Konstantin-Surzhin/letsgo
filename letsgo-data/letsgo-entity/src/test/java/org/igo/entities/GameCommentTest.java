@@ -155,7 +155,7 @@ public class GameCommentTest {
         System.out.println("getGamesCommentsCollection");
         GameComment instance = new GameComment();
         Collection<GameComment> expResult = null;
-        Collection<GameComment> result = instance.getGamesCommentsCollection();
+        Collection<GameComment> result = instance.getGameCommentCollection();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -169,7 +169,7 @@ public class GameCommentTest {
         System.out.println("setGamesCommentsCollection");
         Collection<GameComment> gamesCommentsCollection = null;
         GameComment instance = new GameComment();
-        instance.setGamesCommentsCollection(gamesCommentsCollection);
+        instance.setGameCommentCollection(gamesCommentsCollection);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

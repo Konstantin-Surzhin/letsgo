@@ -16,7 +16,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -25,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author surzhin.konstantin
  */
 @Entity
-@Table(catalog = "letsgo", schema = "", uniqueConstraints = {
+@Table(name = "places", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"place_name"})})
 @XmlRootElement
 @NamedQueries({
@@ -88,10 +87,7 @@ public class Place implements Serializable {
             return false;
         }
         Place other = (Place) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     @Override

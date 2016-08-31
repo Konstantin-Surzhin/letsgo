@@ -100,7 +100,7 @@ public class GameDateTest {
         System.out.println("getGames");
         GameDate instance = new GameDate();
         Game expResult = null;
-        Game result = instance.getGames();
+        Game result = instance.getGame();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -114,7 +114,7 @@ public class GameDateTest {
         System.out.println("setGames");
         Game games = null;
         GameDate instance = new GameDate();
-        instance.setGames(games);
+        instance.setGame(games);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

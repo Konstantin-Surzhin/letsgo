@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author surzhin.konstantin
  */
 @Entity
-@Table(name = "users_degrees", catalog = "letsgo", schema = "")
+@Table(name = "users_degrees")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "UserDegree.findAll", query = "SELECT u FROM UserDegree u"),
@@ -99,10 +99,7 @@ public class UserDegree implements Serializable {
             return false;
         }
         UserDegree other = (UserDegree) object;
-        if ((this.userDegreePK == null && other.userDegreePK != null) || (this.userDegreePK != null && !this.userDegreePK.equals(other.userDegreePK))) {
-            return false;
-        }
-        return true;
+        return !((this.userDegreePK == null && other.userDegreePK != null) || (this.userDegreePK != null && !this.userDegreePK.equals(other.userDegreePK)));
     }
 
     @Override

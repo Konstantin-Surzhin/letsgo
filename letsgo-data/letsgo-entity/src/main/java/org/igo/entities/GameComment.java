@@ -23,7 +23,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -33,7 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author surzhin.konstantin
  */
 @Entity
-@Table(name = "games_comments", catalog = "letsgo", schema = "", uniqueConstraints = {
+@Table(name = "games_comments",  uniqueConstraints = {
     @UniqueConstraint(columnNames = {"game_id", "user_id", "comment"})})
 @XmlRootElement
 @NamedQueries({
@@ -48,7 +47,7 @@ public class GameComment implements Serializable {
     private String comment;
     private Date postDateTime;
     private Game gameId;
-    private Collection<GameComment> gamesCommentsCollection;
+    private Collection<GameComment> gameCommentCollection;
     private GameComment inReplayToId;
     private User userId;
 
@@ -110,12 +109,12 @@ public class GameComment implements Serializable {
 
     @OneToMany(mappedBy = "inReplayToId")
     @XmlTransient
-    public Collection<GameComment> getGamesCommentsCollection() {
-        return gamesCommentsCollection;
+    public Collection<GameComment> getGameCommentCollection() {
+        return gameCommentCollection;
     }
 
-    public void setGamesCommentsCollection(Collection<GameComment> gamesCommentsCollection) {
-        this.gamesCommentsCollection = gamesCommentsCollection;
+    public void setGameCommentCollection(Collection<GameComment> gameCommentCollection) {
+        this.gameCommentCollection = gameCommentCollection;
     }
 
     @JoinColumn(name = "in_replay_to_id", referencedColumnName = "id")
@@ -152,10 +151,7 @@ public class GameComment implements Serializable {
             return false;
         }
         GameComment other = (GameComment) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     @Override

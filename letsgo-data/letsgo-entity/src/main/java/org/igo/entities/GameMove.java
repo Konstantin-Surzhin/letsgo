@@ -17,7 +17,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -26,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author surzhin.konstantin
  */
 @Entity
-@Table(name = "games_moves", catalog = "letsgo", schema = "")
+@Table(name = "games_moves")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "GameMove.findAll", query = "SELECT g FROM GameMove g"),
@@ -122,10 +121,7 @@ public class GameMove implements Serializable {
             return false;
         }
         GameMove other = (GameMove) object;
-        if ((this.gameMovePK == null && other.gameMovePK != null) || (this.gameMovePK != null && !this.gameMovePK.equals(other.gameMovePK))) {
-            return false;
-        }
-        return true;
+        return !((this.gameMovePK == null && other.gameMovePK != null) || (this.gameMovePK != null && !this.gameMovePK.equals(other.gameMovePK)));
     }
 
     @Override

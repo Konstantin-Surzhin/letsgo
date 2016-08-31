@@ -126,10 +126,7 @@ public class UserBan implements Serializable {
             return false;
         }
         UserBan other = (UserBan) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     @Override

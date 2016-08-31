@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author surzhin.konstantin
  */
 @Entity
-@Table(name = "users_games", catalog = "letsgo", schema = "")
+@Table(name = "users_games")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "UserGame.findAll", query = "SELECT u FROM UserGame u"),
@@ -106,10 +106,7 @@ public class UserGame implements Serializable {
             return false;
         }
         UserGame other = (UserGame) object;
-        if ((this.usersGamesPK == null && other.usersGamesPK != null) || (this.usersGamesPK != null && !this.usersGamesPK.equals(other.usersGamesPK))) {
-            return false;
-        }
-        return true;
+        return !((this.usersGamesPK == null && other.usersGamesPK != null) || (this.usersGamesPK != null && !this.usersGamesPK.equals(other.usersGamesPK)));
     }
 
     @Override

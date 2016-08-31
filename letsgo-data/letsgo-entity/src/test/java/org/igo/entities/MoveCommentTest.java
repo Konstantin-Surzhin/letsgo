@@ -155,7 +155,7 @@ public class MoveCommentTest {
         System.out.println("getMovesCommentsCollection");
         MoveComment instance = new MoveComment();
         Collection<MoveComment> expResult = null;
-        Collection<MoveComment> result = instance.getMovesCommentsCollection();
+        Collection<MoveComment> result = instance.getMoveCommentCollection();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -169,7 +169,7 @@ public class MoveCommentTest {
         System.out.println("setMovesCommentsCollection");
         Collection<MoveComment> movesCommentsCollection = null;
         MoveComment instance = new MoveComment();
-        instance.setMovesCommentsCollection(movesCommentsCollection);
+        instance.setMoveCommentCollection(movesCommentsCollection);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

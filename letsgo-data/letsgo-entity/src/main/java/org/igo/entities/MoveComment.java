@@ -22,7 +22,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -32,7 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author surzhin.konstantin
  */
 @Entity
-@Table(name = "moves_comments", catalog = "letsgo", schema = "", uniqueConstraints = {
+@Table(name = "moves_comments",  uniqueConstraints = {
     @UniqueConstraint(columnNames = {"move_game_id", "user_id", "move_ndx", "move_comment"})})
 @XmlRootElement
 @NamedQueries({
@@ -48,7 +47,7 @@ public class MoveComment implements Serializable {
     private String moveComment;
     private Date postDateTime;
     private GameMove gamesMoves;
-    private Collection<MoveComment> movesCommentsCollection;
+    private Collection<MoveComment> moveCommentCollection;
     private MoveComment inReplayToId;
     private User userId;
 
@@ -110,12 +109,12 @@ public class MoveComment implements Serializable {
 
     @OneToMany(mappedBy = "inReplayToId")
     @XmlTransient
-    public Collection<MoveComment> getMovesCommentsCollection() {
-        return movesCommentsCollection;
+    public Collection<MoveComment> getMoveCommentCollection() {
+        return moveCommentCollection;
     }
 
-    public void setMovesCommentsCollection(Collection<MoveComment> movesCommentsCollection) {
-        this.movesCommentsCollection = movesCommentsCollection;
+    public void setMoveCommentCollection(Collection<MoveComment> moveCommentCollection) {
+        this.moveCommentCollection = moveCommentCollection;
     }
 
     @JoinColumn(name = "in_replay_to_id", referencedColumnName = "id")
