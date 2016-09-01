@@ -38,7 +38,7 @@ public class City implements Serializable {
     //private Map<String, String> cityNameMap;
     private String cityName;
 
-    private Set<User> usersCollection;
+    private Set<User> userCollection;
 
     public City() {
     }
@@ -64,12 +64,12 @@ public class City implements Serializable {
     }
 
     @OneToMany(mappedBy = "cityId")
-    public Set<User> getUsersCollection() {
-        return usersCollection;
+    public Set<User> getUserCollection() {
+        return userCollection;
     }
 
-    public void setUsersCollection(Set<User> usersCollection) {
-        this.usersCollection = usersCollection;
+    public void setUserCollection(Set<User> userCollection) {
+        this.userCollection = userCollection;
     }
 
     @Override

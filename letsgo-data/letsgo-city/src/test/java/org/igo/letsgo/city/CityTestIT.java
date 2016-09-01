@@ -79,7 +79,7 @@ public class CityTestIT {
     @Test
     public void testGetCity() {
         System.out.println("test get City");
-        assertEquals("Ups! City is not Moskow", "Moskow", city.getCity(0));
-        System.out.println(city.getCity(0));
+        assertEquals("Ups! City is not Moskow", "Moskow", city.getCityName(0));
+        System.out.println(city.getCityName(0));
     }
 }

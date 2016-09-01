@@ -14,8 +14,8 @@ import javax.ejb.Remote;
 @Remote
 public interface ICityRemote {
 
-    public String getCity(final int id);
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    public String getCityName(final Integer id);
+    public Integer getCityId(final String name);
+
     
 }

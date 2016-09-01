@@ -6,8 +6,6 @@
 package org.igo.letsgo.city.ejb;
 
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.embeddable.EJBContainer;
 import javax.naming.NamingException;
 import org.igo.letsgo.remote.ICityRemote;
@@ -61,7 +59,7 @@ public class CitySessionBeanTest {
         try {
             ICityRemote instance = (ICityRemote) container.getContext().lookup("java:global/letsgo-city-ejb/CitySessionBean!org.igo.letsgo.remote.ICityRemote");
             String expResult = "Moskow";
-            String result = instance.getCity(0);
+            String result = instance.getCityName(0);
             assertEquals(expResult, result);
         } catch (NamingException ex) {
             System.out.println(ex.getExplanation());
