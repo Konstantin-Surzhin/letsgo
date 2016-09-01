@@ -68,7 +68,6 @@ public class User implements Serializable {
     private String name;
     private String password;
     private Integer rating;
-    @Size(max = 128)
     private String salt;
     private Integer staus;
     private Integer win;
@@ -187,7 +186,7 @@ public class User implements Serializable {
         this.rating = rating;
     }
 
-    @Column(name = "salt")
+    @Column(name = "salt", length = 128)
     public String getSalt() {
         return salt;
     }
