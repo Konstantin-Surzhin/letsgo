@@ -4,10 +4,11 @@
  */
 package org.igo.letsgo.city.ejb;
 
-import com.sun.istack.internal.logging.Logger;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -23,7 +24,7 @@ import org.igo.letsgo.remote.ICityRemote;
 @Stateless
 public class CitySessionBean implements ICityRemote {
 
-    private final Logger logger = Logger.getLogger(CitySessionBean.class);
+    private static final Logger LOGGER = Logger.getLogger(CitySessionBean.class.getCanonicalName());
     private EntityManager entityManager;
 
     @Override
@@ -41,7 +42,7 @@ public class CitySessionBean implements ICityRemote {
         try {
             return q.getSingleResult().getId();
         } catch (Exception ex) {
-            logger.info(ex.getLocalizedMessage());
+            LOGGER.info(ex.getLocalizedMessage());
             return -1; //id not found
         }
     }
@@ -89,7 +90,7 @@ public class CitySessionBean implements ICityRemote {
                     .collect(Collectors.toList());
             return listUsersName;
         } catch (Exception ex) {
-            logger.info(ex.getLocalizedMessage());
+            LOGGER.info(ex.getLocalizedMessage());
             return null;
         }
     }
@@ -113,7 +114,7 @@ public class CitySessionBean implements ICityRemote {
             entityManager.persist(city);
             return true;
         } catch (Exception ex) {
-            logger.info(ex.getLocalizedMessage());
+            LOGGER.info(ex.getLocalizedMessage());
             return false;
         }
     }
