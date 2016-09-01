@@ -23,7 +23,7 @@ import org.igo.letsgo.remote.ICityRemote;
 @Stateless
 public class CitySessionBean implements ICityRemote {
 
-    Logger logger = Logger.getLogger(CitySessionBean.class);
+    private final Logger logger = Logger.getLogger(CitySessionBean.class);
     private EntityManager entityManager;
 
     @Override
@@ -41,6 +41,7 @@ public class CitySessionBean implements ICityRemote {
         try {
             return q.getSingleResult().getId();
         } catch (Exception ex) {
+            logger.info(ex.getLocalizedMessage());
             return -1; //id not found
         }
     }
@@ -56,12 +57,12 @@ public class CitySessionBean implements ICityRemote {
      * @param entityManager the em to set
      */
     @PersistenceContext
-    public void setEntityManager(EntityManager entityManager) {
+    public void setEntityManager(final EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
     @Override
-    public List<String> getAllCityName(String name) {
+    public List<String> getAllCityName() {
         TypedQuery<City> q = getEntityManager().createNamedQuery("City.findAll", City.class);
         List<City> names = q.getResultList();
 
@@ -88,7 +89,7 @@ public class CitySessionBean implements ICityRemote {
                     .collect(Collectors.toList());
             return listUsersName;
         } catch (Exception ex) {
-            ex.getLocalizedMessage();
+            logger.info(ex.getLocalizedMessage());
             return null;
         }
     }
@@ -102,5 +103,18 @@ public class CitySessionBean implements ICityRemote {
                 .sorted()
                 .collect(Collectors.toList());
         return listUsersName;
+    }
+
+    @Override
+    public Boolean createCity(final String cityName) {
+        City city = new City(cityName);
+        city.setCityName(cityName);
+        try {
+            entityManager.persist(city);
+            return true;
+        } catch (Exception ex) {
+            logger.info(ex.getLocalizedMessage());
+            return false;
+        }
     }
 }

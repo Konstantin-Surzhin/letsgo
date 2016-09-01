@@ -23,6 +23,8 @@ public interface ICityRemote {
 
     public List<String> getAllCityUser(final Integer id);
 
-    public List<String> getAllCityName(String name);
+    public List<String> getAllCityName();
+    
+    public Boolean createCity(final String cityName);
 
 }

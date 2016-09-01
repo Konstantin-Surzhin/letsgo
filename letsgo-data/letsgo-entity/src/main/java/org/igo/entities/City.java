@@ -43,8 +43,12 @@ public class City implements Serializable {
     public City() {
     }
 
-    public City(Integer id) {
+    public City(final Integer id) {
         this.id = id;
+    }
+
+    public City(final String cityName) {
+       this.cityName= cityName;
     }
 
 //    public City(Integer id, Map<String, String> cityNameMap) {
@@ -59,7 +63,7 @@ public class City implements Serializable {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(final Integer id) {
         this.id = id;
     }
 
@@ -68,7 +72,7 @@ public class City implements Serializable {
         return userCollection;
     }
 
-    public void setUserCollection(Set<User> userCollection) {
+    public void setUserCollection(final Set<User> userCollection) {
         this.userCollection = userCollection;
     }
 
@@ -106,7 +110,7 @@ public class City implements Serializable {
     /**
      * @param cityName the cityName to set
      */
-    public void setCityName(String cityName) {
+    public void setCityName(final String cityName) {
         this.cityName = cityName;
     }
 
