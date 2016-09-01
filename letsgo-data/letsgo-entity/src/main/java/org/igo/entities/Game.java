@@ -177,7 +177,7 @@ public class Game implements Serializable {
         this.gamesMovesCollection = gamesMovesCollection;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "games")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "game")
     @XmlTransient
     public Collection<GameDate> getGamesDatesCollection() {
         return gamesDatesCollection;

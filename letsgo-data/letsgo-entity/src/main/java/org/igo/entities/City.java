@@ -6,18 +6,13 @@
 package org.igo.entities;
 
 import java.io.Serializable;
-import java.util.Map;
 import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.MapKeyColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -31,13 +26,17 @@ import javax.persistence.Table;
 @Table(name = "cities")
 @NamedQueries({
     @NamedQuery(name = "City.findAll", query = "SELECT c FROM City c"),
-    @NamedQuery(name = "City.findById", query = "SELECT c FROM City c WHERE c.id = :id"), //@NamedQuery(name = "City.findByCityName", query = "SELECT c FROM City c WHERE c.cityName = :cityName")
+    @NamedQuery(name = "City.findById", query = "SELECT c FROM City c WHERE c.id = :id"), 
+    @NamedQuery(name = "City.findByCityName", query = "SELECT c FROM City c WHERE c.cityName = :cityName")
 })
 public class City implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Integer id;
-    private Map<String, String> cityName;
+    //TODO: make i18n
+    //private Map<String, String> cityNameMap;
+    private String cityName;
+    
     private Set<User> usersCollection;
 
     public City() {
@@ -47,10 +46,10 @@ public class City implements Serializable {
         this.id = id;
     }
 
-    public City(Integer id, Map<String, String> cityName) {
-        this.id = id;
-        this.cityName = cityName;
-    }
+//    public City(Integer id, Map<String, String> cityNameMap) {
+//        this.id = id;
+//        this.cityNameMap = cityName;
+//    }
 
     @Id
     @Basic(optional = false)
@@ -98,18 +97,33 @@ public class City implements Serializable {
     /**
      * @return the cityName
      */
-    @ElementCollection
-    @JoinTable(name = "city_name", joinColumns = @JoinColumn(name = "id"))
-    @MapKeyColumn(name = "locale")
-    @Column(name = "city_name", unique = true)
-    public Map<String, String> getCityName() {
+     @Column(name = "city_name")
+    public String getCityName() {
         return cityName;
     }
 
     /**
      * @param cityName the cityName to set
      */
-    public void setCityName(Map<String, String> cityName) {
+    public void setCityName(String cityName) {
         this.cityName = cityName;
     }
+
+    /**
+     * @return the cityNameMap
+     */
+//    @ElementCollection
+//    @JoinTable(name = "city_name", joinColumns = @JoinColumn(name = "id"))
+//    @MapKeyColumn(name = "locale")
+//    @Column(name = "city_name", unique = true)
+//    public Map<String, String> getCityNameMap() {
+//        return cityNameMap;
+//    }
+
+    /**
+     * @param cityNameMap the cityNameMap to set
+     */
+//    public void setCityNameMap(Map<String, String> cityNameMap) {
+//        this.cityNameMap = cityNameMap;
+//    }
 }

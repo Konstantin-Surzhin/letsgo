@@ -45,7 +45,7 @@ public class UserGameTest {
         System.out.println("getUsersGamesPK");
         UserGame instance = new UserGame();
         UserGamePK expResult = null;
-        UserGamePK result = instance.getUsersGamesPK();
+        UserGamePK result = instance.getUserGamePK();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -59,7 +59,7 @@ public class UserGameTest {
         System.out.println("setUsersGamesPK");
         UserGamePK usersGamesPK = null;
         UserGame instance = new UserGame();
-        instance.setUsersGamesPK(usersGamesPK);
+        instance.sesetUserGamePKsersGamesPK);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

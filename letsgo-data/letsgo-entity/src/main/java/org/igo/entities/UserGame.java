@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class UserGame implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    protected UserGamePK usersGamesPK;
+    protected UserGamePK userGamePK;
     private int color;
     private Game games;
     private User users;
@@ -41,25 +41,25 @@ public class UserGame implements Serializable {
     }
 
     public UserGame(UserGamePK usersGamesPK) {
-        this.usersGamesPK = usersGamesPK;
+        this.userGamePK = usersGamesPK;
     }
 
     public UserGame(UserGamePK usersGamesPK, int color) {
-        this.usersGamesPK = usersGamesPK;
+        this.userGamePK = usersGamesPK;
         this.color = color;
     }
 
     public UserGame(long gameId, int userId) {
-        this.usersGamesPK = new UserGamePK(gameId, userId);
+        this.userGamePK = new UserGamePK(gameId, userId);
     }
 
     @EmbeddedId
-    public UserGamePK getUsersGamesPK() {
-        return usersGamesPK;
+    public UserGamePK getUserGamePK() {
+        return userGamePK;
     }
 
-    public void setUsersGamesPK(UserGamePK usersGamesPK) {
-        this.usersGamesPK = usersGamesPK;
+    public void setUserGamePK(UserGamePK userGamePK) {
+        this.userGamePK = userGamePK;
     }
 
     @Basic(optional = false)
@@ -95,7 +95,7 @@ public class UserGame implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (usersGamesPK != null ? usersGamesPK.hashCode() : 0);
+        hash += (userGamePK != null ? userGamePK.hashCode() : 0);
         return hash;
     }
 
@@ -106,12 +106,12 @@ public class UserGame implements Serializable {
             return false;
         }
         UserGame other = (UserGame) object;
-        return !((this.usersGamesPK == null && other.usersGamesPK != null) || (this.usersGamesPK != null && !this.usersGamesPK.equals(other.usersGamesPK)));
+        return !((this.userGamePK == null && other.userGamePK != null) || (this.userGamePK != null && !this.userGamePK.equals(other.userGamePK)));
     }
 
     @Override
     public String toString() {
-        return "org.igo.entities.UsersGames[ usersGamesPK=" + usersGamesPK + " ]";
+        return "org.igo.entities.UsersGames[ usersGamesPK=" + userGamePK + " ]";
     }
 
 }

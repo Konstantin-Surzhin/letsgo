@@ -26,8 +26,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "UserDegree.findAll", query = "SELECT u FROM UserDegree u"),
-    @NamedQuery(name = "UserDegree.findByAppointmentDate", query = "SELECT u FROM UserDegree u WHERE u.usersDegreesPK.appointmentDate = :appointmentDate"),
-    @NamedQuery(name = "UserDegree.findByUserId", query = "SELECT u FROM UserDegree u WHERE u.usersDegreesPK.userId = :userId"),
+    @NamedQuery(name = "UserDegree.findByAppointmentDate", query = "SELECT u FROM UserDegree u WHERE u.userDegreePK.appointmentDate = :appointmentDate"),
+    @NamedQuery(name = "UserDegree.findByUserId", query = "SELECT u FROM UserDegree u WHERE u.userDegreePK.userId = :userId"),
     @NamedQuery(name = "UserDegree.findByDegreeType", query = "SELECT u FROM UserDegree u WHERE u.degreeType = :degreeType")})
 public class UserDegree implements Serializable {
 

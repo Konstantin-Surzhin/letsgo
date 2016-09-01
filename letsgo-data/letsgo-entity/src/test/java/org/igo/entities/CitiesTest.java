@@ -44,8 +44,12 @@ public class CitiesTest {
 
     @After
     public void tearDown() {
-        em.close();
-        emf.close();
+        if (em != null) {
+            em.close();
+        }
+        if (emf != null) {
+            emf.close();
+        }
     }
 
     /**
