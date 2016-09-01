@@ -64,6 +64,8 @@ public class CitiesTest {
 
         assertNull(result);
 
+        city.setCityName("Не резиновая!");
+        
         em.getTransaction().begin();
         em.persist(city);
         em.getTransaction().commit();

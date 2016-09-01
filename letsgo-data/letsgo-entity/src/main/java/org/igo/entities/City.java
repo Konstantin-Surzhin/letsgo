@@ -17,6 +17,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -26,7 +27,7 @@ import javax.persistence.Table;
 @Table(name = "cities")
 @NamedQueries({
     @NamedQuery(name = "City.findAll", query = "SELECT c FROM City c"),
-    @NamedQuery(name = "City.findById", query = "SELECT c FROM City c WHERE c.id = :id"), 
+    @NamedQuery(name = "City.findById", query = "SELECT c FROM City c WHERE c.id = :id"),
     @NamedQuery(name = "City.findByCityName", query = "SELECT c FROM City c WHERE c.cityName = :cityName")
 })
 public class City implements Serializable {
@@ -36,7 +37,7 @@ public class City implements Serializable {
     //TODO: make i18n
     //private Map<String, String> cityNameMap;
     private String cityName;
-    
+
     private Set<User> usersCollection;
 
     public City() {
@@ -50,7 +51,6 @@ public class City implements Serializable {
 //        this.id = id;
 //        this.cityNameMap = cityName;
 //    }
-
     @Id
     @Basic(optional = false)
     @Column(name = "id")
@@ -97,7 +97,8 @@ public class City implements Serializable {
     /**
      * @return the cityName
      */
-     @Column(name = "city_name")
+    @Size(min = 1,max = 255)
+    @Column(length = 255, name = "city_name", nullable = false, unique = true, columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci" )
     public String getCityName() {
         return cityName;
     }
@@ -119,7 +120,6 @@ public class City implements Serializable {
 //    public Map<String, String> getCityNameMap() {
 //        return cityNameMap;
 //    }
-
     /**
      * @param cityNameMap the cityNameMap to set
      */
