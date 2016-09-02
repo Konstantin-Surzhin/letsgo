@@ -17,90 +17,65 @@
 package org.igo.entities;
 
 import java.math.BigInteger;
-import java.util.List;
+import java.util.Arrays;
+import java.util.Collection;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
 /**
  *
  * @author surzhin.konstantin
  */
+@RunWith(Parameterized.class)
 public class DataBaseCreateJUnitTest {
 
-    private static EntityManagerFactory emf;
-    private static EntityManager em;
+    @Parameterized.Parameter(value = 0)
+    public EntityManagerFactory emf;
+
+    @Parameterized.Parameter(value = 1)
+    public String tableName;
+
+    @Parameterized.Parameter(value = 2)
+    public String schemaName;
+
+    @Parameterized.Parameter(value = 3)
+    public String rdbmsName;
+
+    @Parameterized.Parameters
+    public static Collection dataBaseParam() {
+        EntityManagerFactory emf0 = Persistence.createEntityManagerFactory("testGamePU_MySQL");
+        EntityManagerFactory emf1 = Persistence.createEntityManagerFactory("testGamePU_H2");
+
+        String[] table = {"CITIES", "DEGREES", "EVENTS"};
+        Object[][] param = {{emf0, table[0], "letsgo", "MySql"}, {emf1, table[1], "LETSGO", "H2"}};
+
+        return Arrays.asList(param);
+    }
 
     public DataBaseCreateJUnitTest() {
     }
 
-    @BeforeClass
-    public static void setUpClass() {
-      //  emf = Persistence.createEntityManagerFactory("testGamePU_MySQL");
-        emf = Persistence.createEntityManagerFactory("testGamePU_H2");
-        
-        em = emf.createEntityManager();
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-        if (em != null) {
-            em.close();
-        }
-        if (emf != null) {
-            emf.close();
-        }
-    }
-
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
-    }
-
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
     @Test
-    public void citiesTableExist() {
-        System.out.println("cities table");
-        Query q = em.createNativeQuery("SELECT count(TABLE_NAME)  cn  FROM  information_schema.TABLES WHERE TABLE_NAME='CITIES' AND TABLE_SCHEMA='LETSGO'");
-        BigInteger cn = (BigInteger) q.getSingleResult();
-        List l = q.getResultList();
-        l.stream().forEach((o) -> {
-            System.out.println(o);
-        }); //  BigInteger result = BigInteger.valueOf(1);
-        // assertEquals("cities table does not exist", result, cn);
-    }
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
+    public void ifTableExist() {
+        System.out.println(rdbmsName + " : " + tableName + ":check table exist.");
 
-    @Test
-    public void degreeTableExist() {
-        System.out.println("degree table");
-        Query q = em.createNativeQuery("SELECT count(TABLE_NAME)  cn  FROM  information_schema.TABLES WHERE TABLE_NAME='DEGREES' AND TABLE_SCHEMA='LETSGO'");
+        EntityManager em = emf.createEntityManager();
+        Query q = em.createNativeQuery("SELECT count(TABLE_NAME)  cn  FROM  information_schema.TABLES WHERE TABLE_NAME=:TABLE_NAME AND TABLE_SCHEMA=:TABLE_SCHEMA");
+        q.setParameter("TABLE_NAME", tableName);
+        q.setParameter("TABLE_SCHEMA", schemaName);
+
         BigInteger cn = (BigInteger) q.getSingleResult();
+        em.close();
+
         BigInteger result = BigInteger.valueOf(1);
-        assertEquals("degrees table does not exist",result, cn);
+
+        assertEquals(rdbmsName + " : " + tableName + " does not exist", result, cn);
     }
 
-    @Test
-    public void eventTableExist() {
-        System.out.println("event table");
-        Query q = em.
-                createNativeQuery("SELECT count(TABLE_NAME)  cn  FROM  information_schema.TABLES WHERE TABLE_NAME='event'  AND TABLE_SCHEMA='letsgo'");
-        BigInteger cn = (BigInteger) q.getSingleResult();
-        BigInteger result = BigInteger.valueOf(1);
-        assertEquals("event table does not exist", result, cn);
-    }
 }
