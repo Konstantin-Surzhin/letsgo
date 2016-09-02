@@ -2,17 +2,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>letsgo-wso2</artifactId>
+        <artifactId>letsgo-ejb-remote-client</artifactId>
         <groupId>org.igo</groupId>
         <version>1.0</version>
     </parent>
 
     <groupId>org.igo</groupId>
-    <artifactId>letsgo-city-ejb-client</artifactId>
+    <artifactId>letsgo-ejb-remote-client-city</artifactId>
     <version>1.0</version>
     <packaging>app-client</packaging>
 
-    <name>letsgo-city-ejb-client</name>
+    <name>letsgo-ejb-remote-client-city</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>

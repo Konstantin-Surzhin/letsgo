@@ -12,6 +12,6 @@
     <packaging>pom</packaging>
     <name>letsgo-ejb-remote-client</name>
   <modules>
-    <module>letsgo-city-ejb-client</module>
+    <module>letsgo-ejb-remote-client-city</module>
   </modules>
 </project>

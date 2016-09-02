@@ -151,3 +151,4 @@ hs_err_pid*
 /letsgo-rest/letsgo-rest-game/target/
 /letsgo-rest/letsgo-rest-place/target/
 /letsgo-rest/letsgo-rest-degree/target/
+/letsgo-ejb-remote-client/letsgo-ejb-remote-client-city/target/
