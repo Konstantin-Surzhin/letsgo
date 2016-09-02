@@ -24,7 +24,7 @@ import javax.validation.constraints.Size;
  * @author surzhin.konstantin
  */
 @Entity
-@Table(name = "cities")
+@Table(name = "CITIES")
 @NamedQueries({
     @NamedQuery(name = "City.findAll", query = "SELECT c FROM City c"),
     @NamedQuery(name = "City.findById", query = "SELECT c FROM City c WHERE c.id = :id"),
@@ -102,7 +102,8 @@ public class City implements Serializable {
      * @return the cityName
      */
     @Size(min = 1,max = 255)
-    @Column(length = 255, name = "city_name", nullable = false, unique = true, columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci" )
+    @Column(length = 255, name = "city_name", nullable = false, unique = true )
+    //@Column(length = 255, name = "city_name", nullable = false, unique = true, columnDefinition = "VARCHAR(255) CHARACTER SET utf-8 COLLATE utf8_unicode_ci" )
     public String getCityName() {
         return cityName;
     }

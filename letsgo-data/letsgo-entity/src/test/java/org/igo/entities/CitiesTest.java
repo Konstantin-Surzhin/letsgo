@@ -38,7 +38,7 @@ public class CitiesTest {
 
     @Before
     public void setUp() {
-        emf = Persistence.createEntityManagerFactory("testGamePU");
+        emf = Persistence.createEntityManagerFactory("testGamePU_H2");
         em = emf.createEntityManager();
     }
 
