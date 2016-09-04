@@ -5,6 +5,7 @@
  */
 package org.igo.junit.entities;
 
+import java.org.igo.entities.LetsgoEntityTestSuite;
 import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
