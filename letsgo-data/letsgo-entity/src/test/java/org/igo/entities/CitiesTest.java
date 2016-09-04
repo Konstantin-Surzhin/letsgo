@@ -22,7 +22,7 @@ import static org.junit.Assert.*;
  */
 public class CitiesTest {
 
-    private EntityManagerFactory emf;
+    static private EntityManagerFactory emf;
     private EntityManager em;
 
     public CitiesTest() {
@@ -30,15 +30,19 @@ public class CitiesTest {
 
     @BeforeClass
     public static void setUpClass() {
+        emf = Persistence.createEntityManagerFactory("testGamePU_MySQL");
     }
 
     @AfterClass
     public static void tearDownClass() {
+        if (emf != null) {
+            emf.close();
+        }
     }
 
     @Before
     public void setUp() {
-        emf = Persistence.createEntityManagerFactory("testGamePU_H2");
+
         em = emf.createEntityManager();
     }
 
@@ -47,9 +51,7 @@ public class CitiesTest {
         if (em != null) {
             em.close();
         }
-        if (emf != null) {
-            emf.close();
-        }
+
     }
 
     /**
@@ -65,7 +67,7 @@ public class CitiesTest {
         assertNull(result);
 
         city.setCityName("Не резиновая!");
-        
+
         em.getTransaction().begin();
         em.persist(city);
         em.getTransaction().commit();

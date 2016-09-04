@@ -31,7 +31,7 @@
             <property name="hibernate.connection.characterEncoding" value="UTF-8"/>
             <property name="hibernate.connection.charSet" value="UTF-8"/>
             <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+            <property name="hibernate.dialect" value="org.mysql.utf8.dialect.MysqlUTF8Dialect"/>
         </properties>
     </persistence-unit>
     <persistence-unit name="testGamePU_H2" transaction-type="RESOURCE_LOCAL">
