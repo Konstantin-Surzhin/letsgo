@@ -16,6 +16,8 @@
  */
 package org.igo.junit.entities;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -29,14 +31,34 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
 /**
  *
  * @author surzhin.konstantin
  */
+@RunWith(Parameterized.class)
 public class CitiesTest {
 
-    static private EntityManagerFactory emf;
+    @Parameterized.Parameter(value = 0)
+    static public EntityManagerFactory emf;
+
+    @Parameterized.Parameters
+    public static Collection dataBaseParam() {
+        EntityManagerFactory emf0 = null;
+        EntityManagerFactory emf1 = null;
+
+        if (LetsgoEntityTestSuite.emf0 == null) {
+            emf0 = Persistence.createEntityManagerFactory("testGamePU_MySQL");
+        }
+        if (LetsgoEntityTestSuite.emf1 == null) {
+            emf1 = Persistence.createEntityManagerFactory("testGamePU_H2");
+        }
+        Object[][]param = {{emf0}, {emf1}};
+
+        return Arrays.asList(param);
+    }
 
     private EntityManager em;
 
@@ -45,9 +67,7 @@ public class CitiesTest {
 
     @BeforeClass
     public static void setUpClass() {
-        if (LetsgoEntityTestSuite.emf == null) {
-            emf = Persistence.createEntityManagerFactory("testGamePU_H2");
-        }
+
     }
 
     @AfterClass
@@ -55,24 +75,17 @@ public class CitiesTest {
         if (emf != null) {
             emf.close();
         }
+
     }
 
     @Before
     public void setUp() {
-        if (emf != null) {
-            em = emf.createEntityManager();
-        } else {
-            em = LetsgoEntityTestSuite.emf.createEntityManager();
-        }
-
+        em = emf.createEntityManager();
     }
 
     @After
     public void tearDown() {
-        if (em != null) {
-            em.close();
-        }
-
+        em.close();
     }
 
     /**
@@ -80,6 +93,7 @@ public class CitiesTest {
      */
     @Test
     public void testGetId() {
+        
         System.out.println("getId");
         City city = new City();
 

@@ -55,17 +55,22 @@ import org.junit.runners.Suite;
     org.igo.junit.entities.GameMoveTest.class})
 public class LetsgoEntityTestSuite {
 
-    static public EntityManagerFactory emf;
+    static public EntityManagerFactory emf0;
+    static public EntityManagerFactory emf1;
 
     @BeforeClass
     public static void setUpClass() throws Exception {
-        emf = Persistence.createEntityManagerFactory("testGamePU_H2");
+        emf0 = Persistence.createEntityManagerFactory("testGamePU_MySQL");
+        emf1 = Persistence.createEntityManagerFactory("testGamePU_H2");
     }
 
     @AfterClass
     public static void tearDownClass() throws Exception {
-        if (emf != null) {
-            emf.close();
+        if (emf0 != null) {
+            emf0.close();
+        }
+        if (emf1 != null) {
+            emf1.close();
         }
     }
 
