@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author surzhin.konstantin
  */
 @Entity
-@Table(name = "moves_comments",  uniqueConstraints = {
+@Table(name = "MOVE_COMMENTS",  uniqueConstraints = {
     @UniqueConstraint(columnNames = {"move_game_id", "user_id", "move_ndx", "move_comment"})})
 @XmlRootElement
 @NamedQueries({

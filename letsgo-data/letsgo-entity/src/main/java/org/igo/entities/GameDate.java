@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author surzhin.konstantin
  */
 @Entity
-@Table(name = "games_dates",  uniqueConstraints = {
+@Table(name = "GAME_DATES",  uniqueConstraints = {
     @UniqueConstraint(columnNames = {"game_date", "game_id"})})
 @XmlRootElement
 @NamedQueries({
