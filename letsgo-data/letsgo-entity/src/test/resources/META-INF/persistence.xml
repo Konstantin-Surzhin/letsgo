@@ -56,7 +56,7 @@
         <class>org.igo.entities.UserGame</class>
         <class>org.igo.entities.UserRole</class>
         <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:letsgo;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS LETSGO"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:letsgo;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;DATABASE_TO_UPPER=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS letsgo;"/>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
             <property name="javax.persistence.jdbc.password" value=""/>
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>

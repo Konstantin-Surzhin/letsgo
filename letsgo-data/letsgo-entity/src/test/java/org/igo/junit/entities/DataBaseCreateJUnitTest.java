@@ -37,13 +37,10 @@ public class DataBaseCreateJUnitTest {
 
     @Parameterized.Parameter(value = 0)
     public EntityManagerFactory emf;
-
     @Parameterized.Parameter(value = 1)
-    public String tableName;
-
+    public String informationSchemaName;
     @Parameterized.Parameter(value = 2)
-    public String schemaName;
-
+    public String tableName;
     @Parameterized.Parameter(value = 3)
     public String rdbmsName;
 
@@ -52,13 +49,15 @@ public class DataBaseCreateJUnitTest {
         EntityManagerFactory emf0 = Persistence.createEntityManagerFactory("testGamePU_MySQL");
         EntityManagerFactory emf1 = Persistence.createEntityManagerFactory("testGamePU_H2");
 
-        String[] table = {"CITIES", "DEGREES", "EVENTS",
+        String _informationSchemaName = "information_schema";
+        String[] table = {"cities", "DEGREES", "EVENTS",
             "GAMES", "GAME_COMMENS", "GANE_DATES", "GAME_MOVES",
             "GAME_RULES", "LEADUES", "MOVE_COMMENTS", "PLACES", "ROOMS",
             "TEAMS", "USERS", "USER_BANS", "USER_DEGREES", "USER_GAME",
             "USER_ROLES"
         };
-        Object[][] param = {{emf0, table[0], "letsgo", "MySql"}, {emf1, table[1], "LETSGO", "H2"}};
+        Object[][] param = {{emf0, _informationSchemaName, table[0],  "MySql"},
+        {emf1, _informationSchemaName.toUpperCase(), table[1], "H2"}};
 
         return Arrays.asList(param);
     }
@@ -71,9 +70,10 @@ public class DataBaseCreateJUnitTest {
         System.out.println(rdbmsName + " : " + tableName + ":check table exist.");
 
         EntityManager em = emf.createEntityManager();
-        Query q = em.createNativeQuery("SELECT count(TABLE_NAME)  cn  FROM  information_schema.TABLES WHERE TABLE_NAME=:TABLE_NAME AND TABLE_SCHEMA=:TABLE_SCHEMA");
+        Query q = em.createNativeQuery("SELECT count(TABLE_NAME) cn  FROM "
+                + informationSchemaName
+                + ".TABLES WHERE TABLE_NAME=:TABLE_NAME AND TABLE_SCHEMA='letsgo'");
         q.setParameter("TABLE_NAME", tableName);
-        q.setParameter("TABLE_SCHEMA", schemaName);
 
         BigInteger cn = (BigInteger) q.getSingleResult();
         em.close();
