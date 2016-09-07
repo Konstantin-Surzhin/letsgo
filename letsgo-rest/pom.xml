@@ -11,22 +11,21 @@
     <modules>
         <module>letsgo-rest-game</module>
         <module>letsgo-rest-place</module>
-    <module>letsgo-rest-degree</module>
-    <module>letsgo-rest-event</module>
-    <module>letsgo-rest-game-comment</module>
-    <module>letsgo-rest-game-date</module>
-    <module>letsgo-rest-game-move</module>
-    <module>letsgo-rest-game-rule</module>
-    <module>letsgo-rest-league</module>
-    <module>letsgo-rest-move-comment</module>
-    <module>letsgo-rest-room</module>
-    <module>letsg-rest-team</module>
-    <module>letsgo-rest-user</module>
-    <module>letsgo-rest-user-ban</module>
-    <module>letsg-rest-user-degree</module>
-    <module>letsgo-rest-user-game</module>
-    <module>letsgo-rest-user-role</module>
-        <module>spring-tiles-city</module>
+        <module>letsgo-rest-degree</module>
+        <module>letsgo-rest-event</module>
+        <module>letsgo-rest-game-comment</module>
+        <module>letsgo-rest-game-date</module>
+        <module>letsgo-rest-game-move</module>
+        <module>letsgo-rest-game-rule</module>
+        <module>letsgo-rest-league</module>
+        <module>letsgo-rest-move-comment</module>
+        <module>letsgo-rest-room</module>
+        <module>letsg-rest-team</module>
+        <module>letsgo-rest-user</module>
+        <module>letsgo-rest-user-ban</module>
+        <module>letsg-rest-user-degree</module>
+        <module>letsgo-rest-user-game</module>
+        <module>letsgo-rest-user-role</module>
     </modules>
     <name>letsgo-rest</name>
 </project>

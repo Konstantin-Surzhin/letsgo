@@ -17,6 +17,7 @@
         <module>spring-mixer2</module>
         <module>spring-angular-bootstrap</module>
         <module>letsgo-spring-jsp</module>
+        <module>spring-data</module>
     </modules>
     <name>letsgo-spring</name>
 </project>
