@@ -8,4 +8,7 @@
     </parent>
     <artifactId>spring-tiles</artifactId>
     <packaging>pom</packaging>
+  <modules>
+    <module>spring-tiles-city</module>
+  </modules>
 </project>
