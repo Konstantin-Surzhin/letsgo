@@ -8,11 +8,13 @@ package org.igo.spring.data.city;
 import java.util.List;
 import org.igo.entities.City;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author surzhin.konstantin
  */
+@Repository
 public interface CityRepository extends CrudRepository<City, Long>{
     
     City findByFirstName(String firstName);
