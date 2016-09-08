@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class CityController {
 
-    @Autowired
-    CityRepository cityRepository;
+   // @Autowired
+  // CityRepository cityRepository;
 
     @GetMapping(value = "/city")
     public String index(Model model) {
