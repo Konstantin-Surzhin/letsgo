@@ -9,4 +9,7 @@
     <artifactId>letsgo-spring-velocity</artifactId>
     <packaging>pom</packaging>
     <name>letsgo-spring-velocity</name>
+  <modules>
+    <module>letsgo-spring-velocity-city</module>
+  </modules>
 </project>
