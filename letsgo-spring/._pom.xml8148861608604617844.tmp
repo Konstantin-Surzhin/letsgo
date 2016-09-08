@@ -9,15 +9,15 @@
     <artifactId>letsgo-spring</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>letsgo-spring-thymeleaf</module>
-        <module>letsgo-spring-freemarker</module>
+        <module>spring-sitemesh</module>
+        <module>spring-thymeleaf</module>
+        <module>spring-tiles</module>
+        <module>spring-velocity</module>
+        <module>spring-freemarker</module>
+        <module>spring-mixer2</module>
+        <module>spring-angular-bootstrap</module>
         <module>letsgo-spring-jsp</module>
-        <module>letsgo-spring-sitemesh</module>
-        <module>letsgo-spring-tiles</module>
-        <module>letsgo-spring-velocity</module>
-        <module>letsgo-spring-mixer2</module>
-        <module>letsgo-spring-data</module>
-        <module>letsgo-spring-angular-bootstrap</module>
+        <module>spring-data</module>
     </modules>
     <name>letsgo-spring</name>
 </project>

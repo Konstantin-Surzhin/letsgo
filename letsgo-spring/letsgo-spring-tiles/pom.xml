@@ -6,9 +6,10 @@
         <artifactId>letsgo-spring</artifactId>
         <version>1.0</version>
     </parent>
-    <artifactId>spring-angular-bootstrap</artifactId>
+    <artifactId>letsgo-spring-tiles</artifactId>
     <packaging>pom</packaging>
   <modules>
-    <module>letsgo-spring-angular-bootstrap-city</module>
+    <module>spring-tiles-city</module>
   </modules>
+    <name>letsgo-spring-tiles</name>
 </project>

@@ -6,6 +6,10 @@
         <artifactId>letsgo-spring</artifactId>
         <version>1.0</version>
     </parent>
-    <artifactId>spring-velocity</artifactId>
+    <artifactId>letsgo-spring-thymeleaf</artifactId>
     <packaging>pom</packaging>
+  <modules>
+    <module>letsgo-spring-thymeleaf-city</module>
+  </modules>
+    <name>letsgo-spring-thymeleaf</name>
 </project>

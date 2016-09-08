@@ -6,6 +6,7 @@
         <artifactId>letsgo-spring</artifactId>
         <version>1.0</version>
     </parent>
-    <artifactId>spring-thymeleaf</artifactId>
+    <artifactId>letsgo-spring-sitemesh</artifactId>
     <packaging>pom</packaging>
+    <name>letsgo-spring-sitemesh</name>
 </project>
