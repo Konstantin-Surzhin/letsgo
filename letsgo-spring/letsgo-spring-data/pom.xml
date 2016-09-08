@@ -9,7 +9,7 @@
     <artifactId>letsgo-spring-data</artifactId>
     <packaging>pom</packaging>
   <modules>
-    <module>spring-data-city</module>
+    <module>letsgo-spring-data-city</module>
   </modules>
     <name>letsgo-spring-data</name>
 </project>
