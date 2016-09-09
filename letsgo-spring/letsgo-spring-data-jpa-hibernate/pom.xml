@@ -6,10 +6,10 @@
         <artifactId>letsgo-spring</artifactId>
         <version>1.0</version>
     </parent>
-    <artifactId>letsgo-spring-data</artifactId>
+    <artifactId>letsgo-spring-data-jpa-hibernate</artifactId>
     <packaging>pom</packaging>
   <modules>
-    <module>spring-data-city</module>
+    <module>letsgo-spring-data-city</module>
   </modules>
-    <name>letsgo-spring-data</name>
+    <name>letsgo-spring-data-jpa-hibernate</name>
 </project>
