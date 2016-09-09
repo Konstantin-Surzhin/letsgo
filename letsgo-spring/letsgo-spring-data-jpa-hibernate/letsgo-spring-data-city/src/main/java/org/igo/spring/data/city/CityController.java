@@ -6,7 +6,6 @@
 package org.igo.spring.data.city;
 
 import org.igo.entities.City;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +31,7 @@ public class CityController {
     @PostMapping(value = "addCity")
     public String addCity(Model model, @ModelAttribute City city) {
 
-        model.addAttribute("name", city.getName());
+        model.addAttribute("name", city.getCityName());
         model.addAttribute("id", city.getId());
         return "result";
     }

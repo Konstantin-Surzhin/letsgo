@@ -16,8 +16,9 @@
         <module>letsgo-spring-tiles</module>
         <module>letsgo-spring-velocity</module>
         <module>letsgo-spring-mixer2</module>
-        <module>letsgo-spring-data</module>
         <module>letsgo-spring-angular-bootstrap</module>
+        <module>letsgo-spring-data-jpa-hibernate</module>
+        <module>letsgo-spring-data-jpa-mybatis</module>
     </modules>
     <name>letsgo-spring</name>
 </project>

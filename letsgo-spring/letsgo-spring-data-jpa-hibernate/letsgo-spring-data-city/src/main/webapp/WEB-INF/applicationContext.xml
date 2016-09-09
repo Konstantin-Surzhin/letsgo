@@ -23,5 +23,6 @@
     p:password="${jdbc.password}" /-->
 
     <!-- ADD PERSISTENCE SUPPORT HERE (jpa, hibernate, etc) -->
-    <jpa:repositories base-package="org.igo.entities"  />
+    <!--<jpa:repositories base-package="org.igo.entities"  />-->
+    <!--<jpa:repositories base-package="org.igo.spring.data.city"/>-->
 </beans>
