@@ -1,6 +1,6 @@
 <%-- 
-    Document   : city
-    Created on : 08.09.2016, 12:12:48
+    Document   : result
+    Created on : 12.09.2016, 9:43:51
     Author     : surzhin.konstantin
 --%>
 
@@ -12,7 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello City ${city.cityName}!</h1>
-        <a href="addCity.htm">добавить город!</a>
+        <h1>Hello ${city.cityName} : ${city.id}! </h1>
     </body>
 </html>
