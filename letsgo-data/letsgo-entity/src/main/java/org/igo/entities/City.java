@@ -39,16 +39,14 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "City.findAll", query = "SELECT c FROM City c"),
     @NamedQuery(name = "City.findById", query = "SELECT c FROM City c WHERE c.id = :id"),
-    @NamedQuery(name = "City.findByCityName", query = "SELECT c FROM City c WHERE c.cityName = :cityName")
+    @NamedQuery(name = "City.findByCityName", query = "SELECT c FROM City c WHERE c.cityName = :cityName"),
+    @NamedQuery(name = "City.checkByCityName", query = "SELECT count(c) FROM City c WHERE c.cityName = :cityName")
 })
 public class City implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Integer id;
-    //TODO: make i18n
-    //private Map<String, String> cityNameMap;
     private String cityName;
-
     private Set<User> userCollection;
 
     public City() {
@@ -62,10 +60,6 @@ public class City implements Serializable {
        this.cityName= cityName;
     }
 
-//    public City(Integer id, Map<String, String> cityNameMap) {
-//        this.id = id;
-//        this.cityNameMap = cityName;
-//    }
     @Id
     @Basic(optional = false)
     @Column(name = "id")
@@ -114,7 +108,6 @@ public class City implements Serializable {
      */
     @Size(min = 1,max = 255)
     @Column(length = 255, name = "city_name", nullable = false, unique = true )
-    //@Column(length = 255, name = "city_name", nullable = false, unique = true, columnDefinition = "VARCHAR(255) CHARACTER SET utf-8 COLLATE utf8_unicode_ci" )
     public String getCityName() {
         return cityName;
     }
@@ -125,21 +118,4 @@ public class City implements Serializable {
     public void setCityName(final String cityName) {
         this.cityName = cityName;
     }
-
-    /**
-     * @return the cityNameMap
-     */
-//    @ElementCollection
-//    @JoinTable(name = "city_name", joinColumns = @JoinColumn(name = "id"))
-//    @MapKeyColumn(name = "locale")
-//    @Column(name = "city_name", unique = true)
-//    public Map<String, String> getCityNameMap() {
-//        return cityNameMap;
-//    }
-    /**
-     * @param cityNameMap the cityNameMap to set
-     */
-//    public void setCityNameMap(Map<String, String> cityNameMap) {
-//        this.cityNameMap = cityNameMap;
-//    }
 }
