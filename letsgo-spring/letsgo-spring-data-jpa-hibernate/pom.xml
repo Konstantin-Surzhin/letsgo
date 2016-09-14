@@ -9,7 +9,6 @@
     <artifactId>letsgo-spring-data-jpa-hibernate</artifactId>
     <packaging>pom</packaging>
   <modules>
-    <module>letsgo-spring-data-city</module>
     <module>letsgo-spring-data-degree</module>
     <module>letsgo-spring-data-event</module>
     <module>letsgo-spring-data-game</module>
@@ -27,6 +26,8 @@
     <module>letsgo-spring-data-user-degree</module>
     <module>letsgo-spring-data-user-game</module>
     <module>letsgo-spring-data-user-role</module>
+    <module>org.igo_letsgo-spring-data-city_war_1.0</module>
+    <module>letsgo-spring-jsp-city</module>
   </modules>
     <name>letsgo-spring-data-jpa-hibernate</name>
 </project>

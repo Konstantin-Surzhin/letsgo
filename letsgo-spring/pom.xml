@@ -19,6 +19,7 @@
         <module>letsgo-spring-angular-bootstrap</module>
         <module>letsgo-spring-data-jpa-hibernate</module>
         <module>letsgo-spring-data-jpa-mybatis</module>
+        <module>letsgo-spring-controler</module>
     </modules>
     <name>letsgo-spring</name>
 </project>
