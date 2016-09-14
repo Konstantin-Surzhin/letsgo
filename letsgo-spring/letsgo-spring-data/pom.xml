@@ -27,6 +27,7 @@
     <module>letsgo-spring-data-user-game</module>
     <module>letsgo-spring-data-user-role</module>
     <module>letsgo-spring-data-event</module>
+    <module>letsgo-spring-data-crud</module>
   </modules>
     <name>letsgo-spring-data</name>
 </project>
