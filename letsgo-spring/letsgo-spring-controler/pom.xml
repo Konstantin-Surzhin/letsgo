@@ -10,5 +10,22 @@
     <packaging>pom</packaging>
     <modules>
         <module>letsgo-spring-controler-city</module>
+        <module>letsgo-spring-controler-degree</module>
+        <module>letsgo-spring-controler-event</module>
+        <module>letsgo-spring-controler-game</module>
+        <module>letsgo-spring-controler-game-comment</module>
+        <module>letsgo-spring-controler-game-date</module>
+        <module>letsgo-spring-controler-game-move</module>
+        <module>letsgo-spring-controler-game-rule</module>
+        <module>letsgo-spring-controler-league</module>
+        <module>letsgo-spring-controler-move-comment</module>
+        <module>letsgo-spring-controler-place</module>
+        <module>letsgo-spring-controler-room</module>
+        <module>letsgo-spring-controler-team</module>
+        <module>letsgo-spring-controler-user</module>
+        <module>letsgo-spring-controler-user-ban</module>
+        <module>letsgo-spring-controler-user-dergee</module>
+        <module>letsgo-spring-controler-user-game</module>
+        <module>letsgo-spring-controler-user-role</module>
     </modules>
 </project>
