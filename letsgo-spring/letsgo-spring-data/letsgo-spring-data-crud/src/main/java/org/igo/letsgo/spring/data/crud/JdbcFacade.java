@@ -16,11 +16,10 @@ package org.igo.letsgo.spring.data.crud;
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-
 import java.util.List;
-import org.hibernate.SessionFactory;
+import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -29,13 +28,13 @@ import org.springframework.stereotype.Repository;
  * @param <T>
  */
 @Repository
-public class HibernateAbstractFacade<T> implements DaoInterface<T> {
+public class JdbcFacade<T> implements DaoInterface<T> {
 
-    private SessionFactory sessionFactory;
+    private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
+    public void init(DataSource dataSource) {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     @Override

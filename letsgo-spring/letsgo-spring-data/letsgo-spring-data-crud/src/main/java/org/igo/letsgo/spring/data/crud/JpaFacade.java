@@ -27,7 +27,7 @@ import org.springframework.stereotype.Repository;
  * @param <T>
  */
 @Repository
-public abstract class JpaAbstractFacade<T> implements DaoInterface<T> {
+public class JpaFacade<T> implements DaoInterface<T> {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -40,7 +40,7 @@ public abstract class JpaAbstractFacade<T> implements DaoInterface<T> {
         this.entityManager = entityManager;
     }
 
-    public JpaAbstractFacade(Class<T> entityClass) {
+    public JpaFacade(Class<T> entityClass) {
         this.entityClass = entityClass;
     }
 
