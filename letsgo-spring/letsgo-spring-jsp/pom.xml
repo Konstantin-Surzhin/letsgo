@@ -8,7 +8,23 @@
     </parent>
     <artifactId>letsgo-spring-jsp</artifactId>
     <packaging>pom</packaging>
-  <modules>
-	<module>letsgo-spring-jsp-city</module>
-  </modules>
+    <modules>
+        <module>letsgo-spring-jsp-city</module>
+        <module>letsgo-spring-jsp-degree</module>
+        <module>letsgo-spring-jsp-event</module>
+        <module>letsgo-spring-jsp-game</module>
+        <module>letsgo-spring-jsp-game-comment</module>
+        <module>letsgo-spring-jsp-game-move</module>
+        <module>letsgo-spring-jsp-game-date</module>
+        <module>letsgo-spring-jsp-league</module>
+        <module>letsgo-spring-jsp-move-comment</module>
+        <module>letsgo-spring-jsp-place</module>
+        <module>letsgo-spring-jsp-room</module>
+        <module>letsgo-spring-jsp-team</module>
+        <module>letsgo-spring-jsp-user</module>
+        <module>letsgo-spring-jsp-user-ban</module>
+        <module>letsgo-spring-jsp-user-degree</module>
+        <module>letsgo-spring-jsp-user-game</module>
+        <module>letsgo-spring-jsp-user-role</module>
+    </modules>
 </project>
