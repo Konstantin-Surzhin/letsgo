@@ -1,5 +1,3 @@
-package org.igo.letsgo.spring.data.crud;
-
 /*
  * Copyright (C) 2016 surzhin.konstantin
  *
@@ -17,6 +15,7 @@ package org.igo.letsgo.spring.data.crud;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+package org.igo.letsgo.spring.data.crud;
 
 import java.util.List;
 import org.springframework.stereotype.Repository;

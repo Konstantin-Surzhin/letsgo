@@ -14,17 +14,28 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package org.igo.letsgo.spring.data.crud;
-
+ 
 import java.util.List;
+import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author surzhin.konstantin
  * @param <T>
  */
-public class JdbcFacade<T> implements DaoInterface<T>{
+@Repository
+public class JdbcTemplateFacade<T> implements DaoInterface<T> {
+
+    private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    public void init(DataSource dataSource) {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
+    }
 
     @Override
     public int count() {
@@ -60,5 +71,5 @@ public class JdbcFacade<T> implements DaoInterface<T>{
     public void remove(T entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
