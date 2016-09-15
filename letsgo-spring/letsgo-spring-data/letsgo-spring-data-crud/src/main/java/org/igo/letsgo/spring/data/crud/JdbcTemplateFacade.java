@@ -15,8 +15,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.igo.letsgo.spring.data.crud;
- 
+
 import java.util.List;
+import javax.persistence.Entity;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -28,48 +29,67 @@ import org.springframework.stereotype.Repository;
  * @param <T>
  */
 @Repository
-public class JdbcTemplateFacade<T> implements DaoInterface<T> {
+public class JdbcTemplateFacade<T extends Entity> implements DaoInterface<T> {
 
     private JdbcTemplate jdbcTemplate;
+    private final Class<T> entityClass;
+
+    public JdbcTemplateFacade(final Class<T> entityClass) {
+        this.entityClass = entityClass;
+    }
 
     @Autowired
-    public void init(DataSource dataSource) {
+    public void init(final DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     @Override
     public int count() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new RuntimeException("You need use \"executeQuery(String sql)\" instead.");
     }
 
     @Override
     public void create(T entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new RuntimeException("You need use \"executeQuery(String sql)\" instead.");
     }
 
     @Override
     public void edit(T entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new RuntimeException("You need use \"executeQuery(String sql)\" instead.");
     }
 
     @Override
     public T find(Object id) {
+        throw new RuntimeException("You need use \"find(String sql)\" instead.");
+    }
+
+    @Override
+    public List<T> findAll() throws RuntimeException {
+        throw new RuntimeException("You need use \"getList(String sql)\" instead.");
+    }
+
+    @Override
+    public List<T> findRange(int[] range) throws RuntimeException {
+        throw new RuntimeException("You need use \"getList(String sql)\" instead.");
+    }
+
+    @Override
+    public void remove(T entity) throws RuntimeException {
+        throw new RuntimeException("You need use \"executeQuery(String sql)\" instead.");
+    }
+
+    @Override
+    public T find(String sql) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<T> findAll() {
+    public void executeQuery(String sql) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<T> findRange(int[] range) {
+    public List<T> getList(String sql) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    @Override
-    public void remove(T entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

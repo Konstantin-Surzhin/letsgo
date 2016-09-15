@@ -17,6 +17,7 @@
 package org.igo.letsgo.spring.data.crud;
 
 import java.util.List;
+import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
@@ -27,7 +28,7 @@ import org.springframework.stereotype.Repository;
  * @param <T>
  */
 @Repository
-public class JpaFacade<T> implements DaoInterface<T> {
+public class JpaFacade<T extends Entity> implements DaoInterface<T> {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -36,31 +37,31 @@ public class JpaFacade<T> implements DaoInterface<T> {
     /**
      * @param entityManager the entityManager to set
      */
-    public void setEntityManager(EntityManager entityManager) {
+    public void setEntityManager(final EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
-    public JpaFacade(Class<T> entityClass) {
+    public JpaFacade(final Class<T> entityClass) {
         this.entityClass = entityClass;
     }
 
     @Override
-    public void create(T entity) {
+    public void create(final T entity) {
         entityManager.persist(entity);
     }
 
     @Override
-    public void edit(T entity) {
+    public void edit(final T entity) {
         entityManager.merge(entity);
     }
 
     @Override
-    public void remove(T entity) {
+    public void remove(final T entity) {
         entityManager.remove(entityManager.merge(entity));
     }
 
     @Override
-    public T find(Object id) {
+    public T find(final Object id) {
         return entityManager.find(entityClass, id);
     }
 
@@ -72,7 +73,7 @@ public class JpaFacade<T> implements DaoInterface<T> {
     }
 
     @Override
-    public List<T> findRange(int[] range) {
+    public List<T> findRange(final int[] range) {
         javax.persistence.criteria.CriteriaQuery cq = entityManager.getCriteriaBuilder().createQuery();
         cq.select(cq.from(entityClass));
         javax.persistence.Query q = entityManager.createQuery(cq);
@@ -88,5 +89,20 @@ public class JpaFacade<T> implements DaoInterface<T> {
         cq.select(entityManager.getCriteriaBuilder().count(rt));
         javax.persistence.Query q = entityManager.createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
+    }
+
+    @Override
+    public T find(String sql) {
+        throw new RuntimeException("You need use \"find(final Object id)\" instead.");
+    }
+
+    @Override
+    public void executeQuery(String sql) {
+        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<T> getList(String sql) {
+        throw new RuntimeException("You need use \"findAll()\"  or \"findRange(final int[] range)\" instead.");
     }
 }

@@ -14,10 +14,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package org.igo.letsgo.spring.data.crud;
 
 import java.util.List;
+import javax.persistence.Entity;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -26,7 +26,7 @@ import org.springframework.stereotype.Repository;
  * @param <T>
  */
 @Repository
-public interface DaoInterface<T> {
+public interface DaoInterface<T extends Entity> {
 
     int count();
 
@@ -34,12 +34,17 @@ public interface DaoInterface<T> {
 
     void edit(T entity);
 
+    void remove(T entity);
+
+    void executeQuery(String sql);
+
     T find(Object id);
+
+    T find(String sql);
 
     List<T> findAll();
 
     List<T> findRange(int[] range);
 
-    void remove(T entity);
-    
+    List<T> getList(String sql);
 }

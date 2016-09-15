@@ -18,6 +18,7 @@
 package org.igo.letsgo.spring.data.crud;
 
 import java.util.List;
+import javax.persistence.Entity;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -28,7 +29,7 @@ import org.springframework.stereotype.Repository;
  * @param <T>
  */
 @Repository
-public class HibernateFacade<T> implements DaoInterface<T> {
+public class HibernateFacade<T extends Entity> implements DaoInterface<T> {
 
     private SessionFactory sessionFactory;
 
@@ -71,5 +72,21 @@ public class HibernateFacade<T> implements DaoInterface<T> {
     public void remove(T entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public void executeQuery(String sql) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public T find(String sql) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<T> getList(String sql) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 
 }

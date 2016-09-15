@@ -9,7 +9,6 @@
     <artifactId>letsgo-spring-data</artifactId>
     <packaging>pom</packaging>
   <modules>
-    <module>letsgo-spring-data-city</module>
     <module>letsgo-spring-data-degree</module>
     <module>letsgo-spring-data-game</module>
     <module>letsgo-spring-data-game-comment</module>
@@ -28,6 +27,7 @@
     <module>letsgo-spring-data-user-role</module>
     <module>letsgo-spring-data-event</module>
     <module>letsgo-spring-data-crud</module>
+    <module>letsgo-spring-data-city</module>
   </modules>
     <name>letsgo-spring-data</name>
 </project>
