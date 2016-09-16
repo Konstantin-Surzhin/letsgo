@@ -16,6 +16,7 @@
  */
 package org.igo.letsgo.spring.controler;
 
+import java.util.ResourceBundle;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.igo.entities.UserRole;
@@ -36,9 +37,10 @@ public class UserRoleController {
     @GetMapping(value = "/userRole")
     public String index(Model model) {
         model.addAttribute("user_role", new UserRole());
-        model.addAttribute("head", java.util.ResourceBundle.getBundle("Bundle").getString("head"));
-        model.addAttribute("submit", java.util.ResourceBundle.getBundle("Bundle").getString("submit"));
-        model.addAttribute("message", java.util.ResourceBundle.getBundle("Bundle").getString("message"));
+        ResourceBundle bundle = java.util.ResourceBundle.getBundle("Bundle");
+        model.addAttribute("head", bundle.getString("head"));
+        model.addAttribute("submit", bundle.getString("submit"));
+        model.addAttribute("message", bundle.getString("message"));
         return "userRole";
     }
 }
