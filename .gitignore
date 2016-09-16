@@ -165,3 +165,9 @@ hs_err_pid*
 /letsgo-spring/letsgo-spring-controler/letsgo-spring-controler-city/target/
 /letsgo-spring/letsgo-spring-jsp/letsgo-spring-data-city/target/
 /letsgo-spring/letsgo-spring-data/letsgo-spring-data-crud/target/
+/letsgo-spring/letsgo-spring-view/letsgo-spring-angular-bootstrap/letsgo-spring-angular-bootstrap-city/target/
+/letsgo-spring/letsgo-spring-view/letsgo-spring-freemarker/letsgo-spring-freemarker-city/target/
+/letsgo-spring/letsgo-spring-view/letsgo-spring-jsp/letsgo-spring-jsp-city/target/
+/letsgo-spring/letsgo-spring-view/letsgo-spring-thymeleaf/letsgo-spring-thymeleaf-city/target/
+/letsgo-spring/letsgo-spring-view/letsgo-spring-tiles/spring-tiles-city/target/
+/letsgo-spring/letsgo-spring-view/letsgo-spring-velocity/letsgo-spring-velocity-city/target/
