@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.igo.letsgo.spring.controler.event;
+package org.igo.letsgo.spring.controler;
 
 import java.util.ResourceBundle;
 import org.springframework.ui.Model;
@@ -28,15 +28,30 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 public class EventController {
 
-    @PersistenceContext
-    EntityManager em;
+    private EntityManager entityManager;
+    private final ResourceBundle bundle = java.util.ResourceBundle.getBundle("Bundle");
+    
         @GetMapping(value = "/event")
     public String index(Model model) {
         model.addAttribute("event", new Event());
-        ResourceBundle bundle = java.util.ResourceBundle.getBundle("Bundle");
         model.addAttribute("head", bundle.getString("head"));
         model.addAttribute("submit", bundle.getString("submit"));
         model.addAttribute("message", bundle.getString("message"));
         return "event";
+    }
+
+    /**
+     * @return the entityManager
+     */
+    @PersistenceContext
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
+
+    /**
+     * @param entityManager the entityManager to set
+     */
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 }
