@@ -70,7 +70,6 @@ public class CityController {
     /**
      * @return the entityManager
      */
-    @PersistenceContext
     public EntityManager getEntityManager() {
         return entityManager;
     }
@@ -78,6 +77,7 @@ public class CityController {
     /**
      * @param entityManager the entityManager to set
      */
+    @PersistenceContext
     public void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
