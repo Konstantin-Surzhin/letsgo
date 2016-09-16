@@ -20,6 +20,7 @@ import java.util.ResourceBundle;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.igo.entities.GameComment;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  *
  * @author surzhin.konstantin
  */
+@Controller
 public class GameCommentController {
         
     private EntityManager entityManager;
