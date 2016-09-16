@@ -17,6 +17,7 @@
 package org.igo.letsgo.spring.controler;
 
 import java.util.List;
+import java.util.ResourceBundle;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -35,34 +36,49 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class CityController {
 
-    @PersistenceContext
-    EntityManager em;
-    // CityRepository cityRepository;
+    private EntityManager entityManager;
+    private final ResourceBundle bundle = java.util.ResourceBundle.getBundle("Bundle");
 
     @GetMapping(value = "/city")
     public String index(Model model) {
         model.addAttribute("city", new City());
-        model.addAttribute("city_head", java.util.ResourceBundle.getBundle("City").getString("city_head"));
-        model.addAttribute("submit", java.util.ResourceBundle.getBundle("City").getString("submit"));
-        model.addAttribute("message", java.util.ResourceBundle.getBundle("City").getString("message"));
+        model.addAttribute("head", bundle.getString("head"));
+        model.addAttribute("submit", bundle.getString("submit"));
+        model.addAttribute("message", bundle.getString("message"));
         return "city";
     }
 
-    @Transactional()
+    @Transactional
     @PostMapping(value = "/city")
     public String addCity(Model model, @ModelAttribute City city) {
-        TypedQuery<Long> q = em.createNamedQuery("City.checkByCityName", Long.class);
+        TypedQuery<Long> q = getEntityManager().createNamedQuery("City.checkByCityName", Long.class);
         q.setParameter("cityName", city.getCityName());
 
         if (q.getSingleResult() != 0L) {
-            model.addAttribute("error", java.text.MessageFormat.format(java.util.ResourceBundle.getBundle("City").getString("error"), new Object[]{city.getCityName()}));
+            model.addAttribute("error", java.text.MessageFormat.format(bundle.getString("error"),
+                    new Object[]{city.getCityName()}));
             return "databaseError";
         }
-        em.persist(city);
+        getEntityManager().persist(city);
 
-        TypedQuery<City> cities = em.createNamedQuery("City.findAll", City.class);
+        TypedQuery<City> cities = getEntityManager().createNamedQuery("City.findAll", City.class);
         List<City> list = cities.getResultList();
         model.addAttribute("cities", list);
         return "result";
+    }
+
+    /**
+     * @return the entityManager
+     */
+    @PersistenceContext
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
+
+    /**
+     * @param entityManager the entityManager to set
+     */
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 }
