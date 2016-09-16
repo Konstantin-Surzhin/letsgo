@@ -31,16 +31,30 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class UserRoleController {
 
-    @PersistenceContext
-    EntityManager em;
+    private EntityManager entityManager;
+    private final ResourceBundle bundle = java.util.ResourceBundle.getBundle("Bundle");
 
     @GetMapping(value = "/userRole")
     public String index(Model model) {
         model.addAttribute("user_role", new UserRole());
-        ResourceBundle bundle = java.util.ResourceBundle.getBundle("Bundle");
         model.addAttribute("head", bundle.getString("head"));
         model.addAttribute("submit", bundle.getString("submit"));
         model.addAttribute("message", bundle.getString("message"));
         return "userRole";
+    }
+
+    /**
+     * @return the entityManager
+     */
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
+
+    /**
+     * @param entityManager the entityManager to set
+     */
+    @PersistenceContext
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 }
