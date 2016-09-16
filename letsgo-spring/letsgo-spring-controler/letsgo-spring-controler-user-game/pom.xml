@@ -8,4 +8,17 @@
     </parent>
     <artifactId>letsgo-spring-controler-user-game</artifactId>
     <packaging>jar</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>letsgo-entity</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>4.3.2.RELEASE</version>
+            <type>jar</type>
+        </dependency>
+    </dependencies>
 </project>
