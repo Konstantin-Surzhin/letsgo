@@ -3,10 +3,13 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.igo</groupId>
-        <artifactId>letsgo-spring</artifactId>
+        <artifactId>letsgo-spring-view</artifactId>
         <version>1.0</version>
     </parent>
-    <artifactId>letsgo-spring-sitemesh</artifactId>
+    <artifactId>letsgo-spring-tiles</artifactId>
     <packaging>pom</packaging>
-    <name>letsgo-spring-sitemesh</name>
+  <modules>
+    <module>spring-tiles-city</module>
+  </modules>
+    <name>letsgo-spring-tiles</name>
 </project>

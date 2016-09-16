@@ -3,13 +3,10 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.igo</groupId>
-        <artifactId>letsgo-spring</artifactId>
+        <artifactId>letsgo-spring-view</artifactId>
         <version>1.0</version>
     </parent>
-    <artifactId>letsgo-spring-thymeleaf</artifactId>
+    <artifactId>letsgo-spring-sitemesh</artifactId>
     <packaging>pom</packaging>
-  <modules>
-    <module>letsgo-spring-thymeleaf-city</module>
-  </modules>
-    <name>letsgo-spring-thymeleaf</name>
+    <name>letsgo-spring-sitemesh</name>
 </project>
