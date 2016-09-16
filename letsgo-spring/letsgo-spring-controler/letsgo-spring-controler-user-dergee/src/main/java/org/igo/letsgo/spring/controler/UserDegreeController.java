@@ -16,6 +16,7 @@
  */
 package org.igo.letsgo.spring.controler;
 
+import java.util.ResourceBundle;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.igo.entities.UserDegree;
@@ -29,15 +30,31 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class UserDegreeController {
-        @PersistenceContext
-    EntityManager em;
+        
+    private EntityManager entityManager;
+    private final ResourceBundle bundle = java.util.ResourceBundle.getBundle("Bundle");
 
     @GetMapping(value = "/userDegree")
     public String index(Model model) {
         model.addAttribute("league", new UserDegree());
-        model.addAttribute("head", java.util.ResourceBundle.getBundle("City").getString("head"));
-        model.addAttribute("submit", java.util.ResourceBundle.getBundle("City").getString("submit"));
-        model.addAttribute("message", java.util.ResourceBundle.getBundle("City").getString("message"));
+        model.addAttribute("head", bundle.getString("head"));
+        model.addAttribute("submit", bundle.getString("submit"));
+        model.addAttribute("message", bundle.getString("message"));
         return "userDegree";
+    }
+
+    /**
+     * @return the entityManager
+     */
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
+
+    /**
+     * @param entityManager the entityManager to set
+     */
+    @PersistenceContext
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 }
