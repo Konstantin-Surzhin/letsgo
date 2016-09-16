@@ -16,6 +16,7 @@
  */
 package org.igo.letsgo.spring.controler.event;
 
+import java.util.ResourceBundle;
 import org.springframework.ui.Model;
 import org.igo.entities.Event;
 import javax.persistence.EntityManager;
@@ -32,9 +33,10 @@ public class EventController {
         @GetMapping(value = "/event")
     public String index(Model model) {
         model.addAttribute("event", new Event());
-        model.addAttribute("event_head", java.util.ResourceBundle.getBundle("City").getString("event_head"));
-        model.addAttribute("submit", java.util.ResourceBundle.getBundle("City").getString("submit"));
-        model.addAttribute("message", java.util.ResourceBundle.getBundle("City").getString("message"));
+        ResourceBundle bundle = java.util.ResourceBundle.getBundle("Bundle");
+        model.addAttribute("head", bundle.getString("head"));
+        model.addAttribute("submit", bundle.getString("submit"));
+        model.addAttribute("message", bundle.getString("message"));
         return "event";
     }
 }
