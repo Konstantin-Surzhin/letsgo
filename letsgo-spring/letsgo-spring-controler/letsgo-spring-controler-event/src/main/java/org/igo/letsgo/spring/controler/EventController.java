@@ -21,12 +21,14 @@ import org.springframework.ui.Model;
 import org.igo.entities.Event;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  *
  * @author surzhin.konstantin
  */
+@Controller
 public class EventController {
 
     private EntityManager entityManager;
