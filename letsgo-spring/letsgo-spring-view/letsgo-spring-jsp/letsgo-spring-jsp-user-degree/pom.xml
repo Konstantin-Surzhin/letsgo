@@ -138,7 +138,7 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>letsgo-spring-controler-user-degree</artifactId>
+            <artifactId>letsgo-spring-controler-user-dergee</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
