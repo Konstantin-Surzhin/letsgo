@@ -14,8 +14,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.igo.letsgo.spring.controler.degree;
+package org.igo.letsgo.spring.controler;
 
+import java.util.ResourceBundle;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.igo.entities.Degree;
@@ -30,13 +31,30 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class DegreeController {
     @PersistenceContext
-    EntityManager em;
+    private EntityManager entityManager;
+    private final ResourceBundle bundle = java.util.ResourceBundle.getBundle("Bundle");
+    
     @GetMapping(value = "/degree")
     public String index(Model model) {
         model.addAttribute("degree", new Degree());
-        model.addAttribute("degree_head", java.util.ResourceBundle.getBundle("Degree").getString("degree_head"));
-        model.addAttribute("submit", java.util.ResourceBundle.getBundle("City").getString("submit"));
-        model.addAttribute("message", java.util.ResourceBundle.getBundle("City").getString("message"));
+        model.addAttribute("head", bundle.getString("head"));
+        model.addAttribute("submit", bundle.getString("submit"));
+        model.addAttribute("message", bundle.getString("message"));
         return "degree";
+    }
+
+    /**
+     * @return the entityManager
+     */
+    @PersistenceContext
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
+
+    /**
+     * @param entityManager the entityManager to set
+     */
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 }
