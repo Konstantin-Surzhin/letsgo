@@ -22,6 +22,7 @@ import org.igo.entities.Event;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.web.bind.annotation.GetMapping;
+
 /**
  *
  * @author surzhin.konstantin
@@ -30,8 +31,8 @@ public class EventController {
 
     private EntityManager entityManager;
     private final ResourceBundle bundle = java.util.ResourceBundle.getBundle("Bundle");
-    
-        @GetMapping(value = "/event")
+
+    @GetMapping(value = "/event")
     public String index(Model model) {
         model.addAttribute("event", new Event());
         model.addAttribute("head", bundle.getString("head"));
@@ -43,7 +44,6 @@ public class EventController {
     /**
      * @return the entityManager
      */
-    @PersistenceContext
     public EntityManager getEntityManager() {
         return entityManager;
     }
@@ -51,6 +51,7 @@ public class EventController {
     /**
      * @param entityManager the entityManager to set
      */
+    @PersistenceContext
     public void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
