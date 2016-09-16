@@ -14,7 +14,7 @@
        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
     <context:annotation-config />
-    <context:component-scan base-package="org.igo.letsgo.spring.controler.city" />
+    <context:component-scan base-package="org.igo.letsgo.spring.controler" />
     <mvc:annotation-driven />
     
     <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
