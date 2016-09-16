@@ -14,11 +14,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.igo.letsgo.spring.controler.league;
+package org.igo.letsgo.spring.controler;
 
+import java.util.ResourceBundle;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.igo.entities.League;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -26,17 +28,33 @@ import org.springframework.web.bind.annotation.GetMapping;
  *
  * @author surzhin.konstantin
  */
+@Controller
 public class LeagueController {
 
-    @PersistenceContext
-    EntityManager em;
+    private EntityManager entityManager;
+    private final ResourceBundle bundle = java.util.ResourceBundle.getBundle("Bundle");
 
     @GetMapping(value = "/league")
     public String index(Model model) {
         model.addAttribute("league", new League());
-        model.addAttribute("league_head", java.util.ResourceBundle.getBundle("City").getString("league_head"));
-        model.addAttribute("submit", java.util.ResourceBundle.getBundle("City").getString("submit"));
-        model.addAttribute("message", java.util.ResourceBundle.getBundle("City").getString("message"));
+        model.addAttribute("head", bundle.getString("head"));
+        model.addAttribute("submit", bundle.getString("submit"));
+        model.addAttribute("message", bundle.getString("message"));
         return "league";
+    }
+
+    /**
+     * @return the entityManager
+     */
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
+
+    /**
+     * @param entityManager the entityManager to set
+     */
+    @PersistenceContext
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 }
