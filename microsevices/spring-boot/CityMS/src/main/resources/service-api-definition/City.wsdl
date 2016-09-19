@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+    name="CityService"
+    targetNamespace="http://www.examples.com/wsdl/CityService.wsdl"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:tns="http://localhost:8080/wsdl/City.wsdl"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <wsdl:binding name="City" type="tns:City"></wsdl:binding>
+    <wsdl:service name="City">
+        <wsdl:port binding="city:City" name="p1">
+            <soap:address location="http://localhost:8080/soap-api/p1"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

@@ -88,9 +88,9 @@
                 <configuration>
                     <!-- See http://www.mojohaus.org/jaxws-maven-plugin/wsimport-mojo.html -->
                     <wsdlUrls>
-                        <wsdlUrl>src/main/resources/service-api-definition/City_1.0.wsdl</wsdlUrl>
+                        <wsdlUrl>src/main/resources/service-api-definition/City.wsdl</wsdlUrl>
                     </wsdlUrls>
-                    <sourceDestDir>target/generated-sources/wsdlimport/City_1.0</sourceDestDir>
+                    <sourceDestDir>target/generated-sources/wsdlimport/City</sourceDestDir>
                     <!-- For accessing the imported schema, see https://netbeans.org/bugzilla/show_bug.cgi?id=241570 -->
                     <vmArgs>
                         <vmArg>-Djavax.xml.accessExternalSchema=all</vmArg>
