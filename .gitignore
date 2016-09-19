@@ -204,3 +204,6 @@ hs_err_pid*
 /letsgo-spring/letsgo-spring-controler/letsgo-spring-controler-user/target/
 /letsgo-spring/letsgo-spring-controler/letsgo-spring-controler-move-comment/target/
 /letsgo-spring/letsgo-spring-controler/letsgo-spring-controler-place/target/
+/microsevices/spring-boot/DegreeMS/target/
+/microsevices/spring-boot/Копия DegreeMS/target/
+/microsevices/spring-boot/EventMS/target/
