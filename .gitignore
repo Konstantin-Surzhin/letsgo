@@ -207,3 +207,21 @@ hs_err_pid*
 /microsevices/spring-boot/DegreeMS/target/
 /microsevices/spring-boot/Копия DegreeMS/target/
 /microsevices/spring-boot/EventMS/target/
+/microsevices/spring-boot/Копия EventMS/target/
+/microsevices/spring-boot/GameMS/target/
+/microsevices/spring-boot/CityMS/target/
+/microsevices/spring-boot/GameCommentMS/target/
+/microsevices/spring-boot/GmeDateMS/target/
+/microsevices/spring-boot/GameDateMS/target/
+/microsevices/spring-boot/GameMoveMS/target/
+/microsevices/spring-boot/GameRuleMS/target/
+/microsevices/spring-boot/LeagueMS/target/
+/microsevices/spring-boot/MoveCommentMS/target/
+/microsevices/spring-boot/PlaceMS/target/
+/microsevices/spring-boot/RoomMS/target/
+/microsevices/spring-boot/TeamMS/target/
+/microsevices/spring-boot/UserMS/target/
+/microsevices/spring-boot/UserBanMS/target/
+/microsevices/spring-boot/UserDegreeMS/target/
+/microsevices/spring-boot/UserGameMS/target/
+/microsevices/spring-boot/UserRoleMS/target/
