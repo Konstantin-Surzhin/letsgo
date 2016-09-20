@@ -1,4 +1,4 @@
-package org.igo.letsgo.spring.boot.city;
+package org.igo.letsgo.spring.boot.main;
 
 import org.igo.letsgo.spring.boot.domain.City;
 import org.igo.letsgo.spring.boot.repository.CityRepository;

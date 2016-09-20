@@ -16,11 +16,19 @@
  */
 package org.igo.letsgo.spring.boot.repository;
 
+import java.util.List;
 import org.igo.letsgo.spring.boot.domain.City;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 /**
  *
  * @author surzhin.konstantin
  */
-public interface CityRepository extends JpaRepository<City, Integer> {}
+@RepositoryRestResource(path = "city")
+public interface CityRepository extends JpaRepository<City, Integer> {
+
+    @RestResource(path = "names")
+    List<City> findByCityName(String name);
+}
