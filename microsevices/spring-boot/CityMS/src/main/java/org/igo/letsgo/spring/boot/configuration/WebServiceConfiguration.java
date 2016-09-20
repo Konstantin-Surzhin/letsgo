@@ -19,11 +19,8 @@ package org.igo.letsgo.spring.boot.configuration;
 import javax.xml.ws.Endpoint;
 import org.apache.cxf.jaxws.EndpointImpl;
 import org.apache.cxf.Bus;
-import org.apache.cxf.bus.spring.SpringBus;
-import org.apache.cxf.transport.servlet.CXFServlet;
-import org.igo.letsgo.city.soap.CityWebService;
 import org.igo.letsgo.spring.boot.endpoint.CityWebServiceEndpoint;
-import org.springframework.boot.web.servlet.ServletRegistrationBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -34,25 +31,14 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class WebServiceConfiguration {
 
-    @Bean
-    public ServletRegistrationBean dispatcherServlet() {
-        return new ServletRegistrationBean(new CXFServlet(), "/soap-api/*");
-    }
+    @Autowired
+    private Bus bus;
 
-    @Bean(name = Bus.DEFAULT_BUS_ID)
-    public SpringBus springBus() {
-        return new SpringBus();
-    }
-
-    @Bean
-    public CityWebService weatherService() {
-        return new CityWebServiceEndpoint();
-    }
-
+    //http://localhost:8080/services/CityWebService?wsdl
     @Bean
     public Endpoint endpoint() {
-        EndpointImpl endpoint = new EndpointImpl(springBus(), weatherService());
-        endpoint.publish("/CitySoapService");
+        EndpointImpl endpoint = new EndpointImpl(bus, new CityWebServiceEndpoint());
+        endpoint.publish("/CityWebService");
         endpoint.setWsdlLocation("CityWebService.wsdl");
         return endpoint;
     }
