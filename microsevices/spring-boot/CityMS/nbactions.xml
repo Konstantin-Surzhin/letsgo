@@ -14,4 +14,12 @@
                 <exec.executable>java</exec.executable>
             </properties>
         </action>
+        <action>
+            <actionName>CUSTOM-generate-sources</actionName>
+            <displayName>generate-sources</displayName>
+            <goals>
+                <goal>clean</goal>
+                <goal>generate-sources</goal>
+            </goals>
+        </action>
     </actions>

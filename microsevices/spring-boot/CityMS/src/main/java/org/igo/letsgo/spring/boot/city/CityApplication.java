@@ -1,4 +1,4 @@
-package org.igo.letsgo.spring.boot.degree;
+package org.igo.letsgo.spring.boot.city;
 
 import org.apache.cxf.Bus;
 import org.apache.cxf.bus.spring.SpringBus;

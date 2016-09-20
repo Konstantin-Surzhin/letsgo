@@ -67,11 +67,18 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
+            <version>1.4.192</version>
         </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-transports-http</artifactId>
             <version>3.1.7</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxws</artifactId>
+            <version>3.1.6</version>
             <type>jar</type>
         </dependency>
     </dependencies>
@@ -88,9 +95,9 @@
                 <configuration>
                     <!-- See http://www.mojohaus.org/jaxws-maven-plugin/wsimport-mojo.html -->
                     <wsdlUrls>
-                        <wsdlUrl>src/main/resources/service-api-definition/City.wsdl</wsdlUrl>
+                        <wsdlUrl>src/main/resources/service-api-definition/CityWebService.wsdl</wsdlUrl>
                     </wsdlUrls>
-                    <sourceDestDir>target/generated-sources/wsdlimport/City</sourceDestDir>
+                    <sourceDestDir>target/generated-sources/wsdlimport</sourceDestDir>
                     <!-- For accessing the imported schema, see https://netbeans.org/bugzilla/show_bug.cgi?id=241570 -->
                     <vmArgs>
                         <vmArg>-Djavax.xml.accessExternalSchema=all</vmArg>
@@ -116,7 +123,7 @@
                         </goals>
                         <configuration>
                             <sources>
-                                <source>target/generated-sources/wsdlimport/City_1.0</source>
+                                <source>target/generated-sources/wsdlimport</source>
                             </sources>
                         </configuration>
                     </execution>
