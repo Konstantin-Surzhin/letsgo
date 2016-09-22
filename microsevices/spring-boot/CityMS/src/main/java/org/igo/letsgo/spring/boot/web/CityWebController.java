@@ -16,10 +16,7 @@
  */
 package org.igo.letsgo.spring.boot.web;
 
-import org.igo.letsgo.spring.boot.repository.CityRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -27,14 +24,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author surzhin.konstantin
  */
 @Controller
-public class CityController {
+public class CityWebController {
 
-    @Autowired
-    CityRepository cityRepository;
+//    @Autowired
+//    CityRepository cityRepository;
 
     @RequestMapping("/")
-    public String index(Model model) {
-        model.addAttribute("city", cityRepository.findAll());
+    public String index(/*Model model*/) {
+       // model.addAttribute("city", cityRepository.findAll());
         return "index";
     }
 }

@@ -98,6 +98,12 @@
             <artifactId>cxf-rt-rs-service-description-swagger</artifactId>
             <version>3.1.7</version>
         </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20140107</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>

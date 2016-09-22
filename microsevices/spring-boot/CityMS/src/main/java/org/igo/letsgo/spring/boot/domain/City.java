@@ -109,7 +109,7 @@ public class City implements Serializable {
 
     @Override
     public String toString() {
-        return "org.igo.letsgo.spring.boot.domain.City[ id=" + id + " ]";
+        return "org.igo.letsgo.spring.boot.domain.City[ id=" + cityName + " ]";
     }
 
 }
