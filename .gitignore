@@ -226,3 +226,5 @@ hs_err_pid*
 /microsevices/spring-boot/UserGameMS/target/
 /microsevices/spring-boot/UserRoleMS/target/
 /microsevices/spring-boot/LetsgoEurekaSpringBoot/target/
+/microsevices/spring-boot/OpenidCconnectServerSpringBoot/target/
+/microsevices/spring-boot/openid-connect-server-spring-boot/target/
