@@ -16,16 +16,12 @@
  */
 package org.igo.letsgo.spring.boot.rest;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import org.igo.letsgo.spring.boot.domain.City;
-import org.json.JSONObject;
 
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  *
@@ -33,21 +29,11 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/webapi")
-@Api(value = "/webapi", description = "Sample JAX-RS service with Swagger documentation")
-public class CityRestController {
+public class BookRestConrtoller {
 
-    @ApiOperation(
-            value = "Get operation with Response and @Default value",
-            notes = "Get operation with Response and @Default value",
-            response = String.class,
-            responseContainer = "List"
-    )
-    @GetMapping(value = "/city")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String city() {
-
-        JSONObject jObj = new JSONObject();
-        jObj.put("1", new City(1, "Москва"));
-        return jObj.toString();
+    @Produces({"application/xml", "application/json"})
+    @GetMapping(value = "/book/{id}")
+    public Response get(Integer id) {
+        return null;
     }
 }

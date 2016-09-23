@@ -55,7 +55,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-config</artifactId>
@@ -88,12 +87,12 @@
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <dependency>
+       <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>swagger-ui</artifactId>
             <version>2.2.2</version>
         </dependency>
-        <dependency>
+       <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-rs-service-description-swagger</artifactId>
             <version>3.1.7</version>
@@ -101,7 +100,6 @@
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20140107</version>
             <type>jar</type>
         </dependency>
     </dependencies>
@@ -131,7 +129,7 @@
                     <wsdlUrls>
                         <wsdlUrl>src/main/resources/service-api-definition/CityWebService.wsdl</wsdlUrl>
                     </wsdlUrls>
-                    <sourceDestDir>target/generated-sources/wsdlimport</sourceDestDir>
+                    <sourceDestDir>target/generated-sources/wsdl</sourceDestDir>
                     <!-- For accessing the imported schema, see https://netbeans.org/bugzilla/show_bug.cgi?id=241570 -->
                     <vmArgs>
                         <vmArg>-Djavax.xml.accessExternalSchema=all</vmArg>
@@ -157,9 +155,73 @@
                         </goals>
                         <configuration>
                             <sources>
-                                <source>target/generated-sources/wsdlimport</source>
+                                <source>target/generated-sources/wsdl</source>
+                                <source>target/generated-sources/wadl</source>
+                                <source>target/generated/wadl</source>
                             </sources>
                         </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-java2wadl-plugin</artifactId>
+                <version>3.1.7</version>
+                <executions>
+                    <!-- Enable if support for Javadoc is required, not supported in CXF 2.7.11 -->
+                    <!--
+                    <execution>
+                        <id>parsejavadoc</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>parsejavadoc</goal>
+                        </goals>
+                    </execution>
+                    -->
+                    <execution>
+                        <id>process-classes</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>java2wadl</goal>
+                        </goals>
+                        <configuration>
+                            <classResourceNames>
+                                <classResourceName>org.igo.letsgo.spring.boot.rest.CityRestController</classResourceName>
+                                <classResourceName>org.igo.letsgo.spring.boot.rest.BookRestConrtoller</classResourceName>
+                            </classResourceNames>
+                            <!-- Enable if support for Javadoc is required, not supported in CXF 2.7.11 -->
+                            <!--
+                            <docProvider>org.apache.cxf.maven_plugin.javatowadl.ResourceMapJavaDocProvider</docProvider>
+                            -->
+                            <attachWadl>true</attachWadl>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-wadl2java-plugin</artifactId>
+                <version>3.1.7</version>
+                <executions>
+                    <execution>
+                        <id>generate-sources</id>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <sourceRoot>${basedir}/target/generated-sources/wadl</sourceRoot>
+                            <wadlOptions>
+                                <wadlOption>
+                                    <wadl>${basedir}/src/main/resources/service-api-definition/CityWebService.wadl</wadl>
+                                    <!--<impl>true</impl>-->
+                                    <packagename>org.igo.letsgo.spring.boot.rest.services</packagename>
+                                    <schemaPackagenames>
+                                        <schemaPackagename>http://superbooks=org.igo.letsgo.spring.boot.rest.schema</schemaPackagename>
+                                    </schemaPackagenames>
+                                </wadlOption>
+                            </wadlOptions>
+                        </configuration>
+                        <goals>
+                            <goal>wadl2java</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>

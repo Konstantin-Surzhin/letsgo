@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<application xmlns="http://wadl.dev.java.net/2009/02" xmlns:ns="http://wadl.city.letsgo.igo.org/">
+ <grammars>
+  <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        xmlns:tns="http://superbooks" attributeFormDefault="unqualified" elementFormDefault="unqualified"
+        targetNamespace="http://superbooks">
+    <xs:element name="thebook" type="tns:book"/>
+   <xs:complexType name="book">
+        <xs:sequence>
+            <xs:element name="bookName" type="xs:string"/>
+            <xs:element name="id" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+  </xs:schema>
+ </grammars>
+ <resources base="http://localhost:8080/webapi/">
+    <resource path="/book/{id}">
+        <method name="GET">
+            <request>
+                <param name="id" style="query" type="xs:int"/>
+            </request>
+            <response>
+                <representation mediaType="application/xml"/>
+                <representation mediaType="application/json"/>
+            </response>
+        </method>
+    </resource>
+    <resource path="/book/{name}">
+        <method name="GET">
+            <request>
+                <param name="id" style="query" type="xs:string"/>
+            </request>
+            <response>
+                <representation mediaType="application/xml"/>
+                <representation mediaType="application/json"/>
+            </response>
+        </method>
+    </resource>
+ </resources>  
+</application>

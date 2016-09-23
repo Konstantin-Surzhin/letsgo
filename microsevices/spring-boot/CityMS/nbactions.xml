@@ -51,4 +51,11 @@
                 <exec.executable>java</exec.executable>
             </properties>
         </action>
+        <action>
+            <actionName>CUSTOM-process-classes</actionName>
+            <displayName>process-classes</displayName>
+            <goals>
+                <goal>process-classes</goal>
+            </goals>
+        </action>
     </actions>
