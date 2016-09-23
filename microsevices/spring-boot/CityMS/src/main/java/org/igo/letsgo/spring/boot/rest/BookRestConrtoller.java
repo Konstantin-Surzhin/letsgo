@@ -18,21 +18,21 @@ package org.igo.letsgo.spring.boot.rest;
 
 
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.igo.letsgo.spring.boot.rest.services.BookIdResource;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author surzhin.konstantin
  */
-@RestController
+@Service
 @RequestMapping("/webapi")
-public class BookRestConrtoller {
+public class BookRestConrtoller implements  BookIdResource{
 
-    @Produces({"application/xml", "application/json"})
-    @GetMapping(value = "/book/{id}")
+    //@Produces({"application/xml", "application/json"})
+   // @GetMapping(value = "/book/{id}")
+    @Override
     public Response get(Integer id) {
         return null;
     }
