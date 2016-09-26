@@ -16,10 +16,15 @@
  */
 package org.igo.letsgo.spring.boot.configuration;
 
+import java.util.Arrays;
 import javax.xml.ws.Endpoint;
 import org.apache.cxf.jaxws.EndpointImpl;
 import org.apache.cxf.Bus;
+import org.apache.cxf.endpoint.Server;
+import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
+import org.apache.cxf.jaxrs.swagger.Swagger2Feature;
 import org.igo.letsgo.spring.boot.endpoint.CityWebServiceEndpoint;
+import org.igo.letsgo.spring.boot.rest.CityRestConrtoller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,8 +43,19 @@ public class WebServiceConfiguration {
     @Bean
     public Endpoint endpoint() {
         EndpointImpl endpoint = new EndpointImpl(bus, new CityWebServiceEndpoint());
-        endpoint.publish("/CityWebService");
-        endpoint.setWsdlLocation("CityWebService.wsdl");
+        endpoint.publish("/soap");
+        //endpoint.setWsdlLocation("CityWebService.wsdl");
         return endpoint;
+    }
+
+    //http://localhost:8080/services/rest/api-docs?url=/services/rest/swagger.json
+    @Bean
+    public Server rsServer() {
+        JAXRSServerFactoryBean endpoint = new JAXRSServerFactoryBean();
+        endpoint.setBus(bus);
+        endpoint.setServiceBeans(Arrays.<Object>asList(new CityRestConrtoller()));
+        endpoint.setAddress("/rest");
+        endpoint.setFeatures(Arrays.asList(new Swagger2Feature()));
+        return endpoint.create();
     }
 }

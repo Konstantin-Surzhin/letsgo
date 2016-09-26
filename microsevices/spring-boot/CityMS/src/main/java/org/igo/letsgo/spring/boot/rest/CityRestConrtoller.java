@@ -16,24 +16,27 @@
  */
 package org.igo.letsgo.spring.boot.rest;
 
-
-import org.springframework.web.bind.annotation.RequestMapping;
 import javax.ws.rs.core.Response;
-import org.igo.letsgo.spring.boot.rest.services.BookIdResource;
-import org.springframework.stereotype.Service;
+import org.igo.letsgo.spring.boot.rest.services.Resource;
 
 /**
  *
  * @author surzhin.konstantin
  */
-@Service
-@RequestMapping("/webapi")
-public class BookRestConrtoller implements  BookIdResource{
+public class CityRestConrtoller implements Resource {
 
-    //@Produces({"application/xml", "application/json"})
-   // @GetMapping(value = "/book/{id}")
     @Override
-    public Response get(Integer id) {
-        return null;
+    public Response getCity() {
+        return Response.ok("Северная столица", "text/plain; charset=UTF-8").build();
+    }
+
+    @Override
+    public Response getCitynamename(String name) {
+        return Response.ok("1", "text/plain; charset=UTF-8").build();
+    }
+
+    @Override
+    public Response getCityid(Integer id) {
+        return Response.ok("Москва", "text/plain; charset=UTF-8").build();
     }
 }

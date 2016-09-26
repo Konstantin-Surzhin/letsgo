@@ -16,16 +16,9 @@
  */
 package org.igo.letsgo.spring.boot.main;
 
-import java.util.Arrays;
-import org.apache.cxf.Bus;
-import org.apache.cxf.endpoint.Server;
-import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
-import org.apache.cxf.jaxrs.swagger.Swagger2Feature;
 import org.igo.letsgo.spring.boot.domain.City;
 import org.igo.letsgo.spring.boot.repository.CityRepository;
-import org.igo.letsgo.spring.boot.rest.BookRestConrtoller;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -55,19 +48,5 @@ public class CityApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(CityApplication.class, args);
-    }
-
-    @Autowired
-    private Bus bus;
-
-    @Bean
-
-    public Server rsServer() {
-        JAXRSServerFactoryBean endpoint = new JAXRSServerFactoryBean();
-        endpoint.setBus(bus);
-        endpoint.setServiceBeans(Arrays.<Object>asList(new BookRestConrtoller()));
-        endpoint.setAddress("/");
-        endpoint.setFeatures(Arrays.asList(new Swagger2Feature()));
-        return endpoint.create();
     }
 }

@@ -27,7 +27,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
  *
  * @author surzhin.konstantin
  */
-@RepositoryRestResource( path = "city")
+//@RepositoryRestResource( path = "city")
 public interface CityRepository extends JpaRepository<City, Integer> {
 
     

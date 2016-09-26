@@ -55,10 +55,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-config</artifactId>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-eureka</artifactId>
@@ -87,12 +87,27 @@
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
-       <dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxws</artifactId>
+            <version>3.1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+            <version>3.1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-service-description</artifactId>
+            <version>3.1.7</version>
+        </dependency>
+        <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>swagger-ui</artifactId>
             <version>2.2.2</version>
         </dependency>
-       <dependency>
+        <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-rs-service-description-swagger</artifactId>
             <version>3.1.7</version>
@@ -159,41 +174,6 @@
                                 <source>target/generated-sources/wadl</source>
                                 <source>target/generated/wadl</source>
                             </sources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.cxf</groupId>
-                <artifactId>cxf-java2wadl-plugin</artifactId>
-                <version>3.1.7</version>
-                <executions>
-                    <!-- Enable if support for Javadoc is required, not supported in CXF 2.7.11 -->
-                    <!--
-                    <execution>
-                        <id>parsejavadoc</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>parsejavadoc</goal>
-                        </goals>
-                    </execution>
-                    -->
-                    <execution>
-                        <id>process-classes</id>
-                        <phase>process-classes</phase>
-                        <goals>
-                            <goal>java2wadl</goal>
-                        </goals>
-                        <configuration>
-                            <classResourceNames>
-                                <classResourceName>org.igo.letsgo.spring.boot.rest.CityRestController</classResourceName>
-                                <classResourceName>org.igo.letsgo.spring.boot.rest.BookRestConrtoller</classResourceName>
-                            </classResourceNames>
-                            <!-- Enable if support for Javadoc is required, not supported in CXF 2.7.11 -->
-                            <!--
-                            <docProvider>org.apache.cxf.maven_plugin.javatowadl.ResourceMapJavaDocProvider</docProvider>
-                            -->
-                            <attachWadl>true</attachWadl>
                         </configuration>
                     </execution>
                 </executions>
