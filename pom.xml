@@ -105,6 +105,7 @@
         <module>letsgo-mdb</module>
         <module>letsgo-spring</module>
         <module>letsgo-ejb-remote-client</module>
+        <module>letsgo-jsf</module>
     </modules>
     <dependencyManagement>
         <dependencies>

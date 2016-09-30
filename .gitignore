@@ -228,3 +228,4 @@ hs_err_pid*
 /microsevices/spring-boot/LetsgoEurekaSpringBoot/target/
 /microsevices/spring-boot/OpenidCconnectServerSpringBoot/target/
 /microsevices/spring-boot/openid-connect-server-spring-boot/target/
+/letsgo-jsf/letsgo-PrimeFaces/target/
