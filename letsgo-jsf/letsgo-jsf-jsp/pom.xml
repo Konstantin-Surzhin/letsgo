@@ -11,6 +11,22 @@
     <modules>
         <module>letsgo-jsf-jsp-city-PrimeFaces</module>
     <module>letsgo-jsf-jsp-place-PrimeFaces</module>
+    <module>letsgo-jsf-jsp-degree-PrimeFaces</module>
+    <module>letsgo-jsf-jsp-event-PrimeFaces</module>
+    <module>letsgo-jsf-jsp-game-PrimeFaces</module>
+    <module>letsgo-jsf-jsp-game-comment-PrimeFaces</module>
+    <module>letsgo-jsf-jsp-game-date-PrimeFaces</module>
+    <module>letsgo-jsf-jsp-game-move-PrimeFaces</module>
+    <module>letsgo-jsf-jsp-game-rule-PrimeFaces</module>
+    <module>letsgo-jsf-jsp-league-PrimeFaces</module>
+    <module>letsgo-jsf-jsp-move-comment-PrimeFaces</module>
+    <module>letsgo-jsf-jsp-room-PrimeFaces</module>
+    <module>letsgo-jsf-jsp-team-PrimeFaces</module>
+    <module>letsgo-jsf-jsp-user-PrimeFaces</module>
+    <module>letsgo-jsf-jsp-user-ban-PrimeFaces</module>
+        <module>letsgo-jsf-jsp-user-degree-PrimeFaces</module>
+    <module>letsgo-jsf-jsp-user-game-PrimeFaces</module>
+    <module>letsgo-jsf-jsp-user-role-PrimeFaces</module>
   </modules>
     <name>letsgo-jsf-jsp</name>
 </project>
