@@ -6,11 +6,6 @@
         <artifactId>letsgo</artifactId>
         <version>1.0</version>
     </parent>
-    <artifactId>letsgo-jsf</artifactId>
+    <artifactId>letsgo-jsf-xhtml</artifactId>
     <packaging>pom</packaging>
-    <modules>
-        <module>letsgo-jsf-jsp</module>
-        <module>letsgo-jsf-xhtml</module>
-        <module>letsgo-jsf-Facelets</module>
-    </modules>
 </project>
