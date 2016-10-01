@@ -10,7 +10,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>letsgo-jsf-jsp</module>
-        <module>letsgo-jsf-xhtml</module>
         <module>letsgo-jsf-Facelets</module>
+        <module>letsgo-jsf-xhtml</module>
     </modules>
 </project>
