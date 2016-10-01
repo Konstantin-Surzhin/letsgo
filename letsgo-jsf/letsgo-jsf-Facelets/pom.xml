@@ -8,4 +8,24 @@
     </parent>
     <artifactId>letsgo-jsf-Facelets</artifactId>
     <packaging>pom</packaging>
+    <modules>
+        <module>letsgo-jsf-city-PrimeFaces</module>
+        <module>letsgo-jsf-degree-PrimeFaces</module>
+        <module>letsgo-jsf-event-PrimeFaces</module>
+        <module>letsgo-jsf-game-comment-PrimeFaces</module>
+        <module>letsgo-jsf-game-date-PrimeFaces</module>
+        <module>letsgo-jsf-game-move-PrimeFaces</module>
+        <module>letsgo-jsf-game-PrimeFaces</module>
+        <module>letsgo-jsf-game-rule-PrimeFaces</module>
+        <module>letsgo-jsf-league-PrimeFaces</module>
+        <module>letsgo-jsf-move-comment-PrimeFaces</module>
+        <module>letsgo-jsf-place-PrimeFaces</module>
+        <module>letsgo-jsf-room-PrimeFaces</module>
+        <module>letsgo-jsf-team-PrimeFaces</module>
+        <module>letsgo-jsf-user-ban-PrimeFaces</module>
+        <module>letsgo-jsf-user-degree-PrimeFaces</module>
+        <module>letsgo-jsf-user-game-PrimeFaces</module>
+        <module>letsgo-jsf-user-role-PrimeFaces</module>
+        <module>letsgo-jsf-user-PrimeFaces</module>
+    </modules>
 </project>
