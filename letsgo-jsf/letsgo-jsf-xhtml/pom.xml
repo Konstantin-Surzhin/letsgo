@@ -9,14 +9,11 @@
     <artifactId>letsgo-jsf-xhtml</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>letsgo-jsf-jsp-game-date-PrimeFaces</module>
-        <module>letsgo-jsf-jsp-user-ban-PrimeFaces</module>
         <module>letsgo-jsf-jxhtml-team-PrimeFaces</module>
         <module>letsgo-jsf-xhtml-city-PrimeFaces</module>
         <module>letsgo-jsf-xhtml-degree-PrimeFaces</module>
         <module>letsgo-jsf-xhtml-event-PrimeFaces</module>
         <module>letsgo-jsf-xhtml-game-comment-PrimeFaces</module>
-        <module>letsgo-jsletsgo-jsf-xhtml-game-move-PrimeFacesf-jsp-game-move-PrimeFaces</module>
         <module>letsgo-jsf-xhtml-game-PrimeFaces</module>
         <module>letsgo-jsf-xhtml-game-rule-PrimeFaces</module>
         <module>letsgo-jsf-xhtml-league-PrimeFaces</module>
@@ -28,6 +25,8 @@
         <module>letsgo-jsf-xhtml-user-game-PrimeFaces</module>
         <module>letsgo-jsf-xhtml-user-PrimeFaces</module>
         <module>letsgo-jsf-xhtml-user-role-PrimeFaces</module>
+        <module>letsgo-jsf-xhtml-game-date-PrimeFaces</module>
+        <module>letsgo-jsf-xhtml-game-move-PrimeFaces</module>
     </modules>
     <name>letsgo-jsf-xhtml</name>
 </project>

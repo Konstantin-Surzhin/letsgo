@@ -8,11 +8,11 @@
   </parent>
 
     <groupId>org.igo</groupId>
-    <artifactId>letsgo-jsf-xhtml-place-PrimeFaces</artifactId>
+    <artifactId>letsgo-jsf-xhtml-game-date-PrimeFaces</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
 
-    <name>letsgo-jsf-xhtml-place-PrimeFaces</name>
+    <name>letsgo-jsf-xhtml-game-date-PrimeFaces</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>

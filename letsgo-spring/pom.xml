@@ -13,6 +13,7 @@
         <module>letsgo-spring-data-jpa-mybatis</module>
         <module>letsgo-spring-controler</module>
         <module>letsgo-spring-view</module>
+        <module>letsgo-spring-boot</module>
     </modules>
     <name>letsgo-spring</name>
 </project>
