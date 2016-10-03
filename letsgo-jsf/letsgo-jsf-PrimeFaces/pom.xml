@@ -3,12 +3,14 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.igo</groupId>
-        <artifactId>letsgo</artifactId>
+        <artifactId>letsgo-jsf</artifactId>
         <version>1.0</version>
     </parent>
-    <artifactId>letsgo-jsf</artifactId>
+    <artifactId>letsgo-jsf-PrimeFaces</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>letsgo-jsf-PrimeFaces</module>
+        <module>letsgo-jsf-PrimeFaces-Facelets</module>
+        <module>letsgo-jsf-PrimeFaces-xhtml</module>
+        <module>letsgo-jsf-PrimeFaces-jsp</module>
     </modules>
 </project>
