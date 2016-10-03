@@ -9,7 +9,6 @@
     <artifactId>letsgo-jsf-PrimeFaces-xhtml</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>letsgo-jsf-jxhtml-team-PrimeFaces</module>
         <module>letsgo-jsf-PrimeFaces-xhtml-city</module>
         <module>letsgo-jsf-PrimeFaces-xhtml-degree</module>
         <module>letsgo-jsf-PrimeFaces-xhtml-event</module>
@@ -27,6 +26,7 @@
         <module>letsgo-jsf-PrimeFaces-xhtml-user-game</module>
         <module>letsgo-jsf-PrimeFaces-xhtml-user</module>
         <module>letsgo-jsf-PrimeFaces-xhtml-user-role</module>
+        <module>letsgo-jsf-PrimeFaces-xhtml-team</module>
     </modules>
     <name>letsgo-jsf-PrimeFaces-xhtml</name>
 </project>
