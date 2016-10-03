@@ -24,6 +24,6 @@
     </session-config>
     <welcome-file-list>
         <!--  <welcome-file>faces/welcomeJSF.jsp</welcome-file> -->
-        <welcome-file>faces/welcomePrimefaces.xhtml</welcome-file>
+        <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>

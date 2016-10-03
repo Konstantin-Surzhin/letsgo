@@ -9,7 +9,7 @@
         <h:head>
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                <title>City manager</title>
+                <title>#{CityManagedBean.pageHeader}</title>
             </f:facet>
         </h:head>
 
@@ -18,7 +18,7 @@
             <p:layout fullPage="true">
 
                 <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                    Header
+                    <h:outputText id="out" value="#{CityManagedBean.pageHeader}" />
                 </p:layoutUnit>
 
                 <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
@@ -39,7 +39,7 @@
                 </p:layoutUnit>
 
                 <p:layoutUnit position="center">
-                    Welcome to PrimeFaces
+                    <h:outputText id="out" value="#{CityManagedBean.cityName}" />
                 </p:layoutUnit>
 
             </p:layout>

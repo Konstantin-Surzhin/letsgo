@@ -13,5 +13,5 @@
         <module>letsgo-jsf-PrimeFaces-xhtml</module>
         <module>letsgo-jsf-PrimeFaces-jsp</module>
     </modules>
-    <name>letsgo-jsf-PrimeFaces-Facelets</name>
+    <name>letsgo-jsf-PrimeFaces</name>
 </project>
