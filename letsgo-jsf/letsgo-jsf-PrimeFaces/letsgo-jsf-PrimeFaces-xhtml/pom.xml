@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.igo</groupId>
+        <artifactId>letsgo-jsf-PrimeFaces</artifactId>
+        <version>1.0</version>
+    </parent>
+    <artifactId>letsgo-jsf-PrimeFaces-xhtml</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>letsgo-jsf-jxhtml-team-PrimeFaces</module>
+        <module>letsgo-jsf-PrimeFaces-xhtml-city</module>
+        <module>letsgo-jsf-PrimeFaces-xhtml-degree</module>
+        <module>letsgo-jsf-PrimeFaces-xhtml-event</module>
+        <module>letsgo-jsf-PrimeFaces-xhtml-game-comment</module>
+        <module>letsgo-jsf-PrimeFaces-xhtml-game-date</module>
+        <module>letsgo-jsf-PrimeFaces-xhtml-game-move</module>
+        <module>letsgo-jsf-PrimeFaces-xhtml-game</module>
+        <module>letsgo-jsf-PrimeFaces-xhtml-game-rule</module>
+        <module>letsgo-jsf-PrimeFaces-xhtml-league</module>
+        <module>letsgo-jsf-PrimeFaces-xhtml-move-comment</module>
+        <module>letsgo-jsf-PrimeFaces-xhtml-place</module>
+        <module>letsgo-jsf-PrimeFaces-xhtml-room</module>
+        <module>letsgo-jsf-PrimeFaces-xhtml-user-ban</module>
+        <module>letsgo-jsf-PrimeFaces-xhtml-user-degree</module>
+        <module>letsgo-jsf-PrimeFaces-xhtml-user-game</module>
+        <module>letsgo-jsf-PrimeFaces-xhtml-user</module>
+        <module>letsgo-jsf-PrimeFaces-xhtml-user-role</module>
+    </modules>
+    <name>letsgo-jsf-PrimeFaces-xhtml</name>
+</project>
