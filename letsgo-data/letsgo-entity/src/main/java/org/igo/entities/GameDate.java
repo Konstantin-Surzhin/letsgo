@@ -7,6 +7,7 @@ package org.igo.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -89,19 +90,32 @@ public class GameDate implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (gameDatePK != null ? gameDatePK.hashCode() : 0);
+        int hash = 5;
+        hash = 23 * hash + Objects.hashCode(this.gameDatePK);
+        hash = 23 * hash + Objects.hashCode(this.gameDate);
+        hash = 23 * hash + Objects.hashCode(this.game);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof GameDate)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        GameDate other = (GameDate) object;
-        return !((this.gameDatePK == null && other.gameDatePK != null) || (this.gameDatePK != null && !this.gameDatePK.equals(other.gameDatePK)));
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final GameDate other = (GameDate) obj;
+        if (!Objects.equals(this.gameDatePK, other.gameDatePK)) {
+            return false;
+        }
+        if (!Objects.equals(this.gameDate, other.gameDate)) {
+            return false;
+        }
+        return Objects.equals(this.game, other.game);
     }
 
     @Override

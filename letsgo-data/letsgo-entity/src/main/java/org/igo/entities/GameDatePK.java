@@ -17,14 +17,14 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class GameDatePK implements Serializable {
 
-
+    private static final long serialVersionUID = 1L;
     private long gameId;
     private int ndx;
 
     public GameDatePK() {
     }
 
-    public GameDatePK(long gameId, int ndx) {
+    public GameDatePK(final long gameId, final int ndx) {
         this.gameId = gameId;
         this.ndx = ndx;
     }
@@ -35,34 +35,32 @@ public class GameDatePK implements Serializable {
         return gameId;
     }
 
-    public void setGameId(long gameId) {
+    public void setGameId(final long gameId) {
         this.gameId = gameId;
     }
+
     @Basic(optional = false)
     @Column(nullable = false)
     public int getNdx() {
         return ndx;
     }
 
-    public void setNdx(int ndx) {
+    public void setNdx(final int ndx) {
         this.ndx = ndx;
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (int) gameId;
-        hash += (int) ndx;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof GameDatePK)) {
+    public boolean equals(final Object obj) {
+        if (obj == null) {
             return false;
         }
-        GameDatePK other = (GameDatePK) object;
+        if (this == obj) {
+            return true;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final GameDatePK other = (GameDatePK) obj;
         if (this.gameId != other.gameId) {
             return false;
         }
@@ -70,8 +68,16 @@ public class GameDatePK implements Serializable {
     }
 
     @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 41 * hash + (int) (this.gameId ^ (this.gameId >>> 32));
+        hash = 41 * hash + this.ndx;
+        return hash;
+    }
+
+    @Override
     public String toString() {
         return "org.igo.entities.GamesDatesPK[ gameId=" + gameId + ", ndx=" + ndx + " ]";
     }
-    
+
 }

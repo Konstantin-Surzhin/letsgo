@@ -49,19 +49,24 @@ public class GameMovePK implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (int) gameId;
-        hash += (int) ndx;
+        int hash = 7;
+        hash = 97 * hash + (int) (this.gameId ^ (this.gameId >>> 32));
+        hash = 97 * hash + this.ndx;
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof GameMovePK)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        GameMovePK other = (GameMovePK) object;
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final GameMovePK other = (GameMovePK) obj;
         if (this.gameId != other.gameId) {
             return false;
         }
