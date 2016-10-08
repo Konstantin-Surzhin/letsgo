@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:set var="root" value="#{request.scheme}://#{request.serverName}:#{request.serverPort}"/>
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>#{GameMoveManagedBean.pageHeader}</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    <h:outputText id="out" value="#{GameMoveManagedBean.pageHeader}"/>
+
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                    Footer
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
+                    <p:menu>
+                        <p:submenu label="Resources">
+                            <p:menuitem value="Cities" url="#{root}/city-PrimeFaces"/>
+                            <p:menuitem value="Degrees" url="#{root}/degree-PrimeFaces"/>
+                            <p:menuitem value="Events" url="#{root}/event-PrimeFaces"/>
+                            <p:menuitem value="Game comments" url="#{root}/game-comment-PrimeFaces"/>
+                            <p:menuitem value="Game dates" url="#{root}/game-date-PrimeFaces"/>
+                            <p:menuitem value="Game moves" url="#{root}/game-move-PrimeFaces"/>
+                            <p:menuitem value="Games" url="#{root}/game-PrimeFaces"/>
+                            <p:menuitem value="Game rules" url="#{root}/game-rule-PrimeFaces"/>
+                            <p:menuitem value="League" url="#{root}/league-PrimeFaces"/>
+                            <p:menuitem value="Move comments" url="#{root}/move-comment-PrimeFaces"/>
+                            <p:menuitem value="Places" url="#{root}/place-PrimeFaces"/>
+                            <p:menuitem value="Rooms" url="#{root}/room-PrimeFaces"/>
+                            <p:menuitem value="User's bans" url="#{root}/user-ban-PrimeFaces"/>
+                            <p:menuitem value="User's degree" url="#{root}/user-degree-PrimeFaces"/>
+                            <p:menuitem value="User's games" url="#{root}/user-game-PrimeFaces"/>
+                            <p:menuitem value="Users" url="#{root}/user-PrimeFaces"/>
+                            <p:menuitem value="User's roles" url="#{root}/user-role-PrimeFaces"/>
+                            <p:menuitem value="Teams" url="#{root}/team-PrimeFaces"/>
+                        </p:submenu>
+
+                    </p:menu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <h:outputText id="out" value="#{GameMoveManagedBean.gameMoveName}"/><br/>
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+
