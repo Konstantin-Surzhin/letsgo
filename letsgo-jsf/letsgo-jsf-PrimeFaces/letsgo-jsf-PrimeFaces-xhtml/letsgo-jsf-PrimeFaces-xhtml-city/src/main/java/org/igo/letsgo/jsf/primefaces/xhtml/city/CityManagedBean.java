@@ -17,7 +17,6 @@
 package org.igo.letsgo.jsf.primefaces.xhtml.city;
 
 import java.io.Serializable;
-import java.util.Random;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -29,18 +28,8 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class CityManagedBean implements Serializable {
 
-    private final Integer randomInt;
     private String cityName="Житомир";
     private String pageHeader="Управление городами";
-
-    /**
-     * Creates a new instance of CityManagedBean
-     */
-    public CityManagedBean() {
-                Random randomGR = new Random();
-        randomInt = randomGR.nextInt(10);
-        System.out.println("Duke's number: " + randomInt);
-    }
 
     /**
      * @return the cityName
