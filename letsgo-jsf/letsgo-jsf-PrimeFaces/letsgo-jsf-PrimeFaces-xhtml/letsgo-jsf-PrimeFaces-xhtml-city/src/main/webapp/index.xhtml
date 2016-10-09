@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.org/ui" 
       xmlns:c="http://java.sun.com/jsp/jstl/core">
     <c:set var="root" value="#{request.scheme}://#{request.serverName}:#{request.serverPort}"/>
-    <f:view contentType="text/html">
+    <f:view locale="#{facesContext.externalContext.requestLocale}" contentType="text/html">
         <h:head>
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>

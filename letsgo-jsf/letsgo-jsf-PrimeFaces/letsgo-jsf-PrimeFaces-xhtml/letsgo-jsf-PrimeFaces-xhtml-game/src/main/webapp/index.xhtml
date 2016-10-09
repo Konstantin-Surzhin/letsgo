@@ -10,7 +10,7 @@
         <h:head>
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                <title>#{GameDateManagedBean.pageHeader}</title>
+                <title>#{GameManagedBean.pageHeader}</title>
             </f:facet>
         </h:head>
 
@@ -19,7 +19,7 @@
             <p:layout fullPage="true">
 
                 <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                    <h:outputText id="out" value="#{GameDateManagedBean.pageHeader}"/>
+                    <h:outputText id="out" value="#{GameManagedBean.pageHeader}"/><br/>
 
                 </p:layoutUnit>
 
@@ -36,7 +36,7 @@
                             <p:menuitem value="Game comments" url="#{root}/game-comment-PrimeFaces"/>
                             <p:menuitem value="Game dates" url="#{root}/game-date-PrimeFaces"/>
                             <p:menuitem value="Game moves" url="#{root}/game-move-PrimeFaces"/>
-                            <p:menuitem value="Games" url="#{root}/game-PrimeFaces"/>
+                            <p:menuitem value="Games" url="#{root}/game-PrimeFaces" disabled="true" />
                             <p:menuitem value="Game rules" url="#{root}/game-rule-PrimeFaces"/>
                             <p:menuitem value="League" url="#{root}/league-PrimeFaces"/>
                             <p:menuitem value="Move comments" url="#{root}/move-comment-PrimeFaces"/>
@@ -53,8 +53,8 @@
                     </p:menu>
                 </p:layoutUnit>
 
-                <p:layoutUnit position="center">
-                    <h:outputText id="out" value="#{GameDateManagedBean.gameDateName}"/><br/>
+                <p:layoutUnit position="center" id="test">
+                    <h:outputText id="out" value="#{GameManagedBean.gameName}"/><br/>
                 </p:layoutUnit>
 
             </p:layout>
