@@ -9,6 +9,7 @@
     <artifactId>letsgo-jsf</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>letsgo-jsf-PrimeFaces</module>
+        <module>letsgo-jsf-jsp</module>
+        <module>letsgo-jsf-PrimeFaces-xhtml</module>
     </modules>
 </project>

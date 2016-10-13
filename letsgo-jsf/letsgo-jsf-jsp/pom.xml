@@ -3,10 +3,10 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.igo</groupId>
-        <artifactId>letsgo-jsf-PrimeFaces</artifactId>
+        <artifactId>letsgo-jsf</artifactId>
         <version>1.0</version>
     </parent>
-    <artifactId>letsgo-jsf-PrimeFaces-jsp</artifactId>
+    <artifactId>letsgo-jsf-jsp</artifactId>
     <packaging>pom</packaging>
     <modules>
         <module>letsgo-jsf-PrimeFaces-jsp-city</module>
@@ -28,5 +28,5 @@
         <module>letsgo-jsf-PrimeFaces-jsp-user</module>
         <module>letsgo-jsf-PrimeFaces-jsp-user-role</module>
     </modules>
-    <name>letsgo-jsf-PrimeFaces-jsp</name>
+    <name>letsgo-jsf-jsp</name>
 </project>
