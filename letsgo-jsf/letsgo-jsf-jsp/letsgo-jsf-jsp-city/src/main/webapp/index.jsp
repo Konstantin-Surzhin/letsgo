@@ -8,6 +8,7 @@
 <%@taglib prefix="h" uri="http://java.sun.com/jsf/html"%>
 <%@taglib prefix="f" uri="http://java.sun.com/jsf/core"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 
 <%--
@@ -19,8 +20,14 @@
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
             <title>City manager</title>
         </head>
-        <body>
-            <h1><h:outputText value="City manager"/></h1>
-        </body>
+        <frameset rows="10,80,10" >
+            <frame src="faces/frame1.jsp" name="Фрейм 1"/>
+            <frameset cols="15%,*">
+                <frame src="faces/frame2.jsp" name="Фрейм 2"/>
+                <frame src="faces/frame3.jsp" name="Фрейм 3"/>
+            </frameset>
+            <frame src="faces/frame1.jsp" name="Фрейм 1"/>
+            
+        </frameset>
     </html>
 </f:view>
