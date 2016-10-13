@@ -9,24 +9,24 @@
     <artifactId>letsgo-jsf-jsp</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>letsgo-jsf-PrimeFaces-jsp-degree</module>
-        <module>letsgo-jsf-PrimeFaces-jsp-event</module>
-        <module>letsgo-jsf-PrimeFaces-jsp-game-comment</module>
-        <module>letsgo-jsf-PrimeFaces-jsp-game-date</module>
-        <module>letsgo-jsf-PrimeFaces-jsp-game-move</module>
-        <module>letsgo-jsf-PrimeFaces-jsp-game</module>
-        <module>letsgo-jsf-PrimeFaces-jsp-game-rule</module>
-        <module>letsgo-jsf-PrimeFaces-jsp-league</module>
-        <module>letsgo-jsf-PrimeFaces-jsp-move-comment</module>
-        <module>letsgo-jsf-PrimeFaces-jsp-place</module>
-        <module>letsgo-jsf-PrimeFaces-jsp-room</module>
-        <module>letsgo-jsf-PrimeFaces-jsp-team-PrimeFaces</module>
-        <module>letsgo-jsf-PrimeFaces-jsp-user-ban-PrimeFaces</module>
-        <module>letsgo-jsf-PrimeFaces-jsp-user-degree</module>
-        <module>letsgo-jsf-PrimeFaces-jsp-user-game</module>
-        <module>letsgo-jsf-PrimeFaces-jsp-user</module>
-        <module>letsgo-jsf-PrimeFaces-jsp-user-role</module>
         <module>letsgo-jsf-jsp-city</module>
+        <module>letsgo-jsf-jsp-degree</module>
+        <module>letsgo-jsf-jsp-event</module>
+        <module>letsgo-jsf-jsp-game-comment</module>
+        <module>letsgo-jsf-jsp-game-date</module>
+        <module>letsgo-jsf-jsp-game-move</module>
+        <module>letsgo-jsf-jsp-game</module>
+        <module>letsgo-jsf-jsp-game-rule</module>
+        <module>letsgo-jsf-jsp-league</module>
+        <module>letsgo-jsf-jsp-move-comment</module>
+        <module>letsgo-jsf-jsp-place</module>
+        <module>letsgo-jsf-jsp-room</module>
+        <module>letsgo-jsf-jsp-team</module>
+        <module>letsgo-jsf-jsp-user-ban</module>
+        <module>letsgo-jsf-jsp-user-degree</module>
+        <module>letsgo-jsf-jsp-user-game</module>
+        <module>letsgo-jsf-jsp-user</module>
+        <module>letsgo-jsf-jsp-user-role</module>
     </modules>
     <name>letsgo-jsf-jsp</name>
 </project>
