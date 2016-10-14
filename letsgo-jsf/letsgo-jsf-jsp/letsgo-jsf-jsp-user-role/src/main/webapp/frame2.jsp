@@ -15,24 +15,23 @@
             <title>JSP Page</title>
         </head>
         <body>
-        <h:outputLink value="#{root}/jsp-jsf-City" disabled="true" target="_parent">City</h:outputLink><br>
-        <h:outputLink value="#{root}/jsp-jsf-Degree" target="_parent">Degrees</h:outputLink><br>
-        <h:outputLink value="#{root}/jsp-jsf-Event" target="_parent">Events</h:outputLink><br>
-        <h:outputLink value="#{root}/jsp-jsf-GameComment" target="_parent">Game comments</h:outputLink><br>
-        <h:outputLink value="#{root}/jsp-jsf-GameDate" target="_parent">Game dates</h:outputLink><br>
-        <h:outputLink value="#{root}/jsp-jsf-GameMove" target="_parent">Game moves</h:outputLink><br>
-        <h:outputLink value="#{root}/jsp-jsf-Game" target="_parent">Games</h:outputLink><br>
-        <h:outputLink value="#{root}/jsp-jsf-Game" target="_parent">Games</h:outputLink><br>
-        <h:outputLink value="#{root}/jsp-jsf-GameRule" target="_parent">Games rules</h:outputLink><br>
-        <h:outputLink value="#{root}/jsp-jsf-League" target="_parent">Leagues</h:outputLink><br>
-        <h:outputLink value="#{root}/jsp-jsf-MoveComment" target="_parent">Move comments</h:outputLink><br>
-        <h:outputLink value="#{root}/jsp-jsf-Place" target="_parent">Places</h:outputLink><br>
-        <h:outputLink value="#{root}/jsp-jsf-Room" target="_parent">Rooms</h:outputLink><br>
-        <h:outputLink value="#{root}/jsp-jsf-UserBan" target="_parent">User bans</h:outputLink><br>
-        <h:outputLink value="#{root}/jsp-jsf-UserDegree" target="_parent">User degrees</h:outputLink><br>
-        <h:outputLink value="#{root}/jsp-jsf-User" target="_parent">Users</h:outputLink><br>
-        <h:outputLink value="#{root}/jsp-jsf-UserRole" target="_parent">User roles</h:outputLink><br>
-        <h:outputLink value="#{root}/jsp-jsf-Team" target="_parent">Teams</h:outputLink><br>
+        <h:outputLink value="#{root}/jsf-jsp-City" target="_parent">City</h:outputLink><br>
+        <h:outputLink value="#{root}/jsf-jsp-Degree" target="_parent">Degrees</h:outputLink><br>
+        <h:outputLink value="#{root}/jsf-jsp-Event" target="_parent">Events</h:outputLink><br>
+        <h:outputLink value="#{root}/jsf-jsp-GameComment" target="_parent">Game comments</h:outputLink><br>
+        <h:outputLink value="#{root}/jsf-jsp-GameDate" target="_parent">Game dates</h:outputLink><br>
+        <h:outputLink value="#{root}/jsf-jsp-GameMove" target="_parent">Game moves</h:outputLink><br>
+        <h:outputLink value="#{root}/jsf-jsp-Game" target="_parent">Games</h:outputLink><br>
+        <h:outputLink value="#{root}/jsf-jsp-GameRule" target="_parent">Games rules</h:outputLink><br>
+        <h:outputLink value="#{root}/jsf-jsp-League" target="_parent">Leagues</h:outputLink><br>
+        <h:outputLink value="#{root}/jsf-jsp-MoveComment" target="_parent">Move comments</h:outputLink><br>
+        <h:outputLink value="#{root}/jsf-jsp-Place" target="_parent">Places</h:outputLink><br>
+        <h:outputLink value="#{root}/jsf-jsp-Room" target="_parent">Rooms</h:outputLink><br>
+        <h:outputLink value="#{root}/jsf-jsp-UserBan" target="_parent">User bans</h:outputLink><br>
+        <h:outputLink value="#{root}/jsf-jsp-UserDegree" target="_parent">User degrees</h:outputLink><br>
+        <h:outputLink value="#{root}/jsf-jsp-User" target="_parent">Users</h:outputLink><br>
+        <h:outputLink value="#{root}/jsf-jsp-UserRole" target="_parent" disabled="true">User roles</h:outputLink><br>
+        <h:outputLink value="#{root}/jsf-jsp-Team" target="_parent">Teams</h:outputLink><br>
         </body>
     </html>
 </f:subview>
