@@ -29,6 +29,7 @@
         <h:outputLink value="#{root}/jsf-jsp-Room" target="_parent">Rooms</h:outputLink><br>
         <h:outputLink value="#{root}/jsf-jsp-UserBan" target="_parent">User bans</h:outputLink><br>
         <h:outputLink value="#{root}/jsf-jsp-UserDegree" target="_parent" disabled="true">User degrees</h:outputLink><br>
+        <h:outputLink value="#{root}/jsf-jsp-UserGame" target="_parent">User games</h:outputLink><br>
         <h:outputLink value="#{root}/jsf-jsp-User" target="_parent">Users</h:outputLink><br>
         <h:outputLink value="#{root}/jsf-jsp-UserRole" target="_parent">User roles</h:outputLink><br>
         <h:outputLink value="#{root}/jsf-jsp-Team" target="_parent">Teams</h:outputLink><br>
