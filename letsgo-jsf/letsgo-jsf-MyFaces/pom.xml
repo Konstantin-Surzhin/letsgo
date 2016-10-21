@@ -13,4 +13,16 @@
     <module>letsgo-jsf-MyFaces-Trinidad</module>
     <module>letsgo-jsf-MyFaces-Tobago</module>
   </modules>
+      <dependencies>
+        <dependency>
+            <groupId>org.apache.myfaces.core</groupId>
+            <artifactId>myfaces-api</artifactId>
+            <version>2.2.11</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.myfaces.core</groupId>
+            <artifactId>myfaces-impl</artifactId>
+            <version>2.2.11</version>
+        </dependency>
+    </dependencies>
 </project>
