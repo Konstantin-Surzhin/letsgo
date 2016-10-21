@@ -12,7 +12,6 @@
     <html>
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <title>JSP Page</title>
         </head>
         <body>
         <h:outputLink value="#{root}/jsf-jsp-City" target="_parent" disabled="true">City</h:outputLink><br>
@@ -22,7 +21,6 @@
         <h:outputLink value="#{root}/jsf-jsp-GameDate" target="_parent">Game dates</h:outputLink><br>
         <h:outputLink value="#{root}/jsf-jsp-GameMove" target="_parent">Game moves</h:outputLink><br>
         <h:outputLink value="#{root}/jsf-jsp-Game" target="_parent">Games</h:outputLink><br>
-        <h:outputLink value="#{root}/jsf-jsp-Game" target="_parent">Games</h:outputLink><br>
         <h:outputLink value="#{root}/jsf-jsp-GameRule" target="_parent">Games rules</h:outputLink><br>
         <h:outputLink value="#{root}/jsf-jsp-League" target="_parent">Leagues</h:outputLink><br>
         <h:outputLink value="#{root}/jsf-jsp-MoveComment" target="_parent">Move comments</h:outputLink><br>
@@ -30,6 +28,7 @@
         <h:outputLink value="#{root}/jsf-jsp-Room" target="_parent">Rooms</h:outputLink><br>
         <h:outputLink value="#{root}/jsf-jsp-UserBan" target="_parent">User bans</h:outputLink><br>
         <h:outputLink value="#{root}/jsf-jsp-UserDegree" target="_parent">User degrees</h:outputLink><br>
+        <h:outputLink value="#{root}/jsf-jsp-UserGame" target="_parent">User games</h:outputLink><br>
         <h:outputLink value="#{root}/jsf-jsp-User" target="_parent">Users</h:outputLink><br>
         <h:outputLink value="#{root}/jsf-jsp-UserRole" target="_parent">User roles</h:outputLink><br>
         <h:outputLink value="#{root}/jsf-jsp-Team" target="_parent">Teams</h:outputLink><br>
