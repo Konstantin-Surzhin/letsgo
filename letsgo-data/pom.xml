@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>letsgo</artifactId>
+        <groupId>org.igo</groupId>
+        <version>1.0</version>
+    </parent>
+    <groupId>org.igo</groupId>
+    <artifactId>letsgo-data</artifactId>
+    <version>1.0</version>
+    <packaging>pom</packaging>
+    <name>letsgo-data</name>
+    <modules>
+        <module>letsgo-ear</module>
+        <module>letsgo-remote</module>
+        <module>letsgo-entity</module>
+        <module>letsgo-place</module>
+        <module>letsgo-game</module>
+        <module>letsgo-city</module>
+        <module>letsgo-event</module>
+        <module>letsgo-game-comment</module>
+        <module>letsgo-game-date</module>
+        <module>letsgo-game-move</module>
+        <module>letsgo-league</module>
+        <module>letsgo-move-comment</module>
+        <module>letsgo-room</module>
+        <module>letsgo-team</module>
+        <module>letsgo-user-role</module>
+        <module>letsgo-user</module>
+        <module>letsgo-user-ban</module>
+        <module>letsgo-user-degree</module>
+        <module>letsgo-user-game</module>
+    </modules>
+</project>

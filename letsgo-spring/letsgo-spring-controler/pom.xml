@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.igo</groupId>
+        <artifactId>letsgo-spring</artifactId>
+        <version>1.0</version>
+    </parent>
+    <artifactId>letsgo-spring-controler</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>letsgo-spring-controler-city</module>
+        <module>letsgo-spring-controler-degree</module>
+        <module>letsgo-spring-controler-event</module>
+        <module>letsgo-spring-controler-game</module>
+        <module>letsgo-spring-controler-game-comment</module>
+        <module>letsgo-spring-controler-game-date</module>
+        <module>letsgo-spring-controler-game-move</module>
+        <module>letsgo-spring-controler-game-rule</module>
+        <module>letsgo-spring-controler-league</module>
+        <module>letsgo-spring-controler-move-comment</module>
+        <module>letsgo-spring-controler-place</module>
+        <module>letsgo-spring-controler-room</module>
+        <module>letsgo-spring-controler-team</module>
+        <module>letsgo-spring-controler-user</module>
+        <module>letsgo-spring-controler-user-ban</module>
+        <module>letsgo-spring-controler-user-dergee</module>
+        <module>letsgo-spring-controler-user-game</module>
+        <module>letsgo-spring-controler-user-role</module>
+    </modules>
+</project>
