@@ -16,21 +16,60 @@
  */
 package org.igo.letsgo.jsf.jsp.city;
 
-import javax.inject.Named;
-import javax.enterprise.context.Dependent;
+import java.util.ArrayList;
+import java.util.List;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 /**
  *
  * @author pl
  */
-@Named(value = "cityManagedBean")
-@Dependent
+@ManagedBean(name="cityManagedBean")
+@SessionScoped
 public class CityManagedBean {
-
+    private final String pageTitle = "Управление городами";
+    private String cityName ="Москва";
+    private final List<String> cityList = new ArrayList<>();
+ 
     /**
      * Creates a new instance of CityManagedBean
      */
     public CityManagedBean() {
+        cityList.add(cityName);
+    }
+
+    /**
+     * @return the pageTitle
+     */
+    public String getPageTitle() {
+        return pageTitle;
+    }
+
+    /**
+     * @return the cityName
+     */
+    public String getCityName() {
+        return cityName;
+    }
+
+    /**
+     * @param cityName the cityName to set
+     */
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
     
+    public void addCity(){
+        
+         System.out.println("добавлен город: " + cityName);
+         getCityList().add(cityName);
+    }
+
+    /**
+     * @return the cityList
+     */
+    public List<String> getCityList() {
+        return cityList;
+    }
 }

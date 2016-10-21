@@ -12,7 +12,6 @@
     <html>
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <title>JSP Page</title>
         </head>
         <body>
         <h:outputLink value="#{root}/jsf-jsp-City" target="_parent" disabled="true">City</h:outputLink><br>

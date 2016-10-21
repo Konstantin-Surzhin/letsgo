@@ -18,7 +18,7 @@
     <html>
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <title>City manager</title>
+            <title><h:outputText value="#{cityManagedBean.pageTitle}"/></title>
         </head>
         <frameset rows="10,80,10" >
             <frame src="faces/frame1.jsp" name="Фрейм 1"/>
