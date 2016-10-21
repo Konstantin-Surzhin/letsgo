@@ -3,16 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.igo</groupId>
-        <artifactId>letsgo</artifactId>
+        <artifactId>letsgo-jsf</artifactId>
         <version>1.0</version>
     </parent>
-    <artifactId>letsgo-jsf</artifactId>
+    <artifactId>letsgo-jsf-RichFaces</artifactId>
     <packaging>pom</packaging>
-    <modules>
-        <module>letsgo-jsf-jsp</module>
-        <module>letsgo-jsf-PrimeFaces-xhtml</module>
-        <module>letsgo-jsf-RichFaces</module>
-        <module>letsgo-jsf-IceFaces</module>
-        <module>letsgo-jsf-MyFaces</module>
-    </modules>
+  <modules>
+    <module>letsgo-jsf-RichFaces-city</module>
+  </modules>
 </project>
