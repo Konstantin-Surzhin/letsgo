@@ -67,8 +67,6 @@
                     </execution>
                 </executions>
             </plugin>
-            
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -95,7 +93,6 @@
                     </dependency>
                 </dependencies>
             </plugin>
-            
         </plugins>
     </build>
     <modules>
@@ -106,6 +103,9 @@
         <module>letsgo-spring</module>
         <module>letsgo-ejb-remote-client</module>
         <module>letsgo-jsf</module>
+        <!--<module>letsgo-client</module>-->
+        <!--<module>letsgo-remote</module>-->
+        <module>letsgo-deltaspike</module>
     </modules>
     <dependencyManagement>
         <dependencies>
@@ -118,10 +118,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-        <module>letsgo-client</module>
-        <module>letsgo-remote</module>
-    <module>letsgo-deltaspike</module>
-  </modules>
+
     <dependencies>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
