@@ -19,24 +19,41 @@
             <h2>Список городов</h2>
 
             <h:form title="jpa">
-                <h:outputLabel value="Название города"/>
-                <h:inputText id="cityName" value="#{cityManagedBean.cityName}"/>
-                <h:selectOneMenu value="#{cityManagedBean.addMetod}">
+                <h:selectOneRadio value="#{cityManagedBean.addMetod}">
                     <f:selectItem itemValue="jdbc" itemLabel="JDBC"/>
                     <f:selectItem itemValue="jpa" itemLabel="JPA"/>
+                    <f:selectItem itemValue="openjpa" itemLabel="openJPA"/>
+                    <f:selectItem itemValue="activejpa" itemLabel="activeJPA"/>
+                    <f:selectItem itemValue="ebean" itemLabel="Ebean"/>
+                    <f:selectItem itemValue="datanucleus" itemLabel="DataNucleus"/>
+                    <f:selectItem itemValue="eclipselink" itemLabel="EclipseLink"/>
+                    <f:selectItem itemValue="hibernate" itemLabel="Hibernate"/>
+                    <f:selectItem itemValue="ibatis" itemLabel="iBtis"/>
+                    <f:selectItem itemValue="mybatis" itemLabel="myBatis"/>
+                </h:selectOneRadio><br/>
+                <h:selectOneRadio value="#{cityManagedBean.addMetod}">
                     <f:selectItem itemValue="ejb" itemLabel="EJB3"/>
                     <f:selectItem itemValue="rest" itemLabel="RESTful"/>
                     <f:selectItem itemValue="soap" itemLabel="SOAP"/>
                     <f:selectItem itemValue="mq" itemLabel="MQ"/>
                     <f:selectItem itemValue="jms" itemLabel="JMS"/>
-                </h:selectOneMenu>
+                </h:selectOneRadio><br/>
+                <h:selectOneRadio value="#{cityManagedBean.addMetod}">
+                    <f:selectItem itemValue="txt" itemLabel="TXT"/>
+                    <f:selectItem itemValue="json" itemLabel="JSON"/>
+                    <f:selectItem itemValue="xml" itemLabel="XML"/>
+                    <f:selectItem itemValue="protobuf" itemLabel="PROTOBUF"/>
+                    <f:selectItem itemValue="trft" itemLabel="TRIFT"/>
+                </h:selectOneRadio><br/>
+                <h:outputLabel value="Название города: "/>
+                <h:inputText id="cityName" value="#{cityManagedBean.cityName}"/>
                 <h:commandButton value="добавить" action="#{cityManagedBean.addCity}"/>
-            </h:form>
+            </h:form><br/>
             <h:form>
                 <h:outputLabel value="Выбрать город"/>
                 <h:selectOneListbox value="#{cityManagedBean.cityCode}" >  
                     <c:forEach items="#{cityManagedBean.cityList}" var="city">
-                    <f:selectItem itemValue="#{city.id}" itemLabel="#{city.name}"/>
+                        <f:selectItem itemValue="#{city.id}" itemLabel="#{city.name}"/>
                     </c:forEach>
                 </h:selectOneListbox>
             </h:form>

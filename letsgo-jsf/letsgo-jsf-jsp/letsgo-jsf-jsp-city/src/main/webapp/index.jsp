@@ -27,7 +27,7 @@
                 <frame src="faces/frame3.jsp" name="Фрейм 3"/>
             </frameset>
             <frame src="faces/frame1.jsp" name="Фрейм 1"/>
-            
+
         </frameset>
     </html>
 </f:view>

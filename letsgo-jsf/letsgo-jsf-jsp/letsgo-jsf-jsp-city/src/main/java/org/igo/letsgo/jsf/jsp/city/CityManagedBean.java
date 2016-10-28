@@ -48,6 +48,7 @@ public class CityManagedBean {
     private String cityName = "Москва";
     private Integer cityCode = 1;
     private String addMetod = "jpa";
+    private String addTechMetod = "ejb";
 
     private final List<City> cityList = new ArrayList<>();
 

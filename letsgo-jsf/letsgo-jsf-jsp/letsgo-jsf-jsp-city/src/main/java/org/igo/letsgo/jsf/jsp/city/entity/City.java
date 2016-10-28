@@ -35,7 +35,7 @@ public class City implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    
+
     @Column(unique = true)
     private String name;
 
@@ -80,7 +80,6 @@ public class City implements Serializable {
         return hash;
     }
 
-
     @Override
     public String toString() {
         return "org.igo.letsgo.jsf.jsp.city.entity.City[ id=" + id + " ]";
@@ -99,5 +98,5 @@ public class City implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    
+
 }
