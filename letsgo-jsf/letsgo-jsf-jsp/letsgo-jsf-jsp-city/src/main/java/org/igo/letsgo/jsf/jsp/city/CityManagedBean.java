@@ -47,8 +47,9 @@ public class CityManagedBean {
     private final String pageTitle = "Управление городами";
     private String cityName = "Москва";
     private Integer cityCode = 1;
-    private String addMetod = "jpa";
-    private String addTechMetod = "ejb";
+    private String dbMetod = "jpa";
+    private String techMetod = "ejb";
+    private String msgContentType = "txt";
 
     private final List<City> cityList = new ArrayList<>();
 
@@ -82,7 +83,7 @@ public class CityManagedBean {
 
     public void addCity() {
 
-        switch (addMetod) {
+        switch (dbMetod) {
             case "jdbc":
                 addCityJDBC();
                 break;
@@ -101,7 +102,6 @@ public class CityManagedBean {
             case "mq":
                 addCityMQ();
                 break;
-
             case "jms":
                 addCityJMS();
                 break;
@@ -179,17 +179,17 @@ public class CityManagedBean {
     }
 
     /**
-     * @return the addMetod
+     * @return the dbMetod
      */
-    public String getAddMetod() {
-        return addMetod;
+    public String getDbMetod() {
+        return dbMetod;
     }
 
     /**
-     * @param addMetod the addMetod to set
+     * @param dbMetod the dbMetod to set
      */
-    public void setAddMetod(String addMetod) {
-        this.addMetod = addMetod;
+    public void setDbMetod(final String dbMetod) {
+        this.dbMetod = dbMetod;
     }
 
     /**
@@ -202,7 +202,35 @@ public class CityManagedBean {
     /**
      * @param cityCode the cityCode to set
      */
-    public void setCityCode(Integer cityCode) {
+    public void setCityCode(final Integer cityCode) {
         this.cityCode = cityCode;
+    }
+
+    /**
+     * @return the techMetod
+     */
+    public String getTechMetod() {
+        return techMetod;
+    }
+
+    /**
+     * @param techMetod the techMetod to set
+     */
+    public void setTechMetod(final String techMetod) {
+        this.techMetod = techMetod;
+    }
+
+    /**
+     * @return the msgContentType
+     */
+    public String getMsgContentType() {
+        return msgContentType;
+    }
+
+    /**
+     * @param msgContentType the msgContentType to set
+     */
+    public void setMsgContentType(String msgContentType) {
+        this.msgContentType = msgContentType;
     }
 }

@@ -19,7 +19,7 @@
             <h2>Список городов</h2>
 
             <h:form title="jpa">
-                <h:selectOneRadio value="#{cityManagedBean.addMetod}">
+                <h:selectOneRadio value="#{cityManagedBean.dbMetod}">
                     <f:selectItem itemValue="jdbc" itemLabel="JDBC"/>
                     <f:selectItem itemValue="jpa" itemLabel="JPA"/>
                     <f:selectItem itemValue="openjpa" itemLabel="openJPA"/>
@@ -28,22 +28,21 @@
                     <f:selectItem itemValue="datanucleus" itemLabel="DataNucleus"/>
                     <f:selectItem itemValue="eclipselink" itemLabel="EclipseLink"/>
                     <f:selectItem itemValue="hibernate" itemLabel="Hibernate"/>
-                    <f:selectItem itemValue="ibatis" itemLabel="iBtis"/>
                     <f:selectItem itemValue="mybatis" itemLabel="myBatis"/>
                 </h:selectOneRadio><br/>
-                <h:selectOneRadio value="#{cityManagedBean.addMetod}">
+                <h:selectOneRadio value="#{cityManagedBean.techMetod}">
                     <f:selectItem itemValue="ejb" itemLabel="EJB3"/>
                     <f:selectItem itemValue="rest" itemLabel="RESTful"/>
                     <f:selectItem itemValue="soap" itemLabel="SOAP"/>
                     <f:selectItem itemValue="mq" itemLabel="MQ"/>
                     <f:selectItem itemValue="jms" itemLabel="JMS"/>
                 </h:selectOneRadio><br/>
-                <h:selectOneRadio value="#{cityManagedBean.addMetod}">
+                <h:selectOneRadio value="#{cityManagedBean.msgContentType}">
                     <f:selectItem itemValue="txt" itemLabel="TXT"/>
                     <f:selectItem itemValue="json" itemLabel="JSON"/>
                     <f:selectItem itemValue="xml" itemLabel="XML"/>
                     <f:selectItem itemValue="protobuf" itemLabel="PROTOBUF"/>
-                    <f:selectItem itemValue="trft" itemLabel="TRIFT"/>
+                    <f:selectItem itemValue="thrift" itemLabel="Thrift"/>
                 </h:selectOneRadio><br/>
                 <h:outputLabel value="Название города: "/>
                 <h:inputText id="cityName" value="#{cityManagedBean.cityName}"/>
