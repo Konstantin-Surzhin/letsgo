@@ -33,6 +33,7 @@ import javax.transaction.RollbackException;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 import org.igo.letsgo.jsf.jsp.city.entity.City;
+import org.igo.letsgo.jsf.jsp.city.tech.method.CityMsgFabrica;
 
 /**
  *
@@ -82,40 +83,8 @@ public class CityManagedBean {
     }
 
     public void addCity() {
-
-        switch (dbMetod) {
-            case "jdbc":
-                addCityJDBC();
-                break;
-            case "jpa":
-                addCityJPA();
-                break;
-            case "ejb":
-                addCityEJB();
-                break;
-            case "rest":
-                addCityRESTful();
-                break;
-            case "soap":
-                addCitySOAP();
-                break;
-            case "mq":
-                addCityMQ();
-                break;
-            case "jms":
-                addCityJMS();
-                break;
-            default:
-                System.out.println("добавлен город: " + cityName);
-                break;
-
-        }
-    }
-
-    private void addCityJDBC() {
-
-        System.out.println("(JPA) добавлен город: " + cityName);
-
+        CityMsgInterface cm = CityMsgFabrica.createMsgManager(techMetod) ;
+        cm.sendCity(msgContentType, dbMetod, cityName, new City(cityName));
     }
 
 //    UserTransaction utx; 
@@ -139,36 +108,6 @@ public class CityManagedBean {
         } catch (HeuristicMixedException | HeuristicRollbackException | IllegalStateException | RollbackException | SecurityException | SystemException | NotSupportedException | NamingException ex) {
             Logger.getLogger(CityManagedBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    private void addCityEJB() {
-
-        System.out.println("(EJB) добавлен город: " + cityName);
-
-    }
-
-    private void addCityRESTful() {
-
-        System.out.println("(RESTful) добавлен город: " + cityName);
-
-    }
-
-    private void addCitySOAP() {
-
-        System.out.println("(SOAP) добавлен город: " + cityName);
-
-    }
-
-    private void addCityMQ() {
-
-        System.out.println("(SOAP) добавлен город: " + cityName);
-
-    }
-
-    private void addCityJMS() {
-
-        System.out.println("(SOAP) добавлен город: " + cityName);
-
     }
 
     /**

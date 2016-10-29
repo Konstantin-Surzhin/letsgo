@@ -16,20 +16,7 @@
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         </head>
         <body>
-            <h2>Список городов</h2>
-
-            <h:form title="jpa">
-                <h:selectOneRadio value="#{cityManagedBean.dbMetod}">
-                    <f:selectItem itemValue="jdbc" itemLabel="JDBC"/>
-                    <f:selectItem itemValue="jpa" itemLabel="JPA"/>
-                    <f:selectItem itemValue="openjpa" itemLabel="openJPA"/>
-                    <f:selectItem itemValue="activejpa" itemLabel="activeJPA"/>
-                    <f:selectItem itemValue="ebean" itemLabel="Ebean"/>
-                    <f:selectItem itemValue="datanucleus" itemLabel="DataNucleus"/>
-                    <f:selectItem itemValue="eclipselink" itemLabel="EclipseLink"/>
-                    <f:selectItem itemValue="hibernate" itemLabel="Hibernate"/>
-                    <f:selectItem itemValue="mybatis" itemLabel="myBatis"/>
-                </h:selectOneRadio><br/>
+            <h:form>
                 <h:selectOneRadio value="#{cityManagedBean.techMetod}">
                     <f:selectItem itemValue="ejb" itemLabel="EJB3"/>
                     <f:selectItem itemValue="rest" itemLabel="RESTful"/>
@@ -44,10 +31,22 @@
                     <f:selectItem itemValue="protobuf" itemLabel="PROTOBUF"/>
                     <f:selectItem itemValue="thrift" itemLabel="Thrift"/>
                 </h:selectOneRadio><br/>
+                <h:selectOneRadio value="#{cityManagedBean.dbMetod}">
+                    <f:selectItem itemValue="jdbc" itemLabel="JDBC"/>
+                    <f:selectItem itemValue="jpa" itemLabel="JPA"/>
+                    <f:selectItem itemValue="openjpa" itemLabel="openJPA"/>
+                    <f:selectItem itemValue="activejpa" itemLabel="activeJPA"/>
+                    <f:selectItem itemValue="ebean" itemLabel="Ebean"/>
+                    <f:selectItem itemValue="datanucleus" itemLabel="DataNucleus"/>
+                    <f:selectItem itemValue="eclipselink" itemLabel="EclipseLink"/>
+                    <f:selectItem itemValue="hibernate" itemLabel="Hibernate"/>
+                    <f:selectItem itemValue="mybatis" itemLabel="myBatis"/>
+                </h:selectOneRadio><br/>
                 <h:outputLabel value="Название города: "/>
                 <h:inputText id="cityName" value="#{cityManagedBean.cityName}"/>
                 <h:commandButton value="добавить" action="#{cityManagedBean.addCity}"/>
             </h:form><br/>
+            <h2>Список городов</h2>
             <h:form>
                 <h:outputLabel value="Выбрать город"/>
                 <h:selectOneListbox value="#{cityManagedBean.cityCode}" >  
