@@ -26,6 +26,7 @@
         <module>letsg-rest-user-degree</module>
         <module>letsgo-rest-user-game</module>
         <module>letsgo-rest-user-role</module>
+        <module>letsgo-rest-city</module>
     </modules>
     <name>letsgo-rest</name>
 </project>
