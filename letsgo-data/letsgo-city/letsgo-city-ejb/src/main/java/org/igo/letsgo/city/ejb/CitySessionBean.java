@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -107,7 +106,7 @@ public class CitySessionBean implements ICityRemote {
     }
 
     @Override
-    public Boolean createCity(final String cityName) {
+    public Boolean createCity(final String cityName, final String method, final String dbName) {
         City city = new City(cityName);
         city.setCityName(cityName);
         try {
