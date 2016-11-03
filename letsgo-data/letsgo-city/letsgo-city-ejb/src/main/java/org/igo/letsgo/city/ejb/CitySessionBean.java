@@ -109,12 +109,20 @@ public class CitySessionBean implements ICityRemote {
     public Boolean createCity(final String cityName, final String method, final String dbName) {
         City city = new City(cityName);
         city.setCityName(cityName);
-        try {
-            entityManager.persist(city);
-            return true;
-        } catch (Exception ex) {
-            LOGGER.info(ex.getLocalizedMessage());
-            return false;
+
+        switch (method) {
+            case "JPA":
+                try {
+                    entityManager.persist(city);
+                    return true;
+                } catch (Exception ex) {
+                    LOGGER.info(ex.getLocalizedMessage());
+                    return false;
+                }
+            case "JDBC":
+                return false;
+            default:
+                return false;
         }
     }
 }
