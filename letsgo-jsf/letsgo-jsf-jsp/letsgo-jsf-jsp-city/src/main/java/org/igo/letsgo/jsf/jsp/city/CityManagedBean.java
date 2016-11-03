@@ -33,6 +33,7 @@ import javax.transaction.RollbackException;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 import org.igo.letsgo.jsf.jsp.city.entity.City;
+import org.igo.letsgo.jsf.jsp.city.tech.method.CityMsgFabrica;
 
 /**
  *
@@ -47,8 +48,9 @@ public class CityManagedBean {
     private final String pageTitle = "Управление городами";
     private String cityName = "Москва";
     private Integer cityCode = 1;
-    private String addMetod = "jpa";
-    private String addTechMetod = "ejb";
+    private String dbMetod = "jpa";
+    private String techMetod = "ejb";
+    private String msgContentType = "txt";
 
     private final List<City> cityList = new ArrayList<>();
 
@@ -81,41 +83,8 @@ public class CityManagedBean {
     }
 
     public void addCity() {
-
-        switch (addMetod) {
-            case "jdbc":
-                addCityJDBC();
-                break;
-            case "jpa":
-                addCityJPA();
-                break;
-            case "ejb":
-                addCityEJB();
-                break;
-            case "rest":
-                addCityRESTful();
-                break;
-            case "soap":
-                addCitySOAP();
-                break;
-            case "mq":
-                addCityMQ();
-                break;
-
-            case "jms":
-                addCityJMS();
-                break;
-            default:
-                System.out.println("добавлен город: " + cityName);
-                break;
-
-        }
-    }
-
-    private void addCityJDBC() {
-
-        System.out.println("(JPA) добавлен город: " + cityName);
-
+        CityMsgInterface cm = CityMsgFabrica.createMsgManager(techMetod) ;
+        cm.sendCity(msgContentType, dbMetod, cityName, new City(cityName));
     }
 
 //    UserTransaction utx; 
@@ -141,36 +110,6 @@ public class CityManagedBean {
         }
     }
 
-    private void addCityEJB() {
-
-        System.out.println("(EJB) добавлен город: " + cityName);
-
-    }
-
-    private void addCityRESTful() {
-
-        System.out.println("(RESTful) добавлен город: " + cityName);
-
-    }
-
-    private void addCitySOAP() {
-
-        System.out.println("(SOAP) добавлен город: " + cityName);
-
-    }
-
-    private void addCityMQ() {
-
-        System.out.println("(SOAP) добавлен город: " + cityName);
-
-    }
-
-    private void addCityJMS() {
-
-        System.out.println("(SOAP) добавлен город: " + cityName);
-
-    }
-
     /**
      * @return the cityList
      */
@@ -179,17 +118,17 @@ public class CityManagedBean {
     }
 
     /**
-     * @return the addMetod
+     * @return the dbMetod
      */
-    public String getAddMetod() {
-        return addMetod;
+    public String getDbMetod() {
+        return dbMetod;
     }
 
     /**
-     * @param addMetod the addMetod to set
+     * @param dbMetod the dbMetod to set
      */
-    public void setAddMetod(String addMetod) {
-        this.addMetod = addMetod;
+    public void setDbMetod(final String dbMetod) {
+        this.dbMetod = dbMetod;
     }
 
     /**
@@ -202,7 +141,35 @@ public class CityManagedBean {
     /**
      * @param cityCode the cityCode to set
      */
-    public void setCityCode(Integer cityCode) {
+    public void setCityCode(final Integer cityCode) {
         this.cityCode = cityCode;
+    }
+
+    /**
+     * @return the techMetod
+     */
+    public String getTechMetod() {
+        return techMetod;
+    }
+
+    /**
+     * @param techMetod the techMetod to set
+     */
+    public void setTechMetod(final String techMetod) {
+        this.techMetod = techMetod;
+    }
+
+    /**
+     * @return the msgContentType
+     */
+    public String getMsgContentType() {
+        return msgContentType;
+    }
+
+    /**
+     * @param msgContentType the msgContentType to set
+     */
+    public void setMsgContentType(String msgContentType) {
+        this.msgContentType = msgContentType;
     }
 }
