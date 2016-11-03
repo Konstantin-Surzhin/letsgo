@@ -25,6 +25,7 @@ public interface ICityRemote {
 
     public List<String> getAllCityName();
     
-    public Boolean createCity(final String cityName);
+    //jdbc, jpa, mybatis ...
+    public Boolean createCity(final String cityName, final String method, final String dbName );
 
 }
