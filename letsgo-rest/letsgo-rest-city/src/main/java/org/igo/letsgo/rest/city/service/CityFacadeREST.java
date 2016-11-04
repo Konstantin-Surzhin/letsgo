@@ -36,7 +36,7 @@ import org.igo.letsgo.rest.city.City;
  * @author pl
  */
 @Stateless
-@Path("org.igo.letsgo.rest.city")
+@Path("city")
 public class CityFacadeREST extends AbstractFacade<City> {
 
     @PersistenceContext(unitName = "org.igo_letsgo-jsf-jsp-city_war_1.0PU")
@@ -48,14 +48,14 @@ public class CityFacadeREST extends AbstractFacade<City> {
 
     @POST
     @Override
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_XML})
     public void create(City entity) {
         super.create(entity);
     }
 
     @PUT
     @Path("{id}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_XML})
     public void edit(@PathParam("id") Integer id, City entity) {
         super.edit(entity);
     }
@@ -68,21 +68,21 @@ public class CityFacadeREST extends AbstractFacade<City> {
 
     @GET
     @Path("{id}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML})
     public City find(@PathParam("id") Integer id) {
         return super.find(id);
     }
 
     @GET
     @Override
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML})
     public List<City> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML})
     public List<City> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
@@ -98,5 +98,5 @@ public class CityFacadeREST extends AbstractFacade<City> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
 }

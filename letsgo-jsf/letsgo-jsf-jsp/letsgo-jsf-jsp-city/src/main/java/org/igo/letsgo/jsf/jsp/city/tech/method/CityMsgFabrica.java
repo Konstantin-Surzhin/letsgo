@@ -16,6 +16,7 @@
  */
 package org.igo.letsgo.jsf.jsp.city.tech.method;
 
+import org.igo.letsgo.jsf.jsp.city.client.rest.CityRESTClient;
 import org.igo.letsgo.jsf.jsp.city.CityMsgInterface;
 
 /**
@@ -32,7 +33,7 @@ public class CityMsgFabrica {
                 cmi = new CityEJB();
                 break;
             case "rest":
-                cmi = new CityREST();
+                cmi = new CityRESTClient();
                 break;
             case "soap":
                 cmi = new CitySOAP();

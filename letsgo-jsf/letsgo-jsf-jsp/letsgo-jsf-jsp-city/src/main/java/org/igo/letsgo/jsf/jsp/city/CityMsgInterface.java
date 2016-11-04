@@ -23,5 +23,8 @@ import org.igo.letsgo.jsf.jsp.city.entity.City;
  * @author pl
  */
 public interface CityMsgInterface {
-   public void sendCity(String msgContentType, String dbMetod, String dbName, City city);
+
+    public void sendCity(String msgContentType, String dbMetod, String dbName, City city);
+
+    public City recieveCity(String msgContentType, String dbMetod, String dbName);
 }

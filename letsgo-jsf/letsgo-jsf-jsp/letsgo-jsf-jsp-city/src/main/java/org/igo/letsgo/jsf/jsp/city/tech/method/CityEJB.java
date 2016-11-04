@@ -30,6 +30,11 @@ public class CityEJB implements CityMsgInterface{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public City recieveCity(String msgContentType, String dbMetod, String dbName) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 
     
 }

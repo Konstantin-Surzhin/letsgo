@@ -83,8 +83,10 @@ public class CityManagedBean {
     }
 
     public void addCity() {
-        CityMsgInterface cm = CityMsgFabrica.createMsgManager(techMetod) ;
-        cm.sendCity(msgContentType, dbMetod, cityName, new City(cityName));
+        CityMsgInterface cm = CityMsgFabrica.createMsgManager(techMetod);
+//        cm.sendCity(msgContentType, dbMetod, cityName, new City(cityName));
+        City c = cm.recieveCity(msgContentType, dbMetod, cityName);
+        System.out.println(c.getName());
     }
 
 //    UserTransaction utx; 
