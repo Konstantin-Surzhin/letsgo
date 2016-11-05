@@ -22,16 +22,21 @@ import org.igo.letsgo.jsf.jsp.city.entity.City;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
+import javax.ws.rs.client.Entity;
 
 /**
  *
  * @author pl
  */
-public class CityRESTClient implements CityMsgInterface {
+public class CityJPARESTClient implements CityMsgInterface {
 
     @Override
-    public void sendCity(String msgContentType, String dbMetod, String dbName, City city) {
+    public City sendCity(String msgContentType, String dbMetod, String dbName, City city) {
+        ResteasyClient client = new ResteasyClientBuilder().build();
+        ResteasyWebTarget target = client.target("http://localhost:8080/letsgo-rest-city/webresources/jpa/city");
 
+        Entity e = Entity.entity(city, MediaType.APPLICATION_XML);
+        return target.request().post(e, City.class);
     }
 
     @Override
@@ -47,7 +52,7 @@ public class CityRESTClient implements CityMsgInterface {
         ResteasyWebTarget target2 = client3.target("http://localhost:8080/letsgo-rest-city/webresources/simple");
 
         City c = target2.request(MediaType.APPLICATION_XML).get(City.class);
-       
+
         return c;
 
     }

@@ -16,8 +16,9 @@
  */
 package org.igo.letsgo.jsf.jsp.city.tech.method;
 
-import org.igo.letsgo.jsf.jsp.city.client.rest.CityRESTClient;
+import org.igo.letsgo.jsf.jsp.city.client.rest.CityJPARESTClient;
 import org.igo.letsgo.jsf.jsp.city.CityMsgInterface;
+import org.igo.letsgo.jsf.jsp.city.client.rest.RESTClientFabrica;
 
 /**
  *
@@ -25,15 +26,15 @@ import org.igo.letsgo.jsf.jsp.city.CityMsgInterface;
  */
 public class CityMsgFabrica {
 
-    public static CityMsgInterface createMsgManager(String type ) {
+    public static CityMsgInterface createMsgManager(String serviceType, String persistenceType ) {
         CityMsgInterface cmi = null;
         
-        switch (type) {
+        switch (serviceType) {
             case "ejb":
                 cmi = new CityEJB();
                 break;
             case "rest":
-                cmi = new CityRESTClient();
+                cmi = RESTClientFabrica.createRESTClient(persistenceType);
                 break;
             case "soap":
                 cmi = new CitySOAP();
@@ -45,7 +46,7 @@ public class CityMsgFabrica {
                 cmi =  new CityJMS();
                 break;
             default:
-               throw new IllegalArgumentException(type + " not found.");
+               throw new IllegalArgumentException(serviceType + " not found.");
 
         }
         return cmi;

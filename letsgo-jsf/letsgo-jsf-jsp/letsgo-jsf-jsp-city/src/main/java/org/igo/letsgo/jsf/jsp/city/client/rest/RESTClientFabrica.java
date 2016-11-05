@@ -14,26 +14,24 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.igo.letsgo.jsf.jsp.city.tech.method;
+package org.igo.letsgo.jsf.jsp.city.client.rest;
 
 import org.igo.letsgo.jsf.jsp.city.CityMsgInterface;
-import org.igo.letsgo.jsf.jsp.city.entity.City;
 
 /**
  *
  * @author pl
  */
-public class CityJMS implements CityMsgInterface{
+public class RESTClientFabrica {
 
-    @Override
-    public City sendCity(String msgContentType, String dbMetod, String dbName, City city) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public static CityMsgInterface createRESTClient(String persistenceType) {
+        switch (persistenceType) {
+            case "jdbc":
+                return new CityJDBCRESTClient();
+            case "jpa":
+                return new CityJPARESTClient();
+            default:
+                return null;
+        }
     }
-
-    @Override
-    public City recieveCity(String msgContentType, String dbMetod, String dbName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    
 }

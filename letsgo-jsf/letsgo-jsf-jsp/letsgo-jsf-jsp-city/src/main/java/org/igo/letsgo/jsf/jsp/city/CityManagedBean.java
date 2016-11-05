@@ -48,7 +48,7 @@ public class CityManagedBean {
     private final String pageTitle = "Управление городами";
     private String cityName = "Москва";
     private Integer cityCode = 1;
-    private String dbMetod = "jpa";
+    private String persistenceType = "jpa";
     private String techMetod = "ejb";
     private String msgContentType = "txt";
 
@@ -83,10 +83,16 @@ public class CityManagedBean {
     }
 
     public void addCity() {
-        CityMsgInterface cm = CityMsgFabrica.createMsgManager(techMetod);
-//        cm.sendCity(msgContentType, dbMetod, cityName, new City(cityName));
-        City c = cm.recieveCity(msgContentType, dbMetod, cityName);
-        System.out.println(c.getName());
+        CityMsgInterface cm = CityMsgFabrica.createMsgManager(techMetod, persistenceType);
+        try {
+            City city = cm.sendCity(msgContentType, persistenceType, cityName, new City(cityName));
+            if (city != null) {
+                cityList.add(city);
+            }
+        } catch (Exception e) {
+            Logger.getLogger(CityManagedBean.class.getName()).log(Level.SEVERE, e.getMessage());
+        }
+// City c = cm.recieveCity(msgContentType, persistenceType, cityName);
     }
 
 //    UserTransaction utx; 
@@ -120,17 +126,17 @@ public class CityManagedBean {
     }
 
     /**
-     * @return the dbMetod
+     * @return the persistenceType
      */
-    public String getDbMetod() {
-        return dbMetod;
+    public String getPersistenceType() {
+        return persistenceType;
     }
 
     /**
-     * @param dbMetod the dbMetod to set
+     * @param persistenceType the persistenceType to set
      */
-    public void setDbMetod(final String dbMetod) {
-        this.dbMetod = dbMetod;
+    public void setPersistenceType(final String persistenceType) {
+        this.persistenceType = persistenceType;
     }
 
     /**

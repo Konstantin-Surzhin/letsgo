@@ -31,7 +31,7 @@
                     <f:selectItem itemValue="protobuf" itemLabel="PROTOBUF"/>
                     <f:selectItem itemValue="thrift" itemLabel="Thrift"/>
                 </h:selectOneRadio><br/>
-                <h:selectOneRadio value="#{cityManagedBean.dbMetod}">
+                <h:selectOneRadio value="#{cityManagedBean.persistenceType}">
                     <f:selectItem itemValue="jdbc" itemLabel="JDBC"/>
                     <f:selectItem itemValue="jpa" itemLabel="JPA"/>
                     <f:selectItem itemValue="openjpa" itemLabel="openJPA"/>
