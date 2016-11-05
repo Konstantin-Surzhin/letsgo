@@ -14,9 +14,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.igo.letsgo.rest.city.service;
+package org.igo.letsgo.city.rest.jpa;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 
 /**
@@ -34,8 +36,11 @@ public abstract class AbstractFacade<T> {
 
     protected abstract EntityManager getEntityManager();
 
-    public void create(T entity) {
+    public T create(T entity) {
+
         getEntityManager().persist(entity);
+
+        return entity;
     }
 
     public void edit(T entity) {

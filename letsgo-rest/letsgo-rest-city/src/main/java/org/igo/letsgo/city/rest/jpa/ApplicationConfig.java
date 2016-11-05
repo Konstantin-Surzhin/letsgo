@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.igo.letsgo.rest.city.service;
+package org.igo.letsgo.city.rest.jpa;
 
 import java.util.Set;
 import javax.ws.rs.core.Application;
@@ -39,8 +39,8 @@ public class ApplicationConfig extends Application {
      * out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(org.igo.letsgo.rest.city.SimpleResource.class);
-        resources.add(org.igo.letsgo.rest.city.service.CityFacadeREST.class);
+        resources.add(org.igo.letsgo.city.rest.jdbc.CityJdbcREST.class);
+        resources.add(org.igo.letsgo.city.rest.jpa.CityJpaREST.class);
     }
 
 }

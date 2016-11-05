@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.igo.letsgo.rest.city;
+package org.igo.letsgo.city.rest.jdbc;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -35,7 +35,7 @@ public class City implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Integer id;
 
     @Column(unique = true)
@@ -44,7 +44,7 @@ public class City implements Serializable {
     public City() {
     }
 
-    public City(String name) {
+    public City(final String name) {
         this.name = name;
     }
 
@@ -52,7 +52,7 @@ public class City implements Serializable {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(final Integer id) {
         this.id = id;
     }
 
@@ -97,7 +97,7 @@ public class City implements Serializable {
     /**
      * @param name the cityName to set
      */
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 

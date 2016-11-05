@@ -14,9 +14,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.igo.letsgo.rest.city.service;
+package org.igo.letsgo.city.rest.jpa;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,28 +31,36 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import org.igo.letsgo.rest.city.City;
+import org.igo.letsgo.city.rest.jdbc.City;
 
 /**
  *
  * @author pl
  */
 @Stateless
-@Path("city")
-public class CityFacadeREST extends AbstractFacade<City> {
+@Path("jpa")
+public class CityJpaREST extends AbstractFacade<City> {
 
     @PersistenceContext(unitName = "org.igo_letsgo-jsf-jsp-city_war_1.0PU")
     private EntityManager em;
 
-    public CityFacadeREST() {
+    public CityJpaREST() {
         super(City.class);
     }
 
-    @POST
     @Override
+    @Path("city")
+    @POST
     @Consumes({MediaType.APPLICATION_XML})
-    public void create(City entity) {
-        super.create(entity);
+    @Produces({MediaType.APPLICATION_XML})
+    public City create(City entity) {
+        try {
+            super.create(entity);
+        } catch (Error e) {
+            Logger.getLogger(AbstractFacade.class.getName()).log(Level.SEVERE, "!!!{0}", e.getMessage());
+            return null;
+        }
+        return entity;
     }
 
     @PUT

@@ -103,7 +103,7 @@
                         </goals>
                         <configuration>
                             <classResourceNames>
-                                <classResourceName>org.igo.letsgo.rest.city.SimpleResource</classResourceName>
+                                <classResourceName>org.igo.letsgo.city.rest.jdbc.CityJdbcREST</classResourceName>
                             </classResourceNames>
                             <!-- Enable if support for Javadoc is required, not supported in CXF 2.7.11 -->
                             <!--
