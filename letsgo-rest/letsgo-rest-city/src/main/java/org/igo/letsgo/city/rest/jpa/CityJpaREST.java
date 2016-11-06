@@ -21,7 +21,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceUnit;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -49,7 +51,7 @@ public class CityJpaREST extends AbstractFacade<City> {
     }
 
     @Override
-    @Path("city")
+    @Path("{dbname}/city")
     @POST
     @Consumes({MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_XML})
@@ -108,5 +110,4 @@ public class CityJpaREST extends AbstractFacade<City> {
     protected EntityManager getEntityManager() {
         return em;
     }
-
 }

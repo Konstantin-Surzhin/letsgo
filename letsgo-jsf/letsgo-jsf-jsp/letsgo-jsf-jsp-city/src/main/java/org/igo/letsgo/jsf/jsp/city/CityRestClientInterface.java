@@ -14,28 +14,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.igo.letsgo.jsf.jsp.city.client.rest;
+package org.igo.letsgo.jsf.jsp.city;
 
-import org.igo.letsgo.jsf.jsp.city.CityMsgInterface;
+import org.igo.letsgo.jsf.jsp.city.entity.City;
 
 /**
  *
  * @author pl
  */
-public class RESTClientFabrica {
+public interface CityRestClientInterface {
 
-    public static CityMsgInterface createRESTClient(String persistenceType) {
-        switch (persistenceType) {
-            case "jdbc":
-                return new CityJdbcRESTClient();
-            case "jpa":
-                return new CityJpaRESTClient();
-            case "springjdbc":
-                return new CitySpringJdbcRESTClient();
-            case "springdata":
-                return new CitySpringDataRESTClient();
-            default:
-                return null;
-        }
-    }
+    public City sendCity(String msgContentType, String persistenceType, String dbName, City city);
+
+    public City recieveCity(String msgContentType, String dbMetod, String dbName);
 }

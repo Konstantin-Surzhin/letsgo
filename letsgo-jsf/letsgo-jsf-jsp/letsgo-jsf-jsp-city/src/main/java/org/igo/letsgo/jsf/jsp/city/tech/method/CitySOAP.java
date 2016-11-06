@@ -16,14 +16,14 @@
  */
 package org.igo.letsgo.jsf.jsp.city.tech.method;
 
-import org.igo.letsgo.jsf.jsp.city.CityMsgInterface;
 import org.igo.letsgo.jsf.jsp.city.entity.City;
+import org.igo.letsgo.jsf.jsp.city.CityRestClientInterface;
 
 /**
  *
  * @author pl
  */
-public class CitySOAP implements CityMsgInterface{
+public class CitySOAP implements CityRestClientInterface{
 
     @Override
     public City sendCity(String msgContentType, String dbMetod, String dbName, City city) {

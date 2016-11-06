@@ -14,25 +14,33 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.igo.letsgo.jsf.jsp.city.client.rest;
+package org.igo.letsgo.city.rest.jdbc;
 
-import org.igo.letsgo.jsf.jsp.city.CityMsgInterface;
-import org.igo.letsgo.jsf.jsp.city.entity.City;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author pl
  */
-public class CitySpringDataRESTClient implements CityMsgInterface{
+class JDBCConnectionFabrica {
 
-    @Override
-    public City sendCity(String msgContentType, String dbMetod, String dbName, City city) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    static Connection getConnection(String db) {
+        try {
+            switch (db) {
+                case "h2":
+                    return DriverManager.getConnection("");
+                default:
+                    return null;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBCConnectionFabrica.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
-    @Override
-    public City recieveCity(String msgContentType, String dbMetod, String dbName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }

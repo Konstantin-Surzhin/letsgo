@@ -16,6 +16,12 @@
  */
 package org.igo.letsgo.city.rest.jdbc;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -24,6 +30,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -45,7 +52,7 @@ public class CityJdbcREST {
 
     /**
      * Retrieves representation of an instance of
- org.igo.letsgo.rest.city.CityJdbcREST
+     * org.igo.letsgo.rest.city.CityJdbcREST
      *
      * @return an instance of java.lang.String
      */
@@ -68,12 +75,30 @@ public class CityJdbcREST {
     }
 
     @POST
-    @Path("city")
+    @Path("city/{db}")
     @Consumes({MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_XML})
-    public City create(City city) {
+    public City create(@PathParam("db") String db, City city) {
+        try {
 
-        city.setId(2);
+            Connection conn = JDBCConnectionFabrica.getConnection(db);//
+            if (conn == null) {
+                return null;
+            }
+
+            PreparedStatement ps = conn.prepareStatement("");
+            ps.setString(1, city.getName());
+            ps.executeUpdate();
+            ps = conn.prepareStatement("");
+            ps.setString(1, city.getName());
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            int id = rs.getInt(1);
+            city.setId(id);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CityJdbcREST.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         return city;
 

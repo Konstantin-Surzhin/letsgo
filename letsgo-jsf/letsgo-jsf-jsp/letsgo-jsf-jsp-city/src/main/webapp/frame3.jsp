@@ -44,6 +44,13 @@
                     <f:selectItem itemValue="springjdbc" itemLabel="Spring JDBC"/>
                     <f:selectItem itemValue="springdata" itemLabel="Spring Data"/>
                 </h:selectOneRadio><br/>
+                <h:selectOneRadio value="#{cityManagedBean.dbName}">
+                    <f:selectItem itemValue="h2" itemLabel="H2"/>
+                    <f:selectItem itemValue="mysql" itemLabel="MySql"/>
+                    <f:selectItem itemValue="postgreesql" itemLabel="PostgreeSQL"/>
+                    <f:selectItem itemValue="javadb" itemLabel="Derby"/>
+                    <f:selectItem itemValue="db2" itemLabel="DB2"/>
+                </h:selectOneRadio><br/>
                 <h:outputLabel value="Название города: "/>
                 <h:inputText id="cityName" value="#{cityManagedBean.cityName}"/>
                 <h:commandButton value="добавить" action="#{cityManagedBean.addCity}"/>

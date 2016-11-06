@@ -32,6 +32,7 @@ import javax.transaction.NotSupportedException;
 import javax.transaction.RollbackException;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
+import org.igo.letsgo.jsf.jsp.city.client.rest.CityRESTClient;
 import org.igo.letsgo.jsf.jsp.city.entity.City;
 import org.igo.letsgo.jsf.jsp.city.tech.method.CityMsgFabrica;
 
@@ -51,6 +52,7 @@ public class CityManagedBean {
     private String persistenceType = "jpa";
     private String techMetod = "ejb";
     private String msgContentType = "txt";
+    private String dbName ="h2";
 
     private final List<City> cityList = new ArrayList<>();
 
@@ -83,9 +85,9 @@ public class CityManagedBean {
     }
 
     public void addCity() {
-        CityMsgInterface cm = CityMsgFabrica.createMsgManager(techMetod, persistenceType);
+        CityRestClientInterface cm = new CityRESTClient();
         try {
-            City city = cm.sendCity(msgContentType, persistenceType, cityName, new City(cityName));
+            City city = cm.sendCity(msgContentType, persistenceType, dbName, new City(cityName));
             if (city != null) {
                 cityList.add(city);
             }
@@ -179,5 +181,19 @@ public class CityManagedBean {
      */
     public void setMsgContentType(String msgContentType) {
         this.msgContentType = msgContentType;
+    }
+
+    /**
+     * @return the dbName
+     */
+    public String getDbName() {
+        return dbName;
+    }
+
+    /**
+     * @param dbName the dbName to set
+     */
+    public void setDbName(String dbName) {
+        this.dbName = dbName;
     }
 }
