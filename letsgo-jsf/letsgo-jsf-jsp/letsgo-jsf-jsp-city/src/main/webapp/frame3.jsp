@@ -41,6 +41,8 @@
                     <f:selectItem itemValue="eclipselink" itemLabel="EclipseLink"/>
                     <f:selectItem itemValue="hibernate" itemLabel="Hibernate"/>
                     <f:selectItem itemValue="mybatis" itemLabel="myBatis"/>
+                    <f:selectItem itemValue="springjdbc" itemLabel="Spring JDBC"/>
+                    <f:selectItem itemValue="springdata" itemLabel="Spring Data"/>
                 </h:selectOneRadio><br/>
                 <h:outputLabel value="Название города: "/>
                 <h:inputText id="cityName" value="#{cityManagedBean.cityName}"/>

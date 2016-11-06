@@ -17,25 +17,22 @@
 package org.igo.letsgo.jsf.jsp.city.client.rest;
 
 import org.igo.letsgo.jsf.jsp.city.CityMsgInterface;
+import org.igo.letsgo.jsf.jsp.city.entity.City;
 
 /**
  *
  * @author pl
  */
-public class RESTClientFabrica {
+public class CitySpringJdbcRESTClient implements CityMsgInterface{
 
-    public static CityMsgInterface createRESTClient(String persistenceType) {
-        switch (persistenceType) {
-            case "jdbc":
-                return new CityJdbcRESTClient();
-            case "jpa":
-                return new CityJpaRESTClient();
-            case "springjdbc":
-                return new CitySpringJdbcRESTClient();
-            case "springdata":
-                return new CitySpringDataRESTClient();
-            default:
-                return null;
-        }
+    @Override
+    public City sendCity(String msgContentType, String dbMetod, String dbName, City city) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public City recieveCity(String msgContentType, String dbMetod, String dbName) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 }

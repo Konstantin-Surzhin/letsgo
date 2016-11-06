@@ -16,44 +16,31 @@
  */
 package org.igo.letsgo.jsf.jsp.city.client.rest;
 
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import org.igo.letsgo.jsf.jsp.city.CityMsgInterface;
 import org.igo.letsgo.jsf.jsp.city.entity.City;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
-import javax.ws.rs.client.Entity;
 
 /**
  *
  * @author pl
  */
-public class CityJPARESTClient implements CityMsgInterface {
+public class CityJdbcRESTClient implements CityMsgInterface{
 
     @Override
     public City sendCity(String msgContentType, String dbMetod, String dbName, City city) {
         ResteasyClient client = new ResteasyClientBuilder().build();
-        ResteasyWebTarget target = client.target("http://localhost:8080/letsgo-rest-city/webresources/jpa/city");
+        ResteasyWebTarget target = client.target("http://localhost:8080/letsgo-rest-city/webresources/jdbc/city");
 
         Entity e = Entity.entity(city, MediaType.APPLICATION_XML);
-        return target.request().post(e, City.class);
-    }
+        return target.request().post(e, City.class);    }
 
     @Override
     public City recieveCity(String msgContentType, String dbMetod, String dbName) {
-//        Client client1 = ClientBuilder.newClient();
-//        Client client2 = ClientBuilder.newBuilder().build();
-//        WebTarget target1 = client1.target("http://localhost:8080/letsgo-rest-city/webresources");
-//        Response response = target1.request().get();
-//                    String value = response.readEntity(String.class);
-//            response.close();  // You should close connections!    }\
-
-        ResteasyClient client3 = new ResteasyClientBuilder().build();
-        ResteasyWebTarget target2 = client3.target("http://localhost:8080/letsgo-rest-city/webresources/simple");
-
-        City c = target2.request(MediaType.APPLICATION_XML).get(City.class);
-
-        return c;
-
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
 }

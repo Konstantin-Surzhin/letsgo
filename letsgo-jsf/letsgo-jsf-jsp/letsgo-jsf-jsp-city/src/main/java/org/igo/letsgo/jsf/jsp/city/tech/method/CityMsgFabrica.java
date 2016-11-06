@@ -16,7 +16,6 @@
  */
 package org.igo.letsgo.jsf.jsp.city.tech.method;
 
-import org.igo.letsgo.jsf.jsp.city.client.rest.CityJPARESTClient;
 import org.igo.letsgo.jsf.jsp.city.CityMsgInterface;
 import org.igo.letsgo.jsf.jsp.city.client.rest.RESTClientFabrica;
 

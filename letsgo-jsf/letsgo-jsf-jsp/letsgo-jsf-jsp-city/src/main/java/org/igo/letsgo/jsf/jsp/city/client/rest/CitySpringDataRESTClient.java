@@ -16,27 +16,19 @@
  */
 package org.igo.letsgo.jsf.jsp.city.client.rest;
 
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.MediaType;
 import org.igo.letsgo.jsf.jsp.city.CityMsgInterface;
 import org.igo.letsgo.jsf.jsp.city.entity.City;
-import org.jboss.resteasy.client.jaxrs.ResteasyClient;
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 
 /**
  *
  * @author pl
  */
-public class CityJDBCRESTClient implements CityMsgInterface{
+public class CitySpringDataRESTClient implements CityMsgInterface{
 
     @Override
     public City sendCity(String msgContentType, String dbMetod, String dbName, City city) {
-        ResteasyClient client = new ResteasyClientBuilder().build();
-        ResteasyWebTarget target = client.target("http://localhost:8080/letsgo-rest-city/webresources/jdbc/city");
-
-        Entity e = Entity.entity(city, MediaType.APPLICATION_XML);
-        return target.request().post(e, City.class);    }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     @Override
     public City recieveCity(String msgContentType, String dbMetod, String dbName) {
