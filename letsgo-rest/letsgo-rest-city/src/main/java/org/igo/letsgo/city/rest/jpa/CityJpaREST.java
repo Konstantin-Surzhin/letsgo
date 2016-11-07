@@ -43,7 +43,7 @@ public class CityJpaREST extends AbstractFacade<City> {
     private EntityManager h2Em;
     @PersistenceContext(unitName = "org.igo.letsgo.rest.city.mysql.PU")
     private EntityManager mysqlEm;
-    @PersistenceContext(unitName = "org.igo.letsgo.rest.city.postgreesql.PU")
+    @PersistenceContext(unitName = "org.igo.letsgo.rest.city.postgresql.PU")
     private EntityManager postgresqlEm;
 
     public CityJpaREST() {

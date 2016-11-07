@@ -24,10 +24,10 @@
                     <f:selectItem itemValue="mq" itemLabel="MQ"/>
                     <f:selectItem itemValue="jms" itemLabel="JMS"/>
                 </h:selectOneRadio><br/>
-                <h:selectOneRadio value="#{cityManagedBean.msgContentType}">
-                    <f:selectItem itemValue="txt" itemLabel="TXT"/>
-                    <f:selectItem itemValue="json" itemLabel="JSON"/>
-                    <f:selectItem itemValue="xml" itemLabel="XML"/>
+                <h:selectOneRadio value="#{cityManagedBean.msgMediaType}">
+                    <f:selectItem itemValue="text/plain" itemLabel="Text"/>
+                    <f:selectItem itemValue="application/json" itemLabel="JSON"/>
+                    <f:selectItem itemValue="application/xml" itemLabel="XML"/>
                     <f:selectItem itemValue="protobuf" itemLabel="PROTOBUF"/>
                     <f:selectItem itemValue="thrift" itemLabel="Thrift"/>
                 </h:selectOneRadio><br/>

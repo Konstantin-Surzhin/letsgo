@@ -31,10 +31,13 @@ import org.igo.letsgo.jsf.jsp.city.CityRestClientInterface;
 public class CityRESTClient implements CityRestClientInterface {
 
     @Override
-    public City sendCity(String url, MediaType msgContentType, String persistenceType, String dbName, City city) {
+    public City sendCity(String url, String msgContentType, String persistenceType, String dbName, City city) {
         ResteasyClient client = new ResteasyClientBuilder().build();
         ResteasyWebTarget target = client.target(url + persistenceType + "/" + dbName + "/city");
 
+        if(msgContentType.equals("protobuf") || msgContentType.equals("thrift"))
+            msgContentType = MediaType.TEXT_PLAIN;
+        
         Entity e = Entity.entity(city, msgContentType);
         return target.request().post(e, City.class);
     }

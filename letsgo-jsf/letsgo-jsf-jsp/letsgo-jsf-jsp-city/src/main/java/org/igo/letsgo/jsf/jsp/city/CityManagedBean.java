@@ -51,7 +51,7 @@ public class CityManagedBean {
     private Integer cityCode = 1;
     private String persistenceType = "jpa";
     private String techMetod = "ejb";
-    private MediaType msgMediaType = MediaType.TEXT_PLAIN_TYPE; //msgMediaType
+    private String msgMediaType = MediaType.TEXT_PLAIN; 
     private String dbName = "h2";
 
     private final List<City> cityList = new ArrayList<>();
@@ -173,14 +173,15 @@ public class CityManagedBean {
     /**
      * @return the msgContentType
      */
-    public MediaType getMsgMediaType() {
+    public String getMsgMediaType() {
         return msgMediaType;
     }
 
     /**
      * @param msgMediaType the msgContentType to set
      */
-    public void setMsgMediaType(MediaType msgMediaType) {
+    public void setMsgMediaType(String msgMediaType) {
+        
         this.msgMediaType = msgMediaType;
     }
 

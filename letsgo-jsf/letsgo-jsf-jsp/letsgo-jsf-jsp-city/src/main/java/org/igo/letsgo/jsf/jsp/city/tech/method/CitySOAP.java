@@ -27,7 +27,7 @@ import org.igo.letsgo.jsf.jsp.city.CityRestClientInterface;
 public class CitySOAP implements CityRestClientInterface{
 
     @Override
-    public City sendCity(String url, MediaType msgMediaType, String dbMetod, String dbName, City city) {
+    public City sendCity(String url, String msgMediaType, String dbMetod, String dbName, City city) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
