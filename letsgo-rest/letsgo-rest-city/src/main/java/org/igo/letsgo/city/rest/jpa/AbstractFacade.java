@@ -17,8 +17,6 @@
 package org.igo.letsgo.city.rest.jpa;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 
 /**
@@ -29,17 +27,21 @@ import javax.persistence.EntityManager;
 public abstract class AbstractFacade<T> {
 
     private final Class<T> entityClass;
+    private String dbname = "h2";
 
     public AbstractFacade(Class<T> entityClass) {
         this.entityClass = entityClass;
     }
 
-    protected abstract EntityManager getEntityManager();
+    protected abstract EntityManager getH2EntityManager();
 
-    public T create(T entity) {
+    protected abstract EntityManager getMySqlEntityManager();
 
+    protected abstract EntityManager getPostgreSQLEntityManager();
+
+    public T create(String dbname, T entity) {
+        this.dbname = dbname;
         getEntityManager().persist(entity);
-
         return entity;
     }
 
@@ -76,6 +78,19 @@ public abstract class AbstractFacade<T> {
         cq.select(getEntityManager().getCriteriaBuilder().count(rt));
         javax.persistence.Query q = getEntityManager().createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
+    }
+
+    private EntityManager getEntityManager() {
+        switch (dbname) {
+            case "mysql":
+                return getMySqlEntityManager();
+            case "postgresql":
+                return getPostgreSQLEntityManager();
+            case "h2":
+            default:
+                return getH2EntityManager();
+
+        }
     }
 
 }

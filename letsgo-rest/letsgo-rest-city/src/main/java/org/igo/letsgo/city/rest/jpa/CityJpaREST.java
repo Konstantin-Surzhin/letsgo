@@ -17,13 +17,9 @@
 package org.igo.letsgo.city.rest.jpa;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceUnit;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -43,8 +39,12 @@ import org.igo.letsgo.city.rest.jdbc.City;
 @Path("jpa")
 public class CityJpaREST extends AbstractFacade<City> {
 
-    @PersistenceContext(unitName = "org.igo_letsgo-jsf-jsp-city_war_1.0PU")
-    private EntityManager em;
+    @PersistenceContext(unitName = "org.igo.letsgo.rest.city.h2.jndi.PU")
+    private EntityManager h2Em;
+    @PersistenceContext(unitName = "org.igo.letsgo.rest.city.mysql.PU")
+    private EntityManager mysqlEm;
+    @PersistenceContext(unitName = "org.igo.letsgo.rest.city.postgreesql.PU")
+    private EntityManager postgresqlEm;
 
     public CityJpaREST() {
         super(City.class);
@@ -55,13 +55,8 @@ public class CityJpaREST extends AbstractFacade<City> {
     @POST
     @Consumes({MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_XML})
-    public City create(City entity) {
-        try {
-            super.create(entity);
-        } catch (Error e) {
-            Logger.getLogger(AbstractFacade.class.getName()).log(Level.SEVERE, "!!!{0}", e.getMessage());
-            return null;
-        }
+    public City create(@PathParam("dbname") String dbname, City entity) {
+        super.create(dbname, entity);
         return entity;
     }
 
@@ -107,7 +102,17 @@ public class CityJpaREST extends AbstractFacade<City> {
     }
 
     @Override
-    protected EntityManager getEntityManager() {
-        return em;
+    protected EntityManager getH2EntityManager() {
+        return h2Em;
+    }
+
+    @Override
+    protected EntityManager getMySqlEntityManager() {
+        return mysqlEm;
+    }
+
+    @Override
+    protected EntityManager getPostgreSQLEntityManager() {
+        return postgresqlEm;
     }
 }
