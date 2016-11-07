@@ -16,6 +16,7 @@
  */
 package org.igo.letsgo.jsf.jsp.city;
 
+import javax.ws.rs.core.MediaType;
 import org.igo.letsgo.jsf.jsp.city.entity.City;
 
 /**
@@ -24,7 +25,7 @@ import org.igo.letsgo.jsf.jsp.city.entity.City;
  */
 public interface CityRestClientInterface {
 
-    public City sendCity(String msgContentType, String persistenceType, String dbName, City city);
+    public City sendCity(String url, MediaType msgMediaType, String persistenceType, String dbName, City city);
 
     public City recieveCity(String msgContentType, String dbMetod, String dbName);
 }
