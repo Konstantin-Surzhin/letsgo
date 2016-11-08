@@ -885,3 +885,5 @@ hs_err_pid*
 /letsgo-jsf/letsgo-jsf-PrimeFaces-xhtml/letsgo-jsf-PrimeFaces-xhtml-user-role/target/
 /letsgo-jsf/letsgo-jsf-PrimeFaces-xhtml/letsgo-jsf-PrimeFaces-xhtml-team/target/
 /letsgo-rest/letsgo-rest-city/target/
+/letsgo-rest/letsgo-rest-city-jpa-h2/target/
+/letsgo-rest/letsgo-rest-city/letsgo-rest-city-jpa/letsgo-rest-city-jpa-h2/target/
