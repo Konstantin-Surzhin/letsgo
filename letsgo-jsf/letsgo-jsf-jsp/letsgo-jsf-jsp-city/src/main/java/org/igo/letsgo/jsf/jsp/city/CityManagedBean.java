@@ -116,6 +116,7 @@ public class CityManagedBean {
             utx.begin();
             em.persist(city);
             utx.commit();
+            em.close();
 
             cityList.add(city);
             System.out.println("(JPA) добавлен город: " + city);
