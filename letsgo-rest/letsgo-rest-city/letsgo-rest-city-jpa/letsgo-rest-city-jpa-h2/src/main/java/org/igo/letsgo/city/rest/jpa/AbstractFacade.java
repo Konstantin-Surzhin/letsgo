@@ -27,20 +27,12 @@ import javax.persistence.EntityManager;
 public abstract class AbstractFacade<T> {
 
     private final Class<T> entityClass;
-    private String dbname = "h2";
 
     public AbstractFacade(Class<T> entityClass) {
         this.entityClass = entityClass;
     }
 
-    protected abstract EntityManager getH2EntityManager();
-
-    protected abstract EntityManager getMySqlEntityManager();
-
-    protected abstract EntityManager getPostgreSQLEntityManager();
-
-    public T create(String dbname, T entity) {
-        this.dbname = dbname;
+    public T create( T entity) {
         getEntityManager().persist(entity);
         return entity;
     }
@@ -80,17 +72,5 @@ public abstract class AbstractFacade<T> {
         return ((Long) q.getSingleResult()).intValue();
     }
 
-    private EntityManager getEntityManager() {
-        switch (dbname) {
-            case "mysql":
-                return getMySqlEntityManager();
-            case "postgresql":
-                return getPostgreSQLEntityManager();
-            case "h2":
-            default:
-                return getH2EntityManager();
-
-        }
-    }
-
+    protected abstract EntityManager getEntityManager() ;
 }

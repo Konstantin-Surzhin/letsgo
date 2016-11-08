@@ -29,34 +29,29 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import org.igo.letsgo.rest.city.jpa.h2.City;
+import org.igo.letsgo.rest.city.entity.City;
 
 /**
  *
  * @author pl
  */
 @Stateless
-@Path("jpa")
+@Path("jpa/h2/city")
 public class CityJpaREST extends AbstractFacade<City> {
 
     @PersistenceContext(unitName = "org.igo.letsgo.rest.city.h2.jndi.PU")
-    private EntityManager h2Em;
-    @PersistenceContext(unitName = "org.igo.letsgo.rest.city.mysql.PU")
-    private EntityManager mysqlEm;
-    @PersistenceContext(unitName = "org.igo.letsgo.rest.city.postgresql.PU")
-    private EntityManager postgresqlEm;
+    private EntityManager em;
 
     public CityJpaREST() {
         super(City.class);
     }
 
     @Override
-    @Path("{dbname}/city")
     @POST
-    @Consumes({MediaType.APPLICATION_XML})
-    @Produces({MediaType.APPLICATION_XML})
-    public City create(@PathParam("dbname") String dbname, City entity) {
-        super.create(dbname, entity);
+    @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+    public City create(City entity) {
+        super.create(entity);
         return entity;
     }
 
@@ -102,17 +97,7 @@ public class CityJpaREST extends AbstractFacade<City> {
     }
 
     @Override
-    protected EntityManager getH2EntityManager() {
-        return h2Em;
-    }
-
-    @Override
-    protected EntityManager getMySqlEntityManager() {
-        return mysqlEm;
-    }
-
-    @Override
-    protected EntityManager getPostgreSQLEntityManager() {
-        return postgresqlEm;
+    protected EntityManager getEntityManager() {
+        return em;
     }
 }

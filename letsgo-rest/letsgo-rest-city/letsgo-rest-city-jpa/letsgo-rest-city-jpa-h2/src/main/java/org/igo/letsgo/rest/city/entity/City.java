@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.igo.letsgo.rest.city.jpa.h2;
+package org.igo.letsgo.rest.city.entity;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -35,7 +35,7 @@ public class City implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(unique = true)
