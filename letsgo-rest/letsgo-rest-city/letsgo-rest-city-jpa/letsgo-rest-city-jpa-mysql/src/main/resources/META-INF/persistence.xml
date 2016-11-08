@@ -3,8 +3,5 @@
   <persistence-unit name="org.igo.letsgo.rest.city.mysql.jndi.PU" transaction-type="JTA">
     <jta-data-source>java:/jboss/datasources/MySQLDS</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <properties>
-      <property name="javax.persistence.schema-generation.database.action" value="create"/>
-    </properties>
   </persistence-unit>
 </persistence>

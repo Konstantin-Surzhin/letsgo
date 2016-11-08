@@ -36,7 +36,7 @@ import org.igo.letsgo.rest.city.entity.City;
  * @author pl
  */
 @Stateless
-@Path("jpa/h2/city")
+@Path("city")
 public class CityJpaREST extends AbstractFacade<City> {
 
     @PersistenceContext(unitName = "org.igo.letsgo.rest.city.h2.jndi.PU")
@@ -51,8 +51,7 @@ public class CityJpaREST extends AbstractFacade<City> {
     @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public City create(City entity) {
-        super.create(entity);
-        return entity;
+       return super.create(entity);
     }
 
     @PUT

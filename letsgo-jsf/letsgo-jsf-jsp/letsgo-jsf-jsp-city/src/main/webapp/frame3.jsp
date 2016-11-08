@@ -60,7 +60,7 @@
                 <h:outputLabel value="Выбрать город"/>
                 <h:selectOneListbox value="#{cityManagedBean.cityCode}" >  
                     <c:forEach items="#{cityManagedBean.cityList}" var="city">
-                        <f:selectItem itemValue="#{city.id}" itemLabel="#{city.name}"/>
+                        <f:selectItem itemValue="#{city.id}" itemLabel="#{city.cityName}"/>
                     </c:forEach>
                 </h:selectOneListbox>
             </h:form>

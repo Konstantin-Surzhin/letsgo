@@ -51,7 +51,7 @@ public class CityManagedBean {
     private Integer cityCode = 1;
     private String persistenceType = "jpa";
     private String techMetod = "ejb";
-    private String msgMediaType = MediaType.TEXT_PLAIN; 
+    private String msgMediaType = MediaType.TEXT_PLAIN;
     private String dbName = "h2";
 
     private final List<City> cityList = new ArrayList<>();
@@ -87,8 +87,10 @@ public class CityManagedBean {
     public void addCity() {
         CityRestClientInterface cm = new CityRESTClient();
         try {
-            String url = "http://localhost:8080/letsgo-rest-city/webresources/";
-            City city = cm.sendCity(url, msgMediaType, persistenceType, dbName, new City(cityName));
+            String url = "http://localhost:8080/letsgo-rest-city-" + persistenceType + "-" + dbName + "/webresources/";
+            City city = new City();
+            city.setCityName(cityName);
+            city = cm.sendCity(url, msgMediaType, persistenceType, dbName, city);
             if (city != null) {
                 cityList.add(city);
             }
@@ -105,7 +107,8 @@ public class CityManagedBean {
 //} catch(Exception e){} 
     private void addCityJPA() {
         try {
-            City city = new City(cityName);
+            City city = new City();
+            city.setCityName(cityName);
 
             InitialContext context = new InitialContext();
             UserTransaction utx = (UserTransaction) context.lookup("java:comp/UserTransaction");
@@ -181,7 +184,7 @@ public class CityManagedBean {
      * @param msgMediaType the msgContentType to set
      */
     public void setMsgMediaType(String msgMediaType) {
-        
+
         this.msgMediaType = msgMediaType;
     }
 

@@ -33,7 +33,8 @@ public class CityRESTClient implements CityRestClientInterface {
     @Override
     public City sendCity(String url, String msgContentType, String persistenceType, String dbName, City city) {
         ResteasyClient client = new ResteasyClientBuilder().build();
-        ResteasyWebTarget target = client.target(url + persistenceType + "/" + dbName + "/city");
+        String t= url + "city";
+        ResteasyWebTarget target = client.target(t);
 
         if(msgContentType.equals("protobuf") || msgContentType.equals("thrift"))
             msgContentType = MediaType.TEXT_PLAIN;
