@@ -93,5 +93,5 @@ public class City implements Serializable {
     public String toString() {
         return "org.igo.letsgo.rest.city.jpa.mysql.City[ id=" + id + " ]";
     }
-    
+
 }

@@ -11,7 +11,7 @@
     <modules>
         <module>letsgo-spring-angular-bootstrap</module>
         <module>letsgo-spring-freemarker</module>
-        <module>letsgo-spring-jsp</module>
+        <module>letsgo-spring-view-jsp</module>
         <module>letsgo-spring-mixer2</module>
         <module>letsgo-spring-sitemesh</module>
         <module>letsgo-spring-thymeleaf</module>
