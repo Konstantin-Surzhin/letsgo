@@ -11,6 +11,16 @@
       <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect"/>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/city;create=true"/>
       <!-- <property name="javax.persistence.jdbc.url" value="jdbc:derby:memory:cityDB;create=true"/>-->
+  <persistence-unit name="org.igo.letsgo.rest.city.jpa.derby.PU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <class>org.igo.letsgo.rest.city.entity.City</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.jdbc.user" value="citymanager"/>
+      <property name="javax.persistence.jdbc.password" value="managercity"/>
+      <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect" />
+      <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/city;create=true"/>
       <property name="hibernate.show_sql" value="true"/>
       <property name="hibernate.flushMode" value="FLUSH_AUTO"/>
       <property name="hibernate.hbm2ddl.auto" value="create-drop"/>

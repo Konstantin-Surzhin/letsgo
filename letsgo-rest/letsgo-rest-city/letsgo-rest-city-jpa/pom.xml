@@ -10,8 +10,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>letsgo-rest-city-jpa-h2</module>
-    <module>letsgo-rest-city-jpa-mysql</module>
-    <module>letsgo-rest-city-jpa-derby</module>
+        <module>letsgo-rest-city-jpa-mysql</module>
+        <module>letsgo-rest-city-jpa-derby</module>
         <module>letsgo-rest-protobuf-city-jpa</module>
     </modules>
 </project>
