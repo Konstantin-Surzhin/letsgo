@@ -95,7 +95,7 @@
                             <inputDirectories>
                                 <include>src/main/protobuf</include>
                             </inputDirectories>
-                             <outputDirectory>src/main/java</outputDirectory>
+                            <outputDirectory>src/main/java</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>

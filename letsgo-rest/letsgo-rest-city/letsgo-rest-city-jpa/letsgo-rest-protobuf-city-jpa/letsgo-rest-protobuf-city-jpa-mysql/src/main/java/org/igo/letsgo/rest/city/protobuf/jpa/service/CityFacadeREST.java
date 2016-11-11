@@ -19,6 +19,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import org.igo.letsgo.rest.city.entity.City;
+import org.igo.letsgo.rest.city.generate.sources.CityService;
 
 /**
  *
@@ -40,6 +41,7 @@ public class CityFacadeREST extends AbstractFacade<City> {
     @Produces(value = {"application/x-protobuf"})
     @Consumes(value = {"application/x-protobuf"})
     public void create(City entity) {
+        CityService.City ss = CityService.City.newBuilder().build();
         super.create(entity);
     }
 
