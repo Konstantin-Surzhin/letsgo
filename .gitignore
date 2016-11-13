@@ -907,3 +907,5 @@ hs_err_pid*
 /letsgo-spring/letsgo-spring-view/letsgo-spring-view-jsp/letsgo-spring-jsp-user-game/target/
 /letsgo-spring/letsgo-spring-view/letsgo-spring-view-jsp/letsgo-spring-jsp-user-role/target/
 /letsgo-spring/letsgo-spring-view/letsgo-spring-view-jsp/letsgo-spring-jsp-user/target/
+/letsgo-rest/letsgo-rest-city/letsgo-rest-city-jpa/letsgo-rest-city-jpa-protobuf/letsgo-rest-protobuf-city-jpa-mysql/target/
+/letsgo-rest/letsgo-rest-city/letsgo-rest-city-jpa/letsgo-rest-city-jpa-protobuf/letsgo-rest-city-jpa-protobuf-mysql/target/

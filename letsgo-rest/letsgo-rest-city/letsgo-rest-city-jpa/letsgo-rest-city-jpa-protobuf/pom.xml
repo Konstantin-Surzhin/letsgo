@@ -6,10 +6,10 @@
         <artifactId>letsgo-rest-city-jpa</artifactId>
         <version>1.0</version>
     </parent>
-    <artifactId>letsgo-rest-protobuf-city-jpa</artifactId>
+    <artifactId>letsgo-rest-city-jpa-protobuf</artifactId>
     <packaging>pom</packaging>
   <modules>
-    <module>letsgo-rest-protobuf-city-jpa-mysql</module>
+    <module>letsgo-rest-city-jpa-protobuf-mysql</module>
   </modules>
     <dependencies>
         <dependency>
@@ -18,5 +18,5 @@
             <version>3.1.0</version>
         </dependency>
     </dependencies>
-    <name>letsgo-rest-protobuf-city-jpa</name>
+    <name>letsgo-rest-city-jpa-protobuf</name>
 </project>
