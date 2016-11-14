@@ -6,17 +6,10 @@
         <artifactId>letsgo-rest-city-jpa</artifactId>
         <version>1.0</version>
     </parent>
-    <artifactId>letsgo-rest-city-jpa-protobuf</artifactId>
+    <artifactId>letsgo-rest-city-trift-jpa</artifactId>
     <packaging>pom</packaging>
+    <name>letsgo-rest-city-trift-jpa</name>
   <modules>
-    <module>letsgo-rest-city-protobuf-jpa-h2</module>
+    <module>letsgo-rest-city-trift-jpa-h2</module>
   </modules>
-    <dependencies>
-        <dependency>
-            <groupId>com.google.protobuf</groupId>
-            <artifactId>protobuf-java</artifactId>
-            <version>3.1.0</version>
-        </dependency>
-    </dependencies>
-    <name>letsgo-rest-city-jpa-protobuf</name>
 </project>

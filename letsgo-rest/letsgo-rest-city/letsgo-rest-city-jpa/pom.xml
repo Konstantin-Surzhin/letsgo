@@ -12,6 +12,7 @@
         <module>letsgo-rest-city-jpa-h2</module>
         <module>letsgo-rest-city-jpa-mysql</module>
         <module>letsgo-rest-city-jpa-derby</module>
-        <module>letsgo-rest-city-jpa-protobuf</module>
+        <module>letsgo-rest-city-protobuf-jpa</module>
+        <module>letsgo-rest-city-trift-jpa</module>
     </modules>
 </project>
