@@ -22,7 +22,6 @@ import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import javax.ws.rs.client.Entity;
-import org.igo.letsgo.jsf.jsp.city.CityRestClientInterface;
 
 /**
  *
@@ -31,15 +30,12 @@ import org.igo.letsgo.jsf.jsp.city.CityRestClientInterface;
 public class CityRESTClient implements CityRestClientInterface {
 
     @Override
-    public City sendCity(String url, String msgContentType, String persistenceType, String dbName, City city) {
-        ResteasyClient client = new ResteasyClientBuilder().build();
-        String t= url + "city";
-        ResteasyWebTarget target = client.target(t);
-
-        if(msgContentType.equals("protobuf") || msgContentType.equals("thrift"))
-            msgContentType = MediaType.TEXT_PLAIN;
-        
-        Entity e = Entity.entity(city, msgContentType);
+    public City sendCity(final String url, final String sgMediaType,
+            final String persistenceType, final String dbName, final City city) {
+        final ResteasyClient client = new ResteasyClientBuilder().build();
+        final String t = url + "-" + persistenceType + "-" + dbName + "/webresources/" + "city";
+        final ResteasyWebTarget target = client.target(t);
+        final Entity e = Entity.entity(city, sgMediaType);
         return target.request().post(e, City.class);
     }
 

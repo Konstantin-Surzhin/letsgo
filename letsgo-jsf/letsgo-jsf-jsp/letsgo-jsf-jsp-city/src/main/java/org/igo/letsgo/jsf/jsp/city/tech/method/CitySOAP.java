@@ -18,7 +18,7 @@ package org.igo.letsgo.jsf.jsp.city.tech.method;
 
 import javax.ws.rs.core.MediaType;
 import org.igo.letsgo.jsf.jsp.city.entity.City;
-import org.igo.letsgo.jsf.jsp.city.CityRestClientInterface;
+import org.igo.letsgo.jsf.jsp.city.client.rest.CityRestClientInterface;
 
 /**
  *

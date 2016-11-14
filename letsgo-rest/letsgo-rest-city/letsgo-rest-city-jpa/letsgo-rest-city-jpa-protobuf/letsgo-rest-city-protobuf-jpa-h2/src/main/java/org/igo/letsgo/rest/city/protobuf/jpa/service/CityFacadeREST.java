@@ -1,10 +1,22 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2016 surzhin.konstantin
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.igo.letsgo.rest.city.protobuf.jpa.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -37,12 +49,16 @@ public class CityFacadeREST extends AbstractFacade<City> {
     }
 
     @POST
-    @Override
     @Produces(value = {"application/x-protobuf"})
     @Consumes(value = {"application/x-protobuf"})
-    public void create(City entity) {
-        CityService.City ss = CityService.City.newBuilder().build();
-        super.create(entity);
+    public CityService.City create(CityService.City city) {
+        //City entity = new City();
+        //entity.setCityName(city.getName());
+        //  entity = super.create(entity);
+        // CityService.City out = CityService.City.newBuilder(city).setId(entity.getId()).build();
+        //CityService.City out = CityService.City.newBuilder(city).setId(100).setName("Перозаводск").build();
+
+        return CityService.City.newBuilder(city).setId(100).setName("Перозаводск").build();
     }
 
     @PUT
@@ -61,16 +77,24 @@ public class CityFacadeREST extends AbstractFacade<City> {
 
     @GET
     @Path("{id}")
-    @Consumes(value = {"application/x-protobuf"})
-    public City find(@PathParam("id") Integer id) {
-        return super.find(id);
+    @Produces(value = {"application/x-protobuf"})
+    public CityService.City find(@PathParam("id") Integer id) {
+        CityService.City c = CityService.City.newBuilder().setId(id).setName("Петрозаводск").build();
+        return c;
+        //return super.find(id);
     }
 
     @GET
-    @Override
     @Produces(value = {"application/x-protobuf"})
-    public List<City> findAll() {
-        return super.findAll();
+    public List<CityService.City> findAll() {
+
+        CityService.City city1 = CityService.City.newBuilder().setId(100).setName("Перозаводск").build();
+        CityService.City city2 = CityService.City.newBuilder().setId(101).setName("Рязань").build();
+        List<CityService.City> list = new ArrayList<>();
+        list.add(city1);
+        list.add(city2);
+        return list;
+        //  return super.findAll();
     }
 
     @GET

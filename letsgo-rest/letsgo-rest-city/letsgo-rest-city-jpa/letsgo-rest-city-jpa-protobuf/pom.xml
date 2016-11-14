@@ -9,7 +9,7 @@
     <artifactId>letsgo-rest-city-jpa-protobuf</artifactId>
     <packaging>pom</packaging>
   <modules>
-    <module>letsgo-rest-city-jpa-protobuf-mysql</module>
+    <module>letsgo-rest-city-protobuf-jpa-h2</module>
   </modules>
     <dependencies>
         <dependency>

@@ -17,7 +17,7 @@
 package org.igo.letsgo.jsf.jsp.city.tech.method;
 
 import org.igo.letsgo.jsf.jsp.city.entity.City;
-import org.igo.letsgo.jsf.jsp.city.CityRestClientInterface;
+import org.igo.letsgo.jsf.jsp.city.client.rest.CityRestClientInterface;
 
 /**
  *

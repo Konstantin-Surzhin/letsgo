@@ -8,11 +8,11 @@
     </parent>
 
     <groupId>org.igo</groupId>
-    <artifactId>letsgo-rest-city-jpa-protobuf-mysql</artifactId>
+    <artifactId>letsgo-rest-city-protobuf-jpa-h2</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
 
-    <name>letsgo-rest-city-jpa-protobuf-mysql</name>
+    <name>letsgo-rest-city-protobuf-jpa-h2</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
@@ -45,6 +45,7 @@
                     <compilerArguments>
                         <endorseddirs>${endorsed.dir}</endorseddirs>
                     </compilerArguments>
+                    <debug>true</debug>
                 </configuration>
             </plugin>
             <plugin>

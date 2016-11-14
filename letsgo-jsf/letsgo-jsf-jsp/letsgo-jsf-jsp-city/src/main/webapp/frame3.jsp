@@ -28,7 +28,7 @@
                     <f:selectItem itemValue="text/plain" itemLabel="Text"/>
                     <f:selectItem itemValue="application/json" itemLabel="JSON"/>
                     <f:selectItem itemValue="application/xml" itemLabel="XML"/>
-                    <f:selectItem itemValue="protobuf" itemLabel="PROTOBUF"/>
+                    <f:selectItem itemValue="application/x-protobuf" itemLabel="PROTOBUF"/>
                     <f:selectItem itemValue="thrift" itemLabel="Thrift"/>
                 </h:selectOneRadio><br/>
                 <h:selectOneRadio value="#{cityManagedBean.persistenceType}">

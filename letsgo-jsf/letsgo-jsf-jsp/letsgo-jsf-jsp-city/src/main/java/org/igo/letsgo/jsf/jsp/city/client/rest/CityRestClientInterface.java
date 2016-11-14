@@ -14,9 +14,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.igo.letsgo.jsf.jsp.city;
+package org.igo.letsgo.jsf.jsp.city.client.rest;
 
-import javax.ws.rs.core.MediaType;
 import org.igo.letsgo.jsf.jsp.city.entity.City;
 
 /**

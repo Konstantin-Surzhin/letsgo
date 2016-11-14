@@ -16,6 +16,9 @@
  */
 package org.igo.letsgo.jsf.jsp.city;
 
+import org.igo.letsgo.jsf.jsp.city.client.rest.CityRestClientInterface;
+import org.igo.letsgo.jsf.jsp.city.client.rest.RESTClientBuilder;
+import org.igo.letsgo.jsf.jsp.city.client.rest.CityProtobufRESTClient;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -85,9 +88,10 @@ public class CityManagedBean {
     }
 
     public void addCity() {
-        CityRestClientInterface cm = new CityRESTClient();
+        final CityRestClientInterface cm = new RESTClientBuilder().build(msgMediaType);
+
         try {
-            String url = "http://localhost:8080/letsgo-rest-city-" + persistenceType + "-" + dbName + "/webresources/";
+            String url = "http://localhost:8080/letsgo-rest-city";
             City city = new City();
             city.setCityName(cityName);
             city = cm.sendCity(url, msgMediaType, persistenceType, dbName, city);
@@ -97,7 +101,6 @@ public class CityManagedBean {
         } catch (Exception e) {
             Logger.getLogger(CityManagedBean.class.getName()).log(Level.SEVERE, e.getMessage());
         }
-// City c = cm.recieveCity(msgContentType, persistenceType, cityName);
     }
 
 //    UserTransaction utx; 
