@@ -100,12 +100,11 @@
     </build>
     <modules>
         <module>letsgo-data</module>
-        <module>letsgo-rest</module>
-        <module>letsgo-soap</module>
         <module>letsgo-mdb</module>
         <module>letsgo-spring</module>
         <module>letsgo-ejb-remote-client</module>
         <module>letsgo-jsf</module>
+        <module>letsgo-services</module>
     </modules>
     <dependencyManagement>
         <dependencies>

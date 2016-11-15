@@ -1,0 +1,10 @@
+org\igo\letsgo\rest\city\generate\sources\CityService$1.class
+org\igo\letsgo\rest\city\protobuf\jpa\service\ApplicationConfig.class
+org\igo\letsgo\rest\city\entity\City.class
+org\igo\letsgo\rest\city\generate\sources\CityService.class
+org\igo\letsgo\rest\city\generate\sources\CityService$City$1.class
+org\igo\letsgo\rest\city\generate\sources\CityService$City$Builder.class
+org\igo\letsgo\rest\city\protobuf\jpa\service\CityFacadeREST.class
+org\igo\letsgo\rest\city\generate\sources\CityService$City.class
+org\igo\letsgo\rest\city\generate\sources\CityService$CityOrBuilder.class
+org\igo\letsgo\rest\city\protobuf\jpa\service\AbstractFacade.class
