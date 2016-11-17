@@ -953,3 +953,6 @@ hs_err_pid*
 /letsgo-services/letsgo-soap/letsgo-soap-user-role/target/
 /letsgo-services/letsgo-soap/letsgo-soap-user/target/
 /letsgo-services/letsgo-rpc/letsgo-rpc-apache-thrift/letsgo-rpc-apache-thrift-city/letsgo-rpc-apache-thrift-city-jpa/letsgo-rpc-apache-thrift-city-jpa-h2/target/
+/letsgo-mdb/target/
+/letsgo-ejb-remote-client/target/
+/letsgo-jsf/target/

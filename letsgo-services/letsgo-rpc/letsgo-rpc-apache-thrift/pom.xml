@@ -10,5 +10,13 @@
     <packaging>pom</packaging>
     <modules>
         <module>letsgo-rpc-apache-thrift-city</module>
+        <module>letsgo-rpc-apache-thrift-multiplexed-server</module>
     </modules>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.thrift</groupId>
+            <artifactId>libthrift</artifactId>
+            <version>0.9.3</version>
+        </dependency>
+    </dependencies>
 </project>

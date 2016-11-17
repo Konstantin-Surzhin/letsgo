@@ -11,5 +11,6 @@
     <name>letsgo-rpc-apache-thrift-city-jpa</name>
   <modules>
     <module>letsgo-rpc-apache-thrift-city-jpa-h2</module>
+    <module>letsgo-rpc-apache-thrift-city-jpa-mysql</module>
   </modules>
 </project>
