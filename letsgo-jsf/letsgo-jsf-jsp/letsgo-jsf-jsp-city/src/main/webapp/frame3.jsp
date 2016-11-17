@@ -16,6 +16,7 @@
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         </head>
         <body>
+            <h1>Здесь можно добавить город.</h1>
             <h:form>
                 <h:selectOneRadio value="#{cityManagedBean.techMetod}">
                     <f:selectItem itemValue="ejb" itemLabel="EJB3"/>
