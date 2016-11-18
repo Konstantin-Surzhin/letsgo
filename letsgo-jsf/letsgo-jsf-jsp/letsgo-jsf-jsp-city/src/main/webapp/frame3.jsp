@@ -10,10 +10,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
-<f:view>
-    <html>
+
+<html>
+    <f:view>     
         <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            <title>Управление городами</title>
         </head>
         <body>
             <h1>Здесь можно добавить город.</h1>
@@ -56,15 +57,7 @@
                 <h:inputText id="cityName" value="#{cityManagedBean.cityName}"/>
                 <h:commandButton value="добавить" action="#{cityManagedBean.addCity}"/>
             </h:form><br/>
-            <h2>Список городов</h2>
-            <h:form>
-                <h:outputLabel value="Выбрать город"/>
-                <h:selectOneListbox value="#{cityManagedBean.cityCode}" >  
-                    <c:forEach items="#{cityManagedBean.cityList}" var="city">
-                        <f:selectItem itemValue="#{city.id}" itemLabel="#{city.cityName}"/>
-                    </c:forEach>
-                </h:selectOneListbox>
-            </h:form>
+
         </body>
-    </html>
-</f:view>
+    </f:view>  
+</html>

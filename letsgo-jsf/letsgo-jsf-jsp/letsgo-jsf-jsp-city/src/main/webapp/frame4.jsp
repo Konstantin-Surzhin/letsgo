@@ -6,6 +6,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="h" uri="http://java.sun.com/jsf/html"%>
 <%@taglib prefix="f" uri="http://java.sun.com/jsf/core"%>
-<f:view>
-    <a  href="faces/summary.jsp" target="f3" >Города</a>
-</f:view>
+<html>
+    <body>
+        <f:view>
+            <a  href="faces/summary.jsp" target="f3" >Города</a>
+        </f:view>     
+    </body>
+
+</html>
