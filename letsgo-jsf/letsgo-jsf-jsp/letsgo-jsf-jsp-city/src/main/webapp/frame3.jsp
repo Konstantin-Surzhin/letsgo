@@ -17,12 +17,13 @@
             <title>Управление городами</title>
         </head>
         <body>
-            <h1>Здесь можно добавить город.</h1>
+            <h2>Здесь можно добавить город.</h2>
             <h:form>
                 <h:selectOneRadio value="#{cityManagedBean.techMetod}">
                     <f:selectItem itemValue="ejb" itemLabel="EJB3"/>
-                    <f:selectItem itemValue="rest" itemLabel="RESTful"/>
+                    <f:selectItem itemValue="rest" itemLabel="REST"/>
                     <f:selectItem itemValue="soap" itemLabel="SOAP"/>
+                    <f:selectItem itemValue="rpc" itemLabel="RPC"/>
                     <f:selectItem itemValue="mq" itemLabel="MQ"/>
                     <f:selectItem itemValue="jms" itemLabel="JMS"/>
                 </h:selectOneRadio><br/>
@@ -31,7 +32,7 @@
                     <f:selectItem itemValue="application/json" itemLabel="JSON"/>
                     <f:selectItem itemValue="application/xml" itemLabel="XML"/>
                     <f:selectItem itemValue="application/x-protobuf" itemLabel="PROTOBUF"/>
-                    <f:selectItem itemValue="thrift" itemLabel="Thrift"/>
+                    <f:selectItem itemValue="application/x-thrift" itemLabel="Thrift"/>
                 </h:selectOneRadio><br/>
                 <h:selectOneRadio value="#{cityManagedBean.persistenceType}">
                     <f:selectItem itemValue="jdbc" itemLabel="JDBC"/>

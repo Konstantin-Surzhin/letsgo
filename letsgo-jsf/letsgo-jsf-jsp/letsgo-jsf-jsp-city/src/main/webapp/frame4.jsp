@@ -9,8 +9,13 @@
 <html>
     <body>
         <f:view>
-            <a  href="faces/summary.jsp" target="f3" >Города</a>
+            <table>
+                <tr>
+                    <td><a  href="faces/summary.jsp" target="f3" >Города</a></td>
+                    <td><a  href="faces/map.jsp" target="f3" >Карта</a></td>
+                    <td><a  href="faces/graph.jsp" target="f3" >Графики</a></td>
+                </tr>
+            </table>         
         </f:view>     
     </body>
-
 </html>
