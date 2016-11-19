@@ -956,3 +956,6 @@ hs_err_pid*
 /letsgo-mdb/target/
 /letsgo-ejb-remote-client/target/
 /letsgo-jsf/target/
+/letsgo-services/letsgo-rest/letsgo-rest-city/target/
+/letsgo-services/letsgo-rest/letsgo-rest-city/letsgo-rest-city-jpa/target/
+/letsgo-services/letsgo-rest/letsgo-rest-city/letsgo-rest-city-jpa/letsgo-rest-city-protobuf-jpa/target/
