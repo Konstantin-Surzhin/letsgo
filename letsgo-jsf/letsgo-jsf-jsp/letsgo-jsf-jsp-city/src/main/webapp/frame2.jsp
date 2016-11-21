@@ -12,6 +12,7 @@
     <html>
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            <title>JSP Page</title>
         </head>
         <body>
             <h:outputLink value="#{root}/jsf-jsp-City" target="_parent" disabled="true">Города</h:outputLink><br>
@@ -29,7 +30,6 @@
             <h:outputLink value="#{root}/jsf-jsp-Room" target="_parent">Комнаты</h:outputLink><br>
             <h:outputLink value="#{root}/jsf-jsp-UserBan" target="_parent">Блокировки игроков</h:outputLink><br>
             <h:outputLink value="#{root}/jsf-jsp-UserDegree" target="_parent">Разряды игроков</h:outputLink><br>
-
             <h:outputLink value="#{root}/jsf-jsp-User" target="_parent">Игроки</h:outputLink><br>
             <h:outputLink value="#{root}/jsf-jsp-UserRole" target="_parent">Роли игроков</h:outputLink><br>
             <h:outputLink value="#{root}/jsf-jsp-Team" target="_parent">Команды</h:outputLink><br>

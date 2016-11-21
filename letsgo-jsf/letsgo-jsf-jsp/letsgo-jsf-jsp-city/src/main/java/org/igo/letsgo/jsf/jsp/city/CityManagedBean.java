@@ -18,7 +18,6 @@ package org.igo.letsgo.jsf.jsp.city;
 
 import org.igo.letsgo.jsf.jsp.city.client.rest.CityRestClientInterface;
 import org.igo.letsgo.jsf.jsp.city.client.rest.RESTClientBuilder;
-import org.igo.letsgo.jsf.jsp.city.client.rest.CityProtobufRESTClient;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -36,7 +35,6 @@ import javax.transaction.RollbackException;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 import javax.ws.rs.core.MediaType;
-import org.igo.letsgo.jsf.jsp.city.client.rest.CityRESTClient;
 import org.igo.letsgo.jsf.jsp.city.entity.City;
 
 /**

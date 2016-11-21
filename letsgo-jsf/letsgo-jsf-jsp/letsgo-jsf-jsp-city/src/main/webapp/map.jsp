@@ -8,11 +8,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <head>
-        <link rel="stylesheet" href="https://openlayers.org/en/v3.19.1/css/ol.css" type="text/css">
+        <link href="js/libs/ol3/ol.css" rel="stylesheet" type="text/css"/>
         <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
         <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
-        <script src="https://openlayers.org/en/v3.19.1/build/ol.js"></script><title>Карт городов</title>
+        <script src="js/libs/ol3/ol.js" type="text/javascript"></script>
+        <title>Карт городов</title>
     </head>
     <body>
         <h2>Тут играют в Го.</h2>

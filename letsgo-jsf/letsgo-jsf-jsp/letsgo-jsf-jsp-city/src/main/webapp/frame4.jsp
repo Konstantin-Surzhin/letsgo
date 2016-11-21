@@ -11,6 +11,7 @@
         <f:view>
             <table>
                 <tr>
+                    <td><a  href="frame3.jsp" target="f3" >Управление</a></td>
                     <td><a  href="faces/summary.jsp" target="f3" >Города</a></td>
                     <td><a  href="faces/map.jsp" target="f3" >Карта</a></td>
                     <td><a  href="faces/graph.jsp" target="f3" >Графики</a></td>
