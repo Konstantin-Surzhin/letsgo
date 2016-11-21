@@ -27,6 +27,9 @@
         <module>letsgo-jsf-jsp-user-game</module>
         <module>letsgo-jsf-jsp-user</module>
         <module>letsgo-jsf-jsp-user-role</module>
+        <module>letsgo-jsf-jsp-club</module>
+        <module>letsgo-jsf-jsp-user-comment</module>
+        <module>letsgo-jsf-jsp-user-rating</module>
     </modules>
     <name>letsgo-jsf-jsp</name>
     <dependencies>

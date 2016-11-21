@@ -959,3 +959,6 @@ hs_err_pid*
 /letsgo-services/letsgo-rest/letsgo-rest-city/target/
 /letsgo-services/letsgo-rest/letsgo-rest-city/letsgo-rest-city-jpa/target/
 /letsgo-services/letsgo-rest/letsgo-rest-city/letsgo-rest-city-jpa/letsgo-rest-city-protobuf-jpa/target/
+/letsgo-jsf/letsgo-jsf-jsp/letsgo-jsf-jsp-club/target/
+/letsgo-jsf/letsgo-jsf-jsp/letsgo-jsf-jsp-user-comment/target/
+/letsgo-jsf/letsgo-jsf-jsp/letsgo-jsf-jsp-user-rating/target/
