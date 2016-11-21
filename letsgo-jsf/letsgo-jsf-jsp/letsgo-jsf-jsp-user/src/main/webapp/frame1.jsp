@@ -9,9 +9,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Статистика игроков</title>
     </head>
     <body>
-        <h1>frame 1</h1>
+        <h1>Статистика игроков</h1>
     </body>
 </html>

@@ -3,15 +3,60 @@
     Created on : 13.10.2016, 15:13:59
     Author     : surzhin.konstantin
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="h" uri="http://java.sun.com/jsf/html"%>
+<%@taglib prefix="f" uri="http://java.sun.com/jsf/core"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
+
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>farame 3</h1>
-    </body>
+    <f:view>     
+        <head>
+            <title>Управление игроками</title>
+        </head>
+        <body>
+            <h2>Здесь можно добавить игрока.</h2>
+            <h:form>
+                <h:selectOneRadio value="#{userManagedBean.techMetod}">
+                    <f:selectItem itemValue="ejb" itemLabel="EJB3"/>
+                    <f:selectItem itemValue="rest" itemLabel="REST"/>
+                    <f:selectItem itemValue="soap" itemLabel="SOAP"/>
+                    <f:selectItem itemValue="rpc" itemLabel="RPC"/>
+                    <f:selectItem itemValue="mq" itemLabel="MQ"/>
+                    <f:selectItem itemValue="jms" itemLabel="JMS"/>
+                </h:selectOneRadio><br/>
+                <h:selectOneRadio value="#{userManagedBean.msgMediaType}">
+                    <f:selectItem itemValue="text/plain" itemLabel="Text"/>
+                    <f:selectItem itemValue="application/json" itemLabel="JSON"/>
+                    <f:selectItem itemValue="application/xml" itemLabel="XML"/>
+                    <f:selectItem itemValue="application/x-protobuf" itemLabel="PROTOBUF"/>
+                    <f:selectItem itemValue="application/x-thrift" itemLabel="Thrift"/>
+                </h:selectOneRadio><br/>
+                <h:selectOneRadio value="#{userManagedBean.persistenceType}">
+                    <f:selectItem itemValue="jdbc" itemLabel="JDBC"/>
+                    <f:selectItem itemValue="jpa" itemLabel="JPA"/>
+                    <f:selectItem itemValue="openjpa" itemLabel="openJPA"/>
+                    <f:selectItem itemValue="activejpa" itemLabel="activeJPA"/>
+                    <f:selectItem itemValue="ebean" itemLabel="Ebean"/>
+                    <f:selectItem itemValue="datanucleus" itemLabel="DataNucleus"/>
+                    <f:selectItem itemValue="eclipselink" itemLabel="EclipseLink"/>
+                    <f:selectItem itemValue="hibernate" itemLabel="Hibernate"/>
+                    <f:selectItem itemValue="mybatis" itemLabel="myBatis"/>
+                    <f:selectItem itemValue="springjdbc" itemLabel="Spring JDBC"/>
+                    <f:selectItem itemValue="springdata" itemLabel="Spring Data"/>
+                </h:selectOneRadio><br/>
+                <h:selectOneRadio value="#{userManagedBean.dbName}">
+                    <f:selectItem itemValue="h2" itemLabel="H2"/>
+                    <f:selectItem itemValue="mysql" itemLabel="MySql"/>
+                    <f:selectItem itemValue="postgresql" itemLabel="PostgreeSQL"/>
+                    <f:selectItem itemValue="derby" itemLabel="Derby"/>
+                    <f:selectItem itemValue="db2" itemLabel="DB2"/>
+                </h:selectOneRadio><br/>
+                <h:outputLabel value="Прозвище игрока: "/>
+                <h:inputText id="userName" value="#{userManagedBean.userName}"/>
+                <h:commandButton value="добавить" action="#{userManagedBean.addUser()}"/>
+            </h:form><br/>
+        </body>
+    </f:view>  
 </html>

@@ -18,16 +18,15 @@
     <html>
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <title>City manager</title>
+            <title>Статистика игроков</title>
         </head>
         <frameset rows="10,80,10" >
-            <frame src="faces/frame1.jsp" name="Фрейм 1"/>
+            <frame src="faces/frame1.jsp" name="f1"/>
             <frameset cols="15%,*">
-                <frame src="faces/frame2.jsp" name="Фрейм 2"/>
-                <frame src="faces/frame3.jsp" name="Фрейм 3"/>
+                <frame src="faces/frame2.jsp" name="f2"/>
+                <frame src="faces/frame3.jsp" name="f3"/>
             </frameset>
-            <frame src="faces/frame1.jsp" name="Фрейм 1"/>
-            
+            <frame src="faces/frame4.jsp" name="f4"/>
         </frameset>
     </html>
 </f:view>
