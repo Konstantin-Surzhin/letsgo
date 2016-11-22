@@ -38,7 +38,7 @@ public class Room implements Serializable {
     private static final long serialVersionUID = 1L;
     private Short id;
     private String roomName;
-    private Collection<User> usersCollection;
+    private Collection<UserDetails> usersCollection;
 
     public Room() {
     }
@@ -76,13 +76,13 @@ public class Room implements Serializable {
         this.roomName = roomName;
     }
 
-    @OneToMany(mappedBy = "roomId")
+    @OneToMany(mappedBy = "room")
     @XmlTransient
-    public Collection<User> getUsersCollection() {
+    public Collection<UserDetails> getUsersCollection() {
         return usersCollection;
     }
 
-    public void setUsersCollection(Collection<User> usersCollection) {
+    public void setUsersCollection(Collection<UserDetails> usersCollection) {
         this.usersCollection = usersCollection;
     }
 

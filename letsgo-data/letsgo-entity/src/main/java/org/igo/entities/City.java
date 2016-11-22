@@ -19,6 +19,7 @@ package org.igo.entities;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,14 +29,18 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author surzhin.konstantin
  */
 @Entity
-@Table(name = "cities")
+@Table(name = "cities",uniqueConstraints = {
+            @UniqueConstraint(name = "uk_city_name",
+                    columnNames = {"city_name"})})
 @NamedQueries({
     @NamedQuery(name = "City.findAll", query = "SELECT c FROM City c"),
     @NamedQuery(name = "City.findById", query = "SELECT c FROM City c WHERE c.id = :id"),
@@ -47,7 +52,8 @@ public class City implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer id;
     private String cityName;
-    private Set<User> userCollection;
+    private Set<UserDetails> userCollection;
+    private Set<Club> clubsSet;
 
     public City() {
     }
@@ -72,12 +78,12 @@ public class City implements Serializable {
         this.id = id;
     }
 
-    @OneToMany(mappedBy = "cityId")
-    public Set<User> getUserCollection() {
+    @OneToMany(mappedBy = "city")
+    public Set<UserDetails> getUserCollection() {
         return userCollection;
     }
 
-    public void setUserCollection(final Set<User> userCollection) {
+    public void setUserCollection(final Set<UserDetails> userCollection) {
         this.userCollection = userCollection;
     }
 
@@ -107,7 +113,7 @@ public class City implements Serializable {
      * @return the cityName
      */
     @Size(min = 1,max = 255)
-    @Column(length = 255, name = "city_name", nullable = false, unique = true )
+    @Column(length = 255, name = "city_name", nullable = false  )
     public String getCityName() {
         return cityName;
     }
@@ -117,5 +123,15 @@ public class City implements Serializable {
      */
     public void setCityName(final String cityName) {
         this.cityName = cityName;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cityId")
+    @XmlTransient
+    public Set<Club> getClubsSet() {
+        return clubsSet;
+    }
+
+    public void setClubsSet(Set<Club> clubsSet) {
+        this.clubsSet = clubsSet;
     }
 }

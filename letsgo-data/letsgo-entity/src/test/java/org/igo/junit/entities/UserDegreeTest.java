@@ -17,7 +17,7 @@
 package org.igo.junit.entities;
 
 import org.igo.entities.Degree;
-import org.igo.entities.User;
+import org.igo.entities.UserDetails;
 import org.igo.entities.UserDegree;
 import org.igo.entities.UserDegreePK;
 import org.junit.After;
@@ -113,8 +113,8 @@ public class UserDegreeTest {
     public void testGetUsers() {
         System.out.println("getUsers");
         UserDegree instance = new UserDegree();
-        User expResult = null;
-        User result = instance.getUsers();
+        UserDetails expResult = null;
+        UserDetails result = instance.getUserDetails();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -126,9 +126,9 @@ public class UserDegreeTest {
     @Test
     public void testSetUsers() {
         System.out.println("setUsers");
-        User users = null;
+        UserDetails users = null;
         UserDegree instance = new UserDegree();
-        instance.setUsers(users);
+        instance.setUserDetails(users);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -141,7 +141,7 @@ public class UserDegreeTest {
         System.out.println("getDegreeId");
         UserDegree instance = new UserDegree();
         Degree expResult = null;
-        Degree result = instance.getDegreeId();
+        Degree result = instance.getDegree();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -155,7 +155,7 @@ public class UserDegreeTest {
         System.out.println("setDegreeId");
         Degree degreeId = null;
         UserDegree instance = new UserDegree();
-        instance.setDegreeId(degreeId);
+        instance.setDegree(degreeId);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

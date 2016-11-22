@@ -38,7 +38,7 @@ public class League implements Serializable {
     private Short id;
     private String leagueName;
     private Collection<Team> teamsCollection;
-    private Collection<User> usersCollection;
+    private Collection<UserDetails> usersCollection;
 
     public League() {
     }
@@ -85,13 +85,13 @@ public class League implements Serializable {
         this.teamsCollection = teamsCollection;
     }
 
-    @OneToMany(mappedBy = "leagueId")
+    @OneToMany(mappedBy = "league")
     @XmlTransient
-    public Collection<User> getUsersCollection() {
+    public Collection<UserDetails> getUsersCollection() {
         return usersCollection;
     }
 
-    public void setUsersCollection(Collection<User> usersCollection) {
+    public void setUsersCollection(Collection<UserDetails> usersCollection) {
         this.usersCollection = usersCollection;
     }
 

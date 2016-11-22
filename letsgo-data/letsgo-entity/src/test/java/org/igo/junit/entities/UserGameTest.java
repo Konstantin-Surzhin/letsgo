@@ -17,7 +17,7 @@
 package org.igo.junit.entities;
 
 import org.igo.entities.Game;
-import org.igo.entities.User;
+import org.igo.entities.UserDetails;
 import org.igo.entities.UserGame;
 import org.igo.entities.UserGamePK;
 import org.junit.After;
@@ -140,8 +140,8 @@ public class UserGameTest {
     public void testGetUsers() {
         System.out.println("getUsers");
         UserGame instance = new UserGame();
-        User expResult = null;
-        User result = instance.getUsers();
+        UserDetails expResult = null;
+        UserDetails result = instance.getUserDetails();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -153,9 +153,9 @@ public class UserGameTest {
     @Test
     public void testSetUsers() {
         System.out.println("setUsers");
-        User users = null;
+        UserDetails users = null;
         UserGame instance = new UserGame();
-        instance.setUsers(users);
+        instance.setUserDetails(users);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

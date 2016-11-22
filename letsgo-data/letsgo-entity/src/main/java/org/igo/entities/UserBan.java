@@ -10,6 +10,7 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -43,7 +44,7 @@ public class UserBan implements Serializable {
     private String comment;
     private short duration;
     private Date startDate;
-    private User userId;
+    private UserDetails userDetails;
 
     public UserBan() {
     }
@@ -101,15 +102,14 @@ public class UserBan implements Serializable {
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
-
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    public User getUserId() {
-        return userId;
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_userBan_userDetails"), name = "user_details_id", referencedColumnName = "id")
+    public UserDetails getUserDetails() {
+        return userDetails;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUserDetails(UserDetails userDetails) {
+        this.userDetails = userDetails;
     }
 
     @Override

@@ -76,7 +76,7 @@ public class Degree implements Serializable {
         this.degreeValue = degreeValue;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "degreeId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "degree")
     @XmlTransient
     public Collection<UserDegree> getUsersDegreesCollection() {
         return usersDegreesCollection;

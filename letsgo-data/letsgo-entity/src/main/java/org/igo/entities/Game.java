@@ -157,7 +157,7 @@ public class Game implements Serializable {
         this.usersGamesCollection = usersGamesCollection;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "gameId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "game")
     @XmlTransient
     public Collection<GameComment> getGamesCommentsCollection() {
         return gamesCommentsCollection;

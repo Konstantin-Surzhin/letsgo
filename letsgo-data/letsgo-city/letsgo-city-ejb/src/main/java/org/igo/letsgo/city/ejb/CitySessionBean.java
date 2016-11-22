@@ -13,7 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import org.igo.entities.City;
-import org.igo.entities.User;
+import org.igo.entities.UserDetails;
 import org.igo.letsgo.remote.ICityRemote;
 
 /**
@@ -82,9 +82,9 @@ public class CitySessionBean implements ICityRemote {
         try {
             Integer id = q.getSingleResult().getId();
             City city = getEntityManager().find(City.class, id);
-            Set<User> users = city.getUserCollection();
+            Set<UserDetails> users = city.getUserCollection();
             List<String> listUsersName = users.stream()
-                    .map(c -> c.getName())
+                    .map(c -> c.getUserName())
                     .sorted()
                     .collect(Collectors.toList());
             return listUsersName;
@@ -97,9 +97,9 @@ public class CitySessionBean implements ICityRemote {
     @Override
     public List<String> getAllCityUser(final Integer id) {
         City city = getEntityManager().find(City.class, id);
-        Set<User> users = city.getUserCollection();
+        Set<UserDetails> users = city.getUserCollection();
         List<String> listUsersName = users.stream()
-                .map(c -> c.getName())
+                .map(c -> c.getUserName())
                 .sorted()
                 .collect(Collectors.toList());
         return listUsersName;

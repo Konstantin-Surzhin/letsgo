@@ -17,7 +17,7 @@
 package org.igo.testng.entities;
 
 import org.igo.entities.Degree;
-import org.igo.entities.User;
+import org.igo.entities.UserDetails;
 import org.igo.entities.UserDegree;
 import org.igo.entities.UserDegreePK;
 import static org.testng.Assert.*;
@@ -108,8 +108,8 @@ public class UserDegreeNGTest {
     public void testGetUsers() {
         System.out.println("getUsers");
         UserDegree instance = new UserDegree();
-        User expResult = null;
-        User result = instance.getUsers();
+        UserDetails expResult = null;
+        UserDetails result = instance.getUserDetails();
         assertEquals(result, expResult);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
@@ -121,9 +121,9 @@ public class UserDegreeNGTest {
     @org.testng.annotations.Test
     public void testSetUsers() {
         System.out.println("setUsers");
-        User users = null;
+        UserDetails users = null;
         UserDegree instance = new UserDegree();
-        instance.setUsers(users);
+        instance.setUserDetails(users);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
     }
@@ -136,7 +136,7 @@ public class UserDegreeNGTest {
         System.out.println("getDegreeId");
         UserDegree instance = new UserDegree();
         Degree expResult = null;
-        Degree result = instance.getDegreeId();
+        Degree result = instance.getDegree();
         assertEquals(result, expResult);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
@@ -150,7 +150,7 @@ public class UserDegreeNGTest {
         System.out.println("setDegreeId");
         Degree degreeId = null;
         UserDegree instance = new UserDegree();
-        instance.setDegreeId(degreeId);
+        instance.setDegree(degreeId);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
     }

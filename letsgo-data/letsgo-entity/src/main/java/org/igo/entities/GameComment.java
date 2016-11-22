@@ -11,6 +11,7 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,24 +33,24 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author surzhin.konstantin
  */
 @Entity
-@Table(name = "GAME_COMMENTS",  uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"game_id", "user_id", "comment"})})
+@Table(name = "GAME_COMMENTS", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"game_id", "user_details_id", "comment"})})
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "GameComment.findAll", query = "SELECT g FROM GameComment g"),
-    @NamedQuery(name = "GameComment.findById", query = "SELECT g FROM GameComment g WHERE g.id = :id"),
-    @NamedQuery(name = "GameComment.findByComment", query = "SELECT g FROM GameComment g WHERE g.comment = :comment"),
-    @NamedQuery(name = "GameComment.findByPostDateTime", query = "SELECT g FROM GameComment g WHERE g.postDateTime = :postDateTime")})
+    @NamedQuery(name = "GameComment.findAll", query = "SELECT g FROM GameComment g")
+    ,@NamedQuery(name = "GameComment.findById", query = "SELECT g FROM GameComment g WHERE g.id = :id")
+    ,@NamedQuery(name = "GameComment.findByComment", query = "SELECT g FROM GameComment g WHERE g.comment = :comment")
+    ,@NamedQuery(name = "GameComment.findByPostDateTime", query = "SELECT g FROM GameComment g WHERE g.postDateTime = :postDateTime")})
 public class GameComment implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Long id;
     private String comment;
     private Date postDateTime;
-    private Game gameId;
+    private Game game;
     private Collection<GameComment> gameCommentCollection;
     private GameComment inReplayToId;
-    private User userId;
+    private UserDetails userDetails;
 
     public GameComment() {
     }
@@ -63,6 +64,7 @@ public class GameComment implements Serializable {
         this.comment = comment;
         this.postDateTime = postDateTime;
     }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -97,14 +99,14 @@ public class GameComment implements Serializable {
         this.postDateTime = postDateTime;
     }
 
-    @JoinColumn(name = "game_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_gameComment_game"), name = "game_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
-    public Game getGameId() {
-        return gameId;
+    public Game getGame() {
+        return game;
     }
 
-    public void setGameId(Game gameId) {
-        this.gameId = gameId;
+    public void setGame(Game game) {
+        this.game = game;
     }
 
     @OneToMany(mappedBy = "inReplayToId")
@@ -117,7 +119,7 @@ public class GameComment implements Serializable {
         this.gameCommentCollection = gameCommentCollection;
     }
 
-    @JoinColumn(name = "in_replay_to_id", referencedColumnName = "id")
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_gameComment_in_replay_to_id"), name = "in_replay_to_id", referencedColumnName = "id")
     @ManyToOne
     public GameComment getInReplayToId() {
         return inReplayToId;
@@ -127,14 +129,14 @@ public class GameComment implements Serializable {
         this.inReplayToId = inReplayToId;
     }
 
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
-    public User getUserId() {
-        return userId;
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_gameComment_userDetails"), name = "user_details_id", referencedColumnName = "id", nullable = false)
+    public UserDetails getUserDetails() {
+        return userDetails;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUserDetails(UserDetails userDetails) {
+        this.userDetails = userDetails;
     }
 
     @Override
@@ -158,5 +160,5 @@ public class GameComment implements Serializable {
     public String toString() {
         return "org.igo.entities.GamesComments[ id=" + id + " ]";
     }
-    
+
 }

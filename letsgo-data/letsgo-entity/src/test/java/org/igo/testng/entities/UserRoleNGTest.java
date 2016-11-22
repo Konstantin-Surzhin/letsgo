@@ -17,7 +17,7 @@
 package org.igo.testng.entities;
 
 import java.util.Collection;
-import org.igo.entities.User;
+import org.igo.entities.UserDetails;
 import org.igo.entities.UserRole;
 import static org.testng.Assert.*;
 import org.testng.annotations.AfterClass;
@@ -152,9 +152,9 @@ public class UserRoleNGTest {
     @Test
     public void testSetUserCollection() {
         System.out.println("setUserCollection");
-        Collection<User> userCollection = null;
-        UserRole instance = new UserRole();
-        instance.setUserCollection(userCollection);
+//        Collection<UserDetails> userCollection = null;
+//        UserRole instance = new UserRole();
+//        instance.setUserCollection(userCollection);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
     }

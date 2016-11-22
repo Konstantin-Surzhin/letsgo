@@ -17,7 +17,7 @@
 package org.igo.testng.entities;
 
 import org.igo.entities.Game;
-import org.igo.entities.User;
+import org.igo.entities.UserDetails;
 import org.igo.entities.UserGame;
 import org.igo.entities.UserGamePK;
 import static org.testng.Assert.*;
@@ -140,8 +140,8 @@ public class UserGameNGTest {
     public void testGetUsers() {
         System.out.println("getUsers");
         UserGame instance = new UserGame();
-        User expResult = null;
-        User result = instance.getUsers();
+        UserDetails expResult = null;
+        UserDetails result = instance.getUserDetails();
         assertEquals(result, expResult);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
@@ -153,9 +153,9 @@ public class UserGameNGTest {
     @Test
     public void testSetUsers() {
         System.out.println("setUsers");
-        User users = null;
+        UserDetails users = null;
         UserGame instance = new UserGame();
-        instance.setUsers(users);
+        instance.setUserDetails(users);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
     }

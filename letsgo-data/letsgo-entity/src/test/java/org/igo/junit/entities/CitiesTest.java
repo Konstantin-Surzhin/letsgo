@@ -24,7 +24,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import org.igo.entities.City;
-import org.igo.entities.User;
+import org.igo.entities.UserDetails;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -141,8 +141,8 @@ public class CitiesTest {
     public void testGetUsersCollection() {
         System.out.println("getUsers");
         City city = new City();
-        Set<User> expResult = null;
-        Set<User> result = city.getUserCollection();
+        Set<UserDetails> expResult = null;
+        Set<UserDetails> result = city.getUserCollection();
         assertEquals(expResult, result);
 
     }
@@ -153,7 +153,7 @@ public class CitiesTest {
     @Test
     public void testSetUsersCollection() {
         System.out.println("setUsers");
-        Set<User> users = null;
+        Set<UserDetails> users = null;
         City city = new City();
         city.setUserCollection(users);
         assertNull(city.getUserCollection());

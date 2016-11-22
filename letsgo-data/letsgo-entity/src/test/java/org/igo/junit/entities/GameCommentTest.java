@@ -20,7 +20,7 @@ import java.util.Collection;
 import java.util.Date;
 import org.igo.entities.Game;
 import org.igo.entities.GameComment;
-import org.igo.entities.User;
+import org.igo.entities.UserDetails;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -142,7 +142,7 @@ public class GameCommentTest {
         System.out.println("getGameId");
         GameComment instance = new GameComment();
         Game expResult = null;
-        Game result = instance.getGameId();
+        Game result = instance.getGame();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -156,7 +156,7 @@ public class GameCommentTest {
         System.out.println("setGameId");
         Game gameId = null;
         GameComment instance = new GameComment();
-        instance.setGameId(gameId);
+        instance.setGame(gameId);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -222,8 +222,8 @@ public class GameCommentTest {
     public void testGetUserId() {
         System.out.println("getUserId");
         GameComment instance = new GameComment();
-        User expResult = null;
-        User result = instance.getUserId();
+        UserDetails expResult = null;
+        UserDetails result = instance.getUserDetails();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -235,9 +235,9 @@ public class GameCommentTest {
     @Test
     public void testSetUserId() {
         System.out.println("setUserId");
-        User userId = null;
-        GameComment instance = new GameComment();
-        instance.setUserId(userId);
+//        UserDetails userId = null;
+//        GameComment instance = new GameComment();
+//        instance.sesetUserserId);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

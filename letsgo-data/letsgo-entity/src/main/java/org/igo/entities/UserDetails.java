@@ -12,6 +12,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,9 +21,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -33,29 +36,23 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author surzhin.konstantin
  */
 @Entity
-@Table(name = "USERS")
+@Table(name = "user_details", uniqueConstraints = {
+    @UniqueConstraint(name = "uk_user_email", columnNames = {"email"})
+    ,@UniqueConstraint(name = "uk_user_name", columnNames = {"user_name"})})
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
-    @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id"),
-    @NamedQuery(name = "User.findByDraw", query = "SELECT u FROM User u WHERE u.draw = :draw"),
-    @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
-    @NamedQuery(name = "User.findByIsLogin", query = "SELECT u FROM User u WHERE u.isLogin = :isLogin"),
-    @NamedQuery(name = "User.findByLastTime", query = "SELECT u FROM User u WHERE u.lastTime = :lastTime"),
-    @NamedQuery(name = "User.findByLose", query = "SELECT u FROM User u WHERE u.lose = :lose"),
-    @NamedQuery(name = "User.findByName", query = "SELECT u FROM User u WHERE u.name = :name"),
-    @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password"),
-    @NamedQuery(name = "User.findByRating", query = "SELECT u FROM User u WHERE u.rating = :rating"),
-    @NamedQuery(name = "User.findBySalt", query = "SELECT u FROM User u WHERE u.salt = :salt"),
-    @NamedQuery(name = "User.findByStaus", query = "SELECT u FROM User u WHERE u.staus = :staus"),
-    @NamedQuery(name = "User.findByWin", query = "SELECT u FROM User u WHERE u.win = :win")})
-public class User implements Serializable {
-
-    private Collection<UserGame> userGameCollection;
-    private Collection<UserDegree> userDegreeCollection;
-    private Collection<MoveComment> moveCommentCollection;
-    private Collection<GameComment> gameCommentCollection;
-    private Collection<UserBan> userBanCollection;
+    @NamedQuery(name = "UserDetails.findAll", query = "SELECT u FROM UserDetails u")
+    ,@NamedQuery(name = "UserDetails.findByDraw", query = "SELECT u FROM UserDetails u WHERE u.draw = :draw")
+    ,@NamedQuery(name = "UserDetails.findByEmail", query = "SELECT u FROM UserDetails u WHERE u.email = :email")
+    ,@NamedQuery(name = "UserDetails.findByIsLogin", query = "SELECT u FROM UserDetails u WHERE u.isLogin = :isLogin")
+    ,@NamedQuery(name = "UserDetails.findByLastTime", query = "SELECT u FROM UserDetails u WHERE u.lastTime = :lastTime")
+    ,@NamedQuery(name = "UserDetails.findByLose", query = "SELECT u FROM UserDetails u WHERE u.lose = :lose")
+    ,@NamedQuery(name = "UserDetails.findByUserName", query = "SELECT u FROM UserDetails u WHERE u.userName = :userName")
+    ,@NamedQuery(name = "UserDetails.findByRating", query = "SELECT u FROM UserDetails u WHERE u.rating = :rating")
+    ,@NamedQuery(name = "UserDetails.findByStaus", query = "SELECT u FROM UserDetails u WHERE u.staus = :staus")
+    ,@NamedQuery(name = "UserDetails.findByNescape", query = "SELECT u FROM UserDetails u WHERE u.nescape = :nescape")
+    ,@NamedQuery(name = "UserDetails.findByWin", query = "SELECT u FROM UserDetails u WHERE u.win = :win")})
+public class UserDetails implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -65,37 +62,29 @@ public class User implements Serializable {
     private Boolean isLogin;
     private Date lastTime;
     private Integer lose;
-    private String name;
-    private String password;
+    private String userName;
     private Integer rating;
-    private String salt;
     private Integer staus;
     private Integer win;
+    private Integer nescape;
+    private League league;
+    private Team team;
+    private Room room;
+    private City city;
+    private Club club;
+    private GoUser user;
+    
+    private Collection<UserGame> userGameCollection;
+    private Collection<UserDegree> userDegreeCollection;
+    private Collection<MoveComment> moveCommentCollection;
+    private Collection<GameComment> gameCommentCollection;
+    private Collection<UserBan> userBanCollection;
 
-    private League leagueId;
-    private UserRole roleId;
-    private Team teamId;
-    private Room roomId;
-    private City cityId;
-
-    public User() {
+    public UserDetails() {
     }
 
-    public User(Integer id) {
-        this.id = id;
-    }
-
-    public User(Integer id, String email, Date lastTime, String name) {
-        this.id = id;
-        this.email = email;
-        this.lastTime = lastTime;
-        this.name = name;
-    }
-
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getId() {
         return id;
     }
@@ -117,7 +106,7 @@ public class User implements Serializable {
     @NotNull
     @Size(min = 1, max = 255)
     @Basic(optional = false)
-    @Column(name = "email", unique = true, nullable = false)
+    @Column(name = "email", nullable = false)
     public String getEmail() {
         return email;
     }
@@ -158,23 +147,13 @@ public class User implements Serializable {
     @NotNull
     @Size(min = 1, max = 64)
     @Basic(optional = false)
-    @Column(name = "name", nullable = false, unique = true)
-    public String getName() {
-        return name;
+    @Column(name = "user_name", nullable = false)
+    public String getUserName() {
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Size(min = 8, max = 128)
-    @Column(name = "password", nullable = false)
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     @Column(name = "rating")
@@ -184,15 +163,6 @@ public class User implements Serializable {
 
     public void setRating(Integer rating) {
         this.rating = rating;
-    }
-
-    @Column(name = "salt", length = 128)
-    public String getSalt() {
-        return salt;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt;
     }
 
     @Column(name = "staus")
@@ -213,8 +183,8 @@ public class User implements Serializable {
         this.win = win;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     @XmlTransient
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userDetails")
     public Collection<UserBan> getUserBanCollection() {
         return userBanCollection;
     }
@@ -223,54 +193,44 @@ public class User implements Serializable {
         this.userBanCollection = userBanCollection;
     }
 
-    @JoinColumn(name = "league_id", referencedColumnName = "id")
     @ManyToOne
-    public League getLeagueId() {
-        return leagueId;
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_user_league"), name = "league_id", referencedColumnName = "id")
+    public League getLeague() {
+        return league;
     }
 
-    public void setLeagueId(League leagueId) {
-        this.leagueId = leagueId;
+    public void setLeague(League league) {
+        this.league = league;
     }
 
-    @JoinColumn(name = "role_id", referencedColumnName = "id")
     @ManyToOne
-    public UserRole getRoleId() {
-        return roleId;
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_user_team"), name = "team_id", referencedColumnName = "id")
+    public Team getTeam() {
+        return team;
     }
 
-    public void setRoleId(UserRole roleId) {
-        this.roleId = roleId;
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
-    @JoinColumn(name = "team_id", referencedColumnName = "id")
     @ManyToOne
-    public Team getTeamId() {
-        return teamId;
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_user_room"), name = "room_id", referencedColumnName = "id")
+    public Room getRoom() {
+        return room;
     }
 
-    public void setTeamId(Team teamId) {
-        this.teamId = teamId;
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
-    @JoinColumn(name = "room_id", referencedColumnName = "id")
     @ManyToOne
-    public Room getRoomId() {
-        return roomId;
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_user_city"), name = "city_id", referencedColumnName = "id")
+    public City getCity() {
+        return city;
     }
 
-    public void setRoomId(Room roomId) {
-        this.roomId = roomId;
-    }
-
-    @JoinColumn(name = "city_id", referencedColumnName = "id")
-    @ManyToOne
-    public City getCityId() {
-        return cityId;
-    }
-
-    public void setCityId(City cityId) {
-        this.cityId = cityId;
+    public void setCity(City city) {
+        this.city = city;
     }
 
     @Override
@@ -283,10 +243,10 @@ public class User implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof User)) {
+        if (!(object instanceof UserDetails)) {
             return false;
         }
-        User other = (User) object;
+        UserDetails other = (UserDetails) object;
         return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
@@ -295,8 +255,8 @@ public class User implements Serializable {
         return "org.igo.ban.ejb.Users[ id=" + id + " ]";
     }
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "users")
     @XmlTransient
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userDetails")
     public Collection<UserGame> getUserGameCollection() {
         return userGameCollection;
     }
@@ -305,8 +265,8 @@ public class User implements Serializable {
         this.userGameCollection = userGameCollection;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "users")
     @XmlTransient
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userDetails")
     public Collection<UserDegree> getUserDegreeCollection() {
         return userDegreeCollection;
     }
@@ -315,8 +275,8 @@ public class User implements Serializable {
         this.userDegreeCollection = userDegreeCollection;
     }
 
-    @OneToMany(mappedBy = "userId")
     @XmlTransient
+    @OneToMany(mappedBy = "userDetails")
     public Collection<MoveComment> getMoveCommentCollection() {
         return moveCommentCollection;
     }
@@ -325,8 +285,8 @@ public class User implements Serializable {
         this.moveCommentCollection = moveCommentCollection;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     @XmlTransient
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userDetails")
     public Collection<GameComment> getGameCommentCollection() {
         return gameCommentCollection;
     }
@@ -335,4 +295,44 @@ public class User implements Serializable {
         this.gameCommentCollection = gameCommentCollection;
     }
 
+    /**
+     * @return the escaped
+     */
+    @Column(name = "nescape")
+    public Integer getNescape() {
+        return nescape;
+    }
+
+    /**
+     * @param nescape
+     */
+    public void setNescape(Integer nescape) {
+        this.nescape = nescape;
+    }
+
+    /**
+     * @return the club
+     */
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_user_club"), name = "club_id", referencedColumnName = "id")
+    public Club getClub() {
+        return club;
+    }
+
+    /**
+     * @param club the club to set
+     */
+    public void setClub(Club club) {
+        this.club = club;
+    }
+
+    @OneToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_user_details"), name = "user_id", referencedColumnName = "id")
+    public GoUser getUser() {
+        return user;
+    }
+
+    public void setUser(GoUser user) {
+        this.user = user;
+    }
 }

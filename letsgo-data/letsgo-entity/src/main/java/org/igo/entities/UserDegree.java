@@ -10,6 +10,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -25,17 +26,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "USER_DEGREES")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "UserDegree.findAll", query = "SELECT u FROM UserDegree u"),
-    @NamedQuery(name = "UserDegree.findByAppointmentDate", query = "SELECT u FROM UserDegree u WHERE u.userDegreePK.appointmentDate = :appointmentDate"),
-    @NamedQuery(name = "UserDegree.findByUserId", query = "SELECT u FROM UserDegree u WHERE u.userDegreePK.userId = :userId"),
-    @NamedQuery(name = "UserDegree.findByDegreeType", query = "SELECT u FROM UserDegree u WHERE u.degreeType = :degreeType")})
+    @NamedQuery(name = "UserDegree.findAll", query = "SELECT u FROM UserDegree u")
+    ,@NamedQuery(name = "UserDegree.findByAppointmentDate", query = "SELECT u FROM UserDegree u WHERE u.userDegreePK.appointmentDate = :appointmentDate")
+    ,@NamedQuery(name = "UserDegree.findByUserId", query = "SELECT u FROM UserDegree u WHERE u.userDegreePK.userId = :userId")
+    ,@NamedQuery(name = "UserDegree.findByDegreeType", query = "SELECT u FROM UserDegree u WHERE u.degreeType = :degreeType")})
 public class UserDegree implements Serializable {
 
     private static final long serialVersionUID = 1L;
     protected UserDegreePK userDegreePK;
     private Integer degreeType;
-    private User users;
-    private Degree degreeId;
+    private UserDetails userDetails;
+    private Degree degree;
 
     public UserDegree() {
     }
@@ -47,6 +48,7 @@ public class UserDegree implements Serializable {
     public UserDegree(Date appointmentDate, int userId) {
         this.userDegreePK = new UserDegreePK(appointmentDate, userId);
     }
+
     @EmbeddedId
     public UserDegreePK getUserDegreePK() {
         return userDegreePK;
@@ -65,24 +67,25 @@ public class UserDegree implements Serializable {
         this.degreeType = degreeType;
     }
 
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    public User getUsers() {
-        return users;
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_userDegree_userDetails"), name = "user_details_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
+    public UserDetails getUserDetails() {
+        return userDetails;
     }
 
-    public void setUsers(User users) {
-        this.users = users;
+    public void setUserDetails(UserDetails userDetails) {
+        this.userDetails = userDetails;
     }
 
-    @JoinColumn(name = "degree_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
-    public Degree getDegreeId() {
-        return degreeId;
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_user_degree_degree"), name = "degree_id", referencedColumnName = "id", nullable = false)
+
+    public Degree getDegree() {
+        return degree;
     }
 
-    public void setDegreeId(Degree degreeId) {
-        this.degreeId = degreeId;
+    public void setDegree(Degree degree) {
+        this.degree = degree;
     }
 
     @Override
@@ -106,5 +109,5 @@ public class UserDegree implements Serializable {
     public String toString() {
         return "org.igo.entities.UsersDegrees[ usersDegreesPK=" + userDegreePK + " ]";
     }
-    
+
 }

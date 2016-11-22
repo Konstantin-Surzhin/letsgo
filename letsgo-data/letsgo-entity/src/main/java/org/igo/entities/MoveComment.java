@@ -11,6 +11,7 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
@@ -31,14 +32,14 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author surzhin.konstantin
  */
 @Entity
-@Table(name = "MOVE_COMMENTS",  uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"move_game_id", "user_id", "move_ndx", "move_comment"})})
+@Table(name = "MOVE_COMMENTS", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"move_game_id", "user_details_id", "move_ndx", "move_comment"})})
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "MoveComment.findAll", query = "SELECT m FROM MoveComment m"),
-    @NamedQuery(name = "MoveComment.findById", query = "SELECT m FROM MoveComment m WHERE m.id = :id"),
-    @NamedQuery(name = "MoveComment.findByMoveComment", query = "SELECT m FROM MoveComment m WHERE m.moveComment = :moveComment"),
-    @NamedQuery(name = "MoveComment.findByPostDateTime", query = "SELECT m FROM MoveComment m WHERE m.postDateTime = :postDateTime")})
+    @NamedQuery(name = "MoveComment.findAll", query = "SELECT m FROM MoveComment m")
+    ,@NamedQuery(name = "MoveComment.findById", query = "SELECT m FROM MoveComment m WHERE m.id = :id")
+    ,@NamedQuery(name = "MoveComment.findByMoveComment", query = "SELECT m FROM MoveComment m WHERE m.moveComment = :moveComment")
+    ,@NamedQuery(name = "MoveComment.findByPostDateTime", query = "SELECT m FROM MoveComment m WHERE m.postDateTime = :postDateTime")})
 public class MoveComment implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,7 +50,7 @@ public class MoveComment implements Serializable {
     private GameMove gamesMoves;
     private Collection<MoveComment> moveCommentCollection;
     private MoveComment inReplayToId;
-    private User userId;
+    private UserDetails userDetails;
 
     public MoveComment() {
     }
@@ -96,7 +97,8 @@ public class MoveComment implements Serializable {
     }
 
     @JoinColumns({
-        @JoinColumn(name = "move_game_id", referencedColumnName = "game_id"),
+        @JoinColumn(name = "move_game_id", referencedColumnName = "game_id")
+        ,
         @JoinColumn(name = "move_ndx", referencedColumnName = "ndx")})
     @ManyToOne
     public GameMove getGamesMoves() {
@@ -127,14 +129,14 @@ public class MoveComment implements Serializable {
         this.inReplayToId = inReplayToId;
     }
 
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne
-    public User getUserId() {
-        return userId;
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_moveComment_userDetails"), name = "user_details_id", referencedColumnName = "id")
+    public UserDetails getUserDetails() {
+        return userDetails;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUserDetails(UserDetails userDetails) {
+        this.userDetails = userDetails;
     }
 
     @Override

@@ -20,7 +20,7 @@ import java.util.Collection;
 import java.util.Date;
 import org.igo.entities.GameMove;
 import org.igo.entities.MoveComment;
-import org.igo.entities.User;
+import org.igo.entities.UserDetails;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -222,8 +222,8 @@ public class MoveCommentTest {
     public void testGetUserId() {
         System.out.println("getUserId");
         MoveComment instance = new MoveComment();
-        User expResult = null;
-        User result = instance.getUserId();
+        UserDetails expResult = null;
+        UserDetails result = instance.getUserDetails();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -235,9 +235,9 @@ public class MoveCommentTest {
     @Test
     public void testSetUserId() {
         System.out.println("setUserId");
-        User userId = null;
+        UserDetails userId = null;
         MoveComment instance = new MoveComment();
-        instance.setUserId(userId);
+        instance.setUserDetails(userId);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

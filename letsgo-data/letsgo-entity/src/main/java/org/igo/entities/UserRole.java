@@ -29,10 +29,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "USER_ROLES")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "UserRole.findAll", query = "SELECT u FROM UserRole u"),
-    @NamedQuery(name = "UserRole.findById", query = "SELECT u FROM UserRole u WHERE u.id = :id"),
-    @NamedQuery(name = "UserRole.findByUsername", query = "SELECT u FROM UserRole u WHERE u.username = :username"),
-    @NamedQuery(name = "UserRole.findByUserrole", query = "SELECT u FROM UserRole u WHERE u.userrole = :userrole")})
+    @NamedQuery(name = "UserRole.findAll", query = "SELECT u FROM UserRole u")
+    ,@NamedQuery(name = "UserRole.findById", query = "SELECT u FROM UserRole u WHERE u.id = :id")
+    ,@NamedQuery(name = "UserRole.findByUsername", query = "SELECT u FROM UserRole u WHERE u.username = :username")
+    ,@NamedQuery(name = "UserRole.findByUserrole", query = "SELECT u FROM UserRole u WHERE u.userrole = :userrole")})
 public class UserRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,7 +40,7 @@ public class UserRole implements Serializable {
     private Short id;
     private String username;
     private String userrole;
-    private Collection<User> userCollection;
+    private Collection<GoUser> userCollection;
 
     public UserRole() {
     }
@@ -80,7 +80,7 @@ public class UserRole implements Serializable {
 
     @Size(min = 1, max = 255)
     @Basic(optional = false)
-    @Column(name = "userrole",nullable = false)
+    @Column(name = "userrole", nullable = false)
     public String getUserrole() {
         return userrole;
     }
@@ -89,13 +89,13 @@ public class UserRole implements Serializable {
         this.userrole = userrole;
     }
 
-    @OneToMany(mappedBy = "roleId")
     @XmlTransient
-    public Collection<User> getUserCollection() {
+    @OneToMany(mappedBy = "role")
+    public Collection<GoUser> getUserCollection() {
         return userCollection;
     }
 
-    public void setUserCollection(Collection<User> userCollection) {
+    public void setUserCollection(Collection<GoUser> userCollection) {
         this.userCollection = userCollection;
     }
 

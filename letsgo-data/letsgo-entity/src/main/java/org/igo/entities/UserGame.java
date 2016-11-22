@@ -10,6 +10,7 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -25,17 +26,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "USER_GAMES")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "UserGame.findAll", query = "SELECT u FROM UserGame u"),
-    @NamedQuery(name = "UserGame.findByGameId", query = "SELECT u FROM UserGame u WHERE u.userGamePK.gameId = :gameId"),
-    @NamedQuery(name = "UserGame.findByUserId", query = "SELECT u FROM UserGame u WHERE u.userGamePK.userId = :userId"),
-    @NamedQuery(name = "UserGame.findByColor", query = "SELECT u FROM UserGame u WHERE u.color = :color")})
+    @NamedQuery(name = "UserGame.findAll", query = "SELECT u FROM UserGame u")
+    ,@NamedQuery(name = "UserGame.findByGameId", query = "SELECT u FROM UserGame u WHERE u.userGamePK.gameId = :gameId")
+    ,@NamedQuery(name = "UserGame.findByUserId", query = "SELECT u FROM UserGame u WHERE u.userGamePK.userId = :userId")
+    ,@NamedQuery(name = "UserGame.findByColor", query = "SELECT u FROM UserGame u WHERE u.color = :color")})
 public class UserGame implements Serializable {
 
     private static final long serialVersionUID = 1L;
     protected UserGamePK userGamePK;
     private int color;
     private Game games;
-    private User users;
+    private UserDetails userDetails;
 
     public UserGame() {
     }
@@ -82,14 +83,14 @@ public class UserGame implements Serializable {
         this.games = games;
     }
 
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    public User getUsers() {
-        return users;
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_userGame_userDetails"),name = "user_details_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
+    public UserDetails getUserDetails() {
+        return userDetails;
     }
 
-    public void setUsers(User users) {
-        this.users = users;
+    public void setUserDetails(UserDetails userDetails) {
+        this.userDetails = userDetails;
     }
 
     @Override

@@ -18,7 +18,7 @@ package org.igo.testng.entities;
 
 import java.util.Set;
 import org.igo.entities.City;
-import org.igo.entities.User;
+import org.igo.entities.UserDetails;
 import static org.testng.Assert.*;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -98,7 +98,7 @@ public class CityNGTest {
     @Test
     public void testSetUserCollection() {
         System.out.println("setUserCollection");
-        Set<User> userCollection = null;
+        Set<UserDetails> userCollection = null;
         City instance = new City();
         instance.setUserCollection(userCollection);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
