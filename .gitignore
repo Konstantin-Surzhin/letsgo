@@ -1006,3 +1006,12 @@ hs_err_pid*
 /letsgo-services/letsgo-rest/letsgo-rest-resteasy/letsgo-rest-resteasy-city/letsgo-rest-resteasy-city-jpa/letsgo-rest-resteasy-city-jpa-h2/target/
 /letsgo-services/letsgo-rest/letsgo-rest-resteasy/letsgo-rest-resteasy-city/letsgo-rest-resteasy-city-jpa/letsgo-rest-resteasy-city-jpa-derby/target/
 /letsgo-services/letsgo-rest/letsgo-rest-resteasy/letsgo-rest-resteasy-city/letsgo-rest-resteasy-city-jpa/letsgo-rest-resteasy-city-jpa-mysql/target/
+/letsgo-data/letsgo-place/target/
+/letsgo-data/letsgo-game-comment/target/
+/letsgo-data/letsgo-game-date/target/
+/letsgo-data/letsgo-game-move/target/
+/letsgo-data/letsgo-move-comment/target/
+/letsgo-data/letsgo-team/target/
+/letsgo-data/letsgo-user-role/target/
+/letsgo-data/letsgo-user/target/
+/letsgo-data/letsgo-user-game/target/
