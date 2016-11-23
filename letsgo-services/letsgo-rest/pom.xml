@@ -26,8 +26,9 @@
         <module>letsg-rest-user-degree</module>
         <module>letsgo-rest-user-game</module>
         <module>letsgo-rest-user-role</module>
-        <module>letsgo-rest-city</module>
-        <module>letsgo-rest-user-registation</module>
+        <module>letsgo-rest-resteasy</module>
+        <module>letsgo-rest-thrift</module>
+        <module>letsgo-rest-protobuf</module>
     </modules>
     <name>letsgo-rest</name>
 </project>

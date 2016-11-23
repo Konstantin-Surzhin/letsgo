@@ -3,22 +3,14 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.igo</groupId>
-        <artifactId>letsgo</artifactId>
+        <artifactId>letsgo-rest-resteasy</artifactId>
         <version>1.0</version>
     </parent>
-    <artifactId>letsgo-services</artifactId>
+    <artifactId>letsgo-rest-resteasy-city</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>letsgo-rest</module>
-        <module>letsgo-soap</module>
-        <module>letsgo-rpc</module>
+        <module>letsgo-rest-resteasy-city-jpa</module>
+        <module>letsgo-rest-resteasy-city-jdbc</module>
     </modules>
-    <dependencies>
-        <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
-            <version>7.0</version>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
+    <name>letsgo-rest-resteasy-city</name>
 </project>

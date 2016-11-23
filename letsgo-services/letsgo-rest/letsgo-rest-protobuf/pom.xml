@@ -3,22 +3,13 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.igo</groupId>
-        <artifactId>letsgo</artifactId>
+        <artifactId>letsgo-rest</artifactId>
         <version>1.0</version>
     </parent>
-    <artifactId>letsgo-services</artifactId>
+    <artifactId>letsgo-rest-protobuf</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>letsgo-rest</module>
-        <module>letsgo-soap</module>
-        <module>letsgo-rpc</module>
+        <module>letsgo-rest-protobuf-city-jpa</module>
     </modules>
-    <dependencies>
-        <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
-            <version>7.0</version>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
+    <name>letsgo-rest-protobuf</name>
 </project>
