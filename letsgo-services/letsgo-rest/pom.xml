@@ -27,6 +27,7 @@
         <module>letsgo-rest-user-game</module>
         <module>letsgo-rest-user-role</module>
         <module>letsgo-rest-city</module>
+        <module>letsgo-rest-user-registation</module>
     </modules>
     <name>letsgo-rest</name>
 </project>
