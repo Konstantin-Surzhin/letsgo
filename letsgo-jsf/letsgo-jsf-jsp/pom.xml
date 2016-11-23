@@ -30,7 +30,8 @@
         <module>letsgo-jsf-jsp-club</module>
         <module>letsgo-jsf-jsp-user-comment</module>
         <module>letsgo-jsf-jsp-user-rating</module>
-    </modules>
+    <module>letsgo-jsf-jsp-user-registration</module>
+  </modules>
     <name>letsgo-jsf-jsp</name>
     <dependencies>
         <dependency>
