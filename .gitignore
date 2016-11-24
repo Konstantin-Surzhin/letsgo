@@ -1015,3 +1015,4 @@ hs_err_pid*
 /letsgo-data/letsgo-user-role/target/
 /letsgo-data/letsgo-user/target/
 /letsgo-data/letsgo-user-game/target/
+/letsgo-services/letsgo-rest/letsgo-rest-reseasy-game-ejb/target/

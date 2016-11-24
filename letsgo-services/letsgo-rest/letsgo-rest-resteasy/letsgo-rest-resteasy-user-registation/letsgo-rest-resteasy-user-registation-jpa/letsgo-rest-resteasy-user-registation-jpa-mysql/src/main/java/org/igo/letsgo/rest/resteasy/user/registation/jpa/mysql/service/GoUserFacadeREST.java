@@ -16,7 +16,11 @@
  */
 package org.igo.letsgo.rest.resteasy.user.registation.jpa.mysql.service;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -30,6 +34,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import org.igo.entities.GoUser;
+import org.igo.entities.UserRole;
 
 /**
  *
@@ -47,8 +52,40 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
     }
 
     @POST
-    @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public User createUser(User user) {
+
+        String originalPassword = user.getPassword();
+        String repetitionPassword = user.getPasswordRepetition();
+        if (passwordComplexityChecks(originalPassword)) {
+            user.setLastError(java.util.ResourceBundle.getBundle("Bundle").getString("PASSWORD_TOO_WEAK"));
+            return user;
+        }
+        if (!repetitionPassword.equals(originalPassword)) {
+            user.setLastError(java.util.ResourceBundle.getBundle("Bundle").getString("PASSWORDS_DO_NOT_MATCH"));
+            return user;
+        }
+
+        try {
+            GoUser goUser = new GoUser();
+            byte[] salt = PasswordUtils.getSalt();
+            goUser.setUserName(user.getLogin());
+            goUser.setPassword(PasswordUtils.generateStorngPasswordHash(originalPassword, salt));
+            goUser.setSalt(PasswordUtils.toHex(salt));
+            em.createNamedQuery(originalPassword);
+            UserRole ur = new UserRole();
+            
+            goUser.setRole(ur);
+            create(goUser);
+            user.setUserURL(goUser.getId().toString());
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
+            Logger.getLogger(GoUserFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    @Override
     public void create(GoUser entity) {
         super.create(entity);
     }
@@ -57,36 +94,37 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void edit(@PathParam("id") Integer id, GoUser entity) {
-        super.edit(entity);
+        // super.edit(entity);
     }
 
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Integer id) {
-        super.remove(super.find(id));
+        //super.remove(super.find(id));
     }
 
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public GoUser find(@PathParam("id") Integer id) {
-        
-        return super.find(id);
+        super.find(id);
+        return null;
     }
 
     @GET
     @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<GoUser> findAll() {
-        
-        return super.findAll();
+        super.findAll();
+        return null;
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<GoUser> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
+        super.findRange(new int[]{from, to});
+        return null;
     }
 
     @GET
@@ -100,5 +138,9 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
+    private boolean passwordComplexityChecks(String originalPassword) {
+        PasswordValidator passwordValidator = new PasswordValidator();
+        return passwordValidator.validate(originalPassword);
+    }
 }

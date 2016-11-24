@@ -11,6 +11,7 @@
     <modules>
         <module>letsgo-rest-resteasy-user-registation</module>
         <module>letsgo-rest-resteasy-city</module>
+        <module>letsgo-rest-resteasy-game</module>
     </modules>
     <dependencies>
         <dependency>
