@@ -37,8 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "user_details", uniqueConstraints = {
-    @UniqueConstraint(name = "uk_user_email", columnNames = {"email"})
-    ,@UniqueConstraint(name = "uk_user_name", columnNames = {"user_name"})})
+    @UniqueConstraint(name = "uk_user_email", columnNames = {"email"})})
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "UserDetails.findAll", query = "SELECT u FROM UserDetails u")
@@ -47,7 +46,6 @@ import javax.xml.bind.annotation.XmlTransient;
     ,@NamedQuery(name = "UserDetails.findByIsLogin", query = "SELECT u FROM UserDetails u WHERE u.isLogin = :isLogin")
     ,@NamedQuery(name = "UserDetails.findByLastTime", query = "SELECT u FROM UserDetails u WHERE u.lastTime = :lastTime")
     ,@NamedQuery(name = "UserDetails.findByLose", query = "SELECT u FROM UserDetails u WHERE u.lose = :lose")
-    ,@NamedQuery(name = "UserDetails.findByUserName", query = "SELECT u FROM UserDetails u WHERE u.userName = :userName")
     ,@NamedQuery(name = "UserDetails.findByRating", query = "SELECT u FROM UserDetails u WHERE u.rating = :rating")
     ,@NamedQuery(name = "UserDetails.findByStaus", query = "SELECT u FROM UserDetails u WHERE u.staus = :staus")
     ,@NamedQuery(name = "UserDetails.findByNescape", query = "SELECT u FROM UserDetails u WHERE u.nescape = :nescape")
@@ -62,7 +60,7 @@ public class UserDetails implements Serializable {
     private Boolean isLogin;
     private Date lastTime;
     private Integer lose;
-    private String userName;
+    //private String userName;
     private Integer rating;
     private Integer staus;
     private Integer win;
@@ -73,7 +71,7 @@ public class UserDetails implements Serializable {
     private City city;
     private Club club;
     private GoUser user;
-    
+
     private Collection<UserGame> userGameCollection;
     private Collection<UserDegree> userDegreeCollection;
     private Collection<MoveComment> moveCommentCollection;
@@ -142,18 +140,6 @@ public class UserDetails implements Serializable {
 
     public void setLose(Integer lose) {
         this.lose = lose;
-    }
-
-    @NotNull
-    @Size(min = 1, max = 64)
-    @Basic(optional = false)
-    @Column(name = "user_name", nullable = false)
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     @Column(name = "rating")

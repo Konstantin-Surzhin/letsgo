@@ -17,6 +17,8 @@
 package org.igo.entities;
 
 import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
@@ -26,19 +28,22 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
  * @author surzhin.konstantin
  */
 @Entity
-@Table(name = "go_user")
-@XmlRootElement
+@Table(name = "go_user", uniqueConstraints = {
+    @UniqueConstraint(name = "uk_user_name", columnNames = {"user_name"})})
 public class GoUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Integer id;
+    private String userName;
     private String password;
     private String salt;
     private UserDetails userDetails;
@@ -127,5 +132,17 @@ public class GoUser implements Serializable {
 
     public void setRole(UserRole role) {
         this.role = role;
+    }
+
+    @NotNull
+    @Size(min = 1, max = 64)
+    @Basic(optional = false)
+    @Column(name = "user_name", nullable = false)
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

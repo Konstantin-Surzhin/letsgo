@@ -229,10 +229,10 @@ public class UserTest {
     @Test
     public void testGetName() {
         System.out.println("getName");
-        UserDetails instance = new UserDetails();
-        String expResult = "";
-        String result = instance.getUserName();
-        assertEquals(expResult, result);
+//        UserDetails instance = new UserDetails();
+//        String expResult = "";
+//        String result = instance.getUserName();
+//        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -243,9 +243,9 @@ public class UserTest {
     @Test
     public void testSetName() {
         System.out.println("setName");
-        String name = "";
-        UserDetails instance = new UserDetails();
-        instance.setUserName(name);
+//        String name = "";
+//        UserDetails instance = new UserDetails();
+//        instance.setUserName(name);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
