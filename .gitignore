@@ -1058,3 +1058,4 @@ hs_err_pid*
 /letsgo-spring/letsgo-spring-data-jpa-mybatis/target/
 /letsgo-spring/letsgo-spring-view/target/
 /letsgo-spring/letsgo-spring-boot/target/
+/letsgo-services/letsgo-rest/letsgo-rest-resteasy/target/

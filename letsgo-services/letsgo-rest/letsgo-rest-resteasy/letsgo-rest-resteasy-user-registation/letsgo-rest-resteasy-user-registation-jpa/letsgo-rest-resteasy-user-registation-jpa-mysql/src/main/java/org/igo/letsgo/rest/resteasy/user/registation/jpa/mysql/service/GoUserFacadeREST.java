@@ -16,11 +16,8 @@
  */
 package org.igo.letsgo.rest.resteasy.user.registation.jpa.mysql.service;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
+
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -58,6 +55,7 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
 
         String originalPassword = user.getPassword();
         String repetitionPassword = user.getPasswordRepetition();
+        //TODO: вызвать слуюбу валидации пароля
         if (passwordComplexityChecks(originalPassword)) {
             user.setLastError(java.util.ResourceBundle.getBundle("Bundle").getString("PASSWORD_TOO_WEAK"));
             return user;
@@ -67,21 +65,17 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
             return user;
         }
 
-        try {
-            GoUser goUser = new GoUser();
-            byte[] salt = PasswordUtils.getSalt();
-            goUser.setUserName(user.getLogin());
-            goUser.setPassword(PasswordUtils.generateStorngPasswordHash(originalPassword, salt));
-            goUser.setSalt(PasswordUtils.toHex(salt));
-            em.createNamedQuery(originalPassword);
-            UserRole ur = new UserRole();
-            
-            goUser.setRole(ur);
-            create(goUser);
-            user.setUserURL(goUser.getId().toString());
-        } catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
-            Logger.getLogger(GoUserFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        GoUser goUser = new GoUser();
+        byte[] salt = PasswordUtils.getSalt(); //TODO: вызвать службу сгенерить соль
+        goUser.setUserName(user.getLogin());
+        //TODO: вызвать службу сгенерить зашифрованый пароль
+        goUser.setPassword(PasswordUtils.generateStorngPasswordHash(originalPassword, salt));
+        goUser.setSalt(PasswordUtils.toHex(salt));
+        em.createNamedQuery(originalPassword);
+        UserRole ur = new UserRole();
+        goUser.setRole(ur);
+        create(goUser);
+        user.setUserURL(goUser.getId().toString());
         return null;
     }
 

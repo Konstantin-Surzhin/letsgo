@@ -26,6 +26,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -39,11 +41,14 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "go_user", uniqueConstraints = {
     @UniqueConstraint(name = "uk_user_name", columnNames = {"user_name"})})
+@NamedQueries({
+    @NamedQuery(name = "League.findByUserName", query = "SELECT g FROM GoUser g WHERE g.userName = :userName")})
 public class GoUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Integer id;
     private String userName;
+    private int iterations;
     private String password;
     private String salt;
     private UserDetails userDetails;
@@ -144,5 +149,19 @@ public class GoUser implements Serializable {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    /**
+     * @return the iterations
+     */
+    public int getIterations() {
+        return iterations;
+    }
+
+    /**
+     * @param iterations the iterations to set
+     */
+    public void setIterations(int iterations) {
+        this.iterations = iterations;
     }
 }

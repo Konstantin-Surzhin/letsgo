@@ -1,0 +1,149 @@
+/*
+ * Copyright (C) 2016 surzhin.konstantin
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+package org.igo.letsgo.password.utils;
+
+import java.math.BigInteger;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import org.igo.entities.GoUser;
+
+/**
+ *
+ * @author surzhin.konstantin
+ */
+@Stateless
+@Path("user")
+public class PasswordUtils {
+
+    @PersistenceContext(unitName = "gamePU")
+    private EntityManager em;
+
+    @POST
+    @Path("{password}")
+    @Consumes({MediaType.TEXT_PLAIN})
+    @Produces({MediaType.APPLICATION_XML})
+    public PasswordHash getPasswordAsHash(@PathParam("password") final String password) {
+
+        try {
+            return generateStorngPasswordHash(password, getSalt());
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
+            //TODO: set error
+            Logger.getLogger(PasswordUtils.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    @POST
+    @Path("{password}/{login}")
+    @Consumes({MediaType.TEXT_PLAIN})
+    @Produces({MediaType.TEXT_PLAIN})
+    public String isPasswordValid(@PathParam("password") final String password, @PathParam("login") final String login) {
+
+        final TypedQuery<GoUser> query = em.createNamedQuery("League.findByUserName", GoUser.class);
+        query.setParameter("userName", login);
+        try {
+            final GoUser user = query.getSingleResult();
+
+            if (validatePassword(password,
+                    user.getPassword(),
+                    user.getSalt(),
+                    user.getIterations())) {
+                return "true";
+            } else {
+                return "false";
+            }
+        } catch (Exception e) {
+            //TODO: set error
+            return "false";
+        }
+    }
+
+    private PasswordHash generateStorngPasswordHash(final String password,
+            final byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        final int iterations = 1000;
+        final char[] chars = password.toCharArray();
+        final PBEKeySpec spec = new PBEKeySpec(chars, salt, iterations, 64 * 8);
+        final SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1"); //NOI18N
+        final byte[] hash = skf.generateSecret(spec).getEncoded();
+        final PasswordHash passwordHash = new PasswordHash();
+        passwordHash.setHash(toHex(hash));
+        passwordHash.setIterations(iterations);
+        passwordHash.setSalt(toHex(salt));
+        return passwordHash;
+    }
+
+    private byte[] getSalt() throws NoSuchAlgorithmException {
+        final SecureRandom sr = SecureRandom.getInstance("SHA1PRNG"); //NOI18N
+        final byte[] salt = new byte[16];
+        sr.nextBytes(salt);
+        return salt;
+    }
+
+    private String toHex(final byte[] array) {
+        final BigInteger bi = new BigInteger(1, array);
+        final String hex = bi.toString(16);
+        final int paddingLength = (array.length * 2) - hex.length();
+        if (paddingLength > 0) {
+            return String.format("%0" + paddingLength + "d", 0) + hex; //NOI18N
+        } else {
+            return hex;
+        }
+    }
+
+    private boolean validatePassword(final String originalPassword,
+            final String storedPassword,
+            final String storedSalt,
+            final int iterations
+    ) throws NoSuchAlgorithmException, InvalidKeySpecException {
+
+        final byte[] salt = fromHex(storedSalt);
+        final byte[] hash = fromHex(storedPassword);
+
+        final PBEKeySpec spec = new PBEKeySpec(originalPassword.toCharArray(), salt, iterations, hash.length * 8);
+        final SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+        final byte[] testHash = skf.generateSecret(spec).getEncoded();
+
+        int diff = hash.length ^ testHash.length;
+        for (int i = 0; i < hash.length && i < testHash.length; i++) {
+            diff |= hash[i] ^ testHash[i];
+        }
+        return diff == 0;
+    }
+
+    private byte[] fromHex(String hex) throws NoSuchAlgorithmException {
+        final byte[] bytes = new byte[hex.length() / 2];
+        for (int i = 0; i < bytes.length; i++) {
+            bytes[i] = (byte) Integer.parseInt(hex.substring(2 * i, 2 * i + 2), 16);
+        }
+        return bytes;
+    }
+}
