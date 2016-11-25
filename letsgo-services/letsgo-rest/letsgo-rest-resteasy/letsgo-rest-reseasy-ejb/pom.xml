@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.igo</groupId>
+        <artifactId>letsgo-rest-resteasy</artifactId>
+        <version>1.0</version>
+    </parent>
+    <artifactId>letsgo-rest-reseasy-ejb</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>letsgo-rest-reseasy-ejb-game</module>
+        <module>letsgo-rest-reseasy-ejb-place</module>
+        <module>letsgo-rest-reseasy-ejb-degree</module>
+        <module>letsgo-rest-reseasy-ejb-event</module>
+        <module>letsgo-rest-reseasy-ejb-game-comment</module>
+        <module>letsgo-rest-reseasy-ejb-game-date</module>
+        <module>letsgo-rest-reseasy-ejb-game-move</module>
+        <module>letsgo-rest-reseasy-ejb-game-rule</module>
+        <module>letsgo-rest-reseasy-ejb-league</module>
+        <module>letsgo-rest-reseasy-ejb-move-comment</module>
+        <module>letsgo-rest-reseasy-ejb-room</module>
+        <module>letsgo-rest-reseasy-ejb-team</module>
+        <module>letsgo-rest-reseasy-ejb-user</module>
+        <module>letsgo-rest-reseasy-ejb-user-ban</module>
+        <module>letsgo-rest-reseasy-ejb-user-degree</module>
+        <module>letsgo-rest-reseasy-ejb-user-game</module>
+        <module>letsgo-rest-reseasy-ejb-user-role</module>
+    </modules>
+    <name>letsgo-rest-reseasy-ejb</name>
+    <dependencies>
+        <dependency>
+            <groupId>org.igo</groupId>
+            <artifactId>letsgo-remote</artifactId>
+            <version>1.0</version>
+            <type>jar</type>
+        </dependency>
+    </dependencies>
+</project>

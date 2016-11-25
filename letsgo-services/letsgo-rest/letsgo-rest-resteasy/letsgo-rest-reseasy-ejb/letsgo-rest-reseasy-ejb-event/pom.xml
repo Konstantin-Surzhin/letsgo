@@ -2,16 +2,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
+        <artifactId>letsgo-rest-reseasy-ejb</artifactId>
         <groupId>org.igo</groupId>
-        <artifactId>letsgo-services</artifactId>
         <version>1.0</version>
     </parent>
-    <artifactId>letsgo-rest</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>letsgo-rest-resteasy</module>
-        <module>letsgo-rest-thrift</module>
-        <module>letsgo-rest-protobuf</module>
-    </modules>
-    <name>letsgo-rest</name>
+
+    <groupId>org.igo</groupId>
+    <artifactId>letsgo-rest-reseasy-ejb-event</artifactId>
+    <version>1.0</version>
+    <packaging>war</packaging>
+
+    <name>letsgo-rest-reseasy-ejb-event</name>
+
 </project>

@@ -84,7 +84,7 @@ public class CitySessionBean implements ICityRemote {
             City city = getEntityManager().find(City.class, id);
             Set<UserDetails> users = city.getUserCollection();
             List<String> listUsersName = users.stream()
-                    .map(c -> c.getUserName())
+                    .map(c -> c.getUser().getUserName())
                     .sorted()
                     .collect(Collectors.toList());
             return listUsersName;
@@ -99,7 +99,7 @@ public class CitySessionBean implements ICityRemote {
         City city = getEntityManager().find(City.class, id);
         Set<UserDetails> users = city.getUserCollection();
         List<String> listUsersName = users.stream()
-                .map(c -> c.getUserName())
+                .map(c -> c.getUser().getUserName())
                 .sorted()
                 .collect(Collectors.toList());
         return listUsersName;
