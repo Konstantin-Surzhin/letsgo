@@ -8,14 +8,14 @@ package org.igo.ejb;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.igo.entities.GamesDates;
+import org.igo.entities.UserGame;
 
 /**
  *
  * @author surzhin.konstantin
  */
 @Stateless
-public class GamesDatesFacade extends AbstractFacade<GamesDates> {
+public class UserGameFacade extends AbstractFacade<UserGame> {
 
     @PersistenceContext(unitName = "gamePU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class GamesDatesFacade extends AbstractFacade<GamesDates> {
         return em;
     }
 
-    public GamesDatesFacade() {
-        super(GamesDates.class);
+    public UserGameFacade() {
+        super(UserGame.class);
     }
     
 }

@@ -8,14 +8,14 @@ package org.igo.ejb;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.igo.entities.UsersDegrees;
+import org.igo.entities.MoveComment;
 
 /**
  *
  * @author surzhin.konstantin
  */
 @Stateless
-public class UsersDegreesFacade extends AbstractFacade<UsersDegrees> {
+public class MoveCommentFacade extends AbstractFacade<MoveComment> {
 
     @PersistenceContext(unitName = "gamePU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class UsersDegreesFacade extends AbstractFacade<UsersDegrees> {
         return em;
     }
 
-    public UsersDegreesFacade() {
-        super(UsersDegrees.class);
+    public MoveCommentFacade() {
+        super(MoveComment.class);
     }
     
 }

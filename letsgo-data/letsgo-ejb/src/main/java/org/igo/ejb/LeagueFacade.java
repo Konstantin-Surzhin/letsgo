@@ -8,14 +8,14 @@ package org.igo.ejb;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.igo.entities.Cities;
+import org.igo.entities.League;
 
 /**
  *
  * @author surzhin.konstantin
  */
 @Stateless
-public class CitiesFacade extends AbstractFacade<Cities> {
+public class LeagueFacade extends AbstractFacade<League> {
 
     @PersistenceContext(unitName = "gamePU")
     private EntityManager em;
@@ -25,7 +25,8 @@ public class CitiesFacade extends AbstractFacade<Cities> {
         return em;
     }
 
-    public CitiesFacade() {
-        super(Cities.class);
+    public LeagueFacade() {
+        super(League.class);
     }
+    
 }

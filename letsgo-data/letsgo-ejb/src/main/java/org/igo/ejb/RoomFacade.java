@@ -8,14 +8,14 @@ package org.igo.ejb;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.igo.entities.Degrees;
+import org.igo.entities.Room;
 
 /**
  *
  * @author surzhin.konstantin
  */
 @Stateless
-public class DegreesFacade extends AbstractFacade<Degrees> {
+public class RoomFacade extends AbstractFacade<Room> {
 
     @PersistenceContext(unitName = "gamePU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class DegreesFacade extends AbstractFacade<Degrees> {
         return em;
     }
 
-    public DegreesFacade() {
-        super(Degrees.class);
+    public RoomFacade() {
+        super(Room.class);
     }
     
 }

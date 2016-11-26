@@ -12,6 +12,11 @@
         <module>letsgo-rest-resteasy</module>
         <module>letsgo-rest-thrift</module>
         <module>letsgo-rest-protobuf</module>
+        <module>letsgo-rest-servlet</module>
+        <module>letsgo-rest-apache-cxf</module>
+        <module>letsgo-rest-apache-axis2</module>
+        <module>letsgo-rest-restlet</module>
+        <module>letsgo-rest-jersey</module>
     </modules>
     <name>letsgo-rest</name>
 </project>

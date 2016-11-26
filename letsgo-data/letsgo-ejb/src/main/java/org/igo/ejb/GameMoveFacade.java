@@ -8,14 +8,14 @@ package org.igo.ejb;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.igo.entities.Userroles;
+import org.igo.entities.GameMove;
 
 /**
  *
  * @author surzhin.konstantin
  */
 @Stateless
-public class UserrolesFacade extends AbstractFacade<Userroles> {
+public class GameMoveFacade extends AbstractFacade<GameMove> {
 
     @PersistenceContext(unitName = "gamePU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class UserrolesFacade extends AbstractFacade<Userroles> {
         return em;
     }
 
-    public UserrolesFacade() {
-        super(Userroles.class);
+    public GameMoveFacade() {
+        super(GameMove.class);
     }
     
 }

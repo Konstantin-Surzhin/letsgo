@@ -31,5 +31,6 @@
         <module>letsgo-user-ban</module>
         <module>letsgo-user-degree</module>
         <module>letsgo-user-game</module>
+        <module>letsgo-ejb</module>
     </modules>
 </project>
