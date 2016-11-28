@@ -11,18 +11,9 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
-                <configuration>
-                    <debug>false</debug>
-                    <showDeprecation>false</showDeprecation>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.bsc.maven</groupId>
                 <artifactId>maven-processor-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.2.0</version>
                 <executions>
                     <execution>
                         <id>process</id>
@@ -41,11 +32,10 @@
                     <dependency>
                         <groupId>org.hibernate</groupId>
                         <artifactId>hibernate-jpamodelgen</artifactId>
-                        <version>5.2.2.Final</version>
+                        <version>5.2.4.Final</version>
                     </dependency>
                 </dependencies>
             </plugin>
-
         </plugins>
         
     </build>
@@ -53,7 +43,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>5.2.2.Final</version>
+            <version>5.2.4.Final</version>
             <type>jar</type>
         </dependency>
         <dependency>

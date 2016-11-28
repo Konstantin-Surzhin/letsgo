@@ -26,11 +26,11 @@
         <module>letsgo-move-comment</module>
         <module>letsgo-room</module>
         <module>letsgo-team</module>
-        <module>letsgo-user-role</module>
         <module>letsgo-user</module>
         <module>letsgo-user-ban</module>
         <module>letsgo-user-degree</module>
         <module>letsgo-user-game</module>
         <module>letsgo-ejb</module>
+        <module>letsgo-data-user-role</module>
     </modules>
 </project>

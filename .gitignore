@@ -26,3 +26,15 @@ hs_err_pid*
 /letsgo-services/letsgo-rest/letsgo-rest-jersey/target/
 /letsgo-services/letsgo-rest/letsgo-rest-apache-axis2/target/
 /nbproject/
+/letsgo-data/letsgo-place/letsgo-place-ear/target/
+/letsgo-data/letsgo-game-comment/letsgo-game-comment-ear/target/
+/letsgo-data/letsgo-city/letsgo-city-ear/target/
+/letsgo-data/letsgo-ear/target/
+/letsgo-data/letsgo-game-move/letsgo-game-move-ear/target/
+/letsgo-data/letsgo-league/letsgo-league-ear/target/
+/letsgo-data/letsgo-move-comment/letsgo-move-comment-ear/target/
+/letsgo-data/letsgo-room/letsgo-room-ear/target/
+/letsgo-data/letsgo-team/letsgo-team-ear/target/
+/letsgo-data/letsgo-user/letsgo-user-ear/target/
+/letsgo-data/letsgo-user-ban/letsgo-user-ban-ear/target/
+/letsgo-data/letsgo-user-degree/letsgo-user-degree-ear/target/
