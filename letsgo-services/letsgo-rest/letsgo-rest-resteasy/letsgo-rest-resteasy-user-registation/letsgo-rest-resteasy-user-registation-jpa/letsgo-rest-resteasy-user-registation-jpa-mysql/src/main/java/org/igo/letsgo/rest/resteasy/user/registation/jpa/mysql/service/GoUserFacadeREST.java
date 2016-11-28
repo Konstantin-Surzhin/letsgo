@@ -65,8 +65,12 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
             return user;
         }
 
-        GoUser goUser = new GoUser();
+        GoUser goUser = new GoUser(); //TODO: get url from eurica, consul, uuid
+        
         byte[] salt = PasswordUtils.getSalt(); //TODO: вызвать службу сгенерить соль
+        String url = "http://localhost:8080/letsgo-password-utils/";
+        
+      
         goUser.setUserName(user.getLogin());
         //TODO: вызвать службу сгенерить зашифрованый пароль
         goUser.setPassword(PasswordUtils.generateStorngPasswordHash(originalPassword, salt));

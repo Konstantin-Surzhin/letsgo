@@ -48,7 +48,6 @@ public class GoUser implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer id;
     private String userName;
-    private int iterations;
     private String password;
     private String salt;
     private UserDetails userDetails;
@@ -149,19 +148,5 @@ public class GoUser implements Serializable {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    /**
-     * @return the iterations
-     */
-    public int getIterations() {
-        return iterations;
-    }
-
-    /**
-     * @param iterations the iterations to set
-     */
-    public void setIterations(int iterations) {
-        this.iterations = iterations;
     }
 }

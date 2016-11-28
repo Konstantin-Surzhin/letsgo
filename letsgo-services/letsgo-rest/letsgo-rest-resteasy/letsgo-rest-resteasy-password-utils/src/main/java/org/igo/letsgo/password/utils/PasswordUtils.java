@@ -17,22 +17,23 @@
 package org.igo.letsgo.password.utils;
 
 import java.math.BigInteger;
+import java.nio.ByteBuffer;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import org.igo.entities.GoUser;
 
@@ -47,22 +48,24 @@ public class PasswordUtils {
     @PersistenceContext(unitName = "gamePU")
     private EntityManager em;
 
-    @POST
+    @Context
+    ServletContext context;
+
+    @GET
     @Path("{password}")
     @Consumes({MediaType.TEXT_PLAIN})
     @Produces({MediaType.APPLICATION_XML})
-    public PasswordHash getPasswordAsHash(@PathParam("password") final String password) {
+    public PasswordHash getPasswordAsHash(@PathParam("password") final String password)
+            throws NoSuchAlgorithmException, InvalidKeySpecException {
 
-        try {
-            return generateStorngPasswordHash(password, getSalt());
-        } catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
-            //TODO: set error
-            Logger.getLogger(PasswordUtils.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
+        int iterations = Integer.parseUnsignedInt(context.getInitParameter("iterations"));
+        byte[] spaceSalt = fromStringToHex(context.getInitParameter("spaceSalt"));
+
+        return generateStorngPasswordHash(password, iterations, spaceSalt);
+
     }
 
-    @POST
+    @GET
     @Path("{password}/{login}")
     @Consumes({MediaType.TEXT_PLAIN})
     @Produces({MediaType.TEXT_PLAIN})
@@ -72,11 +75,11 @@ public class PasswordUtils {
         query.setParameter("userName", login);
         try {
             final GoUser user = query.getSingleResult();
-
+            final int iterations = Integer.parseUnsignedInt(context.getInitParameter("iterations"));
             if (validatePassword(password,
                     user.getPassword(),
                     user.getSalt(),
-                    user.getIterations())) {
+                    iterations)) {
                 return "true";
             } else {
                 return "false";
@@ -88,16 +91,27 @@ public class PasswordUtils {
     }
 
     private PasswordHash generateStorngPasswordHash(final String password,
-            final byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        final int iterations = 1000;
+            final int iterations,
+            final byte[] spaceSalt) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        
+        final byte[] earthSalt = getSalt();
+        final ByteBuffer bb = ByteBuffer.allocate(spaceSalt.length + earthSalt.length);
+        
+        bb.put(spaceSalt);
+        bb.put(earthSalt);
+
+        final byte[] salt  = bb.array();
+        System.out.println(fromHexToString(salt));
+        
         final char[] chars = password.toCharArray();
         final PBEKeySpec spec = new PBEKeySpec(chars, salt, iterations, 64 * 8);
         final SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1"); //NOI18N
         final byte[] hash = skf.generateSecret(spec).getEncoded();
         final PasswordHash passwordHash = new PasswordHash();
-        passwordHash.setHash(toHex(hash));
-        passwordHash.setIterations(iterations);
-        passwordHash.setSalt(toHex(salt));
+
+        passwordHash.setHash(fromHexToString(hash));
+        passwordHash.setSalt(fromHexToString(earthSalt));
+
         return passwordHash;
     }
 
@@ -108,7 +122,7 @@ public class PasswordUtils {
         return salt;
     }
 
-    private String toHex(final byte[] array) {
+    private String fromHexToString(final byte[] array) {
         final BigInteger bi = new BigInteger(1, array);
         final String hex = bi.toString(16);
         final int paddingLength = (array.length * 2) - hex.length();
@@ -125,8 +139,8 @@ public class PasswordUtils {
             final int iterations
     ) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
-        final byte[] salt = fromHex(storedSalt);
-        final byte[] hash = fromHex(storedPassword);
+        final byte[] salt = fromStringToHex(storedSalt);
+        final byte[] hash = fromStringToHex(storedPassword);
 
         final PBEKeySpec spec = new PBEKeySpec(originalPassword.toCharArray(), salt, iterations, hash.length * 8);
         final SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
@@ -139,7 +153,7 @@ public class PasswordUtils {
         return diff == 0;
     }
 
-    private byte[] fromHex(String hex) throws NoSuchAlgorithmException {
+    private byte[] fromStringToHex(String hex) throws NoSuchAlgorithmException {
         final byte[] bytes = new byte[hex.length() / 2];
         for (int i = 0; i < bytes.length; i++) {
             bytes[i] = (byte) Integer.parseInt(hex.substring(2 * i, 2 * i + 2), 16);

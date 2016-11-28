@@ -38,3 +38,5 @@ hs_err_pid*
 /letsgo-data/letsgo-user/letsgo-user-ear/target/
 /letsgo-data/letsgo-user-ban/letsgo-user-ban-ear/target/
 /letsgo-data/letsgo-user-degree/letsgo-user-degree-ear/target/
+/letsgo-services/letsgo-rest/letsgo-rest-resteasy/letsgo-password-utils/target/
+/letsgo-services/letsgo-rest/letsgo-rest-resteasy/letsgo-rest-resteasy-password-utils/target/

@@ -24,23 +24,8 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 public class PasswordHash {
-    private int iterations;
     private String hash;
     private String salt;
-
-    /**
-     * @return the iterations
-     */
-    public int getIterations() {
-        return iterations;
-    }
-
-    /**
-     * @param iterations the iterations to set
-     */
-    public void setIterations(int iterations) {
-        this.iterations = iterations;
-    }
 
     /**
      * @return the hash

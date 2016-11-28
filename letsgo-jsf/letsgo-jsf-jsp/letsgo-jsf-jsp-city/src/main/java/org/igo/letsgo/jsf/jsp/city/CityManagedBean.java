@@ -89,7 +89,7 @@ public class CityManagedBean {
         final CityRestClientInterface cm = new RESTClientBuilder().build(msgMediaType);
 
         try {
-            String url = "http://localhost:8080/letsgo-rest-city";
+            String url = "http://localhost:8080/letsgo-rest-city"; //TODO: get url from eurica, consul, uuid
             City city = new City();
             city.setCityName(cityName);
             city = cm.sendCity(url, msgMediaType, persistenceType, dbName, city);
