@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<jboss-app>
-    <module>
-        <web>
-            <web-uri>letsgo-spring-1.0.war</web-uri>
-            <context-root>/spring</context-root>
-        </web>
-    </module>
-</jboss-app>
