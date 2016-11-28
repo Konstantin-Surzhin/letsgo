@@ -89,7 +89,8 @@
                             <value>false</value>
                         </property>
                     </properties>
-                    <threadCount>1</threadCount>
+                    <argLine>-Dfile.encoding=UTF-8</argLine>
+                    <threadCount>4</threadCount>
                 </configuration>
                 <dependencies>
                     <dependency>

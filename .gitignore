@@ -25,3 +25,4 @@ hs_err_pid*
 /letsgo-services/letsgo-rest/letsgo-rest-restlet/target/
 /letsgo-services/letsgo-rest/letsgo-rest-jersey/target/
 /letsgo-services/letsgo-rest/letsgo-rest-apache-axis2/target/
+/nbproject/
