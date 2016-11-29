@@ -12,7 +12,7 @@
         <title>Login error</title>
     </head>
     <body>
-        <h1>Чтото пошло нетак!</h1>
+        <h1>Что-то пошло не так!</h1>
         <a href="index.jsp">Повторить.</a>
     </body>
 </html>

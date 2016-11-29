@@ -13,9 +13,9 @@
         <module>letsgo-rest-resteasy-city</module>
         <module>letsgo-rest-resteasy-game</module>
         <module>letsgo-rest-reseasy-ejb</module>
-    <module>letsgo-password-validator</module>
-    <module>letsgo-password-utils</module>
-  </modules>
+        <module>letsgo-rest-resteasy-password-utils</module>
+        <module>letsgo-rest-password-validator</module>
+    </modules>
     <dependencies>
         <dependency>
             <groupId>org.jboss.resteasy</groupId>

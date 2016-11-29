@@ -33,7 +33,7 @@
       <property name="hibernate.connection.characterEncoding" value="utf8"/>
       <property name="hibernate.connection.useUnicode" value="true"/>
       <property name="hibernate.connection.charSet" value="UTF-8"/>
-      <property name="hibernate.hbm2ddl.auto" value="create"/>
+      <property name="hibernate.hbm2ddl.auto" value="update"/>
     </properties>
   </persistence-unit>
 </persistence>

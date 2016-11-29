@@ -18,9 +18,9 @@ package org.igo.letsgo.rest.resteasy.user.registation.jpa.mysql.service;
 
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.jws.WebParam;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -29,7 +29,9 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import org.igo.entities.GoUser;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
@@ -53,18 +55,18 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
     @POST
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public User createUser(User user) {
+    public Response createUser(User user) {
 
         String originalPassword = user.getPassword();
         String repetitionPassword = user.getPasswordRepetition();
-        //TODO: вызвать слуюбу валидации пароля
+
         if (passwordComplexityChecks(originalPassword)) {
             user.setLastError(java.util.ResourceBundle.getBundle("Bundle").getString("PASSWORD_TOO_WEAK"));
-            return user;
+            return Response.status(Response.Status.BAD_REQUEST).entity(user).build();
         }
         if (!repetitionPassword.equals(originalPassword)) {
             user.setLastError(java.util.ResourceBundle.getBundle("Bundle").getString("PASSWORDS_DO_NOT_MATCH"));
-            return user;
+            return Response.status(Response.Status.BAD_REQUEST).entity(user).build();
         }
 
         final String url = "http://localhost:8080/letsgo-rest-resteasy-password-utils/webresources/user/" + originalPassword;
@@ -82,8 +84,7 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
             System.out.println(e.getMessage());
         }
         user.setUserURL(goUser.getId().toString());
-
-        return user;
+        return Response.ok(user).build();
     }
 
     @Override
@@ -141,6 +142,7 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
     }
 
     private boolean passwordComplexityChecks(String originalPassword) {
+        //TODO: вызвать службу валидации пароля
         // PasswordValidator passwordValidator = new PasswordValidator();
         return true; //passwordValidator.validate(originalPassword);
     }

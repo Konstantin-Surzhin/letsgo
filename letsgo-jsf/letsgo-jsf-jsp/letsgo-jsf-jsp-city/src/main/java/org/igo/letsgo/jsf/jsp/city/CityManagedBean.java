@@ -22,8 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.persistence.EntityManager;
@@ -42,7 +42,7 @@ import org.igo.letsgo.jsf.jsp.city.entity.City;
  * @author pl
  */
 @ManagedBean(name = "cityManagedBean")
-@SessionScoped
+@RequestScoped
 public class CityManagedBean {
 
     @PersistenceContext

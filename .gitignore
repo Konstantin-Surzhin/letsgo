@@ -42,3 +42,4 @@ hs_err_pid*
 /letsgo-services/letsgo-rest/letsgo-rest-resteasy/letsgo-rest-resteasy-password-utils/target/
 /letsgo-services/letsgo-rest/letsgo-rest-pure/letsgo-rest-pure-lightweight/target/
 /letsgo-services/letsgo-rest/letsgo-rest-pure/letsgo-rest-pure-lightweight/letsgo-rest-pure-lightweight-user-registration/target/
+/letsgo-jsf/letsgo-jsf-jsp/letsgo-jsf-jsp-user-registration/target/
