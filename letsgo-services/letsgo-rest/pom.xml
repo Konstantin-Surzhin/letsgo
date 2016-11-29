@@ -17,6 +17,8 @@
         <module>letsgo-rest-apache-axis2</module>
         <module>letsgo-rest-restlet</module>
         <module>letsgo-rest-jersey</module>
+        <module>letsgo-rest-pure</module>
+        <module>letsgo-rest-apache-wink</module>
     </modules>
     <name>letsgo-rest</name>
 </project>

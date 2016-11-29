@@ -40,3 +40,5 @@ hs_err_pid*
 /letsgo-data/letsgo-user-degree/letsgo-user-degree-ear/target/
 /letsgo-services/letsgo-rest/letsgo-rest-resteasy/letsgo-password-utils/target/
 /letsgo-services/letsgo-rest/letsgo-rest-resteasy/letsgo-rest-resteasy-password-utils/target/
+/letsgo-services/letsgo-rest/letsgo-rest-pure/letsgo-rest-pure-lightweight/target/
+/letsgo-services/letsgo-rest/letsgo-rest-pure/letsgo-rest-pure-lightweight/letsgo-rest-pure-lightweight-user-registration/target/
