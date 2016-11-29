@@ -16,9 +16,9 @@
  */
 package org.igo.letsgo.rest.resteasy.user.registation.jpa.mysql.service;
 
-
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.jws.WebParam;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
@@ -31,7 +31,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import org.igo.entities.GoUser;
-import org.igo.entities.UserRole;
+import org.jboss.resteasy.client.jaxrs.ResteasyClient;
+import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
+import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 
 /**
  *
@@ -65,22 +67,23 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
             return user;
         }
 
-        GoUser goUser = new GoUser(); //TODO: get url from eurica, consul, uuid
-        
-        byte[] salt = PasswordUtils.getSalt(); //TODO: вызвать службу сгенерить соль
-        String url = "http://localhost:8080/letsgo-password-utils/";
-        
-      
+        final String url = "http://localhost:8080/letsgo-rest-resteasy-password-utils/webresources/user/" + originalPassword;
+        final ResteasyClient client = new ResteasyClientBuilder().build();
+        final ResteasyWebTarget target = client.target(url);
+        final PasswordHash passwordHash = target.request().get(PasswordHash.class);
+        final GoUser goUser = new GoUser(); //TODO: get url from eurica, consul, uuid
         goUser.setUserName(user.getLogin());
-        //TODO: вызвать службу сгенерить зашифрованый пароль
-        goUser.setPassword(PasswordUtils.generateStorngPasswordHash(originalPassword, salt));
-        goUser.setSalt(PasswordUtils.toHex(salt));
-        em.createNamedQuery(originalPassword);
-        UserRole ur = new UserRole();
-        goUser.setRole(ur);
-        create(goUser);
+        goUser.setPassword(passwordHash.getHash());
+        goUser.setSalt(passwordHash.getSalt());
+
+        try {
+            create(goUser);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         user.setUserURL(goUser.getId().toString());
-        return null;
+
+        return user;
     }
 
     @Override
@@ -138,7 +141,7 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
     }
 
     private boolean passwordComplexityChecks(String originalPassword) {
-        PasswordValidator passwordValidator = new PasswordValidator();
-        return passwordValidator.validate(originalPassword);
+        // PasswordValidator passwordValidator = new PasswordValidator();
+        return true; //passwordValidator.validate(originalPassword);
     }
 }

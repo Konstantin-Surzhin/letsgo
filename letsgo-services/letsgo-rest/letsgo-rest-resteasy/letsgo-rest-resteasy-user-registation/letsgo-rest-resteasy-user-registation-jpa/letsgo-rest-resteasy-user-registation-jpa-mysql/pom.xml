@@ -19,5 +19,11 @@
             <artifactId>letsgo-entity</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-client</artifactId>
+            <version>3.0.19.Final</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 </project>
