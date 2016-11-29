@@ -18,6 +18,12 @@ package org.igo.letsgo.jsf.jsp.user.registration;
 
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import org.jboss.resteasy.client.jaxrs.ResteasyClient;
+import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
+import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 
 /**
  *
@@ -27,16 +33,30 @@ import javax.enterprise.context.RequestScoped;
 @RequestScoped
 public class UserRegistrationManagedBean {
 
-    
     private String login;
     private String password;
     private String rpassword;
+    private String lastError;
+
     /**
      * Creates a new instance of UserRegistrationManagedBean
      */
     public UserRegistrationManagedBean() {
     }
-    public void addUser(){
+
+    public void addUser() {
+
+        final String url = "http://localhost:8080//letsgo-rest-resteasy-user-registation-jpa-mysql/webresources/user/" ;
+        final ResteasyClient client = new ResteasyClientBuilder().build();
+        final ResteasyWebTarget target = client.target(url);
+        User outUser = new User();
+        outUser.setLogin(login);
+        outUser.setPassword(password);
+        outUser.setPasswordRepetition(rpassword);
+        final Entity e = Entity.entity(outUser,MediaType.APPLICATION_ATOM_XML );
+        User inUser = target.request().post(e, User.class);
+        
+        System.out.println(inUser.getUserURL() + " :: "+inUser.getPassword());
         
     }
 
@@ -80,5 +100,19 @@ public class UserRegistrationManagedBean {
      */
     public void setRpassword(String rpassword) {
         this.rpassword = rpassword;
+    }
+
+    /**
+     * @return the lastError
+     */
+    public String getLastError() {
+        return lastError;
+    }
+
+    /**
+     * @param lastError the lastError to set
+     */
+    public void setLastError(String lastError) {
+        this.lastError = lastError;
     }
 }
