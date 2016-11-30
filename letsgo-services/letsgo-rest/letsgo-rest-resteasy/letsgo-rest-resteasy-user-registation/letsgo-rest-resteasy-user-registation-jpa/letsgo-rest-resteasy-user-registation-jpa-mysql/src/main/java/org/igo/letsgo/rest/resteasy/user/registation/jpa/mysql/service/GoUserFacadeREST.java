@@ -35,6 +35,9 @@ import org.igo.entities.GoUser;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
+//import javax.servlet.ServletContext;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.UriInfo;
 
 /**
  *
@@ -47,13 +50,16 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
     @PersistenceContext(unitName = "gamePU")
     private EntityManager em;
 
+    @Context
+    UriInfo uri;
+
     public GoUserFacadeREST() {
         super(GoUser.class);
     }
 
     @POST
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON, MediaType.TEXT_HTML})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Response createUser(final User user) {
 
         if (user == null) {
@@ -68,8 +74,8 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
             return Response.status(Response.Status.BAD_REQUEST).entity(u).build();
         }
 
-        String originalPassword = user.getPassword();
-        String repetitionPassword = user.getPasswordRepetition();
+        final String originalPassword = user.getPassword();
+        final String repetitionPassword = user.getPasswordRepetition();
 
         if (isPasswordToEasy(originalPassword)) {
             String err;
@@ -92,7 +98,7 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
             user.setLastError(err);
             return Response.status(Response.Status.BAD_REQUEST).entity(user).build();
         }
-
+        //TODO: get path from uudi, eurica or consul
         final String url = "http://localhost:8080/letsgo-rest-resteasy-password-utils/webresources/user/" + originalPassword;
         final ResteasyClient client = new ResteasyClientBuilder().build();
         try {
@@ -105,7 +111,8 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
             goUser.setSalt(passwordHash.getSalt());
 
             create(goUser);
-            user.setUserURL(goUser.getId().toString());
+
+            user.setUserURL(uri.getAbsolutePath() + "/" + goUser.getId().toString());
         } catch (Exception e) {
             user.setLastError(e.getMessage());
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)

@@ -312,8 +312,7 @@ public class UserDetails implements Serializable {
         this.club = club;
     }
 
-    @OneToOne
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_user_details"), name = "user_id", referencedColumnName = "id")
+    @OneToOne(mappedBy = "userDetails")
     public GoUser getUser() {
         return user;
     }

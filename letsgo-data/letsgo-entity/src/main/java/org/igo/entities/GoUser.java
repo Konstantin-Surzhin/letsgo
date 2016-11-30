@@ -39,7 +39,7 @@ import javax.validation.constraints.Size;
  * @author surzhin.konstantin
  */
 @Entity
-@Table(name = "go_user", uniqueConstraints = {
+@Table(name = "GO_USERS", uniqueConstraints = {
     @UniqueConstraint(name = "uk_user_name", columnNames = {"user_name"})})
 @NamedQueries({
     @NamedQuery(name = "League.findByUserName", query = "SELECT g FROM GoUser g WHERE g.userName = :userName")})
@@ -116,8 +116,8 @@ public class GoUser implements Serializable {
     /**
      * @return the userDetails
      */
-    //@OneToOne(mappedBy = "user")
     @OneToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_user_details"), name = "user_detail_id", referencedColumnName = "id")
     public UserDetails getUserDetails() {
         return userDetails;
     }
