@@ -149,6 +149,7 @@
         <module>letsgo-ejb-remote-client</module>
         <module>letsgo-jsf</module>
         <module>letsgo-services</module>
+        <module>letsgo-security</module>
     </modules>
     <dependencyManagement>
         <dependencies>

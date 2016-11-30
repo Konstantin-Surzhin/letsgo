@@ -20,10 +20,14 @@ import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
+
+import java.io.File;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 
 /**
  *
@@ -46,18 +50,36 @@ public class UserRegistrationManagedBean {
 
     public void addUser() {
 
-        final String url = "http://localhost:8080//letsgo-rest-resteasy-user-registation-jpa-mysql/webresources/user/" ;
+        final String url = "http://localhost:8080//letsgo-rest-resteasy-user-registation-jpa-mysql/webresources/user/";
         final ResteasyClient client = new ResteasyClientBuilder().build();
         final ResteasyWebTarget target = client.target(url);
-        User outUser = new User();
+        final User outUser = new User();
         outUser.setLogin(login);
         outUser.setPassword(password);
         outUser.setPasswordRepetition(rpassword);
-        final Entity e = Entity.entity(outUser,MediaType.APPLICATION_ATOM_XML );
-        User inUser = target.request().post(e, User.class);
-        
-        System.out.println(inUser.getUserURL() + " :: "+inUser.getPassword());
-        
+        toFile(outUser);
+        final Entity e = Entity.entity(outUser, MediaType.APPLICATION_XML);
+        //final User inUser = target.request().post(e, User.class);
+
+        // System.out.println(inUser.getUserURL() + " :: "+inUser.getPassword());
+    }
+
+    private void toFile(User user) {
+        try {
+
+            File file = new File("D:\\file.xml");
+            JAXBContext jaxbContext = JAXBContext.newInstance(User.class);
+            Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+
+            // output pretty printed
+            jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+            jaxbMarshaller.marshal(user, file);
+            jaxbMarshaller.marshal(user, System.out);
+
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

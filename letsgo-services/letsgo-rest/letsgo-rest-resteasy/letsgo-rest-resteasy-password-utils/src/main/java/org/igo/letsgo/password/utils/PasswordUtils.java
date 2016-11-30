@@ -58,11 +58,10 @@ public class PasswordUtils {
     public PasswordHash getPasswordAsHash(@PathParam("password") final String password)
             throws NoSuchAlgorithmException, InvalidKeySpecException {
 
-        int iterations = Integer.parseUnsignedInt(context.getInitParameter("iterations"));
-        byte[] spaceSalt = fromStringToHex(context.getInitParameter("spaceSalt"));
+        final int iterations = Integer.parseUnsignedInt(context.getInitParameter("iterations"));
+        final byte[] spaceSalt = fromStringToHex(context.getInitParameter("spaceSalt"));
 
         return generateStorngPasswordHash(password, iterations, spaceSalt);
-
     }
 
     @GET
@@ -93,16 +92,14 @@ public class PasswordUtils {
     private PasswordHash generateStorngPasswordHash(final String password,
             final int iterations,
             final byte[] spaceSalt) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        
+
         final byte[] earthSalt = getSalt();
         final ByteBuffer bb = ByteBuffer.allocate(spaceSalt.length + earthSalt.length);
-        
+
         bb.put(spaceSalt);
         bb.put(earthSalt);
 
-        final byte[] salt  = bb.array();
-        System.out.println(fromHexToString(salt));
-        
+        final byte[] salt = bb.array();
         final char[] chars = password.toCharArray();
         final PBEKeySpec spec = new PBEKeySpec(chars, salt, iterations, 64 * 8);
         final SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1"); //NOI18N

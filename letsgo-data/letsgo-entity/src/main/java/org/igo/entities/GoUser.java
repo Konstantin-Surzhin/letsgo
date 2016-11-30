@@ -116,7 +116,8 @@ public class GoUser implements Serializable {
     /**
      * @return the userDetails
      */
-    @OneToOne(mappedBy = "user")
+    //@OneToOne(mappedBy = "user")
+    @OneToOne
     public UserDetails getUserDetails() {
         return userDetails;
     }

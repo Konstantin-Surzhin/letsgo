@@ -16,11 +16,11 @@
  */
 package org.igo.letsgo.rest.resteasy.user.registation.jpa.mysql.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -29,7 +29,6 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.igo.entities.GoUser;
@@ -54,37 +53,68 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
 
     @POST
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Response createUser(User user) {
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON, MediaType.TEXT_HTML})
+    public Response createUser(final User user) {
+
+        if (user == null) {
+            String err;
+            final User u = new User();
+            try {
+                err = java.util.ResourceBundle.getBundle("Bundle").getString("NO_USER");
+            } catch (Exception ex) {
+                err = ex.getMessage();
+            }
+            u.setLastError(err);
+            return Response.status(Response.Status.BAD_REQUEST).entity(u).build();
+        }
 
         String originalPassword = user.getPassword();
         String repetitionPassword = user.getPasswordRepetition();
 
-        if (passwordComplexityChecks(originalPassword)) {
-            user.setLastError(java.util.ResourceBundle.getBundle("Bundle").getString("PASSWORD_TOO_WEAK"));
+        if (isPasswordToEasy(originalPassword)) {
+            String err;
+            try {
+                err = java.util.ResourceBundle.getBundle("Bundle").getString("PASSWORD_TOO_WEAK");
+            } catch (Exception ex) {
+                err = ex.getMessage();
+            }
+            user.setLastError(err);
             return Response.status(Response.Status.BAD_REQUEST).entity(user).build();
         }
+
         if (!repetitionPassword.equals(originalPassword)) {
-            user.setLastError(java.util.ResourceBundle.getBundle("Bundle").getString("PASSWORDS_DO_NOT_MATCH"));
+            String err;
+            try {
+                err = java.util.ResourceBundle.getBundle("Bundle").getString("PASSWORDS_DO_NOT_MATCH");
+            } catch (Exception ex) {
+                err = ex.getMessage();
+            }
+            user.setLastError(err);
             return Response.status(Response.Status.BAD_REQUEST).entity(user).build();
         }
 
         final String url = "http://localhost:8080/letsgo-rest-resteasy-password-utils/webresources/user/" + originalPassword;
         final ResteasyClient client = new ResteasyClientBuilder().build();
-        final ResteasyWebTarget target = client.target(url);
-        final PasswordHash passwordHash = target.request().get(PasswordHash.class);
-        final GoUser goUser = new GoUser(); //TODO: get url from eurica, consul, uuid
-        goUser.setUserName(user.getLogin());
-        goUser.setPassword(passwordHash.getHash());
-        goUser.setSalt(passwordHash.getSalt());
-
         try {
+            final ResteasyWebTarget target = client.target(url);
+            final PasswordHash passwordHash = target.request().get(PasswordHash.class);
+            final GoUser goUser = new GoUser(); //TODO: get url from eurica, consul, uuid
+
+            goUser.setUserName(user.getLogin());
+            goUser.setPassword(passwordHash.getHash());
+            goUser.setSalt(passwordHash.getSalt());
+
             create(goUser);
+            user.setUserURL(goUser.getId().toString());
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            user.setLastError(e.getMessage());
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity(user)
+                    .build();
         }
-        user.setUserURL(goUser.getId().toString());
-        return Response.ok(user).build();
+
+        return Response.ok(user)
+                .build();
     }
 
     @Override
@@ -114,11 +144,17 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
     }
 
     @GET
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<User> findAllUser() {
+        List<User> list = new ArrayList();
+        return list;
+    }
+
+    //@GET
     @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<GoUser> findAll() {
-        super.findAll();
-        return null;
+        return super.findAll();
     }
 
     @GET
@@ -141,9 +177,9 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
         return em;
     }
 
-    private boolean passwordComplexityChecks(String originalPassword) {
+    private boolean isPasswordToEasy(String originalPassword) {
         //TODO: вызвать службу валидации пароля
         // PasswordValidator passwordValidator = new PasswordValidator();
-        return true; //passwordValidator.validate(originalPassword);
+        return false; //passwordValidator.validate(originalPassword);
     }
 }
