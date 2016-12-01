@@ -48,3 +48,4 @@ hs_err_pid*
 /letsgo-data/letsgo-data-ejb-ear/target/
 /letsgo/letsgo-ear/target/
 /letsgo-main-ear/target/
+/letsgo-services/letsgo-rest/letsgo-rest-resteasy/letsgo-rest-reseasy-skeleton-key-core/target/

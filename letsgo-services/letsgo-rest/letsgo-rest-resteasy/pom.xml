@@ -15,7 +15,8 @@
         <module>letsgo-rest-reseasy-ejb</module>
         <module>letsgo-rest-resteasy-password-utils</module>
         <module>letsgo-rest-password-validator</module>
-    </modules>
+    <module>letsgo-rest-reseasy-skeleton-key-core</module>
+  </modules>
     <dependencies>
         <dependency>
             <groupId>org.jboss.resteasy</groupId>

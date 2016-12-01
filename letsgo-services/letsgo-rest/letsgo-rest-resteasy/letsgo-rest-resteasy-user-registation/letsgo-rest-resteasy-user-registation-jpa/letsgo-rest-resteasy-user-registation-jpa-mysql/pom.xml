@@ -25,6 +25,7 @@
             <artifactId>resteasy-client</artifactId>
             <version>3.0.19.Final</version>
             <type>jar</type>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>
