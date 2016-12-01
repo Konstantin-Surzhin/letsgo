@@ -8,11 +8,11 @@
     </parent>
 
     <groupId>org.igo</groupId>
-    <artifactId>letsgo-ear</artifactId>
+    <artifactId>letsgo-data-ejb-ear</artifactId>
     <version>1.0</version>
     <packaging>ear</packaging>
 
-    <name>letsgo-ear</name>
+    <name>letsgo-data-ejb-ear</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -26,6 +26,7 @@
                 <version>2.10.1</version>
                 <configuration>
                     <version>7</version>
+                    <generatedDescriptorLocation>${basedir}/src/main/application/META-INF</generatedDescriptorLocation>
                     <defaultLibBundleDir>META-INF/lib</defaultLibBundleDir>
                     <modules>
                         <ejbModule>

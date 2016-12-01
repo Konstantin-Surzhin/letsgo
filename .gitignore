@@ -45,3 +45,6 @@ hs_err_pid*
 /letsgo-jsf/letsgo-jsf-jsp/letsgo-jsf-jsp-user-registration/target/
 /letsgo-services/letsgo-rest/letsgo-rest-resteasy/letsgo-rest-resteasy-user-registation/target/
 /letsgo-services/letsgo-rest/letsgo-rest-resteasy/letsgo-rest-resteasy-user-registation/letsgo-rest-resteasy-user-registation-jpa/target/
+/letsgo-data/letsgo-data-ejb-ear/target/
+/letsgo/letsgo-ear/target/
+/letsgo-main-ear/target/

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/application_7.xsd" version="7">
+  <display-name>letsgo-main-ear</display-name>
+  <module>
+    <web>
+      <web-uri>letsgo-rest-resteasy-user-registation-jpa-mysql-1.0.war</web-uri>
+      <context-root>/letsgo-rest-resteasy-user-registation-jpa-mysql</context-root>
+    </web>
+  </module>
+  <module>
+    <web>
+      <web-uri>letsgo-jsf-jsp-user-registration-1.0.war</web-uri>
+      <context-root>/letsgo-jsf-jsp-user-registration</context-root>
+    </web>
+  </module>
+  <module>
+    <web>
+      <web-uri>letsgo-rest-resteasy-password-utils-1.0.war</web-uri>
+      <context-root>/letsgo-rest-resteasy-password-utils</context-root>
+    </web>
+  </module>
+  <library-directory>META-INF/lib</library-directory>
+</application>
