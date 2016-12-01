@@ -12,7 +12,7 @@
     <packaging>pom</packaging>
     <name>letsgo-data</name>
     <modules>
-        <module>letsgo-ear</module>
+        <module>letsgo-data-ejb-ear</module>
         <module>letsgo-remote</module>
         <module>letsgo-entity</module>
         <module>letsgo-place</module>

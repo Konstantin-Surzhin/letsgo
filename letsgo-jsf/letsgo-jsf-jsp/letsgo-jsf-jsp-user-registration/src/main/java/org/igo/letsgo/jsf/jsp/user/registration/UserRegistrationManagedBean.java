@@ -25,6 +25,9 @@ import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 
 import java.io.File;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -50,26 +53,42 @@ public class UserRegistrationManagedBean {
 
     public void addUser() {
 
-        final String url = "http://localhost:8080//letsgo-rest-resteasy-user-registation-jpa-mysql/webresources/user/";
+        if (!password.equals(rpassword)) {
+            FacesContext.getCurrentInstance().addMessage("userForm:newPassword2", new FacesMessage(java.util.ResourceBundle.getBundle("Bundle").getString("ERROR_PASSWORD2")));
+            return;
+        }
+
+        final String url = "http://localhost:8080//letsgo-rest-resteasy-user-registation-jpa-mysql/webresources/user/"; //NOI18N
         final ResteasyClient client = new ResteasyClientBuilder().build();
         final ResteasyWebTarget target = client.target(url);
         final User outUser = new User();
+
         outUser.setLogin(login);
         outUser.setPassword(password);
         outUser.setPasswordRepetition(rpassword);
-        toFile(outUser);
-        final Entity e = Entity.entity(outUser, MediaType.APPLICATION_XML);
-        //final User inUser = target.request().post(e, User.class);
+        
+        //toFile(outUser);
 
-        // System.out.println(inUser.getUserURL() + " :: "+inUser.getPassword());
+        final Entity entity = Entity.entity(outUser, MediaType.APPLICATION_XML);
+        try {
+            final User inUser = target.request().post(entity, User.class);
+            String userUrl = (inUser.getUserURL());
+            FacesContext fc = FacesContext.getCurrentInstance();
+            ExternalContext ec = fc.getExternalContext();
+            ec.redirect(userUrl);
+
+        } catch (Exception ex) {
+            FacesContext.getCurrentInstance().addMessage("error", new FacesMessage(ex.getMessage())); //NOI18N
+        }
     }
 
     private void toFile(User user) {
         try {
 
-            File file = new File("D:\\file.xml");
-            JAXBContext jaxbContext = JAXBContext.newInstance(User.class);
-            Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+            final File file = new File("D:\\file.xml"); //NOI18N
+            final JAXBContext jaxbContext = JAXBContext.newInstance(User.class
+            );
+            final Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
             // output pretty printed
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
