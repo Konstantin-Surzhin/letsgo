@@ -8,4 +8,8 @@
     </parent>
     <artifactId>letsgo-security</artifactId>
     <packaging>pom</packaging>
+  <modules>
+    <module>letsgo-security-base</module>
+    <module>letsgo-security-digest</module>
+  </modules>
 </project>

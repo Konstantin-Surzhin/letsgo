@@ -49,3 +49,10 @@ hs_err_pid*
 /letsgo/letsgo-ear/target/
 /letsgo-main-ear/target/
 /letsgo-services/letsgo-rest/letsgo-rest-resteasy/letsgo-rest-reseasy-skeleton-key-core/target/
+/letsgo-data/letsgo-data-user-role/target/
+/letsgo-data/letsgo-data-user-role/letsgo-data-user-role-ejb/target/
+/letsgo-data/letsgo-data-user-role/letsgo-data-user-role-ear/target/
+/letsgo-services/letsgo-rest/letsgo-rest-resteasy/letsgo-rest-password-validator/target/
+/letsgo-security/target/
+/letsgo-security/letsgo-security-base/target/
+/letsgo-security/letsgo-security-digest/target/
