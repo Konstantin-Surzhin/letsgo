@@ -56,3 +56,4 @@ hs_err_pid*
 /letsgo-security/target/
 /letsgo-security/letsgo-security-base/target/
 /letsgo-security/letsgo-security-digest/target/
+/letsgo-monitoring-jvm/target/

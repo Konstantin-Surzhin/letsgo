@@ -160,6 +160,7 @@
         <module>letsgo-services</module>
         <module>letsgo-security</module>
         <module>letsgo-main-ear</module>
+        <module>letsgo-monitoring-jvm</module>
     </modules>
     <dependencyManagement>
         <dependencies>

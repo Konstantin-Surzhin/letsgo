@@ -1,0 +1,8 @@
+jps
+jstat
+jmap
+jstack
+jcmd
+jconsole
+jvisualvm
+jinfo
