@@ -11,5 +11,6 @@
   <modules>
     <module>letsgo-security-base</module>
     <module>letsgo-security-digest</module>
+    <module>letsgo-security-certificate</module>
   </modules>
 </project>
