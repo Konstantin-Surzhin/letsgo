@@ -53,10 +53,10 @@ public class PageAction implements Consumer<Locale> {
         (new WebDriverWait(driver, 10)).until(
                 (WebDriver d) -> {
                     return d.getTitle()
-                    .contains(MESSAGES.get("title"))
+                            .contains(MESSAGES.get("title"))
                     && d.findElement(By.tagName("H1"))
-                    .getText()
-                    .contains(MESSAGES.get("welcome"));
+                            .getText()
+                            .contains(MESSAGES.get("welcome"));
                 });
     }
 }

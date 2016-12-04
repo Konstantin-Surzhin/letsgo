@@ -5,4 +5,14 @@ jstack
 jcmd
 jconsole
 jvisualvm
+visualgc
 jinfo
+===========
+-Xmx
+-Xmx
+-Xmn
+-XXMetaspaceSize
+-XXMaxMetaspaceSize
+-XXPermSize
+-XXMaxPermSize
+-XX:-UsePerfData

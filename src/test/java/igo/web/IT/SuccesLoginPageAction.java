@@ -52,10 +52,10 @@ public class SuccesLoginPageAction extends PageAction implements Consumer<Locale
         (new WebDriverWait(driver, 10)).until(
                 (WebDriver d) -> {
                     return d.getTitle()
-                    .equals(MESSAGES.get("title"))
+                            .equals(MESSAGES.get("title"))
                     && d.findElement(By.tagName("H1"))
-                    .getText()
-                    .equals(MESSAGES.get("welcome"));
+                            .getText()
+                            .equals(MESSAGES.get("welcome"));
                 });
     }
 }

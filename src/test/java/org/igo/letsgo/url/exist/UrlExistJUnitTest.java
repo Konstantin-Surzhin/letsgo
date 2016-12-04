@@ -61,8 +61,8 @@ public class UrlExistJUnitTest {
             URLConnection conn = url.openConnection();
             conn.setConnectTimeout(5000);
             conn.connect();
-            
-            InputStream resp=conn.getInputStream();
+
+            InputStream resp = conn.getInputStream();
             resp.close();
 //            InputStream resp = (InputStream) obj;
 //            byte[] b = new byte[256];
@@ -71,8 +71,8 @@ public class UrlExistJUnitTest {
 //                System.out.print(new String(b, 0, n));
 //                n = resp.read(b);
 //            }
-        } catch (IOException  ex) {
+        } catch (IOException ex) {
             fail(ex.getMessage());
-        } 
+        }
     }
 }

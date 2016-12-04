@@ -77,6 +77,15 @@
                 <version>3.0.0</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                        <manifestEntries>
+                            <Dependencies>tools.jar</Dependencies>
+                            <Class-Path>/usr/lib/jvm/java-8-openjdk-i386/lib/tools.jar</Class-Path> 
+                        </manifestEntries>
+                    </archive>
                 </configuration>
             </plugin>
             <plugin>

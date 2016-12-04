@@ -19,7 +19,6 @@ package igo.web.chrome.IT;
 import igo.web.IT.BaseInterface;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 
-
 /**
  *
  * @author surzhin.konstantin
@@ -29,7 +28,7 @@ public class ChromeBase implements BaseInterface {
     private static final String CHROME_VERSION = "2.21";
 
     static {
-       ChromeDriverManager.getInstance().setup(ARCH, CHROME_VERSION);
-       //  ChromeDriverManager.getInstance().setup();
+        ChromeDriverManager.getInstance().setup(ARCH, CHROME_VERSION);
+        //  ChromeDriverManager.getInstance().setup();
     }
 }
