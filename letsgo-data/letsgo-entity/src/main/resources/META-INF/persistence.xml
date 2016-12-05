@@ -23,6 +23,8 @@
     <class>org.igo.entities.UserDetails</class>
     <class>org.igo.entities.UserGame</class>
     <class>org.igo.entities.UserRole</class>
+    <class>org.igo.entities.GameStatus</class>
+    <class>org.igo.entities.GameType</class>
     <properties>
       <property name="hibernate.dialect" value="org.mysql.utf8.dialect.MysqlUTF8Dialect"/>
       <property name="hibernate.transaction.manager_lookup_class" value="org.hibernate.transaction.JBossTransactionManagerLookup"/>

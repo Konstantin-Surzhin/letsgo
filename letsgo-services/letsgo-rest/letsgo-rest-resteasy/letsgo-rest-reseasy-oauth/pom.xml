@@ -3,12 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.igo</groupId>
-        <artifactId>letsgo-rest-resteasy-game</artifactId>
+        <artifactId>letsgo-rest-resteasy</artifactId>
         <version>1.0</version>
     </parent>
-    <artifactId>letsgo-rest-resteasy-game-jpa</artifactId>
+    <artifactId>letsgo-rest-reseasy-oauth</artifactId>
     <packaging>pom</packaging>
-  <modules>
-    <module>letsgo-rest-resteasy-game-jpa-mysql</module>
-  </modules>
+    <modules>
+        <module>letsgo-rest-reseasy-oauth-client</module>
+    </modules>
 </project>

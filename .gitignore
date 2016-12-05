@@ -56,3 +56,7 @@ hs_err_pid*
 /letsgo-security/target/
 /letsgo-security/letsgo-security-base/target/
 /letsgo-security/letsgo-security-digest/target/
+/letsgo-services/letsgo-rest/letsgo-rest-resteasy/letsgo-rest-reseasy-oauth/letsgo-rest-reseasy-skeleton-key-core/target/
+/letsgo-services/letsgo-rest/letsgo-rest-resteasy/letsgo-rest-reseasy-oauth/letsgo-rest-reseasy-oauth-client/target/
+/letsgo-services/letsgo-rest/letsgo-rest-resteasy/letsgo-rest-resteasy-game/letsgo-rest-resteasy-game-jpa/target/
+/letsgo-services/letsgo-rest/letsgo-rest-resteasy/letsgo-rest-resteasy-game/letsgo-rest-resteasy-game-jpa/letsgo-rest-resteasy-game-jpa-mysql/target/

@@ -44,13 +44,13 @@ public class Game implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Long id;
-    private Short bayomeeNumber;
-    private Short bayomeeTime;
-    private Short gandicap;
-    private int gameSize;
-    private int gameStatus;
-    private Short gameTime;
-    private int gameType;
+    private short bayomeeNumber;
+    private short bayomeeTime;
+    private short gandicap;
+    private short gameSize;
+    private GameStatus gameStatus;
+    private short gameTime;
+    private GameType gameType;
     private Collection<UserGame> usersGamesCollection;
     private Collection<GameComment> gamesCommentsCollection;
     private Collection<GameMove> gamesMovesCollection;
@@ -64,7 +64,7 @@ public class Game implements Serializable {
         this.id = id;
     }
 
-    public Game(Long id, int gameSize, int gameStatus, int gameType) {
+    public Game(Long id, short gameSize, GameStatus gameStatus, GameType gameType) {
         this.id = id;
         this.gameSize = gameSize;
         this.gameStatus = gameStatus;
@@ -83,67 +83,70 @@ public class Game implements Serializable {
     }
 
     @Column(name = "bayomee_number")
-    public Short getBayomeeNumber() {
+    public short getBayomeeNumber() {
         return bayomeeNumber;
     }
 
-    public void setBayomeeNumber(Short bayomeeNumber) {
+    public void setBayomeeNumber(short bayomeeNumber) {
         this.bayomeeNumber = bayomeeNumber;
     }
 
     @Column(name = "bayomee_time")
-    public Short getBayomeeTime() {
+    public short getBayomeeTime() {
         return bayomeeTime;
     }
 
-    public void setBayomeeTime(Short bayomeeTime) {
+    public void setBayomeeTime(short bayomeeTime) {
         this.bayomeeTime = bayomeeTime;
     }
 
-    public Short getGandicap() {
+    public short getGandicap() {
         return gandicap;
     }
 
-    public void setGandicap(Short gandicap) {
+    public void setGandicap(short gandicap) {
         this.gandicap = gandicap;
     }
 
     @Basic(optional = false)
     @Column(name = "game_size", nullable = false)
-    public int getGameSize() {
+    public short getGameSize() {
         return gameSize;
     }
 
-    public void setGameSize(int gameSize) {
+    public void setGameSize(short gameSize) {
         this.gameSize = gameSize;
     }
 
     @Basic(optional = false)
     @Column(name = "game_status", nullable = false)
-    public int getGameStatus() {
+   
+    @ManyToOne
+    public GameStatus getGameStatus() {
         return gameStatus;
     }
 
-    public void setGameStatus(int gameStatus) {
+    public void setGameStatus(GameStatus gameStatus) {
         this.gameStatus = gameStatus;
     }
 
     @Column(name = "game_time",nullable = false)
-    public Short getGameTime() {
+    public short getGameTime() {
         return gameTime;
     }
 
-    public void setGameTime(Short gameTime) {
+    public void setGameTime(short gameTime) {
         this.gameTime = gameTime;
     }
 
     @Basic(optional = false)
     @Column(name = "game_type", nullable = false)
-    public int getGameType() {
+    @ManyToOne
+    public GameType getGameType() {
         return gameType;
     }
 
-    public void setGameType(int gameType) {
+    public void setGameType(GameType gameType) {
         this.gameType = gameType;
     }
 

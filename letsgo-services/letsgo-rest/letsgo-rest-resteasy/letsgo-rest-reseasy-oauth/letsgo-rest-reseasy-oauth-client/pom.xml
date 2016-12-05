@@ -2,16 +2,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>letsgo-rest-resteasy</artifactId>
+        <artifactId>letsgo-rest-reseasy-oauth</artifactId>
         <groupId>org.igo</groupId>
         <version>1.0</version>
     </parent>
 
     <groupId>org.igo</groupId>
-    <artifactId>letsgo-rest-reseasy-skeleton-key-core</artifactId>
+    <artifactId>letsgo-rest-reseasy-oauth-client</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
-    <name>letsgo-rest-reseasy-skeleton-key-core</name>
+    <name>letsgo-rest-reseasy-oauth-client</name>
     <dependencies>
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
