@@ -42,7 +42,7 @@ import org.igo.entities.GameType;
 @Path("game")
 public class GameFacadeREST extends AbstractFacade<Game> {
 
-    @PersistenceContext(unitName = "")
+    @PersistenceContext(unitName = "gamePU")
     private EntityManager em;
 
     public GameFacadeREST() {
@@ -76,26 +76,26 @@ public class GameFacadeREST extends AbstractFacade<Game> {
         return super.find(id);
     }
 
-    @GET
-    @Path("size/{id}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Game> findAllBySize(@PathParam("id") Short id) {
-
-        Short.parseShort("1");
-        List<Game> gameList = new ArrayList<>();
-        GameStatus gs = new GameStatus(id);
-        GameType gt = new GameType(0);
-        gameList.add(new Game(1L, id, gs, gt));
-        gameList.add(new Game(2L, id, gs, gt));
-        gameList.add(new Game(3L, id, gs, gt));
-        gameList.add(new Game(4L, id, gs, gt));
-        gameList.add(new Game(5L, id, gs, gt));
-        gameList.add(new Game(6L, id, gs, gt));
-        gameList.add(new Game(7L, id, gs, gt));
-        gameList.add(new Game(8L, id, gs, gt));
-        return gameList;
-        // return super.find(id);
-    }
+//    @GET
+//    @Path("size/{id}")
+//    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+//    public List<Game> findAllBySize(@PathParam("id") Short id) {
+//
+//        Short.parseShort("1");
+//        List<Game> gameList = new ArrayList<>();
+//        GameStatus gs = new GameStatus(id);
+//        GameType gt = new GameType(0);
+//        gameList.add(new Game(1L, id, gs, gt));
+//        gameList.add(new Game(2L, id, gs, gt));
+//        gameList.add(new Game(3L, id, gs, gt));
+//        gameList.add(new Game(4L, id, gs, gt));
+//        gameList.add(new Game(5L, id, gs, gt));
+//        gameList.add(new Game(6L, id, gs, gt));
+//        gameList.add(new Game(7L, id, gs, gt));
+//        gameList.add(new Game(8L, id, gs, gt));
+//        return gameList;
+//        // return super.find(id);
+//    }
 
     @GET
     @Override
@@ -103,7 +103,7 @@ public class GameFacadeREST extends AbstractFacade<Game> {
     public List<Game> findAll() {
         List<Game> gameList = new ArrayList<>();
         GameStatus gs = new GameStatus(Short.valueOf("0"));
-        GameType gt = new GameType(0);
+        GameType gt = new GameType(Short.valueOf("0"));
 
         gameList.add(new Game(1L, Short.parseShort("9"), gs, gt));
         gameList.add(new Game(2L, Short.parseShort("11"), gs, gt));

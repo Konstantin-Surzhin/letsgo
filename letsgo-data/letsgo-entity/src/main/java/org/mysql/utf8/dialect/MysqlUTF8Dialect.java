@@ -26,8 +26,6 @@ public class MysqlUTF8Dialect extends MySQLInnoDBDialect{
 
     @Override
     public String getTableTypeString() {
-        return "ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_unicode_ci ";
+        return "ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_unicode_ci";
     }
-    
-    
 }

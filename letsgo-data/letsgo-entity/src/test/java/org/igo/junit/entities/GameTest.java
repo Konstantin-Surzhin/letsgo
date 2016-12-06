@@ -119,7 +119,7 @@ public class GameTest {
         System.out.println("getBayomeeTime");
         Game instance = new Game();
         short expResult = 0;
-        short result = instance.getBayomeeTime();
+        short result = instance.getByoYomiTime();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -133,7 +133,7 @@ public class GameTest {
         System.out.println("setBayomeeTime");
         short bayomeeTime = 0;
         Game instance = new Game();
-        instance.setBayomeeTime(bayomeeTime);
+        instance.setByoYomiTime(bayomeeTime);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

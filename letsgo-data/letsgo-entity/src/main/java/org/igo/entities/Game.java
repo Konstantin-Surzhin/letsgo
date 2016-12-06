@@ -1,7 +1,18 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2016 Surzhin.Konstantin
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.igo.entities;
 
@@ -45,7 +56,7 @@ public class Game implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long id;
     private short bayomeeNumber;
-    private short bayomeeTime;
+    private short ByoYomiTime;
     private short gandicap;
     private short gameSize;
     private GameStatus gameStatus;
@@ -91,13 +102,13 @@ public class Game implements Serializable {
         this.bayomeeNumber = bayomeeNumber;
     }
 
-    @Column(name = "bayomee_time")
-    public short getBayomeeTime() {
-        return bayomeeTime;
+    @Column(name = "byo_yomi_time")
+    public short getByoYomiTime() {
+        return ByoYomiTime;
     }
 
-    public void setBayomeeTime(short bayomeeTime) {
-        this.bayomeeTime = bayomeeTime;
+    public void setByoYomiTime(short ByoYomiTime) {
+        this.ByoYomiTime = ByoYomiTime;
     }
 
     public short getGandicap() {
@@ -119,8 +130,7 @@ public class Game implements Serializable {
     }
 
     @Basic(optional = false)
-    @Column(name = "game_status", nullable = false)
-   
+    @JoinColumn(name = "game_status_id", referencedColumnName = "id")
     @ManyToOne
     public GameStatus getGameStatus() {
         return gameStatus;
@@ -140,7 +150,8 @@ public class Game implements Serializable {
     }
 
     @Basic(optional = false)
-    @Column(name = "game_type", nullable = false)
+   // @Column(name = "game_type", nullable = false)
+    @JoinColumn(name = "game_type_id", referencedColumnName = "id")
     @ManyToOne
     public GameType getGameType() {
         return gameType;

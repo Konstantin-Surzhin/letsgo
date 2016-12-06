@@ -23,6 +23,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -31,6 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @XmlRootElement
+@Table(name = "GAME_STATUS")
 public class GameStatus implements Serializable {
 
     @OneToMany(mappedBy = "gameStatus")
@@ -42,7 +44,10 @@ public class GameStatus implements Serializable {
     private Short id;
     private String statusName;
 
-    public GameStatus(Short id) {
+    public GameStatus() {
+    }
+
+    public GameStatus(short id) {
         this.id = id;
     }
 
@@ -50,7 +55,7 @@ public class GameStatus implements Serializable {
         return id;
     }
 
-    public void setId(Short id) {
+    public void setId(short id) {
         this.id = id;
     }
 

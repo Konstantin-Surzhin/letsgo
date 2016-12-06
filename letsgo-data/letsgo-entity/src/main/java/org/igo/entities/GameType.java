@@ -42,15 +42,18 @@ public class GameType implements Serializable {
     private Short id;
     private String typeName;
 
-    public GameType(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public GameType() {
+    }
+
+    public GameType(short id) {
+       this.id = id;
     }
 
     public Short getId() {
         return id;
     }
 
-    public void setId(Short id) {
+    public void setId(short id) {
         this.id = id;
     }
 
