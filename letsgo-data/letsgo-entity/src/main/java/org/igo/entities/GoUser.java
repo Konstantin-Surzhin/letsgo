@@ -33,6 +33,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -43,6 +44,7 @@ import javax.validation.constraints.Size;
     @UniqueConstraint(name = "uk_user_name", columnNames = {"user_name"})})
 @NamedQueries({
     @NamedQuery(name = "League.findByUserName", query = "SELECT g FROM GoUser g WHERE g.userName = :userName")})
+@XmlRootElement
 public class GoUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
