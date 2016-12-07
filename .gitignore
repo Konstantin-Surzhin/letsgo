@@ -63,3 +63,5 @@ hs_err_pid*
 /letsgo-security/letsgo-security-certificate/target/
 /letsgo-services/letsgo-rest/letsgo-rest-resteasy/letsgo-rest-resteasy-user/letsgo-rest-resteasy-user-detail/letsgo-rest-resteasy-user-detail-jpa/target/
 /letsgo-services/letsgo-rest/letsgo-rest-resteasy/letsgo-rest-resteasy-club/letsgo-rest-resteasy-club-jpa/target/
+/letsgo-services/letsgo-rest/letsgo-rest-resteasy/letsgo-rest-resteasy-degree/letsgo-rest-resteasy-club-jpa/target/
+/letsgo-services/letsgo-rest/letsgo-rest-resteasy/letsgo-rest-resteasy-degree/letsgo-rest-resteasy-degree-jpa/target/

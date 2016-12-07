@@ -18,6 +18,7 @@
         <module>letsgo-rest-reseasy-oauth</module>
         <module>letsgo-rest-resteasy-user</module>
         <module>letsgo-rest-resteasy-club</module>
+        <module>letsgo-rest-resteasy-degree</module>
     </modules>
     <dependencies>
         <dependency>
