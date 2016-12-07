@@ -22,6 +22,7 @@
         <module>letsgo-rest-resteasy-event</module>
         <module>letsgo-rest-resteasy-game-comment</module>
         <module>letsgo-rest-resteasy-game-date</module>
+        <module>letsgo-rest-resteasy-game-move</module>
     </modules>
     <dependencies>
         <dependency>
