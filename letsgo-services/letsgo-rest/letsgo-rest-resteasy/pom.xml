@@ -20,6 +20,7 @@
         <module>letsgo-rest-resteasy-club</module>
         <module>letsgo-rest-resteasy-degree</module>
         <module>letsgo-rest-resteasy-event</module>
+        <module>letsgo-rest-resteasy-game-comment</module>
     </modules>
     <dependencies>
         <dependency>
