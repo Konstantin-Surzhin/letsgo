@@ -5,6 +5,9 @@
             30
         </session-timeout>
     </session-config>
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
     <security-constraint>
         <display-name>Area secured</display-name>
         <web-resource-collection>
@@ -24,7 +27,7 @@
         </user-data-constraint>
     </security-constraint>
     <login-config>
-        <auth-method>BASIC</auth-method>
+        <auth-method>CLIENT-CERT</auth-method>
     </login-config>
     <security-role>
         <description>Any roles</description>
