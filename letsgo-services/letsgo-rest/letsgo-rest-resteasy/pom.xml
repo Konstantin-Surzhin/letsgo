@@ -19,6 +19,7 @@
         <module>letsgo-rest-resteasy-user</module>
         <module>letsgo-rest-resteasy-club</module>
         <module>letsgo-rest-resteasy-degree</module>
+        <module>letsgo-rest-resteasy-event</module>
     </modules>
     <dependencies>
         <dependency>
