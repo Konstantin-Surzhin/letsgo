@@ -17,6 +17,7 @@
         <module>letsgo-rest-password-validator</module>
         <module>letsgo-rest-reseasy-oauth</module>
         <module>letsgo-rest-resteasy-user</module>
+        <module>letsgo-rest-resteasy-club</module>
     </modules>
     <dependencies>
         <dependency>
