@@ -12,6 +12,8 @@
     <class>org.igo.entities.GameDate</class>
     <class>org.igo.entities.GameMove</class>
     <class>org.igo.entities.GameRule</class>
+    <class>org.igo.entities.GameStatus</class>
+    <class>org.igo.entities.GameType</class>
     <class>org.igo.entities.GoUser</class>
     <class>org.igo.entities.League</class>
     <class>org.igo.entities.MoveComment</class>
@@ -32,7 +34,9 @@
       <property name="hibernate.connection.characterEncoding" value="utf8"/>
       <property name="hibernate.connection.useUnicode" value="true"/>
       <property name="hibernate.connection.charSet" value="UTF-8"/>
-      <property name="hibernate.hbm2ddl.auto" value="update"/>
+      <!--<property name="hibernate.hbm2ddl.auto" value="update"/>-->
+      <property name="hibernate.hbm2ddl.auto" value="create"/>
+      <property name="hibernate.hbm2ddl.import_files" value="META-INF/sql/load_script.sql"/>
     </properties>
   </persistence-unit>
 </persistence>

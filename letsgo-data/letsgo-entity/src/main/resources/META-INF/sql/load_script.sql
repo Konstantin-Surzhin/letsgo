@@ -1,0 +1,1 @@
+INSERT INTO letsgo.cities (city_name, oktmo) VALUES ('Москва','45000000000');

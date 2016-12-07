@@ -22,6 +22,8 @@ import org.igo.entities.Game;
 import org.igo.entities.GameComment;
 import org.igo.entities.GameDate;
 import org.igo.entities.GameMove;
+import org.igo.entities.GameStatus;
+import org.igo.entities.GameType;
 import org.igo.entities.UserGame;
 import static org.testng.Assert.*;
 import org.testng.annotations.AfterClass;
@@ -89,8 +91,8 @@ public class GameNGTest {
     public void testGetBayomeeNumber() {
         System.out.println("getBayomeeNumber");
         Game instance = new Game();
-        Short expResult = null;
-        Short result = instance.getBayomeeNumber();
+        short expResult = 0;
+        short result = instance.getBayomeeNumber();
         assertEquals(result, expResult);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
@@ -102,7 +104,7 @@ public class GameNGTest {
     @Test
     public void testSetBayomeeNumber() {
         System.out.println("setBayomeeNumber");
-        Short bayomeeNumber = null;
+        short bayomeeNumber = 0;
         Game instance = new Game();
         instance.setBayomeeNumber(bayomeeNumber);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
@@ -116,8 +118,8 @@ public class GameNGTest {
     public void testGetBayomeeTime() {
         System.out.println("getBayomeeTime");
         Game instance = new Game();
-        Short expResult = null;
-        Short result = instance.getBayomeeTime();
+        short expResult = 0;
+        short result = instance.getByoYomiTime();
         assertEquals(result, expResult);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
@@ -129,9 +131,9 @@ public class GameNGTest {
     @Test
     public void testSetBayomeeTime() {
         System.out.println("setBayomeeTime");
-        Short bayomeeTime = null;
+        short bayomeeTime = 0;
         Game instance = new Game();
-        instance.setBayomeeTime(bayomeeTime);
+        instance.setByoYomiTime(bayomeeTime);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
     }
@@ -143,8 +145,8 @@ public class GameNGTest {
     public void testGetGandicap() {
         System.out.println("getGandicap");
         Game instance = new Game();
-        Short expResult = null;
-        Short result = instance.getGandicap();
+        short expResult = 0;
+        short result = instance.getGandicap();
         assertEquals(result, expResult);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
@@ -156,7 +158,7 @@ public class GameNGTest {
     @Test
     public void testSetGandicap() {
         System.out.println("setGandicap");
-        Short gandicap = null;
+        short gandicap = 0;
         Game instance = new Game();
         instance.setGandicap(gandicap);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
@@ -183,7 +185,7 @@ public class GameNGTest {
     @Test
     public void testSetGameSize() {
         System.out.println("setGameSize");
-        int gameSize = 0;
+        short gameSize = 0;
         Game instance = new Game();
         instance.setGameSize(gameSize);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
@@ -197,8 +199,8 @@ public class GameNGTest {
     public void testGetGameStatus() {
         System.out.println("getGameStatus");
         Game instance = new Game();
-        int expResult = 0;
-        int result = instance.getGameStatus();
+        GameStatus expResult = null;
+        GameStatus result = instance.getGameStatus();
         assertEquals(result, expResult);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
@@ -210,7 +212,7 @@ public class GameNGTest {
     @Test
     public void testSetGameStatus() {
         System.out.println("setGameStatus");
-        int gameStatus = 0;
+        GameStatus gameStatus = null;
         Game instance = new Game();
         instance.setGameStatus(gameStatus);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
@@ -224,8 +226,8 @@ public class GameNGTest {
     public void testGetGameTime() {
         System.out.println("getGameTime");
         Game instance = new Game();
-        Short expResult = null;
-        Short result = instance.getGameTime();
+        short expResult = 0;
+        short result = instance.getGameTime();
         assertEquals(result, expResult);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
@@ -237,7 +239,7 @@ public class GameNGTest {
     @Test
     public void testSetGameTime() {
         System.out.println("setGameTime");
-        Short gameTime = null;
+        short gameTime = 0;
         Game instance = new Game();
         instance.setGameTime(gameTime);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
@@ -251,8 +253,8 @@ public class GameNGTest {
     public void testGetGameType() {
         System.out.println("getGameType");
         Game instance = new Game();
-        int expResult = 0;
-        int result = instance.getGameType();
+        GameType expResult = null;
+        GameType result = instance.getGameType();
         assertEquals(result, expResult);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
@@ -264,7 +266,7 @@ public class GameNGTest {
     @Test
     public void testSetGameType() {
         System.out.println("setGameType");
-        int gameType = 0;
+        GameType gameType = null;
         Game instance = new Game();
         instance.setGameType(gameType);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.

@@ -54,6 +54,7 @@ public class City implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer id;
     private String cityName;
+    private String oktmo;
     private Set<UserDetails> userCollection;
     private Set<Club> clubsSet;
 
@@ -135,5 +136,19 @@ public class City implements Serializable {
 
     public void setClubsSet(Set<Club> clubsSet) {
         this.clubsSet = clubsSet;
+    }
+
+    /**
+     * @return the oktmo
+     */
+    public String getOktmo() {
+        return oktmo;
+    }
+
+    /**
+     * @param oktmo the oktmo to set
+     */
+    public void setOktmo(String oktmo) {
+        this.oktmo = oktmo;
     }
 }

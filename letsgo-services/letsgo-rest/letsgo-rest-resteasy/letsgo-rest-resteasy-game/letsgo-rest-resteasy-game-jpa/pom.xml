@@ -8,4 +8,7 @@
     </parent>
     <artifactId>letsgo-rest-resteasy-game-jpa</artifactId>
     <packaging>pom</packaging>
+  <modules>
+    <module>letsgo-rest-resteasy-game-jpa-mysql</module>
+  </modules>
 </project>

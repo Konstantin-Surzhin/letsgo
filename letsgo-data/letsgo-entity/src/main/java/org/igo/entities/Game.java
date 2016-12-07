@@ -1,7 +1,18 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2016 Surzhin.Konstantin
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.igo.entities;
 
@@ -44,13 +55,13 @@ public class Game implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Long id;
-    private Short bayomeeNumber;
-    private Short bayomeeTime;
-    private Short gandicap;
-    private int gameSize;
-    private int gameStatus;
-    private Short gameTime;
-    private int gameType;
+    private short bayomeeNumber;
+    private short ByoYomiTime;
+    private short gandicap;
+    private short gameSize;
+    private GameStatus gameStatus;
+    private short gameTime;
+    private GameType gameType;
     private Collection<UserGame> usersGamesCollection;
     private Collection<GameComment> gamesCommentsCollection;
     private Collection<GameMove> gamesMovesCollection;
@@ -64,7 +75,7 @@ public class Game implements Serializable {
         this.id = id;
     }
 
-    public Game(Long id, int gameSize, int gameStatus, int gameType) {
+    public Game(Long id, short gameSize, GameStatus gameStatus, GameType gameType) {
         this.id = id;
         this.gameSize = gameSize;
         this.gameStatus = gameStatus;
@@ -83,67 +94,70 @@ public class Game implements Serializable {
     }
 
     @Column(name = "bayomee_number")
-    public Short getBayomeeNumber() {
+    public short getBayomeeNumber() {
         return bayomeeNumber;
     }
 
-    public void setBayomeeNumber(Short bayomeeNumber) {
+    public void setBayomeeNumber(short bayomeeNumber) {
         this.bayomeeNumber = bayomeeNumber;
     }
 
-    @Column(name = "bayomee_time")
-    public Short getBayomeeTime() {
-        return bayomeeTime;
+    @Column(name = "byo_yomi_time")
+    public short getByoYomiTime() {
+        return ByoYomiTime;
     }
 
-    public void setBayomeeTime(Short bayomeeTime) {
-        this.bayomeeTime = bayomeeTime;
+    public void setByoYomiTime(short ByoYomiTime) {
+        this.ByoYomiTime = ByoYomiTime;
     }
 
-    public Short getGandicap() {
+    public short getGandicap() {
         return gandicap;
     }
 
-    public void setGandicap(Short gandicap) {
+    public void setGandicap(short gandicap) {
         this.gandicap = gandicap;
     }
 
     @Basic(optional = false)
     @Column(name = "game_size", nullable = false)
-    public int getGameSize() {
+    public short getGameSize() {
         return gameSize;
     }
 
-    public void setGameSize(int gameSize) {
+    public void setGameSize(short gameSize) {
         this.gameSize = gameSize;
     }
 
     @Basic(optional = false)
-    @Column(name = "game_status", nullable = false)
-    public int getGameStatus() {
+    @JoinColumn(name = "game_status_id", referencedColumnName = "id")
+    @ManyToOne
+    public GameStatus getGameStatus() {
         return gameStatus;
     }
 
-    public void setGameStatus(int gameStatus) {
+    public void setGameStatus(GameStatus gameStatus) {
         this.gameStatus = gameStatus;
     }
 
     @Column(name = "game_time",nullable = false)
-    public Short getGameTime() {
+    public short getGameTime() {
         return gameTime;
     }
 
-    public void setGameTime(Short gameTime) {
+    public void setGameTime(short gameTime) {
         this.gameTime = gameTime;
     }
 
     @Basic(optional = false)
-    @Column(name = "game_type", nullable = false)
-    public int getGameType() {
+   // @Column(name = "game_type", nullable = false)
+    @JoinColumn(name = "game_type_id", referencedColumnName = "id")
+    @ManyToOne
+    public GameType getGameType() {
         return gameType;
     }
 
-    public void setGameType(int gameType) {
+    public void setGameType(GameType gameType) {
         this.gameType = gameType;
     }
 

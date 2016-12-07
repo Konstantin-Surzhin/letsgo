@@ -22,6 +22,8 @@ import org.igo.entities.Game;
 import org.igo.entities.GameComment;
 import org.igo.entities.GameDate;
 import org.igo.entities.GameMove;
+import org.igo.entities.GameStatus;
+import org.igo.entities.GameType;
 import org.igo.entities.UserGame;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -89,8 +91,8 @@ public class GameTest {
     public void testGetBayomeeNumber() {
         System.out.println("getBayomeeNumber");
         Game instance = new Game();
-        Short expResult = null;
-        Short result = instance.getBayomeeNumber();
+        short expResult = 0;
+        short result = instance.getBayomeeNumber();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -102,7 +104,7 @@ public class GameTest {
     @Test
     public void testSetBayomeeNumber() {
         System.out.println("setBayomeeNumber");
-        Short bayomeeNumber = null;
+        short bayomeeNumber = 0;
         Game instance = new Game();
         instance.setBayomeeNumber(bayomeeNumber);
         // TODO review the generated test code and remove the default call to fail.
@@ -116,8 +118,8 @@ public class GameTest {
     public void testGetBayomeeTime() {
         System.out.println("getBayomeeTime");
         Game instance = new Game();
-        Short expResult = null;
-        Short result = instance.getBayomeeTime();
+        short expResult = 0;
+        short result = instance.getByoYomiTime();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -129,9 +131,9 @@ public class GameTest {
     @Test
     public void testSetBayomeeTime() {
         System.out.println("setBayomeeTime");
-        Short bayomeeTime = null;
+        short bayomeeTime = 0;
         Game instance = new Game();
-        instance.setBayomeeTime(bayomeeTime);
+        instance.setByoYomiTime(bayomeeTime);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -143,8 +145,8 @@ public class GameTest {
     public void testGetGandicap() {
         System.out.println("getGandicap");
         Game instance = new Game();
-        Short expResult = null;
-        Short result = instance.getGandicap();
+        short expResult = 0;
+        short result = instance.getGandicap();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -156,7 +158,7 @@ public class GameTest {
     @Test
     public void testSetGandicap() {
         System.out.println("setGandicap");
-        Short gandicap = null;
+        short gandicap = 0;
         Game instance = new Game();
         instance.setGandicap(gandicap);
         // TODO review the generated test code and remove the default call to fail.
@@ -183,7 +185,7 @@ public class GameTest {
     @Test
     public void testSetGameSize() {
         System.out.println("setGameSize");
-        int gameSize = 0;
+        short gameSize = 0;
         Game instance = new Game();
         instance.setGameSize(gameSize);
         // TODO review the generated test code and remove the default call to fail.
@@ -197,8 +199,8 @@ public class GameTest {
     public void testGetGameStatus() {
         System.out.println("getGameStatus");
         Game instance = new Game();
-        int expResult = 0;
-        int result = instance.getGameStatus();
+        GameStatus expResult = null;
+        GameStatus result = instance.getGameStatus();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -210,7 +212,7 @@ public class GameTest {
     @Test
     public void testSetGameStatus() {
         System.out.println("setGameStatus");
-        int gameStatus = 0;
+        GameStatus gameStatus = null;
         Game instance = new Game();
         instance.setGameStatus(gameStatus);
         // TODO review the generated test code and remove the default call to fail.
@@ -224,8 +226,8 @@ public class GameTest {
     public void testGetGameTime() {
         System.out.println("getGameTime");
         Game instance = new Game();
-        Short expResult = null;
-        Short result = instance.getGameTime();
+        short expResult = 0;
+        short result = instance.getGameTime();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -237,7 +239,7 @@ public class GameTest {
     @Test
     public void testSetGameTime() {
         System.out.println("setGameTime");
-        Short gameTime = null;
+        short gameTime = 0;
         Game instance = new Game();
         instance.setGameTime(gameTime);
         // TODO review the generated test code and remove the default call to fail.
@@ -251,8 +253,8 @@ public class GameTest {
     public void testGetGameType() {
         System.out.println("getGameType");
         Game instance = new Game();
-        int expResult = 0;
-        int result = instance.getGameType();
+        GameType expResult = null;
+        GameType result = instance.getGameType();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -264,7 +266,7 @@ public class GameTest {
     @Test
     public void testSetGameType() {
         System.out.println("setGameType");
-        int gameType = 0;
+        GameType gameType = null;
         Game instance = new Game();
         instance.setGameType(gameType);
         // TODO review the generated test code and remove the default call to fail.
