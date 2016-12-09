@@ -31,6 +31,7 @@
         <module>letsgo-rest-resteasy-place</module>
         <module>letsgo-rest-resteasy-room</module>
         <module>letsgo-rest-resteasy-team</module>
+        <module>letsgo-rest-resteasy-user-ban</module>
     </modules>
     <dependencies>
         <dependency>

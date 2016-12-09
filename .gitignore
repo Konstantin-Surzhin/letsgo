@@ -79,3 +79,4 @@ hs_err_pid*
 /letsgo-services/letsgo-rest/letsgo-rest-resteasy/letsgo-rest-resteasy-place/letsgo-rest-resteasy-place-jpa/target/
 /letsgo-services/letsgo-rest/letsgo-rest-resteasy/letsgo-rest-resteasy-room/letsgo-rest-resteasy-room-jpa/target/
 /letsgo-services/letsgo-rest/letsgo-rest-resteasy/letsgo-rest-resteasy-team/letsgo-rest-resteasy-team-jpa/target/
+/letsgo-services/letsgo-rest/letsgo-rest-resteasy/letsgo-rest-resteasy-user-ban/letsgo-rest-resteasy-user-ban-jpa/target/
