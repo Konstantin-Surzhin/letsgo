@@ -29,6 +29,7 @@
         <module>letsgo-rest-resteasy-league</module>
         <module>letsgo-rest-resteasy-move-comment</module>
         <module>letsgo-rest-resteasy-place</module>
+        <module>letsgo-rest-resteasy-room</module>
     </modules>
     <dependencies>
         <dependency>
