@@ -28,6 +28,7 @@
         <module>letsgo-rest-resteasy-game-type</module>
         <module>letsgo-rest-resteasy-league</module>
         <module>letsgo-rest-resteasy-move-comment</module>
+        <module>letsgo-rest-resteasy-place</module>
     </modules>
     <dependencies>
         <dependency>
