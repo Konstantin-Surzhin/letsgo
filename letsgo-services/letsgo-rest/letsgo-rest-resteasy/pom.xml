@@ -27,6 +27,7 @@
         <module>letsgo-rest-resteasy-game-status</module>
         <module>letsgo-rest-resteasy-game-type</module>
         <module>letsgo-rest-resteasy-league</module>
+        <module>letsgo-rest-resteasy-move-comment</module>
     </modules>
     <dependencies>
         <dependency>
