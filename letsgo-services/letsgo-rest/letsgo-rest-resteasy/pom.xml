@@ -34,6 +34,7 @@
         <module>letsgo-rest-resteasy-user-ban</module>
         <module>letsgo-rest-resteasy-user-degree</module>
         <module>letsgo-rest-resteasy-user-game</module>
+        <module>letsgo-rest-resteasy-user-role</module>
     </modules>
     <dependencies>
         <dependency>
