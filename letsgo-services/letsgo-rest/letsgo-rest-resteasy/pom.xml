@@ -32,6 +32,7 @@
         <module>letsgo-rest-resteasy-room</module>
         <module>letsgo-rest-resteasy-team</module>
         <module>letsgo-rest-resteasy-user-ban</module>
+        <module>letsgo-rest-resteasy-user-degree</module>
     </modules>
     <dependencies>
         <dependency>
