@@ -12,6 +12,7 @@
         <module>letsgo-rest</module>
         <module>letsgo-soap</module>
         <module>letsgo-rpc</module>
+        <module>InterfaceOfClientForServiceRequests</module>
     </modules>
     <dependencies>
         <dependency>

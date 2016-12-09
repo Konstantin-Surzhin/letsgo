@@ -70,3 +70,5 @@ hs_err_pid*
 /letsgo-services/letsgo-rest/letsgo-rest-resteasy/letsgo-rest-resteasy-game-date/letsgo-rest-resteasy-game-date-jpa/target/
 /letsgo-services/letsgo-rest/letsgo-rest-resteasy/letsgo-rest-resteasy-game-move/letsgo-rest-resteasy-game-move-jpa/target/
 /letsgo-services/letsgo-rest/letsgo-rest-resteasy/letsgo-rest-resteasy-game-rule/letsgo-rest-resteasy-game-rule-jpa/target/
+/letsgo-services/InterfaceOfClientForServiceRequests/target/
+/letsgo-services/InterfaceOfClientForServiceRequests/nbproject/
