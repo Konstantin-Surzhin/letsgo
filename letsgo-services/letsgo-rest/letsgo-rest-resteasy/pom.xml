@@ -25,6 +25,7 @@
         <module>letsgo-rest-resteasy-game-move</module>
         <module>letsgo-rest-resteasy-game-rule</module>
         <module>letsgo-rest-resteasy-game-status</module>
+        <module>letsgo-rest-resteasy-game-type</module>
     </modules>
     <dependencies>
         <dependency>

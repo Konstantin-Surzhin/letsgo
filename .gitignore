@@ -73,3 +73,4 @@ hs_err_pid*
 /letsgo-services/InterfaceOfClientForServiceRequests/target/
 /letsgo-services/InterfaceOfClientForServiceRequests/nbproject/
 /letsgo-services/letsgo-rest/letsgo-rest-resteasy/letsgo-rest-resteasy-game-status/letsgo-rest-resteasy-game-status-jpa/target/
+/letsgo-services/letsgo-rest/letsgo-rest-resteasy/letsgo-rest-resteasy-game-type/letsgo-rest-resteasy-game-type-jpa/target/
