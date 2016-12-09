@@ -33,6 +33,7 @@
         <module>letsgo-rest-resteasy-team</module>
         <module>letsgo-rest-resteasy-user-ban</module>
         <module>letsgo-rest-resteasy-user-degree</module>
+        <module>letsgo-rest-resteasy-user-game</module>
     </modules>
     <dependencies>
         <dependency>
