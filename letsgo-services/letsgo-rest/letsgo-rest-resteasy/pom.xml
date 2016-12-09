@@ -30,6 +30,7 @@
         <module>letsgo-rest-resteasy-move-comment</module>
         <module>letsgo-rest-resteasy-place</module>
         <module>letsgo-rest-resteasy-room</module>
+        <module>letsgo-rest-resteasy-team</module>
     </modules>
     <dependencies>
         <dependency>
