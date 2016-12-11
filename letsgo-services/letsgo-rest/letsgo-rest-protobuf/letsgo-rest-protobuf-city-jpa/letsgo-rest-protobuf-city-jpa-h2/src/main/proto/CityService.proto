@@ -1,9 +1,9 @@
-syntax = "proto3";
+syntax = "proto2";
 
 package sources;
 option java_package = "org.igo.letsgo.rest.city.generate.sources";
 option java_outer_classname = "CityService";
 message City {
-   int32 id = 1; 
-   string name = 2;
+   required int32 id = 1; 
+   required string name = 2;
   }

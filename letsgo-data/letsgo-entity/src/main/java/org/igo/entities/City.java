@@ -31,6 +31,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -52,6 +53,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class City implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @XmlID
     private Integer id;
     private String cityName;
     private String oktmo;

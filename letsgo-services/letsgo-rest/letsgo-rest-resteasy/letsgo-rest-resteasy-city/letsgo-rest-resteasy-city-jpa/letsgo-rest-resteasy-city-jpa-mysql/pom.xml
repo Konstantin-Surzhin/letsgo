@@ -13,7 +13,13 @@
     <packaging>war</packaging>
 
     <name>letsgo-rest-resteasy-city-jpa-mysql</name>
-
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>letsgo-entity</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

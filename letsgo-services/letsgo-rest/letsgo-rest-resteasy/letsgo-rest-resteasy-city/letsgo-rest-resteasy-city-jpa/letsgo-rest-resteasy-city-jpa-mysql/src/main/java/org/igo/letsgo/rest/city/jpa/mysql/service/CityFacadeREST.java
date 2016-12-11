@@ -18,7 +18,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import org.igo.letsgo.rest.city.entity.City;
+import org.igo.entities.City;
+
+
+import org.jboss.resteasy.links.AddLinks;
+import org.jboss.resteasy.links.LinkResource;
 
 /**
  *
@@ -57,6 +61,8 @@ public class CityFacadeREST extends AbstractFacade<City> {
     }
 
     @GET
+    @AddLinks
+    @LinkResource
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public City find(@PathParam("id") Integer id) {
@@ -64,6 +70,8 @@ public class CityFacadeREST extends AbstractFacade<City> {
     }
 
     @GET
+    @AddLinks
+    @LinkResource(value = City.class)
     @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<City> findAll() {
