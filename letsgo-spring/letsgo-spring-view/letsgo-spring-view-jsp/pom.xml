@@ -9,23 +9,30 @@
     <artifactId>letsgo-spring-view-jsp</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>letsgo-spring-jsp-city</module>
-        <module>letsgo-spring-jsp-degree</module>
-        <module>letsgo-spring-jsp-event</module>
-        <module>letsgo-spring-jsp-game</module>
-        <module>letsgo-spring-jsp-game-comment</module>
-        <module>letsgo-spring-jsp-game-move</module>
-        <module>letsgo-spring-jsp-game-date</module>
-        <module>letsgo-spring-jsp-league</module>
-        <module>letsgo-spring-jsp-move-comment</module>
-        <module>letsgo-spring-jsp-place</module>
-        <module>letsgo-spring-jsp-room</module>
-        <module>letsgo-spring-jsp-team</module>
-        <module>letsgo-spring-jsp-user</module>
-        <module>letsgo-spring-jsp-user-ban</module>
-        <module>letsgo-spring-jsp-user-degree</module>
-        <module>letsgo-spring-jsp-user-game</module>
-        <module>letsgo-spring-jsp-user-role</module>
+        <module>letsgo-spring-view-jsp-city</module>
+        <module>letsgo-spring-view-jsp-degree</module>
+        <module>letsgo-spring-view-jsp-event</module>
+        <module>letsgo-spring-view-jsp-game</module>
+        <module>letsgo-spring-view-jsp-game-comment</module>
+        <module>letsgo-spring-view-jsp-game-date</module>
+        <module>letsgo-spring-view-jsp-game-move</module>
+        <module>letsgo-spring-view-jsp-league</module>
+        <module>letsgo-spring-view-jsp-move-comment</module>
+        <module>letsgo-spring-view-jsp-place</module>
+        <module>letsgo-spring-view-jsp-room</module>
+        <module>letsgo-spring-view-jsp-team</module>
+        <module>letsgo-spring-view-jsp-user</module>
+        <module>letsgo-spring-view-jsp-user-ban</module>
+        <module>letsgo-spring-view-jsp-user-game</module>
+        <module>letsgo-spring-view-jsp-user-degree</module>
+        <module>letsgo-spring-view-jsp-user-role</module>
     </modules>
     <name>letsgo-spring-view-jsp</name>
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>letsgo-entity</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 </project>

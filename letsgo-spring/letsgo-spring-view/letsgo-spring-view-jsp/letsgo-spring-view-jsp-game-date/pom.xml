@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>letsgo-spring-view-jsp</artifactId>
+        <groupId>org.igo</groupId>
+        <version>1.0</version>
+    </parent>
+
+    <groupId>org.igo</groupId>
+    <artifactId>letsgo-spring-view-jsp-game-date</artifactId>
+    <version>1.0</version>
+    <packaging>war</packaging>
+
+    <name>letsgo-spring-view-jsp-game-date</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>letsgo-spring-controler-game-date</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+    </dependencies>
+</project>

@@ -30,4 +30,11 @@
     <module>letsgo-spring-data-city</module>
   </modules>
     <name>letsgo-spring-data</name>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>1.10.5.RELEASE</version>
+        </dependency>
+    </dependencies>
 </project>

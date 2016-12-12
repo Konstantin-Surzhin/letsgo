@@ -18,7 +18,11 @@
                         <endorseddirs>${endorsed.dir}</endorseddirs>
                     </compilerArguments>
                     <debug>false</debug>
-                    <argLine>-Xmx512m</argLine>
+                   <argLine>-Xmx1024m</argLine>
+                    <!--<argLine>-am</argLine>
+                    <argLine>-o</argLine>
+                    <argLine>-Dmaven.test.skip</argLine>
+                    <argLine>-T 2C</argLine>-->
                 </configuration>
             </plugin>
             <plugin>
