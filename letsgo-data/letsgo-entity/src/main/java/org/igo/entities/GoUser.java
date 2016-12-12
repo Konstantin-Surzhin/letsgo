@@ -43,7 +43,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "GO_USERS", uniqueConstraints = {
     @UniqueConstraint(name = "uk_user_name", columnNames = {"user_name"})})
 @NamedQueries({
-    @NamedQuery(name = "League.findByUserName", query = "SELECT g FROM GoUser g WHERE g.userName = :userName")})
+    @NamedQuery(name = "GoUser.findByUserName", query = "SELECT g FROM GoUser g WHERE g.userName = :userName")})
 @XmlRootElement
 public class GoUser implements Serializable {
 

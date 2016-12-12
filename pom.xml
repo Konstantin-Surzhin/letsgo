@@ -90,6 +90,7 @@
                             <Class-Path>/usr/lib/jvm/java-8-openjdk-i386/lib/tools.jar</Class-Path> 
                         </manifestEntries>
                     </archive>
+                    <argLine>-Xmx1024m</argLine>
                 </configuration>
             </plugin>
             <plugin>
@@ -98,7 +99,7 @@
                 <version>2.5.1</version>
                 <configuration>
                     <ejbVersion>3.1</ejbVersion>
-                    <argLine>-Xmx512m</argLine>
+                    <argLine>-Xmx1024m</argLine>
                 </configuration>
             </plugin>
             <plugin>
@@ -108,6 +109,7 @@
                 <configuration>
                     <version>6</version>
                     <defaultLibBundleDir>lib</defaultLibBundleDir>
+                    <argLine>-Xmx1024m</argLine>
                 </configuration>
             </plugin>
             <plugin>

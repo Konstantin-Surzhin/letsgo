@@ -18,9 +18,11 @@ package org.igo.letsgo.rest.resteasy.user.detail.jpa.mysql.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -29,7 +31,11 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
 import org.igo.entities.Club;
 import org.igo.entities.Degree;
 import org.igo.entities.Game;
@@ -65,9 +71,25 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
 
     @PUT
     @Path("{id}")
+    @RolesAllowed({ "gouser", "administrator" })
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") Integer id, GoUser entity) {
-        super.edit(entity);
+    public Response edit(@Context final SecurityContext secContext, @PathParam("id") final Integer id, final GoUser entity) {
+        final String name = secContext.getUserPrincipal().getName();
+        final TypedQuery<GoUser> gousers = em.createNamedQuery("GoUser.findByUserName", GoUser.class);
+        gousers.setParameter("userName",name);
+        
+        try {
+            final GoUser user = gousers.getSingleResult();
+            if (!user.getId().equals(id)) {
+                throw new WebApplicationException(Response.Status.FORBIDDEN);
+            } else {
+                super.edit(entity);
+            }
+        } catch (Exception e) {
+            return Response.status(Response.Status.FORBIDDEN).entity(e.getMessage()).build();
+        }
+
+        return Response.ok(entity).build();
     }
 
     @DELETE
