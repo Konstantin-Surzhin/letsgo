@@ -19,6 +19,8 @@ package org.igo.entities;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.ColumnResult;
+import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
@@ -26,14 +28,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -42,9 +44,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "GO_USERS", uniqueConstraints = {
     @UniqueConstraint(name = "uk_user_name", columnNames = {"user_name"})})
-@NamedQueries({
-    @NamedQuery(name = "GoUser.findByUserName", query = "SELECT g FROM GoUser g WHERE g.userName = :userName")})
-@XmlRootElement
+@NamedNativeQueries({
+    @NamedNativeQuery(name = "GoUser.findByUserName", 
+            query = "SELECT id, user_name FROM go_users", 
+            resultSetMapping = "GoUserToWeakUser")
+     })
+@SqlResultSetMapping(name="GoUserToWeakUser", classes = {
+    @ConstructorResult(targetClass = User.class, 
+    columns = {@ColumnResult(name="id"), @ColumnResult(name="user_name")})
+})
 public class GoUser implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -41,7 +41,6 @@ import javax.xml.bind.annotation.XmlRootElement;
         uniqueConstraints = {
             @UniqueConstraint(name = "uk_city_club",
                     columnNames = {"city_id", "club_name"})})
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Club.findAll", query = "SELECT c FROM Club c")
     , @NamedQuery(name = "Club.findById", query = "SELECT c FROM Club c WHERE c.id = :id")

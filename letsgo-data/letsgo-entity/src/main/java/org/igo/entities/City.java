@@ -30,10 +30,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+//import javax.validation.constraints.Size;
 
 /**
  *
@@ -49,11 +46,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "City.findByCityName", query = "SELECT c FROM City c WHERE c.cityName = :cityName"),
     @NamedQuery(name = "City.checkByCityName", query = "SELECT count(c) FROM City c WHERE c.cityName = :cityName")
 })
-@XmlRootElement
 public class City implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @XmlID
     private Integer id;
     private String cityName;
     private String oktmo;
@@ -117,7 +112,6 @@ public class City implements Serializable {
     /**
      * @return the cityName
      */
-    @Size(min = 1,max = 255)
     @Column(length = 255, name = "city_name", nullable = false  )
     public String getCityName() {
         return cityName;
@@ -131,7 +125,6 @@ public class City implements Serializable {
     }
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cityId")
-    @XmlTransient
     public Set<Club> getClubsSet() {
         return clubsSet;
     }

@@ -31,8 +31,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -40,12 +38,11 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "GAMES")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Game.findAll", query = "SELECT g FROM Game g"),
     @NamedQuery(name = "Game.findById", query = "SELECT g FROM Game g WHERE g.id = :id"),
     @NamedQuery(name = "Game.findByBayomeeNumber", query = "SELECT g FROM Game g WHERE g.bayomeeNumber = :bayomeeNumber"),
-    @NamedQuery(name = "Game.findByBayomeeTime", query = "SELECT g FROM Game g WHERE g.bayomeeTime = :bayomeeTime"),
+    @NamedQuery(name = "Game.findByByoYomiTime", query = "SELECT g FROM Game g WHERE g.byoYomiTime = :byoYomiTime"),
     @NamedQuery(name = "Game.findByGandicap", query = "SELECT g FROM Game g WHERE g.gandicap = :gandicap"),
     @NamedQuery(name = "Game.findByGameSize", query = "SELECT g FROM Game g WHERE g.gameSize = :gameSize"),
     @NamedQuery(name = "Game.findByGameStatus", query = "SELECT g FROM Game g WHERE g.gameStatus = :gameStatus"),
@@ -56,7 +53,7 @@ public class Game implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long id;
     private short bayomeeNumber;
-    private short ByoYomiTime;
+    private short byoYomiTime;
     private short gandicap;
     private short gameSize;
     private GameStatus gameStatus;
@@ -104,11 +101,11 @@ public class Game implements Serializable {
 
     @Column(name = "byo_yomi_time")
     public short getByoYomiTime() {
-        return ByoYomiTime;
+        return byoYomiTime;
     }
 
-    public void setByoYomiTime(short ByoYomiTime) {
-        this.ByoYomiTime = ByoYomiTime;
+    public void setByoYomiTime(short byoYomiTime) {
+        this.byoYomiTime = byoYomiTime;
     }
 
     public short getGandicap() {
@@ -162,7 +159,6 @@ public class Game implements Serializable {
     }
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "games")
-    @XmlTransient
     public Collection<UserGame> getUsersGamesCollection() {
         return usersGamesCollection;
     }
@@ -172,7 +168,6 @@ public class Game implements Serializable {
     }
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "game")
-    @XmlTransient
     public Collection<GameComment> getGamesCommentsCollection() {
         return gamesCommentsCollection;
     }
@@ -182,7 +177,6 @@ public class Game implements Serializable {
     }
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "games")
-    @XmlTransient
     public Collection<GameMove> getGamesMovesCollection() {
         return gamesMovesCollection;
     }
@@ -192,7 +186,6 @@ public class Game implements Serializable {
     }
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "game")
-    @XmlTransient
     public Collection<GameDate> getGamesDatesCollection() {
         return gamesDatesCollection;
     }
