@@ -16,6 +16,7 @@
  */
 package org.igo.letsgo.rest.resteasy.user.detail.jpa.mysql.service;
 
+import java.net.URI;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
@@ -25,12 +26,17 @@ import javax.persistence.TypedQuery;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import org.igo.entities.GoUser;
 import org.igo.entities.User;
 import org.jboss.resteasy.annotations.GZIP;
 import org.jboss.resteasy.links.AddLinks;
 import org.jboss.resteasy.links.LinkResource;
+
 /**
  *
  * @author surzhin.konstantin
@@ -89,15 +95,26 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
 //
 //        return super.find(id);
 //    }
-    @GZIP
-    @AddLinks
-    @LinkResource(value = User.class, rel = "list")
+
     @GET
+    @GZIP
     @RolesAllowed({"gouser", "administrator"})
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<User> findAllUser() {
+    @Produces({"application/vnd.lets.go.igo.v1+xml;charset=UTF-8;v=1", "application/vnd.lets.go.igo.v1+json;charset=UTF-8;v=1"})
+    public Response findAllUser(@Context final UriInfo uriInfo) {
+
         TypedQuery<User> goUsersQuery = em.createNamedQuery("GoUser.findByUserName", User.class);
-        return goUsersQuery.getResultList();
+        URI uri = uriInfo.getAbsolutePath();
+        
+        List<User> list = goUsersQuery.getResultList();
+        
+        list.forEach((User user) -> {
+            user.setUri(uri);
+        });
+        
+        GenericEntity<List<User>> entity
+                = new GenericEntity<List<User>>(list) {
+        };
+        return Response.ok().entity(entity).link(uri, "self").contentLocation(uri).build();
     }
 
 //    @GET

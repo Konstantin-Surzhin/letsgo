@@ -17,26 +17,25 @@
 package org.igo.entities;
 
 import java.io.Serializable;
+import java.net.URI;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.jboss.resteasy.links.RESTServiceDiscovery;
 
 /**
  *
  * @author surzhin.konstantin
  */
-@XmlRootElement
+@XmlRootElement(name = "user")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @XmlID
+
     private String id;
-    @XmlAttribute
+
+    private URI uri;
+
     private String user_name;
-    @XmlElementRef
-    private RESTServiceDiscovery rest;
 
     public User() {
     }
@@ -44,5 +43,50 @@ public class User implements Serializable {
     public User(final Integer id, final String user_name) {
         this.id = id.toString();
         this.user_name = user_name;
+    }
+
+    /**
+     * @return the id
+     */
+    @XmlAttribute(name = "id")
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the user_name
+     */
+    @XmlElement(name = "name")
+    public String getUserName() {
+        return user_name;
+    }
+
+    /**
+     * @param user_name the user_name to set
+     */
+    public void setUserName(String user_name) {
+        this.user_name = user_name;
+    }
+
+    /**
+     * @return the uri
+     */
+    @XmlAttribute(name = "uri")
+    public String getUri() {
+        return uri + "/" + id;
+    }
+
+    /**
+     * @param uri the uri to set
+     */
+    public void setUri(URI uri) {
+        this.uri = uri;
     }
 }

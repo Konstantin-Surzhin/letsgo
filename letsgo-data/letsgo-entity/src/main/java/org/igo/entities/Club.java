@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author surzhin.konstantin
  */
 @Entity
-@Table(name = "clubs",
+@Table(name = "CLUBS",
         uniqueConstraints = {
             @UniqueConstraint(name = "uk_city_club",
                     columnNames = {"city_id", "club_name"})})

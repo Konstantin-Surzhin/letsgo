@@ -46,7 +46,7 @@ import javax.validation.constraints.Size;
     @UniqueConstraint(name = "uk_user_name", columnNames = {"user_name"})})
 @NamedNativeQueries({
     @NamedNativeQuery(name = "GoUser.findByUserName", 
-            query = "SELECT id, user_name FROM go_users", 
+            query = "SELECT id, user_name FROM GO_USERS", 
             resultSetMapping = "GoUserToWeakUser")
      })
 @SqlResultSetMapping(name="GoUserToWeakUser", classes = {

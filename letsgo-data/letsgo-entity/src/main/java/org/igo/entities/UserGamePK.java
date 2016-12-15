@@ -28,6 +28,8 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class UserGamePK implements Serializable {
 
+    private static final long serialVersionUID = 3519446188121448911L;
+
     private long gameId;
     private int userId;
 

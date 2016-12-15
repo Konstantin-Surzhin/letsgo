@@ -31,6 +31,8 @@ import javax.persistence.TemporalType;
 @Embeddable
 public class UserDegreePK implements Serializable {
 
+    private static final long serialVersionUID = -4018991903865846151L;
+
     private Date appointmentDate;
     private int userId;
 
