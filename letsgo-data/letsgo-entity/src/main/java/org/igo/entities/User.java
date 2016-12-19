@@ -18,6 +18,7 @@ package org.igo.entities;
 
 import java.io.Serializable;
 import java.net.URI;
+import java.util.Objects;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -80,7 +81,7 @@ public class User implements Serializable {
      */
     @XmlAttribute(name = "uri")
     public String getUri() {
-        return uri + "/" + id;
+        return uri + id;
     }
 
     /**
@@ -89,4 +90,36 @@ public class User implements Serializable {
     public void setUri(URI uri) {
         this.uri = uri;
     }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final User other = (User) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.user_name, other.user_name)) {
+            return false;
+        }
+        return Objects.equals(this.uri, other.uri);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 19 * hash + Objects.hashCode(this.id);
+        hash = 19 * hash + Objects.hashCode(this.uri);
+        hash = 19 * hash + Objects.hashCode(this.user_name);
+        return hash;
+    }
+    
 }

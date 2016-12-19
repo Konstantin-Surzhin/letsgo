@@ -152,3 +152,4 @@ hs_err_pid*
 /letsgo-spring/letsgo-spring-view/letsgo-spring-view-jsp/letsgo-spring-view-jsp-user/target/
 /letsgo-spring/letsgo-spring-view/letsgo-spring-view-jsp/letsgo-spring-view-jsp-user-ban/target/
 /letsgo-spring/letsgo-spring-view/letsgo-spring-view-jsp/letsgo-spring-view-jsp-user-game/target/
+/letsgo-services/letsgo-rest/letsgo-rest-resteasy/letsgo-rest-resteasy-user/letsgo-rest-resteasy-user-detail/letsgo-rest-resteasy-user-detail-jpa/letsgo-rest-resteasy-user-detail-jpa-mysql/nbproject/

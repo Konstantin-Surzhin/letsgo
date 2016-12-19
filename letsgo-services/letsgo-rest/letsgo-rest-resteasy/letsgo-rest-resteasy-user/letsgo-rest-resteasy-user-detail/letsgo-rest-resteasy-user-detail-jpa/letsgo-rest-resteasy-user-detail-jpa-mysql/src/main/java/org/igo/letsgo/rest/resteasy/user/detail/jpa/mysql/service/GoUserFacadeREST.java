@@ -24,18 +24,20 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.EntityTag;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import org.igo.entities.GoUser;
 import org.igo.entities.User;
 import org.jboss.resteasy.annotations.GZIP;
-import org.jboss.resteasy.links.AddLinks;
-import org.jboss.resteasy.links.LinkResource;
 
 /**
  *
@@ -98,23 +100,45 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
 
     @GET
     @GZIP
-    @RolesAllowed({"gouser", "administrator"})
-    @Produces({"application/vnd.lets.go.igo.v1+xml;charset=UTF-8;v=1", "application/vnd.lets.go.igo.v1+json;charset=UTF-8;v=1"})
-    public Response findAllUser(@Context final UriInfo uriInfo) {
+    //@RolesAllowed({"gouser", "administrator"})
+    //@Produces({"application/vnd.lets.go.igo.v1+xml;charset=UTF-8;v=1", "application/vnd.lets.go.igo.v1+json;charset=UTF-8;v=1"})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public Response findAllUser(@Context final UriInfo uriInfo, @HeaderParam("If-None-Match") String sent, @Context final Request request) {
 
-        TypedQuery<User> goUsersQuery = em.createNamedQuery("GoUser.findByUserName", User.class);
-        URI uri = uriInfo.getAbsolutePath();
-        
-        List<User> list = goUsersQuery.getResultList();
-        
+        final TypedQuery<User> goUsersQuery = em.createNamedQuery("GoUser.findByUserName", User.class);
+        final URI uri = uriInfo.getAbsolutePath();
+
+        final List<User> list = goUsersQuery.getResultList();
+
         list.forEach((User user) -> {
             user.setUri(uri);
         });
-        
-        GenericEntity<List<User>> entity
-                = new GenericEntity<List<User>>(list) {
-        };
-        return Response.ok().entity(entity).link(uri, "self").contentLocation(uri).build();
+
+        Response response;
+
+        final EntityTag et = new EntityTag(String.valueOf(list.hashCode()));
+        final CacheControl cc = new CacheControl();
+        cc.setMaxAge(1200);
+
+        final Response.ResponseBuilder responseBuilder = request.evaluatePreconditions(et);
+
+        if (responseBuilder != null) {
+            response = responseBuilder.cacheControl(cc).tag(et).build();
+        } else {
+
+            final GenericEntity<List<User>> entity
+                    = new GenericEntity<List<User>>(list) {
+            };
+
+            response = Response.ok()
+                    .entity(entity)
+                    .cacheControl(cc)
+                    .tag(et)
+//                    .link(uri, "ttt")
+//                    .contentLocation(uri)
+                    .build();
+        }
+        return response;
     }
 
 //    @GET
