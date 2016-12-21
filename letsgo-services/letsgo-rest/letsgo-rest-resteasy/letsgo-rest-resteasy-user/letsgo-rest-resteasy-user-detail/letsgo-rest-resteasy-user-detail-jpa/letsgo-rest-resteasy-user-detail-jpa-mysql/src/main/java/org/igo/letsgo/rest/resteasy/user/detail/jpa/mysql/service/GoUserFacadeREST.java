@@ -26,7 +26,9 @@ import javax.persistence.TypedQuery;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.EntityTag;
@@ -34,6 +36,8 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
+import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 import org.igo.entities.GoUser;
 import org.igo.entities.User;
@@ -90,17 +94,43 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
 //        super.remove(super.find(id));
 //    }
 //
-//    @GET
-//    @Path("{id}")
-//    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-//    public GoUser find(@PathParam("id") Integer id) {
-//
-//        return super.find(id);
-//    }
 
     @GET
     @GZIP
-    //@RolesAllowed({"gouser", "administrator"})
+    @Path("{id}")
+    @RolesAllowed({"gouser", "administrator"})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON, MediaType.TEXT_HTML})
+    public Response find(@PathParam("id") final Integer id, @Context final SecurityContext secContext) {
+
+        if (!secContext.isSecure()) {
+            final String e = "<html><title>error</title><body><h1>HTTP conection forbidden</body></h1></html>"; 
+            final ResponseBuilder builder = Response.status(Response.Status.METHOD_NOT_ALLOWED).type(MediaType.TEXT_HTML);
+            final Response response = builder.header("title", "error").entity(e).build();
+            throw new WebApplicationException(response);
+        }
+
+        final GoUser user = super.find(id);
+        if (user == null) {
+            final String e = "<html><title>error</title><body><h1>Resource is not found</body></h1></html>"; 
+            final ResponseBuilder builder = Response.status(Response.Status.NOT_FOUND).type(MediaType.TEXT_HTML);
+            final Response response = builder.header("title", "error").entity(e).build();
+            throw new WebApplicationException(response);
+        }
+
+        final String principalName = secContext.getUserPrincipal().getName();
+        if (!principalName.equals(user.getUserName())) {
+            final String e = "<html><title>error</title><body><h1>Prohibition of unauthorized access.</body></h1></html>"; 
+            final ResponseBuilder builder = Response.status(Response.Status.UNAUTHORIZED).type(MediaType.TEXT_HTML);
+            final Response response = builder.header("title", "error").entity(e).build();
+            throw new WebApplicationException(response);
+        }
+
+        return Response.ok().build();
+    }
+
+    @GET
+    @GZIP
+    @RolesAllowed({"gouser", "administrator"})
     //@Produces({"application/vnd.lets.go.igo.v1+xml;charset=UTF-8;v=1", "application/vnd.lets.go.igo.v1+json;charset=UTF-8;v=1"})
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Response findAllUser(@Context final UriInfo uriInfo, @HeaderParam("If-None-Match") String sent, @Context final Request request) {
@@ -134,8 +164,8 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
                     .entity(entity)
                     .cacheControl(cc)
                     .tag(et)
-//                    .link(uri, "ttt")
-//                    .contentLocation(uri)
+                    .link(uri, "users")
+                    .contentLocation(uri)
                     .build();
         }
         return response;
