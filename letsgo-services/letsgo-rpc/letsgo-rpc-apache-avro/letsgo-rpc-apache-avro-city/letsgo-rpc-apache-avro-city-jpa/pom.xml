@@ -3,13 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.igo</groupId>
-        <artifactId>letsgo-services</artifactId>
+        <artifactId>letsgo-rpc-apache-avro-city</artifactId>
         <version>1.0</version>
     </parent>
-    <artifactId>letsgo-rpc</artifactId>
+    <artifactId>letsgo-rpc-apache-avro-city-jpa</artifactId>
     <packaging>pom</packaging>
-    <modules>
-        <module>letsgo-rpc-apache-thrift</module>
-        <module>letsgo-rpc-apache-avro</module>
-    </modules>
+  <modules>
+    <module>letsgo-rpc-apache-avro-city-jpa-mysql</module>
+  </modules>
 </project>
