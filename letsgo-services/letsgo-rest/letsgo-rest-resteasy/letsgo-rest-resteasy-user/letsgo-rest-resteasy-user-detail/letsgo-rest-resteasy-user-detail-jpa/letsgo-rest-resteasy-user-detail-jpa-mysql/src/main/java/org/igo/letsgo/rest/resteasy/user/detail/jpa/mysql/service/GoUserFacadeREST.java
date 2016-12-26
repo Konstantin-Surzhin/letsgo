@@ -18,7 +18,9 @@ package org.igo.letsgo.rest.resteasy.user.detail.jpa.mysql.service;
 
 import java.net.URI;
 import java.util.List;
+import java.util.concurrent.Executors;
 import javax.annotation.security.RolesAllowed;
+import javax.ejb.Asynchronous;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -52,8 +54,11 @@ import org.jboss.resteasy.annotations.GZIP;
 public class GoUserFacadeREST extends AbstractFacade<GoUser> {
 
     @PersistenceContext(unitName = "gamePU")
+
+    // @Context private ExecutionContext ctx;
     private EntityManager em;
 
+    // @Context private ExecutionContext ctx;
     public GoUserFacadeREST() {
         super(GoUser.class);
     }
@@ -103,7 +108,7 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
     public Response find(@PathParam("id") final Integer id, @Context final SecurityContext secContext) {
 
         if (!secContext.isSecure()) {
-            final String e = "<html><title>error</title><body><h1>HTTP conection forbidden</body></h1></html>"; 
+            final String e = "<html><title>error</title><body><h1>HTTP conection forbidden</body></h1></html>";
             final ResponseBuilder builder = Response.status(Response.Status.METHOD_NOT_ALLOWED).type(MediaType.TEXT_HTML);
             final Response response = builder.header("title", "error").entity(e).build();
             throw new WebApplicationException(response);
@@ -111,7 +116,7 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
 
         final GoUser user = super.find(id);
         if (user == null) {
-            final String e = "<html><title>error</title><body><h1>Resource is not found</body></h1></html>"; 
+            final String e = "<html><title>error</title><body><h1>Resource is not found</body></h1></html>";
             final ResponseBuilder builder = Response.status(Response.Status.NOT_FOUND).type(MediaType.TEXT_HTML);
             final Response response = builder.header("title", "error").entity(e).build();
             throw new WebApplicationException(response);
@@ -119,7 +124,7 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
 
         final String principalName = secContext.getUserPrincipal().getName();
         if (!principalName.equals(user.getUserName())) {
-            final String e = "<html><title>error</title><body><h1>Prohibition of unauthorized access.</body></h1></html>"; 
+            final String e = "<html><title>error</title><body><h1>Prohibition of unauthorized access.</body></h1></html>";
             final ResponseBuilder builder = Response.status(Response.Status.UNAUTHORIZED).type(MediaType.TEXT_HTML);
             final Response response = builder.header("title", "error").entity(e).build();
             throw new WebApplicationException(response);
@@ -130,6 +135,7 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
 
     @GET
     @GZIP
+    @Asynchronous
     @RolesAllowed({"gouser", "administrator"})
     //@Produces({"application/vnd.lets.go.igo.v1+xml;charset=UTF-8;v=1", "application/vnd.lets.go.igo.v1+json;charset=UTF-8;v=1"})
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -168,6 +174,17 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
                     .contentLocation(uri)
                     .build();
         }
+
+        Executors.newSingleThreadExecutor().submit(new Runnable() {
+            @Override
+            public void run() {
+//                Thread.sleep(10000);
+//                ctx.resume("Hello async world! Coffee Order is 1234");
+            }
+        });
+//        ctx.suspend();
+
+//   }
         return response;
     }
 
