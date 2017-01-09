@@ -30,7 +30,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -58,33 +57,64 @@ public class Club implements Serializable {
     @ManyToOne(optional = false)
     private City cityId;
 
+    /**
+     *
+     */
     public Club() {
     }
 
+    /**
+     *
+     * @param id
+     */
     public Club(Integer id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public Character getClubName() {
         return clubName;
     }
 
+    /**
+     *
+     * @param clubName
+     */
     public void setClubName(Character clubName) {
         this.clubName = clubName;
     }
 
+    /**
+     *
+     * @return
+     */
     public City getCityId() {
         return cityId;
     }
 
+    /**
+     *
+     * @param cityId
+     */
     public void setCityId(City cityId) {
         this.cityId = cityId;
     }

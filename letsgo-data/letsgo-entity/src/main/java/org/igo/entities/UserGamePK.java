@@ -33,29 +33,54 @@ public class UserGamePK implements Serializable {
     private long gameId;
     private int userId;
 
+    /**
+     *
+     */
     public UserGamePK() {
     }
 
+    /**
+     *
+     * @param gameId
+     * @param userId
+     */
     public UserGamePK(long gameId, int userId) {
         this.gameId = gameId;
         this.userId = userId;
     }
+
+    /**
+     *
+     * @return
+     */
     @Basic(optional = false)
     @Column(name = "game_id", nullable = false)
     public long getGameId() {
         return gameId;
     }
 
+    /**
+     *
+     * @param gameId
+     */
     public void setGameId(long gameId) {
         this.gameId = gameId;
     }
 
+    /**
+     *
+     * @return
+     */
     @Basic(optional = false)
     @Column(name = "user_id", nullable = false)
     public int getUserId() {
         return userId;
     }
 
+    /**
+     *
+     * @param userId
+     */
     public void setUserId(int userId) {
         this.userId = userId;
     }
@@ -78,10 +103,7 @@ public class UserGamePK implements Serializable {
         if (this.gameId != other.gameId) {
             return false;
         }
-        if (this.userId != other.userId) {
-            return false;
-        }
-        return true;
+        return this.userId == other.userId;
     }
 
     @Override

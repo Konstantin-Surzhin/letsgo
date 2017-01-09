@@ -52,17 +52,34 @@ public class Degree implements Serializable {
     private String degreeValue;
     private Collection<UserDegree> usersDegreesCollection;
 
+    /**
+     *
+     */
     public Degree() {
     }
 
+    /**
+     *
+     * @param id
+     */
     public Degree(Byte id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @param id
+     * @param degreeValue
+     */
     public Degree(Byte id, String degreeValue) {
         this.id = id;
         this.degreeValue = degreeValue;
     }
+
+    /**
+     *
+     * @return
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -71,10 +88,18 @@ public class Degree implements Serializable {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Byte id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     @Basic(optional = false)
         @NotNull
     @Size(min = 1, max = 255)
@@ -83,16 +108,28 @@ public class Degree implements Serializable {
         return degreeValue;
     }
 
+    /**
+     *
+     * @param degreeValue
+     */
     public void setDegreeValue(String degreeValue) {
         this.degreeValue = degreeValue;
     }
 
+    /**
+     *
+     * @return
+     */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "degree")
     @XmlTransient
     public Collection<UserDegree> getUsersDegreesCollection() {
         return usersDegreesCollection;
     }
 
+    /**
+     *
+     * @param usersDegreesCollection
+     */
     public void setUsersDegreesCollection(Collection<UserDegree> usersDegreesCollection) {
         this.usersDegreesCollection = usersDegreesCollection;
     }

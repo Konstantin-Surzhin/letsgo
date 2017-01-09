@@ -42,30 +42,47 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "UserRole.findAll", query = "SELECT u FROM UserRole u")
     ,@NamedQuery(name = "UserRole.findById", query = "SELECT u FROM UserRole u WHERE u.id = :id")
-    ,@NamedQuery(name = "UserRole.findByUsername", query = "SELECT u FROM UserRole u WHERE u.username = :username")
-    ,@NamedQuery(name = "UserRole.findByUserrole", query = "SELECT u FROM UserRole u WHERE u.userrole = :userrole")})
+    ,@NamedQuery(name = "UserRole.findByUsername", query = "SELECT u FROM UserRole u WHERE u.userName = :username")
+    ,@NamedQuery(name = "UserRole.findByUserrole", query = "SELECT u FROM UserRole u WHERE u.userRole = :userrole")})
 public class UserRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Short id;
-    private String username;
-    private String userrole;
+    private String userName;
+    private String userRole;
     private Collection<GoUser> userCollection;
 
+    /**
+     *
+     */
     public UserRole() {
     }
 
+    /**
+     *
+     * @param id
+     */
     public UserRole(Short id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @param id
+     * @param username
+     * @param userrole
+     */
     public UserRole(Short id, String username, String userrole) {
         this.id = id;
-        this.username = username;
-        this.userrole = userrole;
+        this.userName = username;
+        this.userRole = userrole;
     }
 
+    /**
+     *
+     * @return
+     */
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
@@ -74,38 +91,66 @@ public class UserRole implements Serializable {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Short id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     @Basic(optional = false)
     @Column(name = "username", nullable = false, unique = true, length = 255)
     @Size(min = 1, max = 255)
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    /**
+     *
+     * @param userName
+     */
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
+    /**
+     *
+     * @return
+     */
     @Size(min = 1, max = 255)
     @Basic(optional = false)
     @Column(name = "userrole", nullable = false)
-    public String getUserrole() {
-        return userrole;
+    public String getUserRole() {
+        return userRole;
     }
 
-    public void setUserrole(String userrole) {
-        this.userrole = userrole;
+    /**
+     *
+     * @param userRole
+     */
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
     }
 
+    /**
+     *
+     * @return
+     */
     @XmlTransient
     @OneToMany(mappedBy = "role")
     public Collection<GoUser> getUserCollection() {
         return userCollection;
     }
 
+    /**
+     *
+     * @param userCollection
+     */
     public void setUserCollection(Collection<GoUser> userCollection) {
         this.userCollection = userCollection;
     }

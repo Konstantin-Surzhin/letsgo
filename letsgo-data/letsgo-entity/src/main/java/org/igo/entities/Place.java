@@ -49,18 +49,34 @@ public class Place implements Serializable {
     private Integer id;
     private String placeName;
 
+    /**
+     *
+     */
     public Place() {
     }
 
+    /**
+     *
+     * @param id
+     */
     public Place(Integer id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @param id
+     * @param placeName
+     */
     public Place(Integer id, String placeName) {
         this.id = id;
         this.placeName = placeName;
     }
 
+    /**
+     *
+     * @return
+     */
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(nullable = false)
@@ -69,10 +85,18 @@ public class Place implements Serializable {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     @Basic(optional = false)
     @Size(min = 1, max = 255)
     @Column(name = "place_name", nullable = false, length = 255, unique = true)
@@ -80,6 +104,10 @@ public class Place implements Serializable {
         return placeName;
     }
 
+    /**
+     *
+     * @param placeName
+     */
     public void setPlaceName(String placeName) {
         this.placeName = placeName;
     }

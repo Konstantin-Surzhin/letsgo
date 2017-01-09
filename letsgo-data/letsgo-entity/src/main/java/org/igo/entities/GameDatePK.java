@@ -32,30 +32,54 @@ public class GameDatePK implements Serializable {
     private long gameId;
     private int ndx;
 
+    /**
+     *
+     */
     public GameDatePK() {
     }
 
+    /**
+     *
+     * @param gameId
+     * @param ndx
+     */
     public GameDatePK(final long gameId, final int ndx) {
         this.gameId = gameId;
         this.ndx = ndx;
     }
 
+    /**
+     *
+     * @return
+     */
     @Basic(optional = false)
     @Column(name = "game_id", nullable = false)
     public long getGameId() {
         return gameId;
     }
 
+    /**
+     *
+     * @param gameId
+     */
     public void setGameId(final long gameId) {
         this.gameId = gameId;
     }
 
+    /**
+     *
+     * @return
+     */
     @Basic(optional = false)
     @Column(nullable = false)
     public int getNdx() {
         return ndx;
     }
 
+    /**
+     *
+     * @param ndx
+     */
     public void setNdx(final int ndx) {
         this.ndx = ndx;
     }

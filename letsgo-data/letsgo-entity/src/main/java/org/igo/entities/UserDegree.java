@@ -44,50 +44,94 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class UserDegree implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    /**
+     *
+     */
     protected UserDegreePK userDegreePK;
     private Integer degreeType;
     private UserDetails userDetails;
     private Degree degree;
 
+    /**
+     *
+     */
     public UserDegree() {
     }
 
+    /**
+     *
+     * @param usersDegreesPK
+     */
     public UserDegree(UserDegreePK usersDegreesPK) {
         this.userDegreePK = usersDegreesPK;
     }
 
+    /**
+     *
+     * @param appointmentDate
+     * @param userId
+     */
     public UserDegree(Date appointmentDate, int userId) {
         this.userDegreePK = new UserDegreePK(appointmentDate, userId);
     }
 
+    /**
+     *
+     * @return
+     */
     @EmbeddedId
     public UserDegreePK getUserDegreePK() {
         return userDegreePK;
     }
 
+    /**
+     *
+     * @param userDegreePK
+     */
     public void setUserDegreePK(UserDegreePK userDegreePK) {
         this.userDegreePK = userDegreePK;
     }
 
+    /**
+     *
+     * @return
+     */
     @Column(name = "degree_type")
     public Integer getDegreeType() {
         return degreeType;
     }
 
+    /**
+     *
+     * @param degreeType
+     */
     public void setDegreeType(Integer degreeType) {
         this.degreeType = degreeType;
     }
 
+    /**
+     *
+     * @return
+     */
     @ManyToOne(optional = false)
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_userDegree_userDetails"), name = "user_details_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
     public UserDetails getUserDetails() {
         return userDetails;
     }
 
+    /**
+     *
+     * @param userDetails
+     */
     public void setUserDetails(UserDetails userDetails) {
         this.userDetails = userDetails;
     }
 
+    /**
+     *
+     * @return
+     */
     @ManyToOne(optional = false)
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_user_degree_degree"), name = "degree_id", referencedColumnName = "id", nullable = false)
 
@@ -95,6 +139,10 @@ public class UserDegree implements Serializable {
         return degree;
     }
 
+    /**
+     *
+     * @param degree
+     */
     public void setDegree(Degree degree) {
         this.degree = degree;
     }

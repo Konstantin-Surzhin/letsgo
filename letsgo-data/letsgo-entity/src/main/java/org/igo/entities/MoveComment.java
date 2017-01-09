@@ -17,6 +17,7 @@
 package org.igo.entities;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -57,24 +58,40 @@ public class MoveComment implements Serializable {
 
     private Long id;
     private String moveComment;
-    private Date postDateTime;
+    private Date postDateTime = Calendar.getInstance().getTime();
     private GameMove gamesMoves;
     private Collection<MoveComment> moveCommentCollection;
     private MoveComment inReplayToId;
     private UserDetails userDetails;
 
+    /**
+     *
+     */
     public MoveComment() {
     }
 
+    /**
+     *
+     * @param id
+     */
     public MoveComment(Long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @param id
+     * @param postDateTime
+     */
     public MoveComment(Long id, Date postDateTime) {
         this.id = id;
-        this.postDateTime = postDateTime;
+        this.postDateTime = new Date(postDateTime.getTime());
     }
 
+    /**
+     *
+     * @return
+     */
     @Id
     @Basic(optional = false)
     @Column(nullable = false)
@@ -82,31 +99,55 @@ public class MoveComment implements Serializable {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     @Column(name = "move_comment", length = 255)
     @Size(min = 1, max = 255)
     public String getMoveComment() {
         return moveComment;
     }
 
+    /**
+     *
+     * @param moveComment
+     */
     public void setMoveComment(String moveComment) {
         this.moveComment = moveComment;
     }
 
+    /**
+     *
+     * @return
+     */
     @Basic(optional = false)
     @Column(name = "post_date_time", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     public Date getPostDateTime() {
-        return postDateTime;
+        return new Date(postDateTime.getTime());
     }
 
+    /**
+     *
+     * @param postDateTime
+     */
     public void setPostDateTime(Date postDateTime) {
-        this.postDateTime = postDateTime;
+        this.postDateTime = new Date(postDateTime.getTime());
     }
 
+    /**
+     *
+     * @return
+     */
     @JoinColumns({
         @JoinColumn(name = "move_game_id", referencedColumnName = "game_id")
         ,
@@ -116,36 +157,64 @@ public class MoveComment implements Serializable {
         return gamesMoves;
     }
 
+    /**
+     *
+     * @param gamesMoves
+     */
     public void setGamesMoves(GameMove gamesMoves) {
         this.gamesMoves = gamesMoves;
     }
 
+    /**
+     *
+     * @return
+     */
     @OneToMany(mappedBy = "inReplayToId")
     @XmlTransient
     public Collection<MoveComment> getMoveCommentCollection() {
         return moveCommentCollection;
     }
 
+    /**
+     *
+     * @param moveCommentCollection
+     */
     public void setMoveCommentCollection(Collection<MoveComment> moveCommentCollection) {
         this.moveCommentCollection = moveCommentCollection;
     }
 
+    /**
+     *
+     * @return
+     */
     @JoinColumn(name = "in_replay_to_id", referencedColumnName = "id")
     @ManyToOne
     public MoveComment getInReplayToId() {
         return inReplayToId;
     }
 
+    /**
+     *
+     * @param inReplayToId
+     */
     public void setInReplayToId(MoveComment inReplayToId) {
         this.inReplayToId = inReplayToId;
     }
 
+    /**
+     *
+     * @return
+     */
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_moveComment_userDetails"), name = "user_details_id", referencedColumnName = "id")
     public UserDetails getUserDetails() {
         return userDetails;
     }
 
+    /**
+     *
+     * @param userDetails
+     */
     public void setUserDetails(UserDetails userDetails) {
         this.userDetails = userDetails;
     }

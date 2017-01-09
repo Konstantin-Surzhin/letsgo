@@ -17,7 +17,6 @@
 package org.igo.testng.entities;
 
 import java.util.Collection;
-import org.igo.entities.UserDetails;
 import org.igo.entities.UserRole;
 import static org.testng.Assert.*;
 import org.testng.annotations.AfterClass;
@@ -79,14 +78,14 @@ public class UserRoleNGTest {
     }
 
     /**
-     * Тест метод getUsername, класса UserRole.
+     * Тест метод getUserName, класса UserRole.
      */
     @Test
     public void testGetUsername() {
         System.out.println("getUsername");
         UserRole instance = new UserRole();
         String expResult = "";
-        String result = instance.getUsername();
+        String result = instance.getUserName();
         assertEquals(result, expResult);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
@@ -100,7 +99,7 @@ public class UserRoleNGTest {
         System.out.println("setUsername");
         String username = "";
         UserRole instance = new UserRole();
-        instance.setUsername(username);
+        instance.setUserName(username);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
     }
@@ -113,7 +112,7 @@ public class UserRoleNGTest {
         System.out.println("getUserrole");
         UserRole instance = new UserRole();
         String expResult = "";
-        String result = instance.getUserrole();
+        String result = instance.getUserRole();
         assertEquals(result, expResult);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
@@ -127,7 +126,7 @@ public class UserRoleNGTest {
         System.out.println("setUserrole");
         String userrole = "";
         UserRole instance = new UserRole();
-        instance.setUserrole(userrole);
+        instance.setUserRole(userrole);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
     }

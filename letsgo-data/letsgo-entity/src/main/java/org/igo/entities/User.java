@@ -38,9 +38,17 @@ public class User implements Serializable {
 
     private String user_name;
 
+    /**
+     *
+     */
     public User() {
     }
 
+    /**
+     *
+     * @param id
+     * @param user_name
+     */
     public User(final Integer id, final String user_name) {
         this.id = id.toString();
         this.user_name = user_name;

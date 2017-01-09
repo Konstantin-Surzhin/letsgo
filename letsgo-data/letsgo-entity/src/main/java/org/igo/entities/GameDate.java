@@ -17,6 +17,7 @@
 package org.igo.entities;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Basic;
@@ -49,52 +50,97 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class GameDate implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    /**
+     *
+     */
     protected GameDatePK gameDatePK;
-    private Date gameDate;
+    private Date gameDate = Calendar.getInstance().getTime();
     private Game game;
 
+    /**
+     *
+     */
     public GameDate() {
     }
 
+    /**
+     *
+     * @param gamesDatesPK
+     */
     public GameDate(GameDatePK gamesDatesPK) {
         this.gameDatePK = gamesDatesPK;
     }
 
+    /**
+     *
+     * @param gamesDatesPK
+     * @param gameDate
+     */
     public GameDate(GameDatePK gamesDatesPK, Date gameDate) {
         this.gameDatePK = gamesDatesPK;
-        this.gameDate = gameDate;
+        this.gameDate = new Date(gameDate.getTime());
     }
 
+    /**
+     *
+     * @param gameId
+     * @param ndx
+     */
     public GameDate(long gameId, int ndx) {
         this.gameDatePK = new GameDatePK(gameId, ndx);
     }
 
+    /**
+     *
+     * @return
+     */
     @EmbeddedId
     public GameDatePK getGameDatePK() {
         return gameDatePK;
     }
 
+    /**
+     *
+     * @param gameDatePK
+     */
     public void setGameDatePK(GameDatePK gameDatePK) {
         this.gameDatePK = gameDatePK;
     }
 
+    /**
+     *
+     * @return
+     */
     @Basic(optional = false)
     @Column(name = "game_date", nullable = false)
     @Temporal(TemporalType.DATE)
     public Date getGameDate() {
-        return gameDate;
+        return new Date(gameDate.getTime());
     }
 
+    /**
+     *
+     * @param gameDate
+     */
     public void setGameDate(Date gameDate) {
-        this.gameDate = gameDate;
+        this.gameDate = new Date(gameDate.getTime());
     }
 
+    /**
+     *
+     * @return
+     */
     @JoinColumn(name = "game_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false)
     public Game getGame() {
         return game;
     }
 
+    /**
+     *
+     * @param game
+     */
     public void setGame(Game game) {
         this.game = game;
     }

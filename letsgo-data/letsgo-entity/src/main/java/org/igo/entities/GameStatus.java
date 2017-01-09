@@ -44,17 +44,32 @@ public class GameStatus implements Serializable {
     private Short id;
     private String statusName;
 
+    /**
+     *
+     */
     public GameStatus() {
     }
 
+    /**
+     *
+     * @param id
+     */
     public GameStatus(short id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public Short getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(short id) {
         this.id = id;
     }

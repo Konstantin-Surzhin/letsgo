@@ -50,18 +50,34 @@ public class Event implements Serializable {
     private String eventName;
     private Collection<Game> gamesCollection;
 
+    /**
+     *
+     */
     public Event() {
     }
 
+    /**
+     *
+     * @param id
+     */
     public Event(Short id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @param id
+     * @param eventName
+     */
     public Event(Short id, String eventName) {
         this.id = id;
         this.eventName = eventName;
     }
 
+    /**
+     *
+     * @return
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -70,10 +86,18 @@ public class Event implements Serializable {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Short id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     @Basic(optional = false)
     @Size(min = 1, max = 255)
     @Column(name = "event_name", nullable = false, length = 255, unique = true)
@@ -81,16 +105,28 @@ public class Event implements Serializable {
         return eventName;
     }
 
+    /**
+     *
+     * @param eventName
+     */
     public void setEventName(String eventName) {
         this.eventName = eventName;
     }
 
+    /**
+     *
+     * @return
+     */
     @OneToMany(mappedBy = "eventId")
     @XmlTransient
     public Collection<Game> getGamesCollection() {
         return gamesCollection;
     }
 
+    /**
+     *
+     * @param gamesCollection
+     */
     public void setGamesCollection(Collection<Game> gamesCollection) {
         this.gamesCollection = gamesCollection;
     }

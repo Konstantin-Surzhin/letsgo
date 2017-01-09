@@ -44,17 +44,32 @@ public class GameType implements Serializable {
     private Short id;
     private String typeName;
 
+    /**
+     *
+     */
     public GameType() {
     }
 
+    /**
+     *
+     * @param id
+     */
     public GameType(short id) {
        this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public Short getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(short id) {
         this.id = id;
     }
@@ -73,10 +88,7 @@ public class GameType implements Serializable {
             return false;
         }
         GameType other = (GameType) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     @Override

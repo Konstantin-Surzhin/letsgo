@@ -63,12 +63,20 @@ public class GoUser implements Serializable {
     private UserDetails userDetails;
     private UserRole role;
 
+    /**
+     *
+     * @return
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Integer id) {
         this.id = id;
     }
@@ -139,16 +147,28 @@ public class GoUser implements Serializable {
         this.userDetails = userDetails;
     }
 
+    /**
+     *
+     * @return
+     */
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_user_role"), name = "role_id", referencedColumnName = "id")
     public UserRole getRole() {
         return role;
     }
 
+    /**
+     *
+     * @param role
+     */
     public void setRole(UserRole role) {
         this.role = role;
     }
 
+    /**
+     *
+     * @return
+     */
     @NotNull
     @Size(min = 1, max = 64)
     @Basic(optional = false)
@@ -157,6 +177,10 @@ public class GoUser implements Serializable {
         return userName;
     }
 
+    /**
+     *
+     * @param userName
+     */
     public void setUserName(String userName) {
         this.userName = userName;
     }

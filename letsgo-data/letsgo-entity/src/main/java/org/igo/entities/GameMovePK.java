@@ -27,33 +27,59 @@ import javax.persistence.Embeddable;
  */
 @Embeddable
 public class GameMovePK implements Serializable {
-
+    
+    private static final long serialVersionUID = 1L;
     private long gameId;
     private int ndx;
 
+    /**
+     *
+     */
     public GameMovePK() {
     }
 
+    /**
+     *
+     * @param gameId
+     * @param ndx
+     */
     public GameMovePK(long gameId, int ndx) {
         this.gameId = gameId;
         this.ndx = ndx;
     }
+
+    /**
+     *
+     * @return
+     */
     @Basic(optional = false)
     @Column(name = "game_id", nullable = false)
     public long getGameId() {
         return gameId;
     }
 
+    /**
+     *
+     * @param gameId
+     */
     public void setGameId(long gameId) {
         this.gameId = gameId;
     }
 
+    /**
+     *
+     * @return
+     */
     @Basic(optional = false)
     @Column(nullable = false)
     public int getNdx() {
         return ndx;
     }
 
+    /**
+     *
+     * @param ndx
+     */
     public void setNdx(int ndx) {
         this.ndx = ndx;
     }

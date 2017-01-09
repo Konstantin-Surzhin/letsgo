@@ -47,73 +47,136 @@ import javax.xml.bind.annotation.XmlTransient;
 public class GameMove implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    /**
+     *
+     */
     protected GameMovePK gameMovePK;
     private Character x;
      private Character y;
     private Collection<MoveComment> movesCommentsCollection;
     private Game games;
 
+    /**
+     *
+     */
     public GameMove() {
     }
 
+    /**
+     *
+     * @param gamesMovesPK
+     */
     public GameMove(GameMovePK gamesMovesPK) {
         this.gameMovePK = gamesMovesPK;
     }
 
+    /**
+     *
+     * @param gamesMovesPK
+     * @param x
+     * @param y
+     */
     public GameMove(GameMovePK gamesMovesPK, Character x, Character y) {
         this.gameMovePK = gamesMovesPK;
         this.x = x;
         this.y = y;
     }
 
+    /**
+     *
+     * @param gameId
+     * @param ndx
+     */
     public GameMove(long gameId, int ndx) {
         this.gameMovePK = new GameMovePK(gameId, ndx);
     }
+
+    /**
+     *
+     * @return
+     */
     @EmbeddedId
     public GameMovePK getGameMovePK() {
         return gameMovePK;
     }
 
+    /**
+     *
+     * @param gameMovePK
+     */
     public void setGameMovePK(GameMovePK gameMovePK) {
         this.gameMovePK = gameMovePK;
     }
 
+    /**
+     *
+     * @return
+     */
     @Basic(optional = false)
     @Column(nullable = false)
     public Character getX() {
         return x;
     }
 
+    /**
+     *
+     * @param x
+     */
     public void setX(Character x) {
         this.x = x;
     }
 
+    /**
+     *
+     * @return
+     */
     @Basic(optional = false)
     @Column(nullable = false)
     public Character getY() {
         return y;
     }
 
+    /**
+     *
+     * @param y
+     */
     public void setY(Character y) {
         this.y = y;
     }
 
+    /**
+     *
+     * @return
+     */
     @OneToMany(mappedBy = "gamesMoves")
     @XmlTransient
     public Collection<MoveComment> getMovesCommentsCollection() {
         return movesCommentsCollection;
     }
 
+    /**
+     *
+     * @param movesCommentsCollection
+     */
     public void setMovesCommentsCollection(Collection<MoveComment> movesCommentsCollection) {
         this.movesCommentsCollection = movesCommentsCollection;
     }
 
+    /**
+     *
+     * @return
+     */
     @JoinColumn(name = "game_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false)
     public Game getGames() {
         return games;
     }
 
+    /**
+     *
+     * @param games
+     */
     public void setGames(Game games) {
         this.games = games;
     }

@@ -79,14 +79,14 @@ public class UserRoleTest {
     }
 
     /**
-     * Test of getUsername method, of class UserRole.
+     * Test of getUserName method, of class UserRole.
      */
     @Test
     public void testGetUsername() {
         System.out.println("getUsername");
         UserRole instance = new UserRole();
         String expResult = "";
-        String result = instance.getUsername();
+        String result = instance.getUserName();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -100,7 +100,7 @@ public class UserRoleTest {
         System.out.println("setUsername");
         String username = "";
         UserRole instance = new UserRole();
-        instance.setUsername(username);
+        instance.setUserName(username);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -113,7 +113,7 @@ public class UserRoleTest {
         System.out.println("getUserrole");
         UserRole instance = new UserRole();
         String expResult = "";
-        String result = instance.getUserrole();
+        String result = instance.getUserRole();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -127,7 +127,7 @@ public class UserRoleTest {
         System.out.println("setUserrole");
         String userrole = "";
         UserRole instance = new UserRole();
-        instance.setUserrole(userrole);
+        instance.setUserRole(userrole);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

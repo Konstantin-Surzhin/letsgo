@@ -51,18 +51,34 @@ public class Room implements Serializable {
     private String roomName;
     private Collection<UserDetails> usersCollection;
 
+    /**
+     *
+     */
     public Room() {
     }
 
+    /**
+     *
+     * @param id
+     */
     public Room(Short id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @param id
+     * @param roomName
+     */
     public Room(Short id, String roomName) {
         this.id = id;
         this.roomName = roomName;
     }
 
+    /**
+     *
+     * @return
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -71,10 +87,18 @@ public class Room implements Serializable {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Short id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     @Basic(optional = false)
     @Column(name = "room_name")
     @NotNull
@@ -83,16 +107,28 @@ public class Room implements Serializable {
         return roomName;
     }
 
+    /**
+     *
+     * @param roomName
+     */
     public void setRoomName(String roomName) {
         this.roomName = roomName;
     }
 
+    /**
+     *
+     * @return
+     */
     @OneToMany(mappedBy = "room")
     @XmlTransient
     public Collection<UserDetails> getUsersCollection() {
         return usersCollection;
     }
 
+    /**
+     *
+     * @param usersCollection
+     */
     public void setUsersCollection(Collection<UserDetails> usersCollection) {
         this.usersCollection = usersCollection;
     }

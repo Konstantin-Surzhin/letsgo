@@ -55,17 +55,32 @@ public class City implements Serializable {
     private Set<UserDetails> userCollection;
     private Set<Club> clubsSet;
 
+    /**
+     *
+     */
     public City() {
     }
 
+    /**
+     *
+     * @param id
+     */
     public City(final Integer id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @param cityName
+     */
     public City(final String cityName) {
        this.cityName= cityName;
     }
 
+    /**
+     *
+     * @return
+     */
     @Id
     @Basic(optional = false)
     @Column(name = "id")
@@ -74,15 +89,27 @@ public class City implements Serializable {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(final Integer id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     @OneToMany(mappedBy = "city")
     public Set<UserDetails> getUserCollection() {
         return userCollection;
     }
 
+    /**
+     *
+     * @param userCollection
+     */
     public void setUserCollection(final Set<UserDetails> userCollection) {
         this.userCollection = userCollection;
     }
@@ -124,11 +151,19 @@ public class City implements Serializable {
         this.cityName = cityName;
     }
 
+    /**
+     *
+     * @return
+     */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cityId")
     public Set<Club> getClubsSet() {
         return clubsSet;
     }
 
+    /**
+     *
+     * @param clubsSet
+     */
     public void setClubsSet(Set<Club> clubsSet) {
         this.clubsSet = clubsSet;
     }

@@ -17,6 +17,7 @@
 package org.igo.entities;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -43,10 +44,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "USER_BANS")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "UserBan.findAll", query = "SELECT u FROM UserBan u"),
-    @NamedQuery(name = "UserBan.findById", query = "SELECT u FROM UserBan u WHERE u.id = :id"),
-    @NamedQuery(name = "UserBan.findByComment", query = "SELECT u FROM UserBan u WHERE u.comment = :comment"),
-    @NamedQuery(name = "UserBan.findByDuration", query = "SELECT u FROM UserBan u WHERE u.duration = :duration"),
+    @NamedQuery(name = "UserBan.findAll", query = "SELECT u FROM UserBan u")
+    ,
+    @NamedQuery(name = "UserBan.findById", query = "SELECT u FROM UserBan u WHERE u.id = :id")
+    ,
+    @NamedQuery(name = "UserBan.findByComment", query = "SELECT u FROM UserBan u WHERE u.comment = :comment")
+    ,
+    @NamedQuery(name = "UserBan.findByDuration", query = "SELECT u FROM UserBan u WHERE u.duration = :duration")
+    ,
     @NamedQuery(name = "UserBan.findByStartDate", query = "SELECT u FROM UserBan u WHERE u.startDate = :startDate")})
 public class UserBan implements Serializable {
 
@@ -54,22 +59,41 @@ public class UserBan implements Serializable {
     private Long id;
     private String comment;
     private short duration;
-    private Date startDate;
+    private Date startDate = Calendar.getInstance().getTime();
     private UserDetails userDetails;
 
+    /**
+     *
+     */
     public UserBan() {
     }
 
+    /**
+     *
+     * @param id
+     */
     public UserBan(Long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @param id
+     * @param comment
+     * @param duration
+     * @param startDate
+     */
     public UserBan(Long id, String comment, short duration, Date startDate) {
         this.id = id;
         this.comment = comment;
         this.duration = duration;
-        this.startDate = startDate;
+        this.startDate = new Date(startDate.getTime());
     }
+
+    /**
+     *
+     * @return
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -78,47 +102,84 @@ public class UserBan implements Serializable {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     @Basic(optional = false)
-    @Column(name = "comment", nullable = false,unique = true)
+    @Column(name = "comment", nullable = false, unique = true)
     @Size(min = 1, max = 255)
     public String getComment() {
         return comment;
     }
 
+    /**
+     *
+     * @param comment
+     */
     public void setComment(String comment) {
         this.comment = comment;
     }
 
+    /**
+     *
+     * @return
+     */
     @Basic(optional = false)
-    @Column(name = "duration",nullable = false)
+    @Column(name = "duration", nullable = false)
     public short getDuration() {
         return duration;
     }
 
+    /**
+     *
+     * @param duration
+     */
     public void setDuration(short duration) {
         this.duration = duration;
     }
 
+    /**
+     *
+     * @return
+     */
     @Basic(optional = false)
-    @Column(name = "start_date",nullable = false)
+    @Column(name = "start_date", nullable = false)
     @Temporal(TemporalType.DATE)
     public Date getStartDate() {
-        return startDate;
+        return new Date(startDate.getTime());
     }
 
+    /**
+     *
+     * @param startDate
+     */
     public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+        this.startDate = new Date(startDate.getTime());
     }
+
+    /**
+     *
+     * @return
+     */
     @ManyToOne(optional = false)
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_userBan_userDetails"), name = "user_details_id", referencedColumnName = "id")
     public UserDetails getUserDetails() {
         return userDetails;
     }
 
+    /**
+     *
+     * @param userDetails
+     */
     public void setUserDetails(UserDetails userDetails) {
         this.userDetails = userDetails;
     }
@@ -144,5 +205,5 @@ public class UserBan implements Serializable {
     public String toString() {
         return "org.igo.ban.ejb.UsersBans[ id=" + id + " ]";
     }
-    
+
 }

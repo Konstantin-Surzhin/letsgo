@@ -44,62 +44,115 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class UserGame implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    /**
+     *
+     */
     protected UserGamePK userGamePK;
     private int color;
     private Game games;
     private UserDetails userDetails;
 
+    /**
+     *
+     */
     public UserGame() {
     }
 
+    /**
+     *
+     * @param usersGamesPK
+     */
     public UserGame(UserGamePK usersGamesPK) {
         this.userGamePK = usersGamesPK;
     }
 
+    /**
+     *
+     * @param usersGamesPK
+     * @param color
+     */
     public UserGame(UserGamePK usersGamesPK, int color) {
         this.userGamePK = usersGamesPK;
         this.color = color;
     }
 
+    /**
+     *
+     * @param gameId
+     * @param userId
+     */
     public UserGame(long gameId, int userId) {
         this.userGamePK = new UserGamePK(gameId, userId);
     }
 
+    /**
+     *
+     * @return
+     */
     @EmbeddedId
     public UserGamePK getUserGamePK() {
         return userGamePK;
     }
 
+    /**
+     *
+     * @param userGamePK
+     */
     public void setUserGamePK(UserGamePK userGamePK) {
         this.userGamePK = userGamePK;
     }
 
+    /**
+     *
+     * @return
+     */
     @Basic(optional = false)
     @Column(nullable = false)
     public int getColor() {
         return color;
     }
 
+    /**
+     *
+     * @param color
+     */
     public void setColor(int color) {
         this.color = color;
     }
 
+    /**
+     *
+     * @return
+     */
     @JoinColumn(name = "game_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false)
     public Game getGames() {
         return games;
     }
 
+    /**
+     *
+     * @param games
+     */
     public void setGames(Game games) {
         this.games = games;
     }
 
+    /**
+     *
+     * @return
+     */
     @ManyToOne(optional = false)
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_userGame_userDetails"),name = "user_details_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
     public UserDetails getUserDetails() {
         return userDetails;
     }
 
+    /**
+     *
+     * @param userDetails
+     */
     public void setUserDetails(UserDetails userDetails) {
         this.userDetails = userDetails;
     }

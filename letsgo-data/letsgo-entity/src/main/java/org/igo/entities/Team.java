@@ -54,18 +54,34 @@ public class Team implements Serializable {
     private League leagueId;
     private Collection<UserDetails> usersCollection;
 
+    /**
+     *
+     */
     public Team() {
     }
 
+    /**
+     *
+     * @param id
+     */
     public Team(Short id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @param id
+     * @param teamName
+     */
     public Team(Short id, String teamName) {
         this.id = id;
         this.teamName = teamName;
     }
 
+    /**
+     *
+     * @return
+     */
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
@@ -74,10 +90,18 @@ public class Team implements Serializable {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Short id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     @Basic(optional = false)
     @Column(name = "team_name", nullable = false, unique = true)
     @Size(min = 1, max = 255)
@@ -85,26 +109,46 @@ public class Team implements Serializable {
         return teamName;
     }
 
+    /**
+     *
+     * @param teamName
+     */
     public void setTeamName(String teamName) {
         this.teamName = teamName;
     }
 
+    /**
+     *
+     * @return
+     */
     @JoinColumn(name = "league_id", referencedColumnName = "id")
     @ManyToOne
     public League getLeagueId() {
         return leagueId;
     }
 
+    /**
+     *
+     * @param leagueId
+     */
     public void setLeagueId(League leagueId) {
         this.leagueId = leagueId;
     }
 
+    /**
+     *
+     * @return
+     */
     @OneToMany(mappedBy = "team")
     @XmlTransient
     public Collection<UserDetails> getUsersCollection() {
         return usersCollection;
     }
 
+    /**
+     *
+     * @param usersCollection
+     */
     public void setUsersCollection(Collection<UserDetails> usersCollection) {
         this.usersCollection = usersCollection;
     }

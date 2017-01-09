@@ -17,6 +17,7 @@
 package org.igo.entities;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -33,33 +34,58 @@ public class UserDegreePK implements Serializable {
 
     private static final long serialVersionUID = -4018991903865846151L;
 
-    private Date appointmentDate;
+    private Date appointmentDate = Calendar.getInstance().getTime();
     private int userId;
 
+    /**
+     *
+     */
     public UserDegreePK() {
     }
 
+    /**
+     *
+     * @param appointmentDate
+     * @param userId
+     */
     public UserDegreePK(Date appointmentDate, int userId) {
-        this.appointmentDate = appointmentDate;
+        this.appointmentDate = new Date(appointmentDate.getTime());
         this.userId = userId;
     }
+
+    /**
+     *
+     * @return
+     */
     @Basic(optional = false)
     @Column(name = "appointment_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     public Date getAppointmentDate() {
-        return appointmentDate;
+        return new Date(appointmentDate.getTime());
     }
 
+    /**
+     *
+     * @param appointmentDate
+     */
     public void setAppointmentDate(Date appointmentDate) {
-        this.appointmentDate = appointmentDate;
+        this.appointmentDate = new Date(appointmentDate.getTime());
     }
 
+    /**
+     *
+     * @return
+     */
     @Basic(optional = false)
     @Column(name = "user_id", nullable = false)
     public int getUserId() {
         return userId;
     }
 
+    /**
+     *
+     * @param userId
+     */
     public void setUserId(int userId) {
         this.userId = userId;
     }
@@ -82,15 +108,12 @@ public class UserDegreePK implements Serializable {
         if ((this.appointmentDate == null && other.appointmentDate != null) || (this.appointmentDate != null && !this.appointmentDate.equals(other.appointmentDate))) {
             return false;
         }
-        if (this.userId != other.userId) {
-            return false;
-        }
-        return true;
+        return this.userId == other.userId;
     }
 
     @Override
     public String toString() {
         return "org.igo.entities.UsersDegreesPK[ appointmentDate=" + appointmentDate + ", userId=" + userId + " ]";
     }
-    
+
 }

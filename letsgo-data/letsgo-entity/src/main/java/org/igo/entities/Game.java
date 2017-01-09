@@ -65,19 +65,38 @@ public class Game implements Serializable {
     private Collection<GameDate> gamesDatesCollection;
     private Event eventId;
 
+    /**
+     *
+     */
     public Game() {
     }
 
+    /**
+     *
+     * @param id
+     */
     public Game(Long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @param id
+     * @param gameSize
+     * @param gameStatus
+     * @param gameType
+     */
     public Game(Long id, short gameSize, GameStatus gameStatus, GameType gameType) {
         this.id = id;
         this.gameSize = gameSize;
         this.gameStatus = gameStatus;
         this.gameType = gameType;
     }
+
+    /**
+     *
+     * @return
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -86,46 +105,86 @@ public class Game implements Serializable {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     @Column(name = "bayomee_number")
     public short getBayomeeNumber() {
         return bayomeeNumber;
     }
 
+    /**
+     *
+     * @param bayomeeNumber
+     */
     public void setBayomeeNumber(short bayomeeNumber) {
         this.bayomeeNumber = bayomeeNumber;
     }
 
+    /**
+     *
+     * @return
+     */
     @Column(name = "byo_yomi_time")
     public short getByoYomiTime() {
         return byoYomiTime;
     }
 
+    /**
+     *
+     * @param byoYomiTime
+     */
     public void setByoYomiTime(short byoYomiTime) {
         this.byoYomiTime = byoYomiTime;
     }
 
+    /**
+     *
+     * @return
+     */
     public short getGandicap() {
         return gandicap;
     }
 
+    /**
+     *
+     * @param gandicap
+     */
     public void setGandicap(short gandicap) {
         this.gandicap = gandicap;
     }
 
+    /**
+     *
+     * @return
+     */
     @Basic(optional = false)
     @Column(name = "game_size", nullable = false)
     public short getGameSize() {
         return gameSize;
     }
 
+    /**
+     *
+     * @param gameSize
+     */
     public void setGameSize(short gameSize) {
         this.gameSize = gameSize;
     }
 
+    /**
+     *
+     * @return
+     */
     @Basic(optional = false)
     @JoinColumn(name = "game_status_id", referencedColumnName = "id")
     @ManyToOne
@@ -133,19 +192,35 @@ public class Game implements Serializable {
         return gameStatus;
     }
 
+    /**
+     *
+     * @param gameStatus
+     */
     public void setGameStatus(GameStatus gameStatus) {
         this.gameStatus = gameStatus;
     }
 
+    /**
+     *
+     * @return
+     */
     @Column(name = "game_time",nullable = false)
     public short getGameTime() {
         return gameTime;
     }
 
+    /**
+     *
+     * @param gameTime
+     */
     public void setGameTime(short gameTime) {
         this.gameTime = gameTime;
     }
 
+    /**
+     *
+     * @return
+     */
     @Basic(optional = false)
    // @Column(name = "game_type", nullable = false)
     @JoinColumn(name = "game_type_id", referencedColumnName = "id")
@@ -154,52 +229,96 @@ public class Game implements Serializable {
         return gameType;
     }
 
+    /**
+     *
+     * @param gameType
+     */
     public void setGameType(GameType gameType) {
         this.gameType = gameType;
     }
 
+    /**
+     *
+     * @return
+     */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "games")
     public Collection<UserGame> getUsersGamesCollection() {
         return usersGamesCollection;
     }
 
+    /**
+     *
+     * @param usersGamesCollection
+     */
     public void setUsersGamesCollection(Collection<UserGame> usersGamesCollection) {
         this.usersGamesCollection = usersGamesCollection;
     }
 
+    /**
+     *
+     * @return
+     */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "game")
     public Collection<GameComment> getGamesCommentsCollection() {
         return gamesCommentsCollection;
     }
 
+    /**
+     *
+     * @param gamesCommentsCollection
+     */
     public void setGamesCommentsCollection(Collection<GameComment> gamesCommentsCollection) {
         this.gamesCommentsCollection = gamesCommentsCollection;
     }
 
+    /**
+     *
+     * @return
+     */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "games")
     public Collection<GameMove> getGamesMovesCollection() {
         return gamesMovesCollection;
     }
 
+    /**
+     *
+     * @param gamesMovesCollection
+     */
     public void setGamesMovesCollection(Collection<GameMove> gamesMovesCollection) {
         this.gamesMovesCollection = gamesMovesCollection;
     }
 
+    /**
+     *
+     * @return
+     */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "game")
     public Collection<GameDate> getGamesDatesCollection() {
         return gamesDatesCollection;
     }
 
+    /**
+     *
+     * @param gamesDatesCollection
+     */
     public void setGamesDatesCollection(Collection<GameDate> gamesDatesCollection) {
         this.gamesDatesCollection = gamesDatesCollection;
     }
 
+    /**
+     *
+     * @return
+     */
     @JoinColumn(name = "event_id", referencedColumnName = "id")
     @ManyToOne
     public Event getEventId() {
         return eventId;
     }
 
+    /**
+     *
+     * @param eventId
+     */
     public void setEventId(Event eventId) {
         this.eventId = eventId;
     }

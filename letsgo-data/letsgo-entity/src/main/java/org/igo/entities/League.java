@@ -51,18 +51,34 @@ public class League implements Serializable {
     private Collection<Team> teamsCollection;
     private Collection<UserDetails> usersCollection;
 
+    /**
+     *
+     */
     public League() {
     }
 
+    /**
+     *
+     * @param id
+     */
     public League(Short id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @param id
+     * @param leagueName
+     */
     public League(Short id, String leagueName) {
         this.id = id;
         this.leagueName = leagueName;
     }
 
+    /**
+     *
+     * @return
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -71,10 +87,18 @@ public class League implements Serializable {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Short id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     @Basic(optional = false)
     @Size(min = 1, max = 255)
     @Column(name = "league_name",nullable = false, unique = true)
@@ -82,26 +106,46 @@ public class League implements Serializable {
         return leagueName;
     }
 
+    /**
+     *
+     * @param leagueName
+     */
     public void setLeagueName(String leagueName) {
         this.leagueName = leagueName;
     }
 
+    /**
+     *
+     * @return
+     */
     @OneToMany(mappedBy = "leagueId")
     @XmlTransient
     public Collection<Team> getTeamsCollection() {
         return teamsCollection;
     }
 
+    /**
+     *
+     * @param teamsCollection
+     */
     public void setTeamsCollection(Collection<Team> teamsCollection) {
         this.teamsCollection = teamsCollection;
     }
 
+    /**
+     *
+     * @return
+     */
     @OneToMany(mappedBy = "league")
     @XmlTransient
     public Collection<UserDetails> getUsersCollection() {
         return usersCollection;
     }
 
+    /**
+     *
+     * @param usersCollection
+     */
     public void setUsersCollection(Collection<UserDetails> usersCollection) {
         this.usersCollection = usersCollection;
     }

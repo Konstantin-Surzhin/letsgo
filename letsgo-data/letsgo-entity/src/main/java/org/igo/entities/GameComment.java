@@ -17,6 +17,7 @@
 package org.igo.entities;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -57,25 +58,42 @@ public class GameComment implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long id;
     private String comment;
-    private Date postDateTime;
+    private Date postDateTime = Calendar.getInstance().getTime();
     private Game game;
     private Collection<GameComment> gameCommentCollection;
     private GameComment inReplayToId;
     private UserDetails userDetails;
 
+    /**
+     *
+     */
     public GameComment() {
     }
 
+    /**
+     *
+     * @param id
+     */
     public GameComment(Long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @param id
+     * @param comment
+     * @param postDateTime
+     */
     public GameComment(Long id, String comment, Date postDateTime) {
         this.id = id;
         this.comment = comment;
-        this.postDateTime = postDateTime;
+        this.postDateTime =  new Date(postDateTime.getTime());
     }
 
+    /**
+     *
+     * @return
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -84,10 +102,18 @@ public class GameComment implements Serializable {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     @Basic(optional = false)
     @Column(nullable = false, length = 255)
     @Size(min = 1, max = 255)
@@ -95,57 +121,101 @@ public class GameComment implements Serializable {
         return comment;
     }
 
+    /**
+     *
+     * @param comment
+     */
     public void setComment(String comment) {
         this.comment = comment;
     }
 
+    /**
+     *
+     * @return
+     */
     @Basic(optional = false)
     @Column(name = "post_date_time", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     public Date getPostDateTime() {
-        return postDateTime;
+        return new Date(postDateTime.getTime());
     }
 
+    /**
+     *
+     * @param postDateTime
+     */
     public void setPostDateTime(Date postDateTime) {
-        this.postDateTime = postDateTime;
+        this.postDateTime= new Date(postDateTime.getTime());
     }
 
+    /**
+     *
+     * @return
+     */
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_gameComment_game"), name = "game_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
     public Game getGame() {
         return game;
     }
 
+    /**
+     *
+     * @param game
+     */
     public void setGame(Game game) {
         this.game = game;
     }
 
+    /**
+     *
+     * @return
+     */
     @OneToMany(mappedBy = "inReplayToId")
     @XmlTransient
     public Collection<GameComment> getGameCommentCollection() {
         return gameCommentCollection;
     }
 
+    /**
+     *
+     * @param gameCommentCollection
+     */
     public void setGameCommentCollection(Collection<GameComment> gameCommentCollection) {
         this.gameCommentCollection = gameCommentCollection;
     }
 
+    /**
+     *
+     * @return
+     */
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_gameComment_in_replay_to_id"), name = "in_replay_to_id", referencedColumnName = "id")
     @ManyToOne
     public GameComment getInReplayToId() {
         return inReplayToId;
     }
 
+    /**
+     *
+     * @param inReplayToId
+     */
     public void setInReplayToId(GameComment inReplayToId) {
         this.inReplayToId = inReplayToId;
     }
 
+    /**
+     *
+     * @return
+     */
     @ManyToOne(optional = false)
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_gameComment_userDetails"), name = "user_details_id", referencedColumnName = "id", nullable = false)
     public UserDetails getUserDetails() {
         return userDetails;
     }
 
+    /**
+     *
+     * @param userDetails
+     */
     public void setUserDetails(UserDetails userDetails) {
         this.userDetails = userDetails;
     }

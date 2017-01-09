@@ -17,6 +17,7 @@
 package org.igo.entities;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -69,7 +70,7 @@ public class UserDetails implements Serializable {
     private Integer draw;
     private String email;
     private Boolean isLogin;
-    private Date lastTime;
+    private Date lastTime = Calendar.getInstance().getTime();
     private Integer lose;
     //private String userName;
     private Integer rating;
@@ -89,29 +90,53 @@ public class UserDetails implements Serializable {
     private Collection<GameComment> gameCommentCollection;
     private Collection<UserBan> userBanCollection;
 
+    /**
+     *
+     */
     public UserDetails() {
     }
 
+    /**
+     *
+     * @return
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     @Column(name = "draw")
     public Integer getDraw() {
         return draw;
     }
 
+    /**
+     *
+     * @param draw
+     */
     public void setDraw(Integer draw) {
         this.draw = draw;
     }
 
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Недопустимый адрес электронной почты")//if the field contains email address consider using this annotation to enforce field validation
+
+    /**
+     *
+     * @return
+     */
     @NotNull
     @Size(min = 1, max = 255)
     @Basic(optional = false)
@@ -120,112 +145,204 @@ public class UserDetails implements Serializable {
         return email;
     }
 
+    /**
+     *
+     * @param email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     *
+     * @return
+     */
     @Column(name = "is_login")
     public Boolean getIsLogin() {
         return isLogin;
     }
 
+    /**
+     *
+     * @param isLogin
+     */
     public void setIsLogin(Boolean isLogin) {
         this.isLogin = isLogin;
     }
 
+    /**
+     *
+     * @return
+     */
     @Basic(optional = false)
     @Column(name = "last_time")
     @Temporal(TemporalType.TIMESTAMP)
     public Date getLastTime() {
-        return lastTime;
+        return new Date(lastTime.getTime());
     }
 
+    /**
+     *
+     * @param lastTime
+     */
     public void setLastTime(Date lastTime) {
-        this.lastTime = lastTime;
+        this.lastTime = new Date(lastTime.getTime());
     }
 
+    /**
+     *
+     * @return
+     */
     @Column(name = "lose")
     public Integer getLose() {
         return lose;
     }
 
+    /**
+     *
+     * @param lose
+     */
     public void setLose(Integer lose) {
         this.lose = lose;
     }
 
+    /**
+     *
+     * @return
+     */
     @Column(name = "rating")
     public Integer getRating() {
         return rating;
     }
 
+    /**
+     *
+     * @param rating
+     */
     public void setRating(Integer rating) {
         this.rating = rating;
     }
 
+    /**
+     *
+     * @return
+     */
     @Column(name = "staus")
     public Integer getStaus() {
         return staus;
     }
 
+    /**
+     *
+     * @param staus
+     */
     public void setStaus(Integer staus) {
         this.staus = staus;
     }
 
+    /**
+     *
+     * @return
+     */
     @Column(name = "win")
     public Integer getWin() {
         return win;
     }
 
+    /**
+     *
+     * @param win
+     */
     public void setWin(Integer win) {
         this.win = win;
     }
 
+    /**
+     *
+     * @return
+     */
     @XmlTransient
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userDetails")
     public Collection<UserBan> getUserBanCollection() {
         return userBanCollection;
     }
 
+    /**
+     *
+     * @param userBanCollection
+     */
     public void setUserBanCollection(Collection<UserBan> userBanCollection) {
         this.userBanCollection = userBanCollection;
     }
 
+    /**
+     *
+     * @return
+     */
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_user_league"), name = "league_id", referencedColumnName = "id")
     public League getLeague() {
         return league;
     }
 
+    /**
+     *
+     * @param league
+     */
     public void setLeague(League league) {
         this.league = league;
     }
 
+    /**
+     *
+     * @return
+     */
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_user_team"), name = "team_id", referencedColumnName = "id")
     public Team getTeam() {
         return team;
     }
 
+    /**
+     *
+     * @param team
+     */
     public void setTeam(Team team) {
         this.team = team;
     }
 
+    /**
+     *
+     * @return
+     */
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_user_room"), name = "room_id", referencedColumnName = "id")
     public Room getRoom() {
         return room;
     }
 
+    /**
+     *
+     * @param room
+     */
     public void setRoom(Room room) {
         this.room = room;
     }
 
+    /**
+     *
+     * @return
+     */
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_user_city"), name = "city_id", referencedColumnName = "id")
     public City getCity() {
         return city;
     }
 
+    /**
+     *
+     * @param city
+     */
     public void setCity(City city) {
         this.city = city;
     }
@@ -252,42 +369,74 @@ public class UserDetails implements Serializable {
         return "org.igo.ban.ejb.Users[ id=" + id + " ]";
     }
 
+    /**
+     *
+     * @return
+     */
     @XmlTransient
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userDetails")
     public Collection<UserGame> getUserGameCollection() {
         return userGameCollection;
     }
 
+    /**
+     *
+     * @param userGameCollection
+     */
     public void setUserGameCollection(Collection<UserGame> userGameCollection) {
         this.userGameCollection = userGameCollection;
     }
 
+    /**
+     *
+     * @return
+     */
     @XmlTransient
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userDetails")
     public Collection<UserDegree> getUserDegreeCollection() {
         return userDegreeCollection;
     }
 
+    /**
+     *
+     * @param userDegreeCollection
+     */
     public void setUserDegreeCollection(Collection<UserDegree> userDegreeCollection) {
         this.userDegreeCollection = userDegreeCollection;
     }
 
+    /**
+     *
+     * @return
+     */
     @XmlTransient
     @OneToMany(mappedBy = "userDetails")
     public Collection<MoveComment> getMoveCommentCollection() {
         return moveCommentCollection;
     }
 
+    /**
+     *
+     * @param moveCommentCollection
+     */
     public void setMoveCommentCollection(Collection<MoveComment> moveCommentCollection) {
         this.moveCommentCollection = moveCommentCollection;
     }
 
+    /**
+     *
+     * @return
+     */
     @XmlTransient
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userDetails")
     public Collection<GameComment> getGameCommentCollection() {
         return gameCommentCollection;
     }
 
+    /**
+     *
+     * @param gameCommentCollection
+     */
     public void setGameCommentCollection(Collection<GameComment> gameCommentCollection) {
         this.gameCommentCollection = gameCommentCollection;
     }
@@ -323,11 +472,19 @@ public class UserDetails implements Serializable {
         this.club = club;
     }
 
+    /**
+     *
+     * @return
+     */
     @OneToOne(mappedBy = "userDetails")
     public GoUser getUser() {
         return user;
     }
 
+    /**
+     *
+     * @param user
+     */
     public void setUser(GoUser user) {
         this.user = user;
     }

@@ -36,12 +36,20 @@ public class GameRule implements Serializable {
     private Short id;
     private String gameRuleName;
 
+    /**
+     *
+     * @return
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Short getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Short id) {
         this.id = id;
     }
