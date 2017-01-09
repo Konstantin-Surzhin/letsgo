@@ -38,15 +38,28 @@ import org.openqa.selenium.chrome.ChromeOptions;
 @RunWith(Parameterized.class)
 public class ChromeSuccesLoginPageIT extends ChromeBase {
 
+    /**
+     *
+     */
     @Parameterized.Parameter(value = 0)
     public Locale locale;
 
+    /**
+     *
+     */
     @Parameterized.Parameter(value = 1)
     public Map<String, String> messages;
 
+    /**
+     *
+     */
     @Parameterized.Parameter(value = 2)
     public WebDriver driver;
 
+    /**
+     *
+     * @return
+     */
     @Parameterized.Parameters
     public static Collection localesedParam() {
         Map<String, String> m0 = new HashMap<>();
@@ -65,6 +78,9 @@ public class ChromeSuccesLoginPageIT extends ChromeBase {
         return Arrays.asList(param);
     }
 
+    /**
+     *
+     */
     @After
     public void tearDown() {
         if (driver != null) {
@@ -72,12 +88,21 @@ public class ChromeSuccesLoginPageIT extends ChromeBase {
         }
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testChromeSuccesLoginPage() throws Exception {
         System.out.println("Test Chrome succes Login Page: " + locale.getLanguage() + " : " + driver);
         new SuccesLoginPageAction(driver, PORT, messages, "admin").accept(locale);
     }
 
+    /**
+     *
+     * @param locale
+     * @return
+     */
     public static WebDriver getDiver(Locale locale) {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--lang=" + locale.getLanguage());

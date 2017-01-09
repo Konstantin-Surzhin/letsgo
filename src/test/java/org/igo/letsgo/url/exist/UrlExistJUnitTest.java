@@ -33,25 +33,43 @@ import static org.junit.Assert.*;
  */
 public class UrlExistJUnitTest {
 
+    /**
+     *
+     */
     public UrlExistJUnitTest() {
     }
 
+    /**
+     *
+     */
     @BeforeClass
     public static void setUpClass() {
     }
 
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass() {
     }
 
+    /**
+     *
+     */
     @Before
     public void setUp() {
     }
 
+    /**
+     *
+     */
     @After
     public void tearDown() {
     }
 
+    /**
+     *
+     */
     @Test
     public void urlExistTest() {
         System.out.println("Is URL Exist?");

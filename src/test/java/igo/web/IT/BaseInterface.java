@@ -24,6 +24,13 @@ import io.github.bonigarcia.wdm.Architecture;
  */
 public interface BaseInterface {
 
+    /**
+     *
+     */
     public static String PORT = "8080";
+
+    /**
+     *
+     */
     public static Architecture ARCH = Architecture.x32;
 }

@@ -29,11 +29,33 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 public class PageAction implements Consumer<Locale> {
 
+    /**
+     *
+     */
     protected final String url;
+
+    /**
+     *
+     */
     protected final WebDriver driver;
+
+    /**
+     *
+     */
     protected final String PORT;
+
+    /**
+     *
+     */
     protected final Map<String, String> MESSAGES;
 
+    /**
+     *
+     * @param driver
+     * @param port
+     * @param messages
+     * @param url
+     */
     public PageAction(WebDriver driver, String port, Map<String, String> messages, String url) {
         if (url != null) {
             this.url = url;

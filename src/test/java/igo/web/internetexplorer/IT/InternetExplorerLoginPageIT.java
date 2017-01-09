@@ -32,13 +32,22 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
  */
 public class InternetExplorerLoginPageIT extends InternetExplorerBase {
 
+    /**
+     *
+     */
     public WebDriver driver;
 
+    /**
+     *
+     */
     @Before
     public void setUp() {
         driver = new InternetExplorerDriver();
     }
 
+    /**
+     *
+     */
     @After
     public void tearDown() {
         if (driver != null) {
@@ -46,6 +55,10 @@ public class InternetExplorerLoginPageIT extends InternetExplorerBase {
         }
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testInternetExplorer_ROOT_LocaleLoginPage() throws Exception {
         System.out.println("Test InternetExplorer ROOT locale login Page");
@@ -57,6 +70,10 @@ public class InternetExplorerLoginPageIT extends InternetExplorerBase {
         new PageAction(driver, PORT, messages, "login").accept(l);
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testInternetExplorer_ru_RU_LocaleLoginPage() throws Exception {
         System.out.println("Test InternetExplorer ru_RU locale login Page");

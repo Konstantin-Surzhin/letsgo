@@ -30,6 +30,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 public class SuccesLoginPageAction extends PageAction implements Consumer<Locale> {
 
+    /**
+     *
+     * @param driver
+     * @param port
+     * @param messages
+     * @param url
+     */
     public SuccesLoginPageAction(WebDriver driver, String port, Map<String, String> messages, String url) {
         super(driver, port, messages, url);
     }

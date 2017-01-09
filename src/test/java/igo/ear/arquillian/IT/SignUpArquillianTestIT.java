@@ -38,6 +38,11 @@ import org.junit.runner.RunWith;
 @RunWith(Arquillian.class)
 public class SignUpArquillianTestIT {
 
+    /**
+     *
+     * @return
+     * @throws Exception
+     */
     @Deployment
     public static EnterpriseArchive createDeployment() throws Exception {
         String letsgoHome = System.getenv("LETSGO_HOME");
@@ -75,21 +80,36 @@ public class SignUpArquillianTestIT {
         return ear;
     }
 
+    /**
+     *
+     */
     public SignUpArquillianTestIT() {
     }
 
+    /**
+     *
+     */
     @BeforeClass
     public static void setUpClass() {
     }
 
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass() {
     }
 
+    /**
+     *
+     */
     @Before
     public void setUp() {
     }
 
+    /**
+     *
+     */
     @After
     public void tearDown() {
     }
@@ -97,6 +117,11 @@ public class SignUpArquillianTestIT {
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //
+
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     @RunAsClient
     public void helloLetsgo() throws Exception {

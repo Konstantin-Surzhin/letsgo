@@ -39,15 +39,28 @@ import org.openqa.selenium.opera.OperaOptions;
 @RunWith(Parameterized.class)
 public class OperaLoginPageIT extends OperaBase {
 
+    /**
+     *
+     */
     @Parameter(value = 0)
     public Locale locale;
 
+    /**
+     *
+     */
     @Parameter(value = 1)
     public Map<String, String> messages;
 
+    /**
+     *
+     */
     @Parameter(value = 2)
     public WebDriver driver;
 
+    /**
+     *
+     * @return
+     */
     @Parameters
     public static Collection localesedParam() {
         Map<String, String> m0 = new HashMap<>();
@@ -66,6 +79,9 @@ public class OperaLoginPageIT extends OperaBase {
         return Arrays.asList(param);
     }
 
+    /**
+     *
+     */
     @After
     public void tearDown() {
         if (driver != null) {
@@ -73,12 +89,21 @@ public class OperaLoginPageIT extends OperaBase {
         }
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testOperaLoginPage() throws Exception {
         System.out.println("Test Opera Login Page: " + locale.getLanguage() + " : " + driver);
         new PageAction(driver, PORT, messages, "admin").accept(locale);
     }
 
+    /**
+     *
+     * @param locale
+     * @return
+     */
     public static WebDriver getDiver(Locale locale) {
         OperaOptions options = new OperaOptions();
         options.addArguments("--lang=" + locale.getLanguage());

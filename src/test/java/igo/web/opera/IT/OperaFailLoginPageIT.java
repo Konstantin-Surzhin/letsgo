@@ -39,15 +39,28 @@ import org.openqa.selenium.opera.OperaOptions;
 @RunWith(Parameterized.class)
 public class OperaFailLoginPageIT extends OperaBase {
 
+    /**
+     *
+     */
     @Parameterized.Parameter(value = 0)
     public Locale locale;
 
+    /**
+     *
+     */
     @Parameterized.Parameter(value = 1)
     public Map<String, String> messages;
 
+    /**
+     *
+     */
     @Parameterized.Parameter(value = 2)
     public WebDriver driver;
 
+    /**
+     *
+     * @return
+     */
     @Parameterized.Parameters
     public static Collection localesedParam() {
         Map<String, String> m0 = new HashMap<>();
@@ -70,6 +83,9 @@ public class OperaFailLoginPageIT extends OperaBase {
         return Arrays.asList(param);
     }
 
+    /**
+     *
+     */
     @After
     public void tearDown() {
         if (driver != null) {
@@ -77,6 +93,10 @@ public class OperaFailLoginPageIT extends OperaBase {
         }
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testChromeFailLoginPage() throws Exception {
         System.out.println("Test Chrome fail Login Page: " + locale.getLanguage() + " : " + driver);
@@ -84,6 +104,11 @@ public class OperaFailLoginPageIT extends OperaBase {
         driver.quit();
     }
 
+    /**
+     *
+     * @param locale
+     * @return
+     */
     public static WebDriver getDiver(Locale locale) {
         OperaOptions options = new OperaOptions();
         options.addArguments("--lang=" + locale.getLanguage());
