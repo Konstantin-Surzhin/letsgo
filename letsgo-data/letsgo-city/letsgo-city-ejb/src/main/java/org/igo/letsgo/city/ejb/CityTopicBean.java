@@ -29,6 +29,10 @@ public class CityTopicBean implements MessageListener {
     @Resource
     private MessageDrivenContext mdc;
 
+    /**
+     *
+     * @param message
+     */
     @Override
     public void onMessage(Message message) {
         ObjectMessage msg = null;

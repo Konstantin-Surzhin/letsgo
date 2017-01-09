@@ -14,6 +14,12 @@ import org.igo.letsgo.remote.IGameCommentRemote;
 @Stateless
 public class GameCommentSessionBean implements IGameCommentRemote {
 
+    /**
+     *
+     * @param gameId
+     * @param commentId
+     * @return
+     */
     @Override
     public String getGameComment(int gameId, int commentId) {
         return "hothing to comment";

@@ -31,26 +31,46 @@ import org.junit.runner.RunWith;
 @RunWith(Arquillian.class)
 public class CityTestIT {
 
+    /**
+     *
+     */
     public CityTestIT() {
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @BeforeClass
     public static void setUpClass() throws Exception {
 
     }
 
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass() {
     }
 
+    /**
+     *
+     */
     @Before
     public void setUp() {
     }
 
+    /**
+     *
+     */
     @After
     public void tearDown() {
     }
 
+    /**
+     *
+     * @return
+     */
     @Deployment
     @OverProtocol("Servlet 3.0")
     public static EnterpriseArchive createTestArchive() {
@@ -70,12 +90,18 @@ public class CityTestIT {
     @EJB(lookup = "java:global/letsgo-city-ear-1.0/letsgo-city-ejb-1.0/CitySessionBean!org.igo.letsgo.remote.ICityRemote")
     private ICityRemote city;
 
+    /**
+     *
+     */
     @Test
     public void testCityNotNull() {
         System.out.println("City is not null: ");
         assertNotNull("Ups! City is null", city);
     }
 
+    /**
+     *
+     */
     @Test
     public void testGetCity() {
         System.out.println("test get City");

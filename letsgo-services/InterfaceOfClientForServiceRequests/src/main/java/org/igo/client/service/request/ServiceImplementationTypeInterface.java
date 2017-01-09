@@ -23,11 +23,27 @@ package org.igo.client.service.request;
  */
 public interface ServiceImplementationTypeInterface<T>  extends UnitInterface<T>{
 
+    /**
+     *
+     * @return
+     */
     public ServiceTypeInterface getServiceType();
 
+    /**
+     *
+     * @return
+     */
     public String getServiceImplementationType();
     
+    /**
+     *
+     * @param db
+     */
     public void setDatase(String db);
     
+    /**
+     *
+     * @param db
+     */
     public void setDataBaseAccessType(String db);
 }

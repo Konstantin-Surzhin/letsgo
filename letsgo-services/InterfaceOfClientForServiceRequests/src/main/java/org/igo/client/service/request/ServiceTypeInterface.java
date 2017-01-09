@@ -23,5 +23,9 @@ package org.igo.client.service.request;
  */
 public interface ServiceTypeInterface<T> extends UnitInterface<T> {
   
+    /**
+     *
+     * @return
+     */
     public String getServiceType();
 }

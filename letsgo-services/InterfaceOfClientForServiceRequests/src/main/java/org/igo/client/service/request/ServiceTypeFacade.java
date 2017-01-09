@@ -31,6 +31,10 @@ public class ServiceTypeFacade<T> implements ServiceTypeInterface<T> {
         this.unitIntf = unitIntf;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String getPath() {
         final StringBuilder sb = new StringBuilder();
@@ -38,6 +42,10 @@ public class ServiceTypeFacade<T> implements ServiceTypeInterface<T> {
         return sb.toString().toLowerCase();
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public T getUnit() {
         return this.unitIntf.getUnit();

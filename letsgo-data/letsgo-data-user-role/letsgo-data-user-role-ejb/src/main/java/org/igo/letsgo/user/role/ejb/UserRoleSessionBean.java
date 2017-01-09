@@ -14,6 +14,11 @@ import org.igo.letsgo.remote.IUserRoleRemote;
 @Stateless
 public class UserRoleSessionBean implements IUserRoleRemote {
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @Override
     public String getRole(int id) {
         return "REGULAR";

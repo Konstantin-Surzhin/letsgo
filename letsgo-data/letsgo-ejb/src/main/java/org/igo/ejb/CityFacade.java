@@ -20,11 +20,18 @@ public class CityFacade extends AbstractFacade<City> {
     @PersistenceContext(unitName = "gamePU")
     private EntityManager em;
 
+    /**
+     *
+     * @return
+     */
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
 
+    /**
+     *
+     */
     public CityFacade() {
         super(City.class);
     }

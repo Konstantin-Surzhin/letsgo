@@ -20,11 +20,18 @@ public class GameDateFacade extends AbstractFacade<GameDate> {
     @PersistenceContext(unitName = "gamePU")
     private EntityManager em;
 
+    /**
+     *
+     * @return
+     */
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
 
+    /**
+     *
+     */
     public GameDateFacade() {
         super(GameDate.class);
     }

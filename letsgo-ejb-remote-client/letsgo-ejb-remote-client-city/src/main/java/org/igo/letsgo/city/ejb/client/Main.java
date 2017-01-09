@@ -6,6 +6,10 @@ package org.igo.letsgo.city.ejb.client;
  */
 public class Main {
     
+    /**
+     *
+     * @param args
+     */
     public static void main( String[] args ) {
         System.out.println( "Hello World Enterprise Application Client!" );
     }

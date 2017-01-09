@@ -31,6 +31,10 @@ public class UnitFacade<T> implements UnitInterface<T> {
         path.append(unit.getClass().getSimpleName());
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String getPath() {
         return this.path.toString().toLowerCase();

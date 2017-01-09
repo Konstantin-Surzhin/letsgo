@@ -23,7 +23,15 @@ package org.igo.client.service.request;
  */
 public interface UnitInterface<T> {
 
+    /**
+     *
+     * @return
+     */
     public String getPath();
 
+    /**
+     *
+     * @return
+     */
     public T getUnit();
 }

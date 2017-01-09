@@ -31,12 +31,20 @@ public class MessageWrappingTypeFcade<T> implements MessageWrappingTypeInterface
         this.messageType = messageType;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String getPath() {
         final StringBuilder sb = new StringBuilder();
         return sb.append(messageType).append("-").append(unitIntf.getPath()).toString().toLowerCase();
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public T getUnit() {
         return unitIntf.getUnit();

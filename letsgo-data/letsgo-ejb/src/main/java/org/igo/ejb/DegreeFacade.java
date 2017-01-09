@@ -20,11 +20,18 @@ public class DegreeFacade extends AbstractFacade<Degree> {
     @PersistenceContext(unitName = "gamePU")
     private EntityManager em;
 
+    /**
+     *
+     * @return
+     */
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
 
+    /**
+     *
+     */
     public DegreeFacade() {
         super(Degree.class);
     }

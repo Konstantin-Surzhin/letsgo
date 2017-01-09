@@ -20,11 +20,18 @@ public class UserRoleFacade extends AbstractFacade<UserRole> {
     @PersistenceContext(unitName = "gamePU")
     private EntityManager em;
 
+    /**
+     *
+     * @return
+     */
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
 
+    /**
+     *
+     */
     public UserRoleFacade() {
         super(UserRole.class);
     }

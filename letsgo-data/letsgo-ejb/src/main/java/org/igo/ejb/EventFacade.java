@@ -20,11 +20,18 @@ public class EventFacade extends AbstractFacade<Event> {
     @PersistenceContext(unitName = "gamePU")
     private EntityManager em;
 
+    /**
+     *
+     * @return
+     */
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
 
+    /**
+     *
+     */
     public EventFacade() {
         super(Event.class);
     }

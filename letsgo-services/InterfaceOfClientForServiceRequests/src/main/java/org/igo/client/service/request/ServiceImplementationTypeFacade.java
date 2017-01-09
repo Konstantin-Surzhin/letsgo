@@ -49,6 +49,10 @@ public class ServiceImplementationTypeFacade<T> implements ServiceImplementation
         return serviceImplementationType;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String getPath() {
         final StringBuilder sb = new StringBuilder();
@@ -64,6 +68,10 @@ public class ServiceImplementationTypeFacade<T> implements ServiceImplementation
         return sb.toString().toLowerCase();
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public T getUnit() {
         return serviceType.getUnit();

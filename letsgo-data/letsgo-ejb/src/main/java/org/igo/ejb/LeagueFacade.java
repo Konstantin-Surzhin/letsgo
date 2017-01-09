@@ -20,11 +20,18 @@ public class LeagueFacade extends AbstractFacade<League> {
     @PersistenceContext(unitName = "gamePU")
     private EntityManager em;
 
+    /**
+     *
+     * @return
+     */
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
 
+    /**
+     *
+     */
     public LeagueFacade() {
         super(League.class);
     }

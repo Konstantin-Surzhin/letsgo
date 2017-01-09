@@ -24,17 +24,29 @@ public class CitySessionBeanTest {
 
     private EJBContainer container;
 
+    /**
+     *
+     */
     public CitySessionBeanTest() {
     }
 
+    /**
+     *
+     */
     @BeforeClass
     public static void setUpClass() {
     }
 
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass() {
     }
 
+    /**
+     *
+     */
     @Before
     public void setUp() {
         Properties properties = new Properties();
@@ -43,6 +55,9 @@ public class CitySessionBeanTest {
         container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
     }
 
+    /**
+     *
+     */
     @After
     public void tearDown() {
         container.close();

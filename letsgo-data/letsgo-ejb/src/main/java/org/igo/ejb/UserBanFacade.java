@@ -20,11 +20,18 @@ public class UserBanFacade extends AbstractFacade<UserBan> {
     @PersistenceContext(unitName = "gamePU")
     private EntityManager em;
 
+    /**
+     *
+     * @return
+     */
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
 
+    /**
+     *
+     */
     public UserBanFacade() {
         super(UserBan.class);
     }

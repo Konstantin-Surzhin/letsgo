@@ -20,11 +20,18 @@ public class RoomFacade extends AbstractFacade<Room> {
     @PersistenceContext(unitName = "gamePU")
     private EntityManager em;
 
+    /**
+     *
+     * @return
+     */
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
 
+    /**
+     *
+     */
     public RoomFacade() {
         super(Room.class);
     }

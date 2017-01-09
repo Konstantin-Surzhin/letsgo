@@ -20,11 +20,18 @@ public class GameMoveFacade extends AbstractFacade<GameMove> {
     @PersistenceContext(unitName = "gamePU")
     private EntityManager em;
 
+    /**
+     *
+     * @return
+     */
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
 
+    /**
+     *
+     */
     public GameMoveFacade() {
         super(GameMove.class);
     }

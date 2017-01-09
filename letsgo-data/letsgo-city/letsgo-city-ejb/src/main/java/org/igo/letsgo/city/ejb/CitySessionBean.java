@@ -26,12 +26,22 @@ public class CitySessionBean implements ICityRemote {
     private static final Logger LOGGER = Logger.getLogger(CitySessionBean.class.getCanonicalName());
     private EntityManager entityManager;
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @Override
     public String getCityName(final Integer id) {
         City city = getEntityManager().find(City.class, id);
         return city.getCityName();
     }
 
+    /**
+     *
+     * @param name
+     * @return
+     */
     @Override
     public Integer getCityId(final String name) {
 
@@ -61,6 +71,10 @@ public class CitySessionBean implements ICityRemote {
         this.entityManager = entityManager;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public List<String> getAllCityName() {
         TypedQuery<City> q = getEntityManager().createNamedQuery("City.findAll", City.class);
@@ -73,6 +87,11 @@ public class CitySessionBean implements ICityRemote {
         return listCityName;
     }
 
+    /**
+     *
+     * @param name
+     * @return
+     */
     @Override
     public List<String> getAllCityUser(final String name) {
 
@@ -94,6 +113,11 @@ public class CitySessionBean implements ICityRemote {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @Override
     public List<String> getAllCityUser(final Integer id) {
         City city = getEntityManager().find(City.class, id);
@@ -105,6 +129,13 @@ public class CitySessionBean implements ICityRemote {
         return listUsersName;
     }
 
+    /**
+     *
+     * @param cityName
+     * @param method
+     * @param dbName
+     * @return
+     */
     @Override
     public Boolean createCity(final String cityName, final String method, final String dbName) {
         City city = new City(cityName);

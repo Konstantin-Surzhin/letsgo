@@ -20,11 +20,18 @@ public class GameCommentFacade extends AbstractFacade<GameComment> {
     @PersistenceContext(unitName = "gamePU")
     private EntityManager em;
 
+    /**
+     *
+     * @return
+     */
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
 
+    /**
+     *
+     */
     public GameCommentFacade() {
         super(GameComment.class);
     }

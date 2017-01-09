@@ -20,11 +20,18 @@ public class UserFacade extends AbstractFacade<GoUser> {
     @PersistenceContext(unitName = "gamePU")
     private EntityManager em;
 
+    /**
+     *
+     * @return
+     */
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
 
+    /**
+     *
+     */
     public UserFacade() {
         super(GoUser.class);
     }

@@ -14,6 +14,11 @@ import org.igo.letsgo.remote.IEventRemote;
 @Stateless
 public class EventSessionBean implements IEventRemote {
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @Override
     public String getEvent(int id) {
         return "Russian championship";

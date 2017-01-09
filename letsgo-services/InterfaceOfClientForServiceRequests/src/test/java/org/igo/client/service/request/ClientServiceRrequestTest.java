@@ -29,25 +29,43 @@ import static org.junit.Assert.*;
  */
 public class ClientServiceRrequestTest {
 
+    /**
+     *
+     */
     public ClientServiceRrequestTest() {
     }
 
+    /**
+     *
+     */
     @BeforeClass
     public static void setUpClass() {
     }
 
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass() {
     }
 
+    /**
+     *
+     */
     @Before
     public void setUp() {
     }
 
+    /**
+     *
+     */
     @After
     public void tearDown() {
     }
 
+    /**
+     *
+     */
     @Test
     public void unitFacadeTest() {
         System.out.println("Unit Facade Test");
@@ -59,6 +77,9 @@ public class ClientServiceRrequestTest {
         assertEquals(response, city);
     }
 
+    /**
+     *
+     */
     @Test
     public void MessageWrappingTypeFacadeTest() {
         System.out.println(" Service Type Facade Test");
@@ -71,6 +92,9 @@ public class ClientServiceRrequestTest {
         assertEquals(response, city);
     }
 
+    /**
+     *
+     */
     @Test
     public void serviceTypeFacadeTest() {
         System.out.println(" Service Type Facade Test");
@@ -84,6 +108,9 @@ public class ClientServiceRrequestTest {
         assertEquals(response, city);
     }
 
+    /**
+     *
+     */
     @Test
     public void serviceImplementationTypeFacade() {
         System.out.println("Service Implementation Type Facade Test");
@@ -98,6 +125,9 @@ public class ClientServiceRrequestTest {
         assertEquals(response, city);
     }
 
+    /**
+     *
+     */
     @Test
     public void dataBaseServiceImplementationTypeFacadeTest() {
         System.out.println("Data Base Service Implementation Type Facade Test");
