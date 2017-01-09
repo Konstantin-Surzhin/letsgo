@@ -41,21 +41,41 @@ public class City implements Serializable {
     @Column(unique = true)
     private String name;
 
+    /**
+     *
+     */
     public City() {
     }
 
+    /**
+     *
+     * @param name
+     */
     public City(final String name) {
         this.name = name;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(final Integer id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -74,6 +94,10 @@ public class City implements Serializable {
         return Objects.equals(this.id, other.id);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 5;
@@ -82,6 +106,10 @@ public class City implements Serializable {
         return hash;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "org.igo.letsgo.jsf.jsp.city.entity.City[ id=" + id + " ]";

@@ -44,34 +44,66 @@ public class City implements Serializable {
     @Column(name = "city_name", unique = true)
     private String cityName;
 
+    /**
+     *
+     */
     public City() {
     }
 
+    /**
+     *
+     * @param id
+     */
     public City(Integer id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @param id
+     * @param cityName
+     */
     public City(Integer id, String cityName) {
         this.id = id;
         this.cityName = cityName;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getCityName() {
         return cityName;
     }
 
+    /**
+     *
+     * @param cityName
+     */
     public void setCityName(String cityName) {
         this.cityName = cityName;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -79,6 +111,11 @@ public class City implements Serializable {
         return hash;
     }
 
+    /**
+     *
+     * @param object
+     * @return
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -89,6 +126,10 @@ public class City implements Serializable {
         return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "org.igo.letsgo.rest.city.jpa.mysql.City[ id=" + id + " ]";

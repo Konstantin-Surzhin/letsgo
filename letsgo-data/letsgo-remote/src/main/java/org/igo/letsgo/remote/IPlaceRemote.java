@@ -14,6 +14,11 @@ import javax.ejb.Remote;
 @Remote
 public interface IPlaceRemote {
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public String getPlaceTitle(final int id);
 
 }

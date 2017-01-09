@@ -51,6 +51,13 @@ public class PasswordUtils {
     @Context
     ServletContext context;
 
+    /**
+     *
+     * @param password
+     * @return
+     * @throws NoSuchAlgorithmException
+     * @throws InvalidKeySpecException
+     */
     @GET
     @Path("{password}")
     @Consumes({MediaType.TEXT_PLAIN})
@@ -64,6 +71,12 @@ public class PasswordUtils {
         return generateStorngPasswordHash(password, iterations, spaceSalt);
     }
 
+    /**
+     *
+     * @param password
+     * @param login
+     * @return
+     */
     @GET
     @Path("{password}/{login}")
     @Consumes({MediaType.TEXT_PLAIN})

@@ -53,10 +53,18 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
     @Context
     UriInfo uri;
 
+    /**
+     *
+     */
     public GoUserFacadeREST() {
         super(GoUser.class);
     }
 
+    /**
+     *
+     * @param user
+     * @return
+     */
     @POST
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -124,11 +132,20 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
                 .build();
     }
 
+    /**
+     *
+     * @param entity
+     */
     @Override
     public void create(GoUser entity) {
         super.create(entity);
     }
 
+    /**
+     *
+     * @param id
+     * @param entity
+     */
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -136,12 +153,21 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
         // super.edit(entity);
     }
 
+    /**
+     *
+     * @param id
+     */
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Integer id) {
         //super.remove(super.find(id));
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -150,6 +176,10 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<User> findAllUser() {
@@ -158,12 +188,23 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
     }
 
     //@GET
+
+    /**
+     *
+     * @return
+     */
     @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<GoUser> findAll() {
         return super.findAll();
     }
 
+    /**
+     *
+     * @param from
+     * @param to
+     * @return
+     */
     @GET
     @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -172,6 +213,10 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     @GET
     @Path("count")
     @Produces(MediaType.TEXT_PLAIN)
@@ -179,6 +224,10 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
         return String.valueOf(super.count());
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     protected EntityManager getEntityManager() {
         return em;

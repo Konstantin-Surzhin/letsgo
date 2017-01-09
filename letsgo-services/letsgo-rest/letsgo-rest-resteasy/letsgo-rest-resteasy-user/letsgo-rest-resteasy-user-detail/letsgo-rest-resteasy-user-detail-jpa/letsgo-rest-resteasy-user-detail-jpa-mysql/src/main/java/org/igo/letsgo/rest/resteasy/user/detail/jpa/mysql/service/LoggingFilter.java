@@ -42,11 +42,24 @@ public class LoggingFilter implements Filter {
     static final Logger LOGGER
             = Logger.getLogger(LoggingFilter.class.getCanonicalName());
 
+    /**
+     *
+     * @param filterConfig
+     * @throws ServletException
+     */
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @param chain
+     * @throws IOException
+     * @throws ServletException
+     */
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
@@ -54,6 +67,9 @@ public class LoggingFilter implements Filter {
         chain.doFilter(request, response);
     }
 
+    /**
+     *
+     */
     @Override
     public void destroy() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

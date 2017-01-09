@@ -14,6 +14,11 @@ import javax.ejb.Remote;
 @Remote
 public interface IGameRemote {
 
-   public String getGame(final int id);
+    /**
+     *
+     * @param id
+     * @return
+     */
+    public String getGame(final int id);
     
 }

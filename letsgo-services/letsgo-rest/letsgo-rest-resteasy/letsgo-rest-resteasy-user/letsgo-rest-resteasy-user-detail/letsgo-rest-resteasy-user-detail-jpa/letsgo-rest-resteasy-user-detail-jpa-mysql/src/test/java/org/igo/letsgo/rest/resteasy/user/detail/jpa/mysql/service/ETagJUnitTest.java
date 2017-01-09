@@ -34,21 +34,36 @@ import static org.junit.Assert.*;
  */
 public class ETagJUnitTest {
 
+    /**
+     *
+     */
     public ETagJUnitTest() {
     }
 
+    /**
+     *
+     */
     @BeforeClass
     public static void setUpClass() {
     }
 
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass() {
     }
 
+    /**
+     *
+     */
     @Before
     public void setUp() {
     }
 
+    /**
+     *
+     */
     @After
     public void tearDown() {
     }
@@ -56,6 +71,11 @@ public class ETagJUnitTest {
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //
+
+    /**
+     *
+     * @throws InterruptedException
+     */
     @Test
     public void testETag() throws InterruptedException {
         final Client client = ClientBuilder.newClient();

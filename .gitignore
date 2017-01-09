@@ -155,3 +155,5 @@ hs_err_pid*
 /letsgo-services/letsgo-rest/letsgo-rest-resteasy/letsgo-rest-resteasy-user/letsgo-rest-resteasy-user-detail/letsgo-rest-resteasy-user-detail-jpa/letsgo-rest-resteasy-user-detail-jpa-mysql/nbproject/
 /letsgo-services/letsgo-rpc/letsgo-rpc-apache-avro/letsgo-rpc-apache-avro-city/letsgo-rpc-apache-avro-city-jpa/target/
 /letsgo-services/letsgo-rpc/letsgo-rpc-apache-avro/letsgo-rpc-apache-avro-city/letsgo-rpc-apache-avro-city-jpa/letsgo-rpc-apache-avro-city-jpa-mysql/target/
+/letsgo-jsf/letsgo-jsf-jsp/target/
+/letsgo-jsf/letsgo-jsf-MyFaces/target/

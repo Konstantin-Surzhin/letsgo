@@ -28,33 +28,64 @@ public abstract class AbstractFacade<T> {
 
     private final Class<T> entityClass;
 
+    /**
+     *
+     * @param entityClass
+     */
     public AbstractFacade(Class<T> entityClass) {
         this.entityClass = entityClass;
     }
 
+    /**
+     *
+     * @param entity
+     * @return
+     */
     public T create( T entity) {
         getEntityManager().persist(entity);
         return entity;
     }
 
+    /**
+     *
+     * @param entity
+     */
     public void edit(T entity) {
         getEntityManager().merge(entity);
     }
 
+    /**
+     *
+     * @param entity
+     */
     public void remove(T entity) {
         getEntityManager().remove(getEntityManager().merge(entity));
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public T find(Object id) {
         return getEntityManager().find(entityClass, id);
     }
 
+    /**
+     *
+     * @return
+     */
     public List<T> findAll() {
         javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(entityClass));
         return getEntityManager().createQuery(cq).getResultList();
     }
 
+    /**
+     *
+     * @param range
+     * @return
+     */
     public List<T> findRange(int[] range) {
         javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(entityClass));
@@ -64,6 +95,10 @@ public abstract class AbstractFacade<T> {
         return q.getResultList();
     }
 
+    /**
+     *
+     * @return
+     */
     public int count() {
         javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         javax.persistence.criteria.Root<T> rt = cq.from(entityClass);
@@ -72,5 +107,9 @@ public abstract class AbstractFacade<T> {
         return ((Long) q.getSingleResult()).intValue();
     }
 
-    protected abstract EntityManager getEntityManager() ;
+    /**
+     *
+     * @return
+     */
+    protected abstract EntityManager getEntityManager();
 }

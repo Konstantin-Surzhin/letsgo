@@ -18,7 +18,6 @@ package org.igo.letsgo.rest.resteasy.user.detail.jpa.mysql.service;
 
 import java.net.URI;
 import java.util.List;
-import java.util.concurrent.Executors;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Asynchronous;
 import javax.ejb.Stateless;
@@ -59,6 +58,10 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
     private EntityManager em;
 
     // @Context private ExecutionContext ctx;
+
+    /**
+     *
+     */
     public GoUserFacadeREST() {
         super(GoUser.class);
     }
@@ -100,6 +103,12 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
 //    }
 //
 
+    /**
+     *
+     * @param id
+     * @param secContext
+     * @return
+     */
     @GET
     @GZIP
     @Path("{id}")
@@ -133,11 +142,17 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
         return Response.ok().build();
     }
 
+    /**
+     *
+     * @param uriInfo
+     * @param sent
+     * @param request
+     * @return
+     */
     @GET
     @GZIP
     @Asynchronous
     @RolesAllowed({"gouser", "administrator"})
-    //@Produces({"application/vnd.lets.go.igo.v1+xml;charset=UTF-8;v=1", "application/vnd.lets.go.igo.v1+json;charset=UTF-8;v=1"})
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Response findAllUser(@Context final UriInfo uriInfo, @HeaderParam("If-None-Match") String sent, @Context final Request request) {
 
@@ -146,7 +161,7 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
 
         final List<User> list = goUsersQuery.getResultList();
 
-        list.forEach((User user) -> {
+        list.forEach(user -> {
             user.setUri(uri);
         });
 
@@ -174,17 +189,6 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
                     .contentLocation(uri)
                     .build();
         }
-
-        Executors.newSingleThreadExecutor().submit(new Runnable() {
-            @Override
-            public void run() {
-//                Thread.sleep(10000);
-//                ctx.resume("Hello async world! Coffee Order is 1234");
-            }
-        });
-//        ctx.suspend();
-
-//   }
         return response;
     }
 
@@ -281,6 +285,11 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
 //    public String countREST() {
 //        return String.valueOf(super.count());
 //    }
+
+    /**
+     *
+     * @return
+     */
     @Override
     protected EntityManager getEntityManager() {
         return em;

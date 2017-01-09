@@ -14,6 +14,11 @@ import javax.ejb.Remote;
 @Remote
 public interface ITeamRemote {
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public String getTeamName(final int id);
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")

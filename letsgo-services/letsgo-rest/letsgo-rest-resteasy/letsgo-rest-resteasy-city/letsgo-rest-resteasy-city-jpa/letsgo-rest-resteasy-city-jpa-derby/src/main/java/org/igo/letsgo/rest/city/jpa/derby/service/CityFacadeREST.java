@@ -54,10 +54,18 @@ public class CityFacadeREST extends AbstractFacade<City> {
     @PersistenceContext(unitName = "org.igo.letsgo.rest.city.jpa.derby.PU")
     private EntityManager em;
 
+    /**
+     *
+     */
     public CityFacadeREST() {
         super(City.class);
     }
 
+    /**
+     *
+     * @param entity
+     * @return
+     */
     @POST
     @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -66,6 +74,12 @@ public class CityFacadeREST extends AbstractFacade<City> {
         return super.create(entity);
     }
 
+    /**
+     *
+     * @param id
+     * @param entity
+     * @return
+     */
     @PUT
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -74,12 +88,21 @@ public class CityFacadeREST extends AbstractFacade<City> {
         return super.edit(entity);
     }
 
+    /**
+     *
+     * @param id
+     */
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Integer id) {
         super.remove(super.find(id));
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -87,6 +110,10 @@ public class CityFacadeREST extends AbstractFacade<City> {
         return super.find(id);
     }
 
+    /**
+     *
+     * @return
+     */
     @GET
     @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -94,6 +121,12 @@ public class CityFacadeREST extends AbstractFacade<City> {
         return super.findAll();
     }
 
+    /**
+     *
+     * @param from
+     * @param to
+     * @return
+     */
     @GET
     @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -101,6 +134,10 @@ public class CityFacadeREST extends AbstractFacade<City> {
         return super.findRange(new int[]{from, to});
     }
 
+    /**
+     *
+     * @return
+     */
     @GET
     @Path("count")
     @Produces(MediaType.TEXT_PLAIN)
@@ -108,6 +145,10 @@ public class CityFacadeREST extends AbstractFacade<City> {
         return String.valueOf(super.count());
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     protected EntityManager getEntityManager() {
 

@@ -34,7 +34,7 @@ import org.igo.letsgo.jsf.jsp.user.entity.User;
 public class UserManagedBean {
     @PersistenceContext
     private EntityManager em;
-    private final String pageTitle = "Управление пользователями";
+    public static final String PAGE_TITLE = "Управление пользователями";
     private String userName = "Tomcat";
     private Integer userCode = 1;
     private String persistenceType = "jpa";
@@ -55,13 +55,6 @@ public class UserManagedBean {
      */
     public void setEm(EntityManager em) {
         this.em = em;
-    }
-
-    /**
-     * @return the pageTitle
-     */
-    public String getPageTitle() {
-        return pageTitle;
     }
 
     /**
@@ -155,6 +148,9 @@ public class UserManagedBean {
         return userList;
     }
     
+    /**
+     *
+     */
     public void addUser(){
         
     }

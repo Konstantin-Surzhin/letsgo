@@ -14,6 +14,11 @@ import javax.ejb.Remote;
 @Remote
 public interface IUserDegreeRemote {
 
+    /**
+     *
+     * @param userId
+     * @return
+     */
     String getUserDegree(final int userId);
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")

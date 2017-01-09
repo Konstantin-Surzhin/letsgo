@@ -14,7 +14,12 @@ import javax.ejb.Remote;
 @Remote
 public interface IRoomRemote {
 
-   public String getRoom(int id);
+    /**
+     *
+     * @param id
+     * @return
+     */
+    public String getRoom(int id);
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
     

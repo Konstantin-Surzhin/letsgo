@@ -14,6 +14,11 @@ import javax.ejb.Remote;
 @Remote
 public interface IUserRemote {
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public String getUserName(final int id);
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")

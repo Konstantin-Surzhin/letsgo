@@ -45,10 +45,17 @@ public class GameFacadeREST extends AbstractFacade<Game> {
     @PersistenceContext(unitName = "gamePU")
     private EntityManager em;
 
+    /**
+     *
+     */
     public GameFacadeREST() {
         super(Game.class);
     }
 
+    /**
+     *
+     * @param entity
+     */
     @POST
     @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -56,6 +63,11 @@ public class GameFacadeREST extends AbstractFacade<Game> {
         super.create(entity);
     }
 
+    /**
+     *
+     * @param id
+     * @param entity
+     */
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -63,12 +75,21 @@ public class GameFacadeREST extends AbstractFacade<Game> {
         super.edit(entity);
     }
 
+    /**
+     *
+     * @param id
+     */
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Long id) {
         super.remove(super.find(id));
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -97,6 +118,11 @@ public class GameFacadeREST extends AbstractFacade<Game> {
 //        // return super.find(id);
 //    }
 
+    /**
+     *
+     * @return
+     */
+
     @GET
     @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -117,6 +143,12 @@ public class GameFacadeREST extends AbstractFacade<Game> {
         //return super.findAll();
     }
 
+    /**
+     *
+     * @param from
+     * @param to
+     * @return
+     */
     @GET
     @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -124,6 +156,10 @@ public class GameFacadeREST extends AbstractFacade<Game> {
         return super.findRange(new int[]{from, to});
     }
 
+    /**
+     *
+     * @return
+     */
     @GET
     @Path("count")
     @Produces(MediaType.TEXT_PLAIN)
@@ -131,6 +167,10 @@ public class GameFacadeREST extends AbstractFacade<Game> {
         return String.valueOf(super.count());
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     protected EntityManager getEntityManager() {
         return em;

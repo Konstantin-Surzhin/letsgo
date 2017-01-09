@@ -75,6 +75,12 @@ public class CityJdbcREST {
     public void putXml(String content) {
     }
 
+    /**
+     *
+     * @param db
+     * @param city
+     * @return
+     */
     @POST
     @Path("city/{db}")
     @Consumes({MediaType.APPLICATION_XML})

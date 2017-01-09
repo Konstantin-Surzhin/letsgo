@@ -14,6 +14,11 @@ import javax.ejb.Remote;
 @Remote
 public interface IUserBanRemote {
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     String getBan(final int id);
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")

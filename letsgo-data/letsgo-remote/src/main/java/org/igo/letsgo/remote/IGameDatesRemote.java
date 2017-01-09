@@ -15,6 +15,10 @@ import javax.ejb.Remote;
 @Remote
 public interface IGameDatesRemote {
 
+    /**
+     *
+     * @return
+     */
     List<String> getGameDates();
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")

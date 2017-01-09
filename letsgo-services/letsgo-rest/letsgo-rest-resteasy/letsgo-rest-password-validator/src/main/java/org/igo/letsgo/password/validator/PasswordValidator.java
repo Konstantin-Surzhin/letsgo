@@ -103,6 +103,11 @@ public class PasswordValidator {
         "1234567890"
     };
 
+    /**
+     *
+     * @param password
+     * @return
+     */
     public boolean validate(final String password) {
         return validateSymbols(password)
                 && validateMatches(password)

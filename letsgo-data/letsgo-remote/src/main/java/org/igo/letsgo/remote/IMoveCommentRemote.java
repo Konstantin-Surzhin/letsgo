@@ -14,6 +14,13 @@ import javax.ejb.Remote;
 @Remote
 public interface IMoveCommentRemote {
 
+    /**
+     *
+     * @param gameId
+     * @param moveId
+     * @param commentId
+     * @return
+     */
     String getMoveComment(final int gameId, final int moveId, final int commentId);
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
