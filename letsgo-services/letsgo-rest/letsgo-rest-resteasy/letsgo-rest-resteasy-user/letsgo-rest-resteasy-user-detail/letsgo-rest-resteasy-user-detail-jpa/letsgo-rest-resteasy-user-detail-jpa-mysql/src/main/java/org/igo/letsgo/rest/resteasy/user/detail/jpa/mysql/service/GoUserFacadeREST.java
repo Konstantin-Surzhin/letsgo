@@ -19,16 +19,18 @@ package org.igo.letsgo.rest.resteasy.user.detail.jpa.mysql.service;
 import java.net.URI;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
-import javax.ejb.Asynchronous;
+//import javax.ejb.Asynchronous;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.Context;
@@ -58,7 +60,6 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
     private EntityManager em;
 
     // @Context private ExecutionContext ctx;
-
     /**
      *
      */
@@ -114,7 +115,8 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
     @Path("{id}")
     @RolesAllowed({"gouser", "administrator"})
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON, MediaType.TEXT_HTML})
-    public Response find(@PathParam("id") final Integer id, @Context final SecurityContext secContext) {
+    public Response find(@PathParam("id") final Integer id,
+            @Context final SecurityContext secContext) {
 
         if (!secContext.isSecure()) {
             final String e = "<html><title>error</title><body><h1>HTTP conection forbidden</body></h1></html>";
@@ -147,19 +149,29 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
      * @param uriInfo
      * @param sent
      * @param request
+     * @param pageNumber
+     * @param pageSize
      * @return
      */
     @GET
     @GZIP
-    @Asynchronous
+    //@Asynchronous
     @RolesAllowed({"gouser", "administrator"})
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Response findAllUser(@Context final UriInfo uriInfo, @HeaderParam("If-None-Match") String sent, @Context final Request request) {
+    public Response findAllUser(@Context final UriInfo uriInfo,
+            @HeaderParam("If-None-Match") String sent,
+            @Context final Request request,
+            @QueryParam("page") @DefaultValue("2") int pageNumber,
+            @QueryParam("limit") @DefaultValue("10") int pageSize) {
 
         final TypedQuery<User> goUsersQuery = em.createNamedQuery("GoUser.findByUserName", User.class);
+
         final URI uri = uriInfo.getAbsolutePath();
 
-        final List<User> list = goUsersQuery.getResultList();
+        final List<User> list = goUsersQuery
+                .setFirstResult((pageNumber-1)* pageSize)
+                .setMaxResults(pageSize)
+                .getResultList();
 
         list.forEach(user -> {
             user.setUri(uri);
@@ -168,7 +180,9 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
         Response response;
 
         final EntityTag et = new EntityTag(String.valueOf(list.hashCode()));
+
         final CacheControl cc = new CacheControl();
+
         cc.setMaxAge(1200);
 
         final Response.ResponseBuilder responseBuilder = request.evaluatePreconditions(et);
@@ -285,7 +299,6 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
 //    public String countREST() {
 //        return String.valueOf(super.count());
 //    }
-
     /**
      *
      * @return

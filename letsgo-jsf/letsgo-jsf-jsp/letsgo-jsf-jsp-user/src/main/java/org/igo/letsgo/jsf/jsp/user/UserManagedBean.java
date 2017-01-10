@@ -145,6 +145,13 @@ public class UserManagedBean {
      * @return the cityList
      */
     public List<User> getUserList() {
+        User user = new User();
+        user.setId(0);
+        user.setUserName("black_diamond");
+        userList.add(user);
+        
+        //TODO: получить список пользователей через сервис.
+        
         return userList;
     }
     

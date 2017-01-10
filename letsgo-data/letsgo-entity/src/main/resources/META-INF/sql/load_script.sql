@@ -1,3 +1,17 @@
 INSERT INTO letsgo.CITIES (city_name, oktmo) VALUES ('Москва','45000000000');
 INSERT INTO letsgo.GO_USERS (password, salt, user_name, role_id, user_detail_id) VALUES ('12345', '12345', 'Иванов', NULL, NULL);
 INSERT INTO letsgo.GO_USERS (password, salt, user_name, role_id, user_detail_id) VALUES ('54321', '54321', 'Петров', NULL, NULL);
+INSERT INTO letsgo.GO_USERS (password, salt, user_name, role_id, user_detail_id) VALUES ('12345', '12345', 'Якушев', NULL, NULL);
+INSERT INTO letsgo.GO_USERS (password, salt, user_name, role_id, user_detail_id) VALUES ('54321', '54321', 'Юдин', NULL, NULL);
+INSERT INTO letsgo.GO_USERS (password, salt, user_name, role_id, user_detail_id) VALUES ('12345', '12345', 'Шарапов', NULL, NULL);
+INSERT INTO letsgo.GO_USERS (password, salt, user_name, role_id, user_detail_id) VALUES ('54321', '54321', 'Фадеев', NULL, NULL);
+INSERT INTO letsgo.GO_USERS (password, salt, user_name, role_id, user_detail_id) VALUES ('12345', '12345', 'Уваров', NULL, NULL);
+INSERT INTO letsgo.GO_USERS (password, salt, user_name, role_id, user_detail_id) VALUES ('54321', '54321', 'Тарасов', NULL, NULL);
+INSERT INTO letsgo.GO_USERS (password, salt, user_name, role_id, user_detail_id) VALUES ('12345', '12345', 'Савельев', NULL, NULL);
+INSERT INTO letsgo.GO_USERS (password, salt, user_name, role_id, user_detail_id) VALUES ('54321', '54321', 'Рожков', NULL, NULL);
+INSERT INTO letsgo.GO_USERS (password, salt, user_name, role_id, user_detail_id) VALUES ('12345', '12345', 'Abramson', NULL, NULL);
+INSERT INTO letsgo.GO_USERS (password, salt, user_name, role_id, user_detail_id) VALUES ('54321', '54321', 'Hawkins', NULL, NULL);
+INSERT INTO letsgo.GO_USERS (password, salt, user_name, role_id, user_detail_id) VALUES ('54321', '54321', 'Krüger', NULL, NULL);
+INSERT INTO letsgo.GO_USERS (password, salt, user_name, role_id, user_detail_id) VALUES ('12345', '12345', 'Müller', NULL, NULL);
+INSERT INTO letsgo.GO_USERS (password, salt, user_name, role_id, user_detail_id) VALUES ('54321', '54321', 'Gérard', NULL, NULL);
+INSERT INTO letsgo.GO_USERS (password, salt, user_name, role_id, user_detail_id) VALUES ('54321', '54321', 'Céline', NULL, NULL);
