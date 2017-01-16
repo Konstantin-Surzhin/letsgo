@@ -16,24 +16,32 @@
  */
 package org.igo.letsgo.jsf.jsp.user;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
-import org.igo.letsgo.jsf.jsp.user.entity.User;
+import org.igo.entities.User;
 
 /**
  *
  * @author surzhin.konstantin
  */
-@ManagedBean(name = "userManagedBean")
 @SessionScoped
-public class UserManagedBean {
+@Named("userManagedBean")
+public class UserManagedBean implements Serializable {
+
+    private static final long serialVersionUID = -7443835253166704224L;
+
     @PersistenceContext
     private EntityManager em;
+
     public static final String PAGE_TITLE = "Управление пользователями";
     private String userName = "Tomcat";
     private Integer userCode = 1;
@@ -41,7 +49,6 @@ public class UserManagedBean {
     private String techMetod = "ejb";
     private String msgMediaType = MediaType.TEXT_PLAIN;
     private String dbName = "h2";
-    private final List<User> userList = new ArrayList<>();
 
     /**
      * @return the em
@@ -145,20 +152,29 @@ public class UserManagedBean {
      * @return the cityList
      */
     public List<User> getUserList() {
-        User user = new User();
-        user.setId(0);
-        user.setUserName("black_diamond");
-        userList.add(user);
-        
-        //TODO: получить список пользователей через сервис.
-        
-        return userList;
+
+//        String usernameAndPassword = "surzhin:su1Jutaith";
+//        String authorizationHeaderName = "Authorization";
+//        String authorizationHeaderValue = "Basic " + java.util.Base64.getEncoder().encodeToString(usernameAndPassword.getBytes());
+
+        final Client client = ClientBuilder.newClient();
+
+        final WebTarget target = client.target("http://localhost:8080/letsgo-rest-resteasy-user-detail-jpa-mysql/webresources/v1/gouser");
+
+        final GenericType<List<User>> genericType = new GenericType<List<User>>() {
+        };
+
+        final List<User> listUser = target
+                .request()
+                // .header(authorizationHeaderName, authorizationHeaderValue)
+                .get(genericType);
+        return listUser;
     }
-    
+
     /**
      *
      */
-    public void addUser(){
-        
+    public void addUser() {
+
     }
 }
