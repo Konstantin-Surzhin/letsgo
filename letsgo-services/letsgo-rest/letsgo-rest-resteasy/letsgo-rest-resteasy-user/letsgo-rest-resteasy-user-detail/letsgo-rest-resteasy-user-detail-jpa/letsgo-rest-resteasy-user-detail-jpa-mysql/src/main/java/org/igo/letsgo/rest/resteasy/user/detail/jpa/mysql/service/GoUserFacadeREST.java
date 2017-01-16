@@ -18,6 +18,7 @@ package org.igo.letsgo.rest.resteasy.user.detail.jpa.mysql.service;
 
 import java.net.URI;
 import java.util.List;
+import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 //import javax.ejb.Asynchronous;
 import javax.ejb.Stateless;
@@ -156,7 +157,8 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
     @GET
     @GZIP
     //@Asynchronous
-    @RolesAllowed({"gouser", "administrator"})
+    //@RolesAllowed({"gouser", "administrator"})
+    @PermitAll
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Response findAllUser(@Context final UriInfo uriInfo,
             @HeaderParam("If-None-Match") String sent,
