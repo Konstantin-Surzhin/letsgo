@@ -32,7 +32,7 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String id;
+    private int id;
 
     private URI uri;
 
@@ -49,8 +49,8 @@ public class User implements Serializable {
      * @param id
      * @param user_name
      */
-    public User(final Integer id, final String user_name) {
-        this.id = id.toString();
+    public User(final int id, final String user_name) {
+        this.id = id;
         this.user_name = user_name;
     }
 
@@ -58,14 +58,14 @@ public class User implements Serializable {
      * @return the id
      */
     @XmlAttribute(name = "id")
-    public String getId() {
+    public int getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(String id) {
+    public void setId(final int id) {
         this.id = id;
     }
 
@@ -80,7 +80,7 @@ public class User implements Serializable {
     /**
      * @param user_name the user_name to set
      */
-    public void setUserName(String user_name) {
+    public void setUserName(final String user_name) {
         this.user_name = user_name;
     }
 
@@ -89,7 +89,10 @@ public class User implements Serializable {
      */
     @XmlAttribute(name = "uri")
     public String getUri() {
-        return uri + id;
+        final StringBuilder sb = new StringBuilder(uri.toString());
+        sb.append("/").append(id);
+        
+        return sb.toString();
     }
 
     /**
@@ -98,7 +101,6 @@ public class User implements Serializable {
     public void setUri(URI uri) {
         this.uri = uri;
     }
-
 
     @Override
     public boolean equals(Object obj) {
@@ -129,5 +131,5 @@ public class User implements Serializable {
         hash = 19 * hash + Objects.hashCode(this.user_name);
         return hash;
     }
-    
+
 }
