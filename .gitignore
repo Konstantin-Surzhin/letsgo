@@ -157,3 +157,4 @@ hs_err_pid*
 /letsgo-services/letsgo-rpc/letsgo-rpc-apache-avro/letsgo-rpc-apache-avro-city/letsgo-rpc-apache-avro-city-jpa/letsgo-rpc-apache-avro-city-jpa-mysql/target/
 /letsgo-jsf/letsgo-jsf-jsp/target/
 /letsgo-jsf/letsgo-jsf-MyFaces/target/
+/letsgo-client/letsgo-client-swing/target/
