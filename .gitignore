@@ -166,3 +166,4 @@ hs_err_pid*
 /letsgo-view/letsgo-view-undertow/target/
 /letsgo-view/letsgo-view-sun-jdk-http-server/target/
 /letsgo-view/letsgo-view-tjws/target/
+/letsgo-view/letsgo-view-netty/target/
