@@ -163,3 +163,5 @@ hs_err_pid*
 /letsgo-view/letsgo-view-tomcat/target/
 /letsgo-view/target/
 /letsgo-view/letsgo-view-tomcat/letsgo-view-tomcat-city/target/
+/letsgo-view/letsgo-view-undertow/target/
+/letsgo-view/letsgo-view-sun-jdk-http-server/target/
