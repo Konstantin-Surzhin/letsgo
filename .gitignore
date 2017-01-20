@@ -158,3 +158,5 @@ hs_err_pid*
 /letsgo-jsf/letsgo-jsf-jsp/target/
 /letsgo-jsf/letsgo-jsf-MyFaces/target/
 /letsgo-client/letsgo-client-swing/target/
+/letsgo-view/letsgo-view-jetty/target/
+/letsgo-view/letsgo-view-jetty/letsgo-view-jetty-city/target/

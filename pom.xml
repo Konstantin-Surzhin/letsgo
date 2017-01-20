@@ -177,6 +177,7 @@
         <module>letsgo-main-ear</module>
         <module>letsgo-monitoring-jvm</module>
         <module>letsgo-client</module>
+        <module>letsgo-view</module>
     </modules>
     <dependencyManagement>
         <dependencies>
