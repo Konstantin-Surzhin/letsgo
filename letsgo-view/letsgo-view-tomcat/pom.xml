@@ -3,13 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.igo</groupId>
-        <artifactId>letsgo</artifactId>
+        <artifactId>letsgo-view</artifactId>
         <version>1.0</version>
     </parent>
-    <artifactId>letsgo-view</artifactId>
+    <artifactId>letsgo-view-tomcat</artifactId>
     <packaging>pom</packaging>
-    <modules>
-        <module>letsgo-view-jetty</module>
-        <module>letsgo-view-tomcat</module>
-    </modules>
+  <modules>
+    <module>letsgo-view-tomcat-city</module>
+  </modules>
 </project>

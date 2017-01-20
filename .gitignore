@@ -160,3 +160,6 @@ hs_err_pid*
 /letsgo-client/letsgo-client-swing/target/
 /letsgo-view/letsgo-view-jetty/target/
 /letsgo-view/letsgo-view-jetty/letsgo-view-jetty-city/target/
+/letsgo-view/letsgo-view-tomcat/target/
+/letsgo-view/target/
+/letsgo-view/letsgo-view-tomcat/letsgo-view-tomcat-city/target/
