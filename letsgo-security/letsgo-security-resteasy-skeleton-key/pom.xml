@@ -3,15 +3,14 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.igo</groupId>
-        <artifactId>letsgo</artifactId>
+        <artifactId>letsgo-security</artifactId>
         <version>1.0</version>
     </parent>
-    <artifactId>letsgo-security</artifactId>
+    <artifactId>letsgo-security-resteasy-skeleton-key</artifactId>
     <packaging>pom</packaging>
   <modules>
-    <module>letsgo-security-base</module>
-    <module>letsgo-security-digest</module>
-    <module>letsgo-security-certificate</module>
-    <module>letsgo-security-resteasy-skeleton-key</module>
+    <module>letsgo-security-resteasy-skeleton-key-client</module>
+    <module>letsgo-security-resteasy-skeleton-key-games</module>
+    <module>letsgo-security-resteasy-skeleton-key-server</module>
   </modules>
 </project>

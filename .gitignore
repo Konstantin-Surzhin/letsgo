@@ -167,3 +167,7 @@ hs_err_pid*
 /letsgo-view/letsgo-view-sun-jdk-http-server/target/
 /letsgo-view/letsgo-view-tjws/target/
 /letsgo-view/letsgo-view-netty/target/
+/letsgo-security/letsgo-security-resteasy-skeleton-key/target/
+/letsgo-security/letsgo-security-resteasy-skeleton-key/letsgo-security-resteasy-skeleton-key-client/target/
+/letsgo-security/letsgo-security-resteasy-skeleton-key/letsgo-security-resteasy-skeleton-key-games/target/
+/letsgo-security/letsgo-security-resteasy-skeleton-key/letsgo-security-resteasy-skeleton-key-server/target/
