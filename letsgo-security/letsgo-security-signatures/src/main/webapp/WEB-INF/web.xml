@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <context-param>
+        <param-name>resteasy.resources</param-name>
+        <param-value>letsgo.security.signatures.resteasy.services.SignedService</param-value>
+    </context-param>
+    <context-param>
+        <param-name>resteasy.doseta.keystore.classpath</param-name>
+        <param-value>demo.jks</param-value>
+    </context-param>
+    <context-param>
+        <param-name>resteasy.doseta.keystore.password</param-name>
+        <param-value>changeit</param-value>
+    </context-param>
+    <context-param>
+        <param-name>resteasy.context.objects</param-name>
+        <param-value>org.jboss.resteasy.security.doseta.KeyRepository : org.jboss.resteasy.security.doseta.ConfiguredDosetaKeyRepository</param-value>
+    </context-param>
+    <!--<servlet>
+        <servlet-name>Resteasy</servlet-name>
+        <servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Resteasy</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </servlet-mapping>-->
+</web-app>

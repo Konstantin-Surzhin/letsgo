@@ -171,3 +171,5 @@ hs_err_pid*
 /letsgo-security/letsgo-security-resteasy-skeleton-key/letsgo-security-resteasy-skeleton-key-client/target/
 /letsgo-security/letsgo-security-resteasy-skeleton-key/letsgo-security-resteasy-skeleton-key-games/target/
 /letsgo-security/letsgo-security-resteasy-skeleton-key/letsgo-security-resteasy-skeleton-key-server/target/
+/letsgo-security/letsgo-security-signatures/target/
+/letsgo-security/letsgo-security-signatures/nbproject/
