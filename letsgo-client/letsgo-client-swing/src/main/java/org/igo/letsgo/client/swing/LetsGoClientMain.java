@@ -31,7 +31,7 @@ public class LetsGoClientMain {
     public static void main(String[] args) {
 
         if (LetsGoClientSettings.isThereRequestForHelp(args)) {
-            LetsGoClientSettings.printHelp();
+            LetsGoClientSettings.printHelpToSystemOut();
             return;  
         }
         

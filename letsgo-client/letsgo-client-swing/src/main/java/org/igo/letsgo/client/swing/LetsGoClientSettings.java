@@ -80,11 +80,10 @@ class LetsGoClientSettings {
     }
 
     static boolean isThereRequestForHelp(final String[] args) {
-        final Stream<String> argsStream = Arrays.stream(args);
-        return argsStream.anyMatch(a -> a.equalsIgnoreCase("--help"));
+         return Arrays.stream(args).anyMatch(a -> a.equalsIgnoreCase("--help"));
     }
 
-    static void printHelp() {
+    static void printHelpToSystemOut() {
         System.out.println("************************************");
         System.out.println("* Specification of allowed options *");
         System.out.println("************************************");
