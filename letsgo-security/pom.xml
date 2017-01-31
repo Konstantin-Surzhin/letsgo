@@ -14,5 +14,6 @@
     <module>letsgo-security-certificate</module>
     <module>letsgo-security-resteasy-skeleton-key</module>
     <module>letsgo-security-signatures</module>
+    <module>letsgo-security-encription</module>
   </modules>
 </project>
