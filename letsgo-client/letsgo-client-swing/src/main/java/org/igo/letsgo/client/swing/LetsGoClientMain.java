@@ -16,6 +16,8 @@
  */
 package org.igo.letsgo.client.swing;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -30,13 +32,16 @@ public class LetsGoClientMain {
      */
     public static void main(String[] args) {
 
-        if (LetsGoClientSettings.isThereRequestForHelp(args)) {
-            LetsGoClientSettings.printHelpToSystemOut();
-            return;  
+        if (CommandLineArgumentsParser.isThereRequestForHelp(args)) {
+            CommandLineArgumentsParser.printHelpToPrintStream(System.out);
+            return;
         }
         
-
-      //  LetsGoClientSettings.commandLinArgumentParse(args);
+        try {
+            CommandLineArgumentsParser.parse(args);
+        } catch (IllegalArgumentException e) {
+            Logger.getLogger(LetsGoClientMain.class.getName()).log(Level.SEVERE, null, e.getMessage());
+        }
 
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
