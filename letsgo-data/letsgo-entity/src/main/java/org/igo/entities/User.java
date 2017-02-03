@@ -103,6 +103,15 @@ public class User implements Serializable {
     }
 
     @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 19 * hash + Objects.hashCode(this.id);
+        hash = 19 * hash + Objects.hashCode(this.uri);
+        hash = 19 * hash + Objects.hashCode(this.user_name);
+        return hash;
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -114,22 +123,13 @@ public class User implements Serializable {
             return false;
         }
         final User other = (User) obj;
-        if (!Objects.equals(this.id, other.id)) {
+        if (this.id != other.id) {
             return false;
         }
         if (!Objects.equals(this.user_name, other.user_name)) {
             return false;
         }
         return Objects.equals(this.uri, other.uri);
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 19 * hash + Objects.hashCode(this.id);
-        hash = 19 * hash + Objects.hashCode(this.uri);
-        hash = 19 * hash + Objects.hashCode(this.user_name);
-        return hash;
     }
 
 }

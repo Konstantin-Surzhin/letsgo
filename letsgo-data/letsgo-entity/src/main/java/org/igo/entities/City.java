@@ -22,9 +22,12 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -37,23 +40,27 @@ import javax.persistence.UniqueConstraint;
  * @author surzhin.konstantin
  */
 @Entity
-@Table(name = "CITIES",uniqueConstraints = {
-            @UniqueConstraint(name = "uk_city_name",
-                    columnNames = {"city_name"})})
+@Table(name = "CITIES", uniqueConstraints = {
+    @UniqueConstraint(name = "uk_city_name",
+            columnNames = {"city_name"})})
 @NamedQueries({
-    @NamedQuery(name = "City.findAll", query = "SELECT c FROM City c"),
-    @NamedQuery(name = "City.findById", query = "SELECT c FROM City c WHERE c.id = :id"),
-    @NamedQuery(name = "City.findByCityName", query = "SELECT c FROM City c WHERE c.cityName = :cityName"),
-    @NamedQuery(name = "City.checkByCityName", query = "SELECT count(c) FROM City c WHERE c.cityName = :cityName")
+    @NamedQuery(name = "City.findAll", query = "SELECT c FROM City c")
+    ,@NamedQuery(name = "City.findById", query = "SELECT c FROM City c WHERE c.id = :id")
+    ,@NamedQuery(name = "City.findByCityName", query = "SELECT c FROM City c WHERE c.cityName = :cityName")
+    ,@NamedQuery(name = "City.checkByCityName", query = "SELECT count(c) FROM City c WHERE c.cityName = :cityName")
 })
 public class City implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private Integer id;
+    private int id;
+    private long latitude;
+    private long longitude;    
     private String cityName;
     private String oktmo;
-    private Set<UserDetails> userCollection;
-    private Set<Club> clubsSet;
+    private Country country;
+    private Set<UserDetails> user;
+    private Set<Club> clubs;
+    private Set<Team> teams;
 
     /**
      *
@@ -65,7 +72,7 @@ public class City implements Serializable {
      *
      * @param id
      */
-    public City(final Integer id) {
+    public City(final int id) {
         this.id = id;
     }
 
@@ -74,7 +81,7 @@ public class City implements Serializable {
      * @param cityName
      */
     public City(final String cityName) {
-       this.cityName= cityName;
+        this.cityName = cityName;
     }
 
     /**
@@ -85,7 +92,7 @@ public class City implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
@@ -102,33 +109,38 @@ public class City implements Serializable {
      * @return
      */
     @OneToMany(mappedBy = "city")
-    public Set<UserDetails> getUserCollection() {
-        return userCollection;
+    public Set<UserDetails> getUser() {
+        return user;
     }
 
     /**
      *
-     * @param userCollection
+     * @param user
      */
-    public void setUserCollection(final Set<UserDetails> userCollection) {
-        this.userCollection = userCollection;
+    public void setUser(final Set<UserDetails> user) {
+        this.user = user;
     }
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 7;
+        hash = 13 * hash + this.id;
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof City)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        City other = (City) object;
-        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final City other = (City) obj;
+        return this.id == other.id;
     }
 
     @Override
@@ -139,7 +151,7 @@ public class City implements Serializable {
     /**
      * @return the cityName
      */
-    @Column(length = 255, name = "city_name", nullable = false  )
+    @Column(length = 255, name = "city_name", nullable = false)
     public String getCityName() {
         return cityName;
     }
@@ -155,17 +167,17 @@ public class City implements Serializable {
      *
      * @return
      */
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cityId")
-    public Set<Club> getClubsSet() {
-        return clubsSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "city")
+    public Set<Club> getClubs() {
+        return clubs;
     }
 
     /**
      *
-     * @param clubsSet
+     * @param clubs
      */
-    public void setClubsSet(Set<Club> clubsSet) {
-        this.clubsSet = clubsSet;
+    public void setClubs(Set<Club> clubs) {
+        this.clubs = clubs;
     }
 
     /**
@@ -180,5 +192,58 @@ public class City implements Serializable {
      */
     public void setOktmo(String oktmo) {
         this.oktmo = oktmo;
+    }
+
+    /**
+     * @return the teams
+     */
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "city")
+    public Set<Team> getTeams() {
+        return teams;
+    }
+
+    /**
+     * @param teams the teams to set
+     */
+    public void setTeams(Set<Team> teams) {
+        this.teams = teams;
+    }
+
+    /**
+     * @return the latitude
+     */
+    public long getLatitude() {
+        return latitude;
+    }
+
+    /**
+     * @param latitude the latitude to set
+     */
+    public void setLatitude(long latitude) {
+        this.latitude = latitude;
+    }
+
+    /**
+     * @return the longitude
+     */
+    public long getLongitude() {
+        return longitude;
+    }
+
+    /**
+     * @param longitude the longitude to set
+     */
+    public void setLongitude(long longitude) {
+        this.longitude = longitude;
+    }
+
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_city_country"), name = "country_id", referencedColumnName = "id")
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
     }
 }

@@ -40,8 +40,6 @@ import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -50,7 +48,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "USER_DETAILS", uniqueConstraints = {
     @UniqueConstraint(name = "uk_user_email", columnNames = {"email"})})
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "UserDetails.findAll", query = "SELECT u FROM UserDetails u")
     ,@NamedQuery(name = "UserDetails.findByDraw", query = "SELECT u FROM UserDetails u WHERE u.draw = :draw")
@@ -72,7 +69,6 @@ public class UserDetails implements Serializable {
     private Boolean isLogin;
     private Date lastTime = Calendar.getInstance().getTime();
     private Integer lose;
-    //private String userName;
     private Integer rating;
     private Integer staus;
     private Integer win;
@@ -89,6 +85,7 @@ public class UserDetails implements Serializable {
     private Collection<MoveComment> moveCommentCollection;
     private Collection<GameComment> gameCommentCollection;
     private Collection<UserBan> userBanCollection;
+    private Country country;
 
     /**
      *
@@ -132,7 +129,6 @@ public class UserDetails implements Serializable {
     }
 
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Недопустимый адрес электронной почты")//if the field contains email address consider using this annotation to enforce field validation
-
     /**
      *
      * @return
@@ -261,7 +257,6 @@ public class UserDetails implements Serializable {
      *
      * @return
      */
-    @XmlTransient
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userDetails")
     public Collection<UserBan> getUserBanCollection() {
         return userBanCollection;
@@ -373,7 +368,6 @@ public class UserDetails implements Serializable {
      *
      * @return
      */
-    @XmlTransient
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userDetails")
     public Collection<UserGame> getUserGameCollection() {
         return userGameCollection;
@@ -391,7 +385,6 @@ public class UserDetails implements Serializable {
      *
      * @return
      */
-    @XmlTransient
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userDetails")
     public Collection<UserDegree> getUserDegreeCollection() {
         return userDegreeCollection;
@@ -409,7 +402,6 @@ public class UserDetails implements Serializable {
      *
      * @return
      */
-    @XmlTransient
     @OneToMany(mappedBy = "userDetails")
     public Collection<MoveComment> getMoveCommentCollection() {
         return moveCommentCollection;
@@ -427,7 +419,6 @@ public class UserDetails implements Serializable {
      *
      * @return
      */
-    @XmlTransient
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userDetails")
     public Collection<GameComment> getGameCommentCollection() {
         return gameCommentCollection;
@@ -487,5 +478,15 @@ public class UserDetails implements Serializable {
      */
     public void setUser(GoUser user) {
         this.user = user;
+    }
+
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_user_country"), name = "country_id", referencedColumnName = "id")
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
     }
 }

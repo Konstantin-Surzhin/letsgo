@@ -24,6 +24,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -50,6 +51,7 @@ public class League implements Serializable {
     private String leagueName;
     private Collection<Team> teamsCollection;
     private Collection<UserDetails> usersCollection;
+    private Country country;
 
     /**
      *
@@ -118,7 +120,7 @@ public class League implements Serializable {
      *
      * @return
      */
-    @OneToMany(mappedBy = "leagueId")
+    @OneToMany(mappedBy = "league")
     @XmlTransient
     public Collection<Team> getTeamsCollection() {
         return teamsCollection;
@@ -170,6 +172,15 @@ public class League implements Serializable {
     @Override
     public String toString() {
         return "org.igo.ban.ejb.Leagues[ id=" + id + " ]";
+    }
+
+    @ManyToOne
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
     }
 
 }

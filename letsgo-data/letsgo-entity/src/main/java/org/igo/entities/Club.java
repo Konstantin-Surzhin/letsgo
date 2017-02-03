@@ -47,15 +47,10 @@ import javax.persistence.UniqueConstraint;
 public class Club implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    private Integer id;
-    @Column(name = "club_name")
-    private Character clubName;
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_club_city"), name = "city_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private City cityId;
+    private int id;
+    private String clubName;
+    private City city;
+    private Country country;
 
     /**
      *
@@ -67,7 +62,7 @@ public class Club implements Serializable {
      *
      * @param id
      */
-    public Club(Integer id) {
+    public Club(int id) {
         this.id = id;
     }
 
@@ -75,6 +70,9 @@ public class Club implements Serializable {
      *
      * @return
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
     public Integer getId() {
         return id;
     }
@@ -83,7 +81,7 @@ public class Club implements Serializable {
      *
      * @param id
      */
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -91,7 +89,8 @@ public class Club implements Serializable {
      *
      * @return
      */
-    public Character getClubName() {
+    @Column(name = "club_name")
+    public String getClubName() {
         return clubName;
     }
 
@@ -99,7 +98,7 @@ public class Club implements Serializable {
      *
      * @param clubName
      */
-    public void setClubName(Character clubName) {
+    public void setClubName(String clubName) {
         this.clubName = clubName;
     }
 
@@ -107,38 +106,55 @@ public class Club implements Serializable {
      *
      * @return
      */
-    public City getCityId() {
-        return cityId;
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_club_city"), name = "city_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    public City getCity() {
+        return city;
     }
 
     /**
      *
-     * @param cityId
+     * @param city
      */
-    public void setCityId(City cityId) {
-        this.cityId = cityId;
+    public void setCity(City city) {
+        this.city = city;
     }
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 3;
+        hash = 97 * hash + this.id;
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Club)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Club other = (Club) object;
-        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Club other = (Club) obj;
+        return this.id == other.id;
     }
 
     @Override
     public String toString() {
         return "org.igo.entities.Clubs[ id=" + id + " ]";
+    }
+
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_club_country"), name = "country_id", referencedColumnName = "id")
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
     }
 
 }

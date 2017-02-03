@@ -114,7 +114,7 @@ public class TeamTest {
         System.out.println("getLeagueId");
         Team instance = new Team();
         League expResult = null;
-        League result = instance.getLeagueId();
+        League result = instance.getLeague();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -128,7 +128,7 @@ public class TeamTest {
         System.out.println("setLeagueId");
         League leagueId = null;
         Team instance = new Team();
-        instance.setLeagueId(leagueId);
+        instance.setLeague(leagueId);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -141,7 +141,7 @@ public class TeamTest {
         System.out.println("getUsersCollection");
         Team instance = new Team();
         Collection<UserDetails> expResult = null;
-        Collection<UserDetails> result = instance.getUsersCollection();
+        Collection<UserDetails> result = instance.getUsers();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -155,7 +155,7 @@ public class TeamTest {
         System.out.println("setUsersCollection");
         Collection<UserDetails> usersCollection = null;
         Team instance = new Team();
-        instance.setUsersCollection(usersCollection);
+        instance.setUsers(usersCollection);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

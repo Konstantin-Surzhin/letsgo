@@ -21,6 +21,7 @@ import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,29 +31,30 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author surzhin.konstantin
  */
 @Entity
-@Table(name = "TEAMS")
-@XmlRootElement
+@Table(name = "TEAMS", uniqueConstraints = {
+    @UniqueConstraint(name = "uk_team_name",
+            columnNames = {"team_name"})})
 @NamedQueries({
-    @NamedQuery(name = "Team.findAll", query = "SELECT t FROM Team t"),
-    @NamedQuery(name = "Team.findById", query = "SELECT t FROM Team t WHERE t.id = :id"),
-    @NamedQuery(name = "Team.findByTeamName", query = "SELECT t FROM Team t WHERE t.teamName = :teamName")})
+    @NamedQuery(name = "Team.findAll", query = "SELECT t FROM Team t")
+    ,@NamedQuery(name = "Team.findById", query = "SELECT t FROM Team t WHERE t.id = :id")
+    ,@NamedQuery(name = "Team.findByTeamName", query = "SELECT t FROM Team t WHERE t.teamName = :teamName")})
 public class Team implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    private Short id;
+    private short id;
     private String teamName;
-    private League leagueId;
-    private Collection<UserDetails> usersCollection;
+    private League league;
+    private Collection<UserDetails> users;
+    private City city;
+    private Country country;
 
     /**
      *
@@ -64,7 +66,7 @@ public class Team implements Serializable {
      *
      * @param id
      */
-    public Team(Short id) {
+    public Team(short id) {
         this.id = id;
     }
 
@@ -73,20 +75,20 @@ public class Team implements Serializable {
      * @param id
      * @param teamName
      */
-    public Team(Short id, String teamName) {
+    public Team(short id, String teamName) {
         this.id = id;
         this.teamName = teamName;
     }
 
     /**
      *
-     * @return
+     * @return id
      */
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     @Id
-    public Short getId() {
+    public short getId() {
         return id;
     }
 
@@ -94,13 +96,13 @@ public class Team implements Serializable {
      *
      * @param id
      */
-    public void setId(Short id) {
+    public void setId(short id) {
         this.id = id;
     }
 
     /**
      *
-     * @return
+     * @return teamName
      */
     @Basic(optional = false)
     @Column(name = "team_name", nullable = false, unique = true)
@@ -119,20 +121,20 @@ public class Team implements Serializable {
 
     /**
      *
-     * @return
+     * @return league
      */
     @JoinColumn(name = "league_id", referencedColumnName = "id")
     @ManyToOne
-    public League getLeagueId() {
-        return leagueId;
+    public League getLeague() {
+        return league;
     }
 
     /**
      *
-     * @param leagueId
+     * @param league
      */
-    public void setLeagueId(League leagueId) {
-        this.leagueId = leagueId;
+    public void setLeague(League league) {
+        this.league = league;
     }
 
     /**
@@ -140,39 +142,69 @@ public class Team implements Serializable {
      * @return
      */
     @OneToMany(mappedBy = "team")
-    @XmlTransient
-    public Collection<UserDetails> getUsersCollection() {
-        return usersCollection;
+    public Collection<UserDetails> getUsers() {
+        return users;
     }
 
     /**
      *
-     * @param usersCollection
+     * @param users
      */
-    public void setUsersCollection(Collection<UserDetails> usersCollection) {
-        this.usersCollection = usersCollection;
+    public void setUsers(Collection<UserDetails> users) {
+        this.users = users;
     }
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 7;
+        hash = 47 * hash + this.id;
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Team)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Team other = (Team) object;
-        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Team other = (Team) obj;
+        return this.id == other.id;
     }
 
     @Override
     public String toString() {
         return "org.igo.ban.ejb.Teams[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the city
+     */
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_team_city"), name = "city_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    public City getCity() {
+        return city;
+    }
+
+    /**
+     * @param city the city to set
+     */
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_team_country"), name = "country_id", referencedColumnName = "id")
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
     }
 
 }

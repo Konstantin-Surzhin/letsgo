@@ -142,7 +142,7 @@ public class CitiesTest {
         System.out.println("getUsers");
         City city = new City();
         Set<UserDetails> expResult = null;
-        Set<UserDetails> result = city.getUserCollection();
+        Set<UserDetails> result = city.getUser();
         assertEquals(expResult, result);
 
     }
@@ -155,8 +155,8 @@ public class CitiesTest {
         System.out.println("setUsers");
         Set<UserDetails> users = null;
         City city = new City();
-        city.setUserCollection(users);
-        assertNull(city.getUserCollection());
+        city.setUser(users);
+        assertNull(city.getUser());
 
     }
 
