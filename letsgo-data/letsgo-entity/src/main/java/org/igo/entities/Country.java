@@ -38,7 +38,7 @@ import javax.validation.constraints.Size;
             ,@UniqueConstraint(name = "uk_country_alpha2", columnNames = {"country_alpha2"})
             ,@UniqueConstraint(name = "uk_country_alpha3", columnNames = {"country_alpha3"})
             ,@UniqueConstraint(name = "uk_country_banner", columnNames = {"banner"})
-            ,@UniqueConstraint(name = "uk_country_national_emblem", columnNames = {"nationalEmblem"})
+            ,@UniqueConstraint(name = "uk_country_national_emblem", columnNames = {"national_emblem"})
         })
 public class Country implements Serializable {
 
