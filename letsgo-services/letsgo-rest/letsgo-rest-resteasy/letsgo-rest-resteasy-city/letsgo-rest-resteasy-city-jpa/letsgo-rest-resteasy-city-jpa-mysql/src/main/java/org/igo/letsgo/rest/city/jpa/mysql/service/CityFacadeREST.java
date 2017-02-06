@@ -32,7 +32,7 @@ import org.jboss.resteasy.links.LinkResource;
 @Path("city")
 public class CityFacadeREST extends AbstractFacade<City> {
 
-    @PersistenceContext(unitName = "org.igo.letsgo.rest.city.mysql.jndi.PU")
+    @PersistenceContext(unitName = "gamePU")
     private EntityManager em;
 
     /**
