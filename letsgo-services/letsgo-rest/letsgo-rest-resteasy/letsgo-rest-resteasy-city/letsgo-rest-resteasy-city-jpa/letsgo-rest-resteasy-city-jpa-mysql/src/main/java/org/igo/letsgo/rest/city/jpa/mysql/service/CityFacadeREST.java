@@ -19,7 +19,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import org.igo.entities.City;
-
+import org.igo.transfer.entities.TransferCity;
 
 import org.jboss.resteasy.links.AddLinks;
 import org.jboss.resteasy.links.LinkResource;
@@ -44,15 +44,14 @@ public class CityFacadeREST extends AbstractFacade<City> {
 
     /**
      *
-     * @param entity
+     * @param transferCity
      * @return
      */
     @POST
-    @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public City create(City entity) {
-        return super.create(entity);
+    public TransferCity persistToDataBase(final TransferCity transferCity) {
+        return new TransferCity(super.persistToDataBase(new City(transferCity)));
     }
 
     /**

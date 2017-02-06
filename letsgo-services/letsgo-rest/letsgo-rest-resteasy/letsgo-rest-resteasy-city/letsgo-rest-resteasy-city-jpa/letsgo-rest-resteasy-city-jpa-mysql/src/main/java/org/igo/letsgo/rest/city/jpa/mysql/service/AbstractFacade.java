@@ -36,7 +36,7 @@ public abstract class AbstractFacade<T> {
      * @param entity
      * @return
      */
-    public T create(T entity) {
+    public T persistToDataBase(T entity) {
         getEntityManager().persist(entity);
         return entity;
     }
