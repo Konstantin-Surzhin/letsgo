@@ -33,6 +33,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import org.igo.transfer.entities.TransferCity;
 //import javax.validation.constraints.Size;
 
 /**
@@ -41,8 +42,10 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "CITIES", uniqueConstraints = {
-    @UniqueConstraint(name = "uk_city_name",
-            columnNames = {"city_name"})})
+    @UniqueConstraint(name = "uk_city_name", columnNames = {"city_name"})
+    ,@UniqueConstraint(name = "uk_lat_lon", columnNames = {"latitude", "longitude"})
+    ,@UniqueConstraint(name = "uk_oktmo", columnNames = {"oktmo"})
+})
 @NamedQueries({
     @NamedQuery(name = "City.findAll", query = "SELECT c FROM City c")
     ,@NamedQuery(name = "City.findById", query = "SELECT c FROM City c WHERE c.id = :id")
@@ -54,7 +57,7 @@ public class City implements Serializable {
     private static final long serialVersionUID = 1L;
     private int id;
     private long latitude;
-    private long longitude;    
+    private long longitude;
     private String cityName;
     private String oktmo;
     private Country country;
@@ -68,20 +71,11 @@ public class City implements Serializable {
     public City() {
     }
 
-    /**
-     *
-     * @param id
-     */
-    public City(final int id) {
-        this.id = id;
-    }
-
-    /**
-     *
-     * @param cityName
-     */
-    public City(final String cityName) {
-        this.cityName = cityName;
+    public City(TransferCity city) {
+        this.latitude = city.getLatitude();
+        this.longitude = city.getLongitude();
+        this.cityName = city.getCityName();
+        this.oktmo = city.getOktmo();
     }
 
     /**

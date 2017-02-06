@@ -166,7 +166,7 @@ public class CitiesTest {
     @Test
     public void testToString() {
         System.out.println("toString");
-        City city = new City("Москва");
+        City city = new City();
         String expResult = "Москва";
 
         String result = city.toString();
