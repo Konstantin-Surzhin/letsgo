@@ -36,7 +36,7 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "PLACES", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"place_name"})})
+    @UniqueConstraint(name = "uk_place_name", columnNames = {"place_name"})})
 @NamedQueries({
     @NamedQuery(name = "Place.findAll", query = "SELECT p FROM Place p"),
     @NamedQuery(name = "Place.findById", query = "SELECT p FROM Place p WHERE p.id = :id"),

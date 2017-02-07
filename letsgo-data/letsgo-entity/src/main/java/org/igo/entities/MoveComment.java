@@ -44,7 +44,7 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "MOVE_COMMENTS", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"move_game_id", "user_details_id", "move_ndx", "move_comment"})})
+    @UniqueConstraint(name = "uk_game_user_move_comment", columnNames = {"move_game_id", "user_details_id", "move_ndx", "move_comment"})})
 @NamedQueries({
     @NamedQuery(name = "MoveComment.findAll", query = "SELECT m FROM MoveComment m")
     ,@NamedQuery(name = "MoveComment.findById", query = "SELECT m FROM MoveComment m WHERE m.id = :id")
@@ -146,11 +146,13 @@ public class MoveComment implements Serializable {
      *
      * @return
      */
-    @JoinColumns({
-        @JoinColumn(name = "move_game_id", referencedColumnName = "game_id")
-        ,
-        @JoinColumn(name = "move_ndx", referencedColumnName = "ndx")})
     @ManyToOne
+    @JoinColumns(
+            foreignKey = @ForeignKey(name = "fk_game_move_ndx"),
+            value = {
+                @JoinColumn(name = "move_game_id", referencedColumnName = "game_id")
+                ,@JoinColumn(name = "move_ndx", referencedColumnName = "ndx")
+            })
     public GameMove getGamesMoves() {
         return gamesMoves;
     }
@@ -184,8 +186,8 @@ public class MoveComment implements Serializable {
      *
      * @return
      */
-    @JoinColumn(name = "in_replay_to_id", referencedColumnName = "id")
     @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_replay_to_comment"),name = "in_replay_to_id", referencedColumnName = "id")
     public MoveComment getInReplayToId() {
         return inReplayToId;
     }

@@ -29,6 +29,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
 
 /**
@@ -36,7 +37,8 @@ import javax.validation.constraints.Size;
  * @author surzhin.konstantin
  */
 @Entity
-@Table(name = "USER_ROLES")
+@Table(name = "USER_ROLES", uniqueConstraints = {
+    @UniqueConstraint(name = "uk_user_name", columnNames = {"user_name"})})
 @NamedQueries({
     @NamedQuery(name = "UserRole.findAll", query = "SELECT u FROM UserRole u")
     ,@NamedQuery(name = "UserRole.findById", query = "SELECT u FROM UserRole u WHERE u.id = :id")
@@ -102,7 +104,7 @@ public class UserRole implements Serializable {
      * @return
      */
     @Basic(optional = false)
-    @Column(name = "username", nullable = false, unique = true, length = 255)
+    @Column(name = "user_name", nullable = false, length = 255)
     @Size(min = 1, max = 255)
     public String getUserName() {
         return userName;

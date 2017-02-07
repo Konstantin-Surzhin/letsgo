@@ -34,6 +34,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
 
 /**
@@ -41,7 +42,8 @@ import javax.validation.constraints.Size;
  * @author surzhin.konstantin
  */
 @Entity
-@Table(name = "USER_BANS")
+@Table(name = "USER_BANS",uniqueConstraints = {
+        @UniqueConstraint(name = "uk_ban_comment", columnNames = {"comment"})})
 @NamedQueries({
     @NamedQuery(name = "UserBan.findAll", query = "SELECT u FROM UserBan u")
     ,@NamedQuery(name = "UserBan.findById", query = "SELECT u FROM UserBan u WHERE u.id = :id")
@@ -110,7 +112,7 @@ public class UserBan implements Serializable {
      * @return
      */
     @Basic(optional = false)
-    @Column(name = "comment", nullable = false, unique = true)
+    @Column(name = "comment", nullable = false)
     @Size(min = 1, max = 255)
     public String getComment() {
         return comment;

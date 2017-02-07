@@ -41,8 +41,7 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "TEAMS", uniqueConstraints = {
-    @UniqueConstraint(name = "uk_team_name",
-            columnNames = {"team_name"})})
+    @UniqueConstraint(name = "uk_team_name", columnNames = {"team_name"})})
 @NamedQueries({
     @NamedQuery(name = "Team.findAll", query = "SELECT t FROM Team t")
     ,@NamedQuery(name = "Team.findById", query = "SELECT t FROM Team t WHERE t.id = :id")
@@ -124,7 +123,7 @@ public class Team implements Serializable {
      *
      * @return league
      */
-    @JoinColumn(name = "league_id", referencedColumnName = "id")
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_team_league"), name = "league_id", referencedColumnName = "id")
     @ManyToOne
     public League getLeague() {
         return league;
