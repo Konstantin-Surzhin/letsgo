@@ -20,6 +20,7 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,8 +38,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -46,8 +45,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "GAME_COMMENTS", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"game_id", "user_details_id", "comment"})})
-@XmlRootElement
+    @UniqueConstraint(name = "uk_game_userDetail_comment", columnNames = {"game_id", "user_details_id", "comment"})})
 @NamedQueries({
     @NamedQuery(name = "GameComment.findAll", query = "SELECT g FROM GameComment g")
     ,@NamedQuery(name = "GameComment.findById", query = "SELECT g FROM GameComment g WHERE g.id = :id")
@@ -56,7 +54,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class GameComment implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private Long id;
+    private long id;
     private String comment;
     private Date postDateTime = Calendar.getInstance().getTime();
     private Game game;
@@ -74,7 +72,7 @@ public class GameComment implements Serializable {
      *
      * @param id
      */
-    public GameComment(Long id) {
+    public GameComment(long id) {
         this.id = id;
     }
 
@@ -84,10 +82,10 @@ public class GameComment implements Serializable {
      * @param comment
      * @param postDateTime
      */
-    public GameComment(Long id, String comment, Date postDateTime) {
+    public GameComment(long id, String comment, Date postDateTime) {
         this.id = id;
         this.comment = comment;
-        this.postDateTime =  new Date(postDateTime.getTime());
+        this.postDateTime = new Date(postDateTime.getTime());
     }
 
     /**
@@ -98,7 +96,7 @@ public class GameComment implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(nullable = false)
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
@@ -106,7 +104,7 @@ public class GameComment implements Serializable {
      *
      * @param id
      */
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -145,7 +143,7 @@ public class GameComment implements Serializable {
      * @param postDateTime
      */
     public void setPostDateTime(Date postDateTime) {
-        this.postDateTime= new Date(postDateTime.getTime());
+        this.postDateTime = new Date(postDateTime.getTime());
     }
 
     /**
@@ -171,7 +169,6 @@ public class GameComment implements Serializable {
      * @return
      */
     @OneToMany(mappedBy = "inReplayToId")
-    @XmlTransient
     public Collection<GameComment> getGameCommentCollection() {
         return gameCommentCollection;
     }
@@ -222,19 +219,30 @@ public class GameComment implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 3;
+        hash = 97 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 97 * hash + Objects.hashCode(this.comment);
+        hash = 97 * hash + Objects.hashCode(this.postDateTime);
+        hash = 97 * hash + Objects.hashCode(this.game);
+        hash = 97 * hash + Objects.hashCode(this.gameCommentCollection);
+        hash = 97 * hash + Objects.hashCode(this.inReplayToId);
+        hash = 97 * hash + Objects.hashCode(this.userDetails);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof GameComment)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        GameComment other = (GameComment) object;
-        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final GameComment other = (GameComment) obj;
+        return this.id == other.id;
     }
 
     @Override

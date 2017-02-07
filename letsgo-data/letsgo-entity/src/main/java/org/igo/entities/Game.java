@@ -18,10 +18,12 @@ package org.igo.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,19 +41,19 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "GAMES")
 @NamedQueries({
-    @NamedQuery(name = "Game.findAll", query = "SELECT g FROM Game g"),
-    @NamedQuery(name = "Game.findById", query = "SELECT g FROM Game g WHERE g.id = :id"),
-    @NamedQuery(name = "Game.findByBayomeeNumber", query = "SELECT g FROM Game g WHERE g.bayomeeNumber = :bayomeeNumber"),
-    @NamedQuery(name = "Game.findByByoYomiTime", query = "SELECT g FROM Game g WHERE g.byoYomiTime = :byoYomiTime"),
-    @NamedQuery(name = "Game.findByGandicap", query = "SELECT g FROM Game g WHERE g.gandicap = :gandicap"),
-    @NamedQuery(name = "Game.findByGameSize", query = "SELECT g FROM Game g WHERE g.gameSize = :gameSize"),
-    @NamedQuery(name = "Game.findByGameStatus", query = "SELECT g FROM Game g WHERE g.gameStatus = :gameStatus"),
-    @NamedQuery(name = "Game.findByGameTime", query = "SELECT g FROM Game g WHERE g.gameTime = :gameTime"),
-    @NamedQuery(name = "Game.findByGameType", query = "SELECT g FROM Game g WHERE g.gameType = :gameType")})
+    @NamedQuery(name = "Game.findAll", query = "SELECT g FROM Game g")
+    ,@NamedQuery(name = "Game.findById", query = "SELECT g FROM Game g WHERE g.id = :id")
+    ,@NamedQuery(name = "Game.findByBayomeeNumber", query = "SELECT g FROM Game g WHERE g.bayomeeNumber = :bayomeeNumber")
+    ,@NamedQuery(name = "Game.findByByoYomiTime", query = "SELECT g FROM Game g WHERE g.byoYomiTime = :byoYomiTime")
+    ,@NamedQuery(name = "Game.findByGandicap", query = "SELECT g FROM Game g WHERE g.gandicap = :gandicap")
+    ,@NamedQuery(name = "Game.findByGameSize", query = "SELECT g FROM Game g WHERE g.gameSize = :gameSize")
+    ,@NamedQuery(name = "Game.findByGameStatus", query = "SELECT g FROM Game g WHERE g.gameStatus = :gameStatus")
+    ,@NamedQuery(name = "Game.findByGameTime", query = "SELECT g FROM Game g WHERE g.gameTime = :gameTime")
+    ,@NamedQuery(name = "Game.findByGameType", query = "SELECT g FROM Game g WHERE g.gameType = :gameType")})
 public class Game implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private Long id;
+    private long id;
     private short bayomeeNumber;
     private short byoYomiTime;
     private short gandicap;
@@ -75,7 +77,7 @@ public class Game implements Serializable {
      *
      * @param id
      */
-    public Game(Long id) {
+    public Game(long id) {
         this.id = id;
     }
 
@@ -86,7 +88,7 @@ public class Game implements Serializable {
      * @param gameStatus
      * @param gameType
      */
-    public Game(Long id, short gameSize, GameStatus gameStatus, GameType gameType) {
+    public Game(long id, short gameSize, GameStatus gameStatus, GameType gameType) {
         this.id = id;
         this.gameSize = gameSize;
         this.gameStatus = gameStatus;
@@ -101,7 +103,7 @@ public class Game implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(nullable = false)
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
@@ -109,7 +111,7 @@ public class Game implements Serializable {
      *
      * @param id
      */
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -186,7 +188,7 @@ public class Game implements Serializable {
      * @return
      */
     @Basic(optional = false)
-    @JoinColumn(name = "game_status_id", referencedColumnName = "id")
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_game_status"), name = "status_id", referencedColumnName = "id")
     @ManyToOne
     public GameStatus getGameStatus() {
         return gameStatus;
@@ -204,7 +206,7 @@ public class Game implements Serializable {
      *
      * @return
      */
-    @Column(name = "game_time",nullable = false)
+    @Column(name = "game_time", nullable = false)
     public short getGameTime() {
         return gameTime;
     }
@@ -222,8 +224,7 @@ public class Game implements Serializable {
      * @return
      */
     @Basic(optional = false)
-   // @Column(name = "game_type", nullable = false)
-    @JoinColumn(name = "game_type_id", referencedColumnName = "id")
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_game_type"), name = "type_id", referencedColumnName = "id")
     @ManyToOne
     public GameType getGameType() {
         return gameType;
@@ -309,7 +310,7 @@ public class Game implements Serializable {
      *
      * @return
      */
-    @JoinColumn(name = "event_id", referencedColumnName = "id")
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_game_event"), name = "event_id", referencedColumnName = "id")
     @ManyToOne
     public Event getEventId() {
         return eventId;
@@ -323,21 +324,39 @@ public class Game implements Serializable {
         this.eventId = eventId;
     }
 
+
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Game other = (Game) obj;
+        return this.id == other.id;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Game)) {
-            return false;
-        }
-        Game other = (Game) object;
-        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 79 * hash + this.bayomeeNumber;
+        hash = 79 * hash + this.byoYomiTime;
+        hash = 79 * hash + this.gandicap;
+        hash = 79 * hash + this.gameSize;
+        hash = 79 * hash + Objects.hashCode(this.gameStatus);
+        hash = 79 * hash + this.gameTime;
+        hash = 79 * hash + Objects.hashCode(this.gameType);
+        hash = 79 * hash + Objects.hashCode(this.usersGamesCollection);
+        hash = 79 * hash + Objects.hashCode(this.gamesCommentsCollection);
+        hash = 79 * hash + Objects.hashCode(this.gamesMovesCollection);
+        hash = 79 * hash + Objects.hashCode(this.gamesDatesCollection);
+        hash = 79 * hash + Objects.hashCode(this.eventId);
+        return hash;
     }
 
     @Override

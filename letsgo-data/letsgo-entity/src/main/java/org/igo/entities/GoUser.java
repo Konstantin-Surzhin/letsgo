@@ -17,6 +17,7 @@
 package org.igo.entities;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.ColumnResult;
@@ -56,7 +57,7 @@ import javax.validation.constraints.Size;
 public class GoUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private Integer id;
+    private int id;
     private String userName;
     private String password;
     private String salt;
@@ -69,7 +70,7 @@ public class GoUser implements Serializable {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
@@ -77,25 +78,35 @@ public class GoUser implements Serializable {
      *
      * @param id
      */
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 3;
+        hash = 17 * hash + this.id;
+        hash = 17 * hash + Objects.hashCode(this.userName);
+        hash = 17 * hash + Objects.hashCode(this.password);
+        hash = 17 * hash + Objects.hashCode(this.salt);
+        hash = 17 * hash + Objects.hashCode(this.userDetails);
+        hash = 17 * hash + Objects.hashCode(this.role);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof GoUser)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        GoUser other = (GoUser) object;
-        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final GoUser other = (GoUser) obj;
+        return this.id == other.id;
     }
 
     @Override

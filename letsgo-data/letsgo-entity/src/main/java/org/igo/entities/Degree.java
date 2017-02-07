@@ -18,6 +18,7 @@ package org.igo.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -29,26 +30,25 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author surzhin.konstantin
  */
 @Entity
-@Table(name = "DEGREES")
-@XmlRootElement
+@Table(name = "DEGREES", uniqueConstraints = {
+    @UniqueConstraint(name = "uk_degree_value", columnNames = {"degree_value"})})
 @NamedQueries({
-    @NamedQuery(name = "Degree.findAll", query = "SELECT d FROM Degree d"),
-    @NamedQuery(name = "Degree.findById", query = "SELECT d FROM Degree d WHERE d.id = :id"),
-    @NamedQuery(name = "Degree.findByDegreeValue", query = "SELECT d FROM Degree d WHERE d.degreeValue = :degreeValue")})
+    @NamedQuery(name = "Degree.findAll", query = "SELECT d FROM Degree d")
+    ,@NamedQuery(name = "Degree.findById", query = "SELECT d FROM Degree d WHERE d.id = :id")
+    ,@NamedQuery(name = "Degree.findByDegreeValue", query = "SELECT d FROM Degree d WHERE d.degreeValue = :degreeValue")})
 public class Degree implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private Byte id;
+    private byte id;
     private String degreeValue;
     private Collection<UserDegree> usersDegreesCollection;
 
@@ -62,7 +62,7 @@ public class Degree implements Serializable {
      *
      * @param id
      */
-    public Degree(Byte id) {
+    public Degree(byte id) {
         this.id = id;
     }
 
@@ -71,7 +71,7 @@ public class Degree implements Serializable {
      * @param id
      * @param degreeValue
      */
-    public Degree(Byte id, String degreeValue) {
+    public Degree(byte id, String degreeValue) {
         this.id = id;
         this.degreeValue = degreeValue;
     }
@@ -101,9 +101,9 @@ public class Degree implements Serializable {
      * @return
      */
     @Basic(optional = false)
-        @NotNull
+    @NotNull
     @Size(min = 1, max = 255)
-    @Column(name = "degree_value", nullable = false, length = 255, unique = true)
+    @Column(name = "degree_value", nullable = false, length = 255)
     public String getDegreeValue() {
         return degreeValue;
     }
@@ -121,7 +121,6 @@ public class Degree implements Serializable {
      * @return
      */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "degree")
-    @XmlTransient
     public Collection<UserDegree> getUsersDegreesCollection() {
         return usersDegreesCollection;
     }
@@ -136,24 +135,31 @@ public class Degree implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 3;
+        hash = 61 * hash + this.id;
+        hash = 61 * hash + Objects.hashCode(this.degreeValue);
+        hash = 61 * hash + Objects.hashCode(this.usersDegreesCollection);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Degree)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Degree other = (Degree) object;
-        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Degree other = (Degree) obj;
+        return this.id == other.id;
     }
 
     @Override
     public String toString() {
         return "org.igo.entities.Degrees[ id=" + id + " ]";
     }
-    
+
 }

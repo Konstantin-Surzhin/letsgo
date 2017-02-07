@@ -18,6 +18,7 @@ package org.igo.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -27,7 +28,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -35,7 +35,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "USER_DEGREES")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "UserDegree.findAll", query = "SELECT u FROM UserDegree u")
     ,@NamedQuery(name = "UserDegree.findByAppointmentDate", query = "SELECT u FROM UserDegree u WHERE u.userDegreePK.appointmentDate = :appointmentDate")
@@ -44,10 +43,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class UserDegree implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    /**
-     *
-     */
     protected UserDegreePK userDegreePK;
     private Integer degreeType;
     private UserDetails userDetails;
@@ -149,19 +144,27 @@ public class UserDegree implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (userDegreePK != null ? userDegreePK.hashCode() : 0);
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.userDegreePK);
+        hash = 59 * hash + Objects.hashCode(this.degreeType);
+        hash = 59 * hash + Objects.hashCode(this.userDetails);
+        hash = 59 * hash + Objects.hashCode(this.degree);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof UserDegree)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        UserDegree other = (UserDegree) object;
-        return !((this.userDegreePK == null && other.userDegreePK != null) || (this.userDegreePK != null && !this.userDegreePK.equals(other.userDegreePK)));
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final UserDegree other = (UserDegree) obj;
+        return Objects.equals(this.userDegreePK, other.userDegreePK);
     }
 
     @Override

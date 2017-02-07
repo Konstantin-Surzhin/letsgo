@@ -24,6 +24,7 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -32,7 +33,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -40,8 +40,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "GAME_DATES",  uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"game_date", "game_id"})})
-@XmlRootElement
+    @UniqueConstraint(name = "uk_gameDate_game",columnNames = {"game_date", "game_id"})})
 @NamedQueries({
     @NamedQuery(name = "GameDate.findAll", query = "SELECT g FROM GameDate g"),
     @NamedQuery(name = "GameDate.findByGameId", query = "SELECT g FROM GameDate g WHERE g.gameDatePK.gameId = :gameId"),
@@ -131,7 +130,7 @@ public class GameDate implements Serializable {
      *
      * @return
      */
-    @JoinColumn(name = "game_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_date_game"), name = "game_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false)
     public Game getGame() {
         return game;

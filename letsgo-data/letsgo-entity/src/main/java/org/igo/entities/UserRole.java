@@ -18,6 +18,7 @@ package org.igo.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,8 +30,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -38,7 +37,6 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "USER_ROLES")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "UserRole.findAll", query = "SELECT u FROM UserRole u")
     ,@NamedQuery(name = "UserRole.findById", query = "SELECT u FROM UserRole u WHERE u.id = :id")
@@ -48,7 +46,7 @@ public class UserRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Short id;
+    private short id;
     private String userName;
     private String userRole;
     private Collection<GoUser> userCollection;
@@ -63,7 +61,7 @@ public class UserRole implements Serializable {
      *
      * @param id
      */
-    public UserRole(Short id) {
+    public UserRole(short id) {
         this.id = id;
     }
 
@@ -73,7 +71,7 @@ public class UserRole implements Serializable {
      * @param username
      * @param userrole
      */
-    public UserRole(Short id, String username, String userrole) {
+    public UserRole(short id, String username, String userrole) {
         this.id = id;
         this.userName = username;
         this.userRole = userrole;
@@ -87,7 +85,7 @@ public class UserRole implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     @Id
-    public Short getId() {
+    public short getId() {
         return id;
     }
 
@@ -95,7 +93,7 @@ public class UserRole implements Serializable {
      *
      * @param id
      */
-    public void setId(Short id) {
+    public void setId(short id) {
         this.id = id;
     }
 
@@ -141,7 +139,6 @@ public class UserRole implements Serializable {
      *
      * @return
      */
-    @XmlTransient
     @OneToMany(mappedBy = "role")
     public Collection<GoUser> getUserCollection() {
         return userCollection;
@@ -157,19 +154,27 @@ public class UserRole implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 3;
+        hash = 97 * hash + this.id;
+        hash = 97 * hash + Objects.hashCode(this.userName);
+        hash = 97 * hash + Objects.hashCode(this.userRole);
+        hash = 97 * hash + Objects.hashCode(this.userCollection);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof UserRole)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        UserRole other = (UserRole) object;
-        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final UserRole other = (UserRole) obj;
+        return this.id == other.id;
     }
 
     @Override

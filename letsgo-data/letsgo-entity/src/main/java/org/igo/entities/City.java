@@ -17,6 +17,7 @@
 package org.igo.entities;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -116,13 +117,6 @@ public class City implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 13 * hash + this.id;
-        return hash;
-    }
-
-    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -136,6 +130,22 @@ public class City implements Serializable {
         final City other = (City) obj;
         return this.id == other.id;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + this.id;
+        hash = 29 * hash + (int) (this.latitude ^ (this.latitude >>> 32));
+        hash = 29 * hash + (int) (this.longitude ^ (this.longitude >>> 32));
+        hash = 29 * hash + Objects.hashCode(this.cityName);
+        hash = 29 * hash + Objects.hashCode(this.oktmo);
+        hash = 29 * hash + Objects.hashCode(this.country);
+        hash = 29 * hash + Objects.hashCode(this.user);
+        hash = 29 * hash + Objects.hashCode(this.clubs);
+        hash = 29 * hash + Objects.hashCode(this.teams);
+        return hash;
+    }
+
 
     @Override
     public String toString() {

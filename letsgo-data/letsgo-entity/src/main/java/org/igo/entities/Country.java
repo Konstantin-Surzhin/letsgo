@@ -17,6 +17,7 @@
 package org.igo.entities;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -125,13 +126,6 @@ public class Country implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 29 * hash + this.id;
-        return hash;
-    }
-
-    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -144,6 +138,23 @@ public class Country implements Serializable {
         }
         final Country other = (Country) obj;
         return this.id == other.id;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 89 * hash + this.id;
+        hash = 89 * hash + Objects.hashCode(this.countryName);
+        hash = 89 * hash + Objects.hashCode(this.countryCodeAlpha2);
+        hash = 89 * hash + Objects.hashCode(this.countryCodeAlpha3);
+        hash = 89 * hash + Objects.hashCode(this.banner);
+        hash = 89 * hash + Objects.hashCode(this.nationalEmblem);
+        hash = 89 * hash + Objects.hashCode(this.user);
+        hash = 89 * hash + Objects.hashCode(this.cities);
+        hash = 89 * hash + Objects.hashCode(this.clubs);
+        hash = 89 * hash + Objects.hashCode(this.teams);
+        hash = 89 * hash + Objects.hashCode(this.leagues);
+        return hash;
     }
 
     /**

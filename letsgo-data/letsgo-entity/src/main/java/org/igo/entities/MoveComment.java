@@ -20,6 +20,7 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,8 +37,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -46,7 +45,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "MOVE_COMMENTS", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"move_game_id", "user_details_id", "move_ndx", "move_comment"})})
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "MoveComment.findAll", query = "SELECT m FROM MoveComment m")
     ,@NamedQuery(name = "MoveComment.findById", query = "SELECT m FROM MoveComment m WHERE m.id = :id")
@@ -56,7 +54,7 @@ public class MoveComment implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Long id;
+    private long id;
     private String moveComment;
     private Date postDateTime = Calendar.getInstance().getTime();
     private GameMove gamesMoves;
@@ -74,7 +72,7 @@ public class MoveComment implements Serializable {
      *
      * @param id
      */
-    public MoveComment(Long id) {
+    public MoveComment(long id) {
         this.id = id;
     }
 
@@ -83,7 +81,7 @@ public class MoveComment implements Serializable {
      * @param id
      * @param postDateTime
      */
-    public MoveComment(Long id, Date postDateTime) {
+    public MoveComment(long id, Date postDateTime) {
         this.id = id;
         this.postDateTime = new Date(postDateTime.getTime());
     }
@@ -95,7 +93,7 @@ public class MoveComment implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(nullable = false)
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
@@ -103,7 +101,7 @@ public class MoveComment implements Serializable {
      *
      * @param id
      */
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -170,7 +168,6 @@ public class MoveComment implements Serializable {
      * @return
      */
     @OneToMany(mappedBy = "inReplayToId")
-    @XmlTransient
     public Collection<MoveComment> getMoveCommentCollection() {
         return moveCommentCollection;
     }
@@ -221,19 +218,30 @@ public class MoveComment implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 5;
+        hash = 53 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 53 * hash + Objects.hashCode(this.moveComment);
+        hash = 53 * hash + Objects.hashCode(this.postDateTime);
+        hash = 53 * hash + Objects.hashCode(this.gamesMoves);
+        hash = 53 * hash + Objects.hashCode(this.moveCommentCollection);
+        hash = 53 * hash + Objects.hashCode(this.inReplayToId);
+        hash = 53 * hash + Objects.hashCode(this.userDetails);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof MoveComment)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        MoveComment other = (MoveComment) object;
-        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final MoveComment other = (MoveComment) obj;
+        return this.id == other.id;
     }
 
     @Override

@@ -17,6 +17,7 @@
 package org.igo.entities;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,7 +29,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -37,7 +37,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "PLACES", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"place_name"})})
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Place.findAll", query = "SELECT p FROM Place p"),
     @NamedQuery(name = "Place.findById", query = "SELECT p FROM Place p WHERE p.id = :id"),
@@ -46,7 +45,7 @@ public class Place implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Integer id;
+    private int id;
     private String placeName;
 
     /**
@@ -59,7 +58,7 @@ public class Place implements Serializable {
      *
      * @param id
      */
-    public Place(Integer id) {
+    public Place(int id) {
         this.id = id;
     }
 
@@ -68,7 +67,7 @@ public class Place implements Serializable {
      * @param id
      * @param placeName
      */
-    public Place(Integer id, String placeName) {
+    public Place(int id, String placeName) {
         this.id = id;
         this.placeName = placeName;
     }
@@ -81,7 +80,7 @@ public class Place implements Serializable {
     @Basic(optional = false)
     @Column(nullable = false)
     @Id
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
@@ -89,7 +88,7 @@ public class Place implements Serializable {
      *
      * @param id
      */
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -114,19 +113,25 @@ public class Place implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 3;
+        hash = 17 * hash + this.id;
+        hash = 17 * hash + Objects.hashCode(this.placeName);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Place)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Place other = (Place) object;
-        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Place other = (Place) obj;
+        return this.id == other.id;
     }
 
     @Override

@@ -18,6 +18,7 @@ package org.igo.entities;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,14 +36,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "GAME_TYPES")
 public class GameType implements Serializable {
 
-    @OneToMany(mappedBy = "gameType")
-    private List<Game> games;
-
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Short id;
+    private short id;
     private String typeName;
+    private List<Game> games;
 
     /**
      *
@@ -55,14 +52,16 @@ public class GameType implements Serializable {
      * @param id
      */
     public GameType(short id) {
-       this.id = id;
+        this.id = id;
     }
 
     /**
      *
      * @return
      */
-    public Short getId() {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    public short getId() {
         return id;
     }
 
@@ -76,19 +75,26 @@ public class GameType implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 3;
+        hash = 37 * hash + this.id;
+        hash = 37 * hash + Objects.hashCode(this.typeName);
+        hash = 37 * hash + Objects.hashCode(this.games);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof GameType)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        GameType other = (GameType) object;
-        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final GameType other = (GameType) obj;
+        return this.id == other.id;
     }
 
     @Override
@@ -113,6 +119,7 @@ public class GameType implements Serializable {
     /**
      * @return the games
      */
+    @OneToMany(mappedBy = "gameType")
     public List<Game> getGames() {
         return games;
     }
@@ -123,5 +130,5 @@ public class GameType implements Serializable {
     public void setGames(List<Game> games) {
         this.games = games;
     }
-    
+
 }

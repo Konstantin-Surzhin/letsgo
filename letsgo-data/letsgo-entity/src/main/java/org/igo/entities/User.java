@@ -31,11 +31,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
     private int id;
-
     private URI uri;
-
     private String user_name;
 
     /**

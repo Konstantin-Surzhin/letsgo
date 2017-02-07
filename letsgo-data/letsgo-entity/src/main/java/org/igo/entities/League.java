@@ -18,36 +18,38 @@ package org.igo.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author surzhin.konstantin
  */
 @Entity
-@Table(name = "LEAGUES")
-@XmlRootElement
+@Table(name = "LEAGUES", uniqueConstraints = {
+    @UniqueConstraint(name = "uk_league_name", columnNames = {"league_name"})})
 @NamedQueries({
-    @NamedQuery(name = "League.findAll", query = "SELECT l FROM League l"),
-    @NamedQuery(name = "League.findById", query = "SELECT l FROM League l WHERE l.id = :id"),
-    @NamedQuery(name = "League.findByLeagueName", query = "SELECT l FROM League l WHERE l.leagueName = :leagueName")})
+    @NamedQuery(name = "League.findAll", query = "SELECT l FROM League l")
+    ,@NamedQuery(name = "League.findById", query = "SELECT l FROM League l WHERE l.id = :id")
+    ,@NamedQuery(name = "League.findByLeagueName", query = "SELECT l FROM League l WHERE l.leagueName = :leagueName")})
 public class League implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private Short id;
+    private short id;
     private String leagueName;
     private Collection<Team> teamsCollection;
     private Collection<UserDetails> usersCollection;
@@ -63,7 +65,7 @@ public class League implements Serializable {
      *
      * @param id
      */
-    public League(Short id) {
+    public League(short id) {
         this.id = id;
     }
 
@@ -72,7 +74,7 @@ public class League implements Serializable {
      * @param id
      * @param leagueName
      */
-    public League(Short id, String leagueName) {
+    public League(short id, String leagueName) {
         this.id = id;
         this.leagueName = leagueName;
     }
@@ -85,7 +87,7 @@ public class League implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    public Short getId() {
+    public short getId() {
         return id;
     }
 
@@ -93,7 +95,7 @@ public class League implements Serializable {
      *
      * @param id
      */
-    public void setId(Short id) {
+    public void setId(short id) {
         this.id = id;
     }
 
@@ -103,7 +105,7 @@ public class League implements Serializable {
      */
     @Basic(optional = false)
     @Size(min = 1, max = 255)
-    @Column(name = "league_name",nullable = false, unique = true)
+    @Column(name = "league_name", nullable = false)
     public String getLeagueName() {
         return leagueName;
     }
@@ -121,7 +123,6 @@ public class League implements Serializable {
      * @return
      */
     @OneToMany(mappedBy = "league")
-    @XmlTransient
     public Collection<Team> getTeamsCollection() {
         return teamsCollection;
     }
@@ -139,7 +140,6 @@ public class League implements Serializable {
      * @return
      */
     @OneToMany(mappedBy = "league")
-    @XmlTransient
     public Collection<UserDetails> getUsersCollection() {
         return usersCollection;
     }
@@ -154,19 +154,28 @@ public class League implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 5;
+        hash = 23 * hash + this.id;
+        hash = 23 * hash + Objects.hashCode(this.leagueName);
+        hash = 23 * hash + Objects.hashCode(this.teamsCollection);
+        hash = 23 * hash + Objects.hashCode(this.usersCollection);
+        hash = 23 * hash + Objects.hashCode(this.country);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof League)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        League other = (League) object;
-        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final League other = (League) obj;
+        return this.id == other.id;
     }
 
     @Override
@@ -175,6 +184,7 @@ public class League implements Serializable {
     }
 
     @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_league_country"), name = "country_id", referencedColumnName = "id")
     public Country getCountry() {
         return country;
     }

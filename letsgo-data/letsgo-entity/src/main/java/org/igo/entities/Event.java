@@ -18,6 +18,7 @@ package org.igo.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,17 +29,17 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author surzhin.konstantin
  */
 @Entity
-@Table(name = "EVENTS")
-@XmlRootElement
+@Table(name = "EVENTS", uniqueConstraints = {
+            @UniqueConstraint(name = "uk_degree_value",
+                    columnNames = {"event_name"})})
 @NamedQueries({
     @NamedQuery(name = "Event.findAll", query = "SELECT e FROM Event e"),
     @NamedQuery(name = "Event.findById", query = "SELECT e FROM Event e WHERE e.id = :id"),
@@ -46,7 +47,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Event implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private Short id;
+    private short id;
     private String eventName;
     private Collection<Game> gamesCollection;
 
@@ -60,7 +61,7 @@ public class Event implements Serializable {
      *
      * @param id
      */
-    public Event(Short id) {
+    public Event(short id) {
         this.id = id;
     }
 
@@ -69,7 +70,7 @@ public class Event implements Serializable {
      * @param id
      * @param eventName
      */
-    public Event(Short id, String eventName) {
+    public Event(short id, String eventName) {
         this.id = id;
         this.eventName = eventName;
     }
@@ -82,7 +83,7 @@ public class Event implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(nullable = false)
-    public Short getId() {
+    public short getId() {
         return id;
     }
 
@@ -90,7 +91,7 @@ public class Event implements Serializable {
      *
      * @param id
      */
-    public void setId(Short id) {
+    public void setId(short id) {
         this.id = id;
     }
 
@@ -100,7 +101,7 @@ public class Event implements Serializable {
      */
     @Basic(optional = false)
     @Size(min = 1, max = 255)
-    @Column(name = "event_name", nullable = false, length = 255, unique = true)
+    @Column(name = "event_name", nullable = false)
     public String getEventName() {
         return eventName;
     }
@@ -118,7 +119,6 @@ public class Event implements Serializable {
      * @return
      */
     @OneToMany(mappedBy = "eventId")
-    @XmlTransient
     public Collection<Game> getGamesCollection() {
         return gamesCollection;
     }
@@ -133,19 +133,26 @@ public class Event implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 7;
+        hash = 71 * hash + this.id;
+        hash = 71 * hash + Objects.hashCode(this.eventName);
+        hash = 71 * hash + Objects.hashCode(this.gamesCollection);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Event)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Event other = (Event) object;
-        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Event other = (Event) obj;
+        return this.id == other.id;
     }
 
     @Override

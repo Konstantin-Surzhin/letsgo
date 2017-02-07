@@ -19,6 +19,7 @@ package org.igo.entities;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -92,23 +93,28 @@ public class UserDegreePK implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (appointmentDate != null ? appointmentDate.hashCode() : 0);
-        hash += (int) userId;
+        int hash = 7;
+        hash = 41 * hash + Objects.hashCode(this.appointmentDate);
+        hash = 41 * hash + this.userId;
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof UserDegreePK)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        UserDegreePK other = (UserDegreePK) object;
-        if ((this.appointmentDate == null && other.appointmentDate != null) || (this.appointmentDate != null && !this.appointmentDate.equals(other.appointmentDate))) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        return this.userId == other.userId;
+        final UserDegreePK other = (UserDegreePK) obj;
+        if (this.userId != other.userId) {
+            return false;
+        }
+        return Objects.equals(this.appointmentDate, other.appointmentDate);
     }
 
     @Override

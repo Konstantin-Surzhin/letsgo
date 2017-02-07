@@ -18,18 +18,18 @@ package org.igo.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -37,7 +37,6 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "GAME_MOVES")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "GameMove.findAll", query = "SELECT g FROM GameMove g"),
     @NamedQuery(name = "GameMove.findByGameId", query = "SELECT g FROM GameMove g WHERE g.gameMovePK.gameId = :gameId"),
@@ -150,7 +149,6 @@ public class GameMove implements Serializable {
      * @return
      */
     @OneToMany(mappedBy = "gamesMoves")
-    @XmlTransient
     public Collection<MoveComment> getMovesCommentsCollection() {
         return movesCommentsCollection;
     }
@@ -167,7 +165,7 @@ public class GameMove implements Serializable {
      *
      * @return
      */
-    @JoinColumn(name = "game_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_move_game"), name = "game_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false)
     public Game getGames() {
         return games;
@@ -182,20 +180,29 @@ public class GameMove implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (gameMovePK != null ? gameMovePK.hashCode() : 0);
-        return hash;
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final GameMove other = (GameMove) obj;
+        return Objects.equals(this.gameMovePK, other.gameMovePK);
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof GameMove)) {
-            return false;
-        }
-        GameMove other = (GameMove) object;
-        return !((this.gameMovePK == null && other.gameMovePK != null) || (this.gameMovePK != null && !this.gameMovePK.equals(other.gameMovePK)));
+    public int hashCode() {
+        int hash = 7;
+        hash = 47 * hash + Objects.hashCode(this.gameMovePK);
+        hash = 47 * hash + Objects.hashCode(this.x);
+        hash = 47 * hash + Objects.hashCode(this.y);
+        hash = 47 * hash + Objects.hashCode(this.movesCommentsCollection);
+        hash = 47 * hash + Objects.hashCode(this.games);
+        return hash;
     }
 
     @Override

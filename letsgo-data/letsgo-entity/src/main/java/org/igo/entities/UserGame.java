@@ -17,6 +17,7 @@
 package org.igo.entities;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -125,7 +126,7 @@ public class UserGame implements Serializable {
      *
      * @return
      */
-    @JoinColumn(name = "game_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_user_game"), name = "game_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false)
     public Game getGames() {
         return games;
@@ -159,19 +160,27 @@ public class UserGame implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (userGamePK != null ? userGamePK.hashCode() : 0);
+        int hash = 7;
+        hash = 83 * hash + Objects.hashCode(this.userGamePK);
+        hash = 83 * hash + this.color;
+        hash = 83 * hash + Objects.hashCode(this.games);
+        hash = 83 * hash + Objects.hashCode(this.userDetails);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof UserGame)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        UserGame other = (UserGame) object;
-        return !((this.userGamePK == null && other.userGamePK != null) || (this.userGamePK != null && !this.userGamePK.equals(other.userGamePK)));
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final UserGame other = (UserGame) obj;
+        return Objects.equals(this.userGamePK, other.userGamePK);
     }
 
     @Override

@@ -20,6 +20,7 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -63,16 +64,16 @@ public class UserDetails implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Integer id;
-    private Integer draw;
+    private int id;
+    private int draw;
     private String email;
-    private Boolean isLogin;
+    private boolean isLogin;
     private Date lastTime = Calendar.getInstance().getTime();
-    private Integer lose;
-    private Integer rating;
-    private Integer staus;
-    private Integer win;
-    private Integer nescape;
+    private int lose;
+    private int rating;
+    private int staus;
+    private int win;
+    private int nescape;
     private League league;
     private Team team;
     private Room room;
@@ -99,7 +100,7 @@ public class UserDetails implements Serializable {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
@@ -107,7 +108,7 @@ public class UserDetails implements Serializable {
      *
      * @param id
      */
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -116,7 +117,7 @@ public class UserDetails implements Serializable {
      * @return
      */
     @Column(name = "draw")
-    public Integer getDraw() {
+    public int getDraw() {
         return draw;
     }
 
@@ -124,7 +125,7 @@ public class UserDetails implements Serializable {
      *
      * @param draw
      */
-    public void setDraw(Integer draw) {
+    public void setDraw(int draw) {
         this.draw = draw;
     }
 
@@ -154,7 +155,7 @@ public class UserDetails implements Serializable {
      * @return
      */
     @Column(name = "is_login")
-    public Boolean getIsLogin() {
+    public boolean getIsLogin() {
         return isLogin;
     }
 
@@ -162,7 +163,7 @@ public class UserDetails implements Serializable {
      *
      * @param isLogin
      */
-    public void setIsLogin(Boolean isLogin) {
+    public void setIsLogin(boolean isLogin) {
         this.isLogin = isLogin;
     }
 
@@ -190,7 +191,7 @@ public class UserDetails implements Serializable {
      * @return
      */
     @Column(name = "lose")
-    public Integer getLose() {
+    public int getLose() {
         return lose;
     }
 
@@ -198,7 +199,7 @@ public class UserDetails implements Serializable {
      *
      * @param lose
      */
-    public void setLose(Integer lose) {
+    public void setLose(int lose) {
         this.lose = lose;
     }
 
@@ -207,7 +208,7 @@ public class UserDetails implements Serializable {
      * @return
      */
     @Column(name = "rating")
-    public Integer getRating() {
+    public int getRating() {
         return rating;
     }
 
@@ -215,7 +216,7 @@ public class UserDetails implements Serializable {
      *
      * @param rating
      */
-    public void setRating(Integer rating) {
+    public void setRating(int rating) {
         this.rating = rating;
     }
 
@@ -224,7 +225,7 @@ public class UserDetails implements Serializable {
      * @return
      */
     @Column(name = "staus")
-    public Integer getStaus() {
+    public int getStaus() {
         return staus;
     }
 
@@ -232,7 +233,7 @@ public class UserDetails implements Serializable {
      *
      * @param staus
      */
-    public void setStaus(Integer staus) {
+    public void setStaus(int staus) {
         this.staus = staus;
     }
 
@@ -241,7 +242,7 @@ public class UserDetails implements Serializable {
      * @return
      */
     @Column(name = "win")
-    public Integer getWin() {
+    public int getWin() {
         return win;
     }
 
@@ -249,7 +250,7 @@ public class UserDetails implements Serializable {
      *
      * @param win
      */
-    public void setWin(Integer win) {
+    public void setWin(int win) {
         this.win = win;
     }
 
@@ -344,19 +345,45 @@ public class UserDetails implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 7;
+        hash = 59 * hash + this.id;
+        hash = 59 * hash + this.draw;
+        hash = 59 * hash + Objects.hashCode(this.email);
+        hash = 59 * hash + (this.isLogin ? 1 : 0);
+        hash = 59 * hash + Objects.hashCode(this.lastTime);
+        hash = 59 * hash + this.lose;
+        hash = 59 * hash + this.rating;
+        hash = 59 * hash + this.staus;
+        hash = 59 * hash + this.win;
+        hash = 59 * hash + this.nescape;
+        hash = 59 * hash + Objects.hashCode(this.league);
+        hash = 59 * hash + Objects.hashCode(this.team);
+        hash = 59 * hash + Objects.hashCode(this.room);
+        hash = 59 * hash + Objects.hashCode(this.city);
+        hash = 59 * hash + Objects.hashCode(this.club);
+        hash = 59 * hash + Objects.hashCode(this.user);
+        hash = 59 * hash + Objects.hashCode(this.userGameCollection);
+        hash = 59 * hash + Objects.hashCode(this.userDegreeCollection);
+        hash = 59 * hash + Objects.hashCode(this.moveCommentCollection);
+        hash = 59 * hash + Objects.hashCode(this.gameCommentCollection);
+        hash = 59 * hash + Objects.hashCode(this.userBanCollection);
+        hash = 59 * hash + Objects.hashCode(this.country);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof UserDetails)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        UserDetails other = (UserDetails) object;
-        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final UserDetails other = (UserDetails) obj;
+        return this.id == other.id;
     }
 
     @Override
@@ -436,14 +463,14 @@ public class UserDetails implements Serializable {
      * @return the escaped
      */
     @Column(name = "nescape")
-    public Integer getNescape() {
+    public int getNescape() {
         return nescape;
     }
 
     /**
      * @param nescape
      */
-    public void setNescape(Integer nescape) {
+    public void setNescape(int nescape) {
         this.nescape = nescape;
     }
 

@@ -19,6 +19,7 @@ package org.igo.entities;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,7 +35,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -42,21 +42,16 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "USER_BANS")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "UserBan.findAll", query = "SELECT u FROM UserBan u")
-    ,
-    @NamedQuery(name = "UserBan.findById", query = "SELECT u FROM UserBan u WHERE u.id = :id")
-    ,
-    @NamedQuery(name = "UserBan.findByComment", query = "SELECT u FROM UserBan u WHERE u.comment = :comment")
-    ,
-    @NamedQuery(name = "UserBan.findByDuration", query = "SELECT u FROM UserBan u WHERE u.duration = :duration")
-    ,
-    @NamedQuery(name = "UserBan.findByStartDate", query = "SELECT u FROM UserBan u WHERE u.startDate = :startDate")})
+    ,@NamedQuery(name = "UserBan.findById", query = "SELECT u FROM UserBan u WHERE u.id = :id")
+    ,@NamedQuery(name = "UserBan.findByComment", query = "SELECT u FROM UserBan u WHERE u.comment = :comment")
+    ,@NamedQuery(name = "UserBan.findByDuration", query = "SELECT u FROM UserBan u WHERE u.duration = :duration")
+    ,@NamedQuery(name = "UserBan.findByStartDate", query = "SELECT u FROM UserBan u WHERE u.startDate = :startDate")})
 public class UserBan implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private Long id;
+    private long id;
     private String comment;
     private short duration;
     private Date startDate = Calendar.getInstance().getTime();
@@ -72,7 +67,7 @@ public class UserBan implements Serializable {
      *
      * @param id
      */
-    public UserBan(Long id) {
+    public UserBan(long id) {
         this.id = id;
     }
 
@@ -83,7 +78,7 @@ public class UserBan implements Serializable {
      * @param duration
      * @param startDate
      */
-    public UserBan(Long id, String comment, short duration, Date startDate) {
+    public UserBan(long id, String comment, short duration, Date startDate) {
         this.id = id;
         this.comment = comment;
         this.duration = duration;
@@ -98,7 +93,7 @@ public class UserBan implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
@@ -106,7 +101,7 @@ public class UserBan implements Serializable {
      *
      * @param id
      */
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -186,19 +181,28 @@ public class UserBan implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 3;
+        hash = 83 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 83 * hash + Objects.hashCode(this.comment);
+        hash = 83 * hash + this.duration;
+        hash = 83 * hash + Objects.hashCode(this.startDate);
+        hash = 83 * hash + Objects.hashCode(this.userDetails);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof UserBan)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        UserBan other = (UserBan) object;
-        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final UserBan other = (UserBan) obj;
+        return this.id == other.id;
     }
 
     @Override

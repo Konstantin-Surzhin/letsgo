@@ -17,6 +17,7 @@
 package org.igo.entities;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -122,8 +123,11 @@ public class Club implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 97 * hash + this.id;
+        int hash = 7;
+        hash = 29 * hash + this.id;
+        hash = 29 * hash + Objects.hashCode(this.clubName);
+        hash = 29 * hash + Objects.hashCode(this.city);
+        hash = 29 * hash + Objects.hashCode(this.country);
         return hash;
     }
 

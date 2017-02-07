@@ -18,6 +18,7 @@ package org.igo.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -155,13 +156,6 @@ public class Team implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 47 * hash + this.id;
-        return hash;
-    }
-
-    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -174,6 +168,18 @@ public class Team implements Serializable {
         }
         final Team other = (Team) obj;
         return this.id == other.id;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + this.id;
+        hash = 97 * hash + Objects.hashCode(this.teamName);
+        hash = 97 * hash + Objects.hashCode(this.league);
+        hash = 97 * hash + Objects.hashCode(this.users);
+        hash = 97 * hash + Objects.hashCode(this.city);
+        hash = 97 * hash + Objects.hashCode(this.country);
+        return hash;
     }
 
     @Override

@@ -18,6 +18,7 @@ package org.igo.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,8 +31,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -39,7 +38,6 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "ROOMS")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Room.findAll", query = "SELECT r FROM Room r"),
     @NamedQuery(name = "Room.findById", query = "SELECT r FROM Room r WHERE r.id = :id"),
@@ -47,7 +45,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Room implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private Short id;
+    private short id;
     private String roomName;
     private Collection<UserDetails> usersCollection;
 
@@ -61,7 +59,7 @@ public class Room implements Serializable {
      *
      * @param id
      */
-    public Room(Short id) {
+    public Room(short id) {
         this.id = id;
     }
 
@@ -70,7 +68,7 @@ public class Room implements Serializable {
      * @param id
      * @param roomName
      */
-    public Room(Short id, String roomName) {
+    public Room(short id, String roomName) {
         this.id = id;
         this.roomName = roomName;
     }
@@ -83,7 +81,7 @@ public class Room implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    public Short getId() {
+    public short getId() {
         return id;
     }
 
@@ -91,7 +89,7 @@ public class Room implements Serializable {
      *
      * @param id
      */
-    public void setId(Short id) {
+    public void setId(short id) {
         this.id = id;
     }
 
@@ -120,7 +118,6 @@ public class Room implements Serializable {
      * @return
      */
     @OneToMany(mappedBy = "room")
-    @XmlTransient
     public Collection<UserDetails> getUsersCollection() {
         return usersCollection;
     }
@@ -133,21 +130,29 @@ public class Room implements Serializable {
         this.usersCollection = usersCollection;
     }
 
+
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 5;
+        hash = 23 * hash + this.id;
+        hash = 23 * hash + Objects.hashCode(this.roomName);
+        hash = 23 * hash + Objects.hashCode(this.usersCollection);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Room)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Room other = (Room) object;
-        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Room other = (Room) obj;
+        return this.id == other.id;
     }
 
     @Override

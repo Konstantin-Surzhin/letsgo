@@ -85,12 +85,20 @@ public class GameDatePK implements Serializable {
     }
 
     @Override
-    public boolean equals(final Object obj) {
-        if (obj == null) {
-            return false;
-        }
+    public int hashCode() {
+        int hash = 3;
+        hash = 59 * hash + (int) (this.gameId ^ (this.gameId >>> 32));
+        hash = 59 * hash + this.ndx;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
         if (this == obj) {
             return true;
+        }
+        if (obj == null) {
+            return false;
         }
         if (getClass() != obj.getClass()) {
             return false;
@@ -100,14 +108,6 @@ public class GameDatePK implements Serializable {
             return false;
         }
         return this.ndx == other.ndx;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 41 * hash + (int) (this.gameId ^ (this.gameId >>> 32));
-        hash = 41 * hash + this.ndx;
-        return hash;
     }
 
     @Override
