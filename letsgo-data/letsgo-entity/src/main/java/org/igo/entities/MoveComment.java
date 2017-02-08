@@ -147,12 +147,10 @@ public class MoveComment implements Serializable {
      * @return
      */
     @ManyToOne
-    @JoinColumns(
-            foreignKey = @ForeignKey(name = "fk_game_move_ndx"),
-            value = {
-                @JoinColumn(name = "move_game_id", referencedColumnName = "game_id")
-                ,@JoinColumn(name = "move_ndx", referencedColumnName = "ndx")
-            })
+    @JoinColumns(foreignKey = @ForeignKey(name = "fk_game_move_ndx"), value = {
+        @JoinColumn(name = "move_game_id", referencedColumnName = "game_id")
+        ,@JoinColumn(name = "move_ndx", referencedColumnName = "ndx")
+    })
     public GameMove getGamesMoves() {
         return gamesMoves;
     }
@@ -187,7 +185,7 @@ public class MoveComment implements Serializable {
      * @return
      */
     @ManyToOne
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_replay_to_comment"),name = "in_replay_to_id", referencedColumnName = "id")
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_replay_to_comment"), name = "in_replay_to_id", referencedColumnName = "id")
     public MoveComment getInReplayToId() {
         return inReplayToId;
     }

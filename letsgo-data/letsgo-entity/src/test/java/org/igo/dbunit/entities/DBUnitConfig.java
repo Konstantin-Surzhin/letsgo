@@ -18,11 +18,14 @@ package org.igo.dbunit.entities;
 
 import java.io.IOException;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.dbunit.DBTestCase;
 import org.dbunit.IDatabaseTester;
-import org.dbunit.JdbcDatabaseTester;
-import org.dbunit.PropertiesBasedJdbcDatabaseTester;
+import org.dbunit.database.DatabaseConfig;
 import org.dbunit.dataset.IDataSet;
+import org.dbunit.ext.mysql.MySqlDataTypeFactory;
+import org.dbunit.ext.mysql.MySqlMetadataHandler;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.Before;
 
@@ -32,28 +35,43 @@ import org.junit.Before;
  */
 public class DBUnitConfig extends DBTestCase {
 
+    private Properties prop = new Properties();
+
     protected IDatabaseTester tester;
-    private Properties prop;
     protected IDataSet beforeData;
 
     @Before
     @Override
-    public void setUp() throws Exception {
-        tester = new JdbcDatabaseTester(
-                prop.getProperty("db.driver"),
-                prop.getProperty("db.url"),
-                prop.getProperty("db.username"),
-                prop.getProperty("db.password"));
+    public void setUp() {
+        try {
+            tester = new MySqlTester(
+                    prop.getProperty("db.driver"),
+                    prop.getProperty("db.url"),
+                    prop.getProperty("db.username"),
+                    prop.getProperty("db.password"),
+                    prop.getProperty("db.schema"));
+            
+        } catch (ClassNotFoundException ex) {
+            
+            Logger.getLogger(DBUnitConfig.class.getName())
+                    .log(Level.SEVERE, ex.getLocalizedMessage());
+            
+            for (Throwable e : ex.getSuppressed()){
+               Logger.getLogger(DBUnitConfig.class.getName())
+                    .log(Level.SEVERE, e.getLocalizedMessage()); 
+            }
+        }
     }
 
     public DBUnitConfig(String name) {
         super(name);
-        prop = new Properties();
         try {
             prop.load(Thread.currentThread()
-                    .getContextClassLoader().getResourceAsStream("db.config.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
+                    .getContextClassLoader()
+                    .getResourceAsStream("db.config.properties"));
+        } catch (IOException ex) {
+            Logger.getLogger(DBUnitConfig.class.getName())
+                    .log(Level.SEVERE, ex.getLocalizedMessage());
         }
 //        System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_DRIVER_CLASS, prop.getProperty("db.driver"));
 //        System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_CONNECTION_URL, prop.getProperty("db.url"));
@@ -65,10 +83,5 @@ public class DBUnitConfig extends DBTestCase {
     @Override
     protected IDataSet getDataSet() throws Exception {
         return beforeData;
-    }
-
-    @Override
-    protected DatabaseOperation getTearDownOperation() throws Exception {
-        return DatabaseOperation.DELETE_ALL;
     }
 }

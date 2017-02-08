@@ -98,7 +98,7 @@ public class Place implements Serializable {
      */
     @Basic(optional = false)
     @Size(min = 1, max = 255)
-    @Column(name = "place_name", nullable = false, length = 255, unique = true)
+    @Column(name = "place_name", nullable = false, length = 255)
     public String getPlaceName() {
         return placeName;
     }

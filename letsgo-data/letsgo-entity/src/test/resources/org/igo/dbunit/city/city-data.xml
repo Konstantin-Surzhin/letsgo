@@ -17,6 +17,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <dataset>
-    <cities id="1" city_name="Не резиновая" />
-    <cities id="2" city_name="Ленинград" />
+    <cities id="1" city_name="Не резиновая" latitude="55.75222" longitude="37.61556" />
+    <cities id="2" city_name="Северная столица" latitude="59.89444" longitude="30.26417"/>
 </dataset>

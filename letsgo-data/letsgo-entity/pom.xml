@@ -32,7 +32,7 @@
                     <dependency>
                         <groupId>org.hibernate</groupId>
                         <artifactId>hibernate-jpamodelgen</artifactId>
-                        <version>5.2.5.Final</version>
+                        <version>5.2.6.Final</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -49,26 +49,19 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.21</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.0-api</artifactId>
-            <version>1.0.1.Final</version>
+            <version>1.7.22</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
             <artifactId>hibernate-jpa-2.1-api</artifactId>
             <version>1.0.0.Final</version>
-            <scope>compile</scope>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-links</artifactId>
-            <version>3.0.19.Final</version>
+            <version>3.1.0.Final</version>
             <type>jar</type>
         </dependency>
         <dependency>
@@ -80,7 +73,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>5.2.5.Final</version>
+            <version>5.2.6.Final</version>
             <type>jar</type>
         </dependency>
     </dependencies>

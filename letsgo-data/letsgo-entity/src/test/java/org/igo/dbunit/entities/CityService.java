@@ -27,32 +27,33 @@ import org.igo.entities.City;
  * @author surzhin.konstantin
  */
 class CityService {
-    private EntityManager em = Persistence.createEntityManagerFactory("testGamePU_MySQL").createEntityManager();
- 
-    public void save(City city){
+
+    private final EntityManager em = Persistence.createEntityManagerFactory("testGamePU_MySQL").createEntityManager();
+
+    public void save(City city) {
         em.getTransaction().begin();
         em.persist(city);
         em.getTransaction().commit();
     }
- 
+
     public void delete(City city) {
         em.getTransaction().begin();
         em.remove(city);
         em.getTransaction().commit();
     }
- 
+
     public City get(int id) {
         return em.find(City.class, id);
     }
- 
+
     public void update(City city) {
         em.getTransaction().begin();
         em.merge(city);
         em.getTransaction().commit();
     }
- 
+
     public List<City> getAll() {
-        TypedQuery<City> namedQuery = em.createNamedQuery("City.findAll",City.class);
-         return namedQuery.getResultList();
+        TypedQuery<City> namedQuery = em.createNamedQuery("City.findAll", City.class);
+        return namedQuery.getResultList();
     }
 }

@@ -105,7 +105,7 @@ public class Team implements Serializable {
      * @return teamName
      */
     @Basic(optional = false)
-    @Column(name = "team_name", nullable = false, unique = true)
+    @Column(name = "team_name", nullable = false)
     @Size(min = 1, max = 255)
     public String getTeamName() {
         return teamName;

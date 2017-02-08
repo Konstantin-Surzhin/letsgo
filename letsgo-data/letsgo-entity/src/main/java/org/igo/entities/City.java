@@ -57,8 +57,8 @@ public class City implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private int id;
-    private long latitude;
-    private long longitude;
+    private long latitude; //широта
+    private long longitude; //долгота
     private String cityName;
     private String oktmo;
     private Country country;
