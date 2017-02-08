@@ -10,5 +10,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>letsgo-client-swing</module>
+        <module>letsgo-java-fx</module>
     </modules>
 </project>
