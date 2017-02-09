@@ -17,6 +17,7 @@
 package org.igo.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -62,7 +63,7 @@ public class City implements Serializable {
     private String cityName;
     private String oktmo;
     private Country country;
-    private Set<UserDetails> user;
+    private Set<UserDetails> users;
     private Set<Club> clubs;
     private Set<Team> teams;
 
@@ -104,16 +105,20 @@ public class City implements Serializable {
      * @return
      */
     @OneToMany(mappedBy = "city")
-    public Set<UserDetails> getUser() {
-        return user;
+    public Set<UserDetails> getUsers() {
+        if (this.users != null) {
+            return new HashSet<>(this.users);
+        } else {
+            return new HashSet<>();
+        }
     }
 
     /**
      *
-     * @param user
+     * @param users
      */
-    public void setUser(final Set<UserDetails> user) {
-        this.user = user;
+    public void setUsers(final Set<UserDetails> users) {
+        this.users = new HashSet<>(users);
     }
 
     @Override
@@ -140,12 +145,11 @@ public class City implements Serializable {
         hash = 29 * hash + Objects.hashCode(this.cityName);
         hash = 29 * hash + Objects.hashCode(this.oktmo);
         hash = 29 * hash + Objects.hashCode(this.country);
-        hash = 29 * hash + Objects.hashCode(this.user);
+        hash = 29 * hash + Objects.hashCode(this.users);
         hash = 29 * hash + Objects.hashCode(this.clubs);
         hash = 29 * hash + Objects.hashCode(this.teams);
         return hash;
     }
-
 
     @Override
     public String toString() {
@@ -173,7 +177,11 @@ public class City implements Serializable {
      */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "city")
     public Set<Club> getClubs() {
-        return clubs;
+        if (this.clubs != null) {
+            return new HashSet<>(this.clubs);
+        } else {
+            return new HashSet<>();
+        }
     }
 
     /**
@@ -181,7 +189,7 @@ public class City implements Serializable {
      * @param clubs
      */
     public void setClubs(Set<Club> clubs) {
-        this.clubs = clubs;
+        this.clubs = new HashSet<>(clubs);
     }
 
     /**

@@ -18,12 +18,14 @@ package org.igo.junit.entities;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import org.igo.entities.City;
+import org.igo.entities.Club;
 import org.igo.entities.UserDetails;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -44,30 +46,23 @@ public class CitiesTest {
     @Parameterized.Parameter(value = 0)
     static public EntityManagerFactory emf;
 
+    private EntityManager em;
+
     @Parameterized.Parameters
     public static Collection dataBaseParam() {
-        EntityManagerFactory emf0 = null;
-        EntityManagerFactory emf1 = null;
 
-        if (LetsgoEntityTestSuite.emf0 == null) {
-            emf0 = Persistence.createEntityManagerFactory("testGamePU_MySQL");
-        }
-        if (LetsgoEntityTestSuite.emf1 == null) {
-            emf1 = Persistence.createEntityManagerFactory("testGamePU_H2");
-        }
-        Object[][] param = {{emf0}, {emf1}};
+        final EntityManagerFactory emf0 = Persistence.createEntityManagerFactory("testGamePU_MySQL");
+        final EntityManagerFactory emf1 = Persistence.createEntityManagerFactory("testGamePU_H2");
+        final Object[][] param = {{emf0}, {emf1}};
 
         return Arrays.asList(param);
     }
-
-    private EntityManager em;
 
     public CitiesTest() {
     }
 
     @BeforeClass
     public static void setUpClass() {
-
     }
 
     @AfterClass
@@ -75,7 +70,6 @@ public class CitiesTest {
         if (emf != null) {
             emf.close();
         }
-
     }
 
     @Before
@@ -85,7 +79,13 @@ public class CitiesTest {
 
     @After
     public void tearDown() {
-        em.close();
+        if (em != null) {
+            final Query q = em.createNativeQuery("delete from letsgo.cities");
+            em.getTransaction().begin();
+            q.executeUpdate();
+            em.getTransaction().commit();
+            em.close();
+        }
     }
 
     /**
@@ -93,22 +93,18 @@ public class CitiesTest {
      */
     @Test
     public void testGetId() {
-
         System.out.println("getId");
-        City city = new City();
 
-        Integer result = city.getId();
-
-        assertNull(result);
-
+        final City city = new City();
         city.setCityName("Не резиновая!");
+        assertTrue(city.getId() == 0);
 
-        em.getTransaction().begin();
-        em.persist(city);
-        em.getTransaction().commit();
-
-        result = city.getId();
-        assertNotNull(result);
+        if (em != null) {
+            em.getTransaction().begin();
+            em.persist(city);
+            em.getTransaction().commit();
+        }
+        assertTrue(city.getId() != 0);
     }
 
     /**
@@ -116,22 +112,24 @@ public class CitiesTest {
      */
     @Test
     public void testSetGetCityName() {
-        System.out.println("getCityName");
-        String expResult = "Москва";
+        System.out.println("setCityName");
 
-        City city = new City();
+        final City city = new City();
+        final String expResult = "Москва";
+
         city.setCityName(expResult);
+        if (em != null) {
+            em.getTransaction().begin();
+            em.persist(city);
+            em.getTransaction().commit();
 
-        em.getTransaction().begin();
-        em.persist(city);
-        em.getTransaction().commit();
+            final String name = (String) em
+                    .createNativeQuery("select city_name from letsgo.cities WHERE id=:id")
+                    .setParameter("id", city.getId())
+                    .getSingleResult();
 
-        Query q = em.createNativeQuery("select city_name from letsgo.cities WHERE id=:id");
-
-        q.setParameter("id", city.getId());
-
-        String name = (String) q.getSingleResult();
-        assertEquals(expResult, name);
+            assertEquals(expResult, name);
+        }
     }
 
     /**
@@ -139,25 +137,43 @@ public class CitiesTest {
      */
     @Test
     public void testGetUsersCollection() {
-        System.out.println("getUsers");
-        City city = new City();
-        Set<UserDetails> expResult = null;
-        Set<UserDetails> result = city.getUser();
-        assertEquals(expResult, result);
+        System.out.println("getUsersCollection");
 
+        final City city = new City();
+        final Set<UserDetails> users = city.getUsers();
+        assertNotNull(users);
+        assertTrue(users.isEmpty());
+    }
+     /**
+     * Test of getUsersCollection method, of class City.
+     */
+    @Test
+    public void testGetClubsCollection() {
+        System.out.println("getClubsCollection");
+
+        final City city = new City();
+        final Set<Club> clubs = city.getClubs();
+        assertNotNull(clubs);
+        assertTrue(clubs.isEmpty());
     }
 
     /**
      * Test of setUsersCollection method, of class City.
      */
     @Test
-    public void testSetUsersCollection() {
-        System.out.println("setUsers");
-        Set<UserDetails> users = null;
-        City city = new City();
-        city.setUser(users);
-        assertNull(city.getUser());
+    public void testSetAndGetUsersCollection() {
+        System.out.println("setAndGetUsersCollection");
 
+        final City city = new City();
+        final Set<UserDetails> oldUsers = new HashSet<>();
+
+        city.setUsers(oldUsers);
+        final Set<UserDetails> newUsers = city.getUsers();
+
+        assertNotNull(city.getUsers());
+        assertEquals(oldUsers, newUsers);
+        assertNotSame(oldUsers, newUsers);
+        assertTrue(newUsers.isEmpty());
     }
 
     /**
@@ -166,12 +182,12 @@ public class CitiesTest {
     @Test
     public void testToString() {
         System.out.println("toString");
-        City city = new City();
-        String expResult = "Москва";
 
-        String result = city.toString();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
+        final City city = new City();
+        final String expResult = "Москва";
+        city.setCityName(expResult);
+
+        assertEquals(expResult, city.toString());
 
     }
 }
