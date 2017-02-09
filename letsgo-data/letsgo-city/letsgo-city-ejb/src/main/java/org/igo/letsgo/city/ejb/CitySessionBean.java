@@ -101,7 +101,7 @@ public class CitySessionBean implements ICityRemote {
         try {
             Integer id = q.getSingleResult().getId();
             City city = getEntityManager().find(City.class, id);
-            Set<UserDetails> users = city.getUserCollection();
+            Set<UserDetails> users = city.getUser();
             List<String> listUsersName = users.stream()
                     .map(c -> c.getUser().getUserName())
                     .sorted()
@@ -121,7 +121,7 @@ public class CitySessionBean implements ICityRemote {
     @Override
     public List<String> getAllCityUser(final Integer id) {
         City city = getEntityManager().find(City.class, id);
-        Set<UserDetails> users = city.getUserCollection();
+        Set<UserDetails> users = city.getUser();
         List<String> listUsersName = users.stream()
                 .map(c -> c.getUser().getUserName())
                 .sorted()
@@ -138,7 +138,7 @@ public class CitySessionBean implements ICityRemote {
      */
     @Override
     public Boolean createCity(final String cityName, final String method, final String dbName) {
-        City city = new City(cityName);
+        City city = new City();
         city.setCityName(cityName);
 
         switch (method) {
