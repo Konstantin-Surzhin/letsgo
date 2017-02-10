@@ -89,8 +89,6 @@ public class City implements Serializable {
      * @return
      */
     @Id
-    @Basic(optional = false)
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
@@ -257,7 +255,7 @@ public class City implements Serializable {
         this.longitude = longitude;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_city_country"), name = "country_id", referencedColumnName = "id")
     public Country getCountry() {
         return country;

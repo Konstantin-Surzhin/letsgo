@@ -27,6 +27,7 @@ import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import org.igo.entities.City;
 import org.igo.entities.Club;
+import org.igo.entities.Country;
 import org.igo.entities.UserDetails;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -293,23 +294,51 @@ public class CitiesTest {
         if (em != null) {
             try {
                 Query q = em.createNamedQuery("City.findAll");
-                
+
                 q.getResultList();
                 q = em.createNamedQuery("City.findById");
                 q.setParameter("id", 1);
                 q.getResultList();
-                
+
                 q = em.createNamedQuery("City.findByCityName");
                 q.setParameter("cityName", "Тула");
                 q.getResultList();
-                
+
                 q = em.createNamedQuery("City.checkByCityName");
                 q.setParameter("cityName", "Тамбов");
                 q.getSingleResult();
-                
+
             } catch (PersistenceException ex) {
                 em.getTransaction().rollback();
                 fail(ex.getLocalizedMessage());
+            }
+        }
+    }
+
+    @Test
+    public void testSetCountry() throws PersistenceException {
+        final Country country = new Country();
+        country.setCountryName("Россия");
+        country.setCountryCodeAlpha2("RU");
+        country.setCountryCodeAlpha3("RUS");
+        final City city = new City("Москва");
+        city.setCountry(country);
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(city);
+                em.getTransaction().commit();
+            } catch (PersistenceException ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            } finally {
+                final Query q1 = em.createNativeQuery("delete from letsgo.cities");
+                final Query q2 = em.createNativeQuery("delete from letsgo.cointries");
+                em.getTransaction().begin();
+                q1.executeUpdate();
+                q2.executeUpdate();
+                em.getTransaction().commit();
             }
         }
     }

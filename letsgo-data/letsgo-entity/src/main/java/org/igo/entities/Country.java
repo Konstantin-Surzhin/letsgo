@@ -20,8 +20,11 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -74,7 +77,7 @@ public class Country implements Serializable {
     /**
      * @return the cities
      */
-    @OneToMany(mappedBy = "country")
+    @OneToMany(mappedBy = "country", cascade = CascadeType.PERSIST)
     public Set<City> getCities() {
         return cities;
     }
@@ -117,6 +120,7 @@ public class Country implements Serializable {
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }
@@ -177,7 +181,7 @@ public class Country implements Serializable {
     /**
      * @return the countryCodeAlpha2
      */
-    @Column(name = "country_alpha2", nullable = false)
+    @Column(name = "country_alpha2", nullable = false, length = 2)
     public String getCountryCodeAlpha2() {
         return countryCodeAlpha2;
     }
@@ -192,7 +196,7 @@ public class Country implements Serializable {
     /**
      * @return the countryCodeAlpha3
      */
-    @Column(name = "country_alpha3", nullable = false)
+    @Column(name = "country_alpha3", nullable = false, length = 3)
     public String getCountryCodeAlpha3() {
         return countryCodeAlpha3;
     }
@@ -221,7 +225,7 @@ public class Country implements Serializable {
     /**
      * @return the nationalEmblem
      */
-    @Column(name = "national_emblem", nullable = false)
+    @Column(name = "national_emblem")
     public String getNationalEmblem() {
         return nationalEmblem;
     }
