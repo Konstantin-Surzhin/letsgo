@@ -23,6 +23,7 @@ import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import org.igo.entities.City;
 import org.igo.entities.Club;
@@ -80,7 +81,7 @@ public class CitiesTest {
             em.getTransaction().begin();
             q.executeUpdate();
             em.getTransaction().commit();
-          }
+        }
     }
 
     @After
@@ -150,7 +151,8 @@ public class CitiesTest {
         assertNotNull(users);
         assertTrue(users.isEmpty());
     }
-     /**
+
+    /**
      * Test of getUsersCollection method, of class City.
      */
     @Test
@@ -176,9 +178,20 @@ public class CitiesTest {
         city.setUsers(oldUsers);
         final Set<UserDetails> newUsers = city.getUsers();
 
-        assertNotNull(city.getUsers());
+        assertNotNull(newUsers);
         assertEquals(oldUsers, newUsers);
         assertNotSame(oldUsers, newUsers);
+        assertTrue(newUsers.isEmpty());
+    }
+
+    @Test
+    public void testSetAndGetUsersToNull() {
+        System.out.println("SetAndGetUsersToNull");
+
+        final City city = new City();
+        city.setUsers(null);
+        final Set<UserDetails> newUsers = city.getUsers();
+        assertNotNull(newUsers);
         assertTrue(newUsers.isEmpty());
     }
 
@@ -194,5 +207,84 @@ public class CitiesTest {
         city.setCityName(expResult);
 
         assertEquals(expResult, city.toString());
+    }
+
+    @Test(expected = PersistenceException.class)
+    public void testDulicateNameException() throws PersistenceException {
+        System.out.println("DulicateNameException");
+
+        final City city1 = new City("Москва");
+        final City city2 = new City("Москва");
+
+        city1.setLatitude(1);
+        city1.setLongitude(1);
+        city1.setOktmo("45000000");
+        city1.setLatitude(2);
+        city1.setLongitude(2);
+        city1.setOktmo("46000000");
+
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(city1);
+                em.persist(city2);
+                em.getTransaction().commit();
+            } catch (PersistenceException ex) {
+                em.getTransaction().rollback();
+                throw ex;
+            }
+        }
+    }
+
+    @Test
+    public void testDulicateLatLonException() throws PersistenceException {
+        System.out.println("DulicateLatLonException");
+
+        final City city1 = new City("Москва");
+        final City city2 = new City("Санкт-Петербург");
+
+        city1.setLatitude(1);
+        city1.setLongitude(1);
+        city1.setOktmo("45000000");
+        city1.setLatitude(1);
+        city1.setLongitude(1);
+        city1.setOktmo("40000000");
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(city1);
+                em.persist(city2);
+                em.getTransaction().commit();
+            } catch (PersistenceException ex) {
+                em.getTransaction().rollback();
+                throw ex;
+            }
+        }
+    }
+
+    @Test
+    public void testDulicateOktmoException() throws PersistenceException {
+        System.out.println("DulicateLatLonException");
+
+        final City city1 = new City("Москва");
+        final City city2 = new City("Санкт-Петербург");
+
+        city1.setLatitude(1);
+        city1.setLongitude(1);
+        city1.setOktmo("45000000");
+        city1.setLatitude(2);
+        city1.setLongitude(2);
+        city1.setOktmo("45000000");
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(city1);
+                em.persist(city2);
+                em.getTransaction().commit();
+            } catch (PersistenceException ex) {
+                em.getTransaction().rollback();
+                throw ex;
+            }
+        }
     }
 }

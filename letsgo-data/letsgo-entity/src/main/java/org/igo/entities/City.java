@@ -73,6 +73,10 @@ public class City implements Serializable {
     public City() {
     }
 
+    public City(String cityName) {
+        this.cityName = cityName;
+    }
+
     public City(TransferCity city) {
         this.latitude = city.getLatitude();
         this.longitude = city.getLongitude();
@@ -118,7 +122,11 @@ public class City implements Serializable {
      * @param users
      */
     public void setUsers(final Set<UserDetails> users) {
-        this.users = new HashSet<>(users);
+        if (users != null) {
+            this.users = new HashSet<>(users);
+        } else {
+            this.users = new HashSet<>();
+        }
     }
 
     @Override
