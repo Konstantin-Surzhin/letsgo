@@ -32,7 +32,7 @@
       <property name="javax.persistence.jdbc.user" value="test"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="test"/>
-      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+      <!--<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>-->
       <property name="hibernate.connection.useUnicode" value="true"/>
       <property name="hibernate.connection.characterEncoding" value="UTF-8"/>
       <property name="hibernate.connection.charSet" value="UTF-8"/>
@@ -78,6 +78,7 @@
       <property name="hibernate.connection.charSet" value="UTF-8"/>
       <property name="hibernate.show_sql" value="true"/>
       <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+      <property name="hibernate.connection.autocommit" value="true"/>
     </properties>
   </persistence-unit>
 </persistence>

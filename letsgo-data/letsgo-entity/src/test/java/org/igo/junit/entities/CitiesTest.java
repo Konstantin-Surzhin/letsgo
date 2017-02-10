@@ -75,6 +75,12 @@ public class CitiesTest {
     @Before
     public void setUp() {
         em = emf.createEntityManager();
+        if (em != null) {
+            final Query q = em.createNativeQuery("delete from letsgo.cities");
+            em.getTransaction().begin();
+            q.executeUpdate();
+            em.getTransaction().commit();
+          }
     }
 
     @After
@@ -188,6 +194,5 @@ public class CitiesTest {
         city.setCityName(expResult);
 
         assertEquals(expResult, city.toString());
-
     }
 }
