@@ -50,6 +50,7 @@ import javax.validation.constraints.Size;
     ,@NamedQuery(name = "MoveComment.findById", query = "SELECT m FROM MoveComment m WHERE m.id = :id")
     ,@NamedQuery(name = "MoveComment.findByMoveComment", query = "SELECT m FROM MoveComment m WHERE m.moveComment = :moveComment")
     ,@NamedQuery(name = "MoveComment.findByPostDateTime", query = "SELECT m FROM MoveComment m WHERE m.postDateTime = :postDateTime")})
+
 public class MoveComment implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -146,11 +147,14 @@ public class MoveComment implements Serializable {
      *
      * @return
      */
+    // ForeignKey not works !!!
     @ManyToOne
-    @JoinColumns(foreignKey = @ForeignKey(name = "fk_game_move_ndx"), value = {
-        @JoinColumn(name = "move_game_id", referencedColumnName = "game_id")
-        ,@JoinColumn(name = "move_ndx", referencedColumnName = "ndx")
-    })
+    @JoinColumns(foreignKey = @ForeignKey(name = "fk_game_move_comment",
+            foreignKeyDefinition = "ALTER TABLE move_comments ADD CONSTRAINT fk_game_move_comment FOREIGN KEY (move_game_id,move_ndx) REFERENCES game_moves(game_id,ndx)"),
+            value = {
+                @JoinColumn(name = "move_game_id", referencedColumnName = "game_id")
+                ,@JoinColumn(name = "move_ndx", referencedColumnName = "ndx")
+            })
     public GameMove getGamesMoves() {
         return gamesMoves;
     }
