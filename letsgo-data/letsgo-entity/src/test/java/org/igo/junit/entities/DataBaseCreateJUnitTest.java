@@ -46,17 +46,17 @@ public class DataBaseCreateJUnitTest {
 
     @Parameterized.Parameters
     public static Collection dataBaseParam() {
-        EntityManagerFactory emf0 = Persistence.createEntityManagerFactory("testGamePU_MySQL");
-        EntityManagerFactory emf1 = Persistence.createEntityManagerFactory("testGamePU_H2");
+        final EntityManagerFactory emf0 = Persistence.createEntityManagerFactory("testGamePU_MySQL");
+        final EntityManagerFactory emf1 = Persistence.createEntityManagerFactory("testGamePU_H2");
 
-        String _informationSchemaName = "information_schema";
-        String[] table = {"cities", "DEGREES", "EVENTS",
+        final String _informationSchemaName = "information_schema";
+        final String[] table = {"cities", "DEGREES", "EVENTS",
             "GAMES", "GAME_COMMENS", "GANE_DATES", "GAME_MOVES",
             "GAME_RULES", "LEADUES", "MOVE_COMMENTS", "PLACES", "ROOMS",
             "TEAMS", "USERS", "USER_BANS", "USER_DEGREES", "USER_GAME",
-            "USER_ROLES"
+            "USER_ROLES, countries"
         };
-        Object[][] param = {{emf0, _informationSchemaName, table[0],  "MySql"},
+        final Object[][] param = {{emf0, _informationSchemaName, table[0],  "MySql"},
         {emf1, _informationSchemaName.toUpperCase(), table[1], "H2"}};
 
         return Arrays.asList(param);
@@ -69,16 +69,16 @@ public class DataBaseCreateJUnitTest {
     public void ifTableExist() {
         System.out.println(rdbmsName + " : " + tableName + ":check table exist.");
 
-        EntityManager em = emf.createEntityManager();
-        Query q = em.createNativeQuery("SELECT count(TABLE_NAME) cn  FROM "
+        final EntityManager em = emf.createEntityManager();
+        final Query q = em.createNativeQuery("SELECT count(TABLE_NAME) cn  FROM "
                 + informationSchemaName
                 + ".TABLES WHERE TABLE_NAME=:TABLE_NAME AND TABLE_SCHEMA='letsgo'");
         q.setParameter("TABLE_NAME", tableName);
 
-        BigInteger cn = (BigInteger) q.getSingleResult();
+        final BigInteger cn = (BigInteger) q.getSingleResult();
         em.close();
 
-        BigInteger result = BigInteger.valueOf(1);
+        final BigInteger result = BigInteger.valueOf(1);
 
         assertEquals(rdbmsName + " : " + tableName + " does not exist", result, cn);
     }

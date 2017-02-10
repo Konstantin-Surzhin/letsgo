@@ -287,4 +287,30 @@ public class CitiesTest {
             }
         }
     }
+
+    @Test
+    public void testNamedQuery() {
+        if (em != null) {
+            try {
+                Query q = em.createNamedQuery("City.findAll");
+                
+                q.getResultList();
+                q = em.createNamedQuery("City.findById");
+                q.setParameter("id", 1);
+                q.getResultList();
+                
+                q = em.createNamedQuery("City.findByCityName");
+                q.setParameter("cityName", "Тула");
+                q.getResultList();
+                
+                q = em.createNamedQuery("City.checkByCityName");
+                q.setParameter("cityName", "Тамбов");
+                q.getSingleResult();
+                
+            } catch (PersistenceException ex) {
+                em.getTransaction().rollback();
+                fail(ex.getLocalizedMessage());
+            }
+        }
+    }
 }
