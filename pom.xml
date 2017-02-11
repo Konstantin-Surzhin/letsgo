@@ -178,6 +178,7 @@
         <module>letsgo-monitoring-jvm</module>
         <module>letsgo-client</module>
         <module>letsgo-view</module>
+        <module>letsgo-osgi</module>
     </modules>
     <dependencyManagement>
         <dependencies>
