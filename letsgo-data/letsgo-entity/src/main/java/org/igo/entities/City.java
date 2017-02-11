@@ -20,7 +20,6 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,6 +34,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Size;
 import org.igo.transfer.entities.TransferCity;
 //import javax.validation.constraints.Size;
 
@@ -58,8 +58,8 @@ public class City implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private int id;
-    private long latitude; //широта
-    private long longitude; //долгота
+    private float latitude; //широта
+    private float longitude; //долгота
     private String cityName;
     private String oktmo;
     private Country country;
@@ -145,17 +145,19 @@ public class City implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 29 * hash + this.id;
-        hash = 29 * hash + (int) (this.latitude ^ (this.latitude >>> 32));
-        hash = 29 * hash + (int) (this.longitude ^ (this.longitude >>> 32));
-        hash = 29 * hash + Objects.hashCode(this.cityName);
-        hash = 29 * hash + Objects.hashCode(this.oktmo);
-        hash = 29 * hash + Objects.hashCode(this.country);
-        hash = 29 * hash + Objects.hashCode(this.users);
-        hash = 29 * hash + Objects.hashCode(this.clubs);
-        hash = 29 * hash + Objects.hashCode(this.teams);
+        hash = 59 * hash + this.id;
+        hash = 59 * hash + Float.floatToIntBits(this.latitude);
+        hash = 59 * hash + Float.floatToIntBits(this.longitude);
+        hash = 59 * hash + Objects.hashCode(this.cityName);
+        hash = 59 * hash + Objects.hashCode(this.oktmo);
+        hash = 59 * hash + Objects.hashCode(this.country);
+        hash = 59 * hash + Objects.hashCode(this.users);
+        hash = 59 * hash + Objects.hashCode(this.clubs);
+        hash = 59 * hash + Objects.hashCode(this.teams);
         return hash;
     }
+
+    
 
     @Override
     public String toString() {
@@ -230,28 +232,28 @@ public class City implements Serializable {
     /**
      * @return the latitude
      */
-    public long getLatitude() {
+    public float getLatitude() {
         return latitude;
     }
 
     /**
      * @param latitude the latitude to set
      */
-    public void setLatitude(long latitude) {
+    public void setLatitude(float latitude) {
         this.latitude = latitude;
     }
 
     /**
      * @return the longitude
      */
-    public long getLongitude() {
+    public float getLongitude() {
         return longitude;
     }
 
     /**
      * @param longitude the longitude to set
      */
-    public void setLongitude(long longitude) {
+    public void setLongitude(float longitude) {
         this.longitude = longitude;
     }
 

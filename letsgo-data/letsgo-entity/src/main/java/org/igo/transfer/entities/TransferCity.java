@@ -27,8 +27,8 @@ import org.igo.entities.City;
 public class TransferCity {
 
     private int id;
-    private long latitude;
-    private long longitude;
+    private float latitude;
+    private float longitude;
     private String cityName;
     private String oktmo;
 
@@ -58,7 +58,7 @@ public class TransferCity {
     /**
      * @return the latitude
      */
-    public long getLatitude() {
+    public float getLatitude() {
         return latitude;
     }
 
@@ -72,7 +72,7 @@ public class TransferCity {
     /**
      * @return the longitude
      */
-    public long getLongitude() {
+    public float getLongitude() {
         return longitude;
     }
 

@@ -120,8 +120,8 @@ public class GoUserFacadeREST extends AbstractFacade<GoUser> {
 
             create(goUser);
 
-            user.setUserURL(uri.getAbsolutePath() + "/" + goUser.getId().toString());
-        } catch (Exception e) {
+            user.setUserURL(uri.getAbsolutePath() + "/" + goUser.getId());
+        } catch (IllegalArgumentException | NullPointerException e) {
             user.setLastError(e.getMessage());
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
                     .entity(user)

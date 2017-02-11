@@ -19,10 +19,18 @@
  * Created: 22.11.2016
  */
 
-CREATE TABLE cities
-(
-    id INTEGER NOT NULL AUTO_INCREMENT,
-    city_name CHARACTER CHARACTER SET utf8 COLLATE utf8_unicode_ci,
-    CONSTRAINT uk_city UNIQUE (club_name),
-    PRIMARY KEY (id),
-) ENGINE=InnoDB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+SHOW CREATE TABLE CITIES;
+CREATE TABLE `CITIES` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `city_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `latitude` float NOT NULL,
+  `longitude` float NOT NULL,
+  `oktmo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `country_id` smallint(6) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_city_name` (`city_name`),
+  UNIQUE KEY `uk_lat_lon` (`latitude`,`longitude`),
+  UNIQUE KEY `uk_oktmo` (`oktmo`),
+  KEY `fk_city_country` (`country_id`),
+  CONSTRAINT `fk_city_country` FOREIGN KEY (`country_id`) REFERENCES `COUNTRIES` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci

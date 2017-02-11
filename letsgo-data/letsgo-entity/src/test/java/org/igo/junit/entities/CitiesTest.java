@@ -25,6 +25,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
+import static org.hamcrest.CoreMatchers.*;
 import org.igo.entities.City;
 import org.igo.entities.Club;
 import org.igo.entities.Country;
@@ -35,6 +36,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Rule;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
@@ -78,7 +81,7 @@ public class CitiesTest {
     public void setUp() {
         em = emf.createEntityManager();
         if (em != null) {
-            final Query q = em.createNativeQuery("delete from letsgo.cities");
+            final Query q = em.createQuery("DELETE FROM City");
             em.getTransaction().begin();
             q.executeUpdate();
             em.getTransaction().commit();
@@ -88,7 +91,7 @@ public class CitiesTest {
     @After
     public void tearDown() {
         if (em != null) {
-            final Query q = em.createNativeQuery("delete from letsgo.cities");
+            final Query q = em.createQuery("DELETE FROM City");
             em.getTransaction().begin();
             q.executeUpdate();
             em.getTransaction().commit();
@@ -132,7 +135,7 @@ public class CitiesTest {
             em.getTransaction().commit();
 
             final String name = (String) em
-                    .createNativeQuery("select city_name from letsgo.cities WHERE id=:id")
+                    .createQuery("SELECT c.cityName FROM City c WHERE c.id=:id")
                     .setParameter("id", city.getId())
                     .getSingleResult();
 
@@ -215,14 +218,14 @@ public class CitiesTest {
         System.out.println("DulicateNameException");
 
         final City city1 = new City("Москва");
-        final City city2 = new City("Москва");
-
-        city1.setLatitude(1);
-        city1.setLongitude(1);
+        city1.setLatitude(1f);
+        city1.setLongitude(1f);
         city1.setOktmo("45000000");
-        city1.setLatitude(2);
-        city1.setLongitude(2);
-        city1.setOktmo("46000000");
+
+        final City city2 = new City("Москва");
+        city2.setLatitude(2f);
+        city2.setLongitude(2f);
+        city2.setOktmo("46000000");
 
         if (em != null) {
             try {
@@ -231,25 +234,61 @@ public class CitiesTest {
                 em.persist(city2);
                 em.getTransaction().commit();
             } catch (PersistenceException ex) {
+
                 em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
                 throw ex;
             }
         }
     }
 
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     @Test
+    public void testDulicateNameExceptionRule() {
+        System.out.println("DulicateNameExceptionRule");
+        thrown.expect(PersistenceException.class);
+
+        final City city1 = new City("Москва");
+        city1.setLatitude(1f);
+        city1.setLongitude(1f);
+        city1.setOktmo("45000000");
+
+        final City city2 = new City("Москва");
+        city2.setLatitude(2f);
+        city2.setLongitude(2f);
+        city2.setOktmo("46000000");
+
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(city1);
+                em.persist(city2);
+                em.getTransaction().commit();
+            } catch (PersistenceException ex) {
+
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            }
+        }
+    }
+
+    @Test(expected = PersistenceException.class)
     public void testDulicateLatLonException() throws PersistenceException {
         System.out.println("DulicateLatLonException");
 
         final City city1 = new City("Москва");
-        final City city2 = new City("Санкт-Петербург");
-
-        city1.setLatitude(1);
-        city1.setLongitude(1);
+        city1.setLatitude(1f);
+        city1.setLongitude(1f);
         city1.setOktmo("45000000");
-        city1.setLatitude(1);
-        city1.setLongitude(1);
-        city1.setOktmo("40000000");
+
+        final City city2 = new City("Санкт-Петербург");
+        city2.setLatitude(1f);
+        city2.setLongitude(1f);
+        city2.setOktmo("40000000");
+
         if (em != null) {
             try {
                 em.getTransaction().begin();
@@ -257,25 +296,28 @@ public class CitiesTest {
                 em.persist(city2);
                 em.getTransaction().commit();
             } catch (PersistenceException ex) {
+
                 em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
                 throw ex;
             }
         }
     }
 
-    @Test
+    @Test(expected = PersistenceException.class)
     public void testDulicateOktmoException() throws PersistenceException {
         System.out.println("DulicateLatLonException");
 
         final City city1 = new City("Москва");
-        final City city2 = new City("Санкт-Петербург");
+        city1.setLatitude(1f);
+        city1.setLongitude(1f);
+        city1.setOktmo("45000000");
 
-        city1.setLatitude(1);
-        city1.setLongitude(1);
-        city1.setOktmo("45000000");
-        city1.setLatitude(2);
-        city1.setLongitude(2);
-        city1.setOktmo("45000000");
+        final City city2 = new City("Санкт-Петербург");
+        city2.setLatitude(2f);
+        city2.setLongitude(2f);
+        city2.setOktmo("45000000");
+
         if (em != null) {
             try {
                 em.getTransaction().begin();
@@ -284,13 +326,16 @@ public class CitiesTest {
                 em.getTransaction().commit();
             } catch (PersistenceException ex) {
                 em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
                 throw ex;
             }
         }
     }
 
     @Test
-    public void testNamedQuery() {
+    public void testNamedQuereis() {
+        System.out.println("NamedQuereis");
+
         if (em != null) {
             try {
                 Query q = em.createNamedQuery("City.findAll");
@@ -316,6 +361,17 @@ public class CitiesTest {
     }
 
     @Test
+    public void testCheckByCityNameNamedQuery() {
+        System.out.println("NamedQuereis");
+        
+        final Query q = em.createNamedQuery("City.checkByCityName");
+        q.setParameter("cityName", "Тамбов");
+        final Object cn = q.getSingleResult();
+        
+        assertThat(cn, equalTo(0l));
+    }
+
+    @Test
     public void testSetCountry() throws PersistenceException {
         final Country country = new Country();
         country.setCountryName("Россия");
@@ -333,8 +389,8 @@ public class CitiesTest {
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             } finally {
-                final Query q1 = em.createNativeQuery("delete from letsgo.cities");
-                final Query q2 = em.createNativeQuery("delete from letsgo.cointries");
+                final Query q1 = em.createQuery("DELETE FROM City");
+                final Query q2 = em.createQuery("DELETE FROM Country");
                 em.getTransaction().begin();
                 q1.executeUpdate();
                 q2.executeUpdate();

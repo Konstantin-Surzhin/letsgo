@@ -47,7 +47,7 @@ import javax.validation.constraints.Size;
 public class Country implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private int id;
+    private short id;
     private String countryName;
     private String countryCodeAlpha2;
     private String countryCodeAlpha3;
@@ -121,11 +121,11 @@ public class Country implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int getId() {
+    public short getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(short id) {
         this.id = id;
     }
 
