@@ -34,9 +34,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.Size;
 import org.igo.transfer.entities.TransferCity;
-//import javax.validation.constraints.Size;
 
 /**
  *
@@ -73,11 +71,11 @@ public class City implements Serializable {
     public City() {
     }
 
-    public City(String cityName) {
+    public City(final String cityName) {
         this.cityName = cityName;
     }
 
-    public City(TransferCity city) {
+    public City(final TransferCity city) {
         this.latitude = city.getLatitude();
         this.longitude = city.getLongitude();
         this.cityName = city.getCityName();
@@ -157,8 +155,6 @@ public class City implements Serializable {
         return hash;
     }
 
-    
-
     @Override
     public String toString() {
         return cityName;
@@ -183,7 +179,7 @@ public class City implements Serializable {
      *
      * @return
      */
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "city")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "city")
     public Set<Club> getClubs() {
         if (this.clubs != null) {
             return new HashSet<>(this.clubs);
@@ -196,7 +192,7 @@ public class City implements Serializable {
      *
      * @param clubs
      */
-    public void setClubs(Set<Club> clubs) {
+    public void setClubs(final Set<Club> clubs) {
         this.clubs = new HashSet<>(clubs);
     }
 
@@ -210,7 +206,7 @@ public class City implements Serializable {
     /**
      * @param oktmo the oktmo to set
      */
-    public void setOktmo(String oktmo) {
+    public void setOktmo(final String oktmo) {
         this.oktmo = oktmo;
     }
 
@@ -219,14 +215,18 @@ public class City implements Serializable {
      */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "city")
     public Set<Team> getTeams() {
-        return teams;
+        if (this.teams != null) {
+            return new HashSet<>(this.teams);
+        } else {
+            return new HashSet<>();
+        }
     }
 
     /**
      * @param teams the teams to set
      */
-    public void setTeams(Set<Team> teams) {
-        this.teams = teams;
+    public void setTeams(final Set<Team> teams) {
+        this.teams = new HashSet<>(teams);
     }
 
     /**
@@ -239,7 +239,7 @@ public class City implements Serializable {
     /**
      * @param latitude the latitude to set
      */
-    public void setLatitude(float latitude) {
+    public void setLatitude(final float latitude) {
         this.latitude = latitude;
     }
 
@@ -253,7 +253,7 @@ public class City implements Serializable {
     /**
      * @param longitude the longitude to set
      */
-    public void setLongitude(float longitude) {
+    public void setLongitude(final float longitude) {
         this.longitude = longitude;
     }
 
@@ -263,7 +263,21 @@ public class City implements Serializable {
         return country;
     }
 
-    public void setCountry(Country country) {
-        this.country = country;
+    public void setCountry(final Country country) {
+        this.country = country; //todo: clone
+    }
+
+    public void addClub(final Club club) {
+        if (this.clubs == null) {
+            this.clubs = new HashSet<>();
+        }
+        this.clubs.add(club); //todo: clone
+    }
+
+    public void addTeam(final Team team) {
+        if (this.teams == null) {
+            this.teams = new HashSet<>();
+        }
+        this.teams.add(team); //todo: clone
     }
 }

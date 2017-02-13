@@ -20,6 +20,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -68,6 +69,14 @@ public class Team implements Serializable {
      */
     public Team(short id) {
         this.id = id;
+    }
+
+    /**
+     *
+     * @param teamName
+     */
+    public Team(String teamName) {
+        this.teamName = teamName;
     }
 
     /**
@@ -123,8 +132,8 @@ public class Team implements Serializable {
      *
      * @return league
      */
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_team_league"), name = "league_id", referencedColumnName = "id")
-    @ManyToOne
     public League getLeague() {
         return league;
     }
@@ -189,8 +198,8 @@ public class Team implements Serializable {
     /**
      * @return the city
      */
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_team_city"), name = "city_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
     public City getCity() {
         return city;
     }
@@ -198,17 +207,17 @@ public class Team implements Serializable {
     /**
      * @param city the city to set
      */
-    public void setCity(City city) {
+    public void setCity(final City city) {
         this.city = city;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_team_country"), name = "country_id", referencedColumnName = "id")
     public Country getCountry() {
         return country;
     }
 
-    public void setCountry(Country country) {
+    public void setCountry(final Country country) {
         this.country = country;
     }
 

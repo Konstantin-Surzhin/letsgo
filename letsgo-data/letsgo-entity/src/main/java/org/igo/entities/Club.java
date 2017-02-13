@@ -19,6 +19,7 @@ package org.igo.entities;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -69,6 +70,14 @@ public class Club implements Serializable {
 
     /**
      *
+     * @param clubName
+     */
+    public Club(String clubName) {
+        this.clubName = clubName;
+    }
+
+    /**
+     *
      * @return
      */
     @Id
@@ -107,8 +116,8 @@ public class Club implements Serializable {
      *
      * @return
      */
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_club_city"), name = "city_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
     public City getCity() {
         return city;
     }
@@ -151,7 +160,7 @@ public class Club implements Serializable {
         return "org.igo.entities.Clubs[ id=" + id + " ]";
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_club_country"), name = "country_id", referencedColumnName = "id")
     public Country getCountry() {
         return country;
