@@ -178,3 +178,5 @@ hs_err_pid*
 /letsgo-security/letsgo-security-encription/nbproject/
 /letsgo-client/letsgo-java-fx/target/
 /letsgo-client/target/
+/letsgo-vaadin/target/
+/letsgo-vaadin/letsgo-vaadin-city/target/

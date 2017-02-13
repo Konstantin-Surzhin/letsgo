@@ -179,6 +179,7 @@
         <module>letsgo-client</module>
         <module>letsgo-view</module>
         <module>letsgo-osgi</module>
+        <module>letsgo-vaadin</module>
     </modules>
     <dependencyManagement>
         <dependencies>
