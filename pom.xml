@@ -367,6 +367,18 @@
             <version>1.4.0</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.github.log4jdbc-forjdbi</groupId>
+            <artifactId>log4jdbc</artifactId>
+            <version>1.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.22</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
