@@ -19,9 +19,9 @@ package org.igo.entities;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -44,8 +44,10 @@ import javax.persistence.UniqueConstraint;
                     columnNames = {"city_id", "club_name"})})
 @NamedQueries({
     @NamedQuery(name = "Club.findAll", query = "SELECT c FROM Club c")
-    , @NamedQuery(name = "Club.findById", query = "SELECT c FROM Club c WHERE c.id = :id")
-    , @NamedQuery(name = "Club.findByClubName", query = "SELECT c FROM Club c WHERE c.clubName = :clubName")})
+    ,@NamedQuery(name = "Club.findById", query = "SELECT c FROM Club c WHERE c.id = :id")
+    ,@NamedQuery(name = "Club.findByClubName", query = "SELECT c FROM Club c WHERE c.clubName = :clubName")
+    ,@NamedQuery(name = "Club.findClubsByCityId", query = "SELECT t FROM Team t WHERE t.city.id = :cityId")
+})
 public class Club implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -116,7 +118,7 @@ public class Club implements Serializable {
      *
      * @return
      */
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_club_city"), name = "city_id", referencedColumnName = "id")
     public City getCity() {
         return city;
@@ -160,7 +162,7 @@ public class Club implements Serializable {
         return "org.igo.entities.Clubs[ id=" + id + " ]";
     }
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_club_country"), name = "country_id", referencedColumnName = "id")
     public Country getCountry() {
         return country;

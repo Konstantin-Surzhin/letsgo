@@ -26,6 +26,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -41,9 +44,15 @@ import javax.validation.constraints.Size;
             @UniqueConstraint(name = "uk_country_name", columnNames = {"country_name"})
             ,@UniqueConstraint(name = "uk_country_alpha2", columnNames = {"country_alpha2"})
             ,@UniqueConstraint(name = "uk_country_alpha3", columnNames = {"country_alpha3"})
-            ,@UniqueConstraint(name = "uk_country_banner", columnNames = {"banner"})
-            ,@UniqueConstraint(name = "uk_country_national_emblem", columnNames = {"national_emblem"})
         })
+@NamedQueries({
+    @NamedQuery(name = "Country.findAll", query = "SELECT c FROM Country c")
+    ,@NamedQuery(name = "Country.findById", query = "SELECT c FROM Country c WHERE c.id = :id")
+    ,@NamedQuery(name = "Country.findByCountryName", query = "SELECT c FROM Country c WHERE c.countryName = :countryName")
+    ,@NamedQuery(name = "Country.findByCountryAlpha2", query = "SELECT c FROM Country c WHERE c.countryCodeAlpha2 = :alpha2")
+    ,@NamedQuery(name = "Country.findByCountryAlpha3", query = "SELECT c FROM Country c WHERE c.countryCodeAlpha3 = :alpha3")
+    ,@NamedQuery(name = "Country.checkByCountryName", query = "SELECT count(c) FROM Country c WHERE c.countryName = :countryName")
+})
 public class Country implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,27 +62,35 @@ public class Country implements Serializable {
     private String countryCodeAlpha3;
     private String banner;
     private String nationalEmblem;
-    private Set<UserDetails> user;
+//    private Set<UserDetails> user;
     private Set<City> cities;
-    private Set<Club> clubs;
-    private Set<Team> teams;
-    private Set<League> leagues;
+//    private Set<Club> clubs;
+//    private Set<Team> teams;
+//    private Set<League> leagues;
+
+    public Country() {
+
+    }
+
+    public Country(String countryName, String countryCodeAlpha2, String countryCodeAlpha3) {
+        this.countryName = countryName;
+        this.countryCodeAlpha2 = countryCodeAlpha2;
+        this.countryCodeAlpha3 = countryCodeAlpha3;
+    }
 
     /**
      * @return the user
      */
-    @OneToMany(mappedBy = "country")
-    public Set<UserDetails> getUser() {
-        return user;
-    }
-
+//    @OneToMany(mappedBy = "country")
+//    public Set<UserDetails> getUser() {
+//        return user;
+//    }
     /**
      * @param user the user to set
      */
-    public void setUser(Set<UserDetails> user) {
-        this.user = user;
-    }
-
+//    public void setUser(Set<UserDetails> user) {
+//        this.user = user;
+//    }
     /**
      * @return the cities
      */
@@ -92,33 +109,30 @@ public class Country implements Serializable {
     /**
      * @return the clubs
      */
-    @OneToMany(mappedBy = "country")
-    public Set<Club> getClubs() {
-        return clubs;
-    }
-
+//    @OneToMany(mappedBy = "country")
+//    public Set<Club> getClubs() {
+//        return clubs;
+//    }
     /**
      * @param clubs the clubs to set
      */
-    public void setClubs(Set<Club> clubs) {
-        this.clubs = clubs;
-    }
-
+//    public void setClubs(Set<Club> clubs) {
+//        this.clubs = clubs;
+//    }
     /**
      * @return the teams
      */
-    @OneToMany(mappedBy = "country")
-    public Set<Team> getTeams() {
-        return teams;
-    }
-
+//    @OneToMany(mappedBy = "country")
+//    public Set<Team> getTeams() {
+//        return teams;
+//    }
     /**
      * @param teams the teams to set
+     * @return
      */
-    public void setTeams(Set<Team> teams) {
-        this.teams = teams;
-    }
-
+//    public void setTeams(Set<Team> teams) {
+//        this.teams = teams;
+//    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public short getId() {
@@ -153,11 +167,6 @@ public class Country implements Serializable {
         hash = 89 * hash + Objects.hashCode(this.countryCodeAlpha3);
         hash = 89 * hash + Objects.hashCode(this.banner);
         hash = 89 * hash + Objects.hashCode(this.nationalEmblem);
-        hash = 89 * hash + Objects.hashCode(this.user);
-        hash = 89 * hash + Objects.hashCode(this.cities);
-        hash = 89 * hash + Objects.hashCode(this.clubs);
-        hash = 89 * hash + Objects.hashCode(this.teams);
-        hash = 89 * hash + Objects.hashCode(this.leagues);
         return hash;
     }
 
@@ -165,8 +174,8 @@ public class Country implements Serializable {
      * @return the countryName
      */
     @Basic(optional = false)
-    @Column(name = "country_name", nullable = false)
     @Size(min = 1, max = 255)
+    @Column(name = "country_name", nullable = false, length = 255)
     public String getCountryName() {
         return countryName;
     }
@@ -181,6 +190,7 @@ public class Country implements Serializable {
     /**
      * @return the countryCodeAlpha2
      */
+    @Size(min = 2, max = 2)
     @Column(name = "country_alpha2", nullable = false, length = 2)
     public String getCountryCodeAlpha2() {
         return countryCodeAlpha2;
@@ -196,6 +206,7 @@ public class Country implements Serializable {
     /**
      * @return the countryCodeAlpha3
      */
+    @Size(min = 3, max = 3)
     @Column(name = "country_alpha3", nullable = false, length = 3)
     public String getCountryCodeAlpha3() {
         return countryCodeAlpha3;
@@ -211,6 +222,8 @@ public class Country implements Serializable {
     /**
      * @return the banner
      */
+    @Lob
+    @Column(columnDefinition = "BLOB", length = 512)
     public String getBanner() {
         return banner;
     }
@@ -225,7 +238,8 @@ public class Country implements Serializable {
     /**
      * @return the nationalEmblem
      */
-    @Column(name = "national_emblem")
+    @Lob
+    @Column(name = "national_emblem", columnDefinition = "BLOB", length = 512)
     public String getNationalEmblem() {
         return nationalEmblem;
     }
@@ -240,15 +254,14 @@ public class Country implements Serializable {
     /**
      * @return the leagues
      */
-    @OneToMany(mappedBy = "country")
-    public Set<League> getLeagues() {
-        return leagues;
-    }
-
+//    @OneToMany(mappedBy = "country")
+//    public Set<League> getLeagues() {
+//        return leagues;
+//    }
     /**
      * @param leagues the leagues to set
      */
-    public void setLeagues(Set<League> leagues) {
-        this.leagues = leagues;
-    }
+//    public void setLeagues(Set<League> leagues) {
+//        this.leagues = leagues;
+//    }
 }

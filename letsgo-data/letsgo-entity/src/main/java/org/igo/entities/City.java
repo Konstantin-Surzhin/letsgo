@@ -17,12 +17,13 @@
 package org.igo.entities;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,6 +35,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Size;
 import org.igo.transfer.entities.TransferCity;
 
 /**
@@ -50,6 +52,8 @@ import org.igo.transfer.entities.TransferCity;
     @NamedQuery(name = "City.findAll", query = "SELECT c FROM City c")
     ,@NamedQuery(name = "City.findById", query = "SELECT c FROM City c WHERE c.id = :id")
     ,@NamedQuery(name = "City.findByCityName", query = "SELECT c FROM City c WHERE c.cityName = :cityName")
+    ,@NamedQuery(name = "City.findByOktmo", query = "SELECT c FROM City c WHERE c.oktmo = :oktmo")
+    ,@NamedQuery(name = "City.findByCountryId", query = "SELECT c FROM City c WHERE c.country.id = :countryId")
     ,@NamedQuery(name = "City.checkByCityName", query = "SELECT count(c) FROM City c WHERE c.cityName = :cityName")
 })
 public class City implements Serializable {
@@ -59,11 +63,11 @@ public class City implements Serializable {
     private float latitude; //широта
     private float longitude; //долгота
     private String cityName;
-    private String oktmo;
+    private char[] oktmo;
     private Country country;
-    private Set<UserDetails> users;
-    private Set<Club> clubs;
-    private Set<Team> teams;
+    //private Set<UserDetails> users;
+    //private Set<Club> clubs;
+    //private Set<Team> teams;
 
     /**
      *
@@ -104,27 +108,25 @@ public class City implements Serializable {
      *
      * @return
      */
-    @OneToMany(mappedBy = "city")
-    public Set<UserDetails> getUsers() {
-        if (this.users != null) {
-            return new HashSet<>(this.users);
-        } else {
-            return new HashSet<>();
-        }
-    }
-
+//    @OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
+//    public Set<UserDetails> getUsers() {
+//        if (this.users != null) {
+//            return new HashSet<>(this.users);
+//        } else {
+//            return new HashSet<>();
+//        }
+//    }
     /**
      *
      * @param users
      */
-    public void setUsers(final Set<UserDetails> users) {
-        if (users != null) {
-            this.users = new HashSet<>(users);
-        } else {
-            this.users = new HashSet<>();
-        }
-    }
-
+//    public void setUsers(final Set<UserDetails> users) {
+//        if (users != null) {
+//            this.users = new HashSet<>(users);
+//        } else {
+//            this.users = new HashSet<>();
+//        }
+//    }
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -133,7 +135,7 @@ public class City implements Serializable {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (!Objects.equals(getClass(), obj.getClass())) {
             return false;
         }
         final City other = (City) obj;
@@ -143,15 +145,11 @@ public class City implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 59 * hash + this.id;
-        hash = 59 * hash + Float.floatToIntBits(this.latitude);
-        hash = 59 * hash + Float.floatToIntBits(this.longitude);
-        hash = 59 * hash + Objects.hashCode(this.cityName);
-        hash = 59 * hash + Objects.hashCode(this.oktmo);
-        hash = 59 * hash + Objects.hashCode(this.country);
-        hash = 59 * hash + Objects.hashCode(this.users);
-        hash = 59 * hash + Objects.hashCode(this.clubs);
-        hash = 59 * hash + Objects.hashCode(this.teams);
+        hash = 29 * hash + this.id;
+        hash = 29 * hash + Float.floatToIntBits(this.latitude);
+        hash = 29 * hash + Float.floatToIntBits(this.longitude);
+        hash = 29 * hash + Objects.hashCode(this.cityName);
+        hash = 29 * hash + Arrays.hashCode(this.oktmo);
         return hash;
     }
 
@@ -163,6 +161,7 @@ public class City implements Serializable {
     /**
      * @return the cityName
      */
+    @Size(min = 1, max = 255)
     @Column(length = 255, name = "city_name", nullable = false)
     public String getCityName() {
         return cityName;
@@ -179,59 +178,37 @@ public class City implements Serializable {
      *
      * @return
      */
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "city")
-    public Set<Club> getClubs() {
-        if (this.clubs != null) {
-            return new HashSet<>(this.clubs);
-        } else {
-            return new HashSet<>();
-        }
-    }
-
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "city")
+//    public Set<Club> getClubs() {
+//        if (this.clubs != null) {
+//            return new HashSet<>(this.clubs);
+//        } else {
+//            return new HashSet<>();
+//        }
+//    }
     /**
      *
      * @param clubs
      */
-    public void setClubs(final Set<Club> clubs) {
-        this.clubs = new HashSet<>(clubs);
-    }
-
+//    public void setClubs(final Set<Club> clubs) {
+//        this.clubs = new HashSet<>(clubs);
+//    }
     /**
      * @return the oktmo
      */
-    public String getOktmo() {
+    @Size(min = 8, max = 8)
+    @Column(columnDefinition = "CHAR(8)")
+    public char[] getOktmo() {
         return oktmo;
     }
 
     /**
      * @param oktmo the oktmo to set
      */
-    public void setOktmo(final String oktmo) {
+    public void setOktmo(final char[] oktmo) {
         this.oktmo = oktmo;
     }
 
-    /**
-     * @return the teams
-     */
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "city")
-    public Set<Team> getTeams() {
-        if (this.teams != null) {
-            return new HashSet<>(this.teams);
-        } else {
-            return new HashSet<>();
-        }
-    }
-
-    /**
-     * @param teams the teams to set
-     */
-    public void setTeams(final Set<Team> teams) {
-        this.teams = new HashSet<>(teams);
-    }
-
-    /**
-     * @return the latitude
-     */
     public float getLatitude() {
         return latitude;
     }
@@ -257,7 +234,7 @@ public class City implements Serializable {
         this.longitude = longitude;
     }
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_city_country"), name = "country_id", referencedColumnName = "id")
     public Country getCountry() {
         return country;
@@ -267,17 +244,16 @@ public class City implements Serializable {
         this.country = country; //todo: clone
     }
 
-    public void addClub(final Club club) {
-        if (this.clubs == null) {
-            this.clubs = new HashSet<>();
-        }
-        this.clubs.add(club); //todo: clone
-    }
-
-    public void addTeam(final Team team) {
-        if (this.teams == null) {
-            this.teams = new HashSet<>();
-        }
-        this.teams.add(team); //todo: clone
-    }
+//    public void addClub(final Club club) {
+//        if (this.clubs == null) {
+//            this.clubs = new HashSet<>();
+//        }
+//        this.clubs.add(club); //todo: clone
+//    }
+//    public void addTeam(final Team team) {
+//        if (this.teams == null) {
+//            this.teams = new HashSet<>();
+//        }
+//        this.teams.add(team); //todo: clone
+//    }
 }

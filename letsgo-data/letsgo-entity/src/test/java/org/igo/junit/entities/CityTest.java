@@ -18,19 +18,16 @@ package org.igo.junit.entities;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
+import javax.validation.ConstraintViolationException;
 import static org.hamcrest.CoreMatchers.*;
 import org.igo.entities.City;
-import org.igo.entities.Club;
 import org.igo.entities.Country;
-import org.igo.entities.Team;
-import org.igo.entities.UserDetails;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -47,7 +44,7 @@ import org.junit.runners.Parameterized;
  * @author surzhin.konstantin
  */
 @RunWith(Parameterized.class)
-public class CitiesTest {
+public class CityTest {
 
     @Parameterized.Parameter(value = 0)
     static public EntityManagerFactory emf;
@@ -64,7 +61,7 @@ public class CitiesTest {
         return Arrays.asList(param);
     }
 
-    public CitiesTest() {
+    public CityTest() {
     }
 
     @BeforeClass
@@ -81,6 +78,7 @@ public class CitiesTest {
     @Before
     public void setUp() {
         em = emf.createEntityManager();
+        
         if (em != null) {
             final Query q = em.createQuery("DELETE FROM City");
             em.getTransaction().begin();
@@ -108,19 +106,27 @@ public class CitiesTest {
         System.out.println("getId");
 
         final City city = new City();
+        
         city.setCityName("Не резиновая!");
+        
         assertTrue(city.getId() == 0);
 
         if (em != null) {
-            em.getTransaction().begin();
-            em.persist(city);
-            em.getTransaction().commit();
+            try {
+                em.getTransaction().begin();
+                em.persist(city);
+                em.getTransaction().commit();
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            }
         }
         assertTrue(city.getId() != 0);
     }
 
     /**
-     * Test of getCityNameResourseBandle method, of class City.
+     * Test of SetGetCityName method, of class City.
      */
     @Test
     public void testSetGetCityName() {
@@ -130,74 +136,99 @@ public class CitiesTest {
         final String expResult = "Москва";
 
         city.setCityName(expResult);
+
         if (em != null) {
-            em.getTransaction().begin();
-            em.persist(city);
-            em.getTransaction().commit();
+            try {
 
-            final String name = (String) em
-                    .createQuery("SELECT c.cityName FROM City c WHERE c.id=:id")
-                    .setParameter("id", city.getId())
-                    .getSingleResult();
+                em.getTransaction().begin();
+                em.persist(city);
+                em.getTransaction().commit();
 
-            assertEquals(expResult, name);
+                final String name = (String) em.createQuery("SELECT c.cityName FROM City c WHERE c.id=:id")
+                        .setParameter("id", city.getId())
+                        .getSingleResult();
+                assertEquals(expResult, name);
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            }
+
         }
     }
 
     /**
-     * Test of getUsersCollection method, of class City.
+     * Test of SetWrongSizeCityName method, of class City.
      */
-    @Test
-    public void testGetUsersCollection() {
-        System.out.println("getUsersCollection");
+    @Test(expected = ConstraintViolationException.class)
+    public void testSetTooBigCityName() {
+        System.out.println("SetTooBigCityName");
 
         final City city = new City();
-        final Set<UserDetails> users = city.getUsers();
-        assertNotNull(users);
-        assertTrue(users.isEmpty());
+        final StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < 257; i++) {
+            sb.append("А");
+        }
+
+        city.setCityName(sb.toString());
+
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(city);
+                em.getTransaction().commit();
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            }
+        }
+    }
+
+    @Test(expected = ConstraintViolationException.class)
+    public void testSetTooSmallCityName() {
+        System.out.println("SetTooSmallCityName");
+
+        final City city = new City();
+
+        city.setCityName("");
+
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(city);
+                em.getTransaction().commit();
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            }
+        }
     }
 
     /**
-     * Test of getUsersCollection method, of class City.
+     * Test of SetNullCityName method, of class City.
      */
-    @Test
-    public void testGetClubsCollection() {
-        System.out.println("getClubsCollection");
+    @Test(expected = PersistenceException.class)
+    public void testSetNullCityName() {
+        System.out.println("SetNullCityName");
 
         final City city = new City();
-        final Set<Club> clubs = city.getClubs();
-        assertNotNull(clubs);
-        assertTrue(clubs.isEmpty());
-    }
 
-    /**
-     * Test of setUsersCollection method, of class City.
-     */
-    @Test
-    public void testSetAndGetUsersCollection() {
-        System.out.println("setAndGetUsersCollection");
+        city.setCityName(null);
 
-        final City city = new City();
-        final Set<UserDetails> oldUsers = new HashSet<>();
-
-        city.setUsers(oldUsers);
-        final Set<UserDetails> newUsers = city.getUsers();
-
-        assertNotNull(newUsers);
-        assertEquals(oldUsers, newUsers);
-        assertNotSame(oldUsers, newUsers);
-        assertTrue(newUsers.isEmpty());
-    }
-
-    @Test
-    public void testSetAndGetUsersToNull() {
-        System.out.println("SetAndGetUsersToNull");
-
-        final City city = new City();
-        city.setUsers(null);
-        final Set<UserDetails> newUsers = city.getUsers();
-        assertNotNull(newUsers);
-        assertTrue(newUsers.isEmpty());
+        try {
+            if (em != null) {
+                em.getTransaction().begin();
+                em.persist(city);
+                em.getTransaction().commit();
+            }
+        } catch (Exception ex) {
+            em.getTransaction().rollback();
+            System.err.println(ex.getLocalizedMessage());
+            throw ex;
+        }
     }
 
     /**
@@ -209,6 +240,7 @@ public class CitiesTest {
 
         final City city = new City();
         final String expResult = "Москва";
+
         city.setCityName(expResult);
 
         assertEquals(expResult, city.toString());
@@ -219,14 +251,16 @@ public class CitiesTest {
         System.out.println("DulicateNameException");
 
         final City city1 = new City("Москва");
+
         city1.setLatitude(1f);
         city1.setLongitude(1f);
-        city1.setOktmo("45000000");
+        city1.setOktmo("45000000".toCharArray());
 
         final City city2 = new City("Москва");
+
         city2.setLatitude(2f);
         city2.setLongitude(2f);
-        city2.setOktmo("46000000");
+        city2.setOktmo("46000000".toCharArray());
 
         if (em != null) {
             try {
@@ -234,7 +268,7 @@ public class CitiesTest {
                 em.persist(city1);
                 em.persist(city2);
                 em.getTransaction().commit();
-            } catch (PersistenceException ex) {
+            } catch (Exception ex) {
 
                 em.getTransaction().rollback();
                 System.err.println(ex.getLocalizedMessage());
@@ -252,14 +286,16 @@ public class CitiesTest {
         thrown.expect(PersistenceException.class);
 
         final City city1 = new City("Москва");
+
         city1.setLatitude(1f);
         city1.setLongitude(1f);
-        city1.setOktmo("45000000");
+        city1.setOktmo("45000000".toCharArray());
 
         final City city2 = new City("Москва");
+
         city2.setLatitude(2f);
         city2.setLongitude(2f);
-        city2.setOktmo("46000000");
+        city2.setOktmo("46000000".toCharArray());
 
         if (em != null) {
             try {
@@ -267,7 +303,7 @@ public class CitiesTest {
                 em.persist(city1);
                 em.persist(city2);
                 em.getTransaction().commit();
-            } catch (PersistenceException ex) {
+            } catch (Exception ex) {
 
                 em.getTransaction().rollback();
                 System.err.println(ex.getLocalizedMessage());
@@ -281,14 +317,16 @@ public class CitiesTest {
         System.out.println("DulicateLatLonException");
 
         final City city1 = new City("Москва");
+
         city1.setLatitude(1f);
         city1.setLongitude(1f);
-        city1.setOktmo("45000000");
+        city1.setOktmo("45000000".toCharArray());
 
         final City city2 = new City("Санкт-Петербург");
+
         city2.setLatitude(1f);
         city2.setLongitude(1f);
-        city2.setOktmo("40000000");
+        city2.setOktmo("40000000".toCharArray());
 
         if (em != null) {
             try {
@@ -296,7 +334,7 @@ public class CitiesTest {
                 em.persist(city1);
                 em.persist(city2);
                 em.getTransaction().commit();
-            } catch (PersistenceException ex) {
+            } catch (Exception ex) {
 
                 em.getTransaction().rollback();
                 System.err.println(ex.getLocalizedMessage());
@@ -310,14 +348,16 @@ public class CitiesTest {
         System.out.println("DulicateLatLonException");
 
         final City city1 = new City("Москва");
+
         city1.setLatitude(1f);
         city1.setLongitude(1f);
-        city1.setOktmo("45000000");
+        city1.setOktmo("45000000".toCharArray());
 
         final City city2 = new City("Санкт-Петербург");
+
         city2.setLatitude(2f);
         city2.setLongitude(2f);
-        city2.setOktmo("45000000");
+        city2.setOktmo("45000000".toCharArray());
 
         if (em != null) {
             try {
@@ -325,7 +365,53 @@ public class CitiesTest {
                 em.persist(city1);
                 em.persist(city2);
                 em.getTransaction().commit();
-            } catch (PersistenceException ex) {
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            }
+        }
+    }
+
+    @Test(expected = ConstraintViolationException.class)
+    public void testTooBigOktmo() throws PersistenceException {
+        System.out.println("TooBigOktmo");
+
+        final City city = new City("Москва");
+
+        city.setLatitude(1f);
+        city.setLongitude(1f);
+        city.setOktmo("45000000000".toCharArray());
+
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(city);
+                em.getTransaction().commit();
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            }
+        }
+    }
+
+    @Test(expected = ConstraintViolationException.class)
+    public void testTooSmallOktmo() throws PersistenceException {
+        System.out.println("TooSmallOktmo");
+
+        final City city = new City("Москва");
+
+        city.setLatitude(1f);
+        city.setLongitude(1f);
+        city.setOktmo("45".toCharArray());
+
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(city);
+                em.getTransaction().commit();
+            } catch (ConstraintViolationException ex) {
                 em.getTransaction().rollback();
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
@@ -334,57 +420,68 @@ public class CitiesTest {
     }
 
     @Test
-    public void testNamedQuereis() {
-        System.out.println("NamedQuereis");
+    public void testCityNamedQuereis() {
+        System.out.println("CityNamedQuereis");
 
         if (em != null) {
             try {
-                Query q = em.createNamedQuery("City.findAll");
+                em.createNamedQuery("City.findAll").getResultList();
 
-                q.getResultList();
-                q = em.createNamedQuery("City.findById");
-                q.setParameter("id", 1);
-                q.getResultList();
+                em.createNamedQuery("City.findById")
+                        .setParameter("id", 1)
+                        .getResultList();
 
-                q = em.createNamedQuery("City.findByCityName");
-                q.setParameter("cityName", "Тула");
-                q.getResultList();
+                em.createNamedQuery("City.findByCityName")
+                        .setParameter("cityName", "Тула")
+                        .getResultList();
 
-                q = em.createNamedQuery("City.checkByCityName");
-                q.setParameter("cityName", "Тамбов");
-                q.getSingleResult();
-
-            } catch (PersistenceException ex) {
-                em.getTransaction().rollback();
-                fail(ex.getLocalizedMessage());
+            } catch (Exception ex) {
+                System.out.println(ex.getLocalizedMessage());
+                throw ex;
             }
         }
     }
 
     @Test
     public void testCheckByCityNameNamedQuery() {
-        System.out.println("NamedQuereis");
+        System.out.println("checkByCityName");
 
-        final Query q = em.createNamedQuery("City.checkByCityName");
-        q.setParameter("cityName", "Тамбов");
-        final Object cn = q.getSingleResult();
+        final Object cn = em.createNamedQuery("City.checkByCityName")
+                .setParameter("cityName", "Тамбов")
+                .getSingleResult();
 
         assertThat(cn, equalTo(0l));
+    }
+
+    @Test()
+    public void testFindByOktmoQuery() {
+        System.out.println("FindByOktmoQuery");
+
+        final int size = em.createNamedQuery("City.findByOktmo")
+                .setParameter("oktmo", "45000000".toCharArray())
+                .getResultList()
+                .size();
+
+        assertThat(size, equalTo(0));
     }
 
     @Test
     public void testSetCountry() throws PersistenceException {
         System.out.println("SetCountry");
-        
+
         final Country country = new Country();
+        final City city = new City("Москва");
+
         country.setCountryName("Россия");
         country.setCountryCodeAlpha2("RU");
         country.setCountryCodeAlpha3("RUS");
-        final City city = new City("Москва");
+
         city.setCountry(country);
+
         if (em != null) {
             try {
                 em.getTransaction().begin();
+                em.persist(country);
                 em.persist(city);
                 em.getTransaction().commit();
             } catch (PersistenceException ex) {
@@ -394,133 +491,6 @@ public class CitiesTest {
             } finally {
                 final Query q1 = em.createQuery("DELETE FROM City");
                 final Query q2 = em.createQuery("DELETE FROM Country");
-                em.getTransaction().begin();
-                q1.executeUpdate();
-                q2.executeUpdate();
-                em.getTransaction().commit();
-            }
-        }
-    }
-
-    @Test
-    public void testSetClubs() throws PersistenceException {
-        System.out.println("SetClubs");
-        
-        final Set<Club> clubs = new HashSet<>();
-        clubs.add(new Club("Зубило"));
-        clubs.add(new Club("Шайба"));
-        final City city = new City("Москва");
-        city.setClubs(clubs);
-        
-        if (em != null) {
-            try {
-                em.getTransaction().begin();
-                em.persist(city);
-                em.getTransaction().commit();
-                
-            } catch (PersistenceException ex) {
-                em.getTransaction().rollback();
-                System.err.println(ex.getLocalizedMessage());
-                throw ex;
-                
-            } finally {
-                final Query q2 = em.createQuery("DELETE FROM Club");
-                final Query q1 = em.createQuery("DELETE FROM City");
-                em.getTransaction().begin();
-                q1.executeUpdate();
-                q2.executeUpdate();
-                em.getTransaction().commit();
-                
-            }
-        }
-    }
-    
-    @Test
-    public void testAddClub() throws PersistenceException {
-        System.out.println("AddClub");
-
-        final City city = new City("Москва");
-        city.addClub(new Club("Зубило"));
-        if (em != null) {
-            try {
-                em.getTransaction().begin();
-                em.persist(city);
-                em.getTransaction().commit();
-            } catch (PersistenceException ex) {
-                em.getTransaction().rollback();
-                System.err.println(ex.getLocalizedMessage());
-                throw ex;
-            } finally {
-                final Query q1 = em.createQuery("DELETE FROM Club");
-                final Query q2 = em.createQuery("DELETE FROM City");
-                em.getTransaction().begin();
-                q1.executeUpdate();
-                q2.executeUpdate();
-                em.getTransaction().commit();
-            }
-        }
-    }
-    
-    @Test
-    public void testSetTeams() throws PersistenceException {
-        System.out.println("SetTeams");
-        
-        final City city = new City("Москва");
-        final Set<Team> teams = new HashSet<>();
-        city.setTeams(teams);
-        
-        teams.add(new Team("Зубило-дети"));
-        teams.add(new Team("Зубило-молодежка"));
-        teams.add(new Team("Зубило-взрослые"));
-        teams.add(new Team("Зубило-ветераны"));
-
-        if (em != null) {
-            try {
-                em.getTransaction().begin();
-                em.persist(city);
-                em.getTransaction().commit();
-                
-            } catch (PersistenceException ex) {
-                em.getTransaction().rollback();
-                System.err.println(ex.getLocalizedMessage());
-                throw ex;
-                
-            } finally {
-                final Query q2 = em.createQuery("DELETE FROM Team");
-                final Query q1 = em.createQuery("DELETE FROM City");
-                em.getTransaction().begin();
-                q1.executeUpdate();
-                q2.executeUpdate();
-                em.getTransaction().commit();
-                
-            }
-        }
-    }
-    
-    @Test
-    public void testAddTeam() throws PersistenceException {
-        System.out.println("AddTeam");
-
-        final City city = new City("Москва");
-        city.addTeam(new Team("Зубило-дети"));
-        city.addTeam(new Team("Зубило-молодежка"));
-        city.addTeam(new Team("Зубило-врослые"));
-        city.addTeam(new Team("Зубило-ветераны"));
-        
-        if (em != null) {
-            try {
-                em.getTransaction().begin();
-                em.persist(city);
-                em.getTransaction().commit();
- 
-                
-            } catch (PersistenceException ex) {
-                em.getTransaction().rollback();
-                System.err.println(ex.getLocalizedMessage());
-                throw ex;
-            } finally {
-                final Query q1 = em.createQuery("DELETE FROM Team");
-                final Query q2 = em.createQuery("DELETE FROM City");
                 em.getTransaction().begin();
                 q1.executeUpdate();
                 q2.executeUpdate();

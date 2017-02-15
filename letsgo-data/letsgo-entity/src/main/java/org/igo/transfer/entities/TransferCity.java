@@ -30,7 +30,7 @@ public class TransferCity {
     private float latitude;
     private float longitude;
     private String cityName;
-    private String oktmo;
+    private char[] oktmo;
 
     public TransferCity(final City city) {
         this.id = city.getId();
@@ -100,14 +100,14 @@ public class TransferCity {
     /**
      * @return the oktmo
      */
-    public String getOktmo() {
+    public char[] getOktmo() {
         return oktmo;
     }
 
     /**
      * @param oktmo the oktmo to set
      */
-    public void setOktmo(String oktmo) {
+    public void setOktmo(char[] oktmo) {
         this.oktmo = oktmo;
     }
 }

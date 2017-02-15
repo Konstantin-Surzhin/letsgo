@@ -23,6 +23,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,6 +33,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
@@ -46,7 +48,10 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "Team.findAll", query = "SELECT t FROM Team t")
     ,@NamedQuery(name = "Team.findById", query = "SELECT t FROM Team t WHERE t.id = :id")
-    ,@NamedQuery(name = "Team.findByTeamName", query = "SELECT t FROM Team t WHERE t.teamName = :teamName")})
+    ,@NamedQuery(name = "Team.findByTeamName", query = "SELECT t FROM Team t WHERE t.teamName = :teamName")
+    ,@NamedQuery(name = "Team.findTeamsByCityId", query = "SELECT t FROM Team t WHERE t.city.id = :cityId")
+})
+
 public class Team implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -77,6 +82,11 @@ public class Team implements Serializable {
      */
     public Team(String teamName) {
         this.teamName = teamName;
+    }
+
+    public Team(final String teamName, final City city) {
+        this.teamName = teamName;
+        this.city = city;
     }
 
     /**
@@ -132,7 +142,7 @@ public class Team implements Serializable {
      *
      * @return league
      */
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_team_league"), name = "league_id", referencedColumnName = "id")
     public League getLeague() {
         return league;
@@ -150,7 +160,7 @@ public class Team implements Serializable {
      *
      * @return
      */
-    @OneToMany(mappedBy = "team")
+    @OneToMany(mappedBy = "team", fetch = FetchType.LAZY)
     public Collection<UserDetails> getUsers() {
         return users;
     }
@@ -198,7 +208,7 @@ public class Team implements Serializable {
     /**
      * @return the city
      */
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_team_city"), name = "city_id", referencedColumnName = "id")
     public City getCity() {
         return city;
@@ -211,7 +221,7 @@ public class Team implements Serializable {
         this.city = city;
     }
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_team_country"), name = "country_id", referencedColumnName = "id")
     public Country getCountry() {
         return country;

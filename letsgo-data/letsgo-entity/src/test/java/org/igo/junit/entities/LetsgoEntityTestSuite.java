@@ -37,7 +37,7 @@ import org.junit.runners.Suite;
     org.igo.junit.entities.MoveCommentTest.class,
     org.igo.junit.entities.PlaceTest.class,
     org.igo.junit.entities.TeamTest.class,
-    org.igo.junit.entities.CitiesTest.class,
+    org.igo.junit.entities.CityTest.class,
     org.igo.junit.entities.EntitiesSuite.class,
     org.igo.junit.entities.UserDegreePKTest.class,
     org.igo.junit.entities.UserGameTest.class,
