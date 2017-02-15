@@ -180,3 +180,4 @@ hs_err_pid*
 /letsgo-client/target/
 /letsgo-vaadin/target/
 /letsgo-vaadin/letsgo-vaadin-city/target/
+/letsgo-data/letsgo-entity/nbproject/
