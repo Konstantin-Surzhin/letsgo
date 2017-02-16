@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -65,9 +66,9 @@ public class City implements Serializable {
     private String cityName;
     private char[] oktmo;
     private Country country;
-    //private Set<UserDetails> users;
-    //private Set<Club> clubs;
-    //private Set<Team> teams;
+    private Set<UserDetails> users;
+    private Set<Club> clubs;
+    private Set<Team> teams;
 
     /**
      *
@@ -108,25 +109,27 @@ public class City implements Serializable {
      *
      * @return
      */
-//    @OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
-//    public Set<UserDetails> getUsers() {
-//        if (this.users != null) {
-//            return new HashSet<>(this.users);
-//        } else {
-//            return new HashSet<>();
-//        }
-//    }
+    @OneToMany(mappedBy = "city", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    public Set<UserDetails> getUsers() {
+        if (this.users != null) {
+            return new HashSet<>(this.users);
+        } else {
+            return new HashSet<>();
+        }
+    }
+
     /**
      *
      * @param users
      */
-//    public void setUsers(final Set<UserDetails> users) {
-//        if (users != null) {
-//            this.users = new HashSet<>(users);
-//        } else {
-//            this.users = new HashSet<>();
-//        }
-//    }
+    public void setUsers(final Set<UserDetails> users) {
+        if (users != null) {
+            this.users = new HashSet<>(users);
+        } else {
+            this.users = new HashSet<>();
+        }
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -178,21 +181,23 @@ public class City implements Serializable {
      *
      * @return
      */
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "city")
-//    public Set<Club> getClubs() {
-//        if (this.clubs != null) {
-//            return new HashSet<>(this.clubs);
-//        } else {
-//            return new HashSet<>();
-//        }
-//    }
+    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, mappedBy = "city")
+    public Set<Club> getClubs() {
+        if (this.clubs != null) {
+            return new HashSet<>(this.clubs);
+        } else {
+            return new HashSet<>();
+        }
+    }
+
     /**
      *
      * @param clubs
      */
-//    public void setClubs(final Set<Club> clubs) {
-//        this.clubs = new HashSet<>(clubs);
-//    }
+    public void setClubs(final Set<Club> clubs) {
+        this.clubs = new HashSet<>(clubs);
+    }
+
     /**
      * @return the oktmo
      */
@@ -244,16 +249,36 @@ public class City implements Serializable {
         this.country = country; //todo: clone
     }
 
-//    public void addClub(final Club club) {
-//        if (this.clubs == null) {
-//            this.clubs = new HashSet<>();
-//        }
-//        this.clubs.add(club); //todo: clone
-//    }
-//    public void addTeam(final Team team) {
-//        if (this.teams == null) {
-//            this.teams = new HashSet<>();
-//        }
-//        this.teams.add(team); //todo: clone
-//    }
+    public void addClub(final Club club) {
+        if (this.clubs == null) {
+            this.clubs = new HashSet<>();
+        }
+        this.clubs.add(club); //todo: clone
+    }
+
+    public void addTeam(final Team team) {
+        if (this.teams == null) {
+            this.teams = new HashSet<>();
+        }
+        this.teams.add(team); //todo: clone
+    }
+
+    /**
+     * @return the teams
+     */
+    @OneToMany(mappedBy = "city", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    public Set<Team> getTeams() {
+        if (this.teams != null) {
+            return new HashSet<>(this.teams);
+        } else {
+            return new HashSet<>();
+        }
+    }
+
+    /**
+     * @param teams the teams to set
+     */
+    public void setTeams(Set<Team> teams) {
+        this.teams = new HashSet<>(teams);
+    }
 }
