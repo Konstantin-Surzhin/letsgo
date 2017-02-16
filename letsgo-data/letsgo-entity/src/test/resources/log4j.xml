@@ -15,23 +15,23 @@
 
   <appender name="sql-appender" class="org.apache.log4j.FileAppender">
     <param name="File" value="./logs/sql.log"/>
-    <param name="Append" value="true"/>
+    <param name="Append" value="false"/>
     <layout class="org.apache.log4j.PatternLayout">
-      <param name="ConversionPattern" value="-----&gt; %d{yyyy-MM-dd HH:mm:ss.SSS} &lt;%t&gt; %m%n%n"/>
+      <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} &lt;%t&gt; %m%n"/>
     </layout>
   </appender>
 
   <appender name="sql-timing-appender" class="org.apache.log4j.FileAppender">
     <param name="File" value="./logs/sqltiming.log"/>
-    <param name="Append" value="true"/>
+    <param name="Append" value="false"/>
     <layout class="org.apache.log4j.PatternLayout">
-      <param name="ConversionPattern" value="-----&gt; %d{yyyy-MM-dd HH:mm:ss.SSS} %m%n%n"/>
+      <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %m%n"/>
     </layout>
   </appender>
 
   <appender name="jdbc-appender" class="org.apache.log4j.FileAppender">
     <param name="File" value="./logs/jdbc.log"/>
-    <param name="Append" value="true"/>
+    <param name="Append" value="false"/>
     <layout class="org.apache.log4j.PatternLayout">
       <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %m%n"/>
     </layout>
@@ -39,7 +39,7 @@
 
   <appender name="jdbc-connection" class="org.apache.log4j.FileAppender">
     <param name="File" value="./logs/connection.log"/>
-    <param name="Append" value="true"/>
+    <param name="Append" value="false"/>
     <layout class="org.apache.log4j.PatternLayout">
       <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %m%n"/>
     </layout>
