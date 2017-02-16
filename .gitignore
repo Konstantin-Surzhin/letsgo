@@ -183,3 +183,6 @@ hs_err_pid*
 /letsgo-data/letsgo-entity/nbproject/
 /letsgo-bdd/letgo-bdd-Thucydides/target/
 /letsgo-bdd/letgo-bdd-Thucydides/letsgo-bdd-thucydides-easyb/target/
+/letsgo-bdd/letgo-bdd-Thucydides/letsgo-bdd-thucydides-jbehave/target/
+/letsgo-bdd/letgo-bdd-Thucydides/letsgo-bdd-thucydides-simple/target/
+/letsgo-data/letsgo-entity/logs/
