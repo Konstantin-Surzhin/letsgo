@@ -606,4 +606,75 @@ public class CityTest {
             }
         }
     }
+    
+    @Test
+    public void testSetTeams() throws PersistenceException {
+        System.out.println("SetTeam");
+
+        final Set<Team> teams = new HashSet<>();
+        final City city = new City("Москва");
+        final Team team = new Team("Ветераны");
+
+        teams.add(team);
+
+        city.setTeams(teams);
+        team.setCity(city);
+
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(city);
+                em.getTransaction().commit();
+                final int size = em
+                        .createQuery("select t from Team t")
+                        .getResultList()
+                        .size();
+                assertThat(size, equalTo(1));
+
+            } catch (PersistenceException ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            } finally {
+                final Query q = em.createQuery("DELETE FROM Team");
+                em.getTransaction().begin();
+                q.executeUpdate();
+                em.getTransaction().commit();
+            }
+        }
+    }
+
+    @Test
+    public void testAddTeam() throws PersistenceException {
+        System.out.println("AddTeam");
+
+        final City city = new City("Москва");
+        final Team team = new Team("Ветераны");
+
+        team.setCity(city);
+        city.addTeam(team);
+
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(city);
+                em.getTransaction().commit();
+                final int size = em
+                        .createQuery("select t from Team t")
+                        .getResultList()
+                        .size();
+                assertThat(size, equalTo(1));
+
+            } catch (PersistenceException ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            } finally {
+                final Query q = em.createQuery("DELETE FROM Team");
+                em.getTransaction().begin();
+                q.executeUpdate();
+                em.getTransaction().commit();
+            }
+        }
+    }
 }

@@ -66,7 +66,7 @@ public class City implements Serializable {
     private String cityName;
     private char[] oktmo;
     private Country country;
-    //private Set<UserDetails> users;
+    private Set<UserDetails> users;
     private Set<Club> clubs;
     private Set<Team> teams;
 
@@ -109,25 +109,27 @@ public class City implements Serializable {
      *
      * @return
      */
-//    @OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
-//    public Set<UserDetails> getUsers() {
-//        if (this.users != null) {
-//            return new HashSet<>(this.users);
-//        } else {
-//            return new HashSet<>();
-//        }
-//    }
-//    /**
-//     *
-//     * @param users
-//     */
-//    public void setUsers(final Set<UserDetails> users) {
-//        if (users != null) {
-//            this.users = new HashSet<>(users);
-//        } else {
-//            this.users = new HashSet<>();
-//        }
-//    }
+    @OneToMany(mappedBy = "city", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    public Set<UserDetails> getUsers() {
+        if (this.users != null) {
+            return new HashSet<>(this.users);
+        } else {
+            return new HashSet<>();
+        }
+    }
+
+    /**
+     *
+     * @param users
+     */
+    public void setUsers(final Set<UserDetails> users) {
+        if (users != null) {
+            this.users = new HashSet<>(users);
+        } else {
+            this.users = new HashSet<>();
+        }
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -255,10 +257,10 @@ public class City implements Serializable {
     }
 
     public void addTeam(final Team team) {
-        if (this.getTeams() == null) {
-            this.setTeams(new HashSet<>());
+        if (this.teams == null) {
+            this.teams = new HashSet<>();
         }
-        this.getTeams().add(team); //todo: clone
+        this.teams.add(team); //todo: clone
     }
 
     /**
