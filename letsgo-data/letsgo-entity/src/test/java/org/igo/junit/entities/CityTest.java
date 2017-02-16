@@ -148,6 +148,7 @@ public class CityTest {
                         .setParameter("id", city.getId())
                         .getSingleResult();
                 assertEquals(expResult, name);
+                
             } catch (Exception ex) {
                 em.getTransaction().rollback();
                 System.err.println(ex.getLocalizedMessage());
