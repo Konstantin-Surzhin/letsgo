@@ -181,3 +181,5 @@ hs_err_pid*
 /letsgo-vaadin/target/
 /letsgo-vaadin/letsgo-vaadin-city/target/
 /letsgo-data/letsgo-entity/nbproject/
+/letsgo-bdd/letgo-bdd-Thucydides/target/
+/letsgo-bdd/letgo-bdd-Thucydides/letsgo-bdd-thucydides-easyb/target/
