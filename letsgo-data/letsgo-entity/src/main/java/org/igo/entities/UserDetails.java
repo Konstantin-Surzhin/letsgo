@@ -77,16 +77,19 @@ public class UserDetails implements Serializable {
     private League league;
     private Team team;
     private Room room;
-    private City city;
+
     private Club club;
     private GoUser user;
+    private String password;
+    private String salt;
+
+    private Country country;
 
     private Collection<UserGame> userGameCollection;
     private Collection<UserDegree> userDegreeCollection;
     private Collection<MoveComment> moveCommentCollection;
     private Collection<GameComment> gameCommentCollection;
     private Collection<UserBan> userBanCollection;
-    private Country country;
 
     /**
      *
@@ -110,6 +113,34 @@ public class UserDetails implements Serializable {
      */
     public void setId(int id) {
         this.id = id;
+    }
+
+    /**
+     * @return the password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     * @return the salt
+     */
+    public String getSalt() {
+        return salt;
+    }
+
+    /**
+     * @param salt the salt to set
+     */
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     /**
@@ -325,24 +356,6 @@ public class UserDetails implements Serializable {
         this.room = room;
     }
 
-    /**
-     *
-     * @return
-     */
-    @ManyToOne
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_user_city"), name = "city_id", referencedColumnName = "id")
-    public City getCity() {
-        return city;
-    }
-
-    /**
-     *
-     * @param city
-     */
-    public void setCity(City city) {
-        this.city = city;
-    }
-
     @Override
     public int hashCode() {
         int hash = 7;
@@ -359,7 +372,6 @@ public class UserDetails implements Serializable {
         hash = 59 * hash + Objects.hashCode(this.league);
         hash = 59 * hash + Objects.hashCode(this.team);
         hash = 59 * hash + Objects.hashCode(this.room);
-        hash = 59 * hash + Objects.hashCode(this.city);
         hash = 59 * hash + Objects.hashCode(this.club);
         hash = 59 * hash + Objects.hashCode(this.user);
         hash = 59 * hash + Objects.hashCode(this.userGameCollection);

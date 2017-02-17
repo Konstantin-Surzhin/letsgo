@@ -520,32 +520,7 @@ public class UserTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of getCityId method, of class UserDetails.
-     */
-    @Test
-    public void testGetCityId() {
-        System.out.println("getCityId");
-        UserDetails instance = new UserDetails();
-        City expResult = null;
-        City result = instance.getCity();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
-    /**
-     * Test of setCityId method, of class UserDetails.
-     */
-    @Test
-    public void testSetCityId() {
-        System.out.println("setCityId");
-        City cityId = null;
-        UserDetails instance = new UserDetails();
-        instance.setCity(cityId);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
     /**
      * Test of hashCode method, of class UserDetails.

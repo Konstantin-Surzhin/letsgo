@@ -30,6 +30,7 @@ import static org.hamcrest.CoreMatchers.*;
 import org.igo.entities.City;
 import org.igo.entities.Club;
 import org.igo.entities.Country;
+import org.igo.entities.GoUser;
 import org.igo.entities.Team;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -414,7 +415,7 @@ public class CityTest {
                 em.getTransaction().begin();
                 em.persist(city);
                 em.getTransaction().commit();
-            } catch (ConstraintViolationException ex) {
+            } catch (Exception ex) {
                 em.getTransaction().rollback();
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
@@ -487,7 +488,7 @@ public class CityTest {
                 em.persist(country);
                 em.persist(city);
                 em.getTransaction().commit();
-            } catch (PersistenceException ex) {
+            } catch (Exception ex) {
                 em.getTransaction().rollback();
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
@@ -555,12 +556,12 @@ public class CityTest {
                 em.persist(city);
                 em.getTransaction().commit();
                 final int size = em
-                        .createQuery("select c from Club c")
+                        .createQuery("SELECT c FROM Club c")
                         .getResultList()
                         .size();
                 assertThat(size, equalTo(1));
 
-            } catch (PersistenceException ex) {
+            } catch (Exception ex) {
                 em.getTransaction().rollback();
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
@@ -589,12 +590,12 @@ public class CityTest {
                 em.persist(city);
                 em.getTransaction().commit();
                 final int size = em
-                        .createQuery("select c from Club c")
+                        .createQuery("SELECT c FROM Club c")
                         .getResultList()
                         .size();
                 assertThat(size, equalTo(1));
 
-            } catch (PersistenceException ex) {
+            } catch (Exception ex) {
                 em.getTransaction().rollback();
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
@@ -626,12 +627,12 @@ public class CityTest {
                 em.persist(city);
                 em.getTransaction().commit();
                 final int size = em
-                        .createQuery("select t from Team t")
+                        .createQuery("SELECT t FROM Team t")
                         .getResultList()
                         .size();
                 assertThat(size, equalTo(1));
 
-            } catch (PersistenceException ex) {
+            } catch (Exception ex) {
                 em.getTransaction().rollback();
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
@@ -660,12 +661,12 @@ public class CityTest {
                 em.persist(city);
                 em.getTransaction().commit();
                 final int size = em
-                        .createQuery("select t from Team t")
+                        .createQuery("SELECT t FROM Team t")
                         .getResultList()
                         .size();
                 assertThat(size, equalTo(1));
 
-            } catch (PersistenceException ex) {
+            } catch (Exception ex) {
                 em.getTransaction().rollback();
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
@@ -691,10 +692,10 @@ public class CityTest {
 
         team1.setCity(city);
         teams1.add(team1);
-        
+
         team2.setCity(city);
         teams2.add(team2);
-        
+
         if (em != null) {
             try {
                 city.setTeams(teams1);
@@ -708,17 +709,81 @@ public class CityTest {
                 em.getTransaction().commit();
 
                 final int size = em
-                        .createQuery("select t from Team t")
+                        .createQuery("SELECT t FROM Team t")
                         .getResultList()
                         .size();
                 assertThat(size, equalTo(2));
 
-            } catch (PersistenceException ex) {
+            } catch (Exception ex) {
                 em.getTransaction().rollback();
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             } finally {
                 final Query q = em.createQuery("DELETE FROM Team");
+                em.getTransaction().begin();
+                q.executeUpdate();
+                em.getTransaction().commit();
+            }
+        }
+    }
+
+    @Test
+    public void testSetUsers() throws PersistenceException {
+        System.out.println("SetUsers");
+
+        final City city = new City("Москва");
+        final Set<GoUser> users = new HashSet<>();
+        users.add(new GoUser("AlphaGo"));
+        city.setUsers(users);
+        
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(city);
+                em.getTransaction().commit();
+                final int size = em
+                        .createQuery("SELECT t FROM GoUser t")
+                        .getResultList()
+                        .size();
+                assertThat(size, equalTo(1));
+
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            } finally {
+                final Query q = em.createQuery("DELETE FROM GoUser");
+                em.getTransaction().begin();
+                q.executeUpdate();
+                em.getTransaction().commit();
+            }
+        }
+    }
+    
+    @Test
+    public void testAddUser() throws PersistenceException {
+        System.out.println("AddUsers");
+
+        final City city = new City("Москва");
+        city.addUser(new GoUser("AlphaGo"));
+        
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(city);
+                em.getTransaction().commit();
+                final int size = em
+                        .createQuery("SELECT t FROM GoUser t")
+                        .getResultList()
+                        .size();
+                assertThat(size, equalTo(1));
+
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            } finally {
+                final Query q = em.createQuery("DELETE FROM GoUser");
                 em.getTransaction().begin();
                 q.executeUpdate();
                 em.getTransaction().commit();

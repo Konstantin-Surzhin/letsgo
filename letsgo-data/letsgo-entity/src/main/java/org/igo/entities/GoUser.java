@@ -19,10 +19,12 @@ package org.igo.entities;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ColumnResult;
 import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -46,23 +48,32 @@ import javax.validation.constraints.Size;
 @Table(name = "GO_USERS", uniqueConstraints = {
     @UniqueConstraint(name = "uk_user_name", columnNames = {"user_name"})})
 @NamedNativeQueries({
-    @NamedNativeQuery(name = "GoUser.findByUserName", 
-            query = "SELECT id, user_name FROM GO_USERS order by user_name", 
+    @NamedNativeQuery(name = "GoUser.findByUserName",
+            query = "SELECT id, user_name FROM GO_USERS order by user_name",
             resultSetMapping = "GoUserToWeakUser")
-     })
-@SqlResultSetMapping(name="GoUserToWeakUser", classes = {
-    @ConstructorResult(targetClass = User.class, 
-    columns = {@ColumnResult(name="id"), @ColumnResult(name="user_name")})
+})
+@SqlResultSetMapping(name = "GoUserToWeakUser", classes = {
+    @ConstructorResult(targetClass = User.class,
+            columns = {
+                @ColumnResult(name = "id")
+                ,@ColumnResult(name = "user_name")})
 })
 public class GoUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private int id;
     private String userName;
-    private String password;
-    private String salt;
-    private UserDetails userDetails;
+    private City city;
     private UserRole role;
+
+    private UserDetails userDetails;
+
+    public GoUser() {
+    }
+
+    public GoUser(String userName) {
+        this.userName = userName;
+    }
 
     /**
      *
@@ -87,10 +98,6 @@ public class GoUser implements Serializable {
         int hash = 3;
         hash = 17 * hash + this.id;
         hash = 17 * hash + Objects.hashCode(this.userName);
-        hash = 17 * hash + Objects.hashCode(this.password);
-        hash = 17 * hash + Objects.hashCode(this.salt);
-        hash = 17 * hash + Objects.hashCode(this.userDetails);
-        hash = 17 * hash + Objects.hashCode(this.role);
         return hash;
     }
 
@@ -115,37 +122,9 @@ public class GoUser implements Serializable {
     }
 
     /**
-     * @return the password
-     */
-    public String getPassword() {
-        return password;
-    }
-
-    /**
-     * @param password the password to set
-     */
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    /**
-     * @return the salt
-     */
-    public String getSalt() {
-        return salt;
-    }
-
-    /**
-     * @param salt the salt to set
-     */
-    public void setSalt(String salt) {
-        this.salt = salt;
-    }
-
-    /**
      * @return the userDetails
      */
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_user_details"), name = "user_detail_id", referencedColumnName = "id")
     public UserDetails getUserDetails() {
         return userDetails;
@@ -156,24 +135,6 @@ public class GoUser implements Serializable {
      */
     public void setUserDetails(UserDetails userDetails) {
         this.userDetails = userDetails;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @ManyToOne
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_user_role"), name = "role_id", referencedColumnName = "id")
-    public UserRole getRole() {
-        return role;
-    }
-
-    /**
-     *
-     * @param role
-     */
-    public void setRole(UserRole role) {
-        this.role = role;
     }
 
     /**
@@ -194,5 +155,41 @@ public class GoUser implements Serializable {
      */
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    /**
+     *
+     * @return
+     */
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_user_city"), name = "city_id", referencedColumnName = "id")
+    public City getCity() {
+        return city;
+    }
+
+    /**
+     *
+     * @param city
+     */
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    /**
+     *
+     * @return
+     */
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_user_role"), name = "role_id", referencedColumnName = "id")
+    public UserRole getRole() {
+        return role;
+    }
+
+    /**
+     *
+     * @param role
+     */
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 }

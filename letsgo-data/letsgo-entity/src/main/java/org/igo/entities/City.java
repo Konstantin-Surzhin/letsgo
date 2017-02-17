@@ -66,7 +66,7 @@ public class City implements Serializable {
     private String cityName;
     private char[] oktmo;
     private Country country;
-    private Set<UserDetails> users;
+    private Set<GoUser> users;
     private Set<Club> clubs;
     private Set<Team> teams;
 
@@ -109,8 +109,11 @@ public class City implements Serializable {
      *
      * @return
      */
-    @OneToMany(mappedBy = "city", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    public Set<UserDetails> getUsers() {
+    @OneToMany(mappedBy = "city",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.PERSIST
+    )
+    public Set<GoUser> getUsers() {
         if (this.users != null) {
             return new HashSet<>(this.users);
         } else {
@@ -122,12 +125,23 @@ public class City implements Serializable {
      *
      * @param users
      */
-    public void setUsers(final Set<UserDetails> users) {
+    public void setUsers(final Set<GoUser> users) {
         if (users != null) {
             this.users = new HashSet<>(users);
         } else {
             this.users = new HashSet<>();
         }
+    }
+
+    /**
+     *
+     * @param user
+     */
+    public void addUser(final GoUser user) {
+        if (this.users == null) {
+            this.users = new HashSet<>();
+        }
+        this.users.add(user);
     }
 
     @Override
@@ -278,7 +292,7 @@ public class City implements Serializable {
     /**
      * @param teams the teams to set
      */
-    public void setTeams(Set<Team> teams) {
+    public void setTeams(final Set<Team> teams) {
         this.teams = new HashSet<>(teams);
     }
 }
