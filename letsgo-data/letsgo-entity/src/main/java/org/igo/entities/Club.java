@@ -45,8 +45,8 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "CLUBS",
         uniqueConstraints = {
-            @UniqueConstraint(name = "uk_city_club",
-                    columnNames = {"city_id", "club_name"})})
+            @UniqueConstraint(name = "uk_club_city",
+                    columnNames = {"club_name", "city_id"})})
 @NamedQueries({
     @NamedQuery(name = "Club.findAll", query = "SELECT c FROM Club c")
     ,@NamedQuery(name = "Club.findById", query = "SELECT c FROM Club c WHERE c.id = :id")
@@ -210,8 +210,8 @@ public class Club implements Serializable {
      *
      * @return league
      */
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_team_league"), name = "league_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_club_league"), name = "league_id", referencedColumnName = "id")
     public League getLeague() {
         return league;
     }

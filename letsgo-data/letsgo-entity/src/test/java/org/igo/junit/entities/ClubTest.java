@@ -31,6 +31,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import org.igo.entities.City;
 import org.igo.entities.Club;
 import org.igo.entities.Country;
+import org.igo.entities.League;
 import org.igo.entities.Team;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -378,10 +379,7 @@ public class ClubTest {
             }
         }
     }
-    
-    
-    
-    
+
     @Test(expected = RollbackException.class)
     public void testPersisClubButCountryNotYetPesisted() throws Exception {
         System.out.println("PersisClubButCountryNotYetPesisted");
@@ -448,6 +446,77 @@ public class ClubTest {
             } finally {
                 final Query q1 = em.createQuery("DELETE FROM Club");
                 final Query q2 = em.createQuery("DELETE FROM Country");
+                em.getTransaction().begin();
+                q1.executeUpdate();
+                q2.executeUpdate();
+                em.getTransaction().commit();
+            }
+        }
+    }
+
+    @Test
+    public void testSetLeagueToCity() {
+        System.out.println("SetLeagueToCity");
+
+        final League league = new League("Городская лига А");
+        final Club club = new Club("Ротор");
+        club.setLeague(league);
+        league.addClub(club);
+
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(league);
+                em.persist(club);
+                em.getTransaction().commit();
+                final int clubSize = em
+                        .createQuery("SELECT c FROM Club c")
+                        .getResultList()
+                        .size();
+                assertThat(clubSize, equalTo(1));
+
+                final int leagueSize = em
+                        .createQuery("SELECT l FROM League l")
+                        .getResultList()
+                        .size();
+                assertThat(leagueSize, equalTo(1));
+
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            } finally {
+                final Query q1 = em.createQuery("DELETE FROM Club");
+                final Query q2 = em.createQuery("DELETE FROM League");
+                em.getTransaction().begin();
+                q1.executeUpdate();
+                q2.executeUpdate();
+                em.getTransaction().commit();
+            }
+        }
+    }
+
+    @Test(expected = PersistenceException.class)
+    public void testPersistCityButLeagueNotPersistYet() throws Exception {
+        System.out.println("PersistCityButLeagueNotPersistYet");
+
+        final League league = new League("Городская лига А");
+        final Club club = new Club("Ротор");
+        club.setLeague(league);
+
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(club);
+                em.getTransaction().commit();
+
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            } finally {
+                final Query q1 = em.createQuery("DELETE FROM Club");
+                final Query q2 = em.createQuery("DELETE FROM League");
                 em.getTransaction().begin();
                 q1.executeUpdate();
                 q2.executeUpdate();

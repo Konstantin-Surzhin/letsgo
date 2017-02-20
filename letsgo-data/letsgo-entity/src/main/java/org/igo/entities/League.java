@@ -18,10 +18,13 @@ package org.igo.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -51,7 +54,8 @@ public class League implements Serializable {
     private static final long serialVersionUID = 1L;
     private short id;
     private String leagueName;
-    private Collection<Team> teamsCollection;
+    private Collection<Team> teams;
+    private Collection<Club> clubs;
     private Collection<UserDetails> usersCollection;
     private Country country;
 
@@ -67,6 +71,14 @@ public class League implements Serializable {
      */
     public League(short id) {
         this.id = id;
+    }
+
+    /**
+     *
+     * @param leagueName
+     */
+    public League(String leagueName) {
+        this.leagueName = leagueName;
     }
 
     /**
@@ -123,16 +135,16 @@ public class League implements Serializable {
      * @return
      */
     @OneToMany(mappedBy = "league")
-    public Collection<Team> getTeamsCollection() {
-        return teamsCollection;
+    public Collection<Team> getTeams() {
+        return teams;
     }
 
     /**
      *
-     * @param teamsCollection
+     * @param teams
      */
-    public void setTeamsCollection(Collection<Team> teamsCollection) {
-        this.teamsCollection = teamsCollection;
+    public void setTeams(Collection<Team> teams) {
+        this.teams = teams;
     }
 
     /**
@@ -157,7 +169,7 @@ public class League implements Serializable {
         int hash = 5;
         hash = 23 * hash + this.id;
         hash = 23 * hash + Objects.hashCode(this.leagueName);
-        hash = 23 * hash + Objects.hashCode(this.teamsCollection);
+        hash = 23 * hash + Objects.hashCode(this.teams);
         hash = 23 * hash + Objects.hashCode(this.usersCollection);
         hash = 23 * hash + Objects.hashCode(this.country);
         return hash;
@@ -191,6 +203,28 @@ public class League implements Serializable {
 
     public void setCountry(Country country) {
         this.country = country;
+    }
+
+    public void addClub(Club club) {
+        if (this.clubs == null) {
+            this.clubs = new HashSet<>();
+        }
+        this.clubs.add(club);
+    }
+
+    /**
+     * @return the clubs
+     */
+    @OneToMany(mappedBy = "league", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    public Collection<Club> getClubs() {
+        return clubs;
+    }
+
+    /**
+     * @param clubs the clubs to set
+     */
+    public void setClubs(Collection<Club> clubs) {
+        this.clubs = clubs;
     }
 
 }
