@@ -40,7 +40,6 @@
       <property name="hibernate.show_sql" value="true"/>
       <property name="hibernate.dialect" value="org.mysql.utf8.dialect.MysqlUTF8Dialect"/>
       <property name="hibernate.jdbc.time_zone" value="UTC"/>
-      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
     </properties>
   </persistence-unit>
   <persistence-unit name="testGamePU_H2" transaction-type="RESOURCE_LOCAL">

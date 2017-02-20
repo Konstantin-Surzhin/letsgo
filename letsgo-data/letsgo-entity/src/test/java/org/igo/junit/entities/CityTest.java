@@ -25,6 +25,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
+import javax.persistence.RollbackException;
 import javax.validation.ConstraintViolationException;
 import static org.hamcrest.CoreMatchers.*;
 import org.igo.entities.City;
@@ -165,8 +166,8 @@ public class CityTest {
      * Test of SetWrongSizeCityName method, of class City.
      */
     @Test(expected = ConstraintViolationException.class)
-    public void testSetTooBigCityName() {
-        System.out.println("SetTooBigCityName");
+    public void testSetTooLongCityName() {
+        System.out.println("SetTooLongCityName");
 
         final City city = new City();
         final StringBuilder sb = new StringBuilder();
@@ -423,6 +424,94 @@ public class CityTest {
         }
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testLatitudeTooSmall() throws PersistenceException {
+        System.out.println("LatitudeTooSmall");
+
+        final City city = new City("Москва");
+
+        city.setLatitude(-91f);
+        city.setLongitude(1f);
+
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(city);
+                em.getTransaction().commit();
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            }
+        }
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testLatitudeTooBig() throws PersistenceException {
+        System.out.println("LatitudeTooBig");
+
+        final City city = new City("Москва");
+
+        city.setLatitude(91f);
+        city.setLongitude(1f);
+
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(city);
+                em.getTransaction().commit();
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            }
+        }
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testLongitudeTooSmall() throws PersistenceException {
+        System.out.println("LatitudeTooSmall");
+
+        final City city = new City("Москва");
+
+        city.setLatitude(1f);
+        city.setLongitude(-181f);
+
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(city);
+                em.getTransaction().commit();
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            }
+        }
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testLongitudeTooBig() throws PersistenceException {
+        System.out.println("LatitudeTooSmall");
+
+        final City city = new City("Москва");
+
+        city.setLatitude(1f);
+        city.setLongitude(181f);
+
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(city);
+                em.getTransaction().commit();
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            }
+        }
+    }
+
     @Test
     public void testCityNamedQuereis() {
         System.out.println("CityNamedQuereis");
@@ -502,6 +591,85 @@ public class CityTest {
             }
         }
     }
+
+    @Test(expected = RollbackException.class)
+    public void testCountryForignKeyPersist() throws Exception {
+        System.out.println("CountryForignKeyPersist");
+
+        final Country country = new Country();
+        final City city = new City("Москва");
+
+        country.setCountryName("Россия");
+        country.setCountryCodeAlpha2("RU");
+        country.setCountryCodeAlpha3("RUS");
+
+        city.setCountry(country);
+ 
+
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(city);
+                em.getTransaction().commit();
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            } finally {
+                final Query q1 = em.createQuery("DELETE FROM City");
+                final Query q2 = em.createQuery("DELETE FROM Country");
+                em.getTransaction().begin();
+                q1.executeUpdate();
+                q2.executeUpdate();
+                em.getTransaction().commit();
+            }
+        }
+    }
+    
+    
+    @Test(expected = PersistenceException.class)
+    public void testCountryForignKeyDelete() throws Exception {
+        System.out.println("CountryForignKeyDelete");
+
+        final Country country = new Country();
+        final City city = new City("Москва");
+
+        country.setCountryName("Россия");
+        country.setCountryCodeAlpha2("RU");
+        country.setCountryCodeAlpha3("RUS");
+
+        city.setCountry(country);
+        country.addCity(city);
+        
+
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(country);
+                em.persist(city);
+                em.getTransaction().commit();
+
+                final Query q = em.createQuery("DELETE FROM Country");
+                em.getTransaction().begin();
+                q.executeUpdate();
+                em.getTransaction().commit();
+                
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            } finally {
+                final Query q1 = em.createQuery("DELETE FROM City");
+                final Query q2 = em.createQuery("DELETE FROM Country");
+                em.getTransaction().begin();
+                q1.executeUpdate();
+                q2.executeUpdate();
+                em.getTransaction().commit();
+            }
+        }
+    }
+    
+    
 
     @Test
     public void testSetClubsNotNullNotSame() {
@@ -735,7 +903,7 @@ public class CityTest {
         final Set<GoUser> users = new HashSet<>();
         users.add(new GoUser("AlphaGo"));
         city.setUsers(users);
-        
+
         if (em != null) {
             try {
                 em.getTransaction().begin();
@@ -759,14 +927,14 @@ public class CityTest {
             }
         }
     }
-    
+
     @Test
     public void testAddUser() throws PersistenceException {
         System.out.println("AddUsers");
 
         final City city = new City("Москва");
         city.addUser(new GoUser("AlphaGo"));
-        
+
         if (em != null) {
             try {
                 em.getTransaction().begin();

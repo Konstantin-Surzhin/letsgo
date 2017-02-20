@@ -17,6 +17,7 @@
 package org.igo.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -249,6 +250,13 @@ public class Country implements Serializable {
      */
     public void setNationalEmblem(String nationalEmblem) {
         this.nationalEmblem = nationalEmblem;
+    }
+
+    public void addCity(City city) {
+        if (this.cities == null) {
+            this.cities = new HashSet<>();
+        }
+        this.cities.add(city);
     }
 
     /**

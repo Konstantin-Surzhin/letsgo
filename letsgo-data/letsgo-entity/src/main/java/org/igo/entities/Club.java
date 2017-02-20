@@ -17,8 +17,11 @@
 package org.igo.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,8 +33,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -55,6 +60,8 @@ public class Club implements Serializable {
     private String clubName;
     private City city;
     private Country country;
+    private League league;
+    private Set<Team> teams;
 
     /**
      *
@@ -83,8 +90,8 @@ public class Club implements Serializable {
      * @return
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getId() {
         return id;
     }
@@ -101,7 +108,8 @@ public class Club implements Serializable {
      *
      * @return
      */
-    @Column(name = "club_name")
+    @Size(min = 1, max = 255)
+    @Column(name = "club_name", nullable = false)
     public String getClubName() {
         return clubName;
     }
@@ -172,4 +180,47 @@ public class Club implements Serializable {
         this.country = country;
     }
 
+    public void addTeam(final Team team) {
+        if (this.teams == null) {
+            this.teams = new HashSet<>();
+        }
+        this.teams.add(team); //todo: clone
+    }
+
+    /**
+     * @return the teams
+     */
+    @OneToMany(mappedBy = "club", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    public Set<Team> getTeams() {
+        if (this.teams != null) {
+            return new HashSet<>(this.teams);
+        } else {
+            return new HashSet<>();
+        }
+    }
+
+    /**
+     * @param teams the teams to set
+     */
+    public void setTeams(final Set<Team> teams) {
+        this.teams = new HashSet<>(teams);
+    }
+
+    /**
+     *
+     * @return league
+     */
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_team_league"), name = "league_id", referencedColumnName = "id")
+    public League getLeague() {
+        return league;
+    }
+
+    /**
+     *
+     * @param league
+     */
+    public void setLeague(League league) {
+        this.league = league;
+    }
 }

@@ -228,6 +228,7 @@ public class City implements Serializable {
         this.oktmo = oktmo;
     }
 
+
     public float getLatitude() {
         return latitude;
     }
@@ -236,6 +237,10 @@ public class City implements Serializable {
      * @param latitude the latitude to set
      */
     public void setLatitude(final float latitude) {
+        if (latitude < -90 || latitude > 90) {
+            throw new IllegalArgumentException(latitude + " :latitude too mast bee -90 < x < 90");
+        }
+
         this.latitude = latitude;
     }
 
@@ -250,6 +255,9 @@ public class City implements Serializable {
      * @param longitude the longitude to set
      */
     public void setLongitude(final float longitude) {
+        if (longitude < -180 || longitude > 180) {
+            throw new IllegalArgumentException(longitude + " :longitude too mast bee -90 < x < 90");
+        }
         this.longitude = longitude;
     }
 

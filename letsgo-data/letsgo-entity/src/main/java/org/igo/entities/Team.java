@@ -60,6 +60,7 @@ public class Team implements Serializable {
     private Collection<UserDetails> users;
     private City city;
     private Country country;
+    private Club club;
 
     /**
      *
@@ -228,6 +229,15 @@ public class Team implements Serializable {
 
     public void setCountry(final Country country) {
         this.country = country;
+    }
+
+    @ManyToOne
+    public Club getClub() {
+        return club;
+    }
+
+    public void setClub(Club club) {
+        this.club = club;
     }
 
 }

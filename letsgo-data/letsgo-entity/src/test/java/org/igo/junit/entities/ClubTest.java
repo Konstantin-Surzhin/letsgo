@@ -18,15 +18,21 @@ package org.igo.junit.entities;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
+import javax.validation.ConstraintViolationException;
+import static org.hamcrest.CoreMatchers.equalTo;
 import org.igo.entities.City;
 import org.igo.entities.Club;
+import org.igo.entities.Team;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -104,32 +110,270 @@ public class ClubTest {
         assertTrue(club.getId() == 0);
 
         if (em != null) {
-            em.getTransaction().begin();
-            em.persist(club);
-            em.getTransaction().commit();
+            try {
+                em.getTransaction().begin();
+                em.persist(club);
+                em.getTransaction().commit();
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            }
         }
         assertTrue(club.getId() != 0);
     }
 
     @Test(expected = PersistenceException.class)
-    public void testDuplicateNameException() throws PersistenceException {
-        System.out.println("DuplicateNameException");
-        
-        final City city = new City("Лабытнанги");
-        
-        final Club club1 = new Club();
-        club1.setCity(city);
-        club1.setClubName("Шайбы и шплинты");
-        final Club club2 = new Club();
-        club2.setClubName("Шайбы и шплинты");
-        club2.setCity(city);
-      
-        if (em != null) {
-            em.getTransaction().begin();
-            em.persist(club1);
-            em.persist(club2);
-            em.getTransaction().commit();
-        }
+    public void testSetNullClubNameException() throws Exception {
+        System.out.println("NullClubNameException");
 
+        final Club club = new Club(null);
+
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(club);
+                em.getTransaction().commit();
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            }
+        }
+    }
+
+    @Test(expected = ConstraintViolationException.class)
+    public void testSetEmptyClubNameException() throws Exception {
+        System.out.println("SetEmptyClubNameException");
+
+        final Club club = new Club("");
+
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(club);
+                em.getTransaction().commit();
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            }
+        }
+    }
+
+    @Test(expected = ConstraintViolationException.class)
+    public void testSetTooLongClubNameException() throws Exception {
+        System.out.println("SetTooLongClubNameException");
+
+        final StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 257; i++) {
+            sb.append("А");
+        }
+        final Club club = new Club(sb.toString());
+
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(club);
+                em.getTransaction().commit();
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            }
+        }
+    }
+
+    @Test
+    public void testSetClubName() {
+        System.out.println("SetClubName");
+
+        final Club club = new Club("Зубило");
+
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(club);
+                em.getTransaction().commit();
+
+                final int size = em.createNamedQuery("Club.findByClubName")
+                        .setParameter("clubName", "Зубило")
+                        .getResultList()
+                        .size();
+                assertThat(size, equalTo(1));
+
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            }
+        }
+    }
+
+    @Test(expected = PersistenceException.class)
+    public void testPersistClubButCityNotYetAlreadyPersist() {
+        System.out.println("PersistClubButCityNotYetAlreadyPersist");
+
+        final City city = new City("Электросталь");
+        final Club club = new Club("Зубило");
+        club.setCity(city);
+
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(club);
+                em.getTransaction().commit();
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            }
+        }
+    }
+
+    @Test(expected = PersistenceException.class)
+    public void testCityToClubForignKey() {
+        System.out.println("PersistClubButCityNotYetAlreadyPersist");
+
+        final City city = new City("Электросталь");
+        final Club club = new Club("Зубило");
+        club.setCity(city);
+
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(city);
+                em.persist(club);
+                em.getTransaction().commit();
+
+                final Query q = em.createQuery("Delete from City");
+
+                em.getTransaction().begin();
+                q.executeUpdate();
+                em.getTransaction().commit();
+
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            } finally {
+                final Query q1 = em.createQuery("Delete from Club");
+                final Query q2 = em.createQuery("Delete from City");
+
+                em.getTransaction().begin();
+                q1.executeUpdate();
+                q2.executeUpdate();
+                em.getTransaction().commit();
+            }
+
+        }
+    }
+
+    @Test
+    public void testPersistCityButCityNotPersist() {
+        System.out.println("PersistCityButCityNotPersist");
+
+        final City city = new City("Электросталь");
+        final Club club = new Club("Зубило");
+        club.setCity(city);
+
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(city);
+                em.persist(club);
+                em.getTransaction().commit();
+
+                final int clubsSize = em.createNamedQuery("Club.findByClubName")
+                        .setParameter("clubName", "Зубило")
+                        .getResultList()
+                        .size();
+                assertThat(clubsSize, equalTo(1));
+
+                final int citySize = em.createNamedQuery("City.findByCityName")
+                        .setParameter("cityName", "Электросталь")
+                        .getResultList()
+                        .size();
+                assertThat(citySize, equalTo(1));
+
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            } finally {
+                final Query q1 = em.createQuery("Delete from Club");
+                final Query q2 = em.createQuery("Delete from City");
+
+                em.getTransaction().begin();
+                q1.executeUpdate();
+                q2.executeUpdate();
+                em.getTransaction().commit();
+            }
+        }
+    }
+
+    @Test(expected = PersistenceException.class)
+    public void testSetNameToTheSameCityException() throws Exception {
+        System.out.println("SetDuplicateClubNameToTheSameCityException");
+
+        final City city = new City("Мышкин");
+        final Club club1 = new Club("Джери и Том");
+        final Club club2 = new Club("Джери и Том");
+        club1.setCity(city);
+        club2.setCity(city);
+
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(club1);
+                em.persist(club2);
+                em.getTransaction().commit();
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            }
+        }
+    }
+
+    @Test
+    public void testSetTeams() throws PersistenceException {
+        System.out.println("SetTeams");
+
+        final Club club = new Club("Кутые окуни");
+        final Set<Team> teams1 = new HashSet<>();
+        teams1.add(new Team("Молодежка"));
+        final Set<Team> teams2 = new HashSet<>();
+        teams2.add(new Team("Ветераны"));
+
+        if (em != null) {
+            try {
+                club.setTeams(teams1);
+                em.getTransaction().begin();
+                em.persist(club);
+                em.getTransaction().commit();
+
+                club.setTeams(teams2);
+                em.getTransaction().begin();
+                em.persist(club);
+                em.getTransaction().commit();
+
+                final int size = em
+                        .createQuery("SELECT t FROM Team t")
+                        .getResultList()
+                        .size();
+                assertThat(size, equalTo(2));
+
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            } finally {
+                final Query q = em.createQuery("DELETE FROM Team");
+                em.getTransaction().begin();
+                q.executeUpdate();
+                em.getTransaction().commit();
+            }
+        }
     }
 }
