@@ -25,10 +25,12 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
+import javax.persistence.RollbackException;
 import javax.validation.ConstraintViolationException;
 import static org.hamcrest.CoreMatchers.equalTo;
 import org.igo.entities.City;
 import org.igo.entities.Club;
+import org.igo.entities.Country;
 import org.igo.entities.Team;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -232,8 +234,8 @@ public class ClubTest {
     }
 
     @Test(expected = PersistenceException.class)
-    public void testCityToClubForignKey() {
-        System.out.println("PersistClubButCityNotYetAlreadyPersist");
+    public void testDeleteCityButClubsAreNotYetDelete() {
+        System.out.println("DeleteCityButClubsAreNotYetDelete");
 
         final City city = new City("Электросталь");
         final Club club = new Club("Зубило");
@@ -270,8 +272,8 @@ public class ClubTest {
     }
 
     @Test
-    public void testPersistCityButCityNotPersist() {
-        System.out.println("PersistCityButCityNotPersist");
+    public void testPersistCityAndClubs() {
+        System.out.println("PersistCityAndClubs");
 
         final City city = new City("Электросталь");
         final Club club = new Club("Зубило");
@@ -372,6 +374,83 @@ public class ClubTest {
                 final Query q = em.createQuery("DELETE FROM Team");
                 em.getTransaction().begin();
                 q.executeUpdate();
+                em.getTransaction().commit();
+            }
+        }
+    }
+    
+    
+    
+    
+    @Test(expected = RollbackException.class)
+    public void testPersisClubButCountryNotYetPesisted() throws Exception {
+        System.out.println("PersisClubButCountryNotYetPesisted");
+
+        final Country country = new Country();
+        final Club club = new Club("Микроскопы");
+
+        country.setCountryName("Россия");
+        country.setCountryCodeAlpha2("RU");
+        country.setCountryCodeAlpha3("RUS");
+
+        club.setCountry(country);
+
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(club);
+                em.getTransaction().commit();
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            } finally {
+                final Query q1 = em.createQuery("DELETE FROM Club");
+                final Query q2 = em.createQuery("DELETE FROM Country");
+                em.getTransaction().begin();
+                q1.executeUpdate();
+                q2.executeUpdate();
+                em.getTransaction().commit();
+            }
+        }
+    }
+
+    @Test(expected = PersistenceException.class)
+    public void testDeleteCountrButCountryClubsNotDeleteYet() throws Exception {
+        System.out.println("DeleteCountrButCountryClubsNotDeleteYet");
+
+        final Country country = new Country();
+        final Club club = new Club("Москва");
+
+        country.setCountryName("Россия");
+        country.setCountryCodeAlpha2("RU");
+        country.setCountryCodeAlpha3("RUS");
+
+        club.setCountry(country);
+        country.addClub(club);
+
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(country);
+                em.persist(club);
+                em.getTransaction().commit();
+
+                final Query q = em.createQuery("DELETE FROM Country");
+                em.getTransaction().begin();
+                q.executeUpdate();
+                em.getTransaction().commit();
+
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            } finally {
+                final Query q1 = em.createQuery("DELETE FROM Club");
+                final Query q2 = em.createQuery("DELETE FROM Country");
+                em.getTransaction().begin();
+                q1.executeUpdate();
+                q2.executeUpdate();
                 em.getTransaction().commit();
             }
         }

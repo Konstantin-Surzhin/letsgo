@@ -24,6 +24,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -65,7 +66,7 @@ public class Country implements Serializable {
     private String nationalEmblem;
 //    private Set<UserDetails> user;
     private Set<City> cities;
-//    private Set<Club> clubs;
+    private Set<Club> clubs;
 //    private Set<Team> teams;
 //    private Set<League> leagues;
 
@@ -110,16 +111,26 @@ public class Country implements Serializable {
     /**
      * @return the clubs
      */
-//    @OneToMany(mappedBy = "country")
-//    public Set<Club> getClubs() {
-//        return clubs;
-//    }
+    @OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
+    public Set<Club> getClubs() {
+        if (this.clubs == null) {
+            return new HashSet<>();
+        } else {
+            return this.clubs;
+        }
+    }
+
     /**
      * @param clubs the clubs to set
      */
-//    public void setClubs(Set<Club> clubs) {
-//        this.clubs = clubs;
-//    }
+    public void setClubs(Set<Club> clubs) {
+        if (clubs != null) {
+            this.clubs = new HashSet<>(clubs);
+        } else {
+            this.clubs = new HashSet<>();
+        }
+    }
+
     /**
      * @return the teams
      */
@@ -257,6 +268,13 @@ public class Country implements Serializable {
             this.cities = new HashSet<>();
         }
         this.cities.add(city);
+    }
+
+    public void addClub(Club club) {
+        if (this.clubs == null) {
+            this.clubs = new HashSet<>();
+        }
+        this.clubs.add(club);
     }
 
     /**

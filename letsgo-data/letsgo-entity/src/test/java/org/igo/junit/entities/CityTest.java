@@ -559,7 +559,7 @@ public class CityTest {
     }
 
     @Test
-    public void testSetCountry() throws PersistenceException {
+    public void testSetCountry() {
         System.out.println("SetCountry");
 
         final Country country = new Country();
@@ -604,7 +604,6 @@ public class CityTest {
         country.setCountryCodeAlpha3("RUS");
 
         city.setCountry(country);
- 
 
         if (em != null) {
             try {
@@ -625,8 +624,7 @@ public class CityTest {
             }
         }
     }
-    
-    
+
     @Test(expected = PersistenceException.class)
     public void testCountryForignKeyDelete() throws Exception {
         System.out.println("CountryForignKeyDelete");
@@ -640,7 +638,6 @@ public class CityTest {
 
         city.setCountry(country);
         country.addCity(city);
-        
 
         if (em != null) {
             try {
@@ -653,7 +650,7 @@ public class CityTest {
                 em.getTransaction().begin();
                 q.executeUpdate();
                 em.getTransaction().commit();
-                
+
             } catch (Exception ex) {
                 em.getTransaction().rollback();
                 System.err.println(ex.getLocalizedMessage());
@@ -668,8 +665,6 @@ public class CityTest {
             }
         }
     }
-    
-    
 
     @Test
     public void testSetClubsNotNullNotSame() {
