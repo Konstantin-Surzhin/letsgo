@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.Cache;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -924,8 +925,8 @@ public class CityTest {
     }
 
     @Test
-    public void testAddUser() throws PersistenceException {
-        System.out.println("AddUsers");
+    public void testAddUserInotCity() throws PersistenceException {
+        System.out.println("AddUserInotCity");
 
         final City city = new City("Москва");
         city.addUser(new GoUser("AlphaGo"));
@@ -952,5 +953,28 @@ public class CityTest {
                 em.getTransaction().commit();
             }
         }
+    }
+
+    @Test
+    public void testCityInL2Cache() {
+        System.out.println("CityInL2Cache");
+
+        final City city = new City("Москва");
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(city);
+                em.getTransaction().commit();
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            }
+        }
+        final Cache cache = em.getEntityManagerFactory().getCache();
+        assertTrue(cache.contains(City.class, city.getId()));
+        
+        cache.evict(City.class, city.getId());
+        assertFalse(cache.contains(City.class, city.getId()));
     }
 }

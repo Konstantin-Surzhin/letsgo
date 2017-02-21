@@ -1,87 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-  <persistence-unit name="testGamePU_MySQL" transaction-type="RESOURCE_LOCAL">
-    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-    <mapping-file>META-INF/orm.xml</mapping-file>
-    <class>org.igo.entities.City</class>
-    <class>org.igo.entities.Degree</class>
-    <class>org.igo.entities.Event</class>
-    <class>org.igo.entities.Game</class>
-    <class>org.igo.entities.GameComment</class>
-    <class>org.igo.entities.GameDate</class>
-    <class>org.igo.entities.GameMove</class>
-    <class>org.igo.entities.GameRule</class>
-    <class>org.igo.entities.League</class>
-    <class>org.igo.entities.MoveComment</class>
-    <class>org.igo.entities.Place</class>
-    <class>org.igo.entities.Room</class>
-    <class>org.igo.entities.Team</class>
-    <class>org.igo.entities.User</class>
-    <class>org.igo.entities.UserBan</class>
-    <class>org.igo.entities.UserDegree</class>
-    <class>org.igo.entities.UserGame</class>
-    <class>org.igo.entities.UserRole</class>
-    <class>org.igo.entities.Club</class>
-    <class>org.igo.entities.Country</class>
-    <class>org.igo.entities.GameStatus</class>
-    <class>org.igo.entities.GameType</class>
-    <class>org.igo.entities.GoUser</class>
-    <class>org.igo.entities.UserDetails</class>
-    <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:log4jdbc:mysql://localhost:3306/letsgo?UseUnicode=true&amp;characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull&amp;useTimezone=true&amp;serverTimezone=UTC"/>
-      <property name="javax.persistence.jdbc.user" value="test"/>
-      <!--<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>-->
-      <property name="javax.persistence.jdbc.driver" value="net.sf.log4jdbc.DriverSpy"/>
-      <property name="javax.persistence.jdbc.password" value="test"/>
-      <property name="hibernate.connection.useUnicode" value="true"/>
-      <property name="hibernate.connection.characterEncoding" value="UTF-8"/>
-      <property name="hibernate.connection.charSet" value="UTF-8"/>
-      <!---->
-      <property name="hibernate.show_sql" value="true"/>
-      <property name="hibernate.dialect" value="org.mysql.utf8.dialect.MysqlUTF8Dialect"/>
-      <property name="hibernate.jdbc.time_zone" value="UTC"/>
-      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
-    </properties>
-  </persistence-unit>
-  <persistence-unit name="testGamePU_H2" transaction-type="RESOURCE_LOCAL">
-    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-    <mapping-file>META-INF/orm.xml</mapping-file>
-    <class>org.igo.entities.City</class>
-    <class>org.igo.entities.Degree</class>
-    <class>org.igo.entities.Event</class>
-    <class>org.igo.entities.Game</class>
-    <class>org.igo.entities.GameComment</class>
-    <class>org.igo.entities.GameDate</class>
-    <class>org.igo.entities.GameMove</class>
-    <class>org.igo.entities.GameRule</class>
-    <class>org.igo.entities.League</class>
-    <class>org.igo.entities.MoveComment</class>
-    <class>org.igo.entities.Place</class>
-    <class>org.igo.entities.Room</class>
-    <class>org.igo.entities.Team</class>
-    <class>org.igo.entities.User</class>
-    <class>org.igo.entities.UserBan</class>
-    <class>org.igo.entities.UserDegree</class>
-    <class>org.igo.entities.UserGame</class>
-    <class>org.igo.entities.UserRole</class>
-    <class>org.igo.entities.Club</class>
-    <class>org.igo.entities.Country</class>
-    <class>org.igo.entities.GameStatus</class>
-    <class>org.igo.entities.GameType</class>
-    <class>org.igo.entities.GoUser</class>
-    <class>org.igo.entities.UserDetails</class>
-    <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:log4jdbc:h2:mem:letsgo;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;DATABASE_TO_UPPER=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS letsgo;"/>
-      <!--<property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>-->
-      <property name="javax.persistence.jdbc.driver" value="net.sf.log4jdbc.DriverSpy"/>
-      <property name="javax.persistence.jdbc.password" value=""/>
-      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
-      <property name="hibernate.connection.useUnicode" value="true"/>
-      <property name="hibernate.connection.characterEncoding" value="UTF-8"/>
-      <property name="hibernate.connection.charSet" value="UTF-8"/>
-      <!--<property name="hibernate.show_sql" value="true"/>-->
-      <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
-      <property name="hibernate.connection.autocommit" value="true"/>
-    </properties>
-  </persistence-unit>
+    <persistence-unit name="testGamePU_MySQL" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <mapping-file>META-INF/orm.xml</mapping-file>
+        <class>org.igo.entities.City</class>
+        <class>org.igo.entities.Degree</class>
+        <class>org.igo.entities.Event</class>
+        <class>org.igo.entities.Game</class>
+        <class>org.igo.entities.GameComment</class>
+        <class>org.igo.entities.GameDate</class>
+        <class>org.igo.entities.GameMove</class>
+        <class>org.igo.entities.GameRule</class>
+        <class>org.igo.entities.League</class>
+        <class>org.igo.entities.MoveComment</class>
+        <class>org.igo.entities.Place</class>
+        <class>org.igo.entities.Room</class>
+        <class>org.igo.entities.Team</class>
+        <class>org.igo.entities.User</class>
+        <class>org.igo.entities.UserBan</class>
+        <class>org.igo.entities.UserDegree</class>
+        <class>org.igo.entities.UserGame</class>
+        <class>org.igo.entities.UserRole</class>
+        <class>org.igo.entities.Club</class>
+        <class>org.igo.entities.Country</class>
+        <class>org.igo.entities.GameStatus</class>
+        <class>org.igo.entities.GameType</class>
+        <class>org.igo.entities.GoUser</class>
+        <class>org.igo.entities.UserDetails</class>
+        <shared-cache-mode>ALL</shared-cache-mode>
+        <properties>
+            <property name="javax.persistence.jdbc.url" value="jdbc:log4jdbc:mysql://localhost:3306/letsgo?UseUnicode=true&amp;characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull&amp;useTimezone=true&amp;serverTimezone=UTC"/>
+            <property name="javax.persistence.jdbc.user" value="test"/>
+            <!--<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>-->
+            <property name="javax.persistence.jdbc.driver" value="net.sf.log4jdbc.DriverSpy"/>
+            <property name="javax.persistence.jdbc.password" value="test"/>
+            <property name="hibernate.connection.useUnicode" value="true"/>
+            <property name="hibernate.connection.characterEncoding" value="UTF-8"/>
+            <property name="hibernate.connection.charSet" value="UTF-8"/>
+            <!--<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>-->
+            <!--<property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>-->
+            <property name="hibernate.cache.region.factory_class" value="org.hibernate.cache.infinispan.InfinispanRegionFactory"/>
+            <property name="hibernate.cache.use_second_level_cache" value="true"/>
+            <property name="hibernate.cache.use_query_cache" value="true"/>
+            <property name="hibernate.dialect" value="org.mysql.utf8.dialect.MysqlUTF8Dialect"/>
+            <property name="hibernate.jdbc.time_zone" value="UTC"/>
+        </properties>
+    </persistence-unit>
+    <persistence-unit name="testGamePU_H2" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <mapping-file>META-INF/orm.xml</mapping-file>
+        <class>org.igo.entities.City</class>
+        <class>org.igo.entities.Degree</class>
+        <class>org.igo.entities.Event</class>
+        <class>org.igo.entities.Game</class>
+        <class>org.igo.entities.GameComment</class>
+        <class>org.igo.entities.GameDate</class>
+        <class>org.igo.entities.GameMove</class>
+        <class>org.igo.entities.GameRule</class>
+        <class>org.igo.entities.League</class>
+        <class>org.igo.entities.MoveComment</class>
+        <class>org.igo.entities.Place</class>
+        <class>org.igo.entities.Room</class>
+        <class>org.igo.entities.Team</class>
+        <class>org.igo.entities.User</class>
+        <class>org.igo.entities.UserBan</class>
+        <class>org.igo.entities.UserDegree</class>
+        <class>org.igo.entities.UserGame</class>
+        <class>org.igo.entities.UserRole</class>
+        <class>org.igo.entities.Club</class>
+        <class>org.igo.entities.Country</class>
+        <class>org.igo.entities.GameStatus</class>
+        <class>org.igo.entities.GameType</class>
+        <class>org.igo.entities.GoUser</class>
+        <class>org.igo.entities.UserDetails</class>
+        <properties>
+            <property name="javax.persistence.jdbc.url" value="jdbc:log4jdbc:h2:mem:letsgo;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;DATABASE_TO_UPPER=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS letsgo;"/>
+            <!--<property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>-->
+            <property name="javax.persistence.jdbc.driver" value="net.sf.log4jdbc.DriverSpy"/>
+            <property name="javax.persistence.jdbc.password" value=""/>
+            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+            <property name="hibernate.connection.useUnicode" value="true"/>
+            <property name="hibernate.connection.characterEncoding" value="UTF-8"/>
+            <property name="hibernate.connection.charSet" value="UTF-8"/>
+            <!--<property name="hibernate.show_sql" value="true"/>-->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <property name="hibernate.connection.autocommit" value="true"/>
+        </properties>
+    </persistence-unit>
 </persistence>

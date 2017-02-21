@@ -57,6 +57,7 @@ import org.igo.transfer.entities.TransferCity;
     ,@NamedQuery(name = "City.findByCountryId", query = "SELECT c FROM City c WHERE c.country.id = :countryId")
     ,@NamedQuery(name = "City.checkByCityName", query = "SELECT count(c) FROM City c WHERE c.cityName = :cityName")
 })
+
 public class City implements Serializable {
 
     private static final long serialVersionUID = 1L;
