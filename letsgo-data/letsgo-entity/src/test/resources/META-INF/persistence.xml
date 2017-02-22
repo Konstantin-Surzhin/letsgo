@@ -74,6 +74,7 @@
         <class>org.igo.entities.GameType</class>
         <class>org.igo.entities.GoUser</class>
         <class>org.igo.entities.UserDetails</class>
+        <shared-cache-mode>ALL</shared-cache-mode>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:log4jdbc:h2:mem:letsgo;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;DATABASE_TO_UPPER=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS letsgo;"/>
             <!--<property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>-->
@@ -83,7 +84,9 @@
             <property name="hibernate.connection.useUnicode" value="true"/>
             <property name="hibernate.connection.characterEncoding" value="UTF-8"/>
             <property name="hibernate.connection.charSet" value="UTF-8"/>
-            <!--<property name="hibernate.show_sql" value="true"/>-->
+            <property name="hibernate.cache.region.factory_class" value="org.hibernate.cache.infinispan.InfinispanRegionFactory"/>
+            <property name="hibernate.cache.use_second_level_cache" value="true"/>
+            <property name="hibernate.cache.use_query_cache" value="true"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
             <property name="hibernate.connection.autocommit" value="true"/>
         </properties>
