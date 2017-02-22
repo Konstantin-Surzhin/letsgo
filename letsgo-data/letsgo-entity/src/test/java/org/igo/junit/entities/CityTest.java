@@ -260,13 +260,11 @@ public class CityTest {
 
         city1.setLatitude(1f);
         city1.setLongitude(1f);
-        city1.setOktmo("45000000".toCharArray());
 
         final City city2 = new City("Москва");
 
         city2.setLatitude(2f);
         city2.setLongitude(2f);
-        city2.setOktmo("46000000".toCharArray());
 
         if (em != null) {
             try {
@@ -295,13 +293,11 @@ public class CityTest {
 
         city1.setLatitude(1f);
         city1.setLongitude(1f);
-        city1.setOktmo("45000000".toCharArray());
 
         final City city2 = new City("Москва");
 
         city2.setLatitude(2f);
         city2.setLongitude(2f);
-        city2.setOktmo("46000000".toCharArray());
 
         if (em != null) {
             try {
@@ -326,13 +322,11 @@ public class CityTest {
 
         city1.setLatitude(1f);
         city1.setLongitude(1f);
-        city1.setOktmo("45000000".toCharArray());
 
         final City city2 = new City("Санкт-Петербург");
 
         city2.setLatitude(1f);
         city2.setLongitude(1f);
-        city2.setOktmo("40000000".toCharArray());
 
         if (em != null) {
             try {
@@ -342,82 +336,6 @@ public class CityTest {
                 em.getTransaction().commit();
             } catch (Exception ex) {
 
-                em.getTransaction().rollback();
-                System.err.println(ex.getLocalizedMessage());
-                throw ex;
-            }
-        }
-    }
-
-    @Test(expected = PersistenceException.class)
-    public void testDulicateOktmoException() throws PersistenceException {
-        System.out.println("DulicateLatLonException");
-
-        final City city1 = new City("Москва");
-
-        city1.setLatitude(1f);
-        city1.setLongitude(1f);
-        city1.setOktmo("45000000".toCharArray());
-
-        final City city2 = new City("Санкт-Петербург");
-
-        city2.setLatitude(2f);
-        city2.setLongitude(2f);
-        city2.setOktmo("45000000".toCharArray());
-
-        if (em != null) {
-            try {
-                em.getTransaction().begin();
-                em.persist(city1);
-                em.persist(city2);
-                em.getTransaction().commit();
-            } catch (Exception ex) {
-                em.getTransaction().rollback();
-                System.err.println(ex.getLocalizedMessage());
-                throw ex;
-            }
-        }
-    }
-
-    @Test(expected = ConstraintViolationException.class)
-    public void testTooBigOktmo() throws PersistenceException {
-        System.out.println("TooBigOktmo");
-
-        final City city = new City("Москва");
-
-        city.setLatitude(1f);
-        city.setLongitude(1f);
-        city.setOktmo("45000000000".toCharArray());
-
-        if (em != null) {
-            try {
-                em.getTransaction().begin();
-                em.persist(city);
-                em.getTransaction().commit();
-            } catch (Exception ex) {
-                em.getTransaction().rollback();
-                System.err.println(ex.getLocalizedMessage());
-                throw ex;
-            }
-        }
-    }
-
-    @Test(expected = ConstraintViolationException.class)
-    public void testTooSmallOktmo() throws PersistenceException {
-        System.out.println("TooSmallOktmo");
-
-        final City city = new City("Москва");
-
-        city.setLatitude(1f);
-        city.setLongitude(1f);
-        city.setOktmo("45".toCharArray());
-
-        if (em != null) {
-            try {
-                em.getTransaction().begin();
-                em.persist(city);
-                em.getTransaction().commit();
-            } catch (Exception ex) {
                 em.getTransaction().rollback();
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
@@ -519,7 +437,8 @@ public class CityTest {
 
         if (em != null) {
             try {
-                em.createNamedQuery("City.findAll").getResultList();
+                em.createNamedQuery("City.findAll")
+                        .getResultList();
 
                 em.createNamedQuery("City.findById")
                         .setParameter("id", 1)
@@ -545,18 +464,6 @@ public class CityTest {
                 .getSingleResult();
 
         assertThat(cn, equalTo(0l));
-    }
-
-    @Test()
-    public void testFindByOktmoQuery() {
-        System.out.println("FindByOktmoQuery");
-
-        final int size = em.createNamedQuery("City.findByOktmo")
-                .setParameter("oktmo", "45000000".toCharArray())
-                .getResultList()
-                .size();
-
-        assertThat(size, equalTo(0));
     }
 
     @Test
@@ -973,7 +880,7 @@ public class CityTest {
         }
         final Cache cache = em.getEntityManagerFactory().getCache();
         assertTrue(cache.contains(City.class, city.getId()));
-        
+
         cache.evict(City.class, city.getId());
         assertFalse(cache.contains(City.class, city.getId()));
     }

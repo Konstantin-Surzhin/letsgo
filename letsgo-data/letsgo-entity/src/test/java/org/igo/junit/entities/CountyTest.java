@@ -388,14 +388,12 @@ public class CountyTest {
 
         city1.setLatitude(1);
         city1.setLongitude(1);
-        city1.setOktmo("45000000".toCharArray());
 
         final City city2 = new City("Тула");
 
         city1.setLatitude(2);
         city1.setLongitude(3);
-        city1.setOktmo("46000000".toCharArray());
-
+   
         final Set<City> citeis = new HashSet<>();
 
         citeis.add(city1);

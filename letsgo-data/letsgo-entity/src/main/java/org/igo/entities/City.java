@@ -47,13 +47,11 @@ import org.igo.transfer.entities.TransferCity;
 @Table(name = "CITIES", uniqueConstraints = {
     @UniqueConstraint(name = "uk_city_name", columnNames = {"city_name"})
     ,@UniqueConstraint(name = "uk_lat_lon", columnNames = {"latitude", "longitude"})
-    ,@UniqueConstraint(name = "uk_oktmo", columnNames = {"oktmo"})
 })
 @NamedQueries({
     @NamedQuery(name = "City.findAll", query = "SELECT c FROM City c")
     ,@NamedQuery(name = "City.findById", query = "SELECT c FROM City c WHERE c.id = :id")
     ,@NamedQuery(name = "City.findByCityName", query = "SELECT c FROM City c WHERE c.cityName = :cityName")
-    ,@NamedQuery(name = "City.findByOktmo", query = "SELECT c FROM City c WHERE c.oktmo = :oktmo")
     ,@NamedQuery(name = "City.findByCountryId", query = "SELECT c FROM City c WHERE c.country.id = :countryId")
     ,@NamedQuery(name = "City.checkByCityName", query = "SELECT count(c) FROM City c WHERE c.cityName = :cityName")
 })
@@ -65,7 +63,6 @@ public class City implements Serializable {
     private float latitude; //широта
     private float longitude; //долгота
     private String cityName;
-    private char[] oktmo;
     private Country country;
     private Set<GoUser> users;
     private Set<Club> clubs;
@@ -85,7 +82,6 @@ public class City implements Serializable {
         this.latitude = city.getLatitude();
         this.longitude = city.getLongitude();
         this.cityName = city.getCityName();
-        this.oktmo = city.getOktmo();
     }
 
     /**
@@ -167,7 +163,6 @@ public class City implements Serializable {
         hash = 29 * hash + Float.floatToIntBits(this.latitude);
         hash = 29 * hash + Float.floatToIntBits(this.longitude);
         hash = 29 * hash + Objects.hashCode(this.cityName);
-        hash = 29 * hash + Arrays.hashCode(this.oktmo);
         return hash;
     }
 
@@ -212,23 +207,6 @@ public class City implements Serializable {
     public void setClubs(final Set<Club> clubs) {
         this.clubs = new HashSet<>(clubs);
     }
-
-    /**
-     * @return the oktmo
-     */
-    @Size(min = 8, max = 8)
-    @Column(columnDefinition = "CHAR(8)")
-    public char[] getOktmo() {
-        return oktmo;
-    }
-
-    /**
-     * @param oktmo the oktmo to set
-     */
-    public void setOktmo(final char[] oktmo) {
-        this.oktmo = oktmo;
-    }
-
 
     public float getLatitude() {
         return latitude;

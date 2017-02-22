@@ -37,7 +37,6 @@ public class TransferCity {
         this.latitude = city.getLatitude();
         this.longitude = city.getLongitude();
         this.cityName  = city.getCityName();
-        this.oktmo = city.getOktmo();
     }
 
 
