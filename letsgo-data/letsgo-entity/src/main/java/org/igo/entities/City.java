@@ -17,7 +17,6 @@
 package org.igo.entities;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -34,8 +33,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.persistence.Version;
 import javax.validation.constraints.Size;
 import org.igo.transfer.entities.TransferCity;
 
@@ -59,7 +60,8 @@ import org.igo.transfer.entities.TransferCity;
 public class City implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private int id;
+    private int id = -1;
+    private short version;
     private float latitude; //широта
     private float longitude; //долгота
     private String cityName;
@@ -89,7 +91,8 @@ public class City implements Serializable {
      * @return
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "city_seq", strategy = GenerationType.AUTO)
+    @SequenceGenerator(name="city_seq",sequenceName="city_seq", allocationSize=1)
     public int getId() {
         return id;
     }
@@ -111,11 +114,12 @@ public class City implements Serializable {
             cascade = CascadeType.PERSIST
     )
     public Set<GoUser> getUsers() {
-        if (this.users != null) {
-            return new HashSet<>(this.users);
-        } else {
-            return new HashSet<>();
-        }
+        return this.users;
+//        if (this.users != null) {
+//            return new HashSet<>(this.users);
+//        } else {
+//            return new HashSet<>();
+//        }
     }
 
     /**
@@ -123,11 +127,12 @@ public class City implements Serializable {
      * @param users
      */
     public void setUsers(final Set<GoUser> users) {
-        if (users != null) {
-            this.users = new HashSet<>(users);
-        } else {
-            this.users = new HashSet<>();
-        }
+        this.users = users;
+//        if (users != null) {
+//            this.users = new HashSet<>(users);
+//        } else {
+//            this.users = new HashSet<>();
+//        }
     }
 
     /**
@@ -193,11 +198,12 @@ public class City implements Serializable {
      */
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, mappedBy = "city")
     public Set<Club> getClubs() {
-        if (this.clubs != null) {
-            return new HashSet<>(this.clubs);
-        } else {
-            return new HashSet<>();
-        }
+        return this.clubs;
+//        if (this.clubs != null) {
+//            return new HashSet<>(this.clubs);
+//        } else {
+//            return new HashSet<>();
+//        }
     }
 
     /**
@@ -205,7 +211,8 @@ public class City implements Serializable {
      * @param clubs
      */
     public void setClubs(final Set<Club> clubs) {
-        this.clubs = new HashSet<>(clubs);
+        this.clubs = clubs;
+        //this.clubs = new HashSet<>(clubs);
     }
 
     public float getLatitude() {
@@ -269,17 +276,34 @@ public class City implements Serializable {
      */
     @OneToMany(mappedBy = "city", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     public Set<Team> getTeams() {
-        if (this.teams != null) {
-            return new HashSet<>(this.teams);
-        } else {
-            return new HashSet<>();
-        }
+        return this.teams;
+//        if (this.teams != null) {
+//            return new HashSet<>(this.teams);
+//        } else {
+//            return new HashSet<>();
+//        }
     }
 
     /**
      * @param teams the teams to set
      */
     public void setTeams(final Set<Team> teams) {
-        this.teams = new HashSet<>(teams);
+        this.teams = teams;
+        //this.teams = new HashSet<>(teams);
+    }
+
+    /**
+     * @return the version
+     */
+    @Version
+    public short getVersion() {
+        return version;
+    }
+
+    /**
+     * @param version the version to set
+     */
+    public void setVersion(short version) {
+        this.version = version;
     }
 }

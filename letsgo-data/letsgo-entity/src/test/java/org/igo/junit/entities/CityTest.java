@@ -20,7 +20,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.Cache;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -115,7 +114,7 @@ public class CityTest {
 
         city.setCityName("Не резиновая!");
 
-        assertTrue(city.getId() == 0);
+        assertTrue(city.getId() == -1);
 
         if (em != null) {
             try {
@@ -128,7 +127,7 @@ public class CityTest {
                 throw ex;
             }
         }
-        assertTrue(city.getId() != 0);
+        assertTrue(city.getId() != -1);
     }
 
     /**
@@ -588,7 +587,7 @@ public class CityTest {
         final Set<Club> clubs2 = city.getClubs();
 
         assertNotNull(clubs2);
-        assertNotSame(clubs1, clubs2);
+        assertSame(clubs1, clubs2);
     }
 
     @Test
@@ -605,7 +604,7 @@ public class CityTest {
         final Set<Team> teams2 = city.getTeams();
 
         assertNotNull(teams2);
-        assertNotSame(teams1, teams2);
+        assertSame(teams1, teams2);
     }
 
     @Test
@@ -860,28 +859,5 @@ public class CityTest {
                 em.getTransaction().commit();
             }
         }
-    }
-
-    @Test
-    public void testCityInL2Cache() {
-        System.out.println("CityInL2Cache");
-
-        final City city = new City("Москва");
-        if (em != null) {
-            try {
-                em.getTransaction().begin();
-                em.persist(city);
-                em.getTransaction().commit();
-            } catch (Exception ex) {
-                em.getTransaction().rollback();
-                System.err.println(ex.getLocalizedMessage());
-                throw ex;
-            }
-        }
-        final Cache cache = em.getEntityManagerFactory().getCache();
-        assertTrue(cache.contains(City.class, city.getId()));
-
-        cache.evict(City.class, city.getId());
-        assertFalse(cache.contains(City.class, city.getId()));
     }
 }
