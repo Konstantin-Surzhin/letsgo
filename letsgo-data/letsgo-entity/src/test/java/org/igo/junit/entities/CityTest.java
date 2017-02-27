@@ -151,6 +151,7 @@ public class CityTest {
 
                 final String name = (String) em.createQuery("SELECT c.cityName FROM City c WHERE c.id=:id")
                         .setParameter("id", city.getId())
+                        .setHint("org.hibernate.readOnly", true)
                         .getSingleResult();
                 assertEquals(expResult, name);
 
@@ -437,13 +438,16 @@ public class CityTest {
         if (em != null) {
             try {
                 em.createNamedQuery("City.findAll")
+                        .setHint("org.hibernate.readOnly", true)
                         .getResultList();
 
                 em.createNamedQuery("City.findById")
+                        .setHint("org.hibernate.readOnly", true)
                         .setParameter("id", 1)
                         .getResultList();
 
                 em.createNamedQuery("City.findByCityName")
+                        .setHint("org.hibernate.readOnly", true)
                         .setParameter("cityName", "Тула")
                         .getResultList();
 
@@ -459,6 +463,7 @@ public class CityTest {
         System.out.println("checkByCityName");
 
         final Object cn = em.createNamedQuery("City.checkByCityName")
+                .setHint("org.hibernate.readOnly", true)
                 .setParameter("cityName", "Тамбов")
                 .getSingleResult();
 
@@ -627,6 +632,7 @@ public class CityTest {
                 em.getTransaction().commit();
                 final int size = em
                         .createQuery("SELECT c FROM Club c")
+                        .setHint("org.hibernate.readOnly", true)
                         .getResultList()
                         .size();
                 assertThat(size, equalTo(1));
@@ -661,6 +667,7 @@ public class CityTest {
                 em.getTransaction().commit();
                 final int size = em
                         .createQuery("SELECT c FROM Club c")
+                        .setHint("org.hibernate.readOnly", true)
                         .getResultList()
                         .size();
                 assertThat(size, equalTo(1));
@@ -732,6 +739,7 @@ public class CityTest {
                 em.getTransaction().commit();
                 final int size = em
                         .createQuery("SELECT t FROM Team t")
+                        .setHint("org.hibernate.readOnly", true)
                         .getResultList()
                         .size();
                 assertThat(size, equalTo(1));
@@ -780,6 +788,7 @@ public class CityTest {
 
                 final int size = em
                         .createQuery("SELECT t FROM Team t")
+                        .setHint("org.hibernate.readOnly", true)
                         .getResultList()
                         .size();
                 assertThat(size, equalTo(2));
@@ -813,6 +822,7 @@ public class CityTest {
                 em.getTransaction().commit();
                 final int size = em
                         .createQuery("SELECT t FROM GoUser t")
+                        .setHint("org.hibernate.readOnly", true)
                         .getResultList()
                         .size();
                 assertThat(size, equalTo(1));
@@ -844,6 +854,7 @@ public class CityTest {
                 em.getTransaction().commit();
                 final int size = em
                         .createQuery("SELECT t FROM GoUser t")
+                        .setHint("org.hibernate.readOnly", true)
                         .getResultList()
                         .size();
                 assertThat(size, equalTo(1));
