@@ -115,11 +115,6 @@ public class City implements Serializable {
     )
     public Set<GoUser> getUsers() {
         return this.users;
-//        if (this.users != null) {
-//            return new HashSet<>(this.users);
-//        } else {
-//            return new HashSet<>();
-//        }
     }
 
     /**
@@ -128,11 +123,6 @@ public class City implements Serializable {
      */
     public void setUsers(final Set<GoUser> users) {
         this.users = users;
-//        if (users != null) {
-//            this.users = new HashSet<>(users);
-//        } else {
-//            this.users = new HashSet<>();
-//        }
     }
 
     /**
@@ -199,11 +189,6 @@ public class City implements Serializable {
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, mappedBy = "city")
     public Set<Club> getClubs() {
         return this.clubs;
-//        if (this.clubs != null) {
-//            return new HashSet<>(this.clubs);
-//        } else {
-//            return new HashSet<>();
-//        }
     }
 
     /**
@@ -212,7 +197,6 @@ public class City implements Serializable {
      */
     public void setClubs(final Set<Club> clubs) {
         this.clubs = clubs;
-        //this.clubs = new HashSet<>(clubs);
     }
 
     public float getLatitude() {
@@ -254,14 +238,14 @@ public class City implements Serializable {
     }
 
     public void setCountry(final Country country) {
-        this.country = country; //todo: clone
+        this.country = country; 
     }
 
     public void addClub(final Club club) {
         if (this.clubs == null) {
             this.clubs = new HashSet<>();
         }
-        this.clubs.add(club); //todo: clone
+        this.clubs.add(club); 
     }
 
     public void addTeam(final Team team) {
@@ -277,11 +261,6 @@ public class City implements Serializable {
     @OneToMany(mappedBy = "city", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     public Set<Team> getTeams() {
         return this.teams;
-//        if (this.teams != null) {
-//            return new HashSet<>(this.teams);
-//        } else {
-//            return new HashSet<>();
-//        }
     }
 
     /**
@@ -289,7 +268,6 @@ public class City implements Serializable {
      */
     public void setTeams(final Set<Team> teams) {
         this.teams = teams;
-        //this.teams = new HashSet<>(teams);
     }
 
     /**
