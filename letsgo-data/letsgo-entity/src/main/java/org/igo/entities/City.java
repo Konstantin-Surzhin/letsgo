@@ -69,6 +69,7 @@ public class City implements Serializable {
     private Set<GoUser> users;
     private Set<Club> clubs;
     private Set<Team> teams;
+    private Set<League> league;
 
     /**
      *
@@ -284,5 +285,20 @@ public class City implements Serializable {
      */
     public void setVersion(short version) {
         this.version = version;
+    }
+
+    /**
+     * @return the league
+     */
+    @OneToMany(mappedBy = "city", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    public Set<League> getLeague() {
+        return league;
+    }
+
+    /**
+     * @param league the league to set
+     */
+    public void setLeague(final Set<League> league) {
+        this.league = league;
     }
 }

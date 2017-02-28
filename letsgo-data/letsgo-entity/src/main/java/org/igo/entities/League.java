@@ -58,6 +58,7 @@ public class League implements Serializable {
     private Collection<Club> clubs;
     private Collection<UserDetails> usersCollection;
     private Country country;
+    private City city;
 
     /**
      *
@@ -225,6 +226,15 @@ public class League implements Serializable {
      */
     public void setClubs(Collection<Club> clubs) {
         this.clubs = clubs;
+    }
+
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
     }
 
 }
