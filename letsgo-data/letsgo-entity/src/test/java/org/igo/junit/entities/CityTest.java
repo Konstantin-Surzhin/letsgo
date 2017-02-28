@@ -207,7 +207,10 @@ public class CityTest {
                 em.getTransaction().commit();
             } catch (Exception ex) {
                 em.getTransaction().rollback();
-                System.err.println(ex.getLocalizedMessage());
+                System.out.println(ex.getLocalizedMessage());
+                for (Throwable t : ex.getSuppressed()){
+                   System.out.println("Suppressed: ------->>> " + t.getLocalizedMessage());
+                }
                 throw ex;
             }
         }

@@ -35,6 +35,7 @@ import org.igo.entities.League;
 import org.igo.entities.Team;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
@@ -97,6 +98,9 @@ public class ClubTest {
             em.getTransaction().begin();
             q.executeUpdate();
             em.getTransaction().commit();
+
+            em.clear();
+            em.getEntityManagerFactory().getCache().evictAll();
             em.close();
         }
     }
@@ -110,20 +114,29 @@ public class ClubTest {
 
         final Club club = new Club();
         club.setClubName("Болты и гайки");
-        assertTrue(club.getId() == 0);
+        assertTrue(club.getId() == -1);
 
         if (em != null) {
             try {
                 em.getTransaction().begin();
                 em.persist(club);
                 em.getTransaction().commit();
+
+                assertTrue(club.getId() != -1);
+
+                em.clear();
+                em.getEntityManagerFactory().getCache().evict(Club.class, club);
+
+                final Club clubFromDb = em.find(Club.class, club.getId());
+                assertNotNull(clubFromDb);
+
             } catch (Exception ex) {
                 em.getTransaction().rollback();
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             }
         }
-        assertTrue(club.getId() != 0);
+
     }
 
     @Test(expected = PersistenceException.class)

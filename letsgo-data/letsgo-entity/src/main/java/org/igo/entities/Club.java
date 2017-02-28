@@ -34,6 +34,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
@@ -56,7 +57,7 @@ import javax.validation.constraints.Size;
 public class Club implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private int id;
+    private int id = -1;
     private String clubName;
     private City city;
     private Country country;
@@ -81,7 +82,7 @@ public class Club implements Serializable {
      *
      * @param clubName
      */
-    public Club(String clubName) {
+    public Club(final String clubName) {
         this.clubName = clubName;
     }
 
@@ -91,7 +92,8 @@ public class Club implements Serializable {
      */
     @Id
     @Basic(optional = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "club_seq", strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "club_seq", sequenceName = "club_seq", allocationSize = 1)
     public Integer getId() {
         return id;
     }
@@ -100,7 +102,7 @@ public class Club implements Serializable {
      *
      * @param id
      */
-    public void setId(int id) {
+    public void setId(final int id) {
         this.id = id;
     }
 
@@ -118,7 +120,7 @@ public class Club implements Serializable {
      *
      * @param clubName
      */
-    public void setClubName(String clubName) {
+    public void setClubName(final String clubName) {
         this.clubName = clubName;
     }
 
@@ -145,8 +147,6 @@ public class Club implements Serializable {
         int hash = 7;
         hash = 29 * hash + this.id;
         hash = 29 * hash + Objects.hashCode(this.clubName);
-        hash = 29 * hash + Objects.hashCode(this.city);
-        hash = 29 * hash + Objects.hashCode(this.country);
         return hash;
     }
 
@@ -162,7 +162,10 @@ public class Club implements Serializable {
             return false;
         }
         final Club other = (Club) obj;
-        return this.id == other.id;
+        if (this.id != other.id) {
+            return false;
+        }
+        return Objects.equals(this.clubName, other.clubName);
     }
 
     @Override
@@ -192,18 +195,15 @@ public class Club implements Serializable {
      */
     @OneToMany(mappedBy = "club", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     public Set<Team> getTeams() {
-        if (this.teams != null) {
-            return new HashSet<>(this.teams);
-        } else {
-            return new HashSet<>();
-        }
+        return this.teams;
+
     }
 
     /**
      * @param teams the teams to set
      */
     public void setTeams(final Set<Team> teams) {
-        this.teams = new HashSet<>(teams);
+        this.teams = teams;
     }
 
     /**

@@ -92,7 +92,7 @@ public class City implements Serializable {
      */
     @Id
     @GeneratedValue(generator = "city_seq", strategy = GenerationType.AUTO)
-    @SequenceGenerator(name="city_seq",sequenceName="city_seq", allocationSize=1)
+    @SequenceGenerator(name = "city_seq", sequenceName = "city_seq", allocationSize = 1)
     public int getId() {
         return id;
     }
@@ -137,6 +137,14 @@ public class City implements Serializable {
     }
 
     @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + this.id;
+        hash = 29 * hash + Objects.hashCode(this.cityName);
+        return hash;
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -144,21 +152,14 @@ public class City implements Serializable {
         if (obj == null) {
             return false;
         }
-        if (!Objects.equals(getClass(), obj.getClass())) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
         final City other = (City) obj;
-        return this.id == other.id;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + this.id;
-        hash = 29 * hash + Float.floatToIntBits(this.latitude);
-        hash = 29 * hash + Float.floatToIntBits(this.longitude);
-        hash = 29 * hash + Objects.hashCode(this.cityName);
-        return hash;
+        if (this.id != other.id) {
+            return false;
+        }
+        return Objects.equals(this.cityName, other.cityName);
     }
 
     @Override
@@ -238,14 +239,14 @@ public class City implements Serializable {
     }
 
     public void setCountry(final Country country) {
-        this.country = country; 
+        this.country = country;
     }
 
     public void addClub(final Club club) {
         if (this.clubs == null) {
             this.clubs = new HashSet<>();
         }
-        this.clubs.add(club); 
+        this.clubs.add(club);
     }
 
     public void addTeam(final Team team) {
