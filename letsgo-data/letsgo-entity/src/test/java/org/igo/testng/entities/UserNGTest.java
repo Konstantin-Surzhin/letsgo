@@ -420,8 +420,8 @@ public class UserNGTest {
         System.out.println("getLeagueId");
         UserDetails instance = new UserDetails();
         League expResult = null;
-        League result = instance.getLeague();
-        assertEquals(result, expResult);
+        //League result = instance.getLeague();
+        //assertEquals(result, expResult);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
     }
@@ -434,7 +434,7 @@ public class UserNGTest {
         System.out.println("setLeagueId");
         League leagueId = null;
         UserDetails instance = new UserDetails();
-        instance.setLeague(leagueId);
+        //instance.setLeague(leagueId);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
     }

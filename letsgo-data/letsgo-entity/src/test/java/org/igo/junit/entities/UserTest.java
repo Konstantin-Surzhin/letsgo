@@ -420,8 +420,8 @@ public class UserTest {
         System.out.println("getLeagueId");
         UserDetails instance = new UserDetails();
         League expResult = null;
-        League result = instance.getLeague();
-        assertEquals(expResult, result);
+        //League result = instance.getLeague();
+        //assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -434,7 +434,7 @@ public class UserTest {
         System.out.println("setLeagueId");
         League leagueId = null;
         UserDetails instance = new UserDetails();
-        instance.setLeague(leagueId);
+//        instance.setLeague(leagueId);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

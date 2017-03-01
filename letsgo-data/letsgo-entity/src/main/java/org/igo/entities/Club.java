@@ -30,12 +30,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
 
@@ -61,7 +62,7 @@ public class Club implements Serializable {
     private String clubName;
     private City city;
     private Country country;
-    private League league;
+    private Set<League> leagues;
     private Set<Team> teams;
 
     /**
@@ -92,8 +93,16 @@ public class Club implements Serializable {
      */
     @Id
     @Basic(optional = false)
-    @GeneratedValue(generator = "club_seq", strategy = GenerationType.AUTO)
-    @SequenceGenerator(name = "club_seq", sequenceName = "club_seq", allocationSize = 1)
+    @GeneratedValue(/**/generator = "club_seq", strategy = GenerationType.TABLE)
+    @TableGenerator(
+            name = "club_seq",
+            table="hibernate_sequences",
+            pkColumnName = "sequence_name",
+            valueColumnName = "next_val",
+            pkColumnValue = "club_seq",
+            allocationSize = 10
+    )
+    //@SequenceGenerator(name = "club_seq", sequenceName = "club_seq", allocationSize = 1)
     public Integer getId() {
         return id;
     }
@@ -207,20 +216,17 @@ public class Club implements Serializable {
     }
 
     /**
-     *
-     * @return league
+     * @return the leagues
      */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_club_league"), name = "league_id", referencedColumnName = "id")
-    public League getLeague() {
-        return league;
+    @ManyToMany(mappedBy = "clubs", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    public Set<League> getLeagues() {
+        return leagues;
     }
 
     /**
-     *
-     * @param league
+     * @param leagues the leagues to set
      */
-    public void setLeague(League league) {
-        this.league = league;
+    public void setLeagues(Set<League> leagues) {
+        this.leagues = leagues;
     }
 }

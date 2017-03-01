@@ -74,7 +74,7 @@ public class UserDetails implements Serializable {
     private int staus;
     private int win;
     private int nescape;
-    private League league;
+   // private League league;
     private Team team;
     private Room room;
 
@@ -306,19 +306,19 @@ public class UserDetails implements Serializable {
      *
      * @return
      */
-    @ManyToOne
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_user_league"), name = "league_id", referencedColumnName = "id")
-    public League getLeague() {
-        return league;
-    }
+//    @ManyToOne
+//    @JoinColumn(foreignKey = @ForeignKey(name = "fk_user_league"), name = "league_id", referencedColumnName = "id")
+//    public League getLeague() {
+//        return league;
+//    }
 
     /**
      *
      * @param league
      */
-    public void setLeague(League league) {
-        this.league = league;
-    }
+//    public void setLeague(League league) {
+//        this.league = league;
+//    }
 
     /**
      *
@@ -369,7 +369,7 @@ public class UserDetails implements Serializable {
         hash = 59 * hash + this.staus;
         hash = 59 * hash + this.win;
         hash = 59 * hash + this.nescape;
-        hash = 59 * hash + Objects.hashCode(this.league);
+//        hash = 59 * hash + Objects.hashCode(this.league);
         hash = 59 * hash + Objects.hashCode(this.team);
         hash = 59 * hash + Objects.hashCode(this.room);
         hash = 59 * hash + Objects.hashCode(this.club);

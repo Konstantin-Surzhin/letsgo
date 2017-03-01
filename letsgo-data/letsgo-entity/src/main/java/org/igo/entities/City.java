@@ -29,12 +29,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
 import javax.validation.constraints.Size;
@@ -69,7 +71,7 @@ public class City implements Serializable {
     private Set<GoUser> users;
     private Set<Club> clubs;
     private Set<Team> teams;
-    private Set<League> league;
+    private Set<League> leagues;
 
     /**
      *
@@ -92,8 +94,17 @@ public class City implements Serializable {
      * @return
      */
     @Id
-    @GeneratedValue(generator = "city_seq", strategy = GenerationType.AUTO)
-    @SequenceGenerator(name = "city_seq", sequenceName = "city_seq", allocationSize = 1)
+    @TableGenerator(
+            name = "city_seq",
+            table="hibernate_sequences",
+            pkColumnName = "sequence_name",
+            valueColumnName = "next_val",
+            pkColumnValue = "city",
+            allocationSize = 10
+    )
+    @GeneratedValue(/**/generator = "city_seq", strategy = GenerationType.TABLE)
+
+    //@SequenceGenerator(name = "city_seq", sequenceName = "city_seq", allocationSize = 1)
     public int getId() {
         return id;
     }
@@ -188,7 +199,7 @@ public class City implements Serializable {
      *
      * @return
      */
-    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, mappedBy = "city")
+    @OneToMany(mappedBy = "city", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     public Set<Club> getClubs() {
         return this.clubs;
     }
@@ -288,17 +299,17 @@ public class City implements Serializable {
     }
 
     /**
-     * @return the league
+     * @return the leagues
      */
-    @OneToMany(mappedBy = "city", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    public Set<League> getLeague() {
-        return league;
+    @ManyToMany(mappedBy = "cities", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    public Set<League> getLeagues() {
+        return leagues;
     }
 
     /**
-     * @param league the league to set
+     * @param leagues the leagues to set
      */
-    public void setLeague(final Set<League> league) {
-        this.league = league;
+    public void setLeagues(final Set<League> leagues) {
+        this.leagues = leagues;
     }
 }

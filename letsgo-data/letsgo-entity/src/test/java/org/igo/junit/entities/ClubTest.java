@@ -393,6 +393,37 @@ public class ClubTest {
         }
     }
 
+    @Test(expected = PersistenceException.class)
+    public void testDeleteClubButTeamsNotDeleteYet() throws PersistenceException {
+        System.out.println("DeleteClubButTeamsNotDeleteYet");
+
+        final Club club = new Club("Кутые окуни");
+        final Set<Team> teams = new HashSet<>();
+        teams.add(new Team("Молодежка"));
+        teams.add(new Team("Ветераны"));
+
+        if (em != null) {
+            try {
+                club.setTeams(teams);
+                em.getTransaction().begin();
+                em.persist(club);
+                em.getTransaction().commit();
+
+                em.createQuery("DELETE FROM Club").executeUpdate();
+
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            } finally {
+                final Query q = em.createQuery("DELETE FROM Team");
+                em.getTransaction().begin();
+                q.executeUpdate();
+                em.getTransaction().commit();
+            }
+        }
+    }
+
     @Test(expected = RollbackException.class)
     public void testPersisClubButCountryNotYetPesisted() throws Exception {
         System.out.println("PersisClubButCountryNotYetPesisted");
@@ -467,55 +498,18 @@ public class ClubTest {
         }
     }
 
-    @Test
-    public void testSetLeagueToCity() {
-        System.out.println("SetLeagueToCity");
-
-        final League league = new League("Городская лига А");
-        final Club club = new Club("Ротор");
-        club.setLeague(league);
-        league.addClub(club);
-
-        if (em != null) {
-            try {
-                em.getTransaction().begin();
-                em.persist(league);
-                em.persist(club);
-                em.getTransaction().commit();
-                final int clubSize = em
-                        .createQuery("SELECT c FROM Club c")
-                        .getResultList()
-                        .size();
-                assertThat(clubSize, equalTo(1));
-
-                final int leagueSize = em
-                        .createQuery("SELECT l FROM League l")
-                        .getResultList()
-                        .size();
-                assertThat(leagueSize, equalTo(1));
-
-            } catch (Exception ex) {
-                em.getTransaction().rollback();
-                System.err.println(ex.getLocalizedMessage());
-                throw ex;
-            } finally {
-                final Query q1 = em.createQuery("DELETE FROM Club");
-                final Query q2 = em.createQuery("DELETE FROM League");
-                em.getTransaction().begin();
-                q1.executeUpdate();
-                q2.executeUpdate();
-                em.getTransaction().commit();
-            }
-        }
-    }
+    
 
     @Test(expected = PersistenceException.class)
-    public void testPersistCityButLeagueNotPersistYet() throws Exception {
-        System.out.println("PersistCityButLeagueNotPersistYet");
+    public void testPersistClubButLeagueNotPersistYet() throws Exception {
+        System.out.println("PersistClubButLeagueNotPersistYet");
 
         final League league = new League("Городская лига А");
+        final Set<League> leagues = new HashSet<>();
+        leagues.add(league);
         final Club club = new Club("Ротор");
-        club.setLeague(league);
+        club.setLeagues(leagues);
+        
 
         if (em != null) {
             try {
@@ -532,7 +526,7 @@ public class ClubTest {
                 final Query q2 = em.createQuery("DELETE FROM League");
                 em.getTransaction().begin();
                 q1.executeUpdate();
-                q2.executeUpdate();
+                //q2.executeUpdate();
                 em.getTransaction().commit();
             }
         }

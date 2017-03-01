@@ -20,6 +20,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -30,11 +31,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
 
@@ -54,11 +58,11 @@ public class League implements Serializable {
     private static final long serialVersionUID = 1L;
     private short id;
     private String leagueName;
-    private Collection<Team> teams;
-    private Collection<Club> clubs;
-    private Collection<UserDetails> usersCollection;
     private Country country;
-    private City city;
+    private Set<Team> teams;
+    private Set<Club> clubs;
+    // private Set<UserDetails> users;
+    private Set<City> cities;
 
     /**
      *
@@ -97,9 +101,17 @@ public class League implements Serializable {
      * @return
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @GeneratedValue(/**/generator = "league_seq", strategy = GenerationType.TABLE)
+    @TableGenerator(
+            name = "league_seq",
+            table = "hibernate_sequences",
+            pkColumnName = "sequence_name",
+            valueColumnName = "next_val",
+            pkColumnValue = "league_seq",
+            allocationSize = 10
+    )
+    //@SequenceGenerator(name = "league_seq", sequenceName = "league_seq", allocationSize = 1)
     public short getId() {
         return id;
     }
@@ -144,7 +156,7 @@ public class League implements Serializable {
      *
      * @param teams
      */
-    public void setTeams(Collection<Team> teams) {
+    public void setTeams(Set<Team> teams) {
         this.teams = teams;
     }
 
@@ -152,26 +164,24 @@ public class League implements Serializable {
      *
      * @return
      */
-    @OneToMany(mappedBy = "league")
-    public Collection<UserDetails> getUsersCollection() {
-        return usersCollection;
-    }
-
+//    @OneToMany(mappedBy = "league")
+//    public Set<UserDetails> getUsersCollection() {
+//        return users;
+//    }
     /**
      *
-     * @param usersCollection
+     * @param users
      */
-    public void setUsersCollection(Collection<UserDetails> usersCollection) {
-        this.usersCollection = usersCollection;
-    }
-
+//    public void setUsers(Set<UserDetails> users) {
+//        this.users = users;
+//    }
     @Override
     public int hashCode() {
         int hash = 5;
         hash = 23 * hash + this.id;
         hash = 23 * hash + Objects.hashCode(this.leagueName);
         hash = 23 * hash + Objects.hashCode(this.teams);
-        hash = 23 * hash + Objects.hashCode(this.usersCollection);
+//        hash = 23 * hash + Objects.hashCode(this.users);
         hash = 23 * hash + Objects.hashCode(this.country);
         return hash;
     }
@@ -216,25 +226,33 @@ public class League implements Serializable {
     /**
      * @return the clubs
      */
-    @OneToMany(mappedBy = "league", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    public Collection<Club> getClubs() {
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_league_club"), name = "league_id", referencedColumnName = "id")
+    public Set<Club> getClubs() {
         return clubs;
     }
 
     /**
      * @param clubs the clubs to set
      */
-    public void setClubs(Collection<Club> clubs) {
+    public void setClubs(Set<Club> clubs) {
         this.clubs = clubs;
     }
 
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    public City getCity() {
-        return city;
+    /**
+     * @return the cities
+     */
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_league_city"), name = "league_id", referencedColumnName = "id")
+    public Set<City> getCities() {
+        return cities;
     }
 
-    public void setCity(City city) {
-        this.city = city;
+    /**
+     * @param cities the cities to set
+     */
+    public void setCities(Set<City> cities) {
+        this.cities = cities;
     }
 
 }
