@@ -27,7 +27,6 @@ import javax.persistence.Query;
 import static org.hamcrest.CoreMatchers.equalTo;
 import org.igo.entities.Club;
 import org.igo.entities.League;
-import static org.igo.junit.entities.CityCacheTest.emf;
 import org.junit.AfterClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
