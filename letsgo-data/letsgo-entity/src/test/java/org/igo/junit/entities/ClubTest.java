@@ -498,9 +498,7 @@ public class ClubTest {
         }
     }
 
-    
-
-    @Test(expected = PersistenceException.class)
+    @Test
     public void testPersistClubButLeagueNotPersistYet() throws Exception {
         System.out.println("PersistClubButLeagueNotPersistYet");
 
@@ -509,7 +507,6 @@ public class ClubTest {
         leagues.add(league);
         final Club club = new Club("Ротор");
         club.setLeagues(leagues);
-        
 
         if (em != null) {
             try {
@@ -526,7 +523,48 @@ public class ClubTest {
                 final Query q2 = em.createQuery("DELETE FROM League");
                 em.getTransaction().begin();
                 q1.executeUpdate();
-                //q2.executeUpdate();
+                q2.executeUpdate();
+                em.getTransaction().commit();
+            }
+        }
+    }
+
+    @Test
+    public void testAddTeam() throws PersistenceException {
+        System.out.println("AddTeam");
+
+        final Club club = new Club("Торпедо");
+        final Team team = new Team("Ветераны");
+
+        team.setClub(club);
+        club.addTeam(team);
+
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(club);
+                em.getTransaction().commit();
+                final int teamSize = em
+                        .createQuery("SELECT t FROM Team t")
+                        .setHint("org.hibernate.readOnly", true)
+                        .getResultList()
+                        .size();
+                assertThat(teamSize, equalTo(1));
+                final int ClubSize = em
+                        .createQuery("SELECT t FROM Club t")
+                        .setHint("org.hibernate.readOnly", true)
+                        .getResultList()
+                        .size();
+                assertThat(ClubSize, equalTo(1));
+
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            } finally {
+                final Query q = em.createQuery("DELETE FROM Team");
+                em.getTransaction().begin();
+                q.executeUpdate();
                 em.getTransaction().commit();
             }
         }
