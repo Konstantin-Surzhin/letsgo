@@ -99,10 +99,9 @@ public class Club implements Serializable {
             table="hibernate_sequences",
             pkColumnName = "sequence_name",
             valueColumnName = "next_val",
-            pkColumnValue = "club_seq",
+            pkColumnValue = "club",
             allocationSize = 10
     )
-    //@SequenceGenerator(name = "club_seq", sequenceName = "club_seq", allocationSize = 1)
     public Integer getId() {
         return id;
     }

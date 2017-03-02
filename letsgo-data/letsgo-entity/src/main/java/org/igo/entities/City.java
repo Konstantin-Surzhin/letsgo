@@ -34,7 +34,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.UniqueConstraint;
@@ -102,9 +101,7 @@ public class City implements Serializable {
             pkColumnValue = "city",
             allocationSize = 10
     )
-    @GeneratedValue(/**/generator = "city_seq", strategy = GenerationType.TABLE)
-
-    //@SequenceGenerator(name = "city_seq", sequenceName = "city_seq", allocationSize = 1)
+    @GeneratedValue(generator = "city_seq", strategy = GenerationType.TABLE)
     public int getId() {
         return id;
     }

@@ -17,7 +17,7 @@
 package org.igo.junit.entities;
 
 import java.util.Date;
-import org.igo.entities.UserDetails;
+import org.igo.entities.GoUser;
 import org.igo.entities.UserBan;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -166,8 +166,8 @@ public class UserBanTest {
     public void testGetUserId() {
         System.out.println("getUserId");
         UserBan instance = new UserBan();
-        UserDetails expResult = null;
-        UserDetails result = instance.getUserDetails();
+        GoUser expResult = null;
+        GoUser result = instance.getGoUser();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -179,7 +179,7 @@ public class UserBanTest {
     @Test
     public void testSetUserId() {
         System.out.println("setUserId");
-//        UserDetails userId = null;
+//        GoUser userId = null;
 //        UserBan instance = new UserBan();
 //        instance.sesetUserserId);
         // TODO review the generated test code and remove the default call to fail.

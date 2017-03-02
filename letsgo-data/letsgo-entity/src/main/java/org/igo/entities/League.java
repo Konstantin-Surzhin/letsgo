@@ -36,7 +36,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.UniqueConstraint;
@@ -61,7 +60,7 @@ public class League implements Serializable {
     private Country country;
     private Set<Team> teams;
     private Set<Club> clubs;
-    // private Set<UserDetails> users;
+    private Set<GoUser> users;
     private Set<City> cities;
 
     /**
@@ -164,17 +163,18 @@ public class League implements Serializable {
      *
      * @return
      */
-//    @OneToMany(mappedBy = "league")
-//    public Set<UserDetails> getUsersCollection() {
-//        return users;
-//    }
+    @OneToMany(mappedBy = "league")
+    public Set<GoUser> getUsers() {
+        return users;
+    }
     /**
      *
      * @param users
      */
-//    public void setUsers(Set<UserDetails> users) {
-//        this.users = users;
-//    }
+    public void setUsers(Set<GoUser> users) {
+        this.users = users;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 5;

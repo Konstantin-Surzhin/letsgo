@@ -20,7 +20,7 @@ import java.util.Collection;
 import java.util.Date;
 import org.igo.entities.GameMove;
 import org.igo.entities.MoveComment;
-import org.igo.entities.UserDetails;
+import org.igo.entities.GoUser;
 import static org.testng.Assert.*;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -222,8 +222,8 @@ public class MoveCommentNGTest {
     public void testGetUserId() {
         System.out.println("getUserId");
         MoveComment instance = new MoveComment();
-        UserDetails expResult = null;
-        UserDetails result = instance.getUserDetails();
+        GoUser expResult = null;
+        GoUser result = instance.getGoUser();
         assertEquals(result, expResult);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
@@ -235,9 +235,9 @@ public class MoveCommentNGTest {
     @Test
     public void testSetUserId() {
         System.out.println("setUserId");
-        UserDetails userId = null;
+        GoUser userId = null;
         MoveComment instance = new MoveComment();
-        instance.setUserDetails(userId);
+        instance.setGoUser(userId);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
     }

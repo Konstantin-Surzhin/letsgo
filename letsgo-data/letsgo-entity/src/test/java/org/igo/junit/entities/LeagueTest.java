@@ -20,7 +20,7 @@ import java.util.Collection;
 import java.util.Set;
 import org.igo.entities.League;
 import org.igo.entities.Team;
-import org.igo.entities.UserDetails;
+import org.igo.entities.GoUser;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -141,8 +141,8 @@ public class LeagueTest {
     public void testGetUsersCollection() {
         System.out.println("getUsersCollection");
         League instance = new League();
-        Collection<UserDetails> expResult = null;
-        //Collection<UserDetails> result = instance.getUsersCollection();
+        Collection<GoUser> expResult = null;
+        //Collection<GoUser> result = instance.getUsersCollection();
         //assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -154,7 +154,7 @@ public class LeagueTest {
     @Test
     public void testSetUsersCollection() {
         System.out.println("setUsersCollection");
-        Set<UserDetails> users = null;
+        Set<GoUser> users = null;
         League instance = new League();
 //        instance.setUsers(users);
         // TODO review the generated test code and remove the default call to fail.

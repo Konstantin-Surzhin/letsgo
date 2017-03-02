@@ -17,7 +17,7 @@
 package org.igo.testng.entities;
 
 import org.igo.entities.Degree;
-import org.igo.entities.UserDetails;
+import org.igo.entities.GoUser;
 import org.igo.entities.UserDegree;
 import org.igo.entities.UserDegreePK;
 import static org.testng.Assert.*;
@@ -108,8 +108,8 @@ public class UserDegreeNGTest {
     public void testGetUsers() {
         System.out.println("getUsers");
         UserDegree instance = new UserDegree();
-        UserDetails expResult = null;
-        UserDetails result = instance.getUserDetails();
+        GoUser expResult = null;
+        GoUser result = instance.getGoUser();
         assertEquals(result, expResult);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
@@ -121,9 +121,9 @@ public class UserDegreeNGTest {
     @org.testng.annotations.Test
     public void testSetUsers() {
         System.out.println("setUsers");
-        UserDetails users = null;
+        GoUser users = null;
         UserDegree instance = new UserDegree();
-        instance.setUserDetails(users);
+        instance.setGoUser(users);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
     }

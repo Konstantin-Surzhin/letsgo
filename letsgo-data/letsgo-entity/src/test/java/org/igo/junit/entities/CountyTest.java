@@ -115,7 +115,7 @@ public class CountyTest {
         country.setCountryCodeAlpha2("RU");
         country.setCountryCodeAlpha3("RUS");
 
-        assertTrue(country.getId() == 0);
+        assertTrue(country.getId() == -1);
 
         if (em != null) {
             try {
@@ -229,7 +229,7 @@ public class CountyTest {
     }
 
     @Test(expected = ConstraintViolationException.class)
-    public void testSetEmtyAlpha2() {
+    public void testSetEmtyAlpha2() throws Exception{
         System.out.println("EmtyAlpha2");
 
         final Country country = new Country();

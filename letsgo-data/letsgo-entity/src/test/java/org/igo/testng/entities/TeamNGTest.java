@@ -19,7 +19,7 @@ package org.igo.testng.entities;
 import java.util.Collection;
 import org.igo.entities.League;
 import org.igo.entities.Team;
-import org.igo.entities.UserDetails;
+import org.igo.entities.GoUser;
 import static org.testng.Assert.*;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -153,7 +153,7 @@ public class TeamNGTest {
     @Test
     public void testSetUsersCollection() {
         System.out.println("setUsersCollection");
-        Collection<UserDetails> usersCollection = null;
+        Collection<GoUser> usersCollection = null;
         Team instance = new Team();
         instance.setUsers(usersCollection);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.

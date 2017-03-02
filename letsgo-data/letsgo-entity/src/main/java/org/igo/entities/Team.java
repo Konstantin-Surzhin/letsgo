@@ -57,7 +57,7 @@ public class Team implements Serializable {
     private short id;
     private String teamName;
     private League league;
-    private Collection<UserDetails> users;
+    private Collection<GoUser> users;
     private City city;
     private Country country;
     private Club club;
@@ -161,7 +161,7 @@ public class Team implements Serializable {
      * @return
      */
     @OneToMany(mappedBy = "team", fetch = FetchType.LAZY)
-    public Collection<UserDetails> getUsers() {
+    public Collection<GoUser> getUsers() {
         return users;
     }
 
@@ -169,7 +169,7 @@ public class Team implements Serializable {
      *
      * @param users
      */
-    public void setUsers(Collection<UserDetails> users) {
+    public void setUsers(Collection<GoUser> users) {
         this.users = users;
     }
 

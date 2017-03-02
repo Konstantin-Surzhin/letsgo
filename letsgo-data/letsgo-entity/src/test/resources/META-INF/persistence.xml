@@ -26,7 +26,6 @@
     <class>org.igo.entities.GameStatus</class>
     <class>org.igo.entities.GameType</class>
     <class>org.igo.entities.GoUser</class>
-    <class>org.igo.entities.UserDetails</class>
     <shared-cache-mode>ALL</shared-cache-mode>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:log4jdbc:mysql://localhost:3306/letsgo?UseUnicode=true&amp;characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull&amp;useTimezone=true&amp;serverTimezone=UTC"/>
@@ -45,6 +44,7 @@
       <property name="hibernate.cache.use_query_cache" value="true"/>
       <property name="hibernate.dialect" value="org.mysql.utf8.dialect.MysqlUTF8Dialect"/>
       <property name="hibernate.jdbc.time_zone" value="UTC"/>
+      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
     </properties>
   </persistence-unit>
   <persistence-unit name="testGamePU_H2" transaction-type="RESOURCE_LOCAL">
@@ -73,7 +73,6 @@
     <class>org.igo.entities.GameStatus</class>
     <class>org.igo.entities.GameType</class>
     <class>org.igo.entities.GoUser</class>
-    <class>org.igo.entities.UserDetails</class>
     <shared-cache-mode>ALL</shared-cache-mode>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:log4jdbc:h2:mem:letsgo;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;DATABASE_TO_UPPER=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS letsgo;"/>

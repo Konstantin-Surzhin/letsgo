@@ -44,7 +44,7 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "MOVE_COMMENTS", uniqueConstraints = {
-    @UniqueConstraint(name = "uk_game_user_move_comment", columnNames = {"move_game_id", "user_details_id", "move_ndx", "move_comment"})})
+    @UniqueConstraint(name = "uk_game_user_move_comment", columnNames = {"move_game_id", "gouser_id", "move_ndx", "move_comment"})})
 @NamedQueries({
     @NamedQuery(name = "MoveComment.findAll", query = "SELECT m FROM MoveComment m")
     ,@NamedQuery(name = "MoveComment.findById", query = "SELECT m FROM MoveComment m WHERE m.id = :id")
@@ -61,7 +61,7 @@ public class MoveComment implements Serializable {
     private GameMove gamesMoves;
     private Collection<MoveComment> moveCommentCollection;
     private MoveComment inReplayToId;
-    private UserDetails userDetails;
+    private GoUser goUser;
 
     /**
      *
@@ -207,17 +207,17 @@ public class MoveComment implements Serializable {
      * @return
      */
     @ManyToOne
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_moveComment_userDetails"), name = "user_details_id", referencedColumnName = "id")
-    public UserDetails getUserDetails() {
-        return userDetails;
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_moveComment_goUser"), name = "gouser_id", referencedColumnName = "id")
+    public GoUser getGoUser() {
+        return goUser;
     }
 
     /**
      *
-     * @param userDetails
+     * @param goUser
      */
-    public void setUserDetails(UserDetails userDetails) {
-        this.userDetails = userDetails;
+    public void setGoUser(GoUser goUser) {
+        this.goUser = goUser;
     }
 
     @Override
@@ -229,7 +229,7 @@ public class MoveComment implements Serializable {
         hash = 53 * hash + Objects.hashCode(this.gamesMoves);
         hash = 53 * hash + Objects.hashCode(this.moveCommentCollection);
         hash = 53 * hash + Objects.hashCode(this.inReplayToId);
-        hash = 53 * hash + Objects.hashCode(this.userDetails);
+        hash = 53 * hash + Objects.hashCode(this.goUser);
         return hash;
     }
 

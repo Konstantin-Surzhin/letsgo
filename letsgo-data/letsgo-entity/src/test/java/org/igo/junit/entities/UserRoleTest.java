@@ -17,7 +17,7 @@
 package org.igo.junit.entities;
 
 import java.util.Collection;
-import org.igo.entities.UserDetails;
+import org.igo.entities.GoUser;
 import org.igo.entities.UserRole;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -139,8 +139,8 @@ public class UserRoleTest {
     public void testGetUsersCollection() {
         System.out.println("getUsersCollection");
 //        UserRole instance = new UserRole();
-//        Collection<UserDetails> expResult = null;
-//        Collection<UserDetails> result = instance.getUserCollection();
+//        Collection<GoUser> expResult = null;
+//        Collection<GoUser> result = instance.getUserCollection();
 //        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -152,7 +152,7 @@ public class UserRoleTest {
     @Test
     public void testSetUsersCollection() {
         System.out.println("setUsersCollection");
-//        Collection<UserDetails> usersCollection = null;
+//        Collection<GoUser> usersCollection = null;
 //        UserRole instance = new UserRole();
 //        instance.setUserCollection(usersCollection);
         // TODO review the generated test code and remove the default call to fail.

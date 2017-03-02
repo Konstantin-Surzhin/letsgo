@@ -57,7 +57,7 @@ public class UserBan implements Serializable {
     private String comment;
     private short duration;
     private Date startDate = Calendar.getInstance().getTime();
-    private UserDetails userDetails;
+    private GoUser goUser;
 
     /**
      *
@@ -168,17 +168,17 @@ public class UserBan implements Serializable {
      * @return
      */
     @ManyToOne(optional = false)
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_userBan_userDetails"), name = "user_details_id", referencedColumnName = "id")
-    public UserDetails getUserDetails() {
-        return userDetails;
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_userBan_goUser"), name = "user_details_id", referencedColumnName = "id")
+    public GoUser getGoUser() {
+        return goUser;
     }
 
     /**
      *
-     * @param userDetails
+     * @param goUser
      */
-    public void setUserDetails(UserDetails userDetails) {
-        this.userDetails = userDetails;
+    public void setGoUser(GoUser goUser) {
+        this.goUser = goUser;
     }
 
     @Override
@@ -188,7 +188,7 @@ public class UserBan implements Serializable {
         hash = 83 * hash + Objects.hashCode(this.comment);
         hash = 83 * hash + this.duration;
         hash = 83 * hash + Objects.hashCode(this.startDate);
-        hash = 83 * hash + Objects.hashCode(this.userDetails);
+        hash = 83 * hash + Objects.hashCode(this.goUser);
         return hash;
     }
 

@@ -20,7 +20,7 @@ import java.util.Collection;
 import java.util.Date;
 import org.igo.entities.Game;
 import org.igo.entities.GameComment;
-import org.igo.entities.UserDetails;
+import org.igo.entities.GoUser;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -222,8 +222,8 @@ public class GameCommentTest {
     public void testGetUserId() {
         System.out.println("getUserId");
         GameComment instance = new GameComment();
-        UserDetails expResult = null;
-        UserDetails result = instance.getUserDetails();
+        GoUser expResult = null;
+        GoUser result = instance.getGoUser();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -235,7 +235,7 @@ public class GameCommentTest {
     @Test
     public void testSetUserId() {
         System.out.println("setUserId");
-//        UserDetails userId = null;
+//        GoUser userId = null;
 //        GameComment instance = new GameComment();
 //        instance.sesetUserserId);
         // TODO review the generated test code and remove the default call to fail.

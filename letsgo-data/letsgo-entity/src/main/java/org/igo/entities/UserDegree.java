@@ -45,7 +45,7 @@ public class UserDegree implements Serializable {
     private static final long serialVersionUID = 1L;
     protected UserDegreePK userDegreePK;
     private Integer degreeType;
-    private UserDetails userDetails;
+    private GoUser goUser;
     private Degree degree;
 
     /**
@@ -110,17 +110,17 @@ public class UserDegree implements Serializable {
      * @return
      */
     @ManyToOne(optional = false)
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_userDegree_userDetails"), name = "user_details_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
-    public UserDetails getUserDetails() {
-        return userDetails;
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_userDegree_goUser"), name = "gouser_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
+    public GoUser getGoUser() {
+        return goUser;
     }
 
     /**
      *
-     * @param userDetails
+     * @param goUser
      */
-    public void setUserDetails(UserDetails userDetails) {
-        this.userDetails = userDetails;
+    public void setGoUser(GoUser goUser) {
+        this.goUser = goUser;
     }
 
     /**
@@ -147,7 +147,7 @@ public class UserDegree implements Serializable {
         int hash = 7;
         hash = 59 * hash + Objects.hashCode(this.userDegreePK);
         hash = 59 * hash + Objects.hashCode(this.degreeType);
-        hash = 59 * hash + Objects.hashCode(this.userDetails);
+        hash = 59 * hash + Objects.hashCode(this.goUser);
         hash = 59 * hash + Objects.hashCode(this.degree);
         return hash;
     }

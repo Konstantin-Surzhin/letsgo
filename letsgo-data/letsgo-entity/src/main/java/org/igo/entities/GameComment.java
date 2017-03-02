@@ -45,7 +45,7 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "GAME_COMMENTS", uniqueConstraints = {
-    @UniqueConstraint(name = "uk_game_userDetail_comment", columnNames = {"game_id", "user_details_id", "comment"})})
+    @UniqueConstraint(name = "uk_game_userDetail_comment", columnNames = {"game_id", "gouser_id", "comment"})})
 @NamedQueries({
     @NamedQuery(name = "GameComment.findAll", query = "SELECT g FROM GameComment g")
     ,@NamedQuery(name = "GameComment.findById", query = "SELECT g FROM GameComment g WHERE g.id = :id")
@@ -60,7 +60,7 @@ public class GameComment implements Serializable {
     private Game game;
     private Collection<GameComment> gameCommentCollection;
     private GameComment inReplayToId;
-    private UserDetails userDetails;
+    private GoUser goUser;
 
     /**
      *
@@ -204,17 +204,17 @@ public class GameComment implements Serializable {
      * @return
      */
     @ManyToOne(optional = false)
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_gameComment_userDetails"), name = "user_details_id", referencedColumnName = "id", nullable = false)
-    public UserDetails getUserDetails() {
-        return userDetails;
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_gameComment_goUser"), name = "gouser_id", referencedColumnName = "id", nullable = false)
+    public GoUser getGoUser() {
+        return goUser;
     }
 
     /**
      *
-     * @param userDetails
+     * @param goUser
      */
-    public void setUserDetails(UserDetails userDetails) {
-        this.userDetails = userDetails;
+    public void setGoUser(GoUser goUser) {
+        this.goUser = goUser;
     }
 
     @Override
@@ -226,7 +226,7 @@ public class GameComment implements Serializable {
         hash = 97 * hash + Objects.hashCode(this.game);
         hash = 97 * hash + Objects.hashCode(this.gameCommentCollection);
         hash = 97 * hash + Objects.hashCode(this.inReplayToId);
-        hash = 97 * hash + Objects.hashCode(this.userDetails);
+        hash = 97 * hash + Objects.hashCode(this.goUser);
         return hash;
     }
 

@@ -52,7 +52,7 @@ public class UserGame implements Serializable {
     protected UserGamePK userGamePK;
     private int color;
     private Game games;
-    private UserDetails userDetails;
+    private GoUser goUser;
 
     /**
      *
@@ -145,17 +145,17 @@ public class UserGame implements Serializable {
      * @return
      */
     @ManyToOne(optional = false)
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_userGame_userDetails"),name = "user_details_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
-    public UserDetails getUserDetails() {
-        return userDetails;
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_userGame_goUser"),name = "user_details_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
+    public GoUser getGoUser() {
+        return goUser;
     }
 
     /**
      *
-     * @param userDetails
+     * @param goUser
      */
-    public void setUserDetails(UserDetails userDetails) {
-        this.userDetails = userDetails;
+    public void setGoUser(GoUser goUser) {
+        this.goUser = goUser;
     }
 
     @Override
@@ -164,7 +164,7 @@ public class UserGame implements Serializable {
         hash = 83 * hash + Objects.hashCode(this.userGamePK);
         hash = 83 * hash + this.color;
         hash = 83 * hash + Objects.hashCode(this.games);
-        hash = 83 * hash + Objects.hashCode(this.userDetails);
+        hash = 83 * hash + Objects.hashCode(this.goUser);
         return hash;
     }
 

@@ -17,7 +17,7 @@
 package org.igo.junit.entities;
 
 import org.igo.entities.Degree;
-import org.igo.entities.UserDetails;
+import org.igo.entities.GoUser;
 import org.igo.entities.UserDegree;
 import org.igo.entities.UserDegreePK;
 import org.junit.After;
@@ -113,8 +113,8 @@ public class UserDegreeTest {
     public void testGetUsers() {
         System.out.println("getUsers");
         UserDegree instance = new UserDegree();
-        UserDetails expResult = null;
-        UserDetails result = instance.getUserDetails();
+        GoUser expResult = null;
+        GoUser result = instance.getGoUser();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -126,9 +126,9 @@ public class UserDegreeTest {
     @Test
     public void testSetUsers() {
         System.out.println("setUsers");
-        UserDetails users = null;
+        GoUser users = null;
         UserDegree instance = new UserDegree();
-        instance.setUserDetails(users);
+        instance.setGoUser(users);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

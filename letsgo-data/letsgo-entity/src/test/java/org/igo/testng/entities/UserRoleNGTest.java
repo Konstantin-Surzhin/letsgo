@@ -151,7 +151,7 @@ public class UserRoleNGTest {
     @Test
     public void testSetUserCollection() {
         System.out.println("setUserCollection");
-//        Collection<UserDetails> userCollection = null;
+//        Collection<GoUser> userCollection = null;
 //        UserRole instance = new UserRole();
 //        instance.setUserCollection(userCollection);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.

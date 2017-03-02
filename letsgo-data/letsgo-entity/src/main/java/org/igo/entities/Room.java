@@ -47,7 +47,7 @@ public class Room implements Serializable {
     private static final long serialVersionUID = 1L;
     private short id;
     private String roomName;
-    private Collection<UserDetails> usersCollection;
+    private Collection<GoUser> usersCollection;
 
     /**
      *
@@ -118,7 +118,7 @@ public class Room implements Serializable {
      * @return
      */
     @OneToMany(mappedBy = "room")
-    public Collection<UserDetails> getUsersCollection() {
+    public Collection<GoUser> getUsersCollection() {
         return usersCollection;
     }
 
@@ -126,7 +126,7 @@ public class Room implements Serializable {
      *
      * @param usersCollection
      */
-    public void setUsersCollection(Collection<UserDetails> usersCollection) {
+    public void setUsersCollection(Collection<GoUser> usersCollection) {
         this.usersCollection = usersCollection;
     }
 

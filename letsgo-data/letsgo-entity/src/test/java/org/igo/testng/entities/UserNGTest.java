@@ -16,19 +16,17 @@
  */
 package org.igo.testng.entities;
 
-import java.util.Collection;
+import java.util.Set;
 import java.util.Date;
-import org.igo.entities.City;
 import org.igo.entities.GameComment;
 import org.igo.entities.League;
 import org.igo.entities.MoveComment;
 import org.igo.entities.Room;
 import org.igo.entities.Team;
-import org.igo.entities.UserDetails;
+import org.igo.entities.GoUser;
 import org.igo.entities.UserBan;
 import org.igo.entities.UserDegree;
 import org.igo.entities.UserGame;
-import org.igo.entities.UserRole;
 import static org.testng.Assert.*;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -62,12 +60,12 @@ public class UserNGTest {
     }
 
     /**
-     * Тест метод getId, класса UserDetails.
+     * Тест метод getId, класса GoUser.
      */
 //    @Test
 //    public void testGetId() {
 //        System.out.println("getId");
-//        UserDetails instance = new UserDetails();
+//        GoUser instance = new GoUser();
 //        Integer expResult = null;
 //        Integer result = instance.getGoUser();
 //        assertEquals(result, expResult);
@@ -76,25 +74,25 @@ public class UserNGTest {
 //    }
 
     /**
-     * Тест метод setId, класса UserDetails.
+     * Тест метод setId, класса GoUser.
      */
 //    @Test
 //    public void testSetId() {
 //        System.out.println("setId");
 //        Integer id = null;
-//        UserDetails instance = new UserDetails();
+//        GoUser instance = new GoUser();
 //        instance.setId(id);
 //        // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
 //        fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
 //    }
 
     /**
-     * Тест метод getDraw, класса UserDetails.
+     * Тест метод getDraw, класса GoUser.
      */
     @Test
     public void testGetDraw() {
         System.out.println("getDraw");
-        UserDetails instance = new UserDetails();
+        GoUser instance = new GoUser();
         Integer expResult = null;
         Integer result = instance.getDraw();
         assertEquals(result, expResult);
@@ -103,25 +101,25 @@ public class UserNGTest {
     }
 
     /**
-     * Тест метод setDraw, класса UserDetails.
+     * Тест метод setDraw, класса GoUser.
      */
     @Test
     public void testSetDraw() {
         System.out.println("setDraw");
         Integer draw = null;
-        UserDetails instance = new UserDetails();
+        GoUser instance = new GoUser();
         instance.setDraw(draw);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
     }
 
     /**
-     * Тест метод getEmail, класса UserDetails.
+     * Тест метод getEmail, класса GoUser.
      */
     @Test
     public void testGetEmail() {
         System.out.println("getEmail");
-        UserDetails instance = new UserDetails();
+        GoUser instance = new GoUser();
         String expResult = "";
         String result = instance.getEmail();
         assertEquals(result, expResult);
@@ -130,25 +128,25 @@ public class UserNGTest {
     }
 
     /**
-     * Тест метод setEmail, класса UserDetails.
+     * Тест метод setEmail, класса GoUser.
      */
     @Test
     public void testSetEmail() {
         System.out.println("setEmail");
         String email = "";
-        UserDetails instance = new UserDetails();
+        GoUser instance = new GoUser();
         instance.setEmail(email);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
     }
 
     /**
-     * Тест метод getIsLogin, класса UserDetails.
+     * Тест метод getIsLogin, класса GoUser.
      */
     @Test
     public void testGetIsLogin() {
         System.out.println("getIsLogin");
-        UserDetails instance = new UserDetails();
+        GoUser instance = new GoUser();
         Boolean expResult = null;
         Boolean result = instance.getIsLogin();
         assertEquals(result, expResult);
@@ -157,25 +155,25 @@ public class UserNGTest {
     }
 
     /**
-     * Тест метод setIsLogin, класса UserDetails.
+     * Тест метод setIsLogin, класса GoUser.
      */
     @Test
     public void testSetIsLogin() {
         System.out.println("setIsLogin");
         Boolean isLogin = null;
-        UserDetails instance = new UserDetails();
+        GoUser instance = new GoUser();
         instance.setIsLogin(isLogin);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
     }
 
     /**
-     * Тест метод getLastTime, класса UserDetails.
+     * Тест метод getLastTime, класса GoUser.
      */
     @Test
     public void testGetLastTime() {
         System.out.println("getLastTime");
-        UserDetails instance = new UserDetails();
+        GoUser instance = new GoUser();
         Date expResult = null;
         Date result = instance.getLastTime();
         assertEquals(result, expResult);
@@ -184,25 +182,25 @@ public class UserNGTest {
     }
 
     /**
-     * Тест метод setLastTime, класса UserDetails.
+     * Тест метод setLastTime, класса GoUser.
      */
     @Test
     public void testSetLastTime() {
         System.out.println("setLastTime");
         Date lastTime = null;
-        UserDetails instance = new UserDetails();
+        GoUser instance = new GoUser();
         instance.setLastTime(lastTime);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
     }
 
     /**
-     * Тест метод getLose, класса UserDetails.
+     * Тест метод getLose, класса GoUser.
      */
     @Test
     public void testGetLose() {
         System.out.println("getLose");
-        UserDetails instance = new UserDetails();
+        GoUser instance = new GoUser();
         Integer expResult = null;
         Integer result = instance.getLose();
         assertEquals(result, expResult);
@@ -211,25 +209,25 @@ public class UserNGTest {
     }
 
     /**
-     * Тест метод setLose, класса UserDetails.
+     * Тест метод setLose, класса GoUser.
      */
     @Test
     public void testSetLose() {
         System.out.println("setLose");
         Integer lose = null;
-        UserDetails instance = new UserDetails();
+        GoUser instance = new GoUser();
         instance.setLose(lose);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
     }
 
     /**
-     * Тест метод getName, класса UserDetails.
+     * Тест метод getName, класса GoUser.
      */
     @Test
     public void testGetName() {
         System.out.println("getName");
-//        UserDetails instance = new UserDetails();
+//        GoUser instance = new GoUser();
 //        String expResult = "";
 //        String result = instance.getUserName();
 //        assertEquals(result, expResult);
@@ -238,25 +236,25 @@ public class UserNGTest {
     }
 
     /**
-     * Тест метод setName, класса UserDetails.
+     * Тест метод setName, класса GoUser.
      */
     @Test
     public void testSetName() {
         System.out.println("setName");
 //        String name = "";
-//        UserDetails instance = new UserDetails();
+//        GoUser instance = new GoUser();
 //        instance.setUserName(name);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
     }
 
     /**
-     * Тест метод getPassword, класса UserDetails.
+     * Тест метод getPassword, класса GoUser.
      */
 //    @Test
 //    public void testGetPassword() {
 //        System.out.println("getPassword");
-//        UserDetails instance = new UserDetails();
+//        GoUser instance = new GoUser();
 //        String expResult = "";
 //        String result = instance.getPassword();
 //        assertEquals(result, expResult);
@@ -265,25 +263,25 @@ public class UserNGTest {
 //    }
 
     /**
-     * Тест метод setPassword, класса UserDetails.
+     * Тест метод setPassword, класса GoUser.
      */
 //    @Test
 //    public void testSetPassword() {
 //        System.out.println("setPassword");
 //        String password = "";
-//        UserDetails instance = new UserDetails();
+//        GoUser instance = new GoUser();
 //        instance.setPassword(password);
 //        // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
 //        fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
 //    }
 
     /**
-     * Тест метод getRating, класса UserDetails.
+     * Тест метод getRating, класса GoUser.
      */
     @Test
     public void testGetRating() {
         System.out.println("getRating");
-        UserDetails instance = new UserDetails();
+        GoUser instance = new GoUser();
         Integer expResult = null;
         Integer result = instance.getRating();
         assertEquals(result, expResult);
@@ -292,25 +290,25 @@ public class UserNGTest {
     }
 
     /**
-     * Тест метод setRating, класса UserDetails.
+     * Тест метод setRating, класса GoUser.
      */
     @Test
     public void testSetRating() {
         System.out.println("setRating");
         Integer rating = null;
-        UserDetails instance = new UserDetails();
+        GoUser instance = new GoUser();
         instance.setRating(rating);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
     }
 
     /**
-     * Тест метод getSalt, класса UserDetails.
+     * Тест метод getSalt, класса GoUser.
      */
 //    @Test
 //    public void testGetSalt() {
 //        System.out.println("getSalt");
-//        UserDetails instance = new UserDetails();
+//        GoUser instance = new GoUser();
 //        String expResult = "";
 //        String result = instance.getSalt();
 //        assertEquals(result, expResult);
@@ -319,25 +317,25 @@ public class UserNGTest {
 //    }
 
     /**
-     * Тест метод setSalt, класса UserDetails.
+     * Тест метод setSalt, класса GoUser.
      */
 //    @Test
 //    public void testSetSalt() {
 //        System.out.println("setSalt");
 //        String salt = "";
-//        UserDetails instance = new UserDetails();
+//        GoUser instance = new GoUser();
 //        instance.setSalt(salt);
 //        // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
 //        fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
 //    }
 
     /**
-     * Тест метод getStaus, класса UserDetails.
+     * Тест метод getStaus, класса GoUser.
      */
     @Test
     public void testGetStaus() {
         System.out.println("getStaus");
-        UserDetails instance = new UserDetails();
+        GoUser instance = new GoUser();
         Integer expResult = null;
         Integer result = instance.getStaus();
         assertEquals(result, expResult);
@@ -346,25 +344,25 @@ public class UserNGTest {
     }
 
     /**
-     * Тест метод setStaus, класса UserDetails.
+     * Тест метод setStaus, класса GoUser.
      */
     @Test
     public void testSetStaus() {
         System.out.println("setStaus");
         Integer staus = null;
-        UserDetails instance = new UserDetails();
+        GoUser instance = new GoUser();
         instance.setStaus(staus);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
     }
 
     /**
-     * Тест метод getWin, класса UserDetails.
+     * Тест метод getWin, класса GoUser.
      */
     @Test
     public void testGetWin() {
         System.out.println("getWin");
-        UserDetails instance = new UserDetails();
+        GoUser instance = new GoUser();
         Integer expResult = null;
         Integer result = instance.getWin();
         assertEquals(result, expResult);
@@ -373,52 +371,52 @@ public class UserNGTest {
     }
 
     /**
-     * Тест метод setWin, класса UserDetails.
+     * Тест метод setWin, класса GoUser.
      */
     @Test
     public void testSetWin() {
         System.out.println("setWin");
         Integer win = null;
-        UserDetails instance = new UserDetails();
+        GoUser instance = new GoUser();
         instance.setWin(win);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
     }
 
     /**
-     * Тест метод getUserBanCollection, класса UserDetails.
+     * Тест метод getUserBanSet, класса GoUser.
      */
     @Test
-    public void testGetUserBanCollection() {
-        System.out.println("getUserBanCollection");
-        UserDetails instance = new UserDetails();
-        Collection expResult = null;
-        Collection result = instance.getUserBanCollection();
+    public void testGetUserBanSet() {
+        System.out.println("getUserBanSet");
+        GoUser instance = new GoUser();
+        Set expResult = null;
+        Set result = instance.getUserBans();
         assertEquals(result, expResult);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
     }
 
     /**
-     * Тест метод setUserBanCollection, класса UserDetails.
+     * Тест метод setUserBanSet, класса GoUser.
      */
     @Test
-    public void testSetUserBanCollection() {
-        System.out.println("setUserBanCollection");
-        Collection<UserBan> userBanCollection = null;
-        UserDetails instance = new UserDetails();
-        instance.setUserBanCollection(userBanCollection);
+    public void testSetUserBanSet() {
+        System.out.println("setUserBanSet");
+        Set<UserBan> userBanSet = null;
+        GoUser instance = new GoUser();
+        instance.setUserBans(userBanSet);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
     }
 
     /**
-     * Тест метод getLeagueId, класса UserDetails.
+     * Тест метод getLeagueId, класса GoUser.
      */
     @Test
     public void testGetLeagueId() {
         System.out.println("getLeagueId");
-        UserDetails instance = new UserDetails();
+        GoUser instance = new GoUser();
         League expResult = null;
         //League result = instance.getLeague();
         //assertEquals(result, expResult);
@@ -427,25 +425,25 @@ public class UserNGTest {
     }
 
     /**
-     * Тест метод setLeagueId, класса UserDetails.
+     * Тест метод setLeagueId, класса GoUser.
      */
     @Test
     public void testSetLeagueId() {
         System.out.println("setLeagueId");
         League leagueId = null;
-        UserDetails instance = new UserDetails();
+        GoUser instance = new GoUser();
         //instance.setLeague(leagueId);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
     }
 
     /**
-     * Тест метод getRoleId, класса UserDetails.
+     * Тест метод getRoleId, класса GoUser.
      */
     @Test
     public void testGetRoleId() {
         System.out.println("getRoleId");
-//        UserDetails instance = new UserDetails();
+//        GoUser instance = new GoUser();
 //        UserRole expResult = null;
 //        UserRole result = instance.getRoleId();
 //        assertEquals(result, expResult);
@@ -454,25 +452,25 @@ public class UserNGTest {
     }
 
     /**
-     * Тест метод setRoleId, класса UserDetails.
+     * Тест метод setRoleId, класса GoUser.
      */
     @Test
     public void testSetRoleId() {
         System.out.println("setRoleId");
 //        UserRole roleId = null;
-//        UserDetails instance = new UserDetails();
+//        GoUser instance = new GoUser();
 //        instance.setRoleId(roleId);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
     }
 
     /**
-     * Тест метод getTeamId, класса UserDetails.
+     * Тест метод getTeamId, класса GoUser.
      */
     @Test
     public void testGetTeamId() {
         System.out.println("getTeamId");
-        UserDetails instance = new UserDetails();
+        GoUser instance = new GoUser();
         Team expResult = null;
         Team result = instance.getTeam();
         assertEquals(result, expResult);
@@ -481,25 +479,25 @@ public class UserNGTest {
     }
 
     /**
-     * Тест метод setTeamId, класса UserDetails.
+     * Тест метод setTeamId, класса GoUser.
      */
     @Test
     public void testSetTeamId() {
         System.out.println("setTeamId");
         Team teamId = null;
-        UserDetails instance = new UserDetails();
+        GoUser instance = new GoUser();
         instance.setTeam(teamId);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
     }
 
     /**
-     * Тест метод getRoomId, класса UserDetails.
+     * Тест метод getRoomId, класса GoUser.
      */
     @Test
     public void testGetRoomId() {
         System.out.println("getRoomId");
-        UserDetails instance = new UserDetails();
+        GoUser instance = new GoUser();
         Room expResult = null;
         Room result = instance.getRoom();
         assertEquals(result, expResult);
@@ -508,25 +506,25 @@ public class UserNGTest {
     }
 
     /**
-     * Тест метод setRoomId, класса UserDetails.
+     * Тест метод setRoomId, класса GoUser.
      */
     @Test
     public void testSetRoomId() {
         System.out.println("setRoomId");
         Room roomId = null;
-        UserDetails instance = new UserDetails();
+        GoUser instance = new GoUser();
         instance.setRoom(roomId);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
     }
 
     /**
-     * Тест метод hashCode, класса UserDetails.
+     * Тест метод hashCode, класса GoUser.
      */
     @Test
     public void testHashCode() {
         System.out.println("hashCode");
-        UserDetails instance = new UserDetails();
+        GoUser instance = new GoUser();
         int expResult = 0;
         int result = instance.hashCode();
         assertEquals(result, expResult);
@@ -535,13 +533,13 @@ public class UserNGTest {
     }
 
     /**
-     * Тест метод equals, класса UserDetails.
+     * Тест метод equals, класса GoUser.
      */
     @Test
     public void testEquals() {
         System.out.println("equals");
         Object object = null;
-        UserDetails instance = new UserDetails();
+        GoUser instance = new GoUser();
         boolean expResult = false;
         boolean result = instance.equals(object);
         assertEquals(result, expResult);
@@ -550,12 +548,12 @@ public class UserNGTest {
     }
 
     /**
-     * Тест метод toString, класса UserDetails.
+     * Тест метод toString, класса GoUser.
      */
     @Test
     public void testToString() {
         System.out.println("toString");
-        UserDetails instance = new UserDetails();
+        GoUser instance = new GoUser();
         String expResult = "";
         String result = instance.toString();
         assertEquals(result, expResult);
@@ -564,109 +562,109 @@ public class UserNGTest {
     }
 
     /**
-     * Тест метод getUserGameCollection, класса UserDetails.
+     * Тест метод getUserGameSet, класса GoUser.
      */
     @Test
-    public void testGetUserGameCollection() {
-        System.out.println("getUserGameCollection");
-        UserDetails instance = new UserDetails();
-        Collection expResult = null;
-        Collection result = instance.getUserGameCollection();
+    public void testGetUserGameSet() {
+        System.out.println("getUserGameSet");
+        GoUser instance = new GoUser();
+        Set expResult = null;
+        Set result = instance.getUserGameSet();
         assertEquals(result, expResult);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
     }
 
     /**
-     * Тест метод setUserGameCollection, класса UserDetails.
+     * Тест метод setUserGameSet, класса GoUser.
      */
     @Test
-    public void testSetUserGameCollection() {
-        System.out.println("setUserGameCollection");
-        Collection<UserGame> userGameCollection = null;
-        UserDetails instance = new UserDetails();
-        instance.setUserGameCollection(userGameCollection);
+    public void testSetUserGameSet() {
+        System.out.println("setUserGameSet");
+        Set<UserGame> userGameSet = null;
+        GoUser instance = new GoUser();
+        instance.setUserGameSet(userGameSet);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
     }
 
     /**
-     * Тест метод getUserDegreeCollection, класса UserDetails.
+     * Тест метод getUserDegreeSet, класса GoUser.
      */
     @Test
-    public void testGetUserDegreeCollection() {
-        System.out.println("getUserDegreeCollection");
-        UserDetails instance = new UserDetails();
-        Collection expResult = null;
-        Collection result = instance.getUserDegreeCollection();
+    public void testGetUserDegreeSet() {
+        System.out.println("getUserDegreeSet");
+        GoUser instance = new GoUser();
+        Set expResult = null;
+        Set result = instance.getUserDegreeSet();
         assertEquals(result, expResult);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
     }
 
     /**
-     * Тест метод setUserDegreeCollection, класса UserDetails.
+     * Тест метод setUserDegreeSet, класса GoUser.
      */
     @Test
-    public void testSetUserDegreeCollection() {
-        System.out.println("setUserDegreeCollection");
-        Collection<UserDegree> userDegreeCollection = null;
-        UserDetails instance = new UserDetails();
-        instance.setUserDegreeCollection(userDegreeCollection);
+    public void testSetUserDegreeSet() {
+        System.out.println("setUserDegreeSet");
+        Set<UserDegree> userDegreeSet = null;
+        GoUser instance = new GoUser();
+        instance.setUserDegreeSet(userDegreeSet);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
     }
 
     /**
-     * Тест метод getMoveCommentCollection, класса UserDetails.
+     * Тест метод getMoveCommentSet, класса GoUser.
      */
     @Test
-    public void testGetMoveCommentCollection() {
-        System.out.println("getMoveCommentCollection");
-        UserDetails instance = new UserDetails();
-        Collection expResult = null;
-        Collection result = instance.getMoveCommentCollection();
+    public void testGetMoveCommentSet() {
+        System.out.println("getMoveCommentSet");
+        GoUser instance = new GoUser();
+        Set expResult = null;
+        Set result = instance.getMoveCommentSet();
         assertEquals(result, expResult);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
     }
 
     /**
-     * Тест метод setMoveCommentCollection, класса UserDetails.
+     * Тест метод setMoveCommentSet, класса GoUser.
      */
     @Test
-    public void testSetMoveCommentCollection() {
-        System.out.println("setMoveCommentCollection");
-        Collection<MoveComment> moveCommentCollection = null;
-        UserDetails instance = new UserDetails();
-        instance.setMoveCommentCollection(moveCommentCollection);
+    public void testSetMoveCommentSet() {
+        System.out.println("setMoveCommentSet");
+        Set<MoveComment> moveCommentSet = null;
+        GoUser instance = new GoUser();
+        instance.setMoveCommentSet(moveCommentSet);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
     }
 
     /**
-     * Тест метод getGameCommentCollection, класса UserDetails.
+     * Тест метод getGameCommentSet, класса GoUser.
      */
     @Test
-    public void testGetGameCommentCollection() {
-        System.out.println("getGameCommentCollection");
-        UserDetails instance = new UserDetails();
-        Collection expResult = null;
-        Collection result = instance.getGameCommentCollection();
+    public void testGetGameCommentSet() {
+        System.out.println("getGameCommentSet");
+        GoUser instance = new GoUser();
+        Set expResult = null;
+        Set result = instance.getGameCommentSet();
         assertEquals(result, expResult);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
     }
 
     /**
-     * Тест метод setGameCommentCollection, класса UserDetails.
+     * Тест метод setGameCommentSet, класса GoUser.
      */
     @Test
-    public void testSetGameCommentCollection() {
-        System.out.println("setGameCommentCollection");
-        Collection<GameComment> gameCommentCollection = null;
-        UserDetails instance = new UserDetails();
-        instance.setGameCommentCollection(gameCommentCollection);
+    public void testSetGameCommentSet() {
+        System.out.println("setGameCommentSet");
+        Set<GameComment> gameCommentSet = null;
+        GoUser instance = new GoUser();
+        instance.setGameCommentSet(gameCommentSet);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
     }

@@ -33,6 +33,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
 
@@ -58,17 +59,17 @@ import javax.validation.constraints.Size;
 public class Country implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private short id;
+    private short id = -1;
     private String countryName;
     private String countryCodeAlpha2;
     private String countryCodeAlpha3;
     private String banner;
     private String nationalEmblem;
-//    private Set<UserDetails> user;
+    private Set<GoUser> user;
     private Set<City> cities;
     private Set<Club> clubs;
-//    private Set<Team> teams;
-//    private Set<League> leagues;
+    private Set<Team> teams;
+    private Set<League> leagues;
 
     public Country() {
 
@@ -83,16 +84,18 @@ public class Country implements Serializable {
     /**
      * @return the user
      */
-//    @OneToMany(mappedBy = "country")
-//    public Set<UserDetails> getUser() {
-//        return user;
-//    }
+    @OneToMany(mappedBy = "country")
+    public Set<GoUser> getUser() {
+        return user;
+    }
+
     /**
      * @param user the user to set
      */
-//    public void setUser(Set<UserDetails> user) {
-//        this.user = user;
-//    }
+    public void setUser(Set<GoUser> user) {
+        this.user = user;
+    }
+
     /**
      * @return the cities
      */
@@ -134,19 +137,28 @@ public class Country implements Serializable {
     /**
      * @return the teams
      */
-//    @OneToMany(mappedBy = "country")
-//    public Set<Team> getTeams() {
-//        return teams;
-//    }
+    @OneToMany(mappedBy = "country")
+    public Set<Team> getTeams() {
+        return teams;
+    }
+
     /**
      * @param teams the teams to set
-     * @return
      */
-//    public void setTeams(Set<Team> teams) {
-//        this.teams = teams;
-//    }
+    public void setTeams(Set<Team> teams) {
+        this.teams = teams;
+    }
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "country_seq", strategy = GenerationType.TABLE)
+    @TableGenerator(
+            name = "country_seq",
+            table="hibernate_sequences",
+            pkColumnName = "sequence_name",
+            valueColumnName = "next_val",
+            pkColumnValue = "country",
+            allocationSize = 10
+    )
     public short getId() {
         return id;
     }
@@ -277,17 +289,25 @@ public class Country implements Serializable {
         this.clubs.add(club);
     }
 
+    public void addTeam(final Team team) {
+        if (this.teams == null) {
+            this.teams = new HashSet<>();
+        }
+        this.teams.add(team); //todo: clone
+    }
+
     /**
      * @return the leagues
      */
-//    @OneToMany(mappedBy = "country")
-//    public Set<League> getLeagues() {
-//        return leagues;
-//    }
+    @OneToMany(mappedBy = "country")
+    public Set<League> getLeagues() {
+        return leagues;
+    }
+
     /**
      * @param leagues the leagues to set
      */
-//    public void setLeagues(Set<League> leagues) {
-//        this.leagues = leagues;
-//    }
+    public void setLeagues(Set<League> leagues) {
+        this.leagues = leagues;
+    }
 }

@@ -20,7 +20,7 @@ import java.util.Collection;
 import java.util.Set;
 import org.igo.entities.League;
 import org.igo.entities.Team;
-import org.igo.entities.UserDetails;
+import org.igo.entities.GoUser;
 import static org.testng.Assert.*;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -154,7 +154,7 @@ public class LeagueNGTest {
     @Test
     public void testSetUsersCollection() {
         System.out.println("setUsersCollection");
-        Set<UserDetails> users = null;
+        Set<GoUser> users = null;
         League instance = new League();
 //        instance.setUsers(users);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.

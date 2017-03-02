@@ -18,7 +18,7 @@ package org.igo.junit.entities;
 
 import java.util.Collection;
 import org.igo.entities.Room;
-import org.igo.entities.UserDetails;
+import org.igo.entities.GoUser;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -112,8 +112,8 @@ public class RoomTest {
     public void testGetUsersCollection() {
         System.out.println("getUsersCollection");
         Room instance = new Room();
-        Collection<UserDetails> expResult = null;
-        Collection<UserDetails> result = instance.getUsersCollection();
+        Collection<GoUser> expResult = null;
+        Collection<GoUser> result = instance.getUsersCollection();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -125,7 +125,7 @@ public class RoomTest {
     @Test
     public void testSetUsersCollection() {
         System.out.println("setUsersCollection");
-        Collection<UserDetails> usersCollection = null;
+        Collection<GoUser> usersCollection = null;
         Room instance = new Room();
         instance.setUsersCollection(usersCollection);
         // TODO review the generated test code and remove the default call to fail.
