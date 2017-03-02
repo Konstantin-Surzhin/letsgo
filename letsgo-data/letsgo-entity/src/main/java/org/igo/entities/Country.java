@@ -167,6 +167,16 @@ public class Country implements Serializable {
         this.id = id;
     }
 
+
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 89 * hash + this.id;
+        hash = 89 * hash + Objects.hashCode(this.countryName);
+        return hash;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -179,19 +189,10 @@ public class Country implements Serializable {
             return false;
         }
         final Country other = (Country) obj;
-        return this.id == other.id;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 89 * hash + this.id;
-        hash = 89 * hash + Objects.hashCode(this.countryName);
-        hash = 89 * hash + Objects.hashCode(this.countryCodeAlpha2);
-        hash = 89 * hash + Objects.hashCode(this.countryCodeAlpha3);
-        hash = 89 * hash + Objects.hashCode(this.banner);
-        hash = 89 * hash + Objects.hashCode(this.nationalEmblem);
-        return hash;
+        if (this.id != other.id) {
+            return false;
+        }
+        return Objects.equals(this.countryName, other.countryName);
     }
 
     /**

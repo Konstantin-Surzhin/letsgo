@@ -31,8 +31,7 @@ import org.igo.entities.City;
 import org.igo.entities.Country;
 import org.junit.After;
 import org.junit.AfterClass;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -129,7 +128,7 @@ public class CountyTest {
             }
         }
 
-        assertTrue(country.getId() != 0);
+        assertTrue(country.getId() != -1);
     }
 
     @Test(expected = PersistenceException.class)
@@ -229,7 +228,7 @@ public class CountyTest {
     }
 
     @Test(expected = ConstraintViolationException.class)
-    public void testSetEmtyAlpha2() throws Exception{
+    public void testSetEmtyAlpha2() throws Exception {
         System.out.println("EmtyAlpha2");
 
         final Country country = new Country();
@@ -393,7 +392,7 @@ public class CountyTest {
 
         city1.setLatitude(2);
         city1.setLongitude(3);
-   
+
         final Set<City> citeis = new HashSet<>();
 
         citeis.add(city1);
@@ -416,7 +415,7 @@ public class CountyTest {
 
                 assertThat(size, equalTo(2));
 
-            } catch (PersistenceException ex) {
+            } catch (Exception ex) {
                 em.getTransaction().rollback();
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
@@ -455,18 +454,106 @@ public class CountyTest {
                         .getSingleResult();
 
                 assertThat(banner.length(), equalTo(1024));
-                
+
                 final String nationalEmblem = em.createQuery("SELECT c.nationalEmblem FROM Country c where c.id =:id", String.class)
                         .setParameter("id", country.getId())
                         .getSingleResult();
-                
+
                 assertThat(nationalEmblem.length(), equalTo(1024));
 
-            } catch (PersistenceException ex) {
+            } catch (Exception ex) {
                 em.getTransaction().rollback();
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             }
+        }
+    }
+
+    @Test(expected = PersistenceException.class)
+    public void teastPersistCountriesWithDuplicateName() {
+        System.out.println("PersistCountriesWithDuplicateName");
+        final Country country1 = new Country("Россия", "RU", "RUS");
+        final Country country2 = new Country("Россия", "EN", "ENG");
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(country1);
+                em.persist(country2);
+                em.getTransaction().commit();
+                em.clear();
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            }
+        } else {
+            fail("EntityManager is null");
+        }
+    }
+
+    @Test(expected = PersistenceException.class)
+    public void teastPersistCountriesWithDuplicateAlpha2() {
+        System.out.println("PersistCountriesWithDuplicateAlpha2");
+        final Country country1 = new Country("Россия", "RU", "RUS");
+        final Country country2 = new Country("Белорусь", "RU", "ENG");
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(country1);
+                em.persist(country2);
+                em.getTransaction().commit();
+                em.clear();
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            }
+        } else {
+            fail("EntityManager is null");
+        }
+    }
+
+    @Test(expected = PersistenceException.class)
+    public void teastPersistCountriesWithDuplicateAlpha3() {
+        System.out.println("PersistCountriesWithDuplicateAlpha3");
+        final Country country1 = new Country("Россия", "RU", "RUS");
+        final Country country2 = new Country("Белорусь", "BY", "RUS");
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(country1);
+                em.persist(country2);
+                em.getTransaction().commit();
+                em.clear();
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            }
+        } else {
+            fail("EntityManager is null");
+        }
+    }
+
+    @Test
+    public void teastPersistTwoCountries() {
+        System.out.println("PersistCountriesWithDuplicateAlpha3");
+        final Country country1 = new Country("Россия", "RU", "RUS");
+        final Country country2 = new Country("Белорусь", "BY", "BLR");
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(country1);
+                em.persist(country2);
+                em.getTransaction().commit();
+                em.clear();
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            }
+        } else {
+            fail("EntityManager is null");
         }
     }
 }
