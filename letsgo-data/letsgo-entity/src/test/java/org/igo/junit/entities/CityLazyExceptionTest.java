@@ -231,7 +231,7 @@ public class CityLazyExceptionTest {
 
         final City city = new City("Москва");
         final Set<GoUser> users = new HashSet();
-        final GoUser user = new GoUser("Вася");
+        final GoUser user = new GoUser("Вася", "pupkin@letsgo.ru");
 
         users.add(user);
         city.setUsers(users);

@@ -208,8 +208,8 @@ public class CityTest {
             } catch (Exception ex) {
                 em.getTransaction().rollback();
                 System.out.println(ex.getLocalizedMessage());
-                for (Throwable t : ex.getSuppressed()){
-                   System.out.println("Suppressed: ------->>> " + t.getLocalizedMessage());
+                for (Throwable t : ex.getSuppressed()) {
+                    System.out.println("Suppressed: ------->>> " + t.getLocalizedMessage());
                 }
                 throw ex;
             }
@@ -815,7 +815,7 @@ public class CityTest {
 
         final City city = new City("Москва");
         final Set<GoUser> users = new HashSet<>();
-        users.add(new GoUser("AlphaGo"));
+        users.add(new GoUser("AlphaGo", "AlphaGo@letsgo.ru"));
         city.setUsers(users);
 
         if (em != null) {
@@ -848,7 +848,7 @@ public class CityTest {
         System.out.println("AddUserInotCity");
 
         final City city = new City("Москва");
-        city.addUser(new GoUser("AlphaGo"));
+        city.addUser(new GoUser("AlphaGo", "AlphaGo@letsgo.ru"));
 
         if (em != null) {
             try {
@@ -861,6 +861,62 @@ public class CityTest {
                         .getResultList()
                         .size();
                 assertThat(size, equalTo(1));
+
+            } catch (Exception ex) {
+                em.getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            } finally {
+                final Query q = em.createQuery("DELETE FROM GoUser");
+                em.getTransaction().begin();
+                q.executeUpdate();
+                em.getTransaction().commit();
+            }
+        }
+    }
+
+    @Test
+    public void testAddExistUserInotCity() throws PersistenceException {
+        System.out.println("AddExistUserInotCity");
+
+        final City city = new City("Москва");
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(city);
+                em.getTransaction().commit();
+
+                final GoUser alphaGo = new GoUser("AlphaGo", "AlphaGo@letsgo.ru");
+                final GoUser alphaZen = new GoUser("AlphaZen", "AlphaZen@letsgo.ru");
+
+                em.getTransaction().begin();
+                em.persist(alphaGo);
+                em.persist(alphaZen);
+                em.getTransaction().commit();
+                final int goUserSize = em
+                        .createQuery("SELECT t FROM GoUser t")
+                        .setHint("org.hibernate.readOnly", true)
+                        .getResultList()
+                        .size();
+                assertThat(goUserSize, equalTo(2));
+
+                city.addUser(alphaGo);
+                city.addUser(alphaZen);
+                
+                alphaGo.setCity(city);
+                alphaZen.setCity(city);
+                
+                em.getTransaction().begin();
+                em.persist(city);
+                em.getTransaction().commit();
+
+                final int goUserFromCitySize = em
+                        .createQuery("SELECT g FROM GoUser g WHERE g.city.id =  :cityId")
+                        .setHint("org.hibernate.readOnly", true)
+                        .setParameter("userId", city.getId())
+                        .getResultList()
+                        .size();
+                assertThat(goUserFromCitySize, equalTo(2));
 
             } catch (Exception ex) {
                 em.getTransaction().rollback();

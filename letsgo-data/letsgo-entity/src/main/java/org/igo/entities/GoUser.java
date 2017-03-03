@@ -39,7 +39,6 @@ import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -115,8 +114,9 @@ public class GoUser implements Serializable {
     public GoUser() {
     }
 
-    public GoUser(String userName) {
+    public GoUser(String userName, String email) {
         this.userName = userName;
+        this.email = email;
     }
 
     /**
