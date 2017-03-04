@@ -59,8 +59,10 @@ public class CityTest {
     public static Collection dataBaseParam() {
 
         final EntityManagerFactory emf0 = Persistence.createEntityManagerFactory("testGamePU_MySQL");
-        final EntityManagerFactory emf1 = Persistence.createEntityManagerFactory("testGamePU_H2");
-        final Object[][] param = {{emf0}, {emf1}};
+        final EntityManagerFactory emf1 = Persistence.createEntityManagerFactory("testPU_PostgreSQL");
+        final EntityManagerFactory emf2 = Persistence.createEntityManagerFactory("testGamePU_H2");
+
+        final Object[][] param = {{emf0}, {emf1}, {emf2}};
 
         return Arrays.asList(param);
     }

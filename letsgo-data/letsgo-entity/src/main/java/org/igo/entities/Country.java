@@ -36,6 +36,7 @@ import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
+import org.hibernate.annotations.Type;
 
 /**
  *
@@ -248,7 +249,8 @@ public class Country implements Serializable {
      * @return the banner
      */
     @Lob
-    @Column(columnDefinition = "BLOB", length = 512)
+   // @Column(columnDefinition = "BLOB", length = 512)
+    @Type(type="org.hibernate.type.BinaryType")
     public String getBanner() {
         return banner;
     }
@@ -264,7 +266,8 @@ public class Country implements Serializable {
      * @return the nationalEmblem
      */
     @Lob
-    @Column(name = "national_emblem", columnDefinition = "BLOB", length = 512)
+    @Column(name = "national_emblem",   length = 512)
+    @Type(type="org.hibernate.type.BinaryType")
     public String getNationalEmblem() {
         return nationalEmblem;
     }
