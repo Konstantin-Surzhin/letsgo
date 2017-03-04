@@ -26,7 +26,6 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import javax.persistence.RollbackException;
-import javax.validation.ConstraintViolationException;
 import static org.hamcrest.CoreMatchers.*;
 import org.igo.entities.City;
 import org.igo.entities.Club;
@@ -122,7 +121,9 @@ public class CityTest {
                 em.persist(city);
                 em.getTransaction().commit();
             } catch (Exception ex) {
-                em.getTransaction().rollback();
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             }
@@ -156,7 +157,9 @@ public class CityTest {
                 assertEquals(expResult, name);
 
             } catch (Exception ex) {
-                em.getTransaction().rollback();
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             }
@@ -166,7 +169,8 @@ public class CityTest {
     /**
      * Test of SetWrongSizeCityName method, of class City.
      */
-    @Test(expected = ConstraintViolationException.class)
+    @Test(expected = RollbackException.class)
+    //@Test(expected = ConstraintViolationException.class)
     public void testSetTooLongCityName() {
         System.out.println("SetTooLongCityName");
 
@@ -185,14 +189,17 @@ public class CityTest {
                 em.persist(city);
                 em.getTransaction().commit();
             } catch (Exception ex) {
-                em.getTransaction().rollback();
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             }
         }
     }
 
-    @Test(expected = ConstraintViolationException.class)
+    @Test(expected = RollbackException.class)
+    //@Test(expected = ConstraintViolationException.class)
     public void testSetTooSmallCityName() {
         System.out.println("SetTooSmallCityName");
 
@@ -206,7 +213,9 @@ public class CityTest {
                 em.persist(city);
                 em.getTransaction().commit();
             } catch (Exception ex) {
-                em.getTransaction().rollback();
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
                 System.out.println(ex.getLocalizedMessage());
                 for (Throwable t : ex.getSuppressed()) {
                     System.out.println("Suppressed: ------->>> " + t.getLocalizedMessage());
@@ -234,7 +243,9 @@ public class CityTest {
                 em.getTransaction().commit();
             }
         } catch (Exception ex) {
-            em.getTransaction().rollback();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
             System.err.println(ex.getLocalizedMessage());
             throw ex;
         }
@@ -276,8 +287,9 @@ public class CityTest {
                 em.persist(city2);
                 em.getTransaction().commit();
             } catch (Exception ex) {
-
-                em.getTransaction().rollback();
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             }
@@ -309,8 +321,9 @@ public class CityTest {
                 em.persist(city2);
                 em.getTransaction().commit();
             } catch (Exception ex) {
-
-                em.getTransaction().rollback();
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             }
@@ -338,8 +351,9 @@ public class CityTest {
                 em.persist(city2);
                 em.getTransaction().commit();
             } catch (Exception ex) {
-
-                em.getTransaction().rollback();
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             }
@@ -361,7 +375,9 @@ public class CityTest {
                 em.persist(city);
                 em.getTransaction().commit();
             } catch (Exception ex) {
-                em.getTransaction().rollback();
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             }
@@ -383,7 +399,9 @@ public class CityTest {
                 em.persist(city);
                 em.getTransaction().commit();
             } catch (Exception ex) {
-                em.getTransaction().rollback();
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             }
@@ -405,7 +423,9 @@ public class CityTest {
                 em.persist(city);
                 em.getTransaction().commit();
             } catch (Exception ex) {
-                em.getTransaction().rollback();
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             }
@@ -427,7 +447,9 @@ public class CityTest {
                 em.persist(city);
                 em.getTransaction().commit();
             } catch (Exception ex) {
-                em.getTransaction().rollback();
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             }
@@ -493,7 +515,9 @@ public class CityTest {
                 em.persist(city);
                 em.getTransaction().commit();
             } catch (Exception ex) {
-                em.getTransaction().rollback();
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             } finally {
@@ -526,7 +550,9 @@ public class CityTest {
                 em.persist(city);
                 em.getTransaction().commit();
             } catch (Exception ex) {
-                em.getTransaction().rollback();
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             } finally {
@@ -567,7 +593,9 @@ public class CityTest {
                 em.getTransaction().commit();
 
             } catch (Exception ex) {
-                em.getTransaction().rollback();
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             } finally {
@@ -641,7 +669,9 @@ public class CityTest {
                 assertThat(size, equalTo(1));
 
             } catch (Exception ex) {
-                em.getTransaction().rollback();
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             } finally {
@@ -676,7 +706,9 @@ public class CityTest {
                 assertThat(size, equalTo(1));
 
             } catch (Exception ex) {
-                em.getTransaction().rollback();
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             } finally {
@@ -713,7 +745,9 @@ public class CityTest {
                 assertThat(size, equalTo(1));
 
             } catch (Exception ex) {
-                em.getTransaction().rollback();
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             } finally {
@@ -748,7 +782,9 @@ public class CityTest {
                 assertThat(size, equalTo(1));
 
             } catch (Exception ex) {
-                em.getTransaction().rollback();
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             } finally {
@@ -797,7 +833,9 @@ public class CityTest {
                 assertThat(size, equalTo(2));
 
             } catch (Exception ex) {
-                em.getTransaction().rollback();
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             } finally {
@@ -831,7 +869,9 @@ public class CityTest {
                 assertThat(size, equalTo(1));
 
             } catch (Exception ex) {
-                em.getTransaction().rollback();
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             } finally {
@@ -863,7 +903,9 @@ public class CityTest {
                 assertThat(size, equalTo(1));
 
             } catch (Exception ex) {
-                em.getTransaction().rollback();
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             } finally {
@@ -902,10 +944,10 @@ public class CityTest {
 
                 city.addUser(alphaGo);
                 city.addUser(alphaZen);
-                
+
                 alphaGo.setCity(city);
                 alphaZen.setCity(city);
-                
+
                 em.getTransaction().begin();
                 em.persist(city);
                 em.getTransaction().commit();
@@ -913,13 +955,15 @@ public class CityTest {
                 final int goUserFromCitySize = em
                         .createQuery("SELECT g FROM GoUser g WHERE g.city.id =  :cityId")
                         .setHint("org.hibernate.readOnly", true)
-                        .setParameter("userId", city.getId())
+                        .setParameter("cityId", city.getId())
                         .getResultList()
                         .size();
                 assertThat(goUserFromCitySize, equalTo(2));
 
             } catch (Exception ex) {
-                em.getTransaction().rollback();
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             } finally {
