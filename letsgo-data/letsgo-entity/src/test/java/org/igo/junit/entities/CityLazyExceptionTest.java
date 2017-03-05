@@ -57,8 +57,10 @@ public class CityLazyExceptionTest {
     public static Collection dataBaseParam() {
 
         final EntityManagerFactory emf0 = Persistence.createEntityManagerFactory("testGamePU_MySQL");
-        final EntityManagerFactory emf1 = Persistence.createEntityManagerFactory("testGamePU_H2");
-        final Object[][] param = {{emf0}, {emf1}};
+        final EntityManagerFactory emf1 = Persistence.createEntityManagerFactory("testPU_PostgreSQL");
+        final EntityManagerFactory emf2 = Persistence.createEntityManagerFactory("testGamePU_H2");
+
+        final Object[][] param = {{emf0}, {emf1}, {emf2}};
 
         return Arrays.asList(param);
     }
@@ -93,6 +95,9 @@ public class CityLazyExceptionTest {
             em.getTransaction().begin();
             q.executeUpdate();
             em.getTransaction().commit();
+
+            em.clear();
+            em.getEntityManagerFactory().getCache().evictAll();
             em.close();
         }
     }
@@ -129,6 +134,53 @@ public class CityLazyExceptionTest {
                 System.out.println(name);
 
             } catch (Exception ex) {
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            } finally {
+                final Query q = em.createQuery("DELETE FROM Club");
+                em.getTransaction().begin();
+                q.executeUpdate();
+                em.getTransaction().commit();
+            }
+        }
+    }
+
+    @Test
+    public void testClubLazyInitialization() {
+        System.out.println("ClubLazyInitialization");
+
+        final Set<Club> clubs = new HashSet<>();
+        final City city = new City("Москва");
+        final Club club1 = new Club("Зубило");
+        final Club club2 = new Club("Шайба");
+
+        clubs.add(club1);
+        clubs.add(club2);
+
+        city.setClubs(clubs);
+        club1.setCity(city);
+        club2.setCity(city);
+
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(city);
+                em.getTransaction().commit();
+
+                em.clear();
+                em.getEntityManagerFactory().getCache().evictAll();
+
+                final City cityFromDb = em.find(City.class, city.getId());
+                final String name = cityFromDb.getClubs().iterator().next().getClubName();
+                System.out.println(name);
+
+            } catch (Exception ex) {
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             } finally {
@@ -172,6 +224,53 @@ public class CityLazyExceptionTest {
                 System.out.println(name);
 
             } catch (Exception ex) {
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            } finally {
+                final Query q = em.createQuery("DELETE FROM Team");
+                em.getTransaction().begin();
+                q.executeUpdate();
+                em.getTransaction().commit();
+            }
+        }
+    }
+
+    @Test
+    public void testTeamLazyInitialization() {
+        System.out.println("TeamLazyInitialization");
+
+        final Set<Team> teams = new HashSet<>();
+        final City city = new City("Москва");
+        final Team team1 = new Team("Спартак");
+        final Team team2 = new Team("ЦСКА");
+
+        teams.add(team1);
+        teams.add(team2);
+
+        city.setTeams(teams);
+        team1.setCity(city);
+        team2.setCity(city);
+
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(city);
+                em.getTransaction().commit();
+
+                em.clear();
+                em.getEntityManagerFactory().getCache().evictAll();
+
+                final City cityFromDb = em.find(City.class, city.getId());
+                final String name = cityFromDb.getTeams().iterator().next().getTeamName();
+                System.out.println(name);
+
+            } catch (Exception ex) {
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             } finally {
@@ -189,12 +288,12 @@ public class CityLazyExceptionTest {
 
         final Set<City> cities = new HashSet<>();
         final Country country = new Country("Россия", "RU", "RUS");
-        final City city1 = new City("Москва");
+        final City city = new City("Москва");
 
-        cities.add(city1);
+        cities.add(city);
 
         country.setCities(cities);
-        city1.setCountry(country);
+        city.setCountry(country);
 
         if (em != null) {
             try {
@@ -205,13 +304,60 @@ public class CityLazyExceptionTest {
                 em.clear();
                 em.getEntityManagerFactory().getCache().evictAll();
 
-                final City cityFromDb = em.find(City.class, city1.getId());
+                final City cityFromDb = em.find(City.class, city.getId());
                 em.clear();
 
                 final String name = cityFromDb.getCountry().getCountryName();
                 System.out.println(name);
 
             } catch (Exception ex) {
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            } finally {
+                final Query q1 = em.createQuery("DELETE FROM City");
+                final Query q2 = em.createQuery("DELETE FROM Country");
+                em.getTransaction().begin();
+                q1.executeUpdate();
+                q2.executeUpdate();
+                em.getTransaction().commit();
+            }
+        }
+    }
+
+    
+    @Test
+    public void testCountryLazyInitialization()  {
+        System.out.println("CountryLazyInitialization");
+
+        final Set<City> cities = new HashSet<>();
+        final Country country = new Country("Россия", "RU", "RUS");
+        final City city = new City("Москва");
+
+        cities.add(city);
+
+        country.setCities(cities);
+        city.setCountry(country);
+
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(country);
+                em.getTransaction().commit();
+
+                em.clear();
+                em.getEntityManagerFactory().getCache().evictAll();
+
+                final City cityFromDb = em.find(City.class, city.getId());
+                final String name = cityFromDb.getCountry().getCountryName();
+                System.out.println(name);
+
+            } catch (Exception ex) {
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             } finally {
@@ -235,6 +381,7 @@ public class CityLazyExceptionTest {
 
         users.add(user);
         city.setUsers(users);
+        user.setCity(city);
 
         if (em != null) {
             try {
@@ -252,6 +399,49 @@ public class CityLazyExceptionTest {
                 System.out.println(name);
 
             } catch (Exception ex) {
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            } finally {
+                final Query q = em.createQuery("DELETE FROM GoUser");
+                em.getTransaction().begin();
+                q.executeUpdate();
+                em.getTransaction().commit();
+            }
+        }
+    }
+    
+    @Test
+    public void testUsersLazyInitialization() {
+        System.out.println("UsersLazyInitializatio");
+
+        final City city = new City("Москва");
+        final Set<GoUser> users = new HashSet();
+        final GoUser user = new GoUser("Вася", "pupkin@letsgo.ru");
+
+        users.add(user);
+        city.setUsers(users);
+        user.setCity(city);
+
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(city);
+                em.getTransaction().commit();
+
+                em.clear();
+                em.getEntityManagerFactory().getCache().evictAll();
+
+                final City cityFromDb = em.find(City.class, city.getId());
+                final String name = cityFromDb.getUsers().iterator().next().getUserName();
+                System.out.println(name);
+
+            } catch (Exception ex) {
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             } finally {

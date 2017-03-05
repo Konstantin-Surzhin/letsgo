@@ -95,7 +95,7 @@ public class City implements Serializable {
     @Id
     @TableGenerator(
             name = "city_seq",
-            table="hibernate_sequences",
+            table = "hibernate_sequences",
             pkColumnName = "sequence_name",
             valueColumnName = "next_val",
             pkColumnValue = "city",
@@ -196,7 +196,10 @@ public class City implements Serializable {
      *
      * @return
      */
-    @OneToMany(mappedBy = "city", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "city",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.PERSIST
+    )
     public Set<Club> getClubs() {
         return this.clubs;
     }
@@ -268,7 +271,8 @@ public class City implements Serializable {
     /**
      * @return the teams
      */
-    @OneToMany(mappedBy = "city", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "city", fetch = FetchType.LAZY, 
+            cascade = CascadeType.PERSIST)
     public Set<Team> getTeams() {
         return this.teams;
     }
@@ -298,7 +302,8 @@ public class City implements Serializable {
     /**
      * @return the leagues
      */
-    @ManyToMany(mappedBy = "cities", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @ManyToMany(mappedBy = "cities", fetch = FetchType.LAZY, 
+            cascade  = {CascadeType.PERSIST, CascadeType.REMOVE})
     public Set<League> getLeagues() {
         return leagues;
     }
