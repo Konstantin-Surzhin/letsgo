@@ -14,15 +14,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.igo.junit.entities;
+package org.igo.junit.city.entities;
 
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 import org.hibernate.LazyInitializationException;
 import org.igo.entities.City;
@@ -33,7 +29,6 @@ import org.igo.entities.Team;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -43,30 +38,11 @@ import org.junit.runners.Parameterized;
  * @author surzhin.konstantin
  */
 @RunWith(Parameterized.class)
-public class CityLazyExceptionTest {
-
-    public CityLazyExceptionTest() {
-    }
-
-    @Parameterized.Parameter(value = 0)
-    static public EntityManagerFactory emf;
+public class CityLazyExceptionTest extends BaseParametrezedTest {
 
     private EntityManager em;
 
-    @Parameterized.Parameters
-    public static Collection dataBaseParam() {
-
-        final EntityManagerFactory emf0 = Persistence.createEntityManagerFactory("testGamePU_MySQL");
-        final EntityManagerFactory emf1 = Persistence.createEntityManagerFactory("testPU_PostgreSQL");
-        final EntityManagerFactory emf2 = Persistence.createEntityManagerFactory("testGamePU_H2");
-
-        final Object[][] param = {{emf0}, {emf1}, {emf2}};
-
-        return Arrays.asList(param);
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
+    public CityLazyExceptionTest() {
     }
 
     @AfterClass
@@ -327,9 +303,8 @@ public class CityLazyExceptionTest {
         }
     }
 
-    
     @Test
-    public void testCountryLazyInitialization()  {
+    public void testCountryLazyInitialization() {
         System.out.println("CountryLazyInitialization");
 
         final Set<City> cities = new HashSet<>();
@@ -412,7 +387,7 @@ public class CityLazyExceptionTest {
             }
         }
     }
-    
+
     @Test
     public void testUsersLazyInitialization() {
         System.out.println("UsersLazyInitializatio");

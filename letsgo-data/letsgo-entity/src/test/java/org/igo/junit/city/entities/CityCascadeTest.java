@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.igo.junit.entities;
+package org.igo.junit.city.entities;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -50,7 +50,7 @@ public class CityCascadeTest {
 
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    
+     @Test
+     public void hello() {}
 }

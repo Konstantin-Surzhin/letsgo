@@ -14,21 +14,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.igo.junit.entities;
+package org.igo.junit.city.entities;
 
-import java.util.Arrays;
-import java.util.Collection;
 import javax.persistence.Cache;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 import static org.hamcrest.CoreMatchers.equalTo;
 import org.igo.entities.City;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
@@ -39,30 +34,11 @@ import org.junit.runners.Parameterized;
  * @author pl
  */
 @RunWith(Parameterized.class)
-public class CityCacheTest {
-
-    public CityCacheTest() {
-    }
-
-    @Parameterized.Parameter(value = 0)
-    static public EntityManagerFactory emf;
+public class CityCacheTest extends BaseParametrezedTest {
 
     private EntityManager em;
 
-    @Parameterized.Parameters
-    public static Collection dataBaseParam() {
-
-        final EntityManagerFactory emf0 = Persistence.createEntityManagerFactory("testGamePU_MySQL");
-        final EntityManagerFactory emf1 = Persistence.createEntityManagerFactory("testPU_PostgreSQL");
-        final EntityManagerFactory emf2 = Persistence.createEntityManagerFactory("testGamePU_H2");
-
-        final Object[][] param = {{emf0}, {emf1}, {emf2}};
-
-        return Arrays.asList(param);
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
+    public CityCacheTest() {
     }
 
     @AfterClass
@@ -123,7 +99,6 @@ public class CityCacheTest {
 
         cache.evict(City.class, city.getId());
         assertFalse(cache.contains(City.class, city.getId()));
-
     }
 
     @Test
@@ -158,11 +133,11 @@ public class CityCacheTest {
                         .setHint("org.hibernate.readOnly", true)
                         .getSingleResult();
                 assertThat(cityFromDbTadle, equalTo("Новая Москва"));
-                
+
                 assertTrue(em.contains(city));
 
                 final City cityFromCahe = em.find(City.class, city.getId());
-                
+
                 assertThat(cityFromCahe.getCityName(), equalTo("Москва"));
 
                 em.refresh(cityFromCahe);

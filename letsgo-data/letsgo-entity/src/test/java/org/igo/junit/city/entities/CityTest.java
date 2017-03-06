@@ -14,15 +14,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.igo.junit.entities;
+package org.igo.junit.city.entities;
 
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import javax.persistence.RollbackException;
@@ -48,24 +44,10 @@ import org.junit.runners.Parameterized;
  * @author surzhin.konstantin
  */
 @RunWith(Parameterized.class)
-public class CityTest {
+public class CityTest extends BaseParametrezedTest{
 
-    @Parameterized.Parameter(value = 0)
-    static public EntityManagerFactory emf;
 
     private EntityManager em;
-
-    @Parameterized.Parameters
-    public static Collection dataBaseParam() {
-
-        final EntityManagerFactory emf0 = Persistence.createEntityManagerFactory("testGamePU_MySQL");
-        final EntityManagerFactory emf1 = Persistence.createEntityManagerFactory("testPU_PostgreSQL");
-        final EntityManagerFactory emf2 = Persistence.createEntityManagerFactory("testGamePU_H2");
-
-        final Object[][] param = {{emf0}, {emf1}, {emf2}};
-
-        return Arrays.asList(param);
-    }
 
     public CityTest() {
     }
