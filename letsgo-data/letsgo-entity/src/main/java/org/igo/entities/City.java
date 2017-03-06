@@ -103,14 +103,14 @@ public class City implements Serializable {
     )
     @GeneratedValue(generator = "city_seq", strategy = GenerationType.TABLE)
     public int getId() {
-        return id;
+        return this.id;
     }
 
     /**
      *
      * @param id
      */
-    public void setId(final Integer id) {
+    public final void setId(final Integer id) {
         this.id = id;
     }
 
@@ -182,7 +182,7 @@ public class City implements Serializable {
     @Size(min = 1, max = 255)
     @Column(length = 255, name = "city_name", nullable = false)
     public String getCityName() {
-        return cityName;
+        return this.cityName;
     }
 
     /**
@@ -231,7 +231,7 @@ public class City implements Serializable {
      * @return the longitude
      */
     public float getLongitude() {
-        return longitude;
+        return this.longitude;
     }
 
     /**
@@ -315,3 +315,4 @@ public class City implements Serializable {
         this.leagues = leagues;
     }
 }
+

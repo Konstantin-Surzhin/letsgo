@@ -43,4 +43,18 @@
                 <exec.executable>java</exec.executable>
             </properties>
         </action>
+        <action>
+            <actionName>CUSTOM-qulice</actionName>
+            <displayName>qulice</displayName>
+            <goals>
+                <goal>qulice:check</goal>
+            </goals>
+        </action>
+        <action>
+            <actionName>CUSTOM-quilice</actionName>
+            <displayName>qulice</displayName>
+            <goals>
+                <goal>qulice:check</goal>
+            </goals>
+        </action>
     </actions>
