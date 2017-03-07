@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 pl
+ * Copyright (C) 2017 surzhin konstantin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,41 +16,107 @@
  */
 package org.igo.junit.city.entities;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import org.igo.entities.City;
+import org.igo.entities.Country;
+import static org.igo.junit.city.entities.BaseParametrezedTest.emf;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import static org.junit.Assert.*;
 
 /**
  *
- * @author pl
+ * @author surzhin.konstantin
  */
-public class CityCascadeTest {
-    
+@RunWith(Parameterized.class)
+public class CityCascadeTest extends BaseParametrezedTest {
+
+    private EntityManager em;
+
     public CityCascadeTest() {
     }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
+
     @AfterClass
     public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
+        if (emf != null) {
+            emf.close();
+        }
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    
-     @Test
-     public void hello() {}
+    @Before
+    public void setUp() {
+        em = emf.createEntityManager();
+
+        if (em != null) {
+            final Query q = em.createQuery("DELETE FROM City");
+            em.getTransaction().begin();
+            q.executeUpdate();
+            em.getTransaction().commit();
+        }
+    }
+
+    @After
+    public void tearDown() {
+        if (em != null) {
+            final Query q = em.createQuery("DELETE FROM City");
+            em.getTransaction().begin();
+            q.executeUpdate();
+            em.getTransaction().commit();
+            em.close();
+        }
+    }
+
+    @Test
+    public void testCountryCascadePersist() {
+        System.out.println("CountryCascadePersist");
+
+        final Country country = new Country();
+        final City city = new City("Москва");
+
+        country.setCountryName("Россия");
+        country.setCountryCodeAlpha2("RU");
+        country.setCountryCodeAlpha3("RUS");
+
+        city.setCountry(country);
+        country.addCity(city);
+
+        if (em != null) {
+            try {
+                em.getTransaction().begin();
+                em.persist(city);
+                em.getTransaction().commit();
+                
+              final int countryListSize = em
+                      .createQuery("SELECT c FROM Country c")
+                      .setHint("org.hibernate.readOnly", true)
+                      .getResultList().size();
+              assertEquals(countryListSize, 1);
+                
+               final int cityFromDb = em.createQuery("SELECT c FROM City c where c.country.id =:countryId")
+                       .setParameter("countryId", country.getId())
+                       .setHint("org.hibernate.readOnly", true)
+                       .getResultList().size();
+              assertEquals(cityFromDb, 1);
+                
+            } catch (Exception ex) {
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            } finally {
+                final Query q1 = em.createQuery("DELETE FROM City");
+                final Query q2 = em.createQuery("DELETE FROM Country");
+                em.getTransaction().begin();
+                q1.executeUpdate();
+                q2.executeUpdate();
+                em.getTransaction().commit();
+            }
+        }
+    }
 }

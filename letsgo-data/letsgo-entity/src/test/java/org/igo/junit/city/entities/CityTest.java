@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 surzhin.konstantin
+ * Copyright (C) 2016 surzhin konstantin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -41,7 +41,7 @@ import org.junit.runners.Parameterized;
 
 /**
  *
- * @author surzhin.konstantin
+ * @author surzhin konstantin
  */
 @RunWith(Parameterized.class)
 public class CityTest extends BaseParametrezedTest{
@@ -514,41 +514,7 @@ public class CityTest extends BaseParametrezedTest{
             }
         }
     }
-
-    @Test(expected = RollbackException.class)
-    public void testCountryForignKeyPersist() throws Exception {
-        System.out.println("CountryForignKeyPersist");
-
-        final Country country = new Country();
-        final City city = new City("Москва");
-
-        country.setCountryName("Россия");
-        country.setCountryCodeAlpha2("RU");
-        country.setCountryCodeAlpha3("RUS");
-
-        city.setCountry(country);
-
-        if (em != null) {
-            try {
-                em.getTransaction().begin();
-                em.persist(city);
-                em.getTransaction().commit();
-            } catch (Exception ex) {
-                if (em.getTransaction().isActive()) {
-                    em.getTransaction().rollback();
-                }
-                System.err.println(ex.getLocalizedMessage());
-                throw ex;
-            } finally {
-                final Query q1 = em.createQuery("DELETE FROM City");
-                final Query q2 = em.createQuery("DELETE FROM Country");
-                em.getTransaction().begin();
-                q1.executeUpdate();
-                q2.executeUpdate();
-                em.getTransaction().commit();
-            }
-        }
-    }
+    
 
     @Test(expected = PersistenceException.class)
     public void testCountryForignKeyDelete() throws Exception {
@@ -594,8 +560,8 @@ public class CityTest extends BaseParametrezedTest{
     }
 
     @Test
-    public void testSetClubsNotNullNotSame() {
-        System.out.println("SetClubsNotNullNotSame");
+    public void testSetClubsNotNullIsSame() {
+        System.out.println("SetClubsNotNullIsSame");
 
         final Set<Club> clubs1 = new HashSet<>();
         final City city = new City("Москва");
@@ -611,8 +577,8 @@ public class CityTest extends BaseParametrezedTest{
     }
 
     @Test
-    public void testSetTeamsNotNullNotSame() {
-        System.out.println("SetTeamsNotNullNotSame");
+    public void testSetTeamsNotNullIsSame() {
+        System.out.println("SetTeamsNotNullIsSame");
 
         final Set<Team> teams1 = new HashSet<>();
         final City city = new City("Москва");
@@ -724,6 +690,7 @@ public class CityTest extends BaseParametrezedTest{
                 em.getTransaction().commit();
                 final int size = em
                         .createQuery("SELECT t FROM Team t")
+                        .setHint("org.hibernate.readOnly", true)
                         .getResultList()
                         .size();
                 assertThat(size, equalTo(1));
@@ -937,7 +904,7 @@ public class CityTest extends BaseParametrezedTest{
                 em.getTransaction().commit();
 
                 final int goUserFromCitySize = em
-                        .createQuery("SELECT g FROM GoUser g WHERE g.city.id =  :cityId")
+                        .createQuery("SELECT g FROM GoUser g WHERE g.city.id =:cityId")
                         .setHint("org.hibernate.readOnly", true)
                         .setParameter("cityId", city.getId())
                         .getResultList()

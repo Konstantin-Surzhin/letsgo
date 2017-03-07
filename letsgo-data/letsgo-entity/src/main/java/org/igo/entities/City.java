@@ -244,7 +244,7 @@ public class City implements Serializable {
         this.longitude = longitude;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_city_country"), name = "country_id", referencedColumnName = "id")
     public Country getCountry() {
         return country;
@@ -271,7 +271,7 @@ public class City implements Serializable {
     /**
      * @return the teams
      */
-    @OneToMany(mappedBy = "city", fetch = FetchType.LAZY, 
+    @OneToMany(mappedBy = "city", fetch = FetchType.LAZY,
             cascade = CascadeType.PERSIST)
     public Set<Team> getTeams() {
         return this.teams;
@@ -302,8 +302,8 @@ public class City implements Serializable {
     /**
      * @return the leagues
      */
-    @ManyToMany(mappedBy = "cities", fetch = FetchType.LAZY, 
-            cascade  = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @ManyToMany(mappedBy = "cities", fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     public Set<League> getLeagues() {
         return leagues;
     }
@@ -315,4 +315,3 @@ public class City implements Serializable {
         this.leagues = leagues;
     }
 }
-
