@@ -16,11 +16,11 @@
  */
 package org.igo.junit.city.entities;
 
+import org.igo.junit.entities.BaseParametrezedTest;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import org.igo.entities.City;
 import org.igo.entities.Country;
-import static org.igo.junit.city.entities.BaseParametrezedTest.emf;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -28,6 +28,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import static org.junit.Assert.*;
+import static org.igo.junit.entities.BaseParametrezedTest.entityManagerFactory;
 
 /**
  *
@@ -36,38 +37,15 @@ import static org.junit.Assert.*;
 @RunWith(Parameterized.class)
 public class CityCascadeTest extends BaseParametrezedTest {
 
-    private EntityManager em;
+    
 
     public CityCascadeTest() {
     }
 
     @AfterClass
     public static void tearDownClass() {
-        if (emf != null) {
-            emf.close();
-        }
-    }
-
-    @Before
-    public void setUp() {
-        em = emf.createEntityManager();
-
-        if (em != null) {
-            final Query q = em.createQuery("DELETE FROM City");
-            em.getTransaction().begin();
-            q.executeUpdate();
-            em.getTransaction().commit();
-        }
-    }
-
-    @After
-    public void tearDown() {
-        if (em != null) {
-            final Query q = em.createQuery("DELETE FROM City");
-            em.getTransaction().begin();
-            q.executeUpdate();
-            em.getTransaction().commit();
-            em.close();
+        if (entityManagerFactory != null) {
+            entityManagerFactory.close();
         }
     }
 
@@ -75,47 +53,44 @@ public class CityCascadeTest extends BaseParametrezedTest {
     public void testCountryCascadePersist() {
         System.out.println("CountryCascadePersist");
 
-        final Country country = new Country();
+        final Country country = new Country("Россия","RU","RUS");
         final City city = new City("Москва");
-
-        country.setCountryName("Россия");
-        country.setCountryCodeAlpha2("RU");
-        country.setCountryCodeAlpha3("RUS");
 
         city.setCountry(country);
         country.addCity(city);
 
-        if (em != null) {
+        final EntityManager entityManager = this.getEntityManager();
+        
+        if (entityManager != null) {
             try {
-                em.getTransaction().begin();
-                em.persist(city);
-                em.getTransaction().commit();
-                
-              final int countryListSize = em
-                      .createQuery("SELECT c FROM Country c")
-                      .setHint("org.hibernate.readOnly", true)
-                      .getResultList().size();
-              assertEquals(countryListSize, 1);
-                
-               final int cityFromDb = em.createQuery("SELECT c FROM City c where c.country.id =:countryId")
-                       .setParameter("countryId", country.getId())
-                       .setHint("org.hibernate.readOnly", true)
-                       .getResultList().size();
-              assertEquals(cityFromDb, 1);
-                
+                entityManager.getTransaction().begin();
+                entityManager.persist(city);
+                entityManager.getTransaction().commit();
+
+                final int countryListSize = entityManager
+                        .createQuery("SELECT c FROM Country c")
+                        .setHint("org.hibernate.readOnly", true)
+                        .getResultList().size();
+                assertEquals(countryListSize, 1);
+
+                final int cityFromDb = entityManager.createQuery("SELECT c FROM City c where c.country.id =:countryId")
+                        .setParameter("countryId", country.getId())
+                        .setHint("org.hibernate.readOnly", true)
+                        .getResultList().size();
+                assertEquals(cityFromDb, 1);
+
             } catch (Exception ex) {
-                if (em.getTransaction().isActive()) {
-                    em.getTransaction().rollback();
+                if (entityManager.getTransaction().isActive()) {
+                    entityManager.getTransaction().rollback();
                 }
-                System.err.println(ex.getLocalizedMessage());
                 throw ex;
             } finally {
-                final Query q1 = em.createQuery("DELETE FROM City");
-                final Query q2 = em.createQuery("DELETE FROM Country");
-                em.getTransaction().begin();
+                final Query q1 = entityManager.createQuery("DELETE FROM City");
+                final Query q2 = entityManager.createQuery("DELETE FROM Country");
+                entityManager.getTransaction().begin();
                 q1.executeUpdate();
                 q2.executeUpdate();
-                em.getTransaction().commit();
+                entityManager.getTransaction().commit();
             }
         }
     }

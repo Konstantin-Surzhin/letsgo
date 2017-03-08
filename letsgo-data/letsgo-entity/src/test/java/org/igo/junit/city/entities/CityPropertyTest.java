@@ -16,11 +16,11 @@
  */
 package org.igo.junit.city.entities;
 
+import org.igo.junit.entities.BaseParametrezedTest;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
-import javax.persistence.Query;
 import javax.persistence.RollbackException;
 import static org.hamcrest.CoreMatchers.*;
 import org.igo.entities.City;
@@ -28,10 +28,6 @@ import org.igo.entities.Club;
 import org.igo.entities.Country;
 import org.igo.entities.GoUser;
 import org.igo.entities.Team;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Rule;
@@ -44,46 +40,9 @@ import org.junit.runners.Parameterized;
  * @author surzhin konstantin
  */
 @RunWith(Parameterized.class)
-public class CityTest extends BaseParametrezedTest{
+public class CityPropertyTest extends BaseParametrezedTest {
 
-
-    private EntityManager em;
-
-    public CityTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-        if (emf != null) {
-            emf.close();
-        }
-    }
-
-    @Before
-    public void setUp() {
-        em = emf.createEntityManager();
-
-        if (em != null) {
-            final Query q = em.createQuery("DELETE FROM City");
-            em.getTransaction().begin();
-            q.executeUpdate();
-            em.getTransaction().commit();
-        }
-    }
-
-    @After
-    public void tearDown() {
-        if (em != null) {
-            final Query q = em.createQuery("DELETE FROM City");
-            em.getTransaction().begin();
-            q.executeUpdate();
-            em.getTransaction().commit();
-            em.close();
-        }
+    public CityPropertyTest() {
     }
 
     /**
@@ -93,22 +52,17 @@ public class CityTest extends BaseParametrezedTest{
     public void testGetId() {
         System.out.println("getId");
 
-        final City city = new City();
-
-        city.setCityName("Не резиновая!");
+        final City city = new City("Не резиновая!");
 
         assertTrue(city.getId() == -1);
-
-        if (em != null) {
+        final EntityManager entityManager = this.getEntityManager();
+        if (entityManager != null) {
             try {
-                em.getTransaction().begin();
-                em.persist(city);
-                em.getTransaction().commit();
+                entityManager.getTransaction().begin();
+                entityManager.persist(city);
+                entityManager.getTransaction().commit();
             } catch (Exception ex) {
-                if (em.getTransaction().isActive()) {
-                    em.getTransaction().rollback();
-                }
-                System.err.println(ex.getLocalizedMessage());
+                this.rollbackTransaction(entityManager);
                 throw ex;
             }
         }
@@ -127,24 +81,23 @@ public class CityTest extends BaseParametrezedTest{
 
         city.setCityName(expResult);
 
-        if (em != null) {
+        final EntityManager entityManager = this.getEntityManager();
+        if (entityManager != null) {
             try {
 
-                em.getTransaction().begin();
-                em.persist(city);
-                em.getTransaction().commit();
+                entityManager.getTransaction().begin();
+                entityManager.persist(city);
+                entityManager.getTransaction().commit();
 
-                final String name = (String) em.createQuery("SELECT c.cityName FROM City c WHERE c.id=:id")
+                final String name = entityManager
+                        .createQuery("SELECT c.cityName FROM City c WHERE c.id=:id",String.class)
                         .setParameter("id", city.getId())
                         .setHint("org.hibernate.readOnly", true)
                         .getSingleResult();
                 assertEquals(expResult, name);
 
             } catch (Exception ex) {
-                if (em.getTransaction().isActive()) {
-                    em.getTransaction().rollback();
-                }
-                System.err.println(ex.getLocalizedMessage());
+                this.rollbackTransaction(entityManager);
                 throw ex;
             }
         }
@@ -167,16 +120,14 @@ public class CityTest extends BaseParametrezedTest{
 
         city.setCityName(sb.toString());
 
-        if (em != null) {
+        final EntityManager entityManager = this.getEntityManager();
+        if (entityManager != null) {
             try {
-                em.getTransaction().begin();
-                em.persist(city);
-                em.getTransaction().commit();
+                entityManager.getTransaction().begin();
+                entityManager.persist(city);
+                entityManager.getTransaction().commit();
             } catch (Exception ex) {
-                if (em.getTransaction().isActive()) {
-                    em.getTransaction().rollback();
-                }
-                System.err.println(ex.getLocalizedMessage());
+                this.rollbackTransaction(entityManager);
                 throw ex;
             }
         }
@@ -191,19 +142,14 @@ public class CityTest extends BaseParametrezedTest{
 
         city.setCityName("");
 
-        if (em != null) {
+        final EntityManager entityManager = this.getEntityManager();
+        if (entityManager != null) {
             try {
-                em.getTransaction().begin();
-                em.persist(city);
-                em.getTransaction().commit();
+                entityManager.getTransaction().begin();
+                entityManager.persist(city);
+                entityManager.getTransaction().commit();
             } catch (Exception ex) {
-                if (em.getTransaction().isActive()) {
-                    em.getTransaction().rollback();
-                }
-                System.out.println(ex.getLocalizedMessage());
-                for (Throwable t : ex.getSuppressed()) {
-                    System.out.println("Suppressed: ------->>> " + t.getLocalizedMessage());
-                }
+                this.rollbackTransaction(entityManager);
                 throw ex;
             }
         }
@@ -220,18 +166,16 @@ public class CityTest extends BaseParametrezedTest{
 
         city.setCityName(null);
 
-        try {
-            if (em != null) {
-                em.getTransaction().begin();
-                em.persist(city);
-                em.getTransaction().commit();
+        final EntityManager entityManager = this.getEntityManager();
+        if (entityManager != null) {
+            try {
+                entityManager.getTransaction().begin();
+                entityManager.persist(city);
+                entityManager.getTransaction().commit();
+            } catch (Exception ex) {
+                this.rollbackTransaction(entityManager);
+                throw ex;
             }
-        } catch (Exception ex) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
-            System.err.println(ex.getLocalizedMessage());
-            throw ex;
         }
     }
 
@@ -264,17 +208,15 @@ public class CityTest extends BaseParametrezedTest{
         city2.setLatitude(2f);
         city2.setLongitude(2f);
 
-        if (em != null) {
+        final EntityManager entityManager = this.getEntityManager();
+        if (entityManager != null) {
             try {
-                em.getTransaction().begin();
-                em.persist(city1);
-                em.persist(city2);
-                em.getTransaction().commit();
+                entityManager.getTransaction().begin();
+                entityManager.persist(city1);
+                entityManager.persist(city2);
+                entityManager.getTransaction().commit();
             } catch (Exception ex) {
-                if (em.getTransaction().isActive()) {
-                    em.getTransaction().rollback();
-                }
-                System.err.println(ex.getLocalizedMessage());
+                this.rollbackTransaction(entityManager);
                 throw ex;
             }
         }
@@ -298,17 +240,15 @@ public class CityTest extends BaseParametrezedTest{
         city2.setLatitude(2f);
         city2.setLongitude(2f);
 
-        if (em != null) {
+        final EntityManager entityManager = this.getEntityManager();
+        if (entityManager != null) {
             try {
-                em.getTransaction().begin();
-                em.persist(city1);
-                em.persist(city2);
-                em.getTransaction().commit();
+                entityManager.getTransaction().begin();
+                entityManager.persist(city1);
+                entityManager.persist(city2);
+                entityManager.getTransaction().commit();
             } catch (Exception ex) {
-                if (em.getTransaction().isActive()) {
-                    em.getTransaction().rollback();
-                }
-                System.err.println(ex.getLocalizedMessage());
+                this.rollbackTransaction(entityManager);
                 throw ex;
             }
         }
@@ -328,17 +268,15 @@ public class CityTest extends BaseParametrezedTest{
         city2.setLatitude(1f);
         city2.setLongitude(1f);
 
-        if (em != null) {
+        final EntityManager entityManager = this.getEntityManager();
+        if (entityManager != null) {
             try {
-                em.getTransaction().begin();
-                em.persist(city1);
-                em.persist(city2);
-                em.getTransaction().commit();
+                entityManager.getTransaction().begin();
+                entityManager.persist(city1);
+                entityManager.persist(city2);
+                entityManager.getTransaction().commit();
             } catch (Exception ex) {
-                if (em.getTransaction().isActive()) {
-                    em.getTransaction().rollback();
-                }
-                System.err.println(ex.getLocalizedMessage());
+                this.rollbackTransaction(entityManager);
                 throw ex;
             }
         }
@@ -353,16 +291,14 @@ public class CityTest extends BaseParametrezedTest{
         city.setLatitude(-91f);
         city.setLongitude(1f);
 
-        if (em != null) {
+        final EntityManager entityManager = this.getEntityManager();
+        if (entityManager != null) {
             try {
-                em.getTransaction().begin();
-                em.persist(city);
-                em.getTransaction().commit();
+                entityManager.getTransaction().begin();
+                entityManager.persist(city);
+                entityManager.getTransaction().commit();
             } catch (Exception ex) {
-                if (em.getTransaction().isActive()) {
-                    em.getTransaction().rollback();
-                }
-                System.err.println(ex.getLocalizedMessage());
+                this.rollbackTransaction(entityManager);
                 throw ex;
             }
         }
@@ -377,16 +313,14 @@ public class CityTest extends BaseParametrezedTest{
         city.setLatitude(91f);
         city.setLongitude(1f);
 
-        if (em != null) {
+        final EntityManager entityManager = this.getEntityManager();
+        if (entityManager != null) {
             try {
-                em.getTransaction().begin();
-                em.persist(city);
-                em.getTransaction().commit();
+                entityManager.getTransaction().begin();
+                entityManager.persist(city);
+                entityManager.getTransaction().commit();
             } catch (Exception ex) {
-                if (em.getTransaction().isActive()) {
-                    em.getTransaction().rollback();
-                }
-                System.err.println(ex.getLocalizedMessage());
+                this.rollbackTransaction(entityManager);
                 throw ex;
             }
         }
@@ -401,16 +335,14 @@ public class CityTest extends BaseParametrezedTest{
         city.setLatitude(1f);
         city.setLongitude(-181f);
 
-        if (em != null) {
+        final EntityManager entityManager = this.getEntityManager();
+        if (entityManager != null) {
             try {
-                em.getTransaction().begin();
-                em.persist(city);
-                em.getTransaction().commit();
+                entityManager.getTransaction().begin();
+                entityManager.persist(city);
+                entityManager.getTransaction().commit();
             } catch (Exception ex) {
-                if (em.getTransaction().isActive()) {
-                    em.getTransaction().rollback();
-                }
-                System.err.println(ex.getLocalizedMessage());
+                this.rollbackTransaction(entityManager);
                 throw ex;
             }
         }
@@ -425,16 +357,14 @@ public class CityTest extends BaseParametrezedTest{
         city.setLatitude(1f);
         city.setLongitude(181f);
 
-        if (em != null) {
+        final EntityManager entityManager = this.getEntityManager();
+        if (entityManager != null) {
             try {
-                em.getTransaction().begin();
-                em.persist(city);
-                em.getTransaction().commit();
+                entityManager.getTransaction().begin();
+                entityManager.persist(city);
+                entityManager.getTransaction().commit();
             } catch (Exception ex) {
-                if (em.getTransaction().isActive()) {
-                    em.getTransaction().rollback();
-                }
-                System.err.println(ex.getLocalizedMessage());
+                this.rollbackTransaction(entityManager);
                 throw ex;
             }
         }
@@ -444,26 +374,22 @@ public class CityTest extends BaseParametrezedTest{
     public void testCityNamedQuereis() {
         System.out.println("CityNamedQuereis");
 
-        if (em != null) {
-            try {
-                em.createNamedQuery("City.findAll")
-                        .setHint("org.hibernate.readOnly", true)
-                        .getResultList();
+        final EntityManager entityManager = this.getEntityManager();
+        if (entityManager != null) {
 
-                em.createNamedQuery("City.findById")
-                        .setHint("org.hibernate.readOnly", true)
-                        .setParameter("id", 1)
-                        .getResultList();
+            entityManager.createNamedQuery("City.findAll")
+                    .setHint("org.hibernate.readOnly", true)
+                    .getResultList();
 
-                em.createNamedQuery("City.findByCityName")
-                        .setHint("org.hibernate.readOnly", true)
-                        .setParameter("cityName", "Тула")
-                        .getResultList();
+            entityManager.createNamedQuery("City.findById")
+                    .setHint("org.hibernate.readOnly", true)
+                    .setParameter("id", 1)
+                    .getResultList();
 
-            } catch (Exception ex) {
-                System.out.println(ex.getLocalizedMessage());
-                throw ex;
-            }
+            entityManager.createNamedQuery("City.findByCityName")
+                    .setHint("org.hibernate.readOnly", true)
+                    .setParameter("cityName", "Тула")
+                    .getResultList();
         }
     }
 
@@ -471,7 +397,9 @@ public class CityTest extends BaseParametrezedTest{
     public void testCheckByCityNameNamedQuery() {
         System.out.println("checkByCityName");
 
-        final Object cn = em.createNamedQuery("City.checkByCityName")
+        final EntityManager entityManager = this.getEntityManager();
+
+        final Object cn = entityManager.createNamedQuery("City.checkByCityName")
                 .setHint("org.hibernate.readOnly", true)
                 .setParameter("cityName", "Тамбов")
                 .getSingleResult();
@@ -492,69 +420,19 @@ public class CityTest extends BaseParametrezedTest{
 
         city.setCountry(country);
 
-        if (em != null) {
+        final EntityManager entityManager = this.getEntityManager();
+        if (entityManager != null) {
             try {
-                em.getTransaction().begin();
-                em.persist(country);
-                em.persist(city);
-                em.getTransaction().commit();
+                entityManager.getTransaction().begin();
+                entityManager.persist(country);
+                entityManager.persist(city);
+                entityManager.getTransaction().commit();
             } catch (Exception ex) {
-                if (em.getTransaction().isActive()) {
-                    em.getTransaction().rollback();
-                }
-                System.err.println(ex.getLocalizedMessage());
+                this.rollbackTransaction(entityManager);
                 throw ex;
             } finally {
-                final Query q1 = em.createQuery("DELETE FROM City");
-                final Query q2 = em.createQuery("DELETE FROM Country");
-                em.getTransaction().begin();
-                q1.executeUpdate();
-                q2.executeUpdate();
-                em.getTransaction().commit();
-            }
-        }
-    }
-    
-
-    @Test(expected = PersistenceException.class)
-    public void testCountryForignKeyDelete() throws Exception {
-        System.out.println("CountryForignKeyDelete");
-
-        final Country country = new Country();
-        final City city = new City("Москва");
-
-        country.setCountryName("Россия");
-        country.setCountryCodeAlpha2("RU");
-        country.setCountryCodeAlpha3("RUS");
-
-        city.setCountry(country);
-        country.addCity(city);
-
-        if (em != null) {
-            try {
-                em.getTransaction().begin();
-                em.persist(country);
-                em.persist(city);
-                em.getTransaction().commit();
-
-                final Query q = em.createQuery("DELETE FROM Country");
-                em.getTransaction().begin();
-                q.executeUpdate();
-                em.getTransaction().commit();
-
-            } catch (Exception ex) {
-                if (em.getTransaction().isActive()) {
-                    em.getTransaction().rollback();
-                }
-                System.err.println(ex.getLocalizedMessage());
-                throw ex;
-            } finally {
-                final Query q1 = em.createQuery("DELETE FROM City");
-                final Query q2 = em.createQuery("DELETE FROM Country");
-                em.getTransaction().begin();
-                q1.executeUpdate();
-                q2.executeUpdate();
-                em.getTransaction().commit();
+                this.deleteFromTable(entityManager, "City");
+                this.deleteFromTable(entityManager, "Country");
             }
         }
     }
@@ -606,12 +484,13 @@ public class CityTest extends BaseParametrezedTest{
         city.setClubs(clubs);
         club.setCity(city);
 
-        if (em != null) {
+        final EntityManager entityManager = this.getEntityManager();
+        if (entityManager != null) {
             try {
-                em.getTransaction().begin();
-                em.persist(city);
-                em.getTransaction().commit();
-                final int size = em
+                entityManager.getTransaction().begin();
+                entityManager.persist(city);
+                entityManager.getTransaction().commit();
+                final int size = entityManager
                         .createQuery("SELECT c FROM Club c")
                         .setHint("org.hibernate.readOnly", true)
                         .getResultList()
@@ -619,16 +498,10 @@ public class CityTest extends BaseParametrezedTest{
                 assertThat(size, equalTo(1));
 
             } catch (Exception ex) {
-                if (em.getTransaction().isActive()) {
-                    em.getTransaction().rollback();
-                }
-                System.err.println(ex.getLocalizedMessage());
+                this.rollbackTransaction(entityManager);
                 throw ex;
             } finally {
-                final Query q = em.createQuery("DELETE FROM Club");
-                em.getTransaction().begin();
-                q.executeUpdate();
-                em.getTransaction().commit();
+                deleteFromTable(entityManager, "Club");
             }
         }
     }
@@ -643,12 +516,13 @@ public class CityTest extends BaseParametrezedTest{
         club.setCity(city);
         city.addClub(club);
 
-        if (em != null) {
+        final EntityManager entityManager = this.getEntityManager();
+        if (entityManager != null) {
             try {
-                em.getTransaction().begin();
-                em.persist(city);
-                em.getTransaction().commit();
-                final int size = em
+                entityManager.getTransaction().begin();
+                entityManager.persist(city);
+                entityManager.getTransaction().commit();
+                final int size = entityManager
                         .createQuery("SELECT c FROM Club c")
                         .setHint("org.hibernate.readOnly", true)
                         .getResultList()
@@ -656,16 +530,10 @@ public class CityTest extends BaseParametrezedTest{
                 assertThat(size, equalTo(1));
 
             } catch (Exception ex) {
-                if (em.getTransaction().isActive()) {
-                    em.getTransaction().rollback();
-                }
-                System.err.println(ex.getLocalizedMessage());
+                this.rollbackTransaction(entityManager);
                 throw ex;
             } finally {
-                final Query q = em.createQuery("DELETE FROM Club");
-                em.getTransaction().begin();
-                q.executeUpdate();
-                em.getTransaction().commit();
+                deleteFromTable(entityManager, "Club");
             }
         }
     }
@@ -683,12 +551,13 @@ public class CityTest extends BaseParametrezedTest{
         city.setTeams(teams);
         team.setCity(city);
 
-        if (em != null) {
+        final EntityManager entityManager = this.getEntityManager();
+        if (entityManager != null) {
             try {
-                em.getTransaction().begin();
-                em.persist(city);
-                em.getTransaction().commit();
-                final int size = em
+                entityManager.getTransaction().begin();
+                entityManager.persist(city);
+                entityManager.getTransaction().commit();
+                final int size = entityManager
                         .createQuery("SELECT t FROM Team t")
                         .setHint("org.hibernate.readOnly", true)
                         .getResultList()
@@ -696,23 +565,17 @@ public class CityTest extends BaseParametrezedTest{
                 assertThat(size, equalTo(1));
 
             } catch (Exception ex) {
-                if (em.getTransaction().isActive()) {
-                    em.getTransaction().rollback();
-                }
-                System.err.println(ex.getLocalizedMessage());
+                this.rollbackTransaction(entityManager);
                 throw ex;
             } finally {
-                final Query q = em.createQuery("DELETE FROM Team");
-                em.getTransaction().begin();
-                q.executeUpdate();
-                em.getTransaction().commit();
+                deleteFromTable(entityManager, "Team");
             }
         }
     }
 
     @Test
-    public void testAddTeam() throws PersistenceException {
-        System.out.println("AddTeam");
+    public void testAddTeamToCity() throws PersistenceException {
+        System.out.println("AddTeamTtCity");
 
         final City city = new City("Москва");
         final Team team = new Team("Ветераны");
@@ -720,12 +583,13 @@ public class CityTest extends BaseParametrezedTest{
         team.setCity(city);
         city.addTeam(team);
 
-        if (em != null) {
+        final EntityManager entityManager = this.getEntityManager();
+        if (entityManager != null) {
             try {
-                em.getTransaction().begin();
-                em.persist(city);
-                em.getTransaction().commit();
-                final int size = em
+                entityManager.getTransaction().begin();
+                entityManager.persist(city);
+                entityManager.getTransaction().commit();
+                final int size = entityManager
                         .createQuery("SELECT t FROM Team t")
                         .setHint("org.hibernate.readOnly", true)
                         .getResultList()
@@ -733,16 +597,10 @@ public class CityTest extends BaseParametrezedTest{
                 assertThat(size, equalTo(1));
 
             } catch (Exception ex) {
-                if (em.getTransaction().isActive()) {
-                    em.getTransaction().rollback();
-                }
-                System.err.println(ex.getLocalizedMessage());
+                this.rollbackTransaction(entityManager);
                 throw ex;
             } finally {
-                final Query q = em.createQuery("DELETE FROM Team");
-                em.getTransaction().begin();
-                q.executeUpdate();
-                em.getTransaction().commit();
+                deleteFromTable(entityManager, "Team");
             }
         }
     }
@@ -764,19 +622,20 @@ public class CityTest extends BaseParametrezedTest{
         team2.setCity(city);
         teams2.add(team2);
 
-        if (em != null) {
+        final EntityManager entityManager = this.getEntityManager();
+        if (entityManager != null) {
             try {
                 city.setTeams(teams1);
-                em.getTransaction().begin();
-                em.persist(city);
-                em.getTransaction().commit();
+                entityManager.getTransaction().begin();
+                entityManager.persist(city);
+                entityManager.getTransaction().commit();
 
                 city.setTeams(teams2);
-                em.getTransaction().begin();
-                em.persist(city);
-                em.getTransaction().commit();
+                entityManager.getTransaction().begin();
+                entityManager.persist(city);
+                entityManager.getTransaction().commit();
 
-                final int size = em
+                final int size = entityManager
                         .createQuery("SELECT t FROM Team t")
                         .setHint("org.hibernate.readOnly", true)
                         .getResultList()
@@ -784,16 +643,10 @@ public class CityTest extends BaseParametrezedTest{
                 assertThat(size, equalTo(2));
 
             } catch (Exception ex) {
-                if (em.getTransaction().isActive()) {
-                    em.getTransaction().rollback();
-                }
-                System.err.println(ex.getLocalizedMessage());
+                this.rollbackTransaction(entityManager);
                 throw ex;
             } finally {
-                final Query q = em.createQuery("DELETE FROM Team");
-                em.getTransaction().begin();
-                q.executeUpdate();
-                em.getTransaction().commit();
+                deleteFromTable(entityManager, "Team");
             }
         }
     }
@@ -807,12 +660,13 @@ public class CityTest extends BaseParametrezedTest{
         users.add(new GoUser("AlphaGo", "AlphaGo@letsgo.ru"));
         city.setUsers(users);
 
-        if (em != null) {
+        final EntityManager entityManager = this.getEntityManager();
+        if (entityManager != null) {
             try {
-                em.getTransaction().begin();
-                em.persist(city);
-                em.getTransaction().commit();
-                final int size = em
+                entityManager.getTransaction().begin();
+                entityManager.persist(city);
+                entityManager.getTransaction().commit();
+                final int size = entityManager
                         .createQuery("SELECT t FROM GoUser t")
                         .setHint("org.hibernate.readOnly", true)
                         .getResultList()
@@ -820,16 +674,10 @@ public class CityTest extends BaseParametrezedTest{
                 assertThat(size, equalTo(1));
 
             } catch (Exception ex) {
-                if (em.getTransaction().isActive()) {
-                    em.getTransaction().rollback();
-                }
-                System.err.println(ex.getLocalizedMessage());
+                this.rollbackTransaction(entityManager);
                 throw ex;
             } finally {
-                final Query q = em.createQuery("DELETE FROM GoUser");
-                em.getTransaction().begin();
-                q.executeUpdate();
-                em.getTransaction().commit();
+                deleteFromTable(entityManager, "GoUser");
             }
         }
     }
@@ -841,12 +689,13 @@ public class CityTest extends BaseParametrezedTest{
         final City city = new City("Москва");
         city.addUser(new GoUser("AlphaGo", "AlphaGo@letsgo.ru"));
 
-        if (em != null) {
+        final EntityManager entityManager = this.getEntityManager();
+        if (entityManager != null) {
             try {
-                em.getTransaction().begin();
-                em.persist(city);
-                em.getTransaction().commit();
-                final int size = em
+                entityManager.getTransaction().begin();
+                entityManager.persist(city);
+                entityManager.getTransaction().commit();
+                final int size = entityManager
                         .createQuery("SELECT t FROM GoUser t")
                         .setHint("org.hibernate.readOnly", true)
                         .getResultList()
@@ -854,16 +703,10 @@ public class CityTest extends BaseParametrezedTest{
                 assertThat(size, equalTo(1));
 
             } catch (Exception ex) {
-                if (em.getTransaction().isActive()) {
-                    em.getTransaction().rollback();
-                }
-                System.err.println(ex.getLocalizedMessage());
+                this.rollbackTransaction(entityManager);
                 throw ex;
             } finally {
-                final Query q = em.createQuery("DELETE FROM GoUser");
-                em.getTransaction().begin();
-                q.executeUpdate();
-                em.getTransaction().commit();
+                deleteFromTable(entityManager, "GoUser");
             }
         }
     }
@@ -873,20 +716,22 @@ public class CityTest extends BaseParametrezedTest{
         System.out.println("AddExistUserInotCity");
 
         final City city = new City("Москва");
-        if (em != null) {
+
+        final EntityManager entityManager = this.getEntityManager();
+        if (entityManager != null) {
             try {
-                em.getTransaction().begin();
-                em.persist(city);
-                em.getTransaction().commit();
+                entityManager.getTransaction().begin();
+                entityManager.persist(city);
+                entityManager.getTransaction().commit();
 
                 final GoUser alphaGo = new GoUser("AlphaGo", "AlphaGo@letsgo.ru");
                 final GoUser alphaZen = new GoUser("AlphaZen", "AlphaZen@letsgo.ru");
 
-                em.getTransaction().begin();
-                em.persist(alphaGo);
-                em.persist(alphaZen);
-                em.getTransaction().commit();
-                final int goUserSize = em
+                entityManager.getTransaction().begin();
+                entityManager.persist(alphaGo);
+                entityManager.persist(alphaZen);
+                entityManager.getTransaction().commit();
+                final int goUserSize = entityManager
                         .createQuery("SELECT t FROM GoUser t")
                         .setHint("org.hibernate.readOnly", true)
                         .getResultList()
@@ -899,11 +744,11 @@ public class CityTest extends BaseParametrezedTest{
                 alphaGo.setCity(city);
                 alphaZen.setCity(city);
 
-                em.getTransaction().begin();
-                em.persist(city);
-                em.getTransaction().commit();
+                entityManager.getTransaction().begin();
+                entityManager.persist(city);
+                entityManager.getTransaction().commit();
 
-                final int goUserFromCitySize = em
+                final int goUserFromCitySize = entityManager
                         .createQuery("SELECT g FROM GoUser g WHERE g.city.id =:cityId")
                         .setHint("org.hibernate.readOnly", true)
                         .setParameter("cityId", city.getId())
@@ -912,17 +757,12 @@ public class CityTest extends BaseParametrezedTest{
                 assertThat(goUserFromCitySize, equalTo(2));
 
             } catch (Exception ex) {
-                if (em.getTransaction().isActive()) {
-                    em.getTransaction().rollback();
-                }
-                System.err.println(ex.getLocalizedMessage());
+                this.rollbackTransaction(entityManager);
                 throw ex;
             } finally {
-                final Query q = em.createQuery("DELETE FROM GoUser");
-                em.getTransaction().begin();
-                q.executeUpdate();
-                em.getTransaction().commit();
+                deleteFromTable(entityManager, "GoUser");
             }
         }
     }
+
 }

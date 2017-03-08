@@ -24,7 +24,10 @@ import org.junit.runners.Suite;
  * @author surzhin.konstantin
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({org.igo.junit.city.entities.CityCacheTest.class, org.igo.junit.city.entities.CityCascadeTest.class, org.igo.junit.city.entities.CityLazyExceptionTest.class, org.igo.junit.city.entities.CityTest.class})
+@Suite.SuiteClasses({org.igo.junit.city.entities.CityCacheTest.class,
+     org.igo.junit.city.entities.CityCascadeTest.class,
+     org.igo.junit.city.entities.CityLazyExceptionTest.class,
+     org.igo.junit.city.entities.CityPropertyTest.class})
 public class CityTestSuite {
-    
+
 }

@@ -16,14 +16,12 @@
  */
 package org.igo.junit.city.entities;
 
+import org.igo.junit.entities.BaseParametrezedTest;
 import javax.persistence.Cache;
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import static org.hamcrest.CoreMatchers.equalTo;
 import org.igo.entities.City;
-import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
@@ -36,38 +34,13 @@ import org.junit.runners.Parameterized;
 @RunWith(Parameterized.class)
 public class CityCacheTest extends BaseParametrezedTest {
 
-    private EntityManager em;
-
     public CityCacheTest() {
     }
 
     @AfterClass
     public static void tearDownClass() {
-        if (emf != null) {
-            emf.close();
-        }
-    }
-
-    @Before
-    public void setUp() {
-        em = emf.createEntityManager();
-
-        if (em != null) {
-            final Query q = em.createQuery("DELETE FROM City");
-            em.getTransaction().begin();
-            q.executeUpdate();
-            em.getTransaction().commit();
-        }
-    }
-
-    @After
-    public void tearDown() {
-        if (em != null) {
-            final Query q = em.createQuery("DELETE FROM City");
-            em.getTransaction().begin();
-            q.executeUpdate();
-            em.getTransaction().commit();
-            em.close();
+        if (entityManagerFactory != null) {
+            entityManagerFactory.close();
         }
     }
 
@@ -76,82 +49,84 @@ public class CityCacheTest extends BaseParametrezedTest {
         System.out.println("CityInCache");
 
         final City city = new City("Москва");
-        if (em != null) {
+        final EntityManager entityManager = this.getEntityManager();
+        if (entityManager != null) {
             try {
-                em.getTransaction().begin();
-                em.persist(city);
-                em.getTransaction().commit();
+                entityManager.getTransaction().begin();
+                entityManager.persist(city);
+                entityManager.getTransaction().commit();
+
+                assertTrue("Объекта в L1 кеше нет", entityManager.contains(city));
+                entityManager.clear();
+                assertFalse("Объекта в L1 кеше", entityManager.contains(city));
+
+                final City nuvoCity = entityManager.find(City.class, city.getId());
+                final Cache cache = entityManager.getEntityManagerFactory().getCache();
+
+                entityManager.merge(nuvoCity);
+                assertTrue("Объекта в L1 кеше нет", entityManager.contains(nuvoCity));
+                assertTrue("Объекта в L2 кеше нет", cache.contains(City.class, nuvoCity.getId()));
+
+                cache.evict(City.class, city.getId());
+                assertFalse(cache.contains(City.class, city.getId()));
+
             } catch (Exception ex) {
-                em.getTransaction().rollback();
-                System.err.println(ex.getLocalizedMessage());
+                entityManager.getTransaction().rollback();
                 throw ex;
             }
         }
-        assertTrue("Объекта в L1 кеше нет", em.contains(city));
-        em.clear();
-        assertFalse("Объекта в L1 кеше", em.contains(city));
 
-        final City nuvoCity = em.find(City.class, city.getId());
-        final Cache cache = em.getEntityManagerFactory().getCache();
-        em.merge(nuvoCity);
-        assertTrue("Объекта в L1 кеше нет", em.contains(nuvoCity));
-        assertTrue("Объекта в L2 кеше нет", cache.contains(City.class, nuvoCity.getId()));
-
-        cache.evict(City.class, city.getId());
-        assertFalse(cache.contains(City.class, city.getId()));
     }
 
     @Test
     public void testUpdateCityWithNativSQLCityInCache() {
         System.out.println("UpdateCityWithNativSQLCityInCache");
-        final Cache cache = em.getEntityManagerFactory().getCache();
+
         final City city = new City("Москва");
-        if (em != null) {
-            try {
-                em.getTransaction().begin();
-                em.persist(city);
-                em.getTransaction().commit();
-            } catch (Exception ex) {
-                em.getTransaction().rollback();
-                System.err.println(ex.getLocalizedMessage());
-                throw ex;
-            }
+
+        final EntityManager entityManager = this.getEntityManager();
+        if (entityManager != null) {
+
+            final Cache cache = entityManager.getEntityManagerFactory().getCache();
 
             try {
-                em.getTransaction().begin();
-                final int number = em
+                entityManager.getTransaction().begin();
+                entityManager.persist(city);
+                entityManager.getTransaction().commit();
+
+                entityManager.getTransaction().begin();
+                final int number = entityManager
                         .createQuery("UPDATE City c SET c.cityName =:cityName WHERE c.id = :id")
                         .setParameter("cityName", "Новая Москва")
                         .setParameter("id", city.getId())
                         .executeUpdate();
-                em.getTransaction().commit();
+                entityManager.getTransaction().commit();
+
                 assertThat(number, equalTo(1));
 
-                final String cityFromDbTadle = em
+                final String cityFromDbTadle = entityManager
                         .createQuery("SELECT c.cityName From City c WHERE c.id=:id", String.class)
                         .setParameter("id", city.getId())
                         .setHint("org.hibernate.readOnly", true)
                         .getSingleResult();
                 assertThat(cityFromDbTadle, equalTo("Новая Москва"));
 
-                assertTrue(em.contains(city));
+                assertTrue(entityManager.contains(city));
 
-                final City cityFromCahe = em.find(City.class, city.getId());
+                final City cityFromCahe = entityManager.find(City.class, city.getId());
 
                 assertThat(cityFromCahe.getCityName(), equalTo("Москва"));
 
-                em.refresh(cityFromCahe);
+                entityManager.refresh(cityFromCahe);
                 assertThat(city.getCityName(), equalTo("Новая Москва"));
                 assertThat(cityFromCahe.getCityName(), equalTo("Новая Москва"));
 
+                cache.evict(City.class, city.getId());
+                assertFalse(cache.contains(City.class, city.getId()));
             } catch (Exception ex) {
-                em.getTransaction().rollback();
-                System.err.println(ex.getLocalizedMessage());
+                entityManager.getTransaction().rollback();
                 throw ex;
             }
         }
-
-        cache.evict(City.class, city.getId());
-        assertFalse(cache.contains(City.class, city.getId()));
     }
 }
