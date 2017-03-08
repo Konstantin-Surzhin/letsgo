@@ -5,15 +5,13 @@
 package org.igo.letsgo.city.ejb;
 
 import java.util.List;
-import java.util.Set;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import org.igo.entities.City;
-import org.igo.entities.UserDetails;
+import org.igo.entities.GoUser;
 import org.igo.letsgo.remote.ICityRemote;
 
 /**
@@ -33,8 +31,9 @@ public class CitySessionBean implements ICityRemote {
      */
     @Override
     public String getCityName(final Integer id) {
-        City city = getEntityManager().find(City.class, id);
-        return city.getCityName();
+        return getEntityManager()
+                .find(City.class, id)
+                .getCityName();
     }
 
     /**
@@ -44,15 +43,15 @@ public class CitySessionBean implements ICityRemote {
      */
     @Override
     public Integer getCityId(final String name) {
-
-        TypedQuery<City> q = getEntityManager().createNamedQuery("City.findByCityName", City.class);
-        q.setParameter("cityName", name);
-
         try {
-            return q.getSingleResult().getId();
+            return getEntityManager()
+                    .createNamedQuery("City.findByCityName", City.class)
+                    .setParameter("cityName", name)
+                    .getSingleResult()
+                    .getId();
         } catch (Exception ex) {
             LOGGER.info(ex.getLocalizedMessage());
-            return -1; //id not found
+            throw ex;
         }
     }
 
@@ -77,14 +76,13 @@ public class CitySessionBean implements ICityRemote {
      */
     @Override
     public List<String> getAllCityName() {
-        TypedQuery<City> q = getEntityManager().createNamedQuery("City.findAll", City.class);
-        List<City> names = q.getResultList();
-
-        List<String> listCityName = names.stream()
-                .map(c -> c.getCityName())
+        return getEntityManager()
+                .createNamedQuery("City.findAll", City.class)
+                .getResultList()
+                .stream()
+                .map(City::getCityName)
                 .sorted()
                 .collect(Collectors.toList());
-        return listCityName;
     }
 
     /**
@@ -94,22 +92,22 @@ public class CitySessionBean implements ICityRemote {
      */
     @Override
     public List<String> getAllCityUser(final String name) {
-
-        TypedQuery<City> q = getEntityManager().createNamedQuery("City.findByCityName", City.class);
-        q.setParameter("cityName", name);
-
         try {
-            Integer id = q.getSingleResult().getId();
-            City city = getEntityManager().find(City.class, id);
-            Set<UserDetails> users = city.getUsers();
-            List<String> listUsersName = users.stream()
-                    .map(c -> c.getUser().getUserName())
+            final Integer id = getEntityManager()
+                    .createNamedQuery("City.findByCityName", City.class)
+                    .setParameter("cityName", name)
+                    .getSingleResult().getId();
+
+            return getEntityManager()
+                    .find(City.class, id)
+                    .getUsers()
+                    .stream()
+                    .map(GoUser::getUserName)
                     .sorted()
                     .collect(Collectors.toList());
-            return listUsersName;
         } catch (Exception ex) {
             LOGGER.info(ex.getLocalizedMessage());
-            return null;
+            throw ex;
         }
     }
 
@@ -120,13 +118,13 @@ public class CitySessionBean implements ICityRemote {
      */
     @Override
     public List<String> getAllCityUser(final Integer id) {
-        City city = getEntityManager().find(City.class, id);
-        Set<UserDetails> users = city.getUsers();
-        List<String> listUsersName = users.stream()
-                .map(c -> c.getUser().getUserName())
+        return getEntityManager()
+                .find(City.class, id)
+                .getUsers()
+                .stream()
+                .map(GoUser::getUserName)
                 .sorted()
                 .collect(Collectors.toList());
-        return listUsersName;
     }
 
     /**
@@ -138,22 +136,21 @@ public class CitySessionBean implements ICityRemote {
      */
     @Override
     public Boolean createCity(final String cityName, final String method, final String dbName) {
-        City city = new City();
-        city.setCityName(cityName);
-
+        final City city = new City(cityName);
+        boolean ret = true;
         switch (method) {
             case "JPA":
                 try {
                     entityManager.persist(city);
-                    return true;
                 } catch (Exception ex) {
                     LOGGER.info(ex.getLocalizedMessage());
-                    return false;
+                    throw ex;
                 }
+                break;
             case "JDBC":
-                return false;
             default:
-                return false;
+                ret = false;
         }
+        return ret;
     }
 }

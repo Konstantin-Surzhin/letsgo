@@ -3,8 +3,6 @@ package org.igo.letsgo.bdd.thucydides.easyb.pages;
 import ch.lambdaj.function.convert.Converter;
 import net.thucydides.core.annotations.DefaultUrl;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import net.thucydides.core.pages.WebElementFacade;
 
@@ -40,10 +38,6 @@ public class DictionaryPage extends PageObject {
     }
 
     private Converter<WebElement, String> toStrings() {
-        return new Converter<WebElement, String>() {
-            public String convert(WebElement from) {
-                return from.getText();
-            }
-        };
+        return WebElement::getText;
     }
 }
