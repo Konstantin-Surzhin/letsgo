@@ -21,12 +21,8 @@ import java.util.Collection;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.criteria.CriteriaBuilder;
-import org.igo.entities.Club;
-import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.runners.Parameterized;
 
 /**
@@ -49,10 +45,6 @@ public class BaseParametrezedTest {
         return Arrays.asList(param);
     }
 
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
     @AfterClass
     public static void tearDownClass() {
         if (entityManagerFactory != null) {
@@ -63,31 +55,8 @@ public class BaseParametrezedTest {
     @Before
     public void setUp() {
         entityManager = entityManagerFactory.createEntityManager();
-
-        if (entityManager != null) {
-            entityManager.getTransaction().begin();
-            entityManager.createQuery("DELETE FROM City").executeUpdate();
-            entityManager.getTransaction().commit();
-        }
     }
 
-    @After
-    public void tearDown() {
-        if (entityManager != null) {
-
-            entityManager.getTransaction().begin();
-            entityManager.createQuery("DELETE FROM City").executeUpdate();
-            entityManager.getTransaction().commit();
-
-            entityManager.clear();
-            entityManager.getEntityManagerFactory().getCache().evictAll();
-            entityManager.close();
-        }
-    }
-
-    /**
-     * @return the em
-     */
     public EntityManager getEntityManager() {
         return entityManager;
     }

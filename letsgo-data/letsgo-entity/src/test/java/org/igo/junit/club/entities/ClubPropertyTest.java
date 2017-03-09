@@ -14,15 +14,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.igo.junit.entities;
+package org.igo.junit.club.entities;
 
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import javax.persistence.RollbackException;
@@ -34,12 +29,10 @@ import org.igo.entities.Country;
 import org.igo.entities.League;
 import org.igo.entities.Team;
 import org.junit.After;
-import org.junit.AfterClass;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -49,59 +42,28 @@ import org.junit.runners.Parameterized;
  * @author surzhin.konstantin
  */
 @RunWith(Parameterized.class)
-public class ClubTest {
+public class ClubPropertyTest extends BaseClubParametrezedTest {
 
-    public ClubTest() {
-    }
-
-    @Parameterized.Parameter(value = 0)
-    static public EntityManagerFactory emf;
-
-    private EntityManager em;
-
-    @Parameterized.Parameters
-    public static Collection dataBaseParam() {
-
-        final EntityManagerFactory emf0 = Persistence.createEntityManagerFactory("testGamePU_MySQL");
-        final EntityManagerFactory emf1 = Persistence.createEntityManagerFactory("testGamePU_H2");
-        final Object[][] param = {{emf0}, {emf1}};
-
-        return Arrays.asList(param);
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-        if (emf != null) {
-            emf.close();
-        }
+    public ClubPropertyTest() {
     }
 
     @Before
+    @Override
     public void setUp() {
-        em = emf.createEntityManager();
-        if (em != null) {
-            final Query q = em.createQuery("DELETE FROM Club");
-            em.getTransaction().begin();
-            q.executeUpdate();
-            em.getTransaction().commit();
+        super.setUp();
+        if (getEntityManager() != null) {
+            deleteFromTable(getEntityManager(), "Club");
         }
     }
 
     @After
     public void tearDown() {
-        if (em != null) {
-            final Query q = em.createQuery("DELETE FROM Club");
-            em.getTransaction().begin();
-            q.executeUpdate();
-            em.getTransaction().commit();
+        if (getEntityManager() != null) {
+            deleteFromTable(getEntityManager(), "Club");
 
-            em.clear();
-            em.getEntityManagerFactory().getCache().evictAll();
-            em.close();
+            getEntityManager().clear();
+            getEntityManager().getEntityManagerFactory().getCache().evictAll();
+            getEntityManager().close();
         }
     }
 
@@ -116,22 +78,22 @@ public class ClubTest {
         club.setClubName("Болты и гайки");
         assertTrue(club.getId() == -1);
 
-        if (em != null) {
+        if (getEntityManager() != null) {
             try {
-                em.getTransaction().begin();
-                em.persist(club);
-                em.getTransaction().commit();
+                getEntityManager().getTransaction().begin();
+                getEntityManager().persist(club);
+                getEntityManager().getTransaction().commit();
 
                 assertTrue(club.getId() != -1);
 
-                em.clear();
-                em.getEntityManagerFactory().getCache().evict(Club.class, club);
+                getEntityManager().clear();
+                getEntityManager().getEntityManagerFactory().getCache().evict(Club.class, club);
 
-                final Club clubFromDb = em.find(Club.class, club.getId());
+                final Club clubFromDb = getEntityManager().find(Club.class, club.getId());
                 assertNotNull(clubFromDb);
 
             } catch (Exception ex) {
-                em.getTransaction().rollback();
+                getEntityManager().getTransaction().rollback();
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             }
@@ -145,13 +107,13 @@ public class ClubTest {
 
         final Club club = new Club(null);
 
-        if (em != null) {
+        if (getEntityManager() != null) {
             try {
-                em.getTransaction().begin();
-                em.persist(club);
-                em.getTransaction().commit();
+                getEntityManager().getTransaction().begin();
+                getEntityManager().persist(club);
+                getEntityManager().getTransaction().commit();
             } catch (Exception ex) {
-                em.getTransaction().rollback();
+                getEntityManager().getTransaction().rollback();
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             }
@@ -164,13 +126,13 @@ public class ClubTest {
 
         final Club club = new Club("");
 
-        if (em != null) {
+        if (getEntityManager() != null) {
             try {
-                em.getTransaction().begin();
-                em.persist(club);
-                em.getTransaction().commit();
+                getEntityManager().getTransaction().begin();
+                getEntityManager().persist(club);
+                getEntityManager().getTransaction().commit();
             } catch (Exception ex) {
-                em.getTransaction().rollback();
+                getEntityManager().getTransaction().rollback();
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             }
@@ -187,13 +149,13 @@ public class ClubTest {
         }
         final Club club = new Club(sb.toString());
 
-        if (em != null) {
+        if (getEntityManager() != null) {
             try {
-                em.getTransaction().begin();
-                em.persist(club);
-                em.getTransaction().commit();
+                getEntityManager().getTransaction().begin();
+                getEntityManager().persist(club);
+                getEntityManager().getTransaction().commit();
             } catch (Exception ex) {
-                em.getTransaction().rollback();
+                getEntityManager().getTransaction().rollback();
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             }
@@ -206,20 +168,20 @@ public class ClubTest {
 
         final Club club = new Club("Зубило");
 
-        if (em != null) {
+        if (getEntityManager() != null) {
             try {
-                em.getTransaction().begin();
-                em.persist(club);
-                em.getTransaction().commit();
+                getEntityManager().getTransaction().begin();
+                getEntityManager().persist(club);
+                getEntityManager().getTransaction().commit();
 
-                final int size = em.createNamedQuery("Club.findByClubName")
+                final int size = getEntityManager().createNamedQuery("Club.findByClubName")
                         .setParameter("clubName", "Зубило")
                         .getResultList()
                         .size();
                 assertThat(size, equalTo(1));
 
             } catch (Exception ex) {
-                em.getTransaction().rollback();
+                getEntityManager().getTransaction().rollback();
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             }
@@ -234,13 +196,13 @@ public class ClubTest {
         final Club club = new Club("Зубило");
         club.setCity(city);
 
-        if (em != null) {
+        if (getEntityManager() != null) {
             try {
-                em.getTransaction().begin();
-                em.persist(club);
-                em.getTransaction().commit();
+                getEntityManager().getTransaction().begin();
+                getEntityManager().persist(club);
+                getEntityManager().getTransaction().commit();
             } catch (Exception ex) {
-                em.getTransaction().rollback();
+                getEntityManager().getTransaction().rollback();
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             }
@@ -255,31 +217,31 @@ public class ClubTest {
         final Club club = new Club("Зубило");
         club.setCity(city);
 
-        if (em != null) {
+        if (getEntityManager() != null) {
             try {
-                em.getTransaction().begin();
-                em.persist(city);
-                em.persist(club);
-                em.getTransaction().commit();
+                getEntityManager().getTransaction().begin();
+                getEntityManager().persist(city);
+                getEntityManager().persist(club);
+                getEntityManager().getTransaction().commit();
 
-                final Query q = em.createQuery("Delete from City");
+                final Query q = getEntityManager().createQuery("Delete from City");
 
-                em.getTransaction().begin();
+                getEntityManager().getTransaction().begin();
                 q.executeUpdate();
-                em.getTransaction().commit();
+                getEntityManager().getTransaction().commit();
 
             } catch (Exception ex) {
-                em.getTransaction().rollback();
+                getEntityManager().getTransaction().rollback();
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             } finally {
-                final Query q1 = em.createQuery("Delete from Club");
-                final Query q2 = em.createQuery("Delete from City");
+                final Query q1 = getEntityManager().createQuery("Delete from Club");
+                final Query q2 = getEntityManager().createQuery("Delete from City");
 
-                em.getTransaction().begin();
+                getEntityManager().getTransaction().begin();
                 q1.executeUpdate();
                 q2.executeUpdate();
-                em.getTransaction().commit();
+                getEntityManager().getTransaction().commit();
             }
 
         }
@@ -293,37 +255,37 @@ public class ClubTest {
         final Club club = new Club("Зубило");
         club.setCity(city);
 
-        if (em != null) {
+        if (getEntityManager() != null) {
             try {
-                em.getTransaction().begin();
-                em.persist(city);
-                em.persist(club);
-                em.getTransaction().commit();
+                getEntityManager().getTransaction().begin();
+                getEntityManager().persist(city);
+                getEntityManager().persist(club);
+                getEntityManager().getTransaction().commit();
 
-                final int clubsSize = em.createNamedQuery("Club.findByClubName")
+                final int clubsSize = getEntityManager().createNamedQuery("Club.findByClubName")
                         .setParameter("clubName", "Зубило")
                         .getResultList()
                         .size();
                 assertThat(clubsSize, equalTo(1));
 
-                final int citySize = em.createNamedQuery("City.findByCityName")
+                final int citySize = getEntityManager().createNamedQuery("City.findByCityName")
                         .setParameter("cityName", "Электросталь")
                         .getResultList()
                         .size();
                 assertThat(citySize, equalTo(1));
 
             } catch (Exception ex) {
-                em.getTransaction().rollback();
+                getEntityManager().getTransaction().rollback();
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             } finally {
-                final Query q1 = em.createQuery("Delete from Club");
-                final Query q2 = em.createQuery("Delete from City");
+                final Query q1 = getEntityManager().createQuery("Delete from Club");
+                final Query q2 = getEntityManager().createQuery("Delete from City");
 
-                em.getTransaction().begin();
+                getEntityManager().getTransaction().begin();
                 q1.executeUpdate();
                 q2.executeUpdate();
-                em.getTransaction().commit();
+                getEntityManager().getTransaction().commit();
             }
         }
     }
@@ -338,14 +300,14 @@ public class ClubTest {
         club1.setCity(city);
         club2.setCity(city);
 
-        if (em != null) {
+        if (getEntityManager() != null) {
             try {
-                em.getTransaction().begin();
-                em.persist(club1);
-                em.persist(club2);
-                em.getTransaction().commit();
+                getEntityManager().getTransaction().begin();
+                getEntityManager().persist(club1);
+                getEntityManager().persist(club2);
+                getEntityManager().getTransaction().commit();
             } catch (Exception ex) {
-                em.getTransaction().rollback();
+                getEntityManager().getTransaction().rollback();
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             }
@@ -362,33 +324,33 @@ public class ClubTest {
         final Set<Team> teams2 = new HashSet<>();
         teams2.add(new Team("Ветераны"));
 
-        if (em != null) {
+        if (getEntityManager() != null) {
             try {
                 club.setTeams(teams1);
-                em.getTransaction().begin();
-                em.persist(club);
-                em.getTransaction().commit();
+                getEntityManager().getTransaction().begin();
+                getEntityManager().persist(club);
+                getEntityManager().getTransaction().commit();
 
                 club.setTeams(teams2);
-                em.getTransaction().begin();
-                em.persist(club);
-                em.getTransaction().commit();
+                getEntityManager().getTransaction().begin();
+                getEntityManager().persist(club);
+                getEntityManager().getTransaction().commit();
 
-                final int size = em
+                final int size = getEntityManager()
                         .createQuery("SELECT t FROM Team t")
                         .getResultList()
                         .size();
                 assertThat(size, equalTo(2));
 
             } catch (Exception ex) {
-                em.getTransaction().rollback();
+                getEntityManager().getTransaction().rollback();
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             } finally {
-                final Query q = em.createQuery("DELETE FROM Team");
-                em.getTransaction().begin();
+                final Query q = getEntityManager().createQuery("DELETE FROM Team");
+                getEntityManager().getTransaction().begin();
                 q.executeUpdate();
-                em.getTransaction().commit();
+                getEntityManager().getTransaction().commit();
             }
         }
     }
@@ -402,24 +364,24 @@ public class ClubTest {
         teams.add(new Team("Молодежка"));
         teams.add(new Team("Ветераны"));
 
-        if (em != null) {
+        if (getEntityManager() != null) {
             try {
                 club.setTeams(teams);
-                em.getTransaction().begin();
-                em.persist(club);
-                em.getTransaction().commit();
+                getEntityManager().getTransaction().begin();
+                getEntityManager().persist(club);
+                getEntityManager().getTransaction().commit();
 
-                em.createQuery("DELETE FROM Club").executeUpdate();
+                getEntityManager().createQuery("DELETE FROM Club").executeUpdate();
 
             } catch (Exception ex) {
-                em.getTransaction().rollback();
+                getEntityManager().getTransaction().rollback();
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             } finally {
-                final Query q = em.createQuery("DELETE FROM Team");
-                em.getTransaction().begin();
+                final Query q = getEntityManager().createQuery("DELETE FROM Team");
+                getEntityManager().getTransaction().begin();
                 q.executeUpdate();
-                em.getTransaction().commit();
+                getEntityManager().getTransaction().commit();
             }
         }
     }
@@ -437,22 +399,22 @@ public class ClubTest {
 
         club.setCountry(country);
 
-        if (em != null) {
+        if (getEntityManager() != null) {
             try {
-                em.getTransaction().begin();
-                em.persist(club);
-                em.getTransaction().commit();
+                getEntityManager().getTransaction().begin();
+                getEntityManager().persist(club);
+                getEntityManager().getTransaction().commit();
             } catch (Exception ex) {
-                em.getTransaction().rollback();
+                getEntityManager().getTransaction().rollback();
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             } finally {
-                final Query q1 = em.createQuery("DELETE FROM Club");
-                final Query q2 = em.createQuery("DELETE FROM Country");
-                em.getTransaction().begin();
+                final Query q1 = getEntityManager().createQuery("DELETE FROM Club");
+                final Query q2 = getEntityManager().createQuery("DELETE FROM Country");
+                getEntityManager().getTransaction().begin();
                 q1.executeUpdate();
                 q2.executeUpdate();
-                em.getTransaction().commit();
+                getEntityManager().getTransaction().commit();
             }
         }
     }
@@ -471,29 +433,29 @@ public class ClubTest {
         club.setCountry(country);
         country.addClub(club);
 
-        if (em != null) {
+        if (getEntityManager() != null) {
             try {
-                em.getTransaction().begin();
-                em.persist(country);
-                em.persist(club);
-                em.getTransaction().commit();
+                getEntityManager().getTransaction().begin();
+                getEntityManager().persist(country);
+                getEntityManager().persist(club);
+                getEntityManager().getTransaction().commit();
 
-                final Query q = em.createQuery("DELETE FROM Country");
-                em.getTransaction().begin();
+                final Query q = getEntityManager().createQuery("DELETE FROM Country");
+                getEntityManager().getTransaction().begin();
                 q.executeUpdate();
-                em.getTransaction().commit();
+                getEntityManager().getTransaction().commit();
 
             } catch (Exception ex) {
-                em.getTransaction().rollback();
+                getEntityManager().getTransaction().rollback();
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             } finally {
-                final Query q1 = em.createQuery("DELETE FROM Club");
-                final Query q2 = em.createQuery("DELETE FROM Country");
-                em.getTransaction().begin();
+                final Query q1 = getEntityManager().createQuery("DELETE FROM Club");
+                final Query q2 = getEntityManager().createQuery("DELETE FROM Country");
+                getEntityManager().getTransaction().begin();
                 q1.executeUpdate();
                 q2.executeUpdate();
-                em.getTransaction().commit();
+                getEntityManager().getTransaction().commit();
             }
         }
     }
@@ -508,23 +470,23 @@ public class ClubTest {
         final Club club = new Club("Ротор");
         club.setLeagues(leagues);
 
-        if (em != null) {
+        if (getEntityManager() != null) {
             try {
-                em.getTransaction().begin();
-                em.persist(club);
-                em.getTransaction().commit();
+                getEntityManager().getTransaction().begin();
+                getEntityManager().persist(club);
+                getEntityManager().getTransaction().commit();
 
             } catch (Exception ex) {
-                em.getTransaction().rollback();
+                getEntityManager().getTransaction().rollback();
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             } finally {
-                final Query q1 = em.createQuery("DELETE FROM Club");
-                final Query q2 = em.createQuery("DELETE FROM League");
-                em.getTransaction().begin();
+                final Query q1 = getEntityManager().createQuery("DELETE FROM Club");
+                final Query q2 = getEntityManager().createQuery("DELETE FROM League");
+                getEntityManager().getTransaction().begin();
                 q1.executeUpdate();
                 q2.executeUpdate();
-                em.getTransaction().commit();
+                getEntityManager().getTransaction().commit();
             }
         }
     }
@@ -539,18 +501,18 @@ public class ClubTest {
         team.setClub(club);
         club.addTeam(team);
 
-        if (em != null) {
+        if (getEntityManager() != null) {
             try {
-                em.getTransaction().begin();
-                em.persist(club);
-                em.getTransaction().commit();
-                final int teamSize = em
+                getEntityManager().getTransaction().begin();
+                getEntityManager().persist(club);
+                getEntityManager().getTransaction().commit();
+                final int teamSize = getEntityManager()
                         .createQuery("SELECT t FROM Team t")
                         .setHint("org.hibernate.readOnly", true)
                         .getResultList()
                         .size();
                 assertThat(teamSize, equalTo(1));
-                final int ClubSize = em
+                final int ClubSize = getEntityManager()
                         .createQuery("SELECT t FROM Club t")
                         .setHint("org.hibernate.readOnly", true)
                         .getResultList()
@@ -558,14 +520,14 @@ public class ClubTest {
                 assertThat(ClubSize, equalTo(1));
 
             } catch (Exception ex) {
-                em.getTransaction().rollback();
+                getEntityManager().getTransaction().rollback();
                 System.err.println(ex.getLocalizedMessage());
                 throw ex;
             } finally {
-                final Query q = em.createQuery("DELETE FROM Team");
-                em.getTransaction().begin();
+                final Query q = getEntityManager().createQuery("DELETE FROM Team");
+                getEntityManager().getTransaction().begin();
                 q.executeUpdate();
-                em.getTransaction().commit();
+                getEntityManager().getTransaction().commit();
             }
         }
     }

@@ -16,7 +16,6 @@
  */
 package org.igo.junit.city.entities;
 
-import org.igo.junit.entities.BaseParametrezedTest;
 import javax.persistence.Cache;
 import javax.persistence.EntityManager;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -32,7 +31,7 @@ import org.junit.runners.Parameterized;
  * @author pl
  */
 @RunWith(Parameterized.class)
-public class CityCacheTest extends BaseParametrezedTest {
+public class CityCacheTest extends BaseCityParametrezedTest {
 
     public CityCacheTest() {
     }

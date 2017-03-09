@@ -18,7 +18,6 @@ package org.igo.junit.city.entities;
 
 import java.util.HashSet;
 import java.util.Set;
-import org.igo.junit.entities.BaseParametrezedTest;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -33,14 +32,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import static org.junit.Assert.*;
-import static org.igo.junit.entities.BaseParametrezedTest.entityManagerFactory;
+import static org.igo.junit.city.entities.BaseCityParametrezedTest.entityManagerFactory;
 
 /**
  *
  * @author surzhin.konstantin
  */
 @RunWith(Parameterized.class)
-public class CityCascadeTest extends BaseParametrezedTest {
+public class CityCascadeTest extends BaseCityParametrezedTest {
 
     public CityCascadeTest() {
     }

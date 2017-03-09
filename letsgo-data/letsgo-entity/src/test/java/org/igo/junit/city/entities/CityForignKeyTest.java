@@ -16,7 +16,6 @@
  */
 package org.igo.junit.city.entities;
 
-import org.igo.junit.entities.BaseParametrezedTest;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
@@ -31,7 +30,7 @@ import org.junit.runners.Parameterized;
  * @author surzhin.konstantin
  */
 @RunWith(Parameterized.class)
-public class CityForignKeyTest extends BaseParametrezedTest {
+public class CityForignKeyTest extends BaseCityParametrezedTest {
 
     public CityForignKeyTest() {
     }

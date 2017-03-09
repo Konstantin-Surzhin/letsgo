@@ -16,7 +16,6 @@
  */
 package org.igo.junit.city.entities;
 
-import org.igo.junit.entities.BaseParametrezedTest;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.EntityManager;
@@ -36,7 +35,7 @@ import org.junit.runners.Parameterized;
  * @author surzhin.konstantin
  */
 @RunWith(Parameterized.class)
-public class CityLazyExceptionTest extends BaseParametrezedTest {
+public class CityLazyExceptionTest extends BaseCityParametrezedTest {
 
     public CityLazyExceptionTest() {
     }
