@@ -88,6 +88,12 @@ public class City implements Serializable {
         this.cityName = city.getCityName();
     }
 
+    public City(String cityName, float latitude, float longitude) {
+        this.cityName = cityName;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
     /**
      *
      * @return
@@ -265,7 +271,7 @@ public class City implements Serializable {
         if (this.teams == null) {
             this.teams = new HashSet<>();
         }
-        this.teams.add(team); //todo: clone
+        this.teams.add(team);
     }
 
     /**
@@ -313,5 +319,12 @@ public class City implements Serializable {
      */
     public void setLeagues(final Set<League> leagues) {
         this.leagues = leagues;
+    }
+
+    public void addLeague(final League league) {
+        if (this.leagues == null) {
+            this.leagues = new HashSet<>();
+        }
+        this.leagues.add(league);
     }
 }
