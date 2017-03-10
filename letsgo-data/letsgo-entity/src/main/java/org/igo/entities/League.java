@@ -31,6 +31,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -167,6 +168,7 @@ public class League implements Serializable {
     public Set<GoUser> getUsers() {
         return users;
     }
+
     /**
      *
      * @param users
@@ -174,15 +176,12 @@ public class League implements Serializable {
     public void setUsers(Set<GoUser> users) {
         this.users = users;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 5;
         hash = 23 * hash + this.id;
         hash = 23 * hash + Objects.hashCode(this.leagueName);
-        hash = 23 * hash + Objects.hashCode(this.teams);
-//        hash = 23 * hash + Objects.hashCode(this.users);
-        hash = 23 * hash + Objects.hashCode(this.country);
         return hash;
     }
 
@@ -198,7 +197,10 @@ public class League implements Serializable {
             return false;
         }
         final League other = (League) obj;
-        return this.id == other.id;
+        if (this.id != other.id) {
+            return false;
+        }
+        return Objects.equals(this.leagueName, other.leagueName);
     }
 
     @Override
@@ -242,8 +244,11 @@ public class League implements Serializable {
     /**
      * @return the cities
      */
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_league_city"), name = "league_id", referencedColumnName = "id")
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "leagues_cities",
+            joinColumns = @JoinColumn(foreignKey = @ForeignKey(name = "fk_league"), name = "league_id"),
+            inverseJoinColumns = @JoinColumn(name = "city_id")
+    )
     public Set<City> getCities() {
         return cities;
     }

@@ -251,8 +251,8 @@ public class CityCascadeTest extends BaseCityParametrezedTest {
 
         final City city = new City("Москва");
         final Set<GoUser> users = new HashSet<>();
-        GoUser user1 = new GoUser("AlphaGo", "AlphaGo@letsgo.ru");
-        GoUser user2 = new GoUser("AlphaZen", "AlphaZen@letsgo.ru");
+        final GoUser user1 = new GoUser("AlphaGo", "AlphaGo@letsgo.ru");
+        final GoUser user2 = new GoUser("AlphaZen", "AlphaZen@letsgo.ru");
 
         user1.setCity(city);
         user2.setCity(city);
@@ -290,8 +290,8 @@ public class CityCascadeTest extends BaseCityParametrezedTest {
         System.out.println("AddUsersToCityAndPersistByCascad");
 
         final City city = new City("Москва");
-        GoUser user1 = new GoUser("AlphaGo", "AlphaGo@letsgo.ru");
-        GoUser user2 = new GoUser("AlphaZen", "AlphaZen@letsgo.ru");
+        final GoUser user1 = new GoUser("AlphaGo", "AlphaGo@letsgo.ru");
+        final GoUser user2 = new GoUser("AlphaZen", "AlphaZen@letsgo.ru");
 
         user1.setCity(city);
         user2.setCity(city);
@@ -328,15 +328,16 @@ public class CityCascadeTest extends BaseCityParametrezedTest {
 
         final City city1 = new City("Москва", 1.0f, 1.0f);
         final City city2 = new City("Петербург", 2.0f, 2.0f);
-        Set<City> cities = new HashSet<>();
+        final Set<City> cities = new HashSet<>();
 
         cities.add(city1);
         cities.add(city2);
 
-        League league1 = new League("Лига белой розы");
-        League league2 = new League("Лига черной розы");
+        final League league1 = new League("Лига белой розы");
+        final League league2 = new League("Лига черной розы");
 
-        Set<League> leagues = new HashSet<>();
+        final Set<League> leagues = new HashSet<>();
+
         league1.setCities(cities);
         league2.setCities(cities);
 
@@ -379,6 +380,7 @@ public class CityCascadeTest extends BaseCityParametrezedTest {
                 throw ex;
             } finally {
                 deleteFromTable(entityManager, "League");
+                deleteFromTable(entityManager, "City");
             }
         }
     }
@@ -387,25 +389,12 @@ public class CityCascadeTest extends BaseCityParametrezedTest {
     public void testAddLeagueToCityAndPersistByCascade() throws PersistenceException {
         System.out.println("AddLeagueToCityAndPersistByCascade");
 
-        System.out.println("SetLeaguesToCityAndPersistByCascade");
-
+        final Set<City> cities = new HashSet<>();
+        final Set<League> leagues = new HashSet<>();
         final City city1 = new City("Москва", 1.0f, 1.0f);
         final City city2 = new City("Петербург", 2.0f, 2.0f);
-        Set<City> cities = new HashSet<>();
-
-        cities.add(city1);
-        cities.add(city2);
-
-        League league1 = new League("Лига белой розы");
-        League league2 = new League("Лига черной розы");
-
-        league1.setCities(cities);
-        league2.setCities(cities);
-
-        city1.addLeague(league1);
-        city1.addLeague(league2);
-        city2.addLeague(league1);
-        city2.addLeague(league2);
+        final League league1 = new League("Лига белой розы");
+        final League league2 = new League("Лига черной розы");
 
         final EntityManager entityManager = this.getEntityManager();
         if (entityManager != null) {
@@ -414,7 +403,24 @@ public class CityCascadeTest extends BaseCityParametrezedTest {
                 entityManager.persist(city1);
                 entityManager.persist(city2);
                 entityManager.persist(league1);
-                entityManager.persist(league2);
+                entityManager.persist(league1);
+                entityManager.getTransaction().commit();
+
+                cities.add(city1); // hashCode id -1
+                cities.add(city2);
+
+                leagues.add(league1);
+                leagues.add(league2);
+
+                league1.setCities(cities);
+                league2.setCities(cities);
+
+                city1.setLeagues(leagues);
+                city2.setLeagues(leagues);
+
+                entityManager.getTransaction().begin();
+                entityManager.persist(city1);
+                entityManager.persist(city2);
                 entityManager.getTransaction().commit();
 
                 final int citySize = entityManager
@@ -437,6 +443,59 @@ public class CityCascadeTest extends BaseCityParametrezedTest {
                         .getResultList()
                         .size();
                 assertThat(leagueCitySize, equalTo(4));
+
+            } catch (Exception ex) {
+                this.rollbackTransaction(entityManager);
+                throw ex;
+            } finally {
+                deleteFromTable(entityManager, "League");
+            }
+        }
+    }
+
+    @Test
+    public void testAddLeagueToCityThenRemoveByCascade() throws PersistenceException {
+        System.out.println("AddLeagueToCityThenRemoveByCascade");
+
+        final City city1 = new City("Москва", 1.0f, 1.0f);
+        final City city2 = new City("Петербург", 2.0f, 2.0f);
+
+        final League league1 = new League("Лига белой розы");
+        final League league2 = new League("Лига черной розы");
+
+        final EntityManager entityManager = this.getEntityManager();
+        if (entityManager != null) {
+            try {
+                entityManager.getTransaction().begin();
+                entityManager.persist(league1);
+                entityManager.persist(league2);
+                entityManager.getTransaction().commit();
+
+                city1.addLeague(league1);
+                city1.addLeague(league2);
+
+                city2.addLeague(league1);
+                city2.addLeague(league2);
+
+                entityManager.getTransaction().begin();
+                entityManager.persist(city1);
+                entityManager.persist(city2);
+                entityManager.getTransaction().commit();
+
+                city1.removeLeague(league1);
+                city1.removeLeague(league2);
+
+                entityManager.getTransaction().begin();
+                entityManager.persist(city1);
+                entityManager.persist(city2);
+                entityManager.getTransaction().commit();
+
+                final int leagueCitySize = entityManager
+                        .createNativeQuery("SELECT * FROM letsgo.leagues_cities")
+                        .setHint("org.hibernate.readOnly", true)
+                        .getResultList()
+                        .size();
+                assertThat(leagueCitySize, equalTo(2));
 
             } catch (Exception ex) {
                 this.rollbackTransaction(entityManager);

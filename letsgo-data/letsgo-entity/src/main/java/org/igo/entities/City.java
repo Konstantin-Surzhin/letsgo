@@ -29,6 +29,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -308,8 +309,11 @@ public class City implements Serializable {
     /**
      * @return the leagues
      */
-    @ManyToMany(mappedBy = "cities", fetch = FetchType.LAZY,
-            cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "leagues_cities",
+            joinColumns = @JoinColumn(foreignKey = @ForeignKey(name = "fk_city"), name = "city_id"),
+            inverseJoinColumns = @JoinColumn(name = "league_id")
+    )
     public Set<League> getLeagues() {
         return leagues;
     }
@@ -326,5 +330,11 @@ public class City implements Serializable {
             this.leagues = new HashSet<>();
         }
         this.leagues.add(league);
+    }
+
+    public void removeLeague(League league) {
+        if (this.leagues != null) {
+            boolean b = this.leagues.remove(league);
+        }
     }
 }
