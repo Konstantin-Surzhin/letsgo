@@ -102,10 +102,10 @@ public class League implements Serializable {
      */
     @Id
     @Basic(optional = false)
-    @GeneratedValue(/**/generator = "league_seq", strategy = GenerationType.TABLE)
+    @GeneratedValue(generator = "LEAGUE_SEQ", strategy = GenerationType.TABLE)
     @TableGenerator(
-            name = "league_seq",
-            table = "hibernate_sequences",
+            name = "LEAGUE_SEQ",
+            table = "HIBERNATE_SEQUENCES",
             pkColumnName = "sequence_name",
             valueColumnName = "next_val",
             pkColumnValue = "league_seq",
@@ -245,7 +245,7 @@ public class League implements Serializable {
      * @return the cities
      */
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "leagues_cities",
+    @JoinTable(name = "LEAGUES_CITIES",
             joinColumns = @JoinColumn(foreignKey = @ForeignKey(name = "fk_league"), name = "league_id"),
             inverseJoinColumns = @JoinColumn(name = "city_id")
     )

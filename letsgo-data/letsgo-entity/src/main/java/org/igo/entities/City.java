@@ -101,14 +101,14 @@ public class City implements Serializable {
      */
     @Id
     @TableGenerator(
-            name = "city_seq",
-            table = "hibernate_sequences",
+            name = "CITY_SEQ",
+            table = "HIBERNATE_SEQUENCES",
             pkColumnName = "sequence_name",
             valueColumnName = "next_val",
             pkColumnValue = "city",
             allocationSize = 10
     )
-    @GeneratedValue(generator = "city_seq", strategy = GenerationType.TABLE)
+    @GeneratedValue(generator = "CITY_SEQ", strategy = GenerationType.TABLE)
     public int getId() {
         return this.id;
     }
@@ -310,7 +310,7 @@ public class City implements Serializable {
      * @return the leagues
      */
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "leagues_cities",
+    @JoinTable(name = "LEAGUES_CITIES",
             joinColumns = @JoinColumn(foreignKey = @ForeignKey(name = "fk_city"), name = "city_id"),
             inverseJoinColumns = @JoinColumn(name = "league_id")
     )

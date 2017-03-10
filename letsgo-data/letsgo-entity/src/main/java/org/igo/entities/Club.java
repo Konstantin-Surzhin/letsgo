@@ -93,10 +93,10 @@ public class Club implements Serializable {
      */
     @Id
     @Basic(optional = false)
-    @GeneratedValue(/**/generator = "club_seq", strategy = GenerationType.TABLE)
+    @GeneratedValue(/**/generator = "CLUB_SEQ", strategy = GenerationType.TABLE)
     @TableGenerator(
-            name = "club_seq",
-            table="hibernate_sequences",
+            name = "CLUB_SEQ",
+            table="HIBERNATE_SEQUENCES",
             pkColumnName = "sequence_name",
             valueColumnName = "next_val",
             pkColumnValue = "club",

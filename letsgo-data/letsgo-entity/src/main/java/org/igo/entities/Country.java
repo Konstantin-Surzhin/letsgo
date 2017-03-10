@@ -151,10 +151,10 @@ public class Country implements Serializable {
     }
 
     @Id
-    @GeneratedValue(generator = "country_seq", strategy = GenerationType.TABLE)
+    @GeneratedValue(generator = "COUNTRY_SEQ", strategy = GenerationType.TABLE)
     @TableGenerator(
-            name = "country_seq",
-            table="hibernate_sequences",
+            name = "COUNTRY_SEQ",
+            table="HIBERNATE_SEQUENCES",
             pkColumnName = "sequence_name",
             valueColumnName = "next_val",
             pkColumnValue = "country",
