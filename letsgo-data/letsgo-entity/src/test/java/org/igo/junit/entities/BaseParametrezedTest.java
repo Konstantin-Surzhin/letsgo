@@ -69,6 +69,9 @@ public class BaseParametrezedTest {
     }
 
     public void deleteFromTable(EntityManager entityManager, String tableName) {
+        if (entityManager.getTransaction().isActive()) {
+            entityManager.getTransaction().rollback();
+        }
         entityManager.getTransaction().begin();
 
         final String query = "DELETE FROM " + tableName;

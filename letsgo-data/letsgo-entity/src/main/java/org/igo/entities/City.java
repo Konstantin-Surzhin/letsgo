@@ -309,7 +309,7 @@ public class City implements Serializable {
     /**
      * @return the leagues
      */
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
     @JoinTable(name = "leagues_cities",
             joinColumns = @JoinColumn(foreignKey = @ForeignKey(name = "fk_city"), name = "city_id"),
             inverseJoinColumns = @JoinColumn(name = "league_id")

@@ -31,6 +31,7 @@ public class BaseCityParametrezedTest extends BaseParametrezedTest {
     public void setUp() {
         super.setUp();
         if (getEntityManager() != null) {
+            
             deleteFromTable(getEntityManager(), "City");
         }
     }
