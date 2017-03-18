@@ -228,7 +228,7 @@ public class League implements Serializable {
     /**
      * @return the clubs
      */
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_league_club"), name = "league_id", referencedColumnName = "id")
     public Set<Club> getClubs() {
         return clubs;
@@ -244,7 +244,7 @@ public class League implements Serializable {
     /**
      * @return the cities
      */
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
     @JoinTable(name = "LEAGUES_CITIES",
             joinColumns = @JoinColumn(foreignKey = @ForeignKey(name = "fk_league"), name = "league_id"),
             inverseJoinColumns = @JoinColumn(name = "city_id")
@@ -260,4 +260,16 @@ public class League implements Serializable {
         this.cities = cities;
     }
 
+    public void addCity(final City city) {
+        if (this.cities == null) {
+            this.cities = new HashSet<>();
+        }
+        this.cities.add(city);
+    }
+
+    public void removeLeague(final City city) {
+        if (this.cities != null) {
+            boolean b = this.cities.remove(city);
+        }
+    }
 }
