@@ -62,7 +62,7 @@ public class League implements Serializable {
     private Set<Team> teams;
     private Set<Club> clubs;
     private Set<GoUser> users;
-    private Set<City> cities;
+    //private Set<City> cities;
 
     /**
      *
@@ -244,32 +244,34 @@ public class League implements Serializable {
     /**
      * @return the cities
      */
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
-    @JoinTable(name = "LEAGUES_CITIES",
-            joinColumns = @JoinColumn(foreignKey = @ForeignKey(name = "fk_league"), name = "league_id"),
-            inverseJoinColumns = @JoinColumn(name = "city_id")
-    )
-    public Set<City> getCities() {
-        return cities;
-    }
+//    @ManyToMany(fetch = FetchType.LAZY
+//           , cascade = {CascadeType.REFRESH, CascadeType.REMOVE}
+//    )
+//    @JoinTable(name = "LEAGUES_CITIES",
+//            joinColumns = @JoinColumn(foreignKey = @ForeignKey(name = "fk_league"), name = "league_id"),
+//            inverseJoinColumns = @JoinColumn(name = "city_id")
+//    )
+//    public Set<City> getCities() {
+//        return cities;
+//    }
 
     /**
      * @param cities the cities to set
      */
-    public void setCities(Set<City> cities) {
-        this.cities = cities;
-    }
+//    public void setCities(Set<City> cities) {
+//        this.cities = cities;
+//    }
+//
+//    public void addCity(final City city) {
+//        if (this.cities == null) {
+//            this.cities = new HashSet<>();
+//        }
+//        this.cities.add(city);
+//    }
 
-    public void addCity(final City city) {
-        if (this.cities == null) {
-            this.cities = new HashSet<>();
-        }
-        this.cities.add(city);
-    }
-
-    public void removeLeague(final City city) {
-        if (this.cities != null) {
-            boolean b = this.cities.remove(city);
-        }
-    }
+//    public void removeLeague(final City city) {
+//        if (this.cities != null) {
+//            boolean b = this.cities.remove(city);
+//        }
+//    }
 }

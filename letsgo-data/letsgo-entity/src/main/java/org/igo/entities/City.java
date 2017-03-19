@@ -29,8 +29,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -71,7 +69,7 @@ public class City implements Serializable {
     private Set<GoUser> users;
     private Set<Club> clubs;
     private Set<Team> teams;
-    private Set<League> leagues;
+    //private Set<League> leagues;
 
     /**
      *
@@ -309,32 +307,34 @@ public class City implements Serializable {
     /**
      * @return the leagues
      */
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
-    @JoinTable(name = "LEAGUES_CITIES",
-            joinColumns = @JoinColumn(foreignKey = @ForeignKey(name = "fk_city"), name = "city_id"),
-            inverseJoinColumns = @JoinColumn(name = "league_id")
-    )
-    public Set<League> getLeagues() {
-        return leagues;
-    }
+//    @ManyToMany(fetch = FetchType.LAZY
+//            , cascade = {CascadeType.REFRESH, CascadeType.REMOVE}
+//)
+//    @JoinTable(name = "LEAGUES_CITIES",
+//            joinColumns = @JoinColumn(foreignKey = @ForeignKey(name = "fk_city"), name = "city_id"),
+//            inverseJoinColumns = @JoinColumn(name = "league_id")
+//    )
+//    public Set<League> getLeagues() {
+//        return leagues;
+//    }
 
     /**
      * @param leagues the leagues to set
-     */
-    public void setLeagues(final Set<League> leagues) {
-        this.leagues = leagues;
-    }
+//     */
+//    public void setLeagues(final Set<League> leagues) {
+//        this.leagues = leagues;
+//    }
+//
+//    public void addLeague(final League league) {
+//        if (this.leagues == null) {
+//            this.leagues = new HashSet<>();
+//        }
+//        this.leagues.add(league);
+//    }
 
-    public void addLeague(final League league) {
-        if (this.leagues == null) {
-            this.leagues = new HashSet<>();
-        }
-        this.leagues.add(league);
-    }
-
-    public void removeLeague(League league) {
-        if (this.leagues != null) {
-            boolean b = this.leagues.remove(league);
-        }
-    }
+//    public void removeLeague(League league) {
+//        if (this.leagues != null) {
+//            boolean b = this.leagues.remove(league);
+//        }
+//    }
 }

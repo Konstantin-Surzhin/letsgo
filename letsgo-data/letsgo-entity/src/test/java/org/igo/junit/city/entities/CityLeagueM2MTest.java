@@ -21,6 +21,7 @@ import javax.persistence.PersistenceException;
 import static org.hamcrest.CoreMatchers.equalTo;
 import org.igo.entities.City;
 import org.igo.entities.League;
+import org.igo.entities.LeagueM2MCity;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
@@ -43,6 +44,8 @@ public class CityLeagueM2MTest extends BaseCityParametrezedTest {
         final City city1 = new City("Москва", 1.0f, 1.0f);
         final League league1 = new League("Лига белой розы");
         final League league2 = new League("Лига черной розы");
+        final LeagueM2MCity lc1 = new LeagueM2MCity(city1, league1);
+        final LeagueM2MCity lc2 = new LeagueM2MCity(city1, league2);
 
         final EntityManager entityManager = this.getEntityManager();
         if (entityManager != null) {
@@ -52,9 +55,14 @@ public class CityLeagueM2MTest extends BaseCityParametrezedTest {
                 entityManager.persist(city1);
                 entityManager.persist(league1);
                 entityManager.persist(league2);
-                city1.addLeague(league1);
-                city1.addLeague(league2);
-                league1.addCity(city1);
+                
+                entityManager.persist(lc1);
+                entityManager.persist(lc2);
+
+//                city1.addLeague(league1);
+//                city1.addLeague(league2);
+                //league1.addCity(city1);
+                //league2.addCity(city1);
                 entityManager.getTransaction().commit();
 
                 final int citySize = entityManager
@@ -72,7 +80,7 @@ public class CityLeagueM2MTest extends BaseCityParametrezedTest {
                 assertThat(leagueSize, equalTo(2));
 
                 final int leagueCitySize = entityManager
-                        .createNativeQuery("SELECT * FROM letsgo.leagues_cities")
+                        .createQuery("SELECT lc FROM LeagueM2MCity lc")
                         .setHint("org.hibernate.readOnly", true)
                         .getResultList()
                         .size();
@@ -82,6 +90,7 @@ public class CityLeagueM2MTest extends BaseCityParametrezedTest {
                 this.rollbackTransaction(entityManager);
                 throw ex;
             } finally {
+                deleteFromTable(entityManager, "LeagueM2MCity");
                 deleteFromTable(entityManager, "League");
             }
         }
