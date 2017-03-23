@@ -17,22 +17,16 @@
 package org.igo.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -60,9 +54,7 @@ public class League implements Serializable {
     private String leagueName;
     private Country country;
     private Set<Team> teams;
-    private Set<Club> clubs;
     private Set<GoUser> users;
-    //private Set<City> cities;
 
     /**
      *
@@ -88,16 +80,6 @@ public class League implements Serializable {
 
     /**
      *
-     * @param id
-     * @param leagueName
-     */
-    public League(short id, String leagueName) {
-        this.id = id;
-        this.leagueName = leagueName;
-    }
-
-    /**
-     *
      * @return
      */
     @Id
@@ -111,7 +93,6 @@ public class League implements Serializable {
             pkColumnValue = "league_seq",
             allocationSize = 10
     )
-    //@SequenceGenerator(name = "league_seq", sequenceName = "league_seq", allocationSize = 1)
     public short getId() {
         return id;
     }
@@ -148,7 +129,7 @@ public class League implements Serializable {
      * @return
      */
     @OneToMany(mappedBy = "league")
-    public Collection<Team> getTeams() {
+    public Set<Team> getTeams() {
         return teams;
     }
 
@@ -178,14 +159,6 @@ public class League implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 23 * hash + this.id;
-        hash = 23 * hash + Objects.hashCode(this.leagueName);
-        return hash;
-    }
-
-    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -204,6 +177,14 @@ public class League implements Serializable {
     }
 
     @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 41 * hash + this.id;
+        hash = 41 * hash + Objects.hashCode(this.leagueName);
+        return hash;
+    }
+
+    @Override
     public String toString() {
         return "org.igo.ban.ejb.Leagues[ id=" + id + " ]";
     }
@@ -217,61 +198,4 @@ public class League implements Serializable {
     public void setCountry(Country country) {
         this.country = country;
     }
-
-    public void addClub(Club club) {
-        if (this.clubs == null) {
-            this.clubs = new HashSet<>();
-        }
-        this.clubs.add(club);
-    }
-
-    /**
-     * @return the clubs
-     */
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_league_club"), name = "league_id", referencedColumnName = "id")
-    public Set<Club> getClubs() {
-        return clubs;
-    }
-
-    /**
-     * @param clubs the clubs to set
-     */
-    public void setClubs(Set<Club> clubs) {
-        this.clubs = clubs;
-    }
-
-    /**
-     * @return the cities
-     */
-//    @ManyToMany(fetch = FetchType.LAZY
-//           , cascade = {CascadeType.REFRESH, CascadeType.REMOVE}
-//    )
-//    @JoinTable(name = "LEAGUES_CITIES",
-//            joinColumns = @JoinColumn(foreignKey = @ForeignKey(name = "fk_league"), name = "league_id"),
-//            inverseJoinColumns = @JoinColumn(name = "city_id")
-//    )
-//    public Set<City> getCities() {
-//        return cities;
-//    }
-
-    /**
-     * @param cities the cities to set
-     */
-//    public void setCities(Set<City> cities) {
-//        this.cities = cities;
-//    }
-//
-//    public void addCity(final City city) {
-//        if (this.cities == null) {
-//            this.cities = new HashSet<>();
-//        }
-//        this.cities.add(city);
-//    }
-
-//    public void removeLeague(final City city) {
-//        if (this.cities != null) {
-//            boolean b = this.cities.remove(city);
-//        }
-//    }
 }

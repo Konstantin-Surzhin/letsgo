@@ -16,41 +16,81 @@
  */
 package org.igo.junit.club.entities;
 
+import javax.persistence.PersistenceException;
+import javax.persistence.Query;
+import org.igo.entities.City;
+import org.igo.entities.Club;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
  * @author surzhin.konstantin
  */
-public class ClubForeignKeyTest {
+public class ClubForeignKeyTest extends BaseClubParametrezedTest{
     
     public ClubForeignKeyTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
+    @Test(expected = PersistenceException.class)
+    public void testPersistClubButCityNotYetAlreadyPersist () {
+        System.out.println("PersistClubButCityNotYetAlreadyPersist");
+
+        final City city = new City("Электросталь");
+        final Club club = new Club("Зубило");
+        club.setCity(city);
+
+        if (getEntityManager() != null) {
+            try {
+                getEntityManager().getTransaction().begin();
+                getEntityManager().persist(club);
+                getEntityManager().getTransaction().commit();
+            } catch (Exception ex) {
+                getEntityManager().getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            }
+        }
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    @Test(expected = PersistenceException.class)
+    public void testDeleteCityButClubsAreNotYetDelete() {
+        System.out.println("DeleteCityButClubsAreNotYetDelete");
+
+        final City city = new City("Электросталь");
+        final Club club = new Club("Зубило");
+        club.setCity(city);
+
+        if (getEntityManager() != null) {
+            try {
+                getEntityManager().getTransaction().begin();
+                getEntityManager().persist(city);
+                getEntityManager().persist(club);
+                getEntityManager().getTransaction().commit();
+
+                final Query q = getEntityManager().createQuery("Delete from City");
+
+                getEntityManager().getTransaction().begin();
+                q.executeUpdate();
+                getEntityManager().getTransaction().commit();
+
+            } catch (Exception ex) {
+                getEntityManager().getTransaction().rollback();
+                System.err.println(ex.getLocalizedMessage());
+                throw ex;
+            } finally {
+                final Query q1 = getEntityManager().createQuery("Delete from Club");
+                final Query q2 = getEntityManager().createQuery("Delete from City");
+
+                getEntityManager().getTransaction().begin();
+                q1.executeUpdate();
+                q2.executeUpdate();
+                getEntityManager().getTransaction().commit();
+            }
+
+        }
+    }
 }

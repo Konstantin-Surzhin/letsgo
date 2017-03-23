@@ -30,7 +30,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -62,7 +61,6 @@ public class Club implements Serializable {
     private String clubName;
     private City city;
     private Country country;
-    private Set<League> leagues;
     private Set<Team> teams;
 
     /**
@@ -204,7 +202,6 @@ public class Club implements Serializable {
     @OneToMany(mappedBy = "club", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     public Set<Team> getTeams() {
         return this.teams;
-
     }
 
     /**
@@ -212,20 +209,5 @@ public class Club implements Serializable {
      */
     public void setTeams(final Set<Team> teams) {
         this.teams = teams;
-    }
-
-    /**
-     * @return the leagues
-     */
-    @ManyToMany(mappedBy = "clubs", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    public Set<League> getLeagues() {
-        return leagues;
-    }
-
-    /**
-     * @param leagues the leagues to set
-     */
-    public void setLeagues(Set<League> leagues) {
-        this.leagues = leagues;
     }
 }

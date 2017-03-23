@@ -20,19 +20,15 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
-import javax.persistence.RollbackException;
 import javax.validation.ConstraintViolationException;
 import static org.hamcrest.CoreMatchers.equalTo;
 import org.igo.entities.City;
 import org.igo.entities.Club;
 import org.igo.entities.Country;
-import org.igo.entities.League;
 import org.igo.entities.Team;
-import org.junit.After;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -47,25 +43,6 @@ public class ClubPropertyTest extends BaseClubParametrezedTest {
     public ClubPropertyTest() {
     }
 
-    @Before
-    @Override
-    public void setUp() {
-        super.setUp();
-        if (getEntityManager() != null) {
-            deleteFromTable(getEntityManager(), "Club");
-        }
-    }
-
-    @After
-    public void tearDown() {
-        if (getEntityManager() != null) {
-            deleteFromTable(getEntityManager(), "Club");
-
-            getEntityManager().clear();
-            getEntityManager().getEntityManagerFactory().getCache().evictAll();
-            getEntityManager().close();
-        }
-    }
 
     /**
      * Test of getId method, of class City.
@@ -120,7 +97,7 @@ public class ClubPropertyTest extends BaseClubParametrezedTest {
         }
     }
 
-    @Test(expected = ConstraintViolationException.class)
+    @Test(expected = PersistenceException.class)
     public void testSetEmptyClubNameException() throws Exception {
         System.out.println("SetEmptyClubNameException");
 
@@ -139,7 +116,7 @@ public class ClubPropertyTest extends BaseClubParametrezedTest {
         }
     }
 
-    @Test(expected = ConstraintViolationException.class)
+    @Test(expected = PersistenceException.class)
     public void testSetTooLongClubNameException() throws Exception {
         System.out.println("SetTooLongClubNameException");
 
@@ -188,64 +165,7 @@ public class ClubPropertyTest extends BaseClubParametrezedTest {
         }
     }
 
-    @Test(expected = PersistenceException.class)
-    public void testPersistClubButCityNotYetAlreadyPersist() {
-        System.out.println("PersistClubButCityNotYetAlreadyPersist");
-
-        final City city = new City("Электросталь");
-        final Club club = new Club("Зубило");
-        club.setCity(city);
-
-        if (getEntityManager() != null) {
-            try {
-                getEntityManager().getTransaction().begin();
-                getEntityManager().persist(club);
-                getEntityManager().getTransaction().commit();
-            } catch (Exception ex) {
-                getEntityManager().getTransaction().rollback();
-                System.err.println(ex.getLocalizedMessage());
-                throw ex;
-            }
-        }
-    }
-
-    @Test(expected = PersistenceException.class)
-    public void testDeleteCityButClubsAreNotYetDelete() {
-        System.out.println("DeleteCityButClubsAreNotYetDelete");
-
-        final City city = new City("Электросталь");
-        final Club club = new Club("Зубило");
-        club.setCity(city);
-
-        if (getEntityManager() != null) {
-            try {
-                getEntityManager().getTransaction().begin();
-                getEntityManager().persist(city);
-                getEntityManager().persist(club);
-                getEntityManager().getTransaction().commit();
-
-                final Query q = getEntityManager().createQuery("Delete from City");
-
-                getEntityManager().getTransaction().begin();
-                q.executeUpdate();
-                getEntityManager().getTransaction().commit();
-
-            } catch (Exception ex) {
-                getEntityManager().getTransaction().rollback();
-                System.err.println(ex.getLocalizedMessage());
-                throw ex;
-            } finally {
-                final Query q1 = getEntityManager().createQuery("Delete from Club");
-                final Query q2 = getEntityManager().createQuery("Delete from City");
-
-                getEntityManager().getTransaction().begin();
-                q1.executeUpdate();
-                q2.executeUpdate();
-                getEntityManager().getTransaction().commit();
-            }
-
-        }
-    }
+    
 
     @Test
     public void testPersistCityAndClubs() {
@@ -386,7 +306,7 @@ public class ClubPropertyTest extends BaseClubParametrezedTest {
         }
     }
 
-    @Test(expected = RollbackException.class)
+    @Test(expected = PersistenceException.class)
     public void testPersisClubButCountryNotYetPesisted() throws Exception {
         System.out.println("PersisClubButCountryNotYetPesisted");
 
@@ -452,37 +372,6 @@ public class ClubPropertyTest extends BaseClubParametrezedTest {
             } finally {
                 final Query q1 = getEntityManager().createQuery("DELETE FROM Club");
                 final Query q2 = getEntityManager().createQuery("DELETE FROM Country");
-                getEntityManager().getTransaction().begin();
-                q1.executeUpdate();
-                q2.executeUpdate();
-                getEntityManager().getTransaction().commit();
-            }
-        }
-    }
-
-    @Test
-    public void testPersistClubButLeagueNotPersistYet() throws Exception {
-        System.out.println("PersistClubButLeagueNotPersistYet");
-
-        final League league = new League("Городская лига А");
-        final Set<League> leagues = new HashSet<>();
-        leagues.add(league);
-        final Club club = new Club("Ротор");
-        club.setLeagues(leagues);
-
-        if (getEntityManager() != null) {
-            try {
-                getEntityManager().getTransaction().begin();
-                getEntityManager().persist(club);
-                getEntityManager().getTransaction().commit();
-
-            } catch (Exception ex) {
-                getEntityManager().getTransaction().rollback();
-                System.err.println(ex.getLocalizedMessage());
-                throw ex;
-            } finally {
-                final Query q1 = getEntityManager().createQuery("DELETE FROM Club");
-                final Query q2 = getEntityManager().createQuery("DELETE FROM League");
                 getEntityManager().getTransaction().begin();
                 q1.executeUpdate();
                 q2.executeUpdate();

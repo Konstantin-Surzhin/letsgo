@@ -17,6 +17,7 @@
 package org.igo.junit.degree.entities;
 
 import java.util.Collection;
+import java.util.Set;
 import org.igo.entities.Degree;
 import org.igo.entities.UserDegree;
 import org.junit.After;
@@ -120,14 +121,14 @@ public class DegreesTest {
     }
 
     /**
-     * Test of setUsersDegreesCollection method, of class Degree.
+     * Test of setUsersDegrees method, of class Degree.
      */
     @Test
     public void testSetUsersDegreesCollection() {
         System.out.println("setUsersDegreesCollection");
-        Collection<UserDegree> usersDegreesCollection = null;
+        Set<UserDegree> usersDegrees = null;
         Degree instance = new Degree();
-        instance.setUsersDegreesCollection(usersDegreesCollection);
+        instance.setUsersDegrees(usersDegrees);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

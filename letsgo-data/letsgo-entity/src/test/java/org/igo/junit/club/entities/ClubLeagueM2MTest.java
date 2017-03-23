@@ -76,13 +76,7 @@ public class ClubLeagueM2MTest {
         System.out.println("SetLeagueToClub");
 
         final League league = new League("Городская лига А");
-        final Set<League> leagues = new HashSet<>();
-        leagues.add(league);
-
         final Club club = new Club("Ротор");
-        league.addClub(club);
-
-        club.setLeagues(leagues);
 
         if (em != null) {
             try {
@@ -128,9 +122,6 @@ public class ClubLeagueM2MTest {
         leagues.add(league);
 
         final Club club = new Club("Ротор");
-        league.addClub(club);
-
-        club.setLeagues(leagues);
 
         if (em != null) {
             try {
@@ -190,13 +181,7 @@ public class ClubLeagueM2MTest {
         System.out.println("DeleFromClub");
 
         final League league = new League("Городская лига А");
-        final Set<League> leagues = new HashSet<>();
-        leagues.add(league);
-
         final Club club = new Club("Ротор");
-        league.addClub(club);
-
-        club.setLeagues(leagues);
 
         if (em != null) {
             try {

@@ -19,6 +19,7 @@ package org.igo.entities;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -50,7 +51,7 @@ public class Degree implements Serializable {
     private static final long serialVersionUID = 1L;
     private byte id;
     private String degreeValue;
-    private Collection<UserDegree> usersDegreesCollection;
+    private Set<UserDegree> usersDegrees;
 
     /**
      *
@@ -121,25 +122,16 @@ public class Degree implements Serializable {
      * @return
      */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "degree")
-    public Collection<UserDegree> getUsersDegreesCollection() {
-        return usersDegreesCollection;
+    public Collection<UserDegree> getUsersDegrees() {
+        return usersDegrees;
     }
 
     /**
      *
-     * @param usersDegreesCollection
+     * @param usersDegrees
      */
-    public void setUsersDegreesCollection(Collection<UserDegree> usersDegreesCollection) {
-        this.usersDegreesCollection = usersDegreesCollection;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 61 * hash + this.id;
-        hash = 61 * hash + Objects.hashCode(this.degreeValue);
-        hash = 61 * hash + Objects.hashCode(this.usersDegreesCollection);
-        return hash;
+    public void setUsersDegrees(Set<UserDegree> usersDegrees) {
+        this.usersDegrees = usersDegrees;
     }
 
     @Override
@@ -154,12 +146,22 @@ public class Degree implements Serializable {
             return false;
         }
         final Degree other = (Degree) obj;
-        return this.id == other.id;
+        if (this.id != other.id) {
+            return false;
+        }
+        return Objects.equals(this.degreeValue, other.degreeValue);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 47 * hash + this.id;
+        hash = 47 * hash + Objects.hashCode(this.degreeValue);
+        return hash;
     }
 
     @Override
     public String toString() {
         return "org.igo.entities.Degrees[ id=" + id + " ]";
     }
-
 }

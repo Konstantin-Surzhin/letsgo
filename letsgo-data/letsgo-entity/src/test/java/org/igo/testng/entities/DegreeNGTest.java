@@ -17,6 +17,7 @@
 package org.igo.testng.entities;
 
 import java.util.Collection;
+import java.util.Set;
 import org.igo.entities.Degree;
 import org.igo.entities.UserDegree;
 import static org.testng.Assert.*;
@@ -115,14 +116,14 @@ public class DegreeNGTest {
     }
 
     /**
-     * Тест метод setUsersDegreesCollection, класса Degree.
+     * Тест метод setUsersDegrees, класса Degree.
      */
     @org.testng.annotations.Test
     public void testSetUsersDegreesCollection() {
         System.out.println("setUsersDegreesCollection");
-        Collection<UserDegree> usersDegreesCollection = null;
+        Set<UserDegree> usersDegrees = null;
         Degree instance = new Degree();
-        instance.setUsersDegreesCollection(usersDegreesCollection);
+        instance.setUsersDegrees(usersDegrees);
         // Просмотр списка задач TODO для сгенерированного кода теста и удаление вызова по умолчанию для случаев сбоя.
         fail("\u042d\u0442\u043e\u0442 \u0442\u0435\u0441\u0442 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0442\u043e\u0442\u0438\u043f\u043e\u043c.");
     }
