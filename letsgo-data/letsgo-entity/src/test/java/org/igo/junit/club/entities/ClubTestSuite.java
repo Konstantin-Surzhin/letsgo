@@ -16,34 +16,42 @@
  */
 package org.igo.junit.club.entities;
 
-import org.igo.junit.entities.BaseParametrezedTest;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
 /**
  *
  * @author surzhin.konstantin
  */
-class BaseClubParametrezedTest extends BaseParametrezedTest{
-    @Before
-    @Override
-    public void setUp() {
-        super.setUp();
-        if (getEntityManager() != null) {
+@RunWith(Suite.class)
+@Suite.SuiteClasses({
+    org.igo.junit.club.entities.ClubCascadeTest.class,
+    org.igo.junit.club.entities.ClubCacheTest.class,
+    org.igo.junit.club.entities.ClubLazyExceptionTest.class,
+    org.igo.junit.club.entities.ClubPropertyTest.class,
+    org.igo.junit.club.entities.ClubLeagueM2MTest.class,
+    org.igo.junit.club.entities.ClubForeignKeyTest.class
+})
+public class ClubTestSuite {
 
-            deleteFromTable(getEntityManager(), "Country");
-        }
+    @BeforeClass
+    public static void setUpClass() throws Exception {
+    }
+
+    @AfterClass
+    public static void tearDownClass() throws Exception {
+    }
+
+    @Before
+    public void setUp() throws Exception {
     }
 
     @After
-    public void tearDown() {
-        if (getEntityManager() != null) {
-
-            deleteFromTable(getEntityManager(), "Country");
-
-            getEntityManager().clear();
-            getEntityManager().getEntityManagerFactory().getCache().evictAll();
-            getEntityManager().close();
-        }
+    public void tearDown() throws Exception {
     }
+
 }

@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.igo.junit.entities;
+package org.igo.junit.country.entities;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -43,9 +43,9 @@ import org.junit.runners.Parameterized;
  * @author surzhin.konstantin
  */
 @RunWith(Parameterized.class)
-public class CountyTest {
+public class CountryPropertyTest {
 
-    public CountyTest() {
+    public CountryPropertyTest() {
     }
 
     @Parameterized.Parameter(value = 0)

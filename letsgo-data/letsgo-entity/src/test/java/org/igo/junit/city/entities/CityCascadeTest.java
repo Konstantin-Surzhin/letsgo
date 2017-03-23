@@ -25,7 +25,6 @@ import org.igo.entities.City;
 import org.igo.entities.Club;
 import org.igo.entities.Country;
 import org.igo.entities.GoUser;
-import org.igo.entities.League;
 import org.igo.entities.Team;
 import org.junit.Test;
 import org.junit.runner.RunWith;

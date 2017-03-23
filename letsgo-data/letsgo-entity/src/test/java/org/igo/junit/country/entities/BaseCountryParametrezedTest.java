@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.igo.junit.club.entities;
+package org.igo.junit.country.entities;
 
 import org.igo.junit.entities.BaseParametrezedTest;
 import org.junit.After;
@@ -24,14 +24,14 @@ import org.junit.Before;
  *
  * @author surzhin.konstantin
  */
-class BaseClubParametrezedTest extends BaseParametrezedTest{
-    @Before
+class BaseCountryParametrezedTest extends BaseParametrezedTest{
+     @Before
     @Override
     public void setUp() {
         super.setUp();
         if (getEntityManager() != null) {
-
-            deleteFromTable(getEntityManager(), "Country");
+            
+            deleteFromTable(getEntityManager(), "Club");
         }
     }
 
@@ -39,7 +39,7 @@ class BaseClubParametrezedTest extends BaseParametrezedTest{
     public void tearDown() {
         if (getEntityManager() != null) {
 
-            deleteFromTable(getEntityManager(), "Country");
+            deleteFromTable(getEntityManager(), "Club");
 
             getEntityManager().clear();
             getEntityManager().getEntityManagerFactory().getCache().evictAll();

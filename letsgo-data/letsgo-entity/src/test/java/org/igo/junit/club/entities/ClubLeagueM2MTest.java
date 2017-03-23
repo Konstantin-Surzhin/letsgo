@@ -39,9 +39,9 @@ import org.junit.runners.Parameterized;
  * @author surzhin.konstantin
  */
 @RunWith(Parameterized.class)
-public class ClubManyToManyTest {
+public class ClubLeagueM2MTest {
 
-    public ClubManyToManyTest() {
+    public ClubLeagueM2MTest() {
     }
 
     @Parameterized.Parameter(value = 0)

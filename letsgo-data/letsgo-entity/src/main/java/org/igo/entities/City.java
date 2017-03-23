@@ -69,7 +69,6 @@ public class City implements Serializable {
     private Set<GoUser> users;
     private Set<Club> clubs;
     private Set<Team> teams;
-    //private Set<League> leagues;
 
     /**
      *
@@ -303,38 +302,4 @@ public class City implements Serializable {
     public void setVersion(short version) {
         this.version = version;
     }
-
-    /**
-     * @return the leagues
-     */
-//    @ManyToMany(fetch = FetchType.LAZY
-//            , cascade = {CascadeType.REFRESH, CascadeType.REMOVE}
-//)
-//    @JoinTable(name = "LEAGUES_CITIES",
-//            joinColumns = @JoinColumn(foreignKey = @ForeignKey(name = "fk_city"), name = "city_id"),
-//            inverseJoinColumns = @JoinColumn(name = "league_id")
-//    )
-//    public Set<League> getLeagues() {
-//        return leagues;
-//    }
-
-    /**
-     * @param leagues the leagues to set
-//     */
-//    public void setLeagues(final Set<League> leagues) {
-//        this.leagues = leagues;
-//    }
-//
-//    public void addLeague(final League league) {
-//        if (this.leagues == null) {
-//            this.leagues = new HashSet<>();
-//        }
-//        this.leagues.add(league);
-//    }
-
-//    public void removeLeague(League league) {
-//        if (this.leagues != null) {
-//            boolean b = this.leagues.remove(league);
-//        }
-//    }
 }

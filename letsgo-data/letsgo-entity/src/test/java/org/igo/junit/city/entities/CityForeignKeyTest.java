@@ -30,9 +30,9 @@ import org.junit.runners.Parameterized;
  * @author surzhin.konstantin
  */
 @RunWith(Parameterized.class)
-public class CityForignKeyTest extends BaseCityParametrezedTest {
+public class CityForeignKeyTest extends BaseCityParametrezedTest {
 
-    public CityForignKeyTest() {
+    public CityForeignKeyTest() {
     }
 
     @Test(expected = PersistenceException.class)

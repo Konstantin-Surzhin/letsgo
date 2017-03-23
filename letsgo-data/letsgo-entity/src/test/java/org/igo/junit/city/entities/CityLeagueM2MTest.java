@@ -59,10 +59,6 @@ public class CityLeagueM2MTest extends BaseCityParametrezedTest {
                 entityManager.persist(lc1);
                 entityManager.persist(lc2);
 
-//                city1.addLeague(league1);
-//                city1.addLeague(league2);
-                //league1.addCity(city1);
-                //league2.addCity(city1);
                 entityManager.getTransaction().commit();
 
                 final int citySize = entityManager
