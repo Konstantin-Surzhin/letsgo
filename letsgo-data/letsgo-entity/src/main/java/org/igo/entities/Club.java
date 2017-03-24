@@ -59,8 +59,8 @@ public class Club implements Serializable {
     private static final long serialVersionUID = 1L;
     private int id = -1;
     private String clubName;
-    private City city;
     private Country country;
+    private City city;
     private Set<Team> teams;
 
     /**
@@ -94,7 +94,7 @@ public class Club implements Serializable {
     @GeneratedValue(/**/generator = "CLUB_SEQ", strategy = GenerationType.TABLE)
     @TableGenerator(
             name = "CLUB_SEQ",
-            table="HIBERNATE_SEQUENCES",
+            table = "HIBERNATE_SEQUENCES",
             pkColumnName = "sequence_name",
             valueColumnName = "next_val",
             pkColumnValue = "club",
@@ -134,7 +134,7 @@ public class Club implements Serializable {
      *
      * @return
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_club_city"), name = "city_id", referencedColumnName = "id")
     public City getCity() {
         return city;
@@ -179,7 +179,7 @@ public class Club implements Serializable {
         return "org.igo.entities.Clubs[ id=" + id + " ]";
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_club_country"), name = "country_id", referencedColumnName = "id")
     public Country getCountry() {
         return country;

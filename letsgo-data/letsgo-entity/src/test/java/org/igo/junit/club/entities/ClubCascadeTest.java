@@ -16,41 +16,103 @@
  */
 package org.igo.junit.club.entities;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import javax.persistence.EntityManager;
+import org.igo.entities.City;
+import org.igo.entities.Club;
+import org.igo.entities.Country;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
 /**
  *
  * @author surzhin.konstantin
  */
-public class ClubCascadeTest {
-    
-    public ClubCascadeTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
+@RunWith(Parameterized.class)
+public class ClubCascadeTest extends BaseClubParametrezedTest {
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    @Test
+    public void testSetCountryToClubAndPersistByCascade() {
+        System.out.println("SetCountryToClubAndPersistByCascade");
+
+        final Country country = new Country("Россия", "RU", "RUS");
+        final Club club = new Club("Рога и копыта");
+
+        club.setCountry(country);
+        country.addClub(club);
+
+        final EntityManager entityManager = this.getEntityManager();
+
+        if (entityManager != null) {
+            try {
+                entityManager.getTransaction().begin();
+                entityManager.persist(club);
+                entityManager.getTransaction().commit();
+
+                final int countryListSize = entityManager
+                        .createQuery("SELECT c FROM Country c")
+                        .setHint("org.hibernate.readOnly", true)
+                        .getResultList().size();
+                assertEquals(countryListSize, 1);
+
+                final int clubFromDb = entityManager.createQuery("SELECT c FROM Club c where c.country.id =:countryId")
+                        .setParameter("countryId", country.getId())
+                        .setHint("org.hibernate.readOnly", true)
+                        .getResultList().size();
+                assertEquals(clubFromDb, 1);
+
+            } catch (Exception ex) {
+                if (entityManager.getTransaction().isActive()) {
+                    entityManager.getTransaction().rollback();
+                }
+                throw ex;
+            } finally {
+                deleteFromTable(entityManager, "Club");
+                deleteFromTable(entityManager, "Country");
+            }
+        }
+    }
+    
+    @Test
+    public void testSetCityToClubAndPersistByCascade() {
+        System.out.println("SetCityToClubAndPersistByCascade");
+
+        final City city = new City("Москва");
+        final Club club = new Club("Рога и копыта");
+
+        club.setCity(city);
+        city.addClub(club);
+
+        final EntityManager entityManager = this.getEntityManager();
+
+        if (entityManager != null) {
+            try {
+                entityManager.getTransaction().begin();
+                entityManager.persist(club);
+                entityManager.getTransaction().commit();
+
+                final int countryListSize = entityManager
+                        .createQuery("SELECT c FROM City c")
+                        .setHint("org.hibernate.readOnly", true)
+                        .getResultList().size();
+                assertEquals(countryListSize, 1);
+
+                final int clubFromDb = entityManager.createQuery("SELECT c FROM Club c where c.city.id =:cityId")
+                        .setParameter("cityId", city.getId())
+                        .setHint("org.hibernate.readOnly", true)
+                        .getResultList().size();
+                assertEquals(clubFromDb, 1);
+
+            } catch (Exception ex) {
+                if (entityManager.getTransaction().isActive()) {
+                    entityManager.getTransaction().rollback();
+                }
+                throw ex;
+            } finally {
+                deleteFromTable(entityManager, "Club");
+                deleteFromTable(entityManager, "City");
+            }
+        }
+    }
 }

@@ -114,7 +114,9 @@ public class CityCascadeTest extends BaseCityParametrezedTest {
                 assertThat(size, equalTo(2));
 
             } catch (Exception ex) {
-                this.rollbackTransaction(entityManager);
+                if (entityManager.getTransaction().isActive()) {
+                    this.rollbackTransaction(entityManager);
+                }
                 throw ex;
             } finally {
                 deleteFromTable(entityManager, "Club");
@@ -151,7 +153,9 @@ public class CityCascadeTest extends BaseCityParametrezedTest {
                 assertThat(size, equalTo(2));
 
             } catch (Exception ex) {
-                this.rollbackTransaction(entityManager);
+                if (entityManager.getTransaction().isActive()) {
+                    this.rollbackTransaction(entityManager);
+                }
                 throw ex;
             } finally {
                 deleteFromTable(entityManager, "Club");
@@ -190,7 +194,9 @@ public class CityCascadeTest extends BaseCityParametrezedTest {
                 assertThat(size, equalTo(2));
 
             } catch (Exception ex) {
-                this.rollbackTransaction(entityManager);
+                if (entityManager.getTransaction().isActive()) {
+                    this.rollbackTransaction(entityManager);
+                }
                 throw ex;
             } finally {
                 deleteFromTable(entityManager, "Team");
@@ -227,7 +233,9 @@ public class CityCascadeTest extends BaseCityParametrezedTest {
                 assertThat(size, equalTo(2));
 
             } catch (Exception ex) {
-                this.rollbackTransaction(entityManager);
+                if (entityManager.getTransaction().isActive()) {
+                    this.rollbackTransaction(entityManager);
+                }
                 throw ex;
             } finally {
                 deleteFromTable(entityManager, "Team");
@@ -267,7 +275,9 @@ public class CityCascadeTest extends BaseCityParametrezedTest {
                 assertThat(size, equalTo(2));
 
             } catch (Exception ex) {
-                this.rollbackTransaction(entityManager);
+                if (entityManager.getTransaction().isActive()) {
+                    this.rollbackTransaction(entityManager);
+                }
                 throw ex;
             } finally {
                 deleteFromTable(entityManager, "GoUser");
@@ -304,7 +314,9 @@ public class CityCascadeTest extends BaseCityParametrezedTest {
                 assertThat(size, equalTo(2));
 
             } catch (Exception ex) {
-                this.rollbackTransaction(entityManager);
+                if (entityManager.getTransaction().isActive()) {
+                    this.rollbackTransaction(entityManager);
+                }
                 throw ex;
             } finally {
                 deleteFromTable(entityManager, "GoUser");

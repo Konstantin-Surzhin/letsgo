@@ -62,7 +62,9 @@ public class CityCacheTest extends BaseCityParametrezedTest {
                 assertFalse(cache.contains(City.class, city.getId()));
 
             } catch (Exception ex) {
-                entityManager.getTransaction().rollback();
+                if (entityManager.getTransaction().isActive()) {
+                    entityManager.getTransaction().rollback();
+                }
                 throw ex;
             }
         }
@@ -114,7 +116,9 @@ public class CityCacheTest extends BaseCityParametrezedTest {
                 cache.evict(City.class, city.getId());
                 assertFalse(cache.contains(City.class, city.getId()));
             } catch (Exception ex) {
-                entityManager.getTransaction().rollback();
+                if (entityManager.getTransaction().isActive()) {
+                    entityManager.getTransaction().rollback();
+                }
                 throw ex;
             }
         }
