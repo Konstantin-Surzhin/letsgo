@@ -26,6 +26,7 @@
     <class>org.igo.entities.UserRole</class>
     <class>org.igo.entities.Country</class>
     <class>org.igo.entities.LeagueM2MClub</class>
+    <class>org.igo.entities.LeagueM2MCity</class>
     <properties>
       <property name="hibernate.dialect" value="org.mysql.utf8.dialect.MysqlUTF8Dialect"/>
       <property name="hibernate.transaction.manager_lookup_class" value="org.hibernate.transaction.JBossTransactionManagerLookup"/>

@@ -16,41 +16,107 @@
  */
 package org.igo.junit.club.entities;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import javax.persistence.Cache;
+import javax.persistence.EntityManager;
+import static org.hamcrest.CoreMatchers.equalTo;
+import org.igo.entities.Club;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
 /**
  *
  * @author surzhin.konstantin
  */
-public class ClubCacheTest {
+@RunWith(Parameterized.class)
+public class ClubCacheTest extends BaseClubParametrezedTest {
     
     public ClubCacheTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
+   @Test
+    public void testClubInCache() {
+        System.out.println("ClubInCache");
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+        final Club club = new Club("Дыхание камней");
+        final EntityManager entityManager = this.getEntityManager();
+        if (entityManager != null) {
+            try {
+                entityManager.getTransaction().begin();
+                entityManager.persist(club);
+                entityManager.getTransaction().commit();
+
+                assertTrue("Объекта в L1 кеше нет", entityManager.contains(club));
+                entityManager.clear();
+                assertFalse("Объекта в L1 кеше", entityManager.contains(club));
+
+                final Club nuvoClub = entityManager.find(Club.class, club.getId());
+                final Cache cache = entityManager.getEntityManagerFactory().getCache();
+
+                entityManager.merge(nuvoClub);
+                assertTrue("Объекта в L1 кеше нет", entityManager.contains(nuvoClub));
+                assertTrue("Объекта в L2 кеше нет", cache.contains(Club.class, nuvoClub.getId()));
+
+                cache.evict(Club.class, club.getId());
+                assertFalse(cache.contains(Club.class, club.getId()));
+
+            } catch (Exception ex) {
+                entityManager.getTransaction().rollback();
+                throw ex;
+            }
+        }
+    } 
+    
+    @Test
+    public void testUpdateClubWithNativSQLClubInCache() {
+        System.out.println("UpdateClubWithNativSQLClubInCache");
+
+        final Club club = new Club("Сердце камня");
+
+        final EntityManager entityManager = this.getEntityManager();
+        if (entityManager != null) {
+
+            final Cache cache = entityManager.getEntityManagerFactory().getCache();
+
+            try {
+                entityManager.getTransaction().begin();
+                entityManager.persist(club);
+                entityManager.getTransaction().commit();
+
+                entityManager.getTransaction().begin();
+                final int number = entityManager
+                        .createQuery("UPDATE Club c SET c.clubName =:clubName WHERE c.id = :id")
+                        .setParameter("clubName", "Душа камня")
+                        .setParameter("id", club.getId())
+                        .executeUpdate();
+                entityManager.getTransaction().commit();
+
+                assertThat(number, equalTo(1));
+
+                final String clubFromDbTadle = entityManager
+                        .createQuery("SELECT c.clubName From Club c WHERE c.id=:id", String.class)
+                        .setParameter("id", club.getId())
+                        .setHint("org.hibernate.readOnly", true)
+                        .getSingleResult();
+                assertThat(clubFromDbTadle, equalTo("Душа камня"));
+
+                assertTrue(entityManager.contains(club));
+
+                final Club clubFromCahe = entityManager.find(Club.class, club.getId());
+
+                assertThat(clubFromCahe.getClubName(), equalTo("Сердце камня"));
+
+                entityManager.refresh(clubFromCahe);
+                assertThat(club.getClubName(), equalTo("Душа камня"));
+                assertThat(clubFromCahe.getClubName(), equalTo("Душа камня"));
+
+                cache.evict(Club.class, club.getId());
+                assertFalse(cache.contains(Club.class, club.getId()));
+            } catch (Exception ex) {
+                entityManager.getTransaction().rollback();
+                throw ex;
+            }
+        }
+    }
 }

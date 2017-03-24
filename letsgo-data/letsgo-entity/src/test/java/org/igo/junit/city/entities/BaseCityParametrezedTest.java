@@ -17,7 +17,9 @@
 package org.igo.junit.city.entities;
 
 import org.igo.junit.entities.BaseParametrezedTest;
+import static org.igo.junit.entities.BaseParametrezedTest.entityManagerFactory;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 
 /**
@@ -31,7 +33,6 @@ public class BaseCityParametrezedTest extends BaseParametrezedTest {
     public void setUp() {
         super.setUp();
         if (getEntityManager() != null) {
-            
             deleteFromTable(getEntityManager(), "City");
         }
     }
@@ -39,13 +40,10 @@ public class BaseCityParametrezedTest extends BaseParametrezedTest {
     @After
     public void tearDown() {
         if (getEntityManager() != null) {
-
             deleteFromTable(getEntityManager(), "City");
-
             getEntityManager().clear();
             getEntityManager().getEntityManagerFactory().getCache().evictAll();
             getEntityManager().close();
         }
     }
-
 }

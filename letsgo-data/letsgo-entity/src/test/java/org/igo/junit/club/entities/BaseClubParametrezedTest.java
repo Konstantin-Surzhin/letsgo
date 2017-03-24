@@ -30,17 +30,14 @@ class BaseClubParametrezedTest extends BaseParametrezedTest{
     public void setUp() {
         super.setUp();
         if (getEntityManager() != null) {
-
-            deleteFromTable(getEntityManager(), "Country");
+            deleteFromTable(getEntityManager(), "Club");
         }
     }
 
     @After
     public void tearDown() {
         if (getEntityManager() != null) {
-
-            deleteFromTable(getEntityManager(), "Country");
-
+            deleteFromTable(getEntityManager(), "Club");
             getEntityManager().clear();
             getEntityManager().getEntityManagerFactory().getCache().evictAll();
             getEntityManager().close();

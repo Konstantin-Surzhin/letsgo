@@ -20,7 +20,6 @@ import javax.persistence.Cache;
 import javax.persistence.EntityManager;
 import static org.hamcrest.CoreMatchers.equalTo;
 import org.igo.entities.City;
-import org.junit.AfterClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
@@ -34,13 +33,6 @@ import org.junit.runners.Parameterized;
 public class CityCacheTest extends BaseCityParametrezedTest {
 
     public CityCacheTest() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-        if (entityManagerFactory != null) {
-            entityManagerFactory.close();
-        }
     }
 
     @Test
@@ -74,7 +66,6 @@ public class CityCacheTest extends BaseCityParametrezedTest {
                 throw ex;
             }
         }
-
     }
 
     @Test
