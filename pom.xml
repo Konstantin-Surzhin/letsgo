@@ -197,6 +197,7 @@
         <module>letsgo-osgi</module>
         <module>letsgo-vaadin</module>
         <module>letsgo-bdd</module>
+        <module>letsgo-engine</module>
     </modules>
     <dependencyManagement>
         <dependencies>
