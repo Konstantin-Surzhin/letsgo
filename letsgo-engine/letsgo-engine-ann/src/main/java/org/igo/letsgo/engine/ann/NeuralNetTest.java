@@ -26,8 +26,8 @@ public class NeuralNetTest {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        NeuralNet n = new NeuralNet();
-        n.initNet();
+        final NeuralNet n = new NeuralNet();
+        n.init(2, new int[]{7, 5, 3}, 1);
         n.printNet();
     }
 

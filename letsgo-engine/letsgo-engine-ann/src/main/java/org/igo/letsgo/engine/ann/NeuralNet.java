@@ -17,6 +17,7 @@
 package org.igo.letsgo.engine.ann;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
@@ -24,87 +25,60 @@ import java.util.ArrayList;
  */
 public class NeuralNet {
 
-    private InputLayer inputLayer;
-    private HiddenLayer hiddenLayer;
-    private final ArrayList<HiddenLayer> listOfHiddenLayer = new ArrayList<>();
-    private OutputLayer outputLayer;
-    private int numberOfHiddenLayers;
+    private final Layer incomingLayer = new Layer("Input layer");
+    private final ArrayList<Layer> listOfLayer = new ArrayList<>();
+    private final Layer outgoingLayer = new Layer("Output layer");
 
-    public void initNet() {
+    public void init(final int numberOfNeuronsInTheInputLayer,
+            final int[] numberOfNeuronsInEachHiddenLayer,
+            final int numberOfNeuronsInTheOutputLayer) {
+
+        makeLayers(numberOfNeuronsInTheInputLayer,
+                numberOfNeuronsInEachHiddenLayer,
+                numberOfNeuronsInTheOutputLayer);
+        bindLayers();
+        
+        listOfLayer.stream().forEach(Layer::init);
+    }
+
+    private void makeLayers(final int numberOfNeuronsInTheInputLayer,
+            final int[] numberOfNeuronsInEachHiddenLayer,
+            final int numberOfNeuronsInTheOutputLayer) {
+        incomingLayer.setNumberOfNeuronsInLayer(numberOfNeuronsInTheInputLayer);
+        listOfLayer.add(incomingLayer);
+
+        int i = 1;
+        for (final int n : numberOfNeuronsInEachHiddenLayer) {
+            final Layer hiddenLayer = new Layer("Hidden layer №" + (i++));
+            hiddenLayer.setNumberOfNeuronsInLayer(n);
+            listOfLayer.add(hiddenLayer);
+        }
+
+        outgoingLayer.setNumberOfNeuronsInLayer(numberOfNeuronsInTheOutputLayer);
+        listOfLayer.add(outgoingLayer);
+    }
+
+    private void bindLayers() {
+        Layer previousLayer = null;
+        for (Layer currentLayer : listOfLayer) {
+            if (previousLayer != null) {
+                previousLayer.setOutgoingLayer(currentLayer);
+                currentLayer.setIncomingLayer(previousLayer);
+            }
+            
+            previousLayer = currentLayer;
+            
+        }
     }
 
     public void printNet() {
-    }
-
-    /**
-     * @return the inputLayer
-     */
-    public InputLayer getInputLayer() {
-        return inputLayer;
-    }
-
-    /**
-     * @param inputLayer the inputLayer to set
-     */
-    public void setInputLayer(InputLayer inputLayer) {
-        this.inputLayer = inputLayer;
-    }
-
-    /**
-     * @return the hiddenLayer
-     */
-    public HiddenLayer getHiddenLayer() {
-        return hiddenLayer;
-    }
-
-    /**
-     * @param hiddenLayer the hiddenLayer to set
-     */
-    public void setHiddenLayer(HiddenLayer hiddenLayer) {
-        this.hiddenLayer = hiddenLayer;
-    }
-
-    /**
-     * @return the listOfHiddenLayer
-     */
-    public ArrayList<HiddenLayer> getListOfHiddenLayer() {
-        return listOfHiddenLayer;
-    }
-
-    /**
-     * @param listOfHiddenLayer the listOfHiddenLayer to set
-     */
-    public void setListOfHiddenLayer(ArrayList<HiddenLayer> listOfHiddenLayer) {
-        this.listOfHiddenLayer.clear();
-        this.listOfHiddenLayer.addAll(listOfHiddenLayer);
-    }
-
-    /**
-     * @return the outputLayer
-     */
-    public OutputLayer getOutputLayer() {
-        return outputLayer;
-    }
-
-    /**
-     * @param outputLayer the outputLayer to set
-     */
-    public void setOutputLayer(OutputLayer outputLayer) {
-        this.outputLayer = outputLayer;
+        listOfLayer.stream().forEach(Layer::printLayer);
     }
 
     /**
      * @return the numberOfHiddenLayers
      */
     public int getNumberOfHiddenLayers() {
-        return numberOfHiddenLayers;
+        return listOfLayer.size();
     }
-
-    /**
-     * @param numberOfHiddenLayers the numberOfHiddenLayers to set
-     */
-    public void setNumberOfHiddenLayers(int numberOfHiddenLayers) {
-        this.numberOfHiddenLayers = numberOfHiddenLayers;
-    }
-
 }

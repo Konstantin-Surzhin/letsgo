@@ -16,7 +16,12 @@
  */
 package org.igo.letsgo.engine.ann;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -24,40 +29,71 @@ import java.util.ArrayList;
  */
 public class Neuron {
 
-    private final ArrayList<Double> listOfWeightIn = new ArrayList<>();
-    private final ArrayList<Double> listOfWeightOut = new ArrayList<>();
+    private final ArrayList<Double> listOfIncomingWeights = new ArrayList<>();
+    private final ArrayList<Double> listOfOutgoingWeights = new ArrayList<>();
+    private final String name;
 
-    public double initNeuron() {
-        return -1;
+    Neuron(String name) {
+        this.name = name;
+    }
+
+    public void init(final int incomingNeuron, final int outgoingNeuron) {
+        try {
+            final SecureRandom r = SecureRandom.getInstanceStrong();
+            for (int i = 0; i < incomingNeuron; i++) {
+                listOfIncomingWeights.add(r.nextDouble());
+            }
+            for (int i = 0; i < outgoingNeuron; i++) {
+                listOfOutgoingWeights.add(r.nextDouble());
+            }
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Neuron.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
-     * @return the listOfWeightIn
+     * @return the listOfIncomingWeights
      */
-    public ArrayList<Double> getListOfWeightIn() {
-        return listOfWeightIn;
+    public ArrayList<Double> getListOfIncomingWeights() {
+        return listOfIncomingWeights;
     }
 
     /**
-     * @param listOfWeightIn the listOfWeightIn to set
+     * @param listOfIncomingWeights the listOfIncomingWeights to set
      */
-    public void setListOfWeightIn(ArrayList<Double> listOfWeightIn) {
-        this.listOfWeightIn.clear();
-        this.listOfWeightIn.addAll(listOfWeightIn);
+    public void setListOfIncomingWeights(ArrayList<Double> listOfIncomingWeights) {
+        this.listOfIncomingWeights.clear();
+        this.listOfIncomingWeights.addAll(listOfIncomingWeights);
     }
 
     /**
-     * @return the listOfWeightOut
+     * @return the listOfOutgoingWeights
      */
-    public ArrayList<Double> getListOfWeightOut() {
-        return listOfWeightOut;
+    public ArrayList<Double> getListOfOutgoingWeights() {
+        return listOfOutgoingWeights;
     }
 
     /**
-     * @param listOfWeightOut the listOfWeightOut to set
+     * @param listOfOutgoingWeights the listOfOutgoingWeights to set
      */
-    public void setListOfWeightOut(ArrayList<Double> listOfWeightOut) {
-        this.listOfWeightOut.clear();
-        this.listOfWeightOut.addAll(listOfWeightOut);
+    public void setListOfOutgoingWeights(ArrayList<Double> listOfOutgoingWeights) {
+        this.listOfOutgoingWeights.clear();
+        this.listOfOutgoingWeights.addAll(listOfOutgoingWeights);
+    }
+
+    public void printWeights() {
+        System.out.println(name);
+        System.out.println("Incoming Weights:");
+
+        final String incomingWeights = listOfIncomingWeights.stream()
+                .map(w -> w.toString())
+                .collect(Collectors.joining(", ", "[", "]"));
+        System.out.println(incomingWeights);
+
+        System.out.println("Outgoing weights:");
+        final String outgoingWeights = listOfOutgoingWeights.stream()
+                .map(w -> w.toString())
+                .collect(Collectors.joining(", ", "[", "]"));
+        System.out.println(outgoingWeights);
     }
 }

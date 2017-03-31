@@ -23,8 +23,16 @@ import java.util.ArrayList;
  * @author surzhin.konstantin
  */
 public class Layer {
+
     private final ArrayList<Neuron> listOfNeurons = new ArrayList<>();
-    private int numberOfNeuronsInLayer;
+    private int numberOfNeuronsInTheLayer = 0;
+    private final String name;
+    private Layer incomingLayer;
+    private Layer outgoingLayer;
+
+    Layer(final String name) {
+        this.name = name;
+    }
 
     /**
      * @return the listOfNeurons
@@ -33,26 +41,71 @@ public class Layer {
         return listOfNeurons;
     }
 
-    /**
-     * @param listOfNeurons the listOfNeurons to set
-     */
-    public void setListOfNeurons(ArrayList<Neuron> listOfNeurons) {
-        this.listOfNeurons.clear();
-        this.listOfNeurons.addAll(listOfNeurons);
+    public void init() {
+
+        for (int i = 1; i <= numberOfNeuronsInTheLayer; i++) {
+            final Neuron neuron = new Neuron("Neuron №" + i);
+
+            int incomingNeurons = 0;
+            if (incomingLayer != null) {
+                incomingNeurons = incomingLayer.getNumberOfNeuronsInLayer();
+            }
+            
+            int outgoingNeurons = 0;
+            if (outgoingLayer != null) {
+                outgoingNeurons = outgoingLayer.getNumberOfNeuronsInLayer();
+            }
+
+            neuron.init(incomingNeurons, outgoingNeurons);
+            listOfNeurons.add(neuron);
+        }
+    }
+
+    public void printLayer() {
+        System.out.println("*********************************");
+        System.out.println("Name: " + this.name);
+        System.out.println("Number of neurons in the layer: " + this.numberOfNeuronsInTheLayer);
+
+        listOfNeurons.stream().forEach(Neuron::printWeights);
+
     }
 
     /**
      * @return the numberOfNeuronsInLayer
      */
     public int getNumberOfNeuronsInLayer() {
-        return numberOfNeuronsInLayer;
+        return this.numberOfNeuronsInTheLayer;
+    }
+
+    void setNumberOfNeuronsInLayer(int numberOfNeuronsInTheLayer) {
+        this.numberOfNeuronsInTheLayer = numberOfNeuronsInTheLayer;
     }
 
     /**
-     * @param numberOfNeuronsInLayer the numberOfNeuronsInLayer to set
+     * @return the incomingLayer
      */
-    public void setNumberOfNeuronsInLayer(int numberOfNeuronsInLayer) {
-        this.numberOfNeuronsInLayer = numberOfNeuronsInLayer;
+    public Layer getIncomingLayer() {
+        return incomingLayer;
     }
-  
+
+    /**
+     * @param incomingLayer the incomingLayer to set
+     */
+    public void setIncomingLayer(Layer incomingLayer) {
+        this.incomingLayer = incomingLayer;
+    }
+
+    /**
+     * @return the outgoingLayer
+     */
+    public Layer getOutgoingLayer() {
+        return outgoingLayer;
+    }
+
+    /**
+     * @param outgoingLayer the outgoingLayer to set
+     */
+    public void setOutgoingLayer(Layer outgoingLayer) {
+        this.outgoingLayer = outgoingLayer;
+    }
 }
