@@ -23,17 +23,17 @@ import java.util.List;
  *
  * @author surzhin.konstantin
  */
-public class AartificialNeuronsLayer implements NeuralNetworkProcessor {
+public class ArtificialNeuronsLayer implements NeuralNetworkProcessor {
 
     private final ArrayList<ArtificialNeuron> listOfNeurons = new ArrayList<>();
     private int numberOfNeuronsInTheLayer = 0;
     private final String name;
-    private AartificialNeuronsLayer inputLayer;
-    private AartificialNeuronsLayer outputLayer;
+    private ArtificialNeuronsLayer inputLayer;
+    private ArtificialNeuronsLayer outputLayer;
     private double[] inputData;
     private double[] outputData;
 
-    AartificialNeuronsLayer(final String name) {
+    ArtificialNeuronsLayer(final String name) {
         this.name = name;
     }
 
@@ -87,28 +87,28 @@ public class AartificialNeuronsLayer implements NeuralNetworkProcessor {
     /**
      * @return the inputLayer
      */
-    public AartificialNeuronsLayer getInputLayer() {
+    public ArtificialNeuronsLayer getInputLayer() {
         return inputLayer;
     }
 
     /**
      * @param inputLayer the inputLayer to set
      */
-    public void setInputLayer(AartificialNeuronsLayer inputLayer) {
+    public void setInputLayer(ArtificialNeuronsLayer inputLayer) {
         this.inputLayer = inputLayer;
     }
 
     /**
      * @return the outputLayer
      */
-    public AartificialNeuronsLayer getOutputLayer() {
+    public ArtificialNeuronsLayer getOutputLayer() {
         return outputLayer;
     }
 
     /**
      * @param outputLayer the outputLayer to set
      */
-    public void setOutputLayer(final AartificialNeuronsLayer outputLayer) {
+    public void setOutputLayer(final ArtificialNeuronsLayer outputLayer) {
         this.outputLayer = outputLayer;
     }
 

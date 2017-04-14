@@ -115,7 +115,7 @@ public abstract class ArtificialNeuralNetworkTeacher {
 
                 if (Math.abs(this.getError()) > neuralNet.getTargetError()) {
                     // fix weights
-                    final AartificialNeuronsLayer inputLayer = new AartificialNeuronsLayer("Incoming Layer");
+                    final ArtificialNeuronsLayer inputLayer = new ArtificialNeuronsLayer("Incoming Layer");
                     final List<ArtificialNeuron> nerons = this.teachNeuronsOfLayer(cols, i, neuralNet, getLearningRate(), value);
 
                     inputLayer.setListOfNeurons(nerons);

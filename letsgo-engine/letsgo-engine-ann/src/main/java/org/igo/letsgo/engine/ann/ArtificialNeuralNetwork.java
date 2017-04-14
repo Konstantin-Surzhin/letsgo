@@ -26,9 +26,9 @@ import org.igo.letsgo.engine.ann.activation.function.ActivationFunction;
  */
 public class ArtificialNeuralNetwork implements NeuralNetworkProcessor {
 
-    private final AartificialNeuronsLayer inputLayer = new AartificialNeuronsLayer("Input layer");
-    private final ArrayList<AartificialNeuronsLayer> listOfLayer = new ArrayList<>();
-    private final AartificialNeuronsLayer outputLayer = new AartificialNeuronsLayer("Output layer");
+    private final ArtificialNeuronsLayer inputLayer = new ArtificialNeuronsLayer("Input layer");
+    private final ArrayList<ArtificialNeuronsLayer> listOfLayer = new ArrayList<>();
+    private final ArtificialNeuronsLayer outputLayer = new ArtificialNeuronsLayer("Output layer");
 
     private final ActivationFunction activationFunction;
 
@@ -51,7 +51,7 @@ public class ArtificialNeuralNetwork implements NeuralNetworkProcessor {
                 numberOfNeuronsInTheOutputLayer);
         bindLayers();
 
-        listOfLayer.stream().forEach(AartificialNeuronsLayer::init);
+        listOfLayer.stream().forEach(ArtificialNeuronsLayer::init);
     }
 
     private void makeLayers(final int numberOfNeuronsInTheInputLayer,
@@ -63,7 +63,7 @@ public class ArtificialNeuralNetwork implements NeuralNetworkProcessor {
 
         int i = 1;
         for (final int n : numberOfNeuronsInEachHiddenLayer) {
-            final AartificialNeuronsLayer hiddenLayer = new AartificialNeuronsLayer("Hidden layer №" + (i++));
+            final ArtificialNeuronsLayer hiddenLayer = new ArtificialNeuronsLayer("Hidden layer №" + (i++));
             hiddenLayer.setNumberOfNeuronsInLayer(n);
             listOfLayer.add(hiddenLayer);
         }
@@ -73,8 +73,8 @@ public class ArtificialNeuralNetwork implements NeuralNetworkProcessor {
     }
 
     private void bindLayers() {
-        AartificialNeuronsLayer previousLayer = null;
-        for (AartificialNeuronsLayer currentLayer : listOfLayer) {
+        ArtificialNeuronsLayer previousLayer = null;
+        for (ArtificialNeuronsLayer currentLayer : listOfLayer) {
             if (previousLayer != null) {
                 previousLayer.setOutputLayer(currentLayer);
                 currentLayer.setInputLayer(previousLayer);
@@ -85,7 +85,7 @@ public class ArtificialNeuralNetwork implements NeuralNetworkProcessor {
     }
 
     public void printNet() {
-        listOfLayer.stream().forEach(AartificialNeuronsLayer::printLayer);
+        listOfLayer.stream().forEach(ArtificialNeuronsLayer::printLayer);
     }
 
     /**
@@ -99,7 +99,7 @@ public class ArtificialNeuralNetwork implements NeuralNetworkProcessor {
         return new double[3][3];
     }
 
-    public AartificialNeuronsLayer getInputLayer() {
+    public ArtificialNeuronsLayer getInputLayer() {
         return listOfLayer.get(0);
     }
 
@@ -115,7 +115,7 @@ public class ArtificialNeuralNetwork implements NeuralNetworkProcessor {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    void setInputLayer(final AartificialNeuronsLayer inputLayer) {
+    void setInputLayer(final ArtificialNeuronsLayer inputLayer) {
         inputLayer
                 .setListOfNeurons(inputLayer.getListOfNeurons());
     }
