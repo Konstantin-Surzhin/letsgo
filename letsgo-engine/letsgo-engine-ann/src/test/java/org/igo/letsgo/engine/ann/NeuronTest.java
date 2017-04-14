@@ -50,12 +50,12 @@ public class NeuronTest {
     }
 
     /**
-     * Test of getListOfWeightIn method, of class Neuron.
+     * Test of getListOfWeightIn method, of class ArtificialNeuron.
      */
     @Test
     public void testGetListOfWeightIn() {
         System.out.println("getListOfWeightIn");
-        Neuron instance = new Neuron("test neuron");
+        ArtificialNeuron instance = new ArtificialNeuron("test neuron");
         ArrayList<Double> expResult = null;
         ArrayList<Double> result = instance.getListOfIncomingWeights();
         assertEquals(expResult, result);
@@ -63,24 +63,24 @@ public class NeuronTest {
     }
 
     /**
-     * Test of setListOfWeightIn method, of class Neuron.
+     * Test of setListOfWeightIn method, of class ArtificialNeuron.
      */
     @Test
     public void testSetListOfWeightIn() {
         System.out.println("setListOfWeightIn");
         ArrayList<Double> listOfWeightIn = null;
-        Neuron instance = new Neuron("test neuron");
+        ArtificialNeuron instance = new ArtificialNeuron("test neuron");
         instance.setListOfIncomingWeights(listOfWeightIn);
 
     }
 
     /**
-     * Test of getListOfWeightOut method, of class Neuron.
+     * Test of getListOfWeightOut method, of class ArtificialNeuron.
      */
     @Test
     public void testGetListOfWeightOut() {
         System.out.println("getListOfWeightOut");
-        Neuron instance = new Neuron("test neuron");
+        ArtificialNeuron instance = new ArtificialNeuron("test neuron");
         ArrayList<Double> expResult = null;
         ArrayList<Double> result = instance.getListOfOutgoingWeights();
         assertEquals(expResult, result);
@@ -88,13 +88,13 @@ public class NeuronTest {
     }
 
     /**
-     * Test of setListOfWeightOut method, of class Neuron.
+     * Test of setListOfWeightOut method, of class ArtificialNeuron.
      */
     @Test
     public void testSetListOfWeightOut() {
         System.out.println("setListOfWeightOut");
         ArrayList<Double> listOfWeightOut = null;
-        Neuron instance = new Neuron("test neuron");
+        ArtificialNeuron instance = new ArtificialNeuron("test neuron");
         instance.setListOfOutgoingWeights(listOfWeightOut);
 
     }

@@ -16,6 +16,9 @@
  */
 package org.igo.letsgo.engine.ann;
 
+import java.util.Arrays;
+import org.igo.letsgo.engine.ann.activation.function.SigmoidActivationFunction;
+
 /**
  *
  * @author surzhin.konstantin
@@ -26,9 +29,38 @@ public class NeuralNetTest {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        final NeuralNet n = new NeuralNet();
-        n.init(2, new int[]{7, 5, 3}, 1);
-        n.printNet();
+//        final ArtificialNeuralNetwork neuralNet = new ArtificialNeuralNetwork(new SigmoidActivationFunction());
+//
+//        neuralNet.init(2, new int[]{7, 5, 3}, 1);
+//        neuralNet.printNet();
+
+        final NeuralNetTest test = new NeuralNetTest();
+
+        test.testPerceptron();
+        test.testAdaline();
     }
 
+    private void testPerceptron() {
+        final ArtificialNeuralNetwork neuralNet = new ArtificialNeuralNetwork(new SigmoidActivationFunction());
+        neuralNet.init(2, new int[]{0}, 1);
+        neuralNet.printNet();
+
+        neuralNet.setInputData(new double[]{0.0, 0.0});
+        neuralNet.recalculate();
+        final double[] result = neuralNet.getOutputData();
+        System.err.println(Arrays.toString(result));
+
+        // neuralNet.setTrainType(TrainingTypesENUM.PERCEPTRON);
+        //final ArtificialNeuralNetworkTeacher teacher = new PerceptronArtificialNeuralNetworkTeacher();
+//        teacher.setLearningRate(1.0);
+//        teacher.setTrainSet(new double[][]{{1.0, 0.0, 0.0}, {1.0, 0.0, 1.0}, {1.0, 1.0, 0.0}, {1.0, 1.0, 1.0}});
+//        teacher.setRealOutputSet(new double[]{0.0, 0.0, 0.0, 1.0});
+//        teacher.setMaxEpochs(10);
+//        teacher.setTargetError(0.002);
+//        teacher.train(neuralNet);
+    }
+
+    private void testAdaline() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

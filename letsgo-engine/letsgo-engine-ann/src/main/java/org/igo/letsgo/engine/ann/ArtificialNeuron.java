@@ -27,13 +27,13 @@ import java.util.stream.Collectors;
  *
  * @author surzhin.konstantin
  */
-public class Neuron {
+public class ArtificialNeuron {
 
     private final ArrayList<Double> listOfIncomingWeights = new ArrayList<>();
     private final ArrayList<Double> listOfOutgoingWeights = new ArrayList<>();
     private final String name;
 
-    Neuron(String name) {
+    ArtificialNeuron(String name) {
         this.name = name;
     }
 
@@ -47,7 +47,7 @@ public class Neuron {
                 listOfOutgoingWeights.add(r.nextDouble());
             }
         } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(Neuron.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ArtificialNeuron.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

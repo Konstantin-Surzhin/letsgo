@@ -8,4 +8,11 @@
     </parent>
     <artifactId>letsgo-engine-ann</artifactId>
     <packaging>jar</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>org.encog</groupId>
+            <artifactId>encog-core</artifactId>
+            <version>3.3.0</version>
+        </dependency>
+    </dependencies>
 </project>
