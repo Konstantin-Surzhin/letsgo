@@ -26,9 +26,4 @@ public final class  StepActivationFunction implements ActivationFunction {
     public double performFunction(final double x) {
         return (x >= 0) ? 1.0 : 0.0;
     }
-
-    @Override
-    public double performDerivativeFunction(double x) {
-        throw new UnsupportedOperationException("Derivative not supported."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

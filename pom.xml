@@ -267,6 +267,7 @@
             <artifactId>webdrivermanager</artifactId>
             <version>1.6.0</version>
             <scope>test</scope>
+            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.jboss.arquillian.junit</groupId>

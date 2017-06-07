@@ -189,3 +189,12 @@ hs_err_pid*
 /letsgo-bdd/target/
 /letsgo-engine/letsgo-engine-ann/nbproject/
 /letsgo-engine/letsgo-engine-ann/target/
+/letsgo-data/letsgo-event/target/
+/letsgo-data/letsgo-event/letsgo-event-ear/target/
+/letsgo-data/letsgo-event/letsgo-event-ejb/target/
+/letsgo-data/letsgo-game/target/
+/letsgo-data/letsgo-game/letsgo-game-ear/target/
+/letsgo-data/letsgo-game/letsgo-game-ejb/target/
+/letsgo-data/letsgo-city/target/
+/letsgo-data/letsgo-city/letsgo-city-ejb/target/
+/letsgo-engine/target/

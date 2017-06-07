@@ -20,7 +20,7 @@ package org.igo.letsgo.engine.ann.activation.function;
  *
  * @author surzhin.konstantin
  */
-public final class SigmoidActivationFunction implements ActivationFunction {
+public final class SigmoidActivationFunction implements ActivationFunction, ActivationFunctionDerivative {
 
     @Override
     public double performFunction(final double x) {

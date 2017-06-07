@@ -22,5 +22,5 @@ package org.igo.letsgo.engine.ann.activation.function;
  */
 public interface ActivationFunction {
     double performFunction(final double x);
-    double performDerivativeFunction(final double x);
+
 }

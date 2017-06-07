@@ -18,6 +18,7 @@ package org.igo.letsgo.engine.ann;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.igo.letsgo.engine.ann.activation.function.ActivationFunctionDerivative;
 
 /**
  *
@@ -187,8 +188,8 @@ public abstract class ArtificialNeuralNetworkTeacher {
 
             case ADALINE:
                 return calculateNewPerseptronWeight(inputWeightOld, learningRate, trainSample, error)
-                        * neuralNet
-                                .getActivationFunction()
+                        * ((ActivationFunctionDerivative)neuralNet
+                                .getActivationFunction())
                                 .performDerivativeFunction(value);
             default:
                 throw new IllegalArgumentException(trainType
