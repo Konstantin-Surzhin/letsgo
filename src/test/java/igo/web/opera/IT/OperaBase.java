@@ -26,6 +26,6 @@ import io.github.bonigarcia.wdm.OperaDriverManager;
 public class OperaBase implements BaseInterface {
 
     static {
-        OperaDriverManager.getInstance().setup(ARCH);
+        OperaDriverManager.operadriver().arch64().setup();
     }
 }
