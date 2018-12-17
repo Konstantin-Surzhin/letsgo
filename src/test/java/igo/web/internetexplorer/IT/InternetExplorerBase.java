@@ -27,6 +27,6 @@ import io.github.bonigarcia.wdm.InternetExplorerDriverManager;
 public class InternetExplorerBase implements BaseInterface {
 
     static {
-        InternetExplorerDriverManager.getInstance().setup(ARCH);
+        InternetExplorerDriverManager.iedriver().arch64().setup();;
     }
 }

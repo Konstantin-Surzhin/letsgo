@@ -19,7 +19,7 @@ package org.igo.letsgo.spring.controler;
 import java.util.ResourceBundle;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.igo.entities.UserDetails;
+//import org.igo.entities.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,7 +36,7 @@ public class UserController {
 
     @GetMapping(value = "/user")
     public String index(Model model) {
-        model.addAttribute("league", new UserDetails());
+        //model.addAttribute("league", new UserDetails());
         model.addAttribute("head", bundle.getString("head"));
         model.addAttribute("submit", bundle.getString("submit"));
         model.addAttribute("message", bundle.getString("message"));

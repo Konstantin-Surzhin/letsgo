@@ -25,10 +25,8 @@ import io.github.bonigarcia.wdm.ChromeDriverManager;
  */
 public class ChromeBase implements BaseInterface {
 
-    private static final String CHROME_VERSION = "2.21";
-
     static {
-        ChromeDriverManager.getInstance().setup(ARCH, CHROME_VERSION);
+        ChromeDriverManager.chromedriver().arch64().setup();
         //  ChromeDriverManager.getInstance().setup();
     }
 }

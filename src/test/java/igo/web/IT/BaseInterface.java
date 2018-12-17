@@ -32,5 +32,5 @@ public interface BaseInterface {
     /**
      *
      */
-    public static Architecture ARCH = Architecture.x32;
+    public static Architecture ARCH = Architecture.X64;
 }
