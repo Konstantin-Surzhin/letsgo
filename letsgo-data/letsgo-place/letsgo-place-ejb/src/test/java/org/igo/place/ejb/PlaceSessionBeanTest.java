@@ -6,13 +6,15 @@
 package org.igo.place.ejb;
 
 import javax.ejb.embeddable.EJBContainer;
+import javax.naming.Context;
+import org.igo.letsgo.remote.IPlaceRemote;
 import org.igo.letsgo.remote.IUserRemote;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -20,15 +22,23 @@ import static org.junit.Assert.*;
  */
 public class PlaceSessionBeanTest {
 
+    private static EJBContainer ejbContainer;
+    private static Context ctx;
+
     public PlaceSessionBeanTest() {
     }
 
     @BeforeClass
     public static void setUpClass() {
+        ejbContainer = EJBContainer.createEJBContainer();
+        System.out.println("Opening the container");
+        ctx = ejbContainer.getContext();
     }
 
     @AfterClass
     public static void tearDownClass() {
+        ejbContainer.close();
+        System.out.println("Closing the container");
     }
 
     @Before
@@ -48,11 +58,11 @@ public class PlaceSessionBeanTest {
     public void testGetPlaceTitle() throws Exception {
         System.out.println("getPlaceTitle");
         int id = 0;
-        try (EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer()) {
-            IUserRemote instance = (IUserRemote) container.getContext().lookup("java:global/classes/PlaceSessionBean");
-            String expResult = "Moskow";
-            String result = instance.getUserName(id);
-            assertEquals(expResult, result);
-        }
+
+        IPlaceRemote instance = (IPlaceRemote) ctx.lookup("java:global/classes/IPlaceRemote");
+        String expResult = "Moskow";
+        String result = instance.getPlaceTitle(id);
+        assertEquals(expResult, result);
+        
     }
 }
