@@ -11,5 +11,6 @@
     <modules>
         <module>letsgo-client-swing</module>
         <module>letsgo-java-fx</module>
+        <module>mavenproject1/jfx</module>
     </modules>
 </project>

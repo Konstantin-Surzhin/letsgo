@@ -17,7 +17,7 @@
 package org.igo.letsgo.spring.boot.rest;
 
 import javax.ws.rs.core.Response;
-import org.igo.letsgo.spring.boot.rest.services.Resource;
+//import org.igo.letsgo.spring.boot.rest.services.Resource;
 
 /**
  *

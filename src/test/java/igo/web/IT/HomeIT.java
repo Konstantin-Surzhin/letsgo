@@ -17,12 +17,6 @@
 package igo.web.IT;
 
 import igo.web.chrome.IT.ChromeBase;
-import org.junit.Test;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.opera.OperaDriver;
-import org.openqa.selenium.opera.OperaOptions;
 
 /**
  *

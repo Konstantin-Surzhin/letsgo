@@ -16,7 +16,7 @@
  */
 package org.igo.letsgo.spring.boot.endpoint;
 
-import org.igo.letsgo.city.soap.CityWebService;
+//import org.igo.letsgo.city.soap.CityWebService;
 
 /**
  *
