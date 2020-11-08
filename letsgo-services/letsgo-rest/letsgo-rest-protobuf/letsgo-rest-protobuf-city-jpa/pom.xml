@@ -8,14 +8,14 @@
     </parent>
     <artifactId>letsgo-rest-protobuf-city-jpa</artifactId>
     <packaging>pom</packaging>
-  <modules>
-    <module>letsgo-rest-protobuf-city-jpa-h2</module>
-  </modules>
+    <modules>
+        <module>letsgo-rest-protobuf-city-jpa-h2</module>
+    </modules>
     <dependencies>
         <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java</artifactId>
-            <version>3.1.0</version>
+            <version>3.13.0</version>
         </dependency>
     </dependencies>
     <name>letsgo-rest-protobuf-city-jpa</name>
