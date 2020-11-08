@@ -28,7 +28,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.MessageBodyReader;
 import javax.ws.rs.ext.Provider;
-import org.igo.letsgo.rest.city.generate.sources.CityService.City;
+import org.igo.letsgo.rest.city.entity.City;
+//import org.igo.letsgo.rest.city.generate.sources.CityService.City;
 
 /**
  *

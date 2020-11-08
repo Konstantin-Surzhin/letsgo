@@ -17,8 +17,7 @@
 package igo.web.internetexplorer.IT;
 
 import igo.web.IT.BaseInterface;
-import io.github.bonigarcia.wdm.InternetExplorerDriverManager;
-
+import io.github.bonigarcia.wdm.managers.InternetExplorerDriverManager;
 
 /**
  *

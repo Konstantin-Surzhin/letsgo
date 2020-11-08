@@ -31,7 +31,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import org.igo.letsgo.rest.city.entity.City;
-import org.igo.letsgo.rest.city.generate.sources.CityService;
+//import org.igo.letsgo.rest.city.generate.sources.CityService;
 
 /**
  *

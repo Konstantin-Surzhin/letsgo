@@ -17,7 +17,7 @@
 package igo.web.chrome.IT;
 
 import igo.web.IT.BaseInterface;
-import io.github.bonigarcia.wdm.ChromeDriverManager;
+import io.github.bonigarcia.wdm.managers.ChromeDriverManager;
 
 /**
  *

@@ -16,7 +16,6 @@
  */
 package igo.web.opera.IT;
 
-import igo.web.chrome.IT.*;
 import static igo.web.IT.BaseInterface.PORT;
 import igo.web.IT.FailLoginPageAction;
 import java.util.Arrays;

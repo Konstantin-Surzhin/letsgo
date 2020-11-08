@@ -16,7 +16,7 @@
  */
 package igo.web.IT;
 
-import io.github.bonigarcia.wdm.Architecture;
+import io.github.bonigarcia.wdm.config.Architecture;
 
 /**
  *

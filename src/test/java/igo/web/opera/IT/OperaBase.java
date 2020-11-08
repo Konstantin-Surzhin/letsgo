@@ -17,7 +17,7 @@
 package igo.web.opera.IT;
 
 import igo.web.IT.BaseInterface;
-import io.github.bonigarcia.wdm.OperaDriverManager;
+import io.github.bonigarcia.wdm.managers.OperaDriverManager;
 
 /**
  *

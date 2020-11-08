@@ -40,8 +40,7 @@ public class SignUpArquillianTestIT {
 
     /**
      *
-     * @return
-     * @throws Exception
+     * @return @throws Exception
      */
     @Deployment
     public static EnterpriseArchive createDeployment() throws Exception {
@@ -117,7 +116,6 @@ public class SignUpArquillianTestIT {
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //
-
     /**
      *
      * @throws Exception

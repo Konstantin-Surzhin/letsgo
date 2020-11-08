@@ -18,12 +18,7 @@ package org.igo.dbunit.entities;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.dbunit.Assertion;
-import org.dbunit.database.DatabaseConfig;
-import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.ITable;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
-import org.dbunit.operation.DatabaseOperation;
 import org.igo.entities.City;
 import org.junit.Before;
 import org.junit.Test;
@@ -55,10 +50,10 @@ public class CityTest extends DBUnitConfig {
             tester.onSetup();
 
         } catch (Exception ex) {
-            
+
             Logger.getLogger(CityTest.class.getName()).
                     log(Level.SEVERE, ex.getLocalizedMessage());
-            
+
             for (Throwable e : ex.getSuppressed()) {
                 Logger.getLogger(DBUnitConfig.class.getName())
                         .log(Level.SEVERE, e.getLocalizedMessage());
@@ -74,8 +69,8 @@ public class CityTest extends DBUnitConfig {
 //                .getResourceAsStream("org/igo/dbunit/city/city-data.xml"));
 //
 //        IDataSet actualData = tester.getConnection().createDataSet();
-//        
-//      
+//
+//
 //        //Assertion.assertEquals(expectedData, actualData);
 //        Assert.assertEquals(expectedData.getTable("cities").getRowCount(), city.size());
 //    }

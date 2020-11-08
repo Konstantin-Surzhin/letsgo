@@ -64,12 +64,4 @@
             </plugin>
         </plugins>
     </build>
-    <dependencies>
-        <dependency>
-            <groupId>org.igo</groupId>
-            <artifactId>lesgo-game-client</artifactId>
-            <version>1.0</version>
-            <type>jar</type>
-        </dependency>
-    </dependencies>
 </project>
