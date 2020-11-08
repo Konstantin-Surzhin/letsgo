@@ -1,0 +1,8 @@
+## YAML Template.
+---
+language: java
+jdk:
+  - oraclejdk8
+  - openjdk8
+os: linux
+dist: focal

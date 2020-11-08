@@ -5,7 +5,7 @@
  */
 package org.igo.lesgo.game.client;
 
-import javax.xml.ws.WebServiceRef;
+//import javax.xml.ws.WebServiceRef;
 
 
 /**

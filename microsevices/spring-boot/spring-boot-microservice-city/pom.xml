@@ -122,6 +122,12 @@
             <artifactId>json</artifactId>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>org.igo.letsgo</groupId>
+            <artifactId>spring-boot-microservice-city</artifactId>
+            <version>0.0.1</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
