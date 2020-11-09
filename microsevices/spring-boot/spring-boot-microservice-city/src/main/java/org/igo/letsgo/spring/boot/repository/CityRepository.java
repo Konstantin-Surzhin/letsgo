@@ -29,9 +29,7 @@ import org.springframework.data.repository.query.Param;
 //@RepositoryRestResource( path = "city")
 public interface CityRepository extends JpaRepository<City, Integer> {
 
-    
-    City  findById(@Param("id") Integer id);
-
+//    City findById(@Param("id") Integer id);
     List<City> findByCityName(@Param("cityName") String cityName);
 
 }

@@ -13,7 +13,7 @@
     <packaging>war</packaging>
 
     <name>letsgo-monitoring-jvm-utils</name>
-    
+
     <dependencies>
         <dependency>
             <groupId>javax</groupId>
@@ -21,13 +21,13 @@
             <version>7.0</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
+        <!--dependency>
             <groupId>com.sun</groupId>
             <artifactId>tools</artifactId>
             <scope>system</scope>
             <version>1.8.0</version>
-            <systemPath>${java.home}/../lib/tools.jar</systemPath>
-        </dependency>
+            <systemPath>${java.home}/lib/tools.jar</systemPath>
+        </dependency-->
     </dependencies>
 
 </project>
