@@ -17,5 +17,6 @@ Any value defined here will override the pom.xml file value but is only applicab
         <netbeans.hint.license>gpl30</netbeans.hint.license>
         <org-netbeans-modules-javascript2-requirejs.enabled>true</org-netbeans-modules-javascript2-requirejs.enabled>
         <org-netbeans-modules-whitelist.whitelist-oracle>false</org-netbeans-modules-whitelist.whitelist-oracle>
+        <netbeans.hint.jdkPlatform>JDK_1.8_graalvm</netbeans.hint.jdkPlatform>
     </properties>
 </project-shared-configuration>
