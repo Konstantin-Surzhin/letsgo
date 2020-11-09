@@ -33,7 +33,7 @@
                     <argLine>-am</argLine>
                     <argLine>-o</argLine>
                     <argLine>-Dmaven.test.skip</argLine>
-                    <argLine>-T 2C</argLine>
+                    <argLine>-T 1C</argLine>
                 </configuration>
             </plugin>
             <plugin>

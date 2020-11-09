@@ -14,27 +14,27 @@ import java.util.List;
 
 import static ch.lambdaj.Lambda.convert;
 
-@DefaultUrl("http://en.wiktionary.org/wiki/Wiktionary")
+//@DefaultUrl("http://en.wiktionary.org/wiki/Wiktionary")
 public class DictionaryPage extends PageObject {
 
-    @FindBy(name="search")
-    private WebElementFacade searchTerms;
-
-    @FindBy(name="go")
-    private WebElementFacade lookupButton;
-
+//    @FindBy(name = "search")
+//    private WebElementFacade searchTerms;
+//
+//    @FindBy(name = "go")
+//    private WebElementFacade lookupButton;
     public void enter_keywords(String keyword) {
-        searchTerms.type(keyword);
+//        searchTerms.type(keyword);
     }
 
     public void lookup_terms() {
-        lookupButton.click();
+//        lookupButton.click();
     }
 
     public List<String> getDefinitions() {
         WebElementFacade definitionList = find(By.tagName("ol"));
-        List<WebElement> results = definitionList.findElements(By.tagName("li"));
-        return convert(results, toStrings());
+//        List<WebElement> results = definitionList.findElements(By.tagName("li"));
+//        return convert(results, toStrings());
+        return null;
     }
 
     private Converter<WebElement, String> toStrings() {

@@ -216,3 +216,5 @@ hs_err_pid*
 /letsgo-spring/letsgo-spring-view/target/
 /letsgo-jsf/letsgo-jsf-RichFaces/target/
 /letsgo-jsf/letsgo-jsf-IceFaces/target/
+/letsgo-osgi/target/
+/letsgo-osgi/letsgo-osgi-city/target/
