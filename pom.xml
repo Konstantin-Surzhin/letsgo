@@ -198,7 +198,6 @@
         <module>letsgo-view</module>
         <module>letsgo-osgi</module>
         <module>letsgo-vaadin</module>
-        <module>letsgo-bdd</module>
         <module>letsgo-engine</module>
     </modules>
     <dependencyManagement>

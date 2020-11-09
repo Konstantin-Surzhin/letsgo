@@ -12,7 +12,6 @@
         <module>letsgo-bdd-JDave</module>
         <module>letsgo-bdd-easyb</module>
         <module>letsgo-bdd-Serenity</module>
-        <module>letgo-bdd-Thucydides</module>
         <module>letsgo-bdd-JBehave</module>
     </modules>
 </project>
