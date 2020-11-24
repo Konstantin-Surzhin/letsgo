@@ -1,0 +1,43 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "org.letsgo",
+      "nativeLanguage": "ru"
+    },
+    "jhipsterVersion": "6.10.5",
+    "applicationType": "monolith",
+    "baseName": "jhipster",
+    "packageName": "org.letsgo",
+    "packageFolder": "org/letsgo",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "ZDI5NWIyMDExZmQ5YWNiN2E4YWQ5ODcyNTZkYjE2MWIxODJjMWZmNGJjZmY5ZGE5NzQyMDJkNzg3ODI0ODJmOGI4MmEyYzA1YWQ3YTJjOWRhYWM4NWRiN2U2OTY2NDQ2Y2QxZjdjN2ExYjJiYmQzYjFhMGM5NjgwNDViNWUwNTI=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "angularX",
+    "clientTheme": "materia",
+    "clientThemeVariant": "light",
+    "creationTimestamp": 1606211523326,
+    "testFrameworks": ["gatling", "cucumber", "protractor"],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": true,
+    "nativeLanguage": "ru",
+    "languages": ["ru", "en"],
+    "blueprints": []
+  }
+}

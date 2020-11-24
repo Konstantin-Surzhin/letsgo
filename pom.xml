@@ -201,6 +201,7 @@
         <module>letsgo-engine</module>
         <module>thorntail</module>
         <module>spring-boot</module>
+        <module>jhipster-blog</module>
     </modules>
     <dependencyManagement>
         <dependencies>
