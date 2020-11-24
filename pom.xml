@@ -199,6 +199,7 @@
         <module>letsgo-osgi</module>
         <module>letsgo-vaadin</module>
         <module>letsgo-engine</module>
+        <module>thorntail</module>
     </modules>
     <dependencyManagement>
         <dependencies>
