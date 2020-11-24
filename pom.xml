@@ -200,6 +200,7 @@
         <module>letsgo-vaadin</module>
         <module>letsgo-engine</module>
         <module>thorntail</module>
+        <module>spring-boot</module>
     </modules>
     <dependencyManagement>
         <dependencies>
